@@ -1,0 +1,404 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 085A49792B8245F481C5BBF2 /* ColorBackground.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58118D0BC99004435E2 /* UbBackground.cpp */; };
+		D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58218D0BC99004435E2 /* UbBlob.cpp */; };
+		D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */; };
+		D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58418D0BC99004435E2 /* UbBlob2.cpp */; };
+		D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58518D0BC99004435E2 /* UbContour.cpp */; };
+		D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58618D0BC99004435E2 /* UbSmooth.cpp */; };
+		D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58718D0BC99004435E2 /* UbThin.cpp */; };
+		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
+		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
+		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		085A49792B8245F481C5BBF2 /* ColorBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorBackground.cpp; path = ColorBackground/ColorBackground.cpp; sourceTree = SOURCE_ROOT; };
+		5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackgroundRemoval.cpp; path = Background/BackgroundRemoval.cpp; sourceTree = SOURCE_ROOT; };
+		7885ACADB627440AAA11DA86 /* ColorBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorBackground.h; path = ColorBackground/ColorBackground.h; sourceTree = SOURCE_ROOT; };
+		80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundRemoval.h; path = Background/BackgroundRemoval.h; sourceTree = SOURCE_ROOT; };
+		BDE895EA1510494B83EB22EB /* libMattingLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMattingLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E0A58118D0BC99004435E2 /* UbBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBackground.cpp; path = UniformBackground/UbBackground.cpp; sourceTree = "<group>"; };
+		D0E0A58218D0BC99004435E2 /* UbBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob.cpp; path = UniformBackground/UbBlob.cpp; sourceTree = "<group>"; };
+		D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob1.cpp; path = UniformBackground/UbBlob1.cpp; sourceTree = "<group>"; };
+		D0E0A58418D0BC99004435E2 /* UbBlob2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob2.cpp; path = UniformBackground/UbBlob2.cpp; sourceTree = "<group>"; };
+		D0E0A58518D0BC99004435E2 /* UbContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbContour.cpp; path = UniformBackground/UbContour.cpp; sourceTree = "<group>"; };
+		D0E0A58618D0BC99004435E2 /* UbSmooth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbSmooth.cpp; path = UniformBackground/UbSmooth.cpp; sourceTree = "<group>"; };
+		D0E0A58718D0BC99004435E2 /* UbThin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbThin.cpp; path = UniformBackground/UbThin.cpp; sourceTree = "<group>"; };
+		D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbUpdate.cpp; path = UniformBackground/UbUpdate.cpp; sourceTree = "<group>"; };
+		D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UniformBackground.cpp; path = UniformBackground/UniformBackground.cpp; sourceTree = "<group>"; };
+		D0E0A58A18D0BC99004435E2 /* UniformBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniformBackground.h; path = UniformBackground/UniformBackground.h; sourceTree = "<group>"; };
+		DFF34186925240D695E86042 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/CMakeLists.txt; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		02D6D7621E5842D6AF9EEE61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDE895EA1510494B83EB22EB /* libMattingLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04EE3344C6C04FFA87DBF9C1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F6160FA366C749B1BC40ABE7 /* MattingLib */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		49F13F29D372466C9D94E081 = {
+			isa = PBXGroup;
+			children = (
+				04EE3344C6C04FFA87DBF9C1 /* Sources */,
+				F9DCD75989A046019BD3E235 /* Resources */,
+				02D6D7621E5842D6AF9EEE61 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		93D3460ADEB24C8EB830AA82 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */,
+				085A49792B8245F481C5BBF2 /* ColorBackground.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		B6B5BA0D7E4349489CF4917B /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */,
+				7885ACADB627440AAA11DA86 /* ColorBackground.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
+			isa = PBXGroup;
+			children = (
+				D0E0A58118D0BC99004435E2 /* UbBackground.cpp */,
+				D0E0A58218D0BC99004435E2 /* UbBlob.cpp */,
+				D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */,
+				D0E0A58418D0BC99004435E2 /* UbBlob2.cpp */,
+				D0E0A58518D0BC99004435E2 /* UbContour.cpp */,
+				D0E0A58618D0BC99004435E2 /* UbSmooth.cpp */,
+				D0E0A58718D0BC99004435E2 /* UbThin.cpp */,
+				D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */,
+				D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */,
+				D0E0A58A18D0BC99004435E2 /* UniformBackground.h */,
+			);
+			name = UniformBackground;
+			sourceTree = "<group>";
+		};
+		F6160FA366C749B1BC40ABE7 /* MattingLib */ = {
+			isa = PBXGroup;
+			children = (
+				D0E0A58018D0BC65004435E2 /* UniformBackground */,
+				93D3460ADEB24C8EB830AA82 /* Source Files */,
+				B6B5BA0D7E4349489CF4917B /* Header Files */,
+				DFF34186925240D695E86042 /* CMakeLists.txt */,
+			);
+			name = MattingLib;
+			sourceTree = "<group>";
+		};
+		F9DCD75989A046019BD3E235 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B89D2E10A8A247F8B25550B8 /* MattingLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 622EAFC0DC4949A6A75F9D7C /* Build configuration list for PBXNativeTarget "MattingLib" */;
+			buildPhases = (
+				B6A24F4FC97A4F53BDBD3E01 /* Sources */,
+				0B890B7B8A844CC78741FCE6 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MattingLib;
+			productName = MattingLib;
+			productReference = BDE895EA1510494B83EB22EB /* libMattingLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		278BCCA49DC84255B89905DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 58B7F0FE10764774AA98C63B /* Build configuration list for PBXProject "MattingLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 49F13F29D372466C9D94E081;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B89D2E10A8A247F8B25550B8 /* MattingLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B890B7B8A844CC78741FCE6 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B6A24F4FC97A4F53BDBD3E01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
+				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
+				D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */,
+				D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */,
+				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
+				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
+				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
+				D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */,
+				D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */,
+				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
+				D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1E8BD26AFF514970B34A68FF /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/ImageLib,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MattingLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		393A897CE318423DB67B001A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/build;
+			};
+			name = Release;
+		};
+		4D897B093B694BE288C8ED05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/ImageLib,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MattingLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		701EC8BCB54448A0AE98D7AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/build;
+			};
+			name = Debug;
+		};
+		7AF3BEDF787D49DBAE613384 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/ImageLib,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MattingLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		A07EC4E672D54C0AB1C208CE /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/build;
+			};
+			name = MinSizeRel;
+		};
+		F5A588E9DF7B43A4AC543967 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/build;
+			};
+			name = RelWithDebInfo;
+		};
+		FB1C6D7AE07E4AF9B36C19F2 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/ImageLib,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MattingLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B7F0FE10764774AA98C63B /* Build configuration list for PBXProject "MattingLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				701EC8BCB54448A0AE98D7AD /* Debug */,
+				393A897CE318423DB67B001A /* Release */,
+				A07EC4E672D54C0AB1C208CE /* MinSizeRel */,
+				F5A588E9DF7B43A4AC543967 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		622EAFC0DC4949A6A75F9D7C /* Build configuration list for PBXNativeTarget "MattingLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D897B093B694BE288C8ED05 /* Debug */,
+				7AF3BEDF787D49DBAE613384 /* Release */,
+				FB1C6D7AE07E4AF9B36C19F2 /* MinSizeRel */,
+				1E8BD26AFF514970B34A68FF /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 278BCCA49DC84255B89905DE /* Project object */;
+}

@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10E5279007A941A39237F794 /* ImageAcquisition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFE87628D94B3BBB05C2E2 /* ImageAcquisition.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D03A30321732973B00AE12A1 /* CameraAcquisitionMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = D06DD876169D48D2001DCDBA /* CameraAcquisitionMac.mm */; };
+		D07DD2EE182699EE00D3FA69 /* ImageAcquisition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFE87628D94B3BBB05C2E2 /* ImageAcquisition.cpp */; };
+		D07DD2EF182699FF00D3FA69 /* CameraControllerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF54CD172FDD0D00EFECBB /* CameraControllerIOS.m */; };
+		D07DD2F018269A0800D3FA69 /* CameraControllerMac.m in Sources */ = {isa = PBXBuildFile; fileRef = D06DD878169D48D2001DCDBA /* CameraControllerMac.m */; };
+		D07DD2F118269E0700D3FA69 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF54CB172FDD0D00EFECBB /* CameraController.m */; };
+		D07DD2F218269E1100D3FA69 /* CameraAcquisitionMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = D06DD876169D48D2001DCDBA /* CameraAcquisitionMac.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		220405C365854771A66403A1 /* libImageAcquisition.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageAcquisition.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		78F42A8B610C40078658D3FB /* ImageAcquisition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAcquisition.h; sourceTree = SOURCE_ROOT; };
+		7CAFE87628D94B3BBB05C2E2 /* ImageAcquisition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAcquisition.cpp; sourceTree = SOURCE_ROOT; };
+		99EC0E485D7546BAABD7E51E /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Gp_Vim/VimGui/ImageAcquisition/CMakeLists.txt; sourceTree = "<absolute>"; };
+		D06DD875169D48D2001DCDBA /* CameraAcquisitionMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraAcquisitionMac.h; path = Mac/CameraAcquisitionMac.h; sourceTree = "<group>"; };
+		D06DD876169D48D2001DCDBA /* CameraAcquisitionMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CameraAcquisitionMac.mm; path = Mac/CameraAcquisitionMac.mm; sourceTree = "<group>"; };
+		D06DD877169D48D2001DCDBA /* CameraControllerMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraControllerMac.h; path = Mac/CameraControllerMac.h; sourceTree = "<group>"; };
+		D06DD878169D48D2001DCDBA /* CameraControllerMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraControllerMac.m; path = Mac/CameraControllerMac.m; sourceTree = "<group>"; };
+		D07DD2E8182699D200D3FA69 /* libImageAcquisitionOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImageAcquisitionOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0BF54CA172FDD0D00EFECBB /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraController.h; path = Mac/CameraController.h; sourceTree = "<group>"; };
+		D0BF54CB172FDD0D00EFECBB /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraController.m; path = Mac/CameraController.m; sourceTree = "<group>"; };
+		D0BF54CC172FDD0D00EFECBB /* CameraControllerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraControllerIOS.h; path = Mac/CameraControllerIOS.h; sourceTree = "<group>"; };
+		D0BF54CD172FDD0D00EFECBB /* CameraControllerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraControllerIOS.m; path = Mac/CameraControllerIOS.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D07DD2E5182699D200D3FA69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		222DB58B362A4CAEA16A8643 /* ImageAcquisition */ = {
+			isa = PBXGroup;
+			children = (
+				D06DD874169D4872001DCDBA /* Mac */,
+				D3596A986CD14A77901D9F4D /* Source Files */,
+				411465F1E70D4EEB84DBEFDE /* Header Files */,
+				99EC0E485D7546BAABD7E51E /* CMakeLists.txt */,
+			);
+			name = ImageAcquisition;
+			sourceTree = "<group>";
+		};
+		411465F1E70D4EEB84DBEFDE /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				78F42A8B610C40078658D3FB /* ImageAcquisition.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		49B789D1613347FD9AE665CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				220405C365854771A66403A1 /* libImageAcquisition.a */,
+				D07DD2E8182699D200D3FA69 /* libImageAcquisitionOSX.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D06DD874169D4872001DCDBA /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D0BF54CA172FDD0D00EFECBB /* CameraController.h */,
+				D0BF54CB172FDD0D00EFECBB /* CameraController.m */,
+				D0BF54CC172FDD0D00EFECBB /* CameraControllerIOS.h */,
+				D0BF54CD172FDD0D00EFECBB /* CameraControllerIOS.m */,
+				D06DD875169D48D2001DCDBA /* CameraAcquisitionMac.h */,
+				D06DD876169D48D2001DCDBA /* CameraAcquisitionMac.mm */,
+				D06DD877169D48D2001DCDBA /* CameraControllerMac.h */,
+				D06DD878169D48D2001DCDBA /* CameraControllerMac.m */,
+			);
+			name = Mac;
+			sourceTree = "<group>";
+		};
+		D3596A986CD14A77901D9F4D /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CAFE87628D94B3BBB05C2E2 /* ImageAcquisition.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		D49E0CC0E492405F86958A0C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D5E8FDFF31BE4FB2B9579F24 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				222DB58B362A4CAEA16A8643 /* ImageAcquisition */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		EBE94261DD4640D3A9718C07 = {
+			isa = PBXGroup;
+			children = (
+				D5E8FDFF31BE4FB2B9579F24 /* Sources */,
+				D49E0CC0E492405F86958A0C /* Resources */,
+				49B789D1613347FD9AE665CB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D07DD2E6182699D200D3FA69 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BBF53E87538A443A9F6919BF /* ImageAcquisition */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA4470FEA31141BDB08509E7 /* Build configuration list for PBXNativeTarget "ImageAcquisition" */;
+			buildPhases = (
+				5AB5AE045155418DAEABDA47 /* Sources */,
+				8E25C383F12A428689CD4E52 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageAcquisition;
+			productName = ImageAcquisition;
+			productReference = 220405C365854771A66403A1 /* libImageAcquisition.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D07DD2E7182699D200D3FA69 /* ImageAcquisitionOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D07DD2E9182699D200D3FA69 /* Build configuration list for PBXNativeTarget "ImageAcquisitionOSX" */;
+			buildPhases = (
+				D07DD2E4182699D200D3FA69 /* Sources */,
+				D07DD2E5182699D200D3FA69 /* Frameworks */,
+				D07DD2E6182699D200D3FA69 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageAcquisitionOSX;
+			productName = ImageAcquisitionOSX;
+			productReference = D07DD2E8182699D200D3FA69 /* libImageAcquisitionOSX.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8C9CD6F5FB904A71B10A2518 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = C308F5BFD3D6481881385D1A /* Build configuration list for PBXProject "ImageAcquisition" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EBE94261DD4640D3A9718C07;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BBF53E87538A443A9F6919BF /* ImageAcquisition */,
+				D07DD2E7182699D200D3FA69 /* ImageAcquisitionOSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8E25C383F12A428689CD4E52 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AB5AE045155418DAEABDA47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10E5279007A941A39237F794 /* ImageAcquisition.cpp in Sources */,
+				D03A30321732973B00AE12A1 /* CameraAcquisitionMac.mm in Sources */,
+				D07DD2EF182699FF00D3FA69 /* CameraControllerIOS.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D07DD2E4182699D200D3FA69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07DD2EE182699EE00D3FA69 /* ImageAcquisition.cpp in Sources */,
+				D07DD2F018269A0800D3FA69 /* CameraControllerMac.m in Sources */,
+				D07DD2F118269E0700D3FA69 /* CameraController.m in Sources */,
+				D07DD2F218269E1100D3FA69 /* CameraAcquisitionMac.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		00ABA8788DDC40F4AA52A977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SYMROOT = ../ImageAcquisition/build;
+			};
+			name = Release;
+		};
+		0D9E611F0B134CF3A794D0E3 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ImageAcquisition;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../ImageAcquisition;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		1AB3EAEB1E314E3A809B71FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SYMROOT = ../ImageAcquisition/build;
+			};
+			name = Debug;
+		};
+		5296449C09C44DB5BD2A2C17 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SYMROOT = ../ImageAcquisition/build;
+			};
+			name = MinSizeRel;
+		};
+		7F378CF0A8EE4155B1F6CCEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ImageAcquisition;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../ImageAcquisition;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		89A28D87392A42A68A79B291 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ImageAcquisition;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../ImageAcquisition;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		BC9C79BB9AF343828630C257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ImageAcquisition;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../ImageAcquisition;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		C0F0A1B7202C4C7C834903B0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SYMROOT = ../ImageAcquisition/build;
+			};
+			name = RelWithDebInfo;
+		};
+		D07DD2EA182699D200D3FA69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D07DD2EB182699D200D3FA69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D07DD2EC182699D200D3FA69 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = MinSizeRel;
+		};
+		D07DD2ED182699D200D3FA69 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA4470FEA31141BDB08509E7 /* Build configuration list for PBXNativeTarget "ImageAcquisition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC9C79BB9AF343828630C257 /* Debug */,
+				7F378CF0A8EE4155B1F6CCEF /* Release */,
+				89A28D87392A42A68A79B291 /* MinSizeRel */,
+				0D9E611F0B134CF3A794D0E3 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C308F5BFD3D6481881385D1A /* Build configuration list for PBXProject "ImageAcquisition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AB3EAEB1E314E3A809B71FD /* Debug */,
+				00ABA8788DDC40F4AA52A977 /* Release */,
+				5296449C09C44DB5BD2A2C17 /* MinSizeRel */,
+				C0F0A1B7202C4C7C834903B0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D07DD2E9182699D200D3FA69 /* Build configuration list for PBXNativeTarget "ImageAcquisitionOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D07DD2EA182699D200D3FA69 /* Debug */,
+				D07DD2EB182699D200D3FA69 /* Release */,
+				D07DD2EC182699D200D3FA69 /* MinSizeRel */,
+				D07DD2ED182699D200D3FA69 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8C9CD6F5FB904A71B10A2518 /* Project object */;
+}

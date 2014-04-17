@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8A04DFB9F1674C879EAECB8E /* Homage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4EDE96F9B8744FAB964CDF4 /* Homage.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A63228AF670440C8B3CB2AD /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Homage/HomageLib/CMakeLists.txt; sourceTree = "<absolute>"; };
+		845A04C5D4DC417EA4378743 /* libHomageLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHomageLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4EDE96F9B8744FAB964CDF4 /* Homage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Homage.cpp; sourceTree = SOURCE_ROOT; };
+		D094F8DF18B7A8EC00D02AF7 /* Homage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Homage.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		14DAE85854A24DA18C7B340D /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				D094F8DF18B7A8EC00D02AF7 /* Homage.h */,
+				C4EDE96F9B8744FAB964CDF4 /* Homage.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		1A5BCEA26D1840D68550017D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3AD2A0B798E8432495DEA10E /* HomageLib */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		3928736B1AC34CCCACB57BCC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				845A04C5D4DC417EA4378743 /* libHomageLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3AD2A0B798E8432495DEA10E /* HomageLib */ = {
+			isa = PBXGroup;
+			children = (
+				14DAE85854A24DA18C7B340D /* Source Files */,
+				6A63228AF670440C8B3CB2AD /* CMakeLists.txt */,
+			);
+			name = HomageLib;
+			sourceTree = "<group>";
+		};
+		55122435DF444FD7BEADF3AF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		97DDF196D62242178F277B8B = {
+			isa = PBXGroup;
+			children = (
+				1A5BCEA26D1840D68550017D /* Sources */,
+				55122435DF444FD7BEADF3AF /* Resources */,
+				3928736B1AC34CCCACB57BCC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DF0F9DA1D2B24167B1C51C17 /* HomageLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 552276F8C4454C2E8A85E171 /* Build configuration list for PBXNativeTarget "HomageLib" */;
+			buildPhases = (
+				10A0809032AF4301B8ACFAF8 /* Sources */,
+				D86298671AD848018641826D /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HomageLib;
+			productName = HomageLib;
+			productReference = 845A04C5D4DC417EA4378743 /* libHomageLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22B066CD0E9B4FABB57792A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 294FAE31B5BF4D3C9ECFA5DF /* Build configuration list for PBXProject "HomageLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 97DDF196D62242178F277B8B;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DF0F9DA1D2B24167B1C51C17 /* HomageLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D86298671AD848018641826D /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		10A0809032AF4301B8ACFAF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A04DFB9F1674C879EAECB8E /* Homage.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0F00D9F668BC48BC9575E60C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../VimGui,
+					../../Core/Util,
+					../../Core/ImageLib,
+					..,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HomageLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_vim/Homage/HomageLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		1760005967A14859B4A22CD1 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/GpVim/Homage/HomageLib/build;
+			};
+			name = RelWithDebInfo;
+		};
+		370BD14BADA94A39A5D5EC6A /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../VimGui,
+					../../Core/Util,
+					../../Core/ImageLib,
+					..,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HomageLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_vim/Homage/HomageLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		88D253C33A364124B5AE0158 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/GpVim/Homage/HomageLib/build;
+			};
+			name = MinSizeRel;
+		};
+		8B65CB8168B244EBB983B983 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../VimGui,
+					../../Core/Util,
+					../../Core/ImageLib,
+					..,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HomageLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_vim/Homage/HomageLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		B28E1F2F10DA4E3BA177FC41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../VimGui,
+					../../Core/Util,
+					../../Core/ImageLib,
+					..,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HomageLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_vim/Homage/HomageLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		E8184D17BECF41E6922FBD37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/GpVim/Homage/HomageLib/build;
+			};
+			name = Debug;
+		};
+		EB4B67DFA1DC481597B88475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/GpVim/Homage/HomageLib/build;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		294FAE31B5BF4D3C9ECFA5DF /* Build configuration list for PBXProject "HomageLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8184D17BECF41E6922FBD37 /* Debug */,
+				EB4B67DFA1DC481597B88475 /* Release */,
+				88D253C33A364124B5AE0158 /* MinSizeRel */,
+				1760005967A14859B4A22CD1 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		552276F8C4454C2E8A85E171 /* Build configuration list for PBXNativeTarget "HomageLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F00D9F668BC48BC9575E60C /* Debug */,
+				B28E1F2F10DA4E3BA177FC41 /* Release */,
+				8B65CB8168B244EBB983B983 /* MinSizeRel */,
+				370BD14BADA94A39A5D5EC6A /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22B066CD0E9B4FABB57792A8 /* Project object */;
+}
