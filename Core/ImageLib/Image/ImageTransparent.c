@@ -394,6 +394,9 @@ int		col = IMAGE_COLUMN(sim), c1;
 int	sc0,	sr0;
 int	t;
 
+	if( row0 <= 0 )	row0 = sim->height;
+	if( col0 <= 0 ) col0 = sim->width;
+
 	sc0 = 0;
 	if( c0 < 0 ){
 		sc0 = -c0;
@@ -945,6 +948,61 @@ imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, 
 			*tp++ = fw * ( (255-w) * sp[0] + w *  R);
 			*tp++ = fw * ( (255-w) * sp[1] + w *  G );
 			*tp++ = fw * ( (255-w) * sp[2] +  w *  B );
+
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im )
+{
+	u_char	*tp;
+	u_char	*sp,	*mp;
+	int	i,	j;
+	int	R,	G,	B,	w;
+
+
+
+
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
+
+
+	R = IMAGE4_RED(color);
+	G = IMAGE4_GREEN(color);
+	B = IMAGE4_BLUE(color);
+
+
+	sp = sim->data;
+	mp = mim->data;
+	tp = im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, mp++,sp += 3 ){
+
+			if( *mp == 0 ){
+				*tp++ = R;
+				*tp++ = G;
+				*tp++ = B;
+				continue;
+			}
+
+
+			if( *mp == 255 ){
+				*tp++ = sp[0];
+				*tp++ = sp[1];
+				*tp++ = sp[2];
+				continue;
+			}
+
+
+			w = *mp +1 ;
+
+
+			*tp++ =  (( w * ( sp[0] - R)) >> 8)  + R;
+			*tp++ =  (( w * ( sp[1] - G)) >> 8)  + G;
+			*tp++ =  (( w * ( sp[2] - B)) >> 8)  + B;
 
 		}
 	}

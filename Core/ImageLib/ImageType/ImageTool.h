@@ -232,6 +232,9 @@ image_type * imageA_set_alpha( image_type *sim, int transparent, image_type *mim
 
 image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, image_type *im );
 
+image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
+
+
 
 
 void	imageT_rectangle( image_type *im,  int *i0, int *i1, int *j0, int *j1 );
