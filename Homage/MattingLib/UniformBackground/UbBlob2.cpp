@@ -47,13 +47,13 @@ int	CUniformBackground::ProcessBlob2()
 
 
 	// remove
-	m_abwBlob = imageLabelUS( im, 4, 1, m_abwBlob );
+	m_abwBlob = imageLabelUS_N( im, 4, 1, 0, m_abwBlob );
 
 	imageLabelUS_remove_A( im,  m_abwBlob, 0x5 );
 
 
 	// fill
-	m_abwBlob = imageLabelUS( im, 1, 0, m_abwBlob );
+	m_abwBlob = imageLabelUS_N( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );
 	imageLabelUS_remove_B( im,  m_abwBlob, 120*120, 0x06 );

@@ -77,6 +77,10 @@ protected:
 
 	int	ProcessContour();
 
+	int	ProcessContourUI();
+	
+
+
 
 
 

@@ -33,6 +33,7 @@ image_type *	bImage_realloc(  box2i_type *b, int n, image_type *bim );
 
 image_type *	bImage_diff( image_type *sim, box2i_type *b, int N, image_type *bim, int T, image_type *im );
 
+static void	image1_close1( image_type *sim );
 
 
 
@@ -241,6 +242,8 @@ int	CUniformBackground::ProcessCompare( image_type *sim, image_type **cim )
 	ProcessBlob2();
 
 
+
+
 	if( m_iFrame == m_dFrame ){
 		IMAGE_DUMP( m_cim, "m", m_iFrame, "4" );
 	}
@@ -255,6 +258,11 @@ int	CUniformBackground::ProcessCompare( image_type *sim, image_type **cim )
 		IMAGE_DUMP( m_cim, "m", m_iFrame, "2" );
 	}
 
+	//image1_close1( m_cim );
+
+	//if( m_iFrame == m_dFrame ){
+	//	IMAGE_DUMP( m_cim, "m", m_iFrame, "3" );
+	//}
 
 
 	gpTime_stop( &m_tCompare );
@@ -389,6 +397,36 @@ bImage_diff( image_type *sim, box2i_type *b, int N, image_type *bim, int T, imag
 
 
 
+
+static void
+image1_close1( image_type *sim )
+{
+
+	int	i,	j;
+
+
+
+	u_char *sp = IMAGE_PIXEL( sim, 1, 1 );
+
+	for( i = 1 ; i < sim->height-1 ; i++, sp += 2 ){
+		u_char *sp0 = sp - sim->width;
+		u_char *sp1 = sp + sim->width;
+
+		for( j = 1 ; j < sim->width-1 ; j ++, sp++, sp0++, sp1++ ){
+
+			if( *sp != 0 )	continue;
+
+			int i1 =  ( *(sp0-1) + *(sp0) + *(sp0+1) + 
+				*(sp-1) + *(sp+1) +
+				*(sp1-1) + *(sp1) + *(sp1+1) );
+
+			if( i1 >= 255 * 7 )
+				*sp = 255;
+
+			
+		}
+	}
+}
 
 
 

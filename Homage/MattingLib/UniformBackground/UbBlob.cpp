@@ -54,7 +54,7 @@ int	CUniformBackground::ProcessBlob()
 
 	float vT = m_T*0.5;
 
-	m_abw = imageLabelUS( m_cim, 255, 1, m_abw );
+	m_abw = imageLabelUS( m_cim, 255, 1, 0, m_abw );
 	
 	
 	imageLabel2_set_boundary( m_abw->im, m_abw->a, m_abw->nA );
