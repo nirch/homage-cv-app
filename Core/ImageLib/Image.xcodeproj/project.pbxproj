@@ -165,8 +165,10 @@
 		D00FB7E618472FE10043E8F4 /* ImageSamplingF.c in Sources */ = {isa = PBXBuildFile; fileRef = D00FB7DB18472FE10043E8F4 /* ImageSamplingF.c */; };
 		D0A5692D18B7A0040053D55F /* BnImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5692B18B7A0040053D55F /* BnImage.cpp */; };
 		D0A5693818B7A01E0053D55F /* Image1LabelInletFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */; };
-		D0A5693A18B7A01E0053D55F /* ImageLabelContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5693518B7A01E0053D55F /* ImageLabelContour.cpp */; };
 		D0A8FE664898491F8F38327F /* ImageEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9934C0A377F04334A5FF1D53 /* ImageEqual.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D0DF9C4919090AF200ED75AD /* ImageLabelUIContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */; };
+		D0DF9C4A19090AF200ED75AD /* ImageLabelUSContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */; };
+		D0DF9C4B19090AF200ED75AD /* ImageLabelUSN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */; };
 		D0E0A59918D0BD8B004435E2 /* ImageBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */; };
 		D0E0A59A18D0BD8B004435E2 /* ImageLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */; };
 		D0E0A59B18D0BD8B004435E2 /* ImageLabelUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */; };
@@ -400,8 +402,10 @@
 		D0A5692F18B7A01E0053D55F /* BwLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BwLabel.h; sourceTree = "<group>"; };
 		D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Image1LabelInletFilter.c; sourceTree = "<group>"; };
 		D0A5693418B7A01E0053D55F /* ImageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabel.h; sourceTree = "<group>"; };
-		D0A5693518B7A01E0053D55F /* ImageLabelContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelContour.cpp; sourceTree = "<group>"; };
 		D0CA2C88838B4E09841B643A /* ImageSubtruct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageSubtruct.c; path = Image/ImageSubtruct.c; sourceTree = SOURCE_ROOT; };
+		D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUIContour.cpp; sourceTree = "<group>"; };
+		D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSContour.cpp; sourceTree = "<group>"; };
+		D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSN.cpp; sourceTree = "<group>"; };
 		D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageBlob.cpp; sourceTree = "<group>"; };
 		D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabel.cpp; sourceTree = "<group>"; };
 		D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUI.cpp; sourceTree = "<group>"; };
@@ -743,6 +747,9 @@
 		D0A5692E18B7A01E0053D55F /* ImageLabel */ = {
 			isa = PBXGroup;
 			children = (
+				D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */,
+				D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */,
+				D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */,
 				D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */,
 				D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */,
 				D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */,
@@ -750,7 +757,6 @@
 				D0A5692F18B7A01E0053D55F /* BwLabel.h */,
 				D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */,
 				D0A5693418B7A01E0053D55F /* ImageLabel.h */,
-				D0A5693518B7A01E0053D55F /* ImageLabelContour.cpp */,
 			);
 			path = ImageLabel;
 			sourceTree = "<group>";
@@ -871,6 +877,7 @@
 				9E0772BBAEA54E8FA5390040 /* HistogramClustringIsoda.c in Sources */,
 				700B1F22D930477C858878E0 /* HistogramOrder.c in Sources */,
 				6A9C89E5EC064353A0DD9607 /* Image4CopyIn.c in Sources */,
+				D0DF9C4A19090AF200ED75AD /* ImageLabelUSContour.cpp in Sources */,
 				48395F2332404D92A1A0D7AC /* image4From.c in Sources */,
 				2A6842E6F31841A49D5020D7 /* ImageAppend.c in Sources */,
 				D7FAEB37292742C2B48BB75E /* ImageBand.c in Sources */,
@@ -961,6 +968,7 @@
 				5509102BE59E4CE88768B06E /* ImageExG.c in Sources */,
 				728B62A37A8145A2B837E3E3 /* ImageNdi.c in Sources */,
 				50877983CB294E4D8D772C88 /* ImageNdrgi.c in Sources */,
+				D0DF9C4B19090AF200ED75AD /* ImageLabelUSN.cpp in Sources */,
 				7A6AD59F731447EE9DD4E00A /* ImageNdrgiF.c in Sources */,
 				1F5D801082BA4021BC65D57E /* ImageYUVSampling.c.cpp in Sources */,
 				8A7ED0D9B6D14B7E8DB7B920 /* BmpDecoder.cpp in Sources */,
@@ -1053,13 +1061,13 @@
 				D00FB7E618472FE10043E8F4 /* ImageSamplingF.c in Sources */,
 				D0A5692D18B7A0040053D55F /* BnImage.cpp in Sources */,
 				D0A5693818B7A01E0053D55F /* Image1LabelInletFilter.c in Sources */,
-				D0A5693A18B7A01E0053D55F /* ImageLabelContour.cpp in Sources */,
 				D0E2732218BDBFD200E239FD /* Image1MaskPln.c in Sources */,
 				D0E2732318BDBFD200E239FD /* Image1ResizeBilinear.c in Sources */,
 				D0E0A59918D0BD8B004435E2 /* ImageBlob.cpp in Sources */,
 				D0E0A59A18D0BD8B004435E2 /* ImageLabel.cpp in Sources */,
 				D0E0A59B18D0BD8B004435E2 /* ImageLabelUI.cpp in Sources */,
 				D0E0A59C18D0BD8B004435E2 /* ImageLabelUS.cpp in Sources */,
+				D0DF9C4919090AF200ED75AD /* ImageLabelUIContour.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

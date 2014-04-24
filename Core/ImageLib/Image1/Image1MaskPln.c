@@ -213,7 +213,7 @@ link_expand( vec2d *ctr, ln_type *l, int Fbr, image_type *image )
 	if( i1 <= 0 )	return;
 	if( i0 >= image->row )	return;
 	if( i0 < 0 )	i0 = 0;
-	if( i1 >= image->row )	i1 = image->row-1;
+	if( i1 >= image->row )	i1 = image->row;
 
 
 //	j0 = ctr->y + box.y0 -2;
@@ -224,7 +224,7 @@ link_expand( vec2d *ctr, ln_type *l, int Fbr, image_type *image )
 	if( j1 <= 0 )	return;
 	if( j0 >= image->column )	return;
 	if( j0 < 0 )	j0 = 0;
-	if( j1 > image->column )	j1 = image->column-1;
+	if( j1 > image->column )	j1 = image->column;
 
 
 	Fbes = link_bes( l );

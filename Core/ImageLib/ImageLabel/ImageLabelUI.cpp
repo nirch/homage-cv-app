@@ -383,6 +383,59 @@ bwLabel_type *bw;
 }
 
 
+
+void
+imageLabelUI_set_box( imageLabel_type *abw )
+{
+	//m_abwC->im, m_abwC->a, m_abwC->nA
+
+	int	i,	j;
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ )
+		abw->a[i].no = 0;
+
+
+	u_int *sp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		int val = *sp++;
+		int n = 1;
+		int	j0 = 0;
+		for( j = 1 ; j < abw->im->width ; j++, sp++ ){
+		
+			if( *sp == val ){
+				n++;
+				continue;
+			}
+
+
+			bw = &abw->a[val];
+			
+
+
+
+			if( bw->no <= 0 ){
+				bw->b.x0 = j0;
+				bw->b.x1 = j-1;
+				bw->b.y0 = bw->b.y1 = i;
+			}
+			else	{
+				bw->b.y1 = i;
+				if( j0 < bw->b.x0 )	bw->b.x0 = j0;
+				if( j-1 > bw->b.x1 )	bw->b.x1 = j-1;
+			}
+
+			bw->no += n;
+
+			val = *sp;
+			n = 1;
+			j0 = j;
+		}
+	}
+}
+
+
+
 int
 imageUI_label_nieg( image_type *im, bwLabel_type *bw, int g[], int *nG )
 {

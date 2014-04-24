@@ -73,7 +73,7 @@ static int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
 
 
 cln_type *
-imageLabelUS_contour( image_type *im, int id )
+imageLabelUI_contour( image_type *im, int id )
 {
 int	i,	j,	i0,	j0,	side;
 int	no;

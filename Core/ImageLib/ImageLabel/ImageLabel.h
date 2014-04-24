@@ -43,16 +43,25 @@ void	imageLabelUI_set_id( imageLabel_type *abw );
 
 void	imageLabelUI_set_aux( image_type *im, bwLabel_type *aBw, int nBw );
 
+void	imageLabelUI_set_box( imageLabel_type *abw );
+
+
 int		imageLabelUI_eigen2d( image_type *im, int id, box2i_type *b, struct eigen2d_type *e );
 
 
 
 	// Image1Blob.c
-imageLabel_type *imageLabelUS( image_type *sim, int T, int inv, imageLabel_type *abw );
+imageLabel_type *imageLabelUS( image_type *sim, int T, int inv, int margin, imageLabel_type *abw );
+
+imageLabel_type *imageLabelUS_N( image_type *sim, int T, int inv, int margin, imageLabel_type *abw );
+
 
 int		imageLabelUS_set_pixel( image_type *sim, imageLabel_type *abw, int value );
 
 void	imageLabelUS_create( image_type *im, bwLabel_type **tbw, int *tnBw );
+
+void	imageLabelUS_value( imageLabel_type *abw, image_type *sim );
+
 
 
 
@@ -76,9 +85,11 @@ void	image1_fill_blob( image_type *sim, int nP, int pT, int bT, int value );
 void	image1_fill_blobV( image_type *vim, image_type *sim, int nP, int pT, int bT, int vT, int value );
 
 
-	// ImageLabelContour.cpp
-cln_type *	imageLabelUS_contour( image_type *im, int id );
+	// ImageLabelUIContour.cpp
+cln_type *	imageLabelUI_contour( image_type *im, int id );
 
+	// ImageLabelUSContour.cpp
+cln_type *	imageLabelUS_contour( image_type *im, int id );
 
 #ifdef __cplusplus
 }

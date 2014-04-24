@@ -9,6 +9,13 @@ extern "C" {
 #include	"Uigp/igp.h"
 #include "Ubox/Box2d.h"
 
+typedef struct lbm_type {
+	short i;
+	short j0;
+	short j1;
+	short id;
+} lbm_type;
+
 
 
 	// Image2BwLabel.c
@@ -79,6 +86,8 @@ void	imageLabel2_set_value( image_type *sim, image_type *im, bwLabel_type *abw, 
 
 void	image2_bwLabel_set_aux( image_type *im, bwLabel_type *aBw, int nBw );
 
+void	imageLabelUS_set_box( imageLabel_type *abw );
+
 
 void	image2_bwLabel_set_direction( image_type *im, bwLabel_type *bw, int nBw );
 
@@ -87,6 +96,9 @@ int		bwLabel_gesture_id( bwLabel_type *bw, int nBw, int T );
 
 
 void	bwLabel_order( bwLabel_type *abw, int nBw, int aI[], int *nI );
+
+void	bwLabel_merge( bwLabel_type *abw, int nBw, int id1, int id );
+
 
 
 

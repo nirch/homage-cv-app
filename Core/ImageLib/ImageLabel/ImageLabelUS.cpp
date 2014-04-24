@@ -13,7 +13,7 @@ static int	math_linear_equation2_symtric_eigenvalue( float xx, float xy, float y
 							  float *e1, vec2d *v1, float *e2 );
 
 
-
+#ifdef _AA_
 imageLabel_type *
 imageLabelUS( image_type *sim, int T, int inv, imageLabel_type *abw )
 {
@@ -38,6 +38,53 @@ imageLabelUS( image_type *sim, int T, int inv, imageLabel_type *abw )
 	}
 	else {
 		for( i = 0 ; i < sim->height ; i++ )
+			for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
+				*bp = ( *sp < T )? 1 : 0;
+	}
+
+
+	//	image2_bwLabel( abw->im, &abw->a, &abw->nA );
+	imageLabelUS_create( abw->im, &abw->a, &abw->nA );
+
+
+	return( abw );
+}
+#endif
+
+imageLabel_type *
+imageLabelUS( image_type *sim, int T, int inv, int margin, imageLabel_type *abw )
+{
+	int	i,	j;
+	u_char	*sp;
+	short	*bp;
+
+
+	if( abw == NULL ){
+		abw = imageLabel_alloc();
+		abw->im = image_realloc( abw->im, sim->width+2*margin, sim->height+2*margin, 1, IMAGE_TYPE_U16, 1 );
+
+		image2_const( abw->im, 0 );
+	}
+
+	abw->margin = margin;
+
+
+	abw->im = image_realloc( abw->im, sim->width+2*margin, sim->height+2*margin, 1, IMAGE_TYPE_U16, 1 );
+	image2_set_boundary( abw->im, 0 );
+
+
+	sp = sim->data;
+//	bp = abw->mim->data_s + margin*(abw->mim->width + 1);
+	bp = (short*)IMAGE_PIXEL( abw->im, margin, margin );
+
+
+	if( inv == 0 ){
+		for( i = 0 ; i < sim->height ; i++, bp += 2*margin )
+			for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
+				*bp = ( *sp < T )? 0 :1;
+	}
+	else {
+		for( i = 0 ; i < sim->height ; i++, bp += 2*margin )
 			for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
 				*bp = ( *sp < T )? 1 : 0;
 	}
@@ -311,8 +358,9 @@ int	i,	j;
 
 	sp = (short *)im->data;
 	for( i = 0 ; i < im->row ; i++ ){
-		for( j = 0 ; j < im->column ; j++, sp++ )
-			*sp = bw[*sp].id;
+		for( j = 0 ; j < im->column ; j++, sp++ ){
+				*sp = bw[*sp].id;
+		}
 	}
 }
 
@@ -359,6 +407,46 @@ int	i,	no;
 	return( no );
 }
 
+
+void
+imageLabelUS_value( imageLabel_type *abw, image_type *sim )
+{
+	int	i,	j;
+	short	*bp;
+	u_char	*sp;
+
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		abw->a[i].no = 0;
+		abw->a[i].av = 0;
+		abw->a[i].var = 0;
+	}
+
+
+
+	sp = sim->data;
+	bp = abw->im->data_s;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
+			bw = &abw->a[*bp];
+			bw->no++;
+			bw->av += *sp;
+			bw->var += *sp * *sp;
+		}
+	}
+
+
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		bwLabel_type *bw = &abw->a[i];
+
+		if( bw->no == 0  )	continue;
+
+		bw->av /= bw->no;
+		bw->var = bw->var / bw->no - bw->av*bw->av;
+	}
+}
 
 
 void
@@ -426,6 +514,56 @@ bwLabel_type *bw;
 			else	{
 				BOX2D_UPDATE( bw->b, j, i );
 			}
+		}
+	}
+}
+
+
+void
+imageLabelUS_set_box( imageLabel_type *abw )
+{
+
+	int	i,	j;
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ )
+		abw->a[i].no = 0;
+
+
+	u_short *sp = abw->im->data_us;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		int val = *sp++;
+		int n = 1;
+		int	j0 = 0;
+		for( j = 1 ; j < abw->im->width ; j++, sp++ ){
+
+			if( *sp == val ){
+				n++;
+				continue;
+			}
+
+
+			bw = &abw->a[val];
+
+
+
+
+			if( bw->no <= 0 ){
+				bw->b.x0 = j0;
+				bw->b.x1 = j-1;
+				bw->b.y0 = bw->b.y1 = i;
+			}
+			else	{
+				bw->b.y1 = i;
+				if( j0 < bw->b.x0 )	bw->b.x0 = j0;
+				if( j-1 > bw->b.x1 )	bw->b.x1 = j-1;
+			}
+
+			bw->no += n;
+
+			val = *sp;
+			n = 1;
+			j0 = j;
 		}
 	}
 }
