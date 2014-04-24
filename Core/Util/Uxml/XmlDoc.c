@@ -284,3 +284,46 @@ int	no;
 
 	return( no );
 }
+
+
+
+int
+xmlFile_get_tag_data( char *file, char *pName, char *name, char *data )
+{
+	xml_type *xml;
+	xmlTag_type *pTag,	*tag;
+
+	//char	file[256];
+	//sprintf( file, "%s/logo.xml", dir );
+	if((xml = xml_parse_file(  file )) == NULL )
+		return( -1 );
+
+
+	pTag = xmlTag_get_tag( xml->root, pName );
+	if( pTag == NULL ){
+		xml_destroy( xml );
+		return( -1 );
+	}
+
+	tag = xmlTag_get_tag( pTag, name );
+	if( pTag == NULL )	return( -1 );
+	strcpy( data, tag->data );
+
+	xml_destroy( xml );
+
+	return( 1 );
+}
+
+
+int
+xmlFile_get_tag_data_int( char *file, char *pName, char *name, int *value )
+{
+char	data[256];
+
+	if( xmlFile_get_tag_data( file, pName, name, data ) < 0 )
+		return( -1 );
+
+	*value = atoi( data );
+
+	return( 1 );
+}

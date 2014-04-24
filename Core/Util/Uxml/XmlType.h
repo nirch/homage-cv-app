@@ -165,6 +165,9 @@ int	xmlTag_get_childNo( xmlTag_type *baseTag, char *tagName );
 xmlTag_type *	xmlTag_get_tag( xmlTag_type *pTag, char *name );
 
 
+int	xmlFile_get_tag_data( char *dir, char *pName, char *name, char *data );
+int	xmlFile_get_tag_data_int( char *dir, char *pName, char *name, int *data );
+
 
 
 	// XmlWrite.c

@@ -3,9 +3,13 @@
 #include	"ImageType/ImageType.h"
 
 
+#ifdef _WIN32
+#define _GPMEMORY_LEAK 
+#endif
 
-#define _IMAGE_LEAK
-#include "ImageLeak.h"
+//#define _IMAGE_LEAK
+//#include "ImageLeak.h"
+#include "Uigp/GpMemoryLeak.h"
 
 
 static	int	Im_bytes[] = {  0,
@@ -54,7 +58,8 @@ image_type	*im;
 
 	im->file = NULL;
 
-	IMAGE_LEAK_ALLOC( im );
+//	IMAGE_LEAK_ALLOC( im );
+	GPMEMORY_LEAK_ALLOC( im );
 
 	return( im );
 }
@@ -129,7 +134,8 @@ image_destroy( image_type *im, int Fdata )
 	if( im == NULL )	return;
 
 
-	IMAGE_LEAK_DESTROY( im );
+//	IMAGE_LEAK_DESTROY( im );
+	GPMEMORY_LEAK_DESTROY( im );
 
 
 	if( Fdata == 1 )
@@ -155,6 +161,8 @@ image_copyN( image_type *sim, image_type *im )
 	memcpy( im->data, sim->data, im->column_byte * im->row );
 
 	im->palette = palette_copy( sim->palette, im->palette );
+
+	im->timeStamp = sim->timeStamp;
 
 	return ( im );
 }

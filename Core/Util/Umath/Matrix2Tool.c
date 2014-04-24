@@ -92,13 +92,11 @@ matrix2_mult_vectorN( matrix2_type *m, float x, float y, float *mx, float *my )
 
 
 
-int 
-matrix2_inverse( matrix2_type *m, matrix2_type *im )
-{	
-	math_matrixD_inverse2( m->a, im->a );
-
-	return( 1 );
-}
+//void
+//matrix2_inverse( matrix2_type *m, matrix2_type *im )
+//{	
+//	math_matrixD_inverse3( m->a, im->a );
+//}
 
 
 int

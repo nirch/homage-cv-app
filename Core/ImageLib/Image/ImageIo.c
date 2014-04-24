@@ -62,11 +62,10 @@ int	channel,	type;
 
 	fread( &height, 1, 4, fp );
 
-//	fread( &depth, 1, 4, fp );
-
 
 	channel	= fgetc( fp );
 	type	= fgetc( fp );
+	if( type == 0 )	type = IMAGE_TYPE_U8;
 
 	fgetc( fp );
 	fgetc( fp );

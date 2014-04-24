@@ -11,14 +11,14 @@
 
 
 int
-plane3d_cut_line( plane3d_type *A, plane3d_type *B, vec3d_type *p, vec3d_type *n )
+plna3d_cut_line( plane3d_type *A, plane3d_type *B, vec3d_type *p, vec3d_type *n )
 {
 matrix2_type	m;
 vec2d_type		D,	X;
 float	t,	s;
 
 	VEC3D_PRODUCT( A->n, B->n, *n );
-	VEC3D_NORMALIZE( *n );
+	VEC3D_NORMAL( *n );
 
 
 	m.a00 = VEC3D_INNER( A->n, A->n );
@@ -66,71 +66,3 @@ float	t,	s;
 
 
 
-// compute the cut point of   plane and the vectot cp + t*v
-int
-plane3d_cut_point( plane3d_type *pl, vec3d_type *cp, vec3d_type *v, vec3d_type *p )
-{
-double	t,	d;
-
-	d = VEC3D_INNER( pl->n, *v );
-
-
-	t = (pl->d - VEC3D_INNER( *cp, pl->n ))/ VEC3D_INNER( pl->n, *v );
-
-	p->x = cp->x + t* v->x;
-	p->y = cp->y + t* v->y;
-	p->z = cp->z + t* v->z;
-
-	return( 1 );
-}
-
-
-
-// find point on plane P + t*V + s*U   nearest to all the plane
-int
-plane3d_nearset_point( plane3d_type ap[], int nP, vec3d_type *P, vec3d_type *V, vec3d_type *U, vec3d_type *p )
-{
-	matrix2_type	m;
-	vec2d_type	D,	X;
-	double	t,	s;
-	float	A,	B,	C;
-	int	i;
-
-	matrix2_zero( &m );
-	D.x = D.y = 0;
-
-	for(i = 0 ; i < nP ; i++ ){
-		plane3d_type	*pn = &ap[i];
-
-
-		A = VEC3D_INNER( *V, pn->n );
-		B = VEC3D_INNER( *U, pn->n );
-
-
-		C = VEC3D_INNER( *P, pn->n );
-
-
-		m.a00 += A*A;
-		m.a01 += B*A;
-
-		m.a10 += A*B;
-		m.a11 += B*B;
-
-		D.x += (-C + pn->d)*A;
-		D.y += (-C + pn->d)*B;
-	}
-
-	if( matrix2S_solve( &m, &D, &X ) < 0 )
-		return( -1 );
-
-	t = X.x;
-	s = X.y;
-
-	p->x = P->x + t * V->x + s * U->x;
-	p->y = P->y + t * V->y + s * U->y;
-	p->z = P->z + t * V->z + s * U->z;
-
-
-	return( 1 );
-
-}

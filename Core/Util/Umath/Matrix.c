@@ -70,7 +70,7 @@ matrix_destroy( matrix_type *m )
 	if( m == NULL )
 		return;
 
-	free( m->d );
+	free( m->f );
 
 	free( m );
 }

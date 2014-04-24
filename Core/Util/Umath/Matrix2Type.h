@@ -62,7 +62,6 @@ void	matrix2_mult_vectorN( matrix2_type *m,
 							float x, float y,
 							float *mx, float *my );
 
-int matrix2_inverse( matrix2_type *m, matrix2_type *im );
 
 int	matrix2_solve( matrix2_type *m, vec2d_type *D, vec2d_type *X );
 

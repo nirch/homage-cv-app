@@ -26,10 +26,6 @@ int	math_linear_equation2_symtric( float A[2][2], float D[2], float EigThresh, f
 int	math_linearD_equation2_symtric( double A[2][2], double D[2], double EigThresh, double X[2] );
 
 
-int	math_matrixD_inverse2( double DA[2][2], double B[2][2] );
-
-
-
 	// MathLinerExquation.c
 int	math_matrix_inverse3( float DA[3][3], float B[3][3] );
 

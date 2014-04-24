@@ -49,6 +49,18 @@ gpTime_init( gpTime_type *t )
 	t->no = 0;
 }
 
+void
+gpTime_initM( gpTime_type *gt, int modulo )
+{
+	if( (gt->no%modulo) != 0 )
+			return;
+
+	gt->sec = 0;
+
+	gt->no = 0;
+}
+
+
 
 void
 gpTime_start( gpTime_type *gt )
@@ -128,6 +140,18 @@ gpTime_mpf( gpTime_type *t )
 	return( 1000*t->sec / t->no );
 }
 
+int 
+gpTime_afps( gpTime_type *t )
+{
+float afps;
+
+	if( t->sec == 0 )
+		return( 0 );
+
+	afps = t->no*1000.0 / ( vTime() - t->t0);
+
+	return( afps );
+}
 
 void 
 gpTime_print( FILE *fp, char *string, gpTime_type *t )
@@ -159,7 +183,7 @@ float	afps;
 
 
 	afps = t->no*1000.0 / ( vTime() - t->t0);
-	n += sprintf( &msg[n], "   spf: %.4fs   fps: %.4f   afps: %.4f  (%d)", t->sec / t->no, t->no/t->sec, afps, t->no );
+	n += sprintf( &msg[n], "   spf: %.4fs   fps: %.2f   afps: %.2f  (%d)", t->sec / t->no, t->no/t->sec, afps, t->no );
 
 
 //	n += sprintf( &msg[n], "   spf: %.4fs(%d)   fps: %.4f(%d)", t->sec / t->no, t->no, t->no/t->sec, t->no );
@@ -392,15 +416,7 @@ gpTime_asctime( char *str, vTime_type vt )
 
 
 
-#ifdef _AA_
-typedef struct vTimer_type {
-	vTime_type t0;
 
-	float  mpt; 
-
-	int		i;
-} vTimer_type;
-#endif
 
 
 void
@@ -410,7 +426,7 @@ vTimer_init( vTimer_type *vt, float mpt )
 
 	vt->mpt = mpt;
 	
-	vt->i = 0;
+	vt->i = 1;
 }
 
 
@@ -424,7 +440,7 @@ int	i;
 
 	i = (t - vt->t0 ) /  vt->mpt;
 
-	if( i < vt->i )
+	if( i <= vt->i )
 		return( -1 );
 
 	vt->i = i;

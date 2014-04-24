@@ -163,7 +163,6 @@ int	i;
 }
 
 
-
 void 
 cln_affine_lt2( cln_type *c, lt2_type *lt )
 {
@@ -371,7 +370,17 @@ cln_simlifay_len( cln_type *c, float minLen, float maxLen )
 		pln_simplify_len( c->a[i], minLen, maxLen );
 }
 
+int	
+cln_is_point_inside( cln_type *c, vec2f_type *p )
+{
+int	i;
 
+	for( i = 0 ; i < c->nA ; i++ ) 
+		if( pln_is_point_inside( c->a[i], p ) == 0 )
+			return( 0 );
+
+	return( 1 );
+}
 
 
 void	
@@ -589,17 +598,4 @@ cln_set_range( cln_type *c )
 				c->a[i]->step++;
 		}
 	}
-}
-
-
-int	
-cln_point_inside( cln_type *c, vec2f_type *p )
-{
-	int	i;
-
-	for( i = 0 ; i < c->nA ; i++ ) 
-		if( pln_point_side( c->a[i], p ) == 0 )
-			return( -1 );
-
-	return( 1 );
 }

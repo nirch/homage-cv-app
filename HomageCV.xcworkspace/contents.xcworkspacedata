@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Core/Util/Util.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:VimGui/Gpw/Gpw.xcodeproj">
    </FileRef>
    <FileRef

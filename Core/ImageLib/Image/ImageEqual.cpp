@@ -13,7 +13,7 @@ int
 image_equal( image_type *im0, image_type *im1 )
 {
 int	i,	j;
-u_int	*p0,	*p1;
+u_char	*p0,	*p1;
 int	n;
 
 	if( im0->depth == 8 )
@@ -23,12 +23,12 @@ int	n;
 		return image1_equal( im0, im1 );
 
 
-	p0 = (u_int *)im0->data;
-	p1 = (u_int *)im1->data;
+	p0 = im0->data;
+	p1 = im1->data;
 
 	n = 0;
 	for( i = 0 ; i < im0->row ; i++ )
-		for( j = 0 ; j < im0->column ; j++ ){
+		for( j = 0 ; j < im0->column*im0->depth ; j++ ){
 			if( *p0 != *p1 )
 				n++;
 			p0++;

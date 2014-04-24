@@ -285,8 +285,6 @@ int		gpDir_force_exist( char *dir );
 int		gpDir_unuse_id( char *base, int i0, char *dir );
 int		gpFile_unuse_id( char *base, int i0, char *file );
 
-char *	gpFile_fullpath( char *file, char *fullpath );
-
 
 	// GpFile1.c
 int		gp_file_create( char *data, int bytes, char *file );
@@ -297,7 +295,7 @@ int		gpFile_copy_to( char *sfile, char *dir );
 
 int		gp_file_append( char *file, int i0, FILE *fp );
 
-int		gpFile_compare( char *file1, char *file2 );
+int		gp_file_compare( char *file1, char *file2 );
 
 int		gpFile_lines( char *file );
 
@@ -402,8 +400,6 @@ int	gp_directory_childs( char *dir, char *precede,
 
 void	gpDir_delete_files( char *dir, char *prefix, char *ext );
 
-int	gpDir_copy_to( char *sdir, char *dir );
-int	gpDir_copy( char *sdir, char *dir );
 
 
 
@@ -439,9 +435,6 @@ int		gp_stricmp(const char *s1, const char *s2);
 char *	gpStr_strdup( char *p );
 
 int		gpStr_indexOf( char *str, char a );
-
-int		gpStr_lastIndexOf( char *str, char a );
-
 
 char *	gpStr_union( char *s[], int nS, char **data, int *byte );
 

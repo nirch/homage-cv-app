@@ -8,13 +8,6 @@
 #include	<string.h>
 
 
-#include "Utime/GpTime.h"
-
-
-//#include "Uthread/VSemaphore.h"
-
-
-
 class CLogFile {
 public:
 	CLogFile();
@@ -23,7 +16,7 @@ public:
 
 	void SetLive( int live )	{ m_live = live; }
 
-	int Init( char *prefix, char *dir );
+	void Init( char *prefix, char *dir );
 
 	void SetFile( char *file );
 
@@ -31,20 +24,6 @@ public:
 
 
 	void Write( const char *fmt, ... );
-
-	void Write( char *title, gpTime_type *gt );
-
-	void Write( char *title, gpTime_type *gt, int modulo );
-
-
-	void Write( char *msg );
-
-	void Flush();
-
-private:
-	int Open();
-
-	int Close();
 
 
 private:
@@ -54,14 +33,6 @@ private:
 	char	m_dir[256];
 
 	char	m_file[256];
-
-	FILE	*m_fp;
-
-
-
-private:
-	class CVSemaphore *m_semIn;
-
 };
 
 #endif

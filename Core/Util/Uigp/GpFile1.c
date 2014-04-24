@@ -74,10 +74,10 @@ FILE	*ifp,	*fp;
 int	c;
 
 	if ( (ifp = fopen( sfile, "rb" )) == NULL )
-		return( -1 );
+		return( 0 );
 
 	if ( (fp = fopen( tfile, "wb" )) == NULL )
-		return( -1 );
+		return( 0 );
 
 	 while ((c = getc( ifp )) != EOF) 
 		putc( c, fp );
@@ -114,7 +114,7 @@ int	c;
 
 
 int
-gpFile_compare( char *file1, char *file2 )
+gp_file_compare( char *file1, char *file2 )
 {
 FILE	*fp1, *fp2;
 int	c1,	c2;

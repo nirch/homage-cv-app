@@ -23,19 +23,6 @@ int	no;
 }
 
 
-int 
-cst_readN( cst_type *cst, int nByte, FILE *fp )
-{
-	int	n;
-
-	n = fread( cst->wp, 1, nByte, fp );
-	if( n == 0 )	return( 0 );
-
-	cst->wp = cst->wp + n;
-
-	return( n );
-}
-
 
 void
 cst_write( FILE *fp, cst_type *cst )

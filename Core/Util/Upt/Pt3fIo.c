@@ -30,7 +30,7 @@ char	file[256];
 #define PT3_VERSION		2
 
 int
-pt3fG_write_to_file( pt3fG_type *apt, char *file )
+pt3fA_write_to_file( pt3fA_type *apt, char *file )
 {
 	FILE	*fp;
 	int	i;
@@ -38,40 +38,6 @@ pt3fG_write_to_file( pt3fG_type *apt, char *file )
 	if( (fp = fopen( file, "wb" ) ) == NULL )
 		return( -1 );
 
-	fprintf( fp, "PT3  %d  %d\n", PT3_VERSION , apt->nA );
-
-
-	for( i = 0 ; i < apt->nA ; i++ )
-		pt3fA_write( apt->a[i], fp );
-
-	fclose( fp );
-
-	return( 1 );
-}
-
-
-int
-pt3fA_write_to_file( pt3fA_type *apt, char *file )
-{
-	FILE	*fp;
-
-
-	if( (fp = fopen( file, "wb" ) ) == NULL )
-		return( -1 );
-
-
-	pt3fA_write( apt, fp );
-
-	fclose( fp );
-
-	return( 1 );
-}
-
-
-int
-pt3fA_write( pt3fA_type *apt, FILE *fp )
-{
-int	i;
 
 	fprintf( fp, "PT3  %d  %d   %d  %d\n", PT3_VERSION , apt->nA, apt->state, apt->type );
 
@@ -81,62 +47,23 @@ int	i;
 	}
 
 
+	fclose( fp );
+
 	return( 1 );
 }
+
 
 int
 pt3fA_read_from_file( pt3fA_type **apt, char *file )
 {
 	FILE	*fp;
-	//int	i,	nA;
-	//char	str[256];
-	//int	version,	state,	type;
-	int	ret;
-
-	if( (fp = fopen( file, "rb" ) ) == NULL )
-		return( -1 );
-
-	ret = pt3fA_read( apt, fp );
-
-
-#ifdef _AA_
-	fscanf( fp, "%s %d %d %d", str, &version, &nA, &state );
-
-	type = 0;
-	if( version >= 2 )
-		fscanf( fp, "%d",  &type );
-
-
-	*apt = pt3fA_alloc( nA );
-	(*apt)->state = state;
-	(*apt)->type = type;
-
-
-	
-	for( i = 0 ; i < nA ; i++ ){
-		pt3f_type *pt = &(*apt)->a[i];
-		fscanf( fp, "%f %f %f  %d", &pt->p.x, &pt->p.y, &pt->p.z, &pt->group );
-	}
-
-	(*apt)->nA = nA;
-#endif
-	fclose( fp );
-
-	
-	return( ret );
-}
-
-
-
-int
-pt3fA_read( pt3fA_type **apt, FILE *fp )
-{
-
 	int	i,	nA;
 	char	str[256];
 	int	version,	state,	type;
 
 
+	if( (fp = fopen( file, "rb" ) ) == NULL )
+		return( -1 );
 
 
 
@@ -152,7 +79,7 @@ pt3fA_read( pt3fA_type **apt, FILE *fp )
 	(*apt)->type = type;
 
 
-
+	
 	for( i = 0 ; i < nA ; i++ ){
 		pt3f_type *pt = &(*apt)->a[i];
 		fscanf( fp, "%f %f %f  %d", &pt->p.x, &pt->p.y, &pt->p.z, &pt->group );
@@ -160,6 +87,8 @@ pt3fA_read( pt3fA_type **apt, FILE *fp )
 
 	(*apt)->nA = nA;
 
+	fclose( fp );
 
+	
 	return( 1 );
 }

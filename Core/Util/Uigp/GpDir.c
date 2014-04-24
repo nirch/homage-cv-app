@@ -71,7 +71,7 @@ int	n;
 	//char m_sSearch[2048] ;
 
 	char * fullPathName ;
-	int dirStrLength = (int)strlen(dir);
+	int dirStrLength = strlen(dir);
 
 
 
@@ -102,7 +102,7 @@ int	n;
 	
 	if( ext != NULL ){
 		strcpy( extension, ext );
-		n = (int)strlen( extension );
+		n = strlen( extension );
 
 		extension[n] = ';';
 		extension[n+1] = 0;
@@ -123,7 +123,7 @@ int	n;
 
 		if( ext != NULL ){
 			gp_filename_extract_extension( m_w32fdFindFileData.cFileName, cext, 256 );
-			n = (int)strlen( cext );
+			n = strlen( cext );
 			if( n == 0 )	continue;
 
 			cext[n] = ';';
@@ -232,7 +232,7 @@ int nFiles = 0;
 	HANDLE m_hFind = NULL;	
 
 	char * fullPathName ;
-	int dirStrLength = (int)strlen(dir);
+	int dirStrLength = strlen(dir);
 
 	strcpy(m_sFilter,dir);
 	if ( dir[dirStrLength -1] != '/' && 
@@ -313,7 +313,7 @@ gpDir_get_directory( char *dir, char *precede, char *extension,
 //	int	bFullPath = 1;
 
 	char * fullPathName ;
-	int dirStrLength = (int)strlen(dir);
+	int dirStrLength = strlen(dir);
 
 	int numOfFilesFound = 0;
 
@@ -570,9 +570,6 @@ gpDir_delete_files(  char *dir, char *prefix, char *ext )
 	char	*file[100];
 	int	i,	no;
 
-	if( gpDir_exist( dir ) != 1 )
-		return;
-
 	while( (no = gpDir_get_files_list( dir, prefix, ext, file, 100, 1 )) > 0 ){
 		for( i = 0 ; i < no ; i++ ){
 			gpFile_delete( file[i] );
@@ -582,45 +579,6 @@ gpDir_delete_files(  char *dir, char *prefix, char *ext )
 }
 
 
-
-int
-gpDir_copy_to( char *sdir, char *tdir )
-{
-char	dir[256];
-int	ret;
-
-	gpFilename_force_dir( sdir, tdir, dir );
-
-	ret = gpDir_copy( sdir, dir );
-
-	return( ret );
-}
-
-
-int
-gpDir_copy( char *sdir, char *dir )
-{
-	char	file[256];
-	int	ret;
-	char	*aFile[1000];
-	int	i,	nFile;
-
-	gpDir_force_exist( dir );
-
-
-
-//	gpFilename_backslash( sdir, sdir );
-	nFile = gpDir_get_files_list( sdir, NULL, NULL, aFile, 1000, 1 );
-
-	for( i = 0 ; i < nFile ; i++ ){
-		gpFilename_force_dir( aFile[i], dir, file );	
-		ret = gpFile_copy( aFile[i], file );
-		free( aFile[i] );
-	}
-
-
-	return( ret );
-}
 
 
 

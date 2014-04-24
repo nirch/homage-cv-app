@@ -163,18 +163,17 @@
 		D00FB7E418472FE10043E8F4 /* ImageSampleG.c in Sources */ = {isa = PBXBuildFile; fileRef = D00FB7D918472FE10043E8F4 /* ImageSampleG.c */; };
 		D00FB7E518472FE10043E8F4 /* ImageSampleNew.c in Sources */ = {isa = PBXBuildFile; fileRef = D00FB7DA18472FE10043E8F4 /* ImageSampleNew.c */; };
 		D00FB7E618472FE10043E8F4 /* ImageSamplingF.c in Sources */ = {isa = PBXBuildFile; fileRef = D00FB7DB18472FE10043E8F4 /* ImageSamplingF.c */; };
+		D02583121902F3150012BD2B /* ImageLabelUIContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D025830F1902F3150012BD2B /* ImageLabelUIContour.cpp */; };
+		D02583131902F3150012BD2B /* ImageLabelUSContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02583101902F3150012BD2B /* ImageLabelUSContour.cpp */; };
+		D02583141902F3150012BD2B /* ImageLabelUSN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02583111902F3150012BD2B /* ImageLabelUSN.cpp */; };
 		D0A5692D18B7A0040053D55F /* BnImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5692B18B7A0040053D55F /* BnImage.cpp */; };
 		D0A5693818B7A01E0053D55F /* Image1LabelInletFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */; };
 		D0A8FE664898491F8F38327F /* ImageEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9934C0A377F04334A5FF1D53 /* ImageEqual.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		D0DF9C4919090AF200ED75AD /* ImageLabelUIContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */; };
-		D0DF9C4A19090AF200ED75AD /* ImageLabelUSContour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */; };
-		D0DF9C4B19090AF200ED75AD /* ImageLabelUSN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */; };
 		D0E0A59918D0BD8B004435E2 /* ImageBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */; };
 		D0E0A59A18D0BD8B004435E2 /* ImageLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */; };
 		D0E0A59B18D0BD8B004435E2 /* ImageLabelUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */; };
 		D0E0A59C18D0BD8B004435E2 /* ImageLabelUS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59818D0BD8B004435E2 /* ImageLabelUS.cpp */; };
 		D0E2732218BDBFD200E239FD /* Image1MaskPln.c in Sources */ = {isa = PBXBuildFile; fileRef = D0E2731F18BDBFD200E239FD /* Image1MaskPln.c */; };
-		D0E2732318BDBFD200E239FD /* Image1ResizeBilinear.c in Sources */ = {isa = PBXBuildFile; fileRef = D0E2732018BDBFD200E239FD /* Image1ResizeBilinear.c */; };
 		D4CB94AC53484B8BA7CD9AC4 /* ImageApp2.c in Sources */ = {isa = PBXBuildFile; fileRef = ADF1EC39315C4413A57D6C1B /* ImageApp2.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D558D83E603E47F8A1B35784 /* Image1Pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 429D6BB480624AFE941A61D0 /* Image1Pixel.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D5821947C7BD46E59E3823D7 /* ImageRgbYCrCb.c in Sources */ = {isa = PBXBuildFile; fileRef = A6BE08075CD344BCA869C1EC /* ImageRgbYCrCb.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -395,6 +394,9 @@
 		D00FB7ED184732570043E8F4 /* PaletteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteType.h; path = ImageType/PaletteType.h; sourceTree = "<group>"; };
 		D00FB7EE1847329C0043E8F4 /* ImageResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageResize.h; path = ImageResize/ImageResize.h; sourceTree = "<group>"; };
 		D00FB7EF184733750043E8F4 /* Histogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Histogram.h; path = Histogram/Histogram.h; sourceTree = "<group>"; };
+		D025830F1902F3150012BD2B /* ImageLabelUIContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUIContour.cpp; sourceTree = "<group>"; };
+		D02583101902F3150012BD2B /* ImageLabelUSContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSContour.cpp; sourceTree = "<group>"; };
+		D02583111902F3150012BD2B /* ImageLabelUSN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSN.cpp; sourceTree = "<group>"; };
 		D02CB8F84CFC496E913F9838 /* Image24To8DitherFloyd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image24To8DitherFloyd.c; path = Image24To8/Image24To8DitherFloyd.c; sourceTree = SOURCE_ROOT; };
 		D069A7A0CA564DB780459D46 /* ImageDewarpLt2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDewarpLt2.c; path = Image/ImageDewarpLt2.c; sourceTree = SOURCE_ROOT; };
 		D0A5692B18B7A0040053D55F /* BnImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BnImage.cpp; sourceTree = "<group>"; };
@@ -403,15 +405,11 @@
 		D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Image1LabelInletFilter.c; sourceTree = "<group>"; };
 		D0A5693418B7A01E0053D55F /* ImageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabel.h; sourceTree = "<group>"; };
 		D0CA2C88838B4E09841B643A /* ImageSubtruct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageSubtruct.c; path = Image/ImageSubtruct.c; sourceTree = SOURCE_ROOT; };
-		D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUIContour.cpp; sourceTree = "<group>"; };
-		D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSContour.cpp; sourceTree = "<group>"; };
-		D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUSN.cpp; sourceTree = "<group>"; };
 		D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageBlob.cpp; sourceTree = "<group>"; };
 		D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabel.cpp; sourceTree = "<group>"; };
 		D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUI.cpp; sourceTree = "<group>"; };
 		D0E0A59818D0BD8B004435E2 /* ImageLabelUS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelUS.cpp; sourceTree = "<group>"; };
 		D0E2731F18BDBFD200E239FD /* Image1MaskPln.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image1MaskPln.c; path = Image1/Image1MaskPln.c; sourceTree = "<group>"; };
-		D0E2732018BDBFD200E239FD /* Image1ResizeBilinear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image1ResizeBilinear.c; path = Image1/Image1ResizeBilinear.c; sourceTree = "<group>"; };
 		D323976EDF654708A99052AA /* Image3Bluring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image3Bluring.c; path = Image3/Image3Bluring.c; sourceTree = SOURCE_ROOT; };
 		D3ADB2690AA741DEAE58C4B1 /* ImageReadPSD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageReadPSD.c; path = PSD/ImageReadPSD.c; sourceTree = SOURCE_ROOT; };
 		D47480364B974871B27C5D9D /* ImageFAccumulate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageFAccumulate.c; path = ImageF/ImageFAccumulate.c; sourceTree = SOURCE_ROOT; };
@@ -457,11 +455,14 @@
 		160EBBE57F4B4CA9B71AE097 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				41BC536723A64C6BA03BF8B3 /* Image1Average.c */,
-				99653BA47A1048D897635450 /* Image1EqualNeighbor.c */,
+				D0DF9CC719091A5500ED75AD /* ImageC */,
+				D0DF9CC619091A4D00ED75AD /* ImageF */,
+				D0DF9CC519091A1500ED75AD /* ImageApp */,
+				D0DF9CC41909195A00ED75AD /* Image6 */,
+				D0DF9CC31909166500ED75AD /* Image3 */,
+				D0DF9CC21909165D00ED75AD /* Image2 */,
 				D0E2731318BB0B6400E239FD /* Image1 */,
 				D0A5692E18B7A01E0053D55F /* ImageLabel */,
-				D0A5692A18B7A0040053D55F /* BnImage */,
 				D00FB7EA184731760043E8F4 /* Histogram */,
 				D00FB7E8184731350043E8F4 /* Image */,
 				D00FB7E71847310F0043E8F4 /* ImageType */,
@@ -518,45 +519,6 @@
 		4C04DAF749E04E74B5B4D388 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
-				8B4836DA7CA245EBAC18FBED /* ImageClustringIsodata.c */,
-				42AC2765433B459CA2D73516 /* Image2Color.c */,
-				673A8740DDB5476AB890D166 /* Image2DynamicRange.c */,
-				0B25B3ADE9CA4C379A53C908 /* Image2Edge.c */,
-				3D8F573A3496438BAC70B2E3 /* Image2EdgeSobol.c */,
-				DB681ED4221D47DD94DAD7D2 /* Image2Interpolate.c */,
-				AFEDBE111A1E40A9B7642520 /* Image2Log.cpp */,
-				ABC9E346A1D1482BA1EFF47A /* Image2Ssd.c */,
-				6F63929378494B0494B64626 /* Image3Bilnear.c */,
-				D323976EDF654708A99052AA /* Image3Bluring.c */,
-				D67A4552B87D4BBDB4E1F2A9 /* Image3Color.c */,
-				4A13CC2B41044C75BCAEFAC4 /* Image3DewarpLt2.c */,
-				6524E3140D4E4CDF98F9690F /* Image3Distance.c */,
-				E19C8CAD458F4FC9884A8529 /* Image3Extend.c */,
-				C0541278418F4E28A1C735ED /* Image3From.c */,
-				CAF10E13D3794DDA92CDBD95 /* Image3MapTransform.c */,
-				3F54B50B41CA40E499352D8A /* Image3Resize43.c */,
-				F6F6E0DFDF1D4971971DC1C5 /* Image3Sample2_1331.c */,
-				3B510D23766E42BEA6F0843F /* Image3YCrCb.c */,
-				F2D2F6226E8D486FB82E3640 /* Image6Convolution.c */,
-				E6FA25B9C9A04DC7B641DB40 /* Image6From.c */,
-				1620AD13776748C6BA724896 /* Image6Tool.c */,
-				CE3C106AC1C6424F870AEC69 /* Image6YCrCb.c */,
-				8B0F0EE0B6E64202A257DF57 /* ImageApp1.c */,
-				ADF1EC39315C4413A57D6C1B /* ImageApp2.c */,
-				A51362F059ED4A36AD771411 /* ImageAppW.c */,
-				52F849D181F04B9F91B0456E /* ImageCTool.c */,
-				0C63F5FA236944A4935D86FA /* ImageAFEigen.cpp */,
-				D47480364B974871B27C5D9D /* ImageFAccumulate.c */,
-				4EFE898D5B2F402CA0E42FE3 /* ImageFArithmetic.cpp */,
-				AF2979C1D3EA433695A3A537 /* ImageFDensity.c */,
-				CF53C0E1CA4D4612B4BAA0C0 /* ImageFDynamicRange.c */,
-				6BB3207491BC4C8CAC5D98A3 /* ImagefFilterBox.cpp */,
-				99247D2EBACE4D20A446B3CC /* ImageFHistogram.c */,
-				68C9C1D64F674204B0835A3A /* ImageFLog.cpp */,
-				0635240974F84F5694542F1E /* ImageFMedian.c */,
-				AA77DA6576AB428B994D48AD /* ImageFPyramid.c */,
-				0F7EC279F57D441998B00B1C /* ImageFResizeBilinear.c */,
-				28A6829FEA284F7D876BF0E3 /* ImageFYCrCb.c */,
 				EEBD72BC8F50497A9D9BB7C3 /* ImageDraw.c */,
 				B9B04B8B4F3440798AC27F54 /* ImagePrint.c */,
 				F7EEF2F341514F53A79ADEE9 /* BitMatrix.cpp */,
@@ -699,6 +661,7 @@
 		D00FB7E8184731350043E8F4 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8B4836DA7CA245EBAC18FBED /* ImageClustringIsodata.c */,
 				D069A7A0CA564DB780459D46 /* ImageDewarpLt2.c */,
 				EFF6B3224DCE4B60A335DA6C /* ImageIo.c */,
 				B26847FCD07F42CCB41D37F9 /* ImageLeak.c */,
@@ -741,15 +704,17 @@
 				D0A5692B18B7A0040053D55F /* BnImage.cpp */,
 				D0A5692C18B7A0040053D55F /* BnImage.h */,
 			);
-			path = BnImage;
+			name = BnImage;
+			path = ../BnImage;
 			sourceTree = "<group>";
 		};
 		D0A5692E18B7A01E0053D55F /* ImageLabel */ = {
 			isa = PBXGroup;
 			children = (
-				D0DF9C4619090AF200ED75AD /* ImageLabelUIContour.cpp */,
-				D0DF9C4719090AF200ED75AD /* ImageLabelUSContour.cpp */,
-				D0DF9C4819090AF200ED75AD /* ImageLabelUSN.cpp */,
+				D0A5692A18B7A0040053D55F /* BnImage */,
+				D025830F1902F3150012BD2B /* ImageLabelUIContour.cpp */,
+				D02583101902F3150012BD2B /* ImageLabelUSContour.cpp */,
+				D02583111902F3150012BD2B /* ImageLabelUSN.cpp */,
 				D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */,
 				D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */,
 				D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */,
@@ -761,11 +726,92 @@
 			path = ImageLabel;
 			sourceTree = "<group>";
 		};
+		D0DF9CC21909165D00ED75AD /* Image2 */ = {
+			isa = PBXGroup;
+			children = (
+				42AC2765433B459CA2D73516 /* Image2Color.c */,
+				673A8740DDB5476AB890D166 /* Image2DynamicRange.c */,
+				0B25B3ADE9CA4C379A53C908 /* Image2Edge.c */,
+				3D8F573A3496438BAC70B2E3 /* Image2EdgeSobol.c */,
+				DB681ED4221D47DD94DAD7D2 /* Image2Interpolate.c */,
+				AFEDBE111A1E40A9B7642520 /* Image2Log.cpp */,
+				ABC9E346A1D1482BA1EFF47A /* Image2Ssd.c */,
+			);
+			name = Image2;
+			sourceTree = "<group>";
+		};
+		D0DF9CC31909166500ED75AD /* Image3 */ = {
+			isa = PBXGroup;
+			children = (
+				6F63929378494B0494B64626 /* Image3Bilnear.c */,
+				D323976EDF654708A99052AA /* Image3Bluring.c */,
+				D67A4552B87D4BBDB4E1F2A9 /* Image3Color.c */,
+				4A13CC2B41044C75BCAEFAC4 /* Image3DewarpLt2.c */,
+				6524E3140D4E4CDF98F9690F /* Image3Distance.c */,
+				E19C8CAD458F4FC9884A8529 /* Image3Extend.c */,
+				C0541278418F4E28A1C735ED /* Image3From.c */,
+				CAF10E13D3794DDA92CDBD95 /* Image3MapTransform.c */,
+				3F54B50B41CA40E499352D8A /* Image3Resize43.c */,
+				F6F6E0DFDF1D4971971DC1C5 /* Image3Sample2_1331.c */,
+				3B510D23766E42BEA6F0843F /* Image3YCrCb.c */,
+			);
+			name = Image3;
+			sourceTree = "<group>";
+		};
+		D0DF9CC41909195A00ED75AD /* Image6 */ = {
+			isa = PBXGroup;
+			children = (
+				F2D2F6226E8D486FB82E3640 /* Image6Convolution.c */,
+				E6FA25B9C9A04DC7B641DB40 /* Image6From.c */,
+				1620AD13776748C6BA724896 /* Image6Tool.c */,
+				CE3C106AC1C6424F870AEC69 /* Image6YCrCb.c */,
+			);
+			name = Image6;
+			sourceTree = "<group>";
+		};
+		D0DF9CC519091A1500ED75AD /* ImageApp */ = {
+			isa = PBXGroup;
+			children = (
+				8B0F0EE0B6E64202A257DF57 /* ImageApp1.c */,
+				ADF1EC39315C4413A57D6C1B /* ImageApp2.c */,
+				A51362F059ED4A36AD771411 /* ImageAppW.c */,
+			);
+			name = ImageApp;
+			sourceTree = "<group>";
+		};
+		D0DF9CC619091A4D00ED75AD /* ImageF */ = {
+			isa = PBXGroup;
+			children = (
+				0C63F5FA236944A4935D86FA /* ImageAFEigen.cpp */,
+				D47480364B974871B27C5D9D /* ImageFAccumulate.c */,
+				4EFE898D5B2F402CA0E42FE3 /* ImageFArithmetic.cpp */,
+				AF2979C1D3EA433695A3A537 /* ImageFDensity.c */,
+				CF53C0E1CA4D4612B4BAA0C0 /* ImageFDynamicRange.c */,
+				6BB3207491BC4C8CAC5D98A3 /* ImagefFilterBox.cpp */,
+				99247D2EBACE4D20A446B3CC /* ImageFHistogram.c */,
+				68C9C1D64F674204B0835A3A /* ImageFLog.cpp */,
+				0635240974F84F5694542F1E /* ImageFMedian.c */,
+				AA77DA6576AB428B994D48AD /* ImageFPyramid.c */,
+				0F7EC279F57D441998B00B1C /* ImageFResizeBilinear.c */,
+				28A6829FEA284F7D876BF0E3 /* ImageFYCrCb.c */,
+			);
+			name = ImageF;
+			sourceTree = "<group>";
+		};
+		D0DF9CC719091A5500ED75AD /* ImageC */ = {
+			isa = PBXGroup;
+			children = (
+				52F849D181F04B9F91B0456E /* ImageCTool.c */,
+			);
+			name = ImageC;
+			sourceTree = "<group>";
+		};
 		D0E2731318BB0B6400E239FD /* Image1 */ = {
 			isa = PBXGroup;
 			children = (
+				99653BA47A1048D897635450 /* Image1EqualNeighbor.c */,
+				41BC536723A64C6BA03BF8B3 /* Image1Average.c */,
 				D0E2731F18BDBFD200E239FD /* Image1MaskPln.c */,
-				D0E2732018BDBFD200E239FD /* Image1ResizeBilinear.c */,
 				02A591904845456AAB3BBA16 /* Image1Interpolate.c */,
 				E8FC4142B8B049919028EE4D /* Image1Majority.c */,
 				3A2B22DF1B7B4CB2A39B4E84 /* Image1Mask.c */,
@@ -833,7 +879,6 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = E45297075A704D7E8EFE3C9C /* Build configuration list for PBXProject "Image" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -871,13 +916,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3349019CDDD1497CB2F1EC37 /* ImageClustringIsodata.c in Sources */,
+				D02583131902F3150012BD2B /* ImageLabelUSContour.cpp in Sources */,
 				9D050048C6514CA9A67D0BEE /* ImageDecoder.cpp in Sources */,
 				A967EEEE0EF240109A335F34 /* ImageEncoder.cpp in Sources */,
 				B01A09E8A6E5491BAE5288C0 /* Histogram.c in Sources */,
 				9E0772BBAEA54E8FA5390040 /* HistogramClustringIsoda.c in Sources */,
 				700B1F22D930477C858878E0 /* HistogramOrder.c in Sources */,
 				6A9C89E5EC064353A0DD9607 /* Image4CopyIn.c in Sources */,
-				D0DF9C4A19090AF200ED75AD /* ImageLabelUSContour.cpp in Sources */,
 				48395F2332404D92A1A0D7AC /* image4From.c in Sources */,
 				2A6842E6F31841A49D5020D7 /* ImageAppend.c in Sources */,
 				D7FAEB37292742C2B48BB75E /* ImageBand.c in Sources */,
@@ -909,6 +954,7 @@
 				68A8143E558844A1A036F208 /* Image1From.c in Sources */,
 				330F10DA7FF64229852D3EBB /* Image1Gravity.c in Sources */,
 				233D3D61738B4470AEBB75C8 /* Image1Histogram.c in Sources */,
+				D02583141902F3150012BD2B /* ImageLabelUSN.cpp in Sources */,
 				78C2CEC5A0ED4D0CAFCF3F91 /* Image1Integral.c in Sources */,
 				15E28C2BD7C7419A8337670B /* Image1Interpolate.c in Sources */,
 				11C8CC5D181E406E9F3AC0B7 /* Image1Majority.c in Sources */,
@@ -957,6 +1003,7 @@
 				FBC21D61CE5545B4821F1CB9 /* ImageFPyramid.c in Sources */,
 				55FFAB05C31945E1BEC14442 /* ImageFResizeBilinear.c in Sources */,
 				7C2C28FC806544B4A20527AF /* ImageFYCrCb.c in Sources */,
+				D02583121902F3150012BD2B /* ImageLabelUIContour.cpp in Sources */,
 				075F3D7D8B044BE087FAF402 /* ImageDraw.c in Sources */,
 				4DFB1E325BA44D818E753301 /* ImagePrint.c in Sources */,
 				30617676D4504EEC8C2871B9 /* BitMatrix.cpp in Sources */,
@@ -968,7 +1015,6 @@
 				5509102BE59E4CE88768B06E /* ImageExG.c in Sources */,
 				728B62A37A8145A2B837E3E3 /* ImageNdi.c in Sources */,
 				50877983CB294E4D8D772C88 /* ImageNdrgi.c in Sources */,
-				D0DF9C4B19090AF200ED75AD /* ImageLabelUSN.cpp in Sources */,
 				7A6AD59F731447EE9DD4E00A /* ImageNdrgiF.c in Sources */,
 				1F5D801082BA4021BC65D57E /* ImageYUVSampling.c.cpp in Sources */,
 				8A7ED0D9B6D14B7E8DB7B920 /* BmpDecoder.cpp in Sources */,
@@ -1062,12 +1108,10 @@
 				D0A5692D18B7A0040053D55F /* BnImage.cpp in Sources */,
 				D0A5693818B7A01E0053D55F /* Image1LabelInletFilter.c in Sources */,
 				D0E2732218BDBFD200E239FD /* Image1MaskPln.c in Sources */,
-				D0E2732318BDBFD200E239FD /* Image1ResizeBilinear.c in Sources */,
 				D0E0A59918D0BD8B004435E2 /* ImageBlob.cpp in Sources */,
 				D0E0A59A18D0BD8B004435E2 /* ImageLabel.cpp in Sources */,
 				D0E0A59B18D0BD8B004435E2 /* ImageLabelUI.cpp in Sources */,
 				D0E0A59C18D0BD8B004435E2 /* ImageLabelUS.cpp in Sources */,
-				D0DF9C4919090AF200ED75AD /* ImageLabelUIContour.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,11 +1121,11 @@
 		14D0D3E935DA4AB2935670E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(PROJECT_DIR)/build";
+				SYMROOT = ../ImageLib/build;
 			};
 			name = Release;
 		};
@@ -1098,8 +1142,7 @@
 				HEADER_SEARCH_PATHS = (
 					../ImageLib,
 					../Util,
-					/Image,
-					"../ImageLib/$(IPPROOT)/include",
+					../../Image,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -1109,7 +1152,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Image;
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../Lib;
+				SYMROOT = ../ImageLib/build;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1122,11 +1165,11 @@
 		7AF76350280146229D3E3F2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(PROJECT_DIR)/build";
+				SYMROOT = ../ImageLib/build;
 			};
 			name = Debug;
 		};
@@ -1143,8 +1186,7 @@
 				HEADER_SEARCH_PATHS = (
 					../ImageLib,
 					../Util,
-					/Image,
-					"../ImageLib/$(IPPROOT)/include",
+					../../Image,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -1154,7 +1196,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Image;
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../Lib;
+				SYMROOT = ../ImageLib/build;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1177,8 +1219,7 @@
 				HEADER_SEARCH_PATHS = (
 					../ImageLib,
 					../Util,
-					/Image,
-					"../ImageLib/$(IPPROOT)/include",
+					../../Image,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -1188,7 +1229,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Image;
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../Lib;
+				SYMROOT = ../ImageLib/build;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1211,8 +1252,7 @@
 				HEADER_SEARCH_PATHS = (
 					../ImageLib,
 					../Util,
-					/Image,
-					"../ImageLib/$(IPPROOT)/include",
+					../../Image,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -1222,7 +1262,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Image;
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../Lib;
+				SYMROOT = ../ImageLib/build;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1235,22 +1275,22 @@
 		E4F53D6D90C84B6FBDA8BE38 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(PROJECT_DIR)/build";
+				SYMROOT = ../ImageLib/build;
 			};
 			name = MinSizeRel;
 		};
 		FAA4B80FD9DA4EBCB110A8B4 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = "$(PROJECT_DIR)/build";
+				SYMROOT = ../ImageLib/build;
 			};
 			name = RelWithDebInfo;
 		};

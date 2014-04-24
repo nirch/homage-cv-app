@@ -114,8 +114,6 @@ void	cst_rewind_data( cst_type *cst );
 	// CstFile.c
 void	cst_read( FILE *fp, cst_type *cst, int byte_no );
 
-int		cst_readN( cst_type *cst, int nByte, FILE *fp );
-
 void	cst_write( FILE *fp, cst_type *cst );
 
 cst_type * cst_load_from_file( char *file );

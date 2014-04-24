@@ -503,23 +503,6 @@ gpStr_indexOf( char *str, char a )
 }
 
 
-int	
-gpStr_lastIndexOf( char *str, char a )
-{
-	char	*p;
-	int	i,	i0;
-
-	i0 = -1;
-	for( p = str, i = 0 ; *p != 0 ; p++, i++ ){
-		if( *p  == a )
-			i0 = i;
-//			return( i );
-	}
-
-	return( i0 );
-}
-
-
 
 
 

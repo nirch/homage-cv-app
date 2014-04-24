@@ -103,23 +103,6 @@ gpLog_time( char *title, gpTime_type *gt )
 }
 
 
-void
-gpLog_timeM( char *title, gpTime_type *gt, int modulo )
-{
-	if( fpLog == NULL )	return;
-
-	if( gt->no = 0 || (gt->no%modulo) != 0 )
-		return;
-
-	gpTime_print( fpLog, title, gt );
-
-	gpTime_init( gt );
-
-	fflush( fpLog );
-}
-
-
-
 void gpTrace( int mode, const char *format, ... )
 {
 va_list args;

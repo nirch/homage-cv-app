@@ -4,8 +4,14 @@
 
 
 
-#define _IMAGE_LEAK
-#include "ImageLeak.h"
+
+#ifdef _WIN32
+#define _GPMEMORY_LEAK 
+#endif
+#include "Uigp/GpMemoryLeak.h"
+
+//#define _IMAGE_LEAK
+//#include "ImageLeak.h"
 
 
 static	int	Im_bytes[] = {  0,
@@ -79,7 +85,8 @@ int	depth,	channle;
 	im->palette = NULL;
 
 
-	IMAGE_LEAK_ALLOC( im );
+//	IMAGE_LEAK_ALLOC( im );
+	GPMEMORY_LEAK_ALLOC( im );
 
 
 	return( im );
@@ -107,6 +114,7 @@ image_type	*im;
 	if( data == NULL )
 		im->data = (u_char *)malloc( (int)(im->row* im->column*1.5) );
 	else	im->data = data;
+
 
 
 	im->format = IMAGE_FORMAT_YUV420;
@@ -189,6 +197,8 @@ image_make_copy( image_type *sim, image_type *im )
 			im = image_createYUV420( sim->row, sim->column, NULL );
 
 		memcpy( im->data, sim->data, (int)(im->row* im->column*1.5) );
+
+		im->timeStamp = sim->timeStamp;
 		return( im );
 	}
 
@@ -199,6 +209,8 @@ image_make_copy( image_type *sim, image_type *im )
 
 
 	im->palette = palette_copy( sim->palette, im->palette );
+
+	im->timeStamp = sim->timeStamp;
 
 	return ( im );
 }

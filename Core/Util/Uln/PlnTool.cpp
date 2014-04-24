@@ -111,7 +111,6 @@ plnA_type	*apl;
 
 	apl->nA = 0;
 
-	apl->iFrame = 0;
 
 	// axis
 	apl->p.x = apl->p.y = 0;

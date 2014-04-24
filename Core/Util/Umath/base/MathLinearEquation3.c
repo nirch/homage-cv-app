@@ -153,6 +153,3 @@ math_linear_equation3( float A[3][3], float D[3], float minDet, float *det, floa
 
 	return( 1 );
 }
-
-
-

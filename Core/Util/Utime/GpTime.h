@@ -61,6 +61,9 @@ void	gpTime_destroy( gpTime_type *gt );
 void	gpTime_init( gpTime_type *t );
 #define gp_time_init	gpTime_init
 
+void	gpTime_initM( gpTime_type *gt, int modulo );
+
+
 
 void	gpTime_start( gpTime_type *t );
 #define gp_time_start	gpTime_start
@@ -81,6 +84,8 @@ void	gpTime_log( LogCallback logCallback, char *string, gpTime_type *t );
 float	gpTime_fps( gpTime_type *t );
 int		gpTime_fpm( gpTime_type *t );
 int		gpTime_mpf( gpTime_type *t );
+int		gpTime_afps( gpTime_type *t );
+
 
 
 

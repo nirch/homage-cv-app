@@ -73,7 +73,7 @@ int	i;
 		vpl->NA = NA;
 	}
 
-	if( vpl->nA > iFrame && vpl->a[iFrame] != NULL )
+	if( vpl->a[iFrame] != NULL )
 		plnA_destroy( vpl->a[iFrame] );
 
 	vpl->a[iFrame] = apl;

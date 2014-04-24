@@ -68,12 +68,6 @@ typedef struct lt2A_type {
 		ty = LT2_F2( lt, x, y ); \
 	}
 
-#define	LT2_T( lt, p, q ) \
-	} \
-	(q).x = ( (lt).f1[0] * (p).x + (lt).f1[1] * (p).y + (lt).f1[2] ); \
-	(q).y = ( (lt).f2[0] * (p).x + (lt).f2[1] * (p)->y + (lt).f2[2] ); \
-	}
-
 
 #define	LT2_SET_F1( lt, a, b, c )	{ (lt).f1[0] = a ; (lt).f1[1] = b; (lt).f1[2] = c; }
 #define	LT2_SET_F2( lt, a, b, c )	{ (lt).f2[0] = a ; (lt).f2[1] = b; (lt).f2[2] = c; }
