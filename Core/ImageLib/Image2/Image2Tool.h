@@ -51,6 +51,8 @@ image_type *    image2_interpolate( image_type *im0, image_type *im1, image_type
 
 image_type *	image2_abs_diff( image_type *im0, image_type *im1, image_type *im );
 
+void	image2_set_boundary( image_type *im, short val );
+
 
 void			image2_binary_down( image_type *sim, int T );
 

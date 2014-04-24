@@ -327,3 +327,33 @@ int	tmp;
 
 	return( im );
 }
+
+
+
+void
+image2_set_boundary( image_type *im, short val )
+{
+	short	*sp;
+	int	i,	j;
+
+
+
+	sp = (short *)im->data;
+	for( j = 0 ; j < im->width ; j++, sp++ )
+		*sp = val;
+
+
+	sp = (short *)IMAGE_PIXEL( im, im->height-1, 0 );
+	for( j = 0 ; j < im->width ; j++, sp++ )
+		*sp = val;
+
+
+	sp = (short *)IMAGE_PIXEL( im, 0, 0 );
+	for( i = 0 ; i < im->height ; i++, sp += im->width )
+		*sp = val;
+
+
+	sp = (short *)IMAGE_PIXEL( im, 0, im->width-1 );
+	for( i = 0 ; i < im->height ; i++, sp += im->width )
+		*sp = val;
+}
