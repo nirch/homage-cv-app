@@ -11,6 +11,14 @@
 #include "ImageType/ImageType.h"
 
 
+typedef struct ubPrm_type {
+	int thin;
+
+	int fillBlob;
+
+} ubPrm_type;
+
+
 typedef	struct bImage_type {
 	int n;
 	int	r;
@@ -33,6 +41,10 @@ public:
 	void DeleteContents();
 
 	void	SetRoi( box2i_type *b );
+
+	void	SetFlip( int flip )	{ m_flip = flip; }
+
+	int	Init( char *xmlFile, char *ctrFile, int width, int height );
 
 	int	ReadMask( char *inFile, int width, int height );
 
@@ -79,14 +91,16 @@ protected:
 
 	int	ProcessContourUI();
 	
+	int	ReadPrm( char *inFile );
 
 
 
-
-
+	ubPrm_type *m_prm;
 
 	int	m_iFrame;
 	int	m_dFrame;
+
+	int m_flip;
 
 	float m_T;
 	
@@ -162,6 +176,12 @@ public:
 
 	char m_processLog[1024];
 };
+
+
+
+ubPrm_type *	ubPrm_alloc();
+
+void	ubPrm_destroy( ubPrm_type *prm );
 
 
 #endif

@@ -219,6 +219,9 @@ typedef struct imageA_type {
 #define IMAGE_RGB2Y_F( R, G, B )	(R*0.29900 + G *0.58700 + B *0.11400)
 #define IMAGE_RGB2Y( R, G, B )		((R*19595 + G *38469 + B *7471)>>16)
 
+
+#define IMAGE_RGB2CMYK( r, g, b )	( ((255-b)<<16) | ((255-g)<<8) | (255-r) )
+
 	// Image.c
 image_type * image_alloc( int width, int height, int channel, int type, int align );
 

@@ -80,6 +80,10 @@ CUniformBackground::CUniformBackground()
 
 	m_contour = 0;
 
+	m_flip = 0;
+
+	m_prm = ubPrm_alloc();
+
 	gpTime_init( &m_rTime );
 	gpTime_init( &m_tCompare );
 	gpTime_init( &m_tUpdate );
@@ -110,11 +114,6 @@ CUniformBackground::~CUniformBackground()
 void CUniformBackground::DeleteContents()
 {
 
-	//if( m_him != NULL ){
-	//	image_destroy( m_him, 1 );
-	//	m_him = NULL;
-	//}
-
 	if( m_cln != NULL ){
 		cln_destroy( m_cln );
 		m_cln = NULL;
@@ -128,6 +127,18 @@ void	CUniformBackground::SetRoi( box2i_type *b )
 	m_roi = *b;
 }
 
+int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
+{
+
+	if( ReadMask( ctrFile,  width, height ) < 0 )
+		return( -1 );
+
+	if( ReadPrm( xmlFile) < 0 )
+		return( -1 );
+
+	return( 1 );
+}
+
 
 int	CUniformBackground::ReadMask( char *inFile, int width, int height )
 {
@@ -135,9 +146,11 @@ int	CUniformBackground::ReadMask( char *inFile, int width, int height )
 	if( cln_read( &cln, inFile ) < 0 )
 		return( -1 );
 
-	m_mim = image1_mask_cln( cln, 1280, 720, NULL );
+	m_mim = image1_mask_cln( cln, width, height, NULL );
 
 	cln_destroy( cln );
+
+	image_dump( m_mim, "mask", 1, NULL );
 
 
 	BOX2D_SET( m_roi, 0,0, width, height );
@@ -158,6 +171,9 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 #ifdef EXCEPTION
 	try {
 #endif
+
+	if( m_flip == 1 )
+		image_flipV( sim );
 
 
 	if( m_bim == NULL ){

@@ -39,18 +39,22 @@ static void	image1_nn_clear( image_type *sim, int N, image_type *im );
 int	CUniformBackground::ProcessThin( int N )
 {
 
+	if( m_prm->thin == 0 )
+		return( 1 );
+
+
 	gpTime_start( &m_tThin );
 	m_cim8 = image1_nn( m_cim, N, m_cim8 );
 
 	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "d2-1" );
+		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "thin-1" );
 	}
 
 
 	image1_nn1( m_cim8, N );
 
 	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "d2-2" );
+		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "thin-2" );
 	}
 
 	if( N == 4 ){
@@ -61,13 +65,13 @@ int	CUniformBackground::ProcessThin( int N )
 		image1_remove_blobM( m_cim8, 0x80, 10, 1, 0x40 );
 
 	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "d2-3" );
+		IMAGE_DUMP_DUP( m_cim8, N, 1, "m", m_iFrame, "thin-3" );
 	}
 	
 	image1_nn_clear( m_cim, N, m_cim8 );
 
 	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP( m_cim, "m", m_iFrame, "d2" );
+		IMAGE_DUMP( m_cim, "m", m_iFrame, "thin" );
 	}
 
 	gpTime_stop( &m_tThin );
@@ -128,7 +132,7 @@ image1_nn1( image_type *im, int N )
 	int	N1 = 0.75*N*N;
 	int	N2 = 0.75 *N *N;
 	u_char *sp = IMAGE_PIXEL( im, 1, 1 );
-	for( i = 1 ; i < im->row-1 ; i++, sp += 2 ){
+	for( i = 1 ; i < im->height-1 ; i++, sp += 2 ){
 		u_char *sp0 = sp - im->width;
 		u_char *sp1 = sp + im->width;
 
@@ -203,7 +207,7 @@ image1_nn_clear( image_type *sim, int N, image_type *im )
 
 
 	u_char *tp = im->data;
-	for( i = 0 ; i < sim->row ; i += N ){
+	for( i = 0 ; i < sim->row-N ; i += N ){
 
 		u_char *sp0 = IMAGE_PIXEL( sim, i, 0 );
 		int k1 = ( i + N < sim->height )? N : sim->height - i;

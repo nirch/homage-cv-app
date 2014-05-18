@@ -26,3 +26,6 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 CMakeScripts
+
+# Backups
+_bak/

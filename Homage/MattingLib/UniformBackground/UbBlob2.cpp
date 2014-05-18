@@ -46,20 +46,38 @@ int	CUniformBackground::ProcessBlob2()
 	image_type *im = image1_sample2N( m_cim, NULL );
 
 
+	if( m_iFrame == m_dFrame ){
+		IMAGE_DUMP_SCALE( im, 32, "blob", m_iFrame, "1" );
+	}
+
 	// remove
 	m_abwBlob = imageLabelUS_N( im, 4, 1, 0, m_abwBlob );
 
 	imageLabelUS_remove_A( im,  m_abwBlob, 0x5 );
 
 
+	if( m_iFrame == m_dFrame ){
+		IMAGE_DUMP_SCALE( im, 32, "blob", m_iFrame, "2" );
+	}
+
 	// fill
 	m_abwBlob = imageLabelUS_N( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );
-	imageLabelUS_remove_B( im,  m_abwBlob, 120*120, 0x06 );
+	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob, 0x06 );
+
+
+	if( m_iFrame == m_dFrame ){
+		IMAGE_DUMP_SCALE( im, 32,"blob", m_iFrame, "3" );
+	}
 
 
 	image1_set( m_cim, im );
+
+	if( m_iFrame == m_dFrame ){
+		IMAGE_DUMP_SCALE( im, 32,"blob", m_iFrame, "4" );
+		IMAGE_DUMP( m_cim,"blob", m_iFrame, "5" );
+	}
 
 	image_destroy( im, 1 );
 
@@ -145,7 +163,7 @@ static int
 		bwLabel_type *bw = &abw->a[i];
 		bw->existence = 0;
 		if( bw->id != i )	continue;
-		if( i == n )	continue;
+		if( i == n || i == 0 )	continue;
 
 		bw->existence = -1;
 	}

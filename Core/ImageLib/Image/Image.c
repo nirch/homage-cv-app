@@ -237,7 +237,7 @@ imageA_alloc( int n )
 	aim = (imageA_type *)malloc( sizeof( imageA_type) );
 
 	aim->NA = n;
-	aim->a = ( image_type **)malloc( aim->NA*sizeof(image_type*) );
+	aim->a = ( image_type **)calloc( aim->NA, sizeof(image_type*) );
 
 	aim->nA = 0;
 

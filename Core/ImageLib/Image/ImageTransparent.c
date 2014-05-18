@@ -1009,3 +1009,57 @@ imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im )
 
 	return( im );
 }
+
+
+image_type *
+	imageA_set_backgorund( image_type *sim, image_type *mim, image_type *bim, image_type *im )
+{
+	u_char	*tp;
+	u_char	*sp,	*mp,	*bp;
+	int	i,	j;
+	int	w;
+
+
+
+
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
+
+
+
+
+
+	sp = sim->data;
+	mp = mim->data;
+	bp = bim->data;
+	tp = im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, mp++,sp += 3, *bp += 3 ){
+
+			if( *mp == 0 ){
+				*tp++ = bp[0];
+				*tp++ = bp[1];
+				*tp++ = bp[2];
+				continue;
+			}
+
+
+			if( *mp == 255 ){
+				*tp++ = sp[0];
+				*tp++ = sp[1];
+				*tp++ = sp[2];
+				continue;
+			}
+
+
+			w = *mp +1 ;
+
+
+			*tp++ =  (( w * ( sp[0] - bp[0])) >> 8)  + bp[0];
+			*tp++ =  (( w * ( sp[1] - bp[1])) >> 8)  + bp[1];
+			*tp++ =  (( w * ( sp[2] - bp[2])) >> 8)  + bp[2];
+
+		}
+	}
+
+	return( im );
+}
