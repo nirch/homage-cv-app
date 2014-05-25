@@ -59,7 +59,7 @@ CUniformBackground::CUniformBackground()
 	m_bT = 8;
 	m_bnT = 12;
 	
-
+	m_sim = NULL;
 	m_yim = NULL;
 	m_eim = NULL;
 	m_bnIm = NULL;
@@ -129,12 +129,15 @@ void	CUniformBackground::SetRoi( box2i_type *b )
 
 int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
 {
+	if( ctrFile != NULL ){
+		if( ReadMask( ctrFile,  width, height ) < 0 )
+			return( -1 );
+	}
 
-	if( ReadMask( ctrFile,  width, height ) < 0 )
-		return( -1 );
-
-	if( ReadPrm( xmlFile) < 0 )
-		return( -1 );
+	if( xmlFile != NULL ){
+		if( ReadPrm( xmlFile) < 0 )
+			return( -1 );
+	}
 
 	return( 1 );
 }
@@ -146,7 +149,7 @@ int	CUniformBackground::ReadMask( char *inFile, int width, int height )
 	if( cln_read( &cln, inFile ) < 0 )
 		return( -1 );
 
-	m_mim = image1_mask_cln( cln, width, height, NULL );
+	m_mim = image1_mask_cln( cln, width, height, m_mim );
 
 	cln_destroy( cln );
 
@@ -173,18 +176,20 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 #endif
 
 	if( m_flip == 1 )
-		image_flipV( sim );
+		m_sim = image3_rotate180( sim, m_sim );
+	else m_sim = image_make_copy( sim, m_sim );
+	
 
 
 	if( m_bim == NULL ){
-		ProcessInitBackground( sim, m_mim );
+		ProcessInitBackground( m_sim, m_mim );
 	}
 
 
 
-	m_yim = image1_from( sim, m_yim );
+	m_yim = image1_from( m_sim, m_yim );
 
-	ProcessCompare( sim, cim );
+	ProcessCompare( m_sim, cim );
 
 
 
@@ -199,12 +204,12 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	ProcessContour();
 
 
-	ProcessBn( sim, m_bnT );
+	ProcessBn( m_sim, m_bnT );
 
 
 
 	gpTime_start( &m_tUpdate );
-	ProcessUpdate( sim );
+	ProcessUpdate( m_sim );
 	gpTime_stop( &m_tUpdate );
 
 
@@ -447,3 +452,37 @@ image1_close1( image_type *sim )
 
 
 
+image_type *CUniformBackground::GetImage(  int color, image_type *im )
+{
+	im = imageA_set_colorN( m_sim, m_cimS, color, im );
+
+	return( im );
+}
+
+
+image_type *CUniformBackground::GetImage(  image_type *bim, image_type *im )
+{
+	im = imageA_set_backgorund( m_sim, m_cimS, bim, im );
+
+	return( im );
+}
+
+int CUniformBackground::ProcessPl(  image_type *sim, int iFrame, plnA_type *apl )
+{
+	m_iFrame = iFrame;
+
+	if( m_flip == 1 )
+		m_sim = image3_rotate180( sim, m_sim );
+	else m_sim = image_make_copy( sim, m_sim );
+
+
+
+	cln_type *cln = cln_from_plnA( apl, 1 );
+
+
+	m_cimS = image1_mask_cln( cln, sim->width, sim->height, m_cimS );
+
+	cln_destroy( cln );
+
+	return( 1 );
+}

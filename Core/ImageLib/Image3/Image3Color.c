@@ -18,7 +18,7 @@ u_char	*tp;
 u_char	*sp;
 int	i,	j;
 
-
+/*
 	if( im != NULL && ( im->row != sim->row || im->column != sim->column ) ){
 		image_destroy( im, 1 );
 		im = NULL;
@@ -26,6 +26,9 @@ int	i,	j;
 	
 	if( im == NULL )
 		im = image_create( sim->row, sim->column, 3, 1, NULL );
+*/
+
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1  );
 
 
 	tp = (u_char *)im->data;
@@ -38,6 +41,24 @@ int	i,	j;
 		}
 
 	return( im );
+}
+
+
+
+void
+image3_bgr2rgb( image_type *im )
+{
+
+u_char	*sp,	tmp;
+int	i,	j;
+
+	sp = im->data;
+	for( i = 0 ; i < im->row ; i++ )
+		for( j = 0 ; j < im->column ; j++, sp += 3 ){
+			tmp = *sp;
+			*sp = *(sp+2);
+			*(sp+2) = tmp;
+		}
 }
 
 

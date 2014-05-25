@@ -48,9 +48,11 @@ void			image3_VHflip( image_type *im );
 
 image_type *	image3_sample2( image_type *sim, image_type *im );
 
-//void			image3_copy_in( image_type *sim, image_type *im, int x0, int y0 );
 
 image_type *	image3_rotate90( image_type *sim, image_type *im );
+
+image_type *	image3_rotate180( image_type *sim, image_type *im );
+
 
 image_type *	image3_maskT( image_type *sim, image_type *mim, int T0, int T1, image_type *im );
 
@@ -119,6 +121,9 @@ float	image3_distance( image_type *im0, image_type *im1 );
 	// IMage3Color.c
 image_type *	image3_to_BGR( image_type *sim, image_type *im );
 
+void	image3_bgr2rgb( image_type *im );
+
+
 void			image3_VH_RGB_flip( image_type *im );
 
 
@@ -171,6 +176,11 @@ image_type *	image3_1280X720_to_640X480( image_type *sim, image_type *im );
 
 	// Image3Histogram.c
 image_type *	image3_histogram_CrCb( image_type *sim,  image_type *mim, image_type *him );
+
+
+	// Image3DewarpLt2.c
+image_type *	image3_dewarp_lt2S( image_type *sim, lt2_type *lt, float scale, image_type *tim );
+
 
 
 #ifdef __cplusplus

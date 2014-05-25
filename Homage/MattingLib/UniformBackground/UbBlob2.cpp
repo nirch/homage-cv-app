@@ -64,7 +64,7 @@ int	CUniformBackground::ProcessBlob2()
 	m_abwBlob = imageLabelUS_N( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );
-	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob, 0x06 );
+	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob/4, 0x06 );
 
 
 	if( m_iFrame == m_dFrame ){

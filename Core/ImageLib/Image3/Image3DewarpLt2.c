@@ -11,7 +11,7 @@
 
 // tim(x,y) = sim( lt(x,y) )
 image_type *
-image3_dewarp_lt2( image_type *sim, lt2_type *lt, float scale, image_type *tim )
+image3_dewarp_lt2S( image_type *sim, lt2_type *lt, float scale, image_type *tim )
 {
 int	i,	j;
 u_char	*sp,	*sp1;

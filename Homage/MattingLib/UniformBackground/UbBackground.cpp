@@ -79,7 +79,7 @@ int	bImage_fill( image_type *bim, int a0[], int a1[] );
 
 int	bImage_row( image_type *bim, int a0[], int a1[] );
 
-int	bImage_protraction( image_type *bim, image_type *eim, int a0[], int a1[] );
+
 
 int	bImage_seg( image_type *bim, image_type *eim, int a[] );
 
@@ -93,15 +93,22 @@ int	bImage_seg( image_type *bim, image_type *eim, int a[] );
 
  int	bImage_erode( image_type *bim, image_type *eim, int a0[], int a1[], segC_type ac0[], segC_type ac1[] );
 
+ int	bImage_erode_up( image_type *bim, image_type *eim, int a0[], int a1[], segC_type ac0[], segC_type ac1[] );
+
+
  int	bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[] );
 
 
  int CUniformBackground::ProcessBackground( image_type *sim, int iFrame )
  {
-	if( m_flip == 1 )
-		 image_flipV( sim );
 
-	ProcessInitBackground( sim, m_mim, 1 );
+	if( m_flip == 1 )
+		m_sim = image3_rotate180( sim, m_sim );
+	else m_sim = image_make_copy( sim, m_sim );
+
+
+
+	ProcessInitBackground( m_sim, m_mim, 1 );
 
 	return( m_state );
 
@@ -150,12 +157,8 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 
 
 
-
-
-
-//	bImage_protraction( m_bim, m_bimDx, a0, a1 );
-
 	bImage_erode( m_bim, m_bimDx, a0, a1, ac0, ac1 );
+	bImage_erode_up( m_bim, m_bimDx, a0, a1, ac0, ac1 );
 
 	bImage_dump( m_bim, m_N, "bg", 1, "E" );
 
@@ -732,73 +735,6 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 			cp->b = (1-f) * bp0->b + f* bp1->b;
 			cp->n = 1;
 		}
-	}
-
-
-	return( 1 );
-}
-
-
-int
-bImage_protraction( image_type *bim, image_type *eim, int a0[], int a1[] )
-{
-	int	i,	j,	no;
-	bImage_type *bp;
-
-
-
-	no = 0;
-	bp = ( bImage_type *)IMAGE_PIXEL( bim, 1, 0 );
-	for( i = 1 ; i < bim->height-1 ; i++, bp += bim->width ){
-
-		if( a0[i] == -1 && a1[i] == -1 )
-			continue;
-
-		int	j0,	j1;
-		bImage_type *bp0,	*bp1;
-
-	
-		j0 = ( a0[i] < 0) ? 0 :  a0[i];
-		j1 = ( a1[i] < 0) ? bim->width-1:  a1[i];
-
-	
-
-
-		
-		bImage_type *cp;
-
-		if( j0 > 0 ){
-//			j0 -= 10;
-			bp0 = bp + j0;
-			char *ep = (char *)IMAGE_PIXEL(eim, i-1, j0-1 );
-
-			for( j = j0+1, cp = bp0+1 ; j < j1 ; j++, ep++, cp++ ){
-				if( ABS(*ep) > 4)	break;
-				cp->n = 1;
-			}
-
-			a0[i] = j-1;
-
-			if( j >=  j1 ){
-				a0[i] = a1[i] = -1;
-				continue;
-			}
-		}
-
-
-	
-		if( j1 < bim->width-1 - 0 ){
-//			j1 += 10;
-			bp1 = bp +j1;
-			char *ep = (char *)IMAGE_PIXEL(eim, i-1, j1-1 );
-			for( j = j1-1, cp = bp1-1 ; j > j0 ; j--, ep--, cp-- ){
-				if( ABS(*ep) > 4)	break;
-				cp->n = 1;
-			}
-
-			a1[i] = j+1;
-		}
-
 	}
 
 
@@ -1384,7 +1320,7 @@ bImage_erode( image_type *bim, image_type *eim, int a0[], int a1[], segC_type ac
 int
 bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[] )
 {
-	int	i;
+	int	i,	j;
 
 
 	seg_type as[100];
@@ -1407,11 +1343,108 @@ bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[] )
 
 	for( i = s->i1+1 ; i < bim->height-1 ; i++ ){
 
-		bp = ( bImage_type *)IMAGE_PIXEL( bim, i, a[i] );
-		bp->r = bp0->r;
-		bp->g = bp0->g;
-		bp->b = bp0->b;
+		int	j0,	j1;
+		if( (j0 = a[i]-6) < 1 )	j0 = 1;
+		if( (j1 = a[i]+6) > bim->width-2 )	j1 = bim->width-2;
 
+		bp = ( bImage_type *)IMAGE_PIXEL( bim, i, j0);
+		for( j = j0; j <= j1 ; j++, bp++ ){
+		
+			bp->r = bp0->r;
+			bp->g = bp0->g;
+			bp->b = bp0->b;
+		}
+	}
+
+
+
+
+	return( 1 );
+}
+
+
+
+
+
+int 
+bImage_erode_up( image_type *bim, image_type *eim, int a0[], int a1[], segC_type ac0[], segC_type ac1[] )
+{
+	int	i,	j,	no;
+	bImage_type *bp;
+
+
+	for( i = 1 ; i < bim->height-1 ; i++ ){
+
+		if( ac0[i].j0 > -1 )	break;
+	}
+
+	int i0 =i;
+
+	int n = 5;
+
+	no = 0;
+	
+	for( i = i0-1 ; i > 0 ; i-- ){
+		bp = ( bImage_type *)IMAGE_PIXEL( bim, i, 0 );
+
+		a0[i] = ac0[i+1].j1;
+		a1[i] = ac1[i+1].j0;
+
+		bImage_segC( bim, eim, i, ac0[i+1].j0, n, &ac0[i] );
+		bImage_segC( bim, eim, i, ac1[i+1].j0, n, &ac1[i] );
+
+
+
+		int	j0,	j1;
+		bImage_type *bp0,	*bp1;
+
+
+		j0 = ac0[i].j1;
+		j1 = ac1[i].j0;
+		int n = ac0[i].n;
+
+
+
+		segC_type c;
+		bImage_type *cp;
+
+
+		bp0 = bp + j0;
+		char *ep = (char *)IMAGE_PIXEL(eim, i-1, j0-1 );
+
+		for( j = j0+1, cp = bp0+1 ; j < j1 ; j++, ep++, cp++ ){
+			bImage_segC( bim, eim, i, j-n, n, &c );
+			if( ABS( c.dx) > 8 || ABS( c.av) > 4 )
+				break;
+
+			ac0[i] = c;
+			a0[i] = c.j1;
+			cp->n = 1;
+		}
+
+
+		if( j >=  j1 ){
+			a0[i] = a1[i] = -1;
+			ac0[i].j0 = ac0[i].j1 = ac1[i].j0 = ac1[i].j1 = -1;
+			break;
+		}
+
+
+
+
+		if( j1 < bim->width-1 - 0 ){
+			bp1 = bp +j1;
+			for( j = j1-1, cp = bp1-1 ; j > j0 ; j--, ep--, cp-- ){
+				bImage_segC( bim, eim, i, j, n, &c );
+				if( ABS( c.dx) > 8 || ABS( c.av) > 4 )
+					break;
+
+				//				if( ABS(*ep) > 4)	break;
+				ac1[i] = c;
+				a1[i] = c.j0;
+				cp->n = 1;
+			}
+		}
 
 
 	}
@@ -1419,6 +1452,5 @@ bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[] )
 
 	return( 1 );
 }
-
 
 

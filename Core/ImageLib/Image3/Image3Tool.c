@@ -478,6 +478,31 @@ image3_rotate90( image_type *sim, image_type *im )
 
 
 image_type *
+image3_rotate180( image_type *sim, image_type *im )
+{
+u_char	*sp,	*tp;
+int	i,	j;
+
+
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
+
+	tp = im->data;
+	for ( i = 0 ; i < im->row ; i++ ){
+		sp = IMAGE_PIXEL( sim, sim->height-1-i, sim->width-1 );
+
+		for ( j = 0 ; j < im->column ; j++, sp -= 3 ){
+			*tp++ = sp[0];
+			*tp++ = sp[1];
+			*tp++ = sp[2];
+		}
+	}
+
+	return( im );
+}
+
+
+
+image_type *
 image3_rotate90_N( image_type *sim, image_type *im )
 {
 	u_char	*sp,	*tp;
@@ -505,6 +530,8 @@ image3_rotate90_N( image_type *sim, image_type *im )
 	return( im );
 
 }
+
+
 
 
 

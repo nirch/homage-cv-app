@@ -52,6 +52,8 @@ public:
 	
 	int	ProcessInitBackground( image_type *sim, image_type *mim, int fState = 0 );
 
+	int ProcessPl(  image_type *sim, int iFrame, plnA_type *apl );
+
 
 	int	Process( image_type *sim, int iFrame, image_type **cim );
 
@@ -68,6 +70,11 @@ public:
 	char * GetProcessLog();
 
 	void ProcessLog();
+
+	image_type *GetImage(  int color, image_type *im );
+
+	image_type *GetImage(  image_type *bim, image_type *im );
+
 protected:
 
 	int	ProcessCompare( image_type *sim, image_type **cim );
@@ -124,6 +131,7 @@ protected:
 	image_type	*m_bimC;
 
 
+	image_type *m_sim;
 
 	image_type *m_yim;
 	image_type *m_bnIm;
