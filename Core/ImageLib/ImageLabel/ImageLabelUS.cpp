@@ -1,55 +1,23 @@
-/***************************
- ***   Image2BwLabel.c   ***
- ***************************/
+/****************************
+ ***   ImageLabelUS.cpp   ***
+ ****************************/
 #include <math.h>
 #include "Uigp/igp.h"
-#include "ImageType/ImageType.h"
-#include "BwLabel.h"
 
+
+#include "Umath/Matrix2Type.h"
+#include "Umath/EigenType.h"
+
+#include "ImageType/ImageType.h"
 #include "ImageLabel.h"
 
+#include "BwLabel.h"
 
 static int	math_linear_equation2_symtric_eigenvalue( float xx, float xy, float yy,
 							  float *e1, vec2d *v1, float *e2 );
 
 
-#ifdef _AA_
-imageLabel_type *
-imageLabelUS( image_type *sim, int T, int inv, imageLabel_type *abw )
-{
-	int	i,	j;
-	u_char	*sp;
-	short	*bp;
 
-	if( abw == NULL )
-		abw = imageLabel_alloc();
-
-
-	abw->im = image_realloc( abw->im, sim->width, sim->height, 1, IMAGE_TYPE_U16, 1 );
-
-
-
-	sp = sim->data;
-	bp = abw->im->data_s;
-	if( inv == 0 ){
-		for( i = 0 ; i < sim->height ; i++ )
-			for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
-				*bp = ( *sp < T )? 0 :1;
-	}
-	else {
-		for( i = 0 ; i < sim->height ; i++ )
-			for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
-				*bp = ( *sp < T )? 1 : 0;
-	}
-
-
-	//	image2_bwLabel( abw->im, &abw->a, &abw->nA );
-	imageLabelUS_create( abw->im, &abw->a, &abw->nA );
-
-
-	return( abw );
-}
-#endif
 
 imageLabel_type *
 imageLabelUS( image_type *sim, int T, int inv, int margin, imageLabel_type *abw )
@@ -394,18 +362,7 @@ imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB )
 		abw[*sp].boundary = 1;
 }
 
-int
-bwLabel_no( bwLabel_type *bw, int nBw, int T )
-{
-int	i,	no;
 
-	for( i = 0, no = 0 ; i < nBw ; i++ ){
-		if( bw[i].id != i )	continue;
-		if( T <= 0 || bw[i].no > T )	no++;
-	}
-
-	return( no );
-}
 
 
 void
@@ -568,6 +525,52 @@ imageLabelUS_set_box( imageLabel_type *abw )
 	}
 }
 
+
+
+void
+imageLabelUS_set_mass( imageLabel_type *abw )
+{
+	int	i,	j;
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		abw->a[i].no = 0;
+		abw->a[i].p.x = abw->a[i].p.y = 0;
+	}
+
+
+	u_short *sp = abw->im->data_us;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		int val = *sp++;
+		int n = 1;
+		int sj = 0;
+		for( j = 1 ; j < abw->im->width ; j++, sp++ ){
+
+			if( *sp == val ){
+				n++;
+				sj += j;
+				continue;
+			}
+
+
+			bw = &abw->a[val];
+
+			bw->no += n;
+			bw->p.x += sj;
+			bw->p.y += n * i;
+
+			val = *sp;
+			n = 1;
+			sj = j;
+		}
+	}
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		if( abw->a[i].id != i )	continue;
+		abw->a[i].p.x /= abw->a[i].no;
+		abw->a[i].p.y /= abw->a[i].no;
+	}
+}
 
 
 void
@@ -737,4 +740,105 @@ bwLabel_type	*b;
 	}
 
 	return( no );
+}
+
+
+
+int
+imageLabelUS_eigen2d( imageLabel_type *abw, int id,  eigen2d_type *e )
+//imageLabelUI_eigen2d(  m_bw->im, i, & m_bw->a[i].b, &e );
+{
+	int	i,	j,	n;
+	u_short	*tp;
+	float	sx,	sy;
+
+	matrix2_type	m;
+	matrix2_zero( &m );
+
+	sx = sy = 0;
+	box2i_type *b = &abw->a[id].b;
+
+	for( i = b->y0, n = 0 ; i <= b->y1 ; i++ ){
+		tp = (u_short *)IMAGE_PIXEL( abw->im, i, b->x0 );
+		for( j = b->x0 ; j <= b->x1 ; j++, tp++ ){
+			if( *tp != id )	continue;
+
+			sx += j;
+			sy += i;
+
+			m.a00 += j*j;
+			m.a01 += j*i;
+			m.a11 += i*i;
+			n++;
+		}
+	}
+
+	sx /= n;
+	sy /= n;
+
+	m.a00 = m.a00 / n - sx*sx;
+	m.a01 = m.a01 / n - sx*sy;
+	m.a11 = m.a11 / n - sy*sy;
+	m.a10 = m.a01;
+
+
+	e->p.x = sx;
+	e->p.y = sy;
+
+
+
+
+	matrix2S_eigen( &m, &e->e1, &e->v1, &e->e2 );
+
+
+#ifdef _TEST_
+	matrix2_type	m3;
+	matrix2S_eigen_inv( &m3, e->e1, &e->v1, e->e2 );
+#endif
+
+	return( n );
+
+}
+
+
+int
+imageLabelUS_eigen2d_matrix( imageLabel_type *abw, int id,  vec2f_type *p, matrix2_type *m )
+
+{
+	int	i,	j,	n;
+	u_short	*tp;
+	float	sx,	sy;
+
+
+	matrix2_zero( m );
+
+	sx = sy = 0;
+	box2i_type *b = &abw->a[id].b;
+
+	for( i = b->y0, n = 0 ; i <= b->y1 ; i++ ){
+		tp = (u_short *)IMAGE_PIXEL( abw->im, i, b->x0 );
+		for( j = b->x0 ; j <= b->x1 ; j++, tp++ ){
+			if( *tp != id )	continue;
+
+			sx += j;
+			sy += i;
+
+			m->a00 += j*j;
+			m->a01 += j*i;
+			m->a11 += i*i;
+			n++;
+		}
+	}
+
+	sx /= n;
+	sy /= n;
+
+	m->a00 = m->a00 / n - sx*sx;
+	m->a01 = m->a01 / n - sx*sy;
+	m->a11 = m->a11 / n - sy*sy;
+	m->a10 = m->a01;
+
+
+	return( 1 );
+
 }

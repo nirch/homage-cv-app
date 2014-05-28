@@ -139,6 +139,10 @@ int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int heigh
 			return( -1 );
 	}
 
+
+	m_mp.x = width/2;
+	m_mp.y = height/2;
+
 	return( 1 );
 }
 

@@ -99,7 +99,7 @@ cln_type *cln;
 		agpLevel_contour_1( im, i, j, side, gapp );
 //		gapp_dump( gapp, "gapp", no, NULL );
 
-		if( gapp->no < 16 )	
+		if( gapp->no < 64 )	
 			continue;
 		
 		pln_type *pl;

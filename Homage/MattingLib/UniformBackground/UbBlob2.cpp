@@ -24,7 +24,7 @@ static image_type *	image1_sample2N( image_type *sim, image_type *im );
 static void	image1_set( image_type *sim, image_type *im );
 
 
-static int	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color );
+static int	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color, vec2f_type *mp );
 
 
 static int	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int color );
@@ -53,7 +53,7 @@ int	CUniformBackground::ProcessBlob2()
 	// remove
 	m_abwBlob = imageLabelUS_N( im, 4, 1, 0, m_abwBlob );
 
-	imageLabelUS_remove_A( im,  m_abwBlob, 0x5 );
+	imageLabelUS_remove_A( im,  m_abwBlob, 0x5, &m_mp );
 
 
 	if( m_iFrame == m_dFrame ){
@@ -150,12 +150,18 @@ static void
 
 
 
+static int	imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp );
 
 static int
-	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color )
+	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color, vec2f_type *mp )
 {
+	imageLabelUS_set_mass( abw );
 
-	int n = imageLabel_bigest( abw, 1 );
+//	int n = imageLabel_bigest( abw, 1 );
+
+	int n = imageLabel_main_blob( abw, 1, mp );
+
+	*mp = abw->a[n].p;
 
 
 	int	i;
@@ -174,6 +180,39 @@ static int
 	return( 1 );
 }
 
+static int
+imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp )
+{
+int	a[6],	nA,	i;
+
+
+	bwLabelA_order( abw, color, 4, a, &nA );
+
+	if( nA < 0 )	return( -1 );
+	if( nA == 1 )	return( a[0] );
+
+	bwLabel_type *bw0 = &abw->a[a[0]];
+	int	i0 = -1;
+	float dMin = 0 ;
+
+	for( i = 0 ; i < nA ; i++ ){
+		vec2f_type p;
+		bwLabel_type *bw = &abw->a[a[i]];
+		if( bw->no < 0.6 * bw0->no )
+			return( i0 );
+
+		p.x = bw->p.x - mp->x;
+		p.y = bw->p.y - mp->y;
+		float d = p.x*p.x + p.y*p.y;
+
+		if( i0 < 0 || d < dMin ){
+			dMin = d;
+			i0 = a[i];
+		}
+	}
+	
+	return( i0 );
+}
 
 
 static int

@@ -60,20 +60,10 @@ typedef struct imageLabel_type {
 
 
 
-imageLabel_type *imageLabel_alloc();
-
-void	imageLabel_destroy( imageLabel_type *abw );
-
-//imageLabel_type *imageLabelUI( image_type *sim, imageLabel_type *abw );
-//
-//imageLabel_type *imageLabelUI_T( image_type *sim, int T, imageLabel_type *abw );
-
-
 
 
 void	image2_bwLabel( image_type *im, bwLabel_type **tbw, int *tnBw );
 
-int		bwLabel_no( bwLabel_type *bw, int nBw, int T );
 
 void	image2_bwLabel_remove_boundary( image_type *im, bwLabel_type *bw );
 
@@ -88,6 +78,9 @@ void	image2_bwLabel_set_aux( image_type *im, bwLabel_type *aBw, int nBw );
 
 void	imageLabelUS_set_box( imageLabel_type *abw );
 
+void	imageLabelUS_set_mass( imageLabel_type *abw );
+
+
 
 void	image2_bwLabel_set_direction( image_type *im, bwLabel_type *bw, int nBw );
 
@@ -95,9 +88,12 @@ void	image2_bwLabel_set_direction( image_type *im, bwLabel_type *bw, int nBw );
 int		bwLabel_gesture_id( bwLabel_type *bw, int nBw, int T );
 
 
-void	bwLabel_order( bwLabel_type *abw, int nBw, int aI[], int *nI );
 
-void	bwLabel_merge( bwLabel_type *abw, int nBw, int id1, int id );
+
+
+
+
+
 
 
 

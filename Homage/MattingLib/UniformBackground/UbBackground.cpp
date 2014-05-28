@@ -167,7 +167,7 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 
 	m_state = bImage_state( ac0, ac1, nC );
 
-	fprintf( stdout, "background: %d\n", m_state );
+	GPTRACE( (3, "background: %d\n", m_state ) );
 
 	if( fState == 1)
 		return( m_state );
@@ -780,11 +780,11 @@ bImage_state( segC_type ac0[], segC_type *ac1, int nC )
 
 
 	for( i = 0 ; i < nS0 ; i++ ){
-		fprintf( stdout, "%d %d   (%d)\n", as0[i].i0, as0[i].i1, as0[i].y );
+		GPTRACE( (3, "%d %d   (%d)\n", as0[i].i0, as0[i].i1, as0[i].y) );
 	}
 
 	for( i = 0 ; i < nS1 ; i++ ){
-		fprintf( stdout, "%d %d   (%d)\n", as1[i].i0, as1[i].i1, as1[i].y );
+		GPTRACE( (3, "%d %d   (%d)\n", as1[i].i0, as1[i].i1, as1[i].y) );
 	}
 
 
@@ -858,7 +858,7 @@ bImage_dilate_L( image_type *bim, image_type *eim, int a[], int n, segC_type ac[
 	bImage_segR( ac, bim->height, as, &nS );
 
 
-	{
+	if( nS > 0 ){
 		int	k;
 		int i0 = as[0].i0;
 
@@ -946,7 +946,7 @@ bImage_dilate_R( image_type *bim, image_type *eim, int a[], int n, segC_type ac[
 
 /// new
 
-	{	
+	if( nS > 0 ){
 		int	k;
 		int i0 = as[0].i0;
 

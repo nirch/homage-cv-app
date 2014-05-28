@@ -163,6 +163,8 @@ public:
 	int	m_state;
 
 
+	vec2f_type m_mp;
+
 
 	gpTime_type	m_rTime;
 	gpTime_type	m_tCompare;

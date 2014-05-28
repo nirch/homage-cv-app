@@ -280,9 +280,9 @@ float	sx,	sy;
 	sx = sy = 0;
 
 	tp = im->data_ui;
-	for( i = b->y0, n = 0 ; i < b->y1 ; i++ ){
+	for( i = b->y0, n = 0 ; i <= b->y1 ; i++ ){
 		tp = IMAGE4_PIXEL( im, i, b->x0 );
-		for( j = b->x0 ; j < b->x1 ; j++, tp++ ){
+		for( j = b->x0 ; j <= b->x1 ; j++, tp++ ){
 			if( *tp != id )	continue;
 
 			sx += j;
@@ -311,6 +311,17 @@ float	sx,	sy;
 
 
 	matrix2S_eigen( &m, &e->e1, &e->v1, &e->e2 );
+
+
+	// test 
+	matrix2_type m1,	m2;
+	m1.a00 = e->v1.x;
+	m1.a10 = e->v1.y;
+	m1.a00 = -e->v1.y;
+	m1.a10 = e->v1.x;
+
+	matrix2_mult( &m1, &m, &m2 );
+
 
 	return( 1 );
 
