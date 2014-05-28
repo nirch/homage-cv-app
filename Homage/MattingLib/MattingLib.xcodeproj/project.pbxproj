@@ -17,6 +17,7 @@
 		D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58718D0BC99004435E2 /* UbThin.cpp */; };
 		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
 		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
+		D0EBED041935E32900B468F3 /* UbPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EBED031935E32900B468F3 /* UbPrm.cpp */; };
 		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbUpdate.cpp; path = UniformBackground/UbUpdate.cpp; sourceTree = "<group>"; };
 		D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UniformBackground.cpp; path = UniformBackground/UniformBackground.cpp; sourceTree = "<group>"; };
 		D0E0A58A18D0BC99004435E2 /* UniformBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniformBackground.h; path = UniformBackground/UniformBackground.h; sourceTree = "<group>"; };
+		D0EBED031935E32900B468F3 /* UbPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbPrm.cpp; path = UniformBackground/UbPrm.cpp; sourceTree = "<group>"; };
 		DFF34186925240D695E86042 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/CMakeLists.txt; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
 			isa = PBXGroup;
 			children = (
+				D0EBED031935E32900B468F3 /* UbPrm.cpp */,
 				D0E0A58118D0BC99004435E2 /* UbBackground.cpp */,
 				D0E0A58218D0BC99004435E2 /* UbBlob.cpp */,
 				D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */,
@@ -184,6 +187,7 @@
 				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
 				D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */,
 				D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */,
+				D0EBED041935E32900B468F3 /* UbPrm.cpp in Sources */,
 				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
 				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
 				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
