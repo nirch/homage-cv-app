@@ -5,12 +5,13 @@
 #include <math.h>
 
 #include "Uigp/igp.h"
-#include "LT2Type.h"
+
 #include "Matrix3Type.h"
 #include "Matrix2Type.h"
 
 #include "EigenType.h"
 
+#include "LT2Type.h"
 
 
 void	
@@ -710,7 +711,7 @@ lt2_similarityA( lt2_type *lt, vec2f_type ap[2], vec2f_type aq[2] )
 
 //    t = lt( s )
 int
-lt2_asimilarity_eigen2d( lt2_type *lt, eigen2d_type *ep, eigen2d_type *eq )
+lt2_asimilarity_eigen2d( lt2_type *lt,  eigen2d_type *ep,  eigen2d_type *eq )
 {
 int	ret;
 float	t;
