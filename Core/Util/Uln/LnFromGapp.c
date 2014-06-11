@@ -22,6 +22,8 @@ pln_type *pl;
 
 	lnL_from_gapp( gapp, &pl->ctr, &pl->link );
 
+	pln_set_length( pl );
+
 	return( pl );
 }
 

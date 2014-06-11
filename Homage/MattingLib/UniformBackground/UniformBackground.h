@@ -16,6 +16,11 @@ typedef struct ubPrm_type {
 
 	int fillBlob;
 
+//	int	adjustContour;
+
+	int dx;
+	int av;
+
 } ubPrm_type;
 
 
@@ -95,8 +100,9 @@ protected:
 	int	ProcessSmooth();
 
 	int	ProcessContour();
+	int	ProcessContourAdjust( plnA_type *apl );
 
-	int	ProcessContourUI();
+//	int	ProcessContourUI();
 	
 	int	ReadPrm( char *inFile );
 

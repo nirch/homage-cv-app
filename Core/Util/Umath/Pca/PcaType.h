@@ -34,6 +34,7 @@ pca_type *pca_alloc( int n );
 void	pca_destory( pca_type *pca );
 
 void	pca_add( pca_type *pca, double f[] );
+void	pca_addF( pca_type *pca, float f[] );
 
 
 void	pca_final( pca_type *pca );

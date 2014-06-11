@@ -37,8 +37,8 @@ float	g[MAX_RC];
 
 
 
-//#define _TEST_
-#ifndef _TEST_
+
+
 image_type *
 image1_convolution_separably( image_type *im,
 					float Cy[], float Cx[], int rC,
@@ -60,29 +60,29 @@ image_type	*tim;
 
 	return( cim );
 }
-#else
+
+
 image_type *
-image1_convolution_separably( image_type *im,
-                             float Cy[], float Cx[], int rC,
-                             image_type *cim )
+	image1_convolution_separablyB( image_type *im,
+	float Cy[], float Cx[], int rC,
+	image_type *cim )
 {
-static image_type	*tim = NULL ;
-    
+static image_type	*tim;
+
 	if( cim == NULL )
 		cim = image_create( im->row, im->column, 1, 1, NULL );
-    
-    
+
+
 	tim = image_recreate( tim, im->row, im->column, 1, 1 );
-    
+
 	image1_convolution_x( im, Cx, rC, tim );
-    
+
 	image1_convolution_y( tim, Cy, rC, cim );
-    
+
 //	image_destroy( tim, 1 );
-    
+
 	return( cim );
 }
-#endif
 
 
 static void

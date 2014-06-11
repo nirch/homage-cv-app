@@ -71,7 +71,7 @@ static void	add_corner_point( gapp_type *gapp, vec2d *v, int side );
 static gapp_type *	gapp_breakpoint( gapp_type *gapp, int d );
 
 
-static int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
+//static int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
 
 
 
@@ -312,7 +312,7 @@ int		i, j;
 
 
 
-
+#ifdef _AA_
 
 static int
 pln_approximate( gapp_type *gapp, int fClose, pln_type **pl )
@@ -459,3 +459,5 @@ int	i;
 
 	return( -1 );
 }
+
+#endif

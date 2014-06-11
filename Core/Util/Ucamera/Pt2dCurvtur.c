@@ -95,9 +95,9 @@ pt2dA_curvtur_1( pt2dA_type *apt, vec2f_type *p0,int i0, int i1, vec2f_type *n, 
 
 
 pt2dA_type *
-pt2dA_smooth( pt2dA_type *apt, float r, pt2dA_type	*tapt )
+pt2dA_smooth( pt2dA_type *apt, float r1, pt2dA_type	*tapt )
 {
-pt2d_type	*pt;
+pt2d_type	*pt,	*tpt;
 vec2f_type	p,	v;
 int	i,	i0;
 poly1d4_type pl;
@@ -134,21 +134,21 @@ float	t,	b,	d;
 
 
 
-		pt = &tapt->p[i];
-		pt->p.x += pl.a0 * -v.y;
-		pt->p.y += pl.a0 * v.x;
+		tpt = &tapt->p[i];
+		tpt->p.x = pt->p.x + pl.a0 * -v.y;
+		tpt->p.y = pt->p.y + pl.a0 * v.x;
 
 
-		pt->n.x = v.x + pl.a1 * -v.y;
-		pt->n.y = v.y + pl.a1 * v.x;
+		tpt->n.x = v.x + pl.a1 * -v.y;
+		tpt->n.y = v.y + pl.a1 * v.x;
 
 		t = hypot( pt->n.x, pt->n.y );
-		pt->n.x /= t;
-		pt->n.y /= t;
+		tpt->n.x /= t;
+		tpt->n.y /= t;
 
 		b = poly1d4_curvtur( &pl, 0 );
 
-		fprintf( stdout, "%.4f  %.4f\n", pl.a2, b );
+	//	fprintf( stdout, "%.4f  %.4f\n", pl.a2, b );
 
 
 		//		pt2d_approximate_polynom_2( apt, i, nI, &pt->p, &pt->n, 6*r, &pl0 );

@@ -39,6 +39,10 @@ cln_from_plnA( plnA_type *apl, int fData )
 
 	cln_type *cln = cln_alloc();
 
+	cln->ctr = apl->p;
+	cln->scale = apl->scale;
+	cln->angle = apl->angle;
+	cln->iFrame = apl->iFrame;
 	
 	for( i = 0 ; i < apl->nA ; i++ ){
 		if( fData == 1 )

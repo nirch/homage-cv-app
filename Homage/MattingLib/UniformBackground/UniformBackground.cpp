@@ -153,7 +153,7 @@ int	CUniformBackground::ReadMask( char *inFile, int width, int height )
 	if( cln_read( &cln, inFile ) < 0 )
 		return( -1 );
 
-	m_mim = image1_mask_cln( cln, width, height, m_mim );
+	m_mim = image1_mask_cln( cln, width, height, 1, m_mim );
 
 	cln_destroy( cln );
 
@@ -484,7 +484,7 @@ int CUniformBackground::ProcessPl(  image_type *sim, int iFrame, plnA_type *apl 
 	cln_type *cln = cln_from_plnA( apl, 1 );
 
 
-	m_cimS = image1_mask_cln( cln, sim->width, sim->height, m_cimS );
+	m_cimS = image1_mask_cln( cln, sim->width, sim->height, 0, m_cimS );
 
 	cln_destroy( cln );
 

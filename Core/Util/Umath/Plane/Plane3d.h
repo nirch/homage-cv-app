@@ -36,8 +36,16 @@ typedef struct plane3d_type {		// n*p = d
 
 
 
-int	plna3d_cut_line( plane3d_type *A, plane3d_type *B, vec3d_type *p, vec3d_type *n );
+// compute cut line of two planes
+int	plane3d_cut_line( plane3d_type *A, plane3d_type *B, vec3d_type *p, vec3d_type *n );
 
+
+// compute the cut point of   plane and the vectot cp + t*v
+int	plane3d_cut_point( plane3d_type *A, vec3d_type *cp, vec3d_type *v, vec3d_type *p );
+
+
+// find point on plane P + t*V + s*U   nearest to all the plane
+int	plane3d_nearset_point( plane3d_type ap[], int nP, vec3d_type *P, vec3d_type *V, vec3d_type *U, vec3d_type *p );
 
 
 #ifdef __cplusplus

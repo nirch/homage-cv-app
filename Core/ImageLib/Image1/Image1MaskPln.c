@@ -90,7 +90,7 @@ image1_mask_plnA( plnA_type *apl, int width, int height, image_type *im )
 
 
 image_type *
-image1_mask_cln( cln_type *cln, int width, int height, image_type *im )
+image1_mask_cln( cln_type *cln, int width, int height, int fNormal, image_type *im )
 {
 	pln_type	*pl;
 	int	i,	Fbr;
@@ -112,7 +112,8 @@ image1_mask_cln( cln_type *cln, int width, int height, image_type *im )
 
 	image1_mask_pln_fill( im );
 
-	image1_mask_normal( im );
+	if( fNormal )
+		image1_mask_normal( im );
 
 	return( im );
 }

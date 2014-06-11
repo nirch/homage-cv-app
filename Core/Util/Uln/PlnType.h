@@ -46,6 +46,9 @@ typedef struct pln_type {
 
 	float	qulity;
 
+
+	struct ellipse_type *e;
+
 } pln_type;
 
 
@@ -331,9 +334,9 @@ typedef struct lnFit_type {
 
 
 	// PlnFit.cpp
-int	pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int cycle, lnFit_type *f );
+int	pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int fside, int cycle, lnFit_type *f );
 
-int	pln_fit_step( pln_type *pl, pln_type *bpl, float gt0, float gt1, lt2_type *lt );
+int	pln_fit_step( pln_type *pl, pln_type *bpl, float gt0, float gt1, int fside, lt2_type *lt );
 
 
 int	pln_fit_compare( pln_type *pl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
@@ -360,6 +363,12 @@ float	plnA_parallel_distance(  plnA_type *apl, float r0, float r1 );
 float	plnA_parallel_distanceH(  plnA_type *apl, float r0, float r1 );
 
 
+	// PlnApproximate.cpp
+int	pln_approximateA( pt2dA_type *apt, int fClose, pln_type **pl );
+
+int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
+
+
 	// lnFromGapp.c
 pln_type *pln_from_gapp( gapp_type *gapp );
 
@@ -384,6 +393,12 @@ int		pln_inside( pln_type *p, pln_type *p2 );
 
 // if the point  is in the right side of the close contour pl  return 1  otherwise 0
 int		pln_point_side( pln_type *pl, vec2d *p );
+
+
+	// PlnSmooth.cpp
+int		plnA_smooth( plnA_type *apl );
+
+pln_type *	pln_smooth( pln_type *pl );
 
 
 

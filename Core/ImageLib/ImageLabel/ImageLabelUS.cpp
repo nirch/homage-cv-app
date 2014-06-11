@@ -332,6 +332,19 @@ int	i,	j;
 	}
 }
 
+void
+imageLabelUS_set_id( imageLabel_type *abw )
+{
+	short	*sp;
+	int	i,	j;
+
+	sp = (short *)abw->im->data;
+	for( i = 0 ; i < abw->im->row ; i++ ){
+		for( j = 0 ; j < abw->im->column ; j++, sp++ ){
+			*sp = abw->a[*sp].id;
+		}
+	}
+}
 
 void
 imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB )
@@ -840,5 +853,302 @@ imageLabelUS_eigen2d_matrix( imageLabel_type *abw, int id,  vec2f_type *p, matri
 
 
 	return( 1 );
+
+}
+
+
+
+image_type *
+imageLabelUS_image( imageLabel_type *abw, image_type *im )
+{
+	int	i,	j;
+	short	*bp;
+	u_char	*tp;
+
+	
+	int width = abw->im->width - 2*abw->margin;
+	int height = abw->im->height - 2*abw->margin;
+
+	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
+
+	int a[4096],	nA;
+	for( i = 0, nA = 0  ; i < abw->nA ; i++ ){
+		if( abw->a[i].id != i )	continue;
+
+		a[i] = nA++;
+	}
+
+	for( i = 0; i < abw->nA ; i++ )
+		a[i] *= 255.0/nA;
+
+
+
+	tp = im->data;
+
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		bp = (short *)IMAGE_PIXEL( abw->im, i + abw->margin, abw->margin );
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			*tp = a[*bp];
+
+		}
+	}
+
+	return( im );
+}
+
+
+#ifdef _AA_
+int
+	imageLabelUS_unoin( imageLabel_type *abw, int d )
+{
+	int	i,	j,	k,	n;
+	short	*bp;
+
+
+
+	int width = abw->im->width - 2*abw->margin;
+	int height = abw->im->height - 2*abw->margin;
+
+	int align = abw->im->width - d;
+
+	for( i = abw->margin ; i+d <= abw->im->height-abw->margin ; i += d ){
+		for( j = abw->margin ; j <= abw->im->width-abw->margin-d ; j += d ){
+			bp = (short *)IMAGE_PIXEL( abw->im, i, j );
+
+			int id = 0;
+			for( k = 0 ; k < d ; k++, bp += align ){
+				for( n = 0 ; n < d ; n++, bp++ ){
+					if( *bp == 0 )	continue;
+
+					if( id == 0 ){
+						id = abw->a[*bp].id;
+						continue;
+					}
+
+					if( id != abw->a[*bp].id ){
+						int id1 = abw->a[*bp].id;
+						abw->a[id].no += abw->a[id1].no;
+						abw->a[id1].id = id;
+						
+					}
+				}
+
+			}
+
+		}
+	}
+
+	imageLabelUS_set_id( abw );
+
+	return( 1 );
+
+	
+}
+#endif
+
+
+#ifdef _AA_
+int
+	imageLabelUS_unoin( imageLabel_type *abw, int d, int size )
+{
+	int	i,	j,	k,	n;
+	short	*bp;
+
+
+
+	int width = abw->im->width - 2*abw->margin;
+	int height = abw->im->height - 2*abw->margin;
+
+	int align = abw->im->width - d;
+
+	for( i = abw->margin ; i+d <= abw->im->height-abw->margin ; i += d ){
+		for( j = abw->margin ; j <= abw->im->width-abw->margin-d ; j += d ){
+			bp = (short *)IMAGE_PIXEL( abw->im, i, j );
+
+			int id = 0;
+			for( k = 0 ; k < d ; k++, bp += align ){
+				for( n = 0 ; n < d ; n++, bp++ ){
+					if( *bp == 0 )	continue;
+					int id1 = abw->a[*bp].id;
+					if( abw->a[id1].no < size )	continue;
+
+					for( k = 0 ; k < aN ; k++ ){
+						if( a[i] == id1 )	break;
+					}
+
+					if( k < nA )	break;
+
+					a[nA++];
+				}
+
+
+					if( id == 0 ){
+						id = abw->a[*bp].id;
+						continue;
+					}
+
+					if( id != abw->a[*bp].id ){
+						int id1 = abw->a[*bp].id;
+						abw->a[id].no += abw->a[id1].no;
+						abw->a[id1].id = id;
+
+					}
+				}
+
+			}
+
+		}
+	}
+
+	imageLabelUS_set_id( abw );
+
+	return( 1 );
+
+
+}
+#endif
+
+
+int
+	imageLabelUS_unoin( imageLabel_type *abw, int d, int size )
+{
+	int	i,	j,	k,	n,	no;
+	short	*bp;
+
+
+	
+	no = 0;
+
+	int width = abw->im->width - 2*abw->margin;
+	int height = abw->im->height - 2*abw->margin;
+	
+	image_type *im = image_alloc( width/8, height/8, 1, IMAGE_TYPE_U16, 1 );
+	short *tp = im->data_s;
+
+	int align = abw->im->width - d;
+
+	for( i = abw->margin ; i+d <= abw->im->height-abw->margin ; i += d ){
+		for( j = abw->margin ; j <= abw->im->width-abw->margin-d ; j += d ){
+			bp = (short *)IMAGE_PIXEL( abw->im, i, j );
+
+			int id = 0;
+			for( k = 0 ; k < d ; k++, bp += align ){
+				for( n = 0 ; n < d ; n++, bp++ ){
+					if( *bp == 0 )	continue;
+
+					int id1 = abw->a[*bp].id;
+					if( id == id1 )	continue;
+
+					if( abw->a[id1].no < size )	continue;
+
+					if( id == 0 ){
+						id = id1;
+						continue;
+					}
+
+
+					no++;
+					
+					for( k = 0; k < abw->nA ; k++ ){
+						if( abw->a[k].id == id1 ){
+							abw->a[id].no += abw->a[k].no;
+							abw->a[k].id = id;
+						}
+					}
+				}
+
+			}
+
+			*tp++ = id;
+
+		}
+	}
+
+	int id1;
+	for( i = 0 ; i < im->height-1 ; i++ ){
+		tp = (short*)IMAGE_PIXEL( im, i, 0 );
+		short *tp1 = tp + im->width;
+		for( j = 0 ; j < im->width-1 ; j++,  tp++, tp1++ ){
+			if( *tp == 0 )	continue;
+
+			int id = abw->a[*tp].id;
+
+			if( abw->a[id].no < size ) continue;
+
+			if( *(tp+1) > 0 ){
+				id1 = abw->a[*(tp+1)].id;
+				if( id != id1 && abw->a[id1].no < size)
+					imageLabel_merge( abw, id, id1 );
+			}
+
+			if( *(tp1) > 0 ){
+				id1 = abw->a[*(tp1)].id;
+				if( id != id1 && abw->a[id1].no < size )
+					imageLabel_merge( abw, id, id1 );
+			}
+
+			if( *(tp1+1) > 0 ){
+				id1 = abw->a[*(tp1+1)].id;
+				if( id != id1 && abw->a[id1].no < size )
+					imageLabel_merge( abw, id, id1 );
+			}
+		}
+	}
+
+	image_destroy( im, 1 );
+
+	imageLabelUS_set_id( abw );
+
+	return( no );
+
+
+}
+
+void
+imageLabel_merge( imageLabel_type *abw, int id, int id1 )
+{
+	int	k;
+	for( k = 0; k < abw->nA ; k++ ){
+		if( abw->a[k].id == id1 ){
+			abw->a[id].no += abw->a[k].no;
+			abw->a[k].id = id;
+		}
+	}
+}
+
+int
+imageLabelUS_unoinCorner( imageLabel_type *abw )
+{
+	int	i,	j,	k;
+	short	*bp;
+
+
+	for( i = 1 ; i < abw->im->height-1 ; i++ ){
+		bp = (short *)IMAGE_PIXEL( abw->im, i, 1 );
+		short *bp0 = bp + abw->im->width+1;
+		for( j = 1 ; j < abw->im->width-1 ; j++, bp++, bp0++ ){
+
+			if( *bp == 0 || *bp0 == 0 )	continue;
+			if( *bp == *bp0 )	continue;
+
+			int id = abw->a[*bp].id;
+			int id0 = abw->a[*bp0].id;
+			if( id == id0 )	continue;
+			
+
+
+			for( k = 0; k < abw->nA ; k++ ){
+				if( abw->a[k].id == id0 ){
+					abw->a[id].no += abw->a[k].no;
+					abw->a[k].id = id;
+				}
+			}
+		}
+	}
+
+	imageLabelUS_set_id( abw );
+
+	return( 1 );
+
 
 }

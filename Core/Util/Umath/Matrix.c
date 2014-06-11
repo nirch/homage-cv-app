@@ -70,7 +70,7 @@ matrix_destroy( matrix_type *m )
 	if( m == NULL )
 		return;
 
-	free( m->f );
+	free( m->d );
 
 	free( m );
 }
@@ -442,6 +442,24 @@ int	ret;
 	ret = math_matrixD_inverse( A->d, B->d, A->n );
 	return( ret );
 }
+
+int
+matrix_solve( matrix_type *m, double D[], double X[] )
+{
+	int	ret;
+
+	matrix_type *im = matrix_alloc( m->n, m->n, MT_DOUBLE );
+	
+	ret = matrix_inverse( m, im );
+
+	matrixD_multV( im, D, X );
+
+	matrix_destroy( im );
+
+	return( ret );
+}
+
+
 
 // A mxn 
 matrix_type *

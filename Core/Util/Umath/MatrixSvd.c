@@ -56,11 +56,13 @@ IppStatus	status;
 //		matrixS_eigen_test( m, em, ev );
 		return( 1 );
 	}
+	
 
+	return( -1 );
 //matrix_normalize( em );
 #endif
-	return( -1 );
-
+	
+	return( -2 );
 
 //	matrix_print( "W", *W, stdout );
 

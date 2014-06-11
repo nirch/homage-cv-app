@@ -7,7 +7,9 @@
 #include "Uigp/igp.h"
 #include "LT2Type.h"
 #include "Matrix3Type.h"
+#include "Matrix2Type.h"
 
+#include "EigenType.h"
 
 
 
@@ -37,8 +39,22 @@ lt2_affine_setV( lt2_type *lt, float a, float b, float s, float t )
 	lt->c1 = b;
 }
 
+#ifdef _AA_
 void	
-lt2_affine_set( lt2_type *lt, float a, float b, float angle, float scale )
+lt2_similarity_set( lt2_type *lt, float a, float b, float angle, float scale )
+{
+	lt->a0 = scale*cos(angle);
+	lt->b0 = scale*sin(angle);
+	lt->c0 = a;
+
+	lt->a1 = -scale*sin(angle);;
+	lt->b1 = scale*cos(angle);;
+	lt->c1 = b;
+}
+#endif
+
+void	
+lt2_similarity_set( lt2_type *lt, float a, float b, float angle, float scale )
 {
 float	s,	t;
 
@@ -57,8 +73,9 @@ float	s,	t;
 	//ctr.y = c->ctr.x * -t + c->ctr.y * s + b;
 }
 
+
 void	
-lt2_affine_get( lt2_type *lt, float *a, float *b, float *angle, float *scale )
+lt2_similarity_get( lt2_type *lt, float *a, float *b, float *angle, float *scale )
 {
 	*scale = hypot( lt->a0, lt->b0 );
 
@@ -125,7 +142,7 @@ lt2_shift( lt2_type *t, float x0, float y0, lt2_type *it )
 	LT2_F2_B( *it ) = LT2_F2_B( *t );
 }
 
-
+#ifdef _AA_
 void	
 lt2_scale( lt2_type *t, float scale )
 {
@@ -135,6 +152,22 @@ lt2_scale( lt2_type *t, float scale )
 	LT2_F2_A( *t ) *= scale;
 	LT2_F2_B( *t ) *= scale;
 }
+#endif
+
+void	
+lt2_scaleN( lt2_type *t, float scale )
+{
+	LT2_F1_A( *t ) *= scale;
+	LT2_F1_B( *t ) *= scale;
+	LT2_F1_C( *t ) *= scale;
+
+
+	LT2_F2_A( *t ) *= scale;
+	LT2_F2_B( *t ) *= scale;
+	LT2_F2_C( *t ) *= scale;
+}
+
+
 
 
 #define	A(t)	LT2_F1_A(t)
@@ -607,6 +640,98 @@ int
 }
 
 
+
+//    t = lt( s )
+int
+lt2_similarityA( lt2_type *lt, vec2f_type ap[2], vec2f_type aq[2] )
+{
+	vec2f_type	p,	q;
+	vec2f_type	pu,	qu;
+	vec2f_type	w;
+	matrix2_type	m,	m1,	m2;
+	float	t;
+
+	p.x = ap[1].x - ap[0].x;
+	p.y = ap[1].y - ap[0].y;
+
+
+	q.x = aq[1].x - aq[0].x;
+	q.y = aq[1].y - aq[0].y;
+
+
+	VEC2D_LEFT( p, pu );
+	VEC2D_LEFT( q, qu );
+
+	
+
+
+	t = p.x*p.x + p.y*p.y;
+	m1.a00 = p.x / t;
+	m1.a01 = p.y / t;
+	m1.a10 = pu.x / t;
+	m1.a11 = pu.y / t;
+
+	m2.a00 = q.x;
+	m2.a01 = qu.x;
+	m2.a10 = q.y;
+	m2.a11 = qu.y;
+
+	matrix2_mult( &m2, &m1, &m );
+
+	lt->a0 = m.a00;
+	lt->b0 = m.a01;
+	lt->a1 = m.a10;
+	lt->b1 = m.a11;
+
+
+	matrix2_multV( &m, &ap[0], &w );
+	lt->c0 = aq[0].x - w.x;
+	lt->c1 = aq[0].y - w.y;
+
+
+#ifdef _TEST_
+	w.x = LT2_F1( *lt, ap[0].x, ap[0].y );
+	w.y = LT2_F2( *lt, ap[0].x, ap[0].y );
+
+	w.x -= aq[0].x;
+	w.y -= aq[0].y;
+
+	w.x = LT2_F1( *lt, ap[1].x, ap[1].y );
+	w.y = LT2_F2( *lt, ap[1].x, ap[1].y );
+
+	w.x -= aq[1].x;
+	w.y -= aq[1].y;
+#endif
+
+
+	return( 1 );
+}
+
+
+//    t = lt( s )
+int
+lt2_asimilarity_eigen2d( lt2_type *lt, eigen2d_type *ep, eigen2d_type *eq )
+{
+int	ret;
+float	t;
+	vec2f_type ap[2],	aq[2];
+
+	ap[0] = ep->p;
+	ap[1].x = ep->p.x + ep->v1.x;
+	ap[1].y = ep->p.y + ep->v1.y;
+
+	t = sqrt(eq->e1 / ep->e1);
+	aq[0] = eq->p;
+	aq[1].x = eq->p.x + t*eq->v1.x;
+	aq[1].y = eq->p.y + t*eq->v1.y;
+
+	ret = lt2_similarityA( lt, ap, aq );
+
+	return( ret );
+}
+
+
+
 void
 lt2_swap( lt2_type *lt, lt2_type *sw )
 {
@@ -619,3 +744,4 @@ lt2_swap( lt2_type *lt, lt2_type *sw )
 	sw->c1 = lt->c0;
 
 }
+

@@ -13,6 +13,7 @@
 
 #include "Uvl/Vl2fType.h"
 #include "Uln/PlnType.h"
+#include "Umath/Ellipse/EllipseType.h"
 
 
 pln_type *
@@ -34,6 +35,7 @@ pln_alloc( int no )
 		pl->link = lnL_alloc( no );
 
 
+	pl->e = NULL;
 //	pl->type = 0;
 //	pl->data = NULL;
 
@@ -65,6 +67,8 @@ pln_destroy( pln_type *pl )
 	if( pl->link != NULL )
 		lnL_destroy( pl->link );
 
+	if( pl->e != NULL )
+		free( pl->e );
 
 //	if( pl->data = NULL )
 //		free( pl->data );
@@ -111,6 +115,7 @@ plnA_type	*apl;
 
 	apl->nA = 0;
 
+	apl->iFrame = 0;
 
 	// axis
 	apl->p.x = apl->p.y = 0;
@@ -864,6 +869,8 @@ float	n;
 		pt->n.y = 0;
 
 		pt->r = r;
+		pt->f = t;
+		pt->id = 0;
 	}
 }
 

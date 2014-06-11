@@ -103,10 +103,12 @@ plnF_read( plnF_type **vpl, char *file )
 		return( -1 );
 	}
 
-#ifdef _AA_
-	if( strcmp( signature, "Cl") != 0 ){
+	if( strcmp( signature, "CL") == 0 ){
+		*vpl = plnF_alloc( 1 );
+
 		fseek( fp, pose, SEEK_SET );
-		plnA_read_cl( apl, fp );
+		plnA_read_cl( &(*vpl)->a[0], fp );
+		(*vpl)->nA = 1;
 		fclose( fp );
 		return( 1 );
 	}
@@ -122,12 +124,12 @@ plnF_read( plnF_type **vpl, char *file )
 		fseek( fp, pose, SEEK_SET );
 		nV = 1;
 	}
-#endif
+//#endif
 
-	if( strcmp( signature, "PLV") != 0 ){
-		fclose( fp );
-		return( -1 );
-	}
+	//if( strcmp( signature, "PLV") != 0 ){
+	//	fclose( fp );
+	//	return( -1 );
+	//}
 
 
 	*vpl = plnF_alloc( nV );
@@ -135,7 +137,8 @@ plnF_read( plnF_type **vpl, char *file )
 
 	plnA_type *apl;
 	for( i = 0 ; i < nV ; i++ ){
-		plnA_read( &apl, fp );
+		if( plnA_read( &apl, fp ) < 0 )
+			break;
 
 		plnF_add( *vpl, apl, apl->iFrame );
 	}
@@ -168,7 +171,7 @@ plnA_read( plnA_type **apl, char *file )
 		return( -1 );
 	}
 
-	if( strcmp( signature, "Cl") != 0 ){
+	if( strcmp( signature, "CL") == 0 ){
 		fseek( fp, pose, SEEK_SET );
 		plnA_read_cl( apl, fp );
 		fclose( fp );
@@ -239,10 +242,11 @@ plnA_read( plnA_type **apl, FILE *fp )
 
 
 	if( fscanf(fp, "%s  %d", signature, &version ) != 2 )
-		return( NULL );
+		return( -1 );
+
 
 	if( strcmp( signature, "PL") != 0 )
-		return( NULL );
+		return( -1 );
 
 	int iFrame = 0;
 	if( version >=2 )

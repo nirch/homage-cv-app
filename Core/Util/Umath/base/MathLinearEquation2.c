@@ -8,6 +8,9 @@
 
 #include	"../umath.h"
 
+#define	MSIZE	2
+
+
 int
 math_linear_equation2( float A[2][2], float D[2], float minDet, float X[2] )
 {
@@ -273,4 +276,52 @@ math_linear_equation2_symtric_eigenvalue( float xx, float xy, float yy,
 	v1->y /= t;
 
 	return( 1 );
+}
+
+
+
+int
+math_matrixD_inverse2( double DA[MSIZE][MSIZE], double B[MSIZE][MSIZE] )
+{
+	double	A[MSIZE][MSIZE];
+	double	a;
+	int	i,	j,	k,	iMax;
+	double	max;
+
+	for( i = 0 ; i < MSIZE ; i++ )
+		for( j = 0 ; j < MSIZE ; j++ ){
+			B[i][j] = ( i != j )? 0 : 1;
+			A[i][j] = DA[i][j];
+		}
+
+
+		for( i = 0 ; i < MSIZE ; i++ ){
+
+			max = A[i][i];
+			iMax = i;
+			for( k = i+1 ; k < MSIZE ; k++ )
+				if( ABS(A[i][k]) > ABS(max) ){
+					iMax = k;
+					max = A[i][k];
+				}
+
+				if( i != iMax ){
+					vectorD_swap( A[i], A[iMax], MSIZE );
+					vectorD_swap( B[i], B[iMax], MSIZE );
+				}
+
+				a = 1.0 / A[i][i];
+				vectorD_multiply( A[i], a, MSIZE );
+				vectorD_multiply( B[i], a, MSIZE );
+
+				for( j = 0 ; j < MSIZE ; j++ ){
+					if( j != i ){
+						a = -A[j][i];
+						vectorD_acumalute( A[j], A[i], a, MSIZE );
+						vectorD_acumalute( B[j], B[i], a, MSIZE ); 
+					}
+				}
+		}
+
+		return( 1 );
 }

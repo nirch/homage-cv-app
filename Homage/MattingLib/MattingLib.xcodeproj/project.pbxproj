@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 085A49792B8245F481C5BBF2 /* ColorBackground.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */; };
+		D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */; };
+		D02F38BE19482B0000FB25A5 /* PlnAdjustThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */; };
 		D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58118D0BC99004435E2 /* UbBackground.cpp */; };
 		D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58218D0BC99004435E2 /* UbBlob.cpp */; };
 		D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */; };
@@ -17,7 +20,6 @@
 		D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58718D0BC99004435E2 /* UbThin.cpp */; };
 		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
 		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
-		D0EBED041935E32900B468F3 /* UbPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EBED031935E32900B468F3 /* UbPrm.cpp */; };
 		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,10 @@
 		7885ACADB627440AAA11DA86 /* ColorBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorBackground.h; path = ColorBackground/ColorBackground.h; sourceTree = SOURCE_ROOT; };
 		80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundRemoval.h; path = Background/BackgroundRemoval.h; sourceTree = SOURCE_ROOT; };
 		BDE895EA1510494B83EB22EB /* libMattingLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMattingLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D02F38B819482B0000FB25A5 /* PlnAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlnAdjust.h; sourceTree = "<group>"; };
+		D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustIn.cpp; sourceTree = "<group>"; };
+		D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustStart.cpp; sourceTree = "<group>"; };
+		D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustThin.cpp; sourceTree = "<group>"; };
 		D0E0A58118D0BC99004435E2 /* UbBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBackground.cpp; path = UniformBackground/UbBackground.cpp; sourceTree = "<group>"; };
 		D0E0A58218D0BC99004435E2 /* UbBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob.cpp; path = UniformBackground/UbBlob.cpp; sourceTree = "<group>"; };
 		D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob1.cpp; path = UniformBackground/UbBlob1.cpp; sourceTree = "<group>"; };
@@ -37,7 +43,6 @@
 		D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbUpdate.cpp; path = UniformBackground/UbUpdate.cpp; sourceTree = "<group>"; };
 		D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UniformBackground.cpp; path = UniformBackground/UniformBackground.cpp; sourceTree = "<group>"; };
 		D0E0A58A18D0BC99004435E2 /* UniformBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniformBackground.h; path = UniformBackground/UniformBackground.h; sourceTree = "<group>"; };
-		D0EBED031935E32900B468F3 /* UbPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbPrm.cpp; path = UniformBackground/UbPrm.cpp; sourceTree = "<group>"; };
 		DFF34186925240D695E86042 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/CMakeLists.txt; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -85,10 +90,20 @@
 			name = "Header Files";
 			sourceTree = "<group>";
 		};
+		D02F38B719482B0000FB25A5 /* PlnAdjust */ = {
+			isa = PBXGroup;
+			children = (
+				D02F38B819482B0000FB25A5 /* PlnAdjust.h */,
+				D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */,
+				D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */,
+				D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */,
+			);
+			path = PlnAdjust;
+			sourceTree = "<group>";
+		};
 		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
 			isa = PBXGroup;
 			children = (
-				D0EBED031935E32900B468F3 /* UbPrm.cpp */,
 				D0E0A58118D0BC99004435E2 /* UbBackground.cpp */,
 				D0E0A58218D0BC99004435E2 /* UbBlob.cpp */,
 				D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */,
@@ -106,6 +121,7 @@
 		F6160FA366C749B1BC40ABE7 /* MattingLib */ = {
 			isa = PBXGroup;
 			children = (
+				D02F38B719482B0000FB25A5 /* PlnAdjust */,
 				D0E0A58018D0BC65004435E2 /* UniformBackground */,
 				93D3460ADEB24C8EB830AA82 /* Source Files */,
 				B6B5BA0D7E4349489CF4917B /* Header Files */,
@@ -183,11 +199,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */,
 				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
 				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
+				D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */,
+				D02F38BE19482B0000FB25A5 /* PlnAdjustThin.cpp in Sources */,
 				D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */,
 				D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */,
-				D0EBED041935E32900B468F3 /* UbPrm.cpp in Sources */,
 				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
 				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
 				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
@@ -204,7 +222,6 @@
 		1E8BD26AFF514970B34A68FF /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -213,8 +230,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../../Core/ImageLib,
-					../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/Util,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -249,7 +266,6 @@
 		4D897B093B694BE288C8ED05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -258,8 +274,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../../Core/ImageLib,
-					../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/Util,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -294,7 +310,6 @@
 		7AF3BEDF787D49DBAE613384 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -303,8 +318,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../../Core/ImageLib,
-					../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/Util,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -351,7 +366,6 @@
 		FB1C6D7AE07E4AF9B36C19F2 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -360,8 +374,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../../Core/ImageLib,
-					../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/../../Core/Util,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;

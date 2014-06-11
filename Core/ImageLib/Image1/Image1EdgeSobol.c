@@ -56,6 +56,8 @@ int	cx,	cy;
 
 
 
+
+
 image_type *
 image1_gridient_sobol_value( image_type *sim, image_type *tim )
 {
@@ -96,12 +98,57 @@ image1_gridient_sobol_value( image_type *sim, image_type *tim )
 
 			val = ABS(cx) + ABS(cy );
 
-			*tp++ = PUSH_TO_RANGE( val, 0, 256 );
+			*tp++ = PUSH_TO_RANGE( val, 0, 255 );
 		}
 	}
 
 	return( tim );
 }
+
+
+image_type *
+	image1M_gridient_sobol_value( image_type *sim, image_type *mim, image_type *im )
+{
+	u_char	*sp,	*sp0,	*sp2,	*mp;
+	u_char	*tp;
+	int	i,	j;
+	int	cx,	cy;
+
+
+
+	im = image_recreate( im, sim->row, sim->column, 1, 1 );
+	image1_const( im, 0 );
+
+	tp = im->data;
+
+
+
+	for( i = 1 ; i < sim->row-1 ; i++ ){
+
+		sp = IMAGE_PIXEL( sim, i, 1 );
+		mp = IMAGE_PIXEL( mim, i, 1 );
+		tp = IMAGE_PIXEL( im, i, 1 );
+
+		sp0 = sp - sim->column;
+		sp2 = sp + sim->column;
+		for( j = 1 ; j < sim->column-1 ; j++, sp++, sp0++, sp2++, mp++, tp++ ){
+
+
+			if( *mp != 0 )	continue;
+
+			cx = ((*(sp0+1) - *(sp0-1)) + 2*(*(sp+1) - *(sp-1)) + (*(sp2+1) - *(sp2-1)));
+			cy = ((*(sp2-1) - *(sp0-1)) + 2*(*(sp2) - *(sp0)) + (*(sp2+1) - *(sp0+1)));
+
+			cx >>= 3;
+			cy >>= 3;
+
+			*tp = 2*(ABS(cx) + ABS(cy));
+		}
+	}
+
+	return( im );
+}
+
 
 
 image_type *

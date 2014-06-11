@@ -260,6 +260,35 @@ int	i,	iMin;
 }
 
 
+int
+pt2dA_distance( pt2dA_type *apt, int ignore, vec2d *p, float *dis )
+{
+	pt2d_type	*pt;
+	vec2d	v;
+	float	dMin,	d;
+	int	i,	iMin;
+
+	
+	iMin = -1;
+	for( i = 0 ; i < apt->nP ; i++ ){
+		if( i == ignore )	continue;
+
+		pt = & apt->p[i];
+		v.x = pt->p.x - p->x;
+		v.y = pt->p.y - p->y;
+
+		d = v.x*v.x + v.y*v.y;
+		if( iMin < 0 || d < dMin ){
+			dMin = d;
+			iMin = i;
+		}
+	}
+
+	*dis = dMin;
+	return( iMin );
+}
+
+
 
 pt2dA_type * 
 pt2dA_copy_neighbor( pt2dA_type *apt, vec2d *p, float D, pt2dA_type *capt )
@@ -394,6 +423,17 @@ int	i,	j,	no;
 	return( no );
 }
 
+
+void pt2dA_remove( pt2dA_type *apt, int k )
+{
+	int	i;
+
+	apt->nA--;
+
+	for( i = k ; i < apt->nA ; i++ ){
+		apt->a[i] = apt->a[i+1];
+	}
+}
 
 void pt2dA_remove_box( pt2dA_type *apt, box2i *box )
 {

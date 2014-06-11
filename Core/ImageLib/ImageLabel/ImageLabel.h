@@ -62,6 +62,7 @@ imageLabel_type *imageLabelUS( image_type *sim, int T, int inv, int margin, imag
 
 imageLabel_type *imageLabelUS_N( image_type *sim, int T, int inv, int margin, imageLabel_type *abw );
 
+void	imageLabelUS_set_id( imageLabel_type *abw );
 
 int		imageLabelUS_set_pixel( image_type *sim, imageLabel_type *abw, int value );
 
@@ -71,6 +72,13 @@ void	imageLabelUS_value( imageLabel_type *abw, image_type *sim );
 
 int		imageLabelUS_eigen2d( imageLabel_type *abw, int id,  struct eigen2d_type *e );
 
+image_type *	imageLabelUS_image( imageLabel_type *abw, image_type *im );
+
+int	imageLabelUS_unoin( imageLabel_type *abw, int d, int size );
+
+int	imageLabelUS_unoinCorner( imageLabel_type *abw );
+
+void	imageLabel_merge( imageLabel_type *abw, int id, int id1 );
 
 
 

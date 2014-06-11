@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		021189B37656487A97A5F7E1 /* Matrix2Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = D246E2357459427B988EEA5B /* Matrix2Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		022F63E1E5604D31871FBFE5 /* MediaDataMultiPart.c in Sources */ = {isa = PBXBuildFile; fileRef = C4AB17B43C0F412180D6D79C /* MediaDataMultiPart.c */; settings = {COMPILER_FLAGS = ""; }; };
-		02AE557CA85645EE9CDCB567 /* Pt2dTriangleFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = 952475986A47497B9B64AC34 /* Pt2dTriangleFilter.c */; settings = {COMPILER_FLAGS = ""; }; };
 		03C2670B0D064E3DBE6B75E9 /* GappDump.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C45B4A3E0514AEFAE85AEE0 /* GappDump.c */; settings = {COMPILER_FLAGS = ""; }; };
 		072B7AA4551C44D1982AED8A /* ViewBasePrm.c in Sources */ = {isa = PBXBuildFile; fileRef = 176BA966E69B49B5A56DD3FF /* ViewBasePrm.c */; settings = {COMPILER_FLAGS = ""; }; };
 		09961F122F4C46A2B0610E0C /* Vl3dIo.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D3822DD5584379A996E313 /* Vl3dIo.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -51,7 +50,6 @@
 		2DA69FDC20774917B6D637CA /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 582CFDEB15D940B78BF6360E /* crc32.c */; settings = {COMPILER_FLAGS = ""; }; };
 		312B39D912C84993A38ACF02 /* Jet2Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 47073158216948029CD9DF19 /* Jet2Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		35B8EC6AADB54E0E9F2C2685 /* GpRelinquish.c in Sources */ = {isa = PBXBuildFile; fileRef = B15C3B07E0BA4006AB77D427 /* GpRelinquish.c */; settings = {COMPILER_FLAGS = ""; }; };
-		3B7B07617EE74F9E8B2DBC53 /* Pt2dIo.c in Sources */ = {isa = PBXBuildFile; fileRef = 19E1DD1B28884AF09338C8C8 /* Pt2dIo.c */; settings = {COMPILER_FLAGS = ""; }; };
 		3C1F2DB2C33E4426B72CBD44 /* BstIn.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E94E9E3329C430CAF80AFE2 /* BstIn.c */; settings = {COMPILER_FLAGS = ""; }; };
 		3CDC465FFF39405991C49240 /* Jet2Array.c in Sources */ = {isa = PBXBuildFile; fileRef = F832FFA573AF4584954E2BE6 /* Jet2Array.c */; settings = {COMPILER_FLAGS = ""; }; };
 		3CFA82D3DA3847FA8428EC2C /* UnityS2.c in Sources */ = {isa = PBXBuildFile; fileRef = C3916CB62BB647E6A57C955F /* UnityS2.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -70,20 +68,15 @@
 		4976243B9A00479196A26265 /* GpFileName.c in Sources */ = {isa = PBXBuildFile; fileRef = 234A812AB0E54C628AC182CC /* GpFileName.c */; settings = {COMPILER_FLAGS = ""; }; };
 		4B0E43B9A51148579BB55279 /* unity.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E20A29869094218B3414A93 /* unity.c */; settings = {COMPILER_FLAGS = ""; }; };
 		4C005C2436424572A55F5D5E /* MathMatrixInvese6.c in Sources */ = {isa = PBXBuildFile; fileRef = C628DD67F8A74631A8256212 /* MathMatrixInvese6.c */; settings = {COMPILER_FLAGS = ""; }; };
-		4CEACDC341BC4363BE057E72 /* Pt2dApproximateAb.c in Sources */ = {isa = PBXBuildFile; fileRef = A0199B35E41E4BBE80361291 /* Pt2dApproximateAb.c */; settings = {COMPILER_FLAGS = ""; }; };
-		4F6B414369054D80850D5B32 /* Pt2dGTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5716A1FDA1364ACABECCEA46 /* Pt2dGTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		504A9F0B6F4048F08DF14446 /* GeoApp1.c in Sources */ = {isa = PBXBuildFile; fileRef = AD8316064CA7414692D8B45C /* GeoApp1.c */; settings = {COMPILER_FLAGS = ""; }; };
 		50A0632B3F254362A6906CDA /* XmlIO.c in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE8C30C5A24CFE89DF389D /* XmlIO.c */; settings = {COMPILER_FLAGS = ""; }; };
 		50E0345BBB4B41EDB3235BA8 /* UnityS4.c in Sources */ = {isa = PBXBuildFile; fileRef = 517EEDC194D641EFB89C85E8 /* UnityS4.c */; settings = {COMPILER_FLAGS = ""; }; };
 		50E840F71D354637BAE4CD58 /* GpTime.c in Sources */ = {isa = PBXBuildFile; fileRef = F23EC5E6EC9348A8B5467DE2 /* GpTime.c */; settings = {COMPILER_FLAGS = ""; }; };
 		523A2C2DCCB442F8AD0A1AAF /* GpFunction.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F89CEF8CD79402E94EDE9F5 /* GpFunction.c */; settings = {COMPILER_FLAGS = ""; }; };
-		5362816FDB7A420FAE515652 /* Pt2dMask.c in Sources */ = {isa = PBXBuildFile; fileRef = 46CD33DEF0144C758690069A /* Pt2dMask.c */; settings = {COMPILER_FLAGS = ""; }; };
 		563E4A191D644604A5140F22 /* Matrix3Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 077F17A648EB4430ADFC330D /* Matrix3Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
-		588CCBC2B7D14C5BA6A93FAC /* Pt2dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = C42BAAC1385C46F79EB69549 /* Pt2dTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		5BB8E69E05C24FC19F538273 /* zip_files.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A11A04A2DD4460388123EE3 /* zip_files.c */; settings = {COMPILER_FLAGS = ""; }; };
 		5C2F7ED158F842A3B1770567 /* lz_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 69F36E3D2FF544C1B0735348 /* lz_encode.c */; settings = {COMPILER_FLAGS = ""; }; };
 		5C5D9E1E0C4D4377804653F2 /* GpMsg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D50001C7A544796B93A1895 /* GpMsg.c */; settings = {COMPILER_FLAGS = ""; }; };
-		5E5487284E4C4449A0C6437F /* Pt2dComponnet.c in Sources */ = {isa = PBXBuildFile; fileRef = AC7692B28E9F4CB59EC0B16B /* Pt2dComponnet.c */; settings = {COMPILER_FLAGS = ""; }; };
 		6097204839B9406389C22D47 /* Poly2d3Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 31F5660A91034D47BA9A2AB4 /* Poly2d3Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		60E836EA0CC345088D06D630 /* Poly1d4Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = F50065DF63EE4F88A91CEDFB /* Poly1d4Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		60F5B5C9BD6D43888AD1DC8C /* XmlParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 501A8779A1BB4DE885CD11A7 /* XmlParser.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -107,7 +100,6 @@
 		7AB2964F94A048CCB97309AD /* ViewObject1.c in Sources */ = {isa = PBXBuildFile; fileRef = EE316F9AD7C449E4AF57BB85 /* ViewObject1.c */; settings = {COMPILER_FLAGS = ""; }; };
 		7BDECF2C43124ABD97053BB0 /* SmilTool.c in Sources */ = {isa = PBXBuildFile; fileRef = F2D66811970A4BDF8B96A7E5 /* SmilTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		7DF6D51937F44D2885A7311F /* GpFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B817C36A646ED9893D8F3 /* GpFile.c */; settings = {COMPILER_FLAGS = ""; }; };
-		7E268350361C4A31AFEB6E44 /* Pt2dApproximateLineAxB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C3ADE5D6F47588D1D4706 /* Pt2dApproximateLineAxB.c */; settings = {COMPILER_FLAGS = ""; }; };
 		809C51E5993647EA8C036E5C /* Jet23Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = BAACD6F340EE48CCB6B5C73D /* Jet23Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		813C1239D4D844D2AE7BCD31 /* ViewTool.c in Sources */ = {isa = PBXBuildFile; fileRef = F83B7BD258314A94BDE540A0 /* ViewTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		822C766082694B4CBC78D63B /* code.c in Sources */ = {isa = PBXBuildFile; fileRef = 08B4AB7C5ED14179A670340D /* code.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -116,11 +108,9 @@
 		88FE94D4CA104793A81EFA58 /* Config3dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = B64E0A6AF2114AFA82C83EC8 /* Config3dTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		8AA6FCFA12044E68B0800AE4 /* TriangleTool.c in Sources */ = {isa = PBXBuildFile; fileRef = F3E573FB8B484C9498794117 /* TriangleTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		8D8095913E2A4C2BA2F1ED00 /* PrmAux.c in Sources */ = {isa = PBXBuildFile; fileRef = C52822C3CE3F44CAAF8B5E8E /* PrmAux.c */; settings = {COMPILER_FLAGS = ""; }; };
-		8DC6B406AE0C4548AA4B5219 /* Pt2dLine.c in Sources */ = {isa = PBXBuildFile; fileRef = E6144BC8BB514478A9F8E22C /* Pt2dLine.c */; settings = {COMPILER_FLAGS = ""; }; };
 		8E1035F8D3904B94829918F6 /* Vl3dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 92F481A81C2548868DA61497 /* Vl3dTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		9037976BC626468B923FDCB0 /* Vl2f_Lt2.c in Sources */ = {isa = PBXBuildFile; fileRef = 745E5E3C2DFE476D9BED4000 /* Vl2f_Lt2.c */; settings = {COMPILER_FLAGS = ""; }; };
 		909053E4093F4CD2832C8E8A /* XmlType.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AEE2E5C5D194A63BA024631 /* XmlType.c */; settings = {COMPILER_FLAGS = ""; }; };
-		90C7276860BE4D5FB4D15A4A /* Pt2dApproximateLinePv.c in Sources */ = {isa = PBXBuildFile; fileRef = A368E2FFF19844448E01AE5C /* Pt2dApproximateLinePv.c */; settings = {COMPILER_FLAGS = ""; }; };
 		91853A485DA440509C83A6CC /* CuspJmap23.c in Sources */ = {isa = PBXBuildFile; fileRef = C0C6D496634A4951A195665C /* CuspJmap23.c */; settings = {COMPILER_FLAGS = ""; }; };
 		9257276F70C94678B3A6C669 /* ViewActualBox.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C5B9C0D33CA4B5DA7E6B5B6 /* ViewActualBox.c */; settings = {COMPILER_FLAGS = ""; }; };
 		94119587E7B349ECBD8F09E3 /* GpBuildNumber.c in Sources */ = {isa = PBXBuildFile; fileRef = 2364A6AF459B44248A071985 /* GpBuildNumber.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -138,21 +128,17 @@
 		A902D9E5BB9844ABBA0643E1 /* PcaTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 61F347EE64A845C180E8CB50 /* PcaTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		A98EF7D05013486CA4C56323 /* UnityS3.c in Sources */ = {isa = PBXBuildFile; fileRef = FF26B98E3FAF4EC79C85595C /* UnityS3.c */; settings = {COMPILER_FLAGS = ""; }; };
 		AAC067C7F48A49509F3A4D67 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 01AE7E74798E4D8B95E04B63 /* trees.c */; settings = {COMPILER_FLAGS = ""; }; };
-		AB7C8E46A16A4488B213C645 /* Pt2dCurvtur.c in Sources */ = {isa = PBXBuildFile; fileRef = F6D0016071B84C509FD847F8 /* Pt2dCurvtur.c */; settings = {COMPILER_FLAGS = ""; }; };
 		ABD5F9289AB04FFCB1148310 /* CstXml.c in Sources */ = {isa = PBXBuildFile; fileRef = FA25CBE44AB24442964FDE35 /* CstXml.c */; settings = {COMPILER_FLAGS = ""; }; };
 		AD053971C5194037ACA7A7FE /* Pt3fTool.c in Sources */ = {isa = PBXBuildFile; fileRef = C48EF3471FFE48B4BAE51DC7 /* Pt3fTool.c */; settings = {COMPILER_FLAGS = ""; }; };
-		ADF13730B6814B769208E218 /* Pt2dApproximateLine.c in Sources */ = {isa = PBXBuildFile; fileRef = CAC30F58342A404CA921B6CF /* Pt2dApproximateLine.c */; settings = {COMPILER_FLAGS = ""; }; };
 		AF0DAAF3B1D646B1AC458C39 /* Poly2d4Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = D89B1690C05F46A9ACCBDB48 /* Poly2d4Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B0B80E7B05E54A0B8419C000 /* CfgTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CACA5E928384E68ACDF9859 /* CfgTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B2D4CE52938D402D80988F92 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = D609839E0D6B490D9C21ABE7 /* compress.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B3A71BA5CDBB4120BDC0B700 /* MediaDataRead.c in Sources */ = {isa = PBXBuildFile; fileRef = 967385441D424C4CB2EF75A8 /* MediaDataRead.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B505ACE39DE546DD83A1C470 /* BitVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2C5F858A341F98A322B6F /* BitVector.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B5B2C02E78864DC8BFD58E3B /* Vec3dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5B79164B63D8439E9501D6E0 /* Vec3dTool.c */; settings = {COMPILER_FLAGS = ""; }; };
-		B68890D6D1E54A6F85D7595B /* Pt2dGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = D78E9EC3895446C2AFF29C18 /* Pt2dGroup.c */; settings = {COMPILER_FLAGS = ""; }; };
 		B8D8EA46263243E3B3DFFB2B /* ViewEulerAngle.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C642D1E94AC48388B7F0E2D /* ViewEulerAngle.c */; settings = {COMPILER_FLAGS = ""; }; };
 		BAC9EE4EBFA9446EB9C29179 /* MathMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = FBD96DD0A264448B94CFCEE8 /* MathMatrix.c */; settings = {COMPILER_FLAGS = ""; }; };
 		BB5DD03B61424EDFBCDBE014 /* Matrix4Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 818BD20C0ADC4AAEB674F954 /* Matrix4Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
-		BB8D3242C7A24580B3C1C355 /* Pt2dApproximatePolynom.c in Sources */ = {isa = PBXBuildFile; fileRef = A1CECD9C42D04B9C84A94E9F /* Pt2dApproximatePolynom.c */; settings = {COMPILER_FLAGS = ""; }; };
 		BBACB05692064778981E9562 /* Config3dIo.c in Sources */ = {isa = PBXBuildFile; fileRef = DB403A23E2AB4C2B95391DE8 /* Config3dIo.c */; settings = {COMPILER_FLAGS = ""; }; };
 		BD08F44ED30A473CB8AA37D2 /* GeoApp2.c in Sources */ = {isa = PBXBuildFile; fileRef = 8263730752C1440281BD8ECD /* GeoApp2.c */; settings = {COMPILER_FLAGS = ""; }; };
 		BD5ADF8C342540ED82FEDF48 /* Pt3fIo.c in Sources */ = {isa = PBXBuildFile; fileRef = 221AEA79B200490992B1B2D7 /* Pt3fIo.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -166,6 +152,26 @@
 		C9A141DDF734451D82F74285 /* MathMatrixInvese4.c in Sources */ = {isa = PBXBuildFile; fileRef = F6098BD0281E434891737E5E /* MathMatrixInvese4.c */; settings = {COMPILER_FLAGS = ""; }; };
 		CE473C7263174CFB862A4D7B /* FoldJmap23.c in Sources */ = {isa = PBXBuildFile; fileRef = A436D1FAFA2E4242BA53837F /* FoldJmap23.c */; settings = {COMPILER_FLAGS = ""; }; };
 		CFE45EE725FD46BA98A8FF6D /* DiagonalJet2.c in Sources */ = {isa = PBXBuildFile; fileRef = F26CE78C4AFB46FF9A8658C2 /* DiagonalJet2.c */; settings = {COMPILER_FLAGS = ""; }; };
+		D02F38DC19482EE200FB25A5 /* Pt2dApproximateAb.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */; };
+		D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */; };
+		D02F38DE19482EE200FB25A5 /* Pt2dApproximateLineAxB.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */; };
+		D02F38DF19482EE200FB25A5 /* Pt2dApproximateLinePv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C619482EE200FB25A5 /* Pt2dApproximateLinePv.cpp */; };
+		D02F38E019482EE200FB25A5 /* Pt2dApproximatePolylink.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C719482EE200FB25A5 /* Pt2dApproximatePolylink.c */; };
+		D02F38E119482EE200FB25A5 /* Pt2dApproximatePolynom.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C819482EE200FB25A5 /* Pt2dApproximatePolynom.c */; };
+		D02F38E219482EE200FB25A5 /* Pt2dCircle.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C919482EE200FB25A5 /* Pt2dCircle.c */; };
+		D02F38E319482EE200FB25A5 /* Pt2dComponnet.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38CA19482EE200FB25A5 /* Pt2dComponnet.c */; };
+		D02F38E419482EE200FB25A5 /* Pt2dCurvtur.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38CB19482EE200FB25A5 /* Pt2dCurvtur.c */; };
+		D02F38E519482EE200FB25A5 /* Pt2dDensity.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38CC19482EE200FB25A5 /* Pt2dDensity.c */; };
+		D02F38E619482EE200FB25A5 /* Pt2dFTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38CD19482EE200FB25A5 /* Pt2dFTool.cpp */; };
+		D02F38E719482EE200FB25A5 /* Pt2dGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38CE19482EE200FB25A5 /* Pt2dGroup.c */; };
+		D02F38E819482EE200FB25A5 /* Pt2dGroupV.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D019482EE200FB25A5 /* Pt2dGroupV.c */; };
+		D02F38E919482EE200FB25A5 /* Pt2dGTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D119482EE200FB25A5 /* Pt2dGTool.c */; };
+		D02F38EA19482EE200FB25A5 /* Pt2dIo.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D219482EE200FB25A5 /* Pt2dIo.c */; };
+		D02F38EB19482EE200FB25A5 /* Pt2dLine.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D319482EE200FB25A5 /* Pt2dLine.c */; };
+		D02F38EC19482EE200FB25A5 /* Pt2dMask.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D419482EE200FB25A5 /* Pt2dMask.c */; };
+		D02F38ED19482EE200FB25A5 /* Pt2dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D519482EE200FB25A5 /* Pt2dTool.c */; };
+		D02F38EE19482EE200FB25A5 /* Pt2dTriangleFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */; };
+		D02F38EF19482EE200FB25A5 /* TriangleTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D819482EE200FB25A5 /* TriangleTool.c */; };
 		D0A5691118B79F9D0053D55F /* CrPlnTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FD18B79F9D0053D55F /* CrPlnTool.c */; };
 		D0A5691218B79F9D0053D55F /* CrPlnToolN.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FE18B79F9D0053D55F /* CrPlnToolN.c */; };
 		D0A5691318B79F9E0053D55F /* LnBox.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FF18B79F9D0053D55F /* LnBox.c */; };
@@ -219,7 +225,6 @@
 		F5C1A8D6DDBC4DAD854B428F /* GeoAppLine.c in Sources */ = {isa = PBXBuildFile; fileRef = 84A564E83A3349CA91CA9CCC /* GeoAppLine.c */; settings = {COMPILER_FLAGS = ""; }; };
 		F6A06A3CFB2F43508CE2AAA4 /* MediaDataTool.c in Sources */ = {isa = PBXBuildFile; fileRef = 1995FD639A4743888D08AA4D /* MediaDataTool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		F945C78646BD49999981E420 /* ViewDump.c in Sources */ = {isa = PBXBuildFile; fileRef = B9317952EA2F4ACF871F89A4 /* ViewDump.c */; settings = {COMPILER_FLAGS = ""; }; };
-		F9C4C8AB867F4842B54CB13C /* Pt2dApproximatePolylink.c in Sources */ = {isa = PBXBuildFile; fileRef = DD3D36B15B8A4455945E5DFB /* Pt2dApproximatePolylink.c */; settings = {COMPILER_FLAGS = ""; }; };
 		FA98A6F2387C4D4294FB27A1 /* MathLinerExquation9.c in Sources */ = {isa = PBXBuildFile; fileRef = 345456473FE4494288B5D113 /* MathLinerExquation9.c */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
@@ -251,7 +256,6 @@
 		17E61FBC04884AF1AB25E3ED /* SmilType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmilType.h; path = Usmil/SmilType.h; sourceTree = SOURCE_ROOT; };
 		1891EC184D8F4668BC563FA8 /* Poly1d4Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Poly1d4Type.h; path = UPoly/Poly1d4Type.h; sourceTree = SOURCE_ROOT; };
 		1995FD639A4743888D08AA4D /* MediaDataTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MediaDataTool.c; path = Umedia/MediaDataTool.c; sourceTree = SOURCE_ROOT; };
-		19E1DD1B28884AF09338C8C8 /* Pt2dIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dIo.c; path = Ucamera/Pt2dIo.c; sourceTree = SOURCE_ROOT; };
 		1AC21AF915E74D4EA58FB8EC /* CfgWrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CfgWrite.c; path = Ucfg/CfgWrite.c; sourceTree = SOURCE_ROOT; };
 		1B76B4E2B7A44FC8AA932E3A /* Eigen2dTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Eigen2dTool.c; path = Umath/Eigen2dTool.c; sourceTree = SOURCE_ROOT; };
 		1B9921DA534641A382B30FC5 /* Vl3dStl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Vl3dStl.c; path = Uvl/Vl3dStl.c; sourceTree = SOURCE_ROOT; };
@@ -272,7 +276,6 @@
 		2A7C4FBEE07C4604A10768E8 /* Mat2fBase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Mat2fBase.c; path = Umat/Mat2fBase.c; sourceTree = SOURCE_ROOT; };
 		2C642D1E94AC48388B7F0E2D /* ViewEulerAngle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewEulerAngle.c; path = Uview/ViewEulerAngle.c; sourceTree = SOURCE_ROOT; };
 		2CACA5E928384E68ACDF9859 /* CfgTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CfgTool.c; path = Ucfg/CfgTool.c; sourceTree = SOURCE_ROOT; };
-		2D1C3ADE5D6F47588D1D4706 /* Pt2dApproximateLineAxB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximateLineAxB.c; path = Ucamera/Pt2dApproximateLineAxB.c; sourceTree = SOURCE_ROOT; };
 		2D50001C7A544796B93A1895 /* GpMsg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GpMsg.c; path = Uigp/GpMsg.c; sourceTree = SOURCE_ROOT; };
 		2DC52507AA9146FEA56C2DF0 /* BstFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BstFile.c; path = Ubst/BstFile.c; sourceTree = SOURCE_ROOT; };
 		2F6EA653C1A44471889045E6 /* ViewRoll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewRoll.c; path = Uview/ViewRoll.c; sourceTree = SOURCE_ROOT; };
@@ -301,13 +304,12 @@
 		46334C6B306140A3B11FB63F /* Mat2fBaseDct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Mat2fBaseDct.c; path = Umat/Mat2fBaseDct.c; sourceTree = SOURCE_ROOT; };
 		463E67955D104F02AC0513EF /* lz12_decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lz12_decode.c; path = Ulz/lz12_decode.c; sourceTree = SOURCE_ROOT; };
 		467F42573B2D4E149EC95DCE /* GpIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GpIo.c; path = Uigp/GpIo.c; sourceTree = SOURCE_ROOT; };
-		46CD33DEF0144C758690069A /* Pt2dMask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dMask.c; path = Ucamera/Pt2dMask.c; sourceTree = SOURCE_ROOT; };
 		47073158216948029CD9DF19 /* Jet2Tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet2Tool.c; path = Ujet2/Jet2Tool.c; sourceTree = SOURCE_ROOT; };
 		4911E85CAB7640F3BEF7482D /* Log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Log.c; path = Ulog/Log.c; sourceTree = SOURCE_ROOT; };
 		4A08D57934D44C489BBB1D0A /* BstGet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BstGet.c; path = Ubst/BstGet.c; sourceTree = SOURCE_ROOT; };
 		4B1F9613DADA47BFA7E7FF91 /* CfgType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CfgType.h; path = Ucfg/CfgType.h; sourceTree = SOURCE_ROOT; };
 		4E208D1230844D7988AF5E74 /* XmlDoc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XmlDoc.c; path = Uxml/XmlDoc.c; sourceTree = SOURCE_ROOT; };
-		4E695920C08E421C8DE05DC0 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = "/Users/tomer/Desktop/Projects/Homage/App/homage-cv-app/Core/Util/CMakeLists.txt"; sourceTree = "<absolute>"; };
+		4E695920C08E421C8DE05DC0 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 		4E7009EB99B34048B0A08235 /* Jet2Io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet2Io.c; path = Ujet2/Jet2Io.c; sourceTree = SOURCE_ROOT; };
 		501A8779A1BB4DE885CD11A7 /* XmlParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XmlParser.c; path = Uxml/XmlParser.c; sourceTree = SOURCE_ROOT; };
 		517EEDC194D641EFB89C85E8 /* UnityS4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UnityS4.c; path = Uunity/UnityS4.c; sourceTree = SOURCE_ROOT; };
@@ -316,7 +318,6 @@
 		537D1F019DAB4868B49E77EC /* CstFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CstFile.c; path = Ucst/CstFile.c; sourceTree = SOURCE_ROOT; };
 		54F7B2BE89AE47BCA9A875F5 /* Jet23Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet23Array.c; path = Ujet2/Jet23Array.c; sourceTree = SOURCE_ROOT; };
 		55611A1FD66943E68C327755 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffixed.h; path = UZlib/inffixed.h; sourceTree = SOURCE_ROOT; };
-		5716A1FDA1364ACABECCEA46 /* Pt2dGTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dGTool.c; path = Ucamera/Pt2dGTool.c; sourceTree = SOURCE_ROOT; };
 		582CFDEB15D940B78BF6360E /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = UZlib/crc32.c; sourceTree = SOURCE_ROOT; };
 		59CA7AD7DFBB4421875CF919 /* GeoApp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GeoApp.c; path = UGeoApp/GeoApp.c; sourceTree = SOURCE_ROOT; };
 		5A0648D346E747D7828D3C29 /* Jet23Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Jet23Type.h; path = Ujet2/Jet23Type.h; sourceTree = SOURCE_ROOT; };
@@ -371,7 +372,6 @@
 		943FDAA1044C4329A266D2BC /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = Ulog/Log.h; sourceTree = SOURCE_ROOT; };
 		94B75916554A4E30A217077A /* Jet23Map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet23Map.c; path = Ujet2/Jet23Map.c; sourceTree = SOURCE_ROOT; };
 		94BA9B24F1F0414A92CC15B8 /* SmilParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SmilParser.c; path = Usmil/SmilParser.c; sourceTree = SOURCE_ROOT; };
-		952475986A47497B9B64AC34 /* Pt2dTriangleFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dTriangleFilter.c; path = Ucamera/Pt2dTriangleFilter.c; sourceTree = SOURCE_ROOT; };
 		967385441D424C4CB2EF75A8 /* MediaDataRead.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MediaDataRead.c; path = Umedia/MediaDataRead.c; sourceTree = SOURCE_ROOT; };
 		97996F4AAEBF474AA5F9888F /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffast.h; path = UZlib/inffast.h; sourceTree = SOURCE_ROOT; };
 		9804D6B3E7BB47189E208EA2 /* MediaDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaDataType.h; path = Umedia/MediaDataType.h; sourceTree = SOURCE_ROOT; };
@@ -384,12 +384,9 @@
 		9F8854131BA34B1FA9F96BCA /* Jet2Inverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet2Inverse.c; path = Ujet2/Jet2Inverse.c; sourceTree = SOURCE_ROOT; };
 		9F8CF9DDFE28424A8FEE0094 /* SlTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SlTool.c; path = Umath/Sl/SlTool.c; sourceTree = SOURCE_ROOT; };
 		A00FBF9256ED407896EF39E7 /* Box2Dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Box2Dump.c; path = Ubox/Box2Dump.c; sourceTree = SOURCE_ROOT; };
-		A0199B35E41E4BBE80361291 /* Pt2dApproximateAb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximateAb.c; path = Ucamera/Pt2dApproximateAb.c; sourceTree = SOURCE_ROOT; };
-		A1CECD9C42D04B9C84A94E9F /* Pt2dApproximatePolynom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximatePolynom.c; path = Ucamera/Pt2dApproximatePolynom.c; sourceTree = SOURCE_ROOT; };
 		A2AD3172BD7C4FAB88D011E9 /* MathVectorD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MathVectorD.c; path = Umath/MathVectorD.c; sourceTree = SOURCE_ROOT; };
 		A2CA8BC1DFFC4C089174726C /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = UZlib/zip.h; sourceTree = SOURCE_ROOT; };
 		A2CB23CC3BD1489396CB8D64 /* libUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUtil.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A368E2FFF19844448E01AE5C /* Pt2dApproximateLinePv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximateLinePv.c; path = Ucamera/Pt2dApproximateLinePv.c; sourceTree = SOURCE_ROOT; };
 		A436D1FAFA2E4242BA53837F /* FoldJmap23.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FoldJmap23.c; path = Ujet2/FoldJmap23.c; sourceTree = SOURCE_ROOT; };
 		A5A382E249184211B68E50D9 /* ls_appr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ls_appr.c; path = UGeoApp/ls_appr.c; sourceTree = SOURCE_ROOT; };
 		A6D44ADE72E44B869FE376D5 /* Box2iTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Box2iTool.c; path = Ubox/Box2iTool.c; sourceTree = SOURCE_ROOT; };
@@ -397,7 +394,6 @@
 		A7689844EF174738AB95336D /* CfgParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CfgParser.c; path = Ucfg/CfgParser.c; sourceTree = SOURCE_ROOT; };
 		AA93469387B346DD86BFE614 /* SlType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlType.h; path = Umath/Sl/SlType.h; sourceTree = SOURCE_ROOT; };
 		AB6C26A58F914719977C3F92 /* lz12_encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lz12_encode.c; path = Ulz/lz12_encode.c; sourceTree = SOURCE_ROOT; };
-		AC7692B28E9F4CB59EC0B16B /* Pt2dComponnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dComponnet.c; path = Ucamera/Pt2dComponnet.c; sourceTree = SOURCE_ROOT; };
 		AC7BBE2D0C4E4B3489218180 /* ViewCreate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewCreate.c; path = Uview/ViewCreate.c; sourceTree = SOURCE_ROOT; };
 		AD8316064CA7414692D8B45C /* GeoApp1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GeoApp1.c; path = UGeoApp/GeoApp1.c; sourceTree = SOURCE_ROOT; };
 		AF45A95A713846C3A7E74048 /* PlnType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlnType.h; path = Uln/PlnType.h; sourceTree = SOURCE_ROOT; };
@@ -424,7 +420,6 @@
 		C1AE9E19511F4EB18CCA7132 /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inflate.h; path = UZlib/inflate.h; sourceTree = SOURCE_ROOT; };
 		C36D672DCEB3471599DE4816 /* BstTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BstTool.c; path = Ubst/BstTool.c; sourceTree = SOURCE_ROOT; };
 		C3916CB62BB647E6A57C955F /* UnityS2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UnityS2.c; path = Uunity/UnityS2.c; sourceTree = SOURCE_ROOT; };
-		C42BAAC1385C46F79EB69549 /* Pt2dTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dTool.c; path = Ucamera/Pt2dTool.c; sourceTree = SOURCE_ROOT; };
 		C47B97714CB546E3A8B81733 /* MathVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MathVector.c; path = Umath/MathVector.c; sourceTree = SOURCE_ROOT; };
 		C48EF3471FFE48B4BAE51DC7 /* Pt3fTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt3fTool.c; path = Upt/Pt3fTool.c; sourceTree = SOURCE_ROOT; };
 		C4AB17B43C0F412180D6D79C /* MediaDataMultiPart.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MediaDataMultiPart.c; path = Umedia/MediaDataMultiPart.c; sourceTree = SOURCE_ROOT; };
@@ -433,7 +428,6 @@
 		C628DD67F8A74631A8256212 /* MathMatrixInvese6.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MathMatrixInvese6.c; path = Umath/base/MathMatrixInvese6.c; sourceTree = SOURCE_ROOT; };
 		C9542DD6DEDE46489B09D7E3 /* Poly2d3Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Poly2d3Type.h; path = UPoly/Poly2d3Type.h; sourceTree = SOURCE_ROOT; };
 		CA459C74BEA64C59BDA0CECD /* Quaternion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Quaternion.c; path = Umath/Quaternion.c; sourceTree = SOURCE_ROOT; };
-		CAC30F58342A404CA921B6CF /* Pt2dApproximateLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximateLine.c; path = Ucamera/Pt2dApproximateLine.c; sourceTree = SOURCE_ROOT; };
 		CBE796817A2E44F9A6360927 /* pLineType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pLineType.h; path = Umath/Sl/pLineType.h; sourceTree = SOURCE_ROOT; };
 		CC3A73F5A0C74F53B7F5AF9B /* hyputA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hyputA.c; path = Uigp/hyputA.c; sourceTree = SOURCE_ROOT; };
 		CC45ABFE5F024F3E8B34AC6A /* ViewCreateNormal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewCreateNormal.c; path = Uview/ViewCreateNormal.c; sourceTree = SOURCE_ROOT; };
@@ -441,6 +435,29 @@
 		CF201D71203F4B069A88F8CE /* Config3dTrajectory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Config3dTrajectory.c; path = Uconfig3d/Config3dTrajectory.c; sourceTree = SOURCE_ROOT; };
 		CF285477B8AD4C65BDBC8C69 /* Matrix4Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix4Type.h; path = Umath/Matrix4Type.h; sourceTree = SOURCE_ROOT; };
 		D02013E60DAD4470BB5AA605 /* lz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lz.h; path = Ulz/lz.h; sourceTree = SOURCE_ROOT; };
+		D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateAb.c; sourceTree = "<group>"; };
+		D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLine.c; sourceTree = "<group>"; };
+		D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLineAxB.c; sourceTree = "<group>"; };
+		D02F38C619482EE200FB25A5 /* Pt2dApproximateLinePv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pt2dApproximateLinePv.cpp; sourceTree = "<group>"; };
+		D02F38C719482EE200FB25A5 /* Pt2dApproximatePolylink.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximatePolylink.c; sourceTree = "<group>"; };
+		D02F38C819482EE200FB25A5 /* Pt2dApproximatePolynom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximatePolynom.c; sourceTree = "<group>"; };
+		D02F38C919482EE200FB25A5 /* Pt2dCircle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dCircle.c; sourceTree = "<group>"; };
+		D02F38CA19482EE200FB25A5 /* Pt2dComponnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dComponnet.c; sourceTree = "<group>"; };
+		D02F38CB19482EE200FB25A5 /* Pt2dCurvtur.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dCurvtur.c; sourceTree = "<group>"; };
+		D02F38CC19482EE200FB25A5 /* Pt2dDensity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dDensity.c; sourceTree = "<group>"; };
+		D02F38CD19482EE200FB25A5 /* Pt2dFTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pt2dFTool.cpp; sourceTree = "<group>"; };
+		D02F38CE19482EE200FB25A5 /* Pt2dGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dGroup.c; sourceTree = "<group>"; };
+		D02F38CF19482EE200FB25A5 /* Pt2dGroupType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pt2dGroupType.h; sourceTree = "<group>"; };
+		D02F38D019482EE200FB25A5 /* Pt2dGroupV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dGroupV.c; sourceTree = "<group>"; };
+		D02F38D119482EE200FB25A5 /* Pt2dGTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dGTool.c; sourceTree = "<group>"; };
+		D02F38D219482EE200FB25A5 /* Pt2dIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dIo.c; sourceTree = "<group>"; };
+		D02F38D319482EE200FB25A5 /* Pt2dLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dLine.c; sourceTree = "<group>"; };
+		D02F38D419482EE200FB25A5 /* Pt2dMask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dMask.c; sourceTree = "<group>"; };
+		D02F38D519482EE200FB25A5 /* Pt2dTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dTool.c; sourceTree = "<group>"; };
+		D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dTriangleFilter.c; sourceTree = "<group>"; };
+		D02F38D719482EE200FB25A5 /* Pt2dType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pt2dType.h; sourceTree = "<group>"; };
+		D02F38D819482EE200FB25A5 /* TriangleTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TriangleTool.c; sourceTree = "<group>"; };
+		D02F38D919482EE200FB25A5 /* TriangleType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleType.h; sourceTree = "<group>"; };
 		D0A568FD18B79F9D0053D55F /* CrPlnTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CrPlnTool.c; path = Uln/CrPlnTool.c; sourceTree = "<group>"; };
 		D0A568FE18B79F9D0053D55F /* CrPlnToolN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CrPlnToolN.c; path = Uln/CrPlnToolN.c; sourceTree = "<group>"; };
 		D0A568FF18B79F9D0053D55F /* LnBox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LnBox.c; path = Uln/LnBox.c; sourceTree = "<group>"; };
@@ -471,18 +488,15 @@
 		D3C386B7FCCC4BC690029D22 /* GpMemoryLeak.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GpMemoryLeak.c; path = Uigp/GpMemoryLeak.c; sourceTree = SOURCE_ROOT; };
 		D609839E0D6B490D9C21ABE7 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress.c; path = UZlib/compress.c; sourceTree = SOURCE_ROOT; };
 		D62EFE84B70E45D6BA24A944 /* BitVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BitVector.h; path = Uvec/BitVector.h; sourceTree = SOURCE_ROOT; };
-		D78E9EC3895446C2AFF29C18 /* Pt2dGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dGroup.c; path = Ucamera/Pt2dGroup.c; sourceTree = SOURCE_ROOT; };
 		D89B1690C05F46A9ACCBDB48 /* Poly2d4Tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Poly2d4Tool.c; path = UPoly/Poly2d4Tool.c; sourceTree = SOURCE_ROOT; };
 		DA47F3B488654C829CD2F979 /* GpFile1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GpFile1.c; path = Uigp/GpFile1.c; sourceTree = SOURCE_ROOT; };
 		DB403A23E2AB4C2B95391DE8 /* Config3dIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Config3dIo.c; path = Uconfig3d/Config3dIo.c; sourceTree = SOURCE_ROOT; };
 		DC11469D599E4E43B9B7049B /* zip_crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip_crypt.h; path = UZlib/zip_crypt.h; sourceTree = SOURCE_ROOT; };
 		DC1A46CAFF794044889E8D71 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zconf.h; path = UZlib/zconf.h; sourceTree = SOURCE_ROOT; };
-		DD3D36B15B8A4455945E5DFB /* Pt2dApproximatePolylink.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dApproximatePolylink.c; path = Ucamera/Pt2dApproximatePolylink.c; sourceTree = SOURCE_ROOT; };
 		DDBE8B17BE7F4B5BA1FCC860 /* MathMatrixInvese.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MathMatrixInvese.c; path = Umath/base/MathMatrixInvese.c; sourceTree = SOURCE_ROOT; };
 		DE373CA4827643F3A95739FE /* LsfType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LsfType.h; path = Umath/LsfType.h; sourceTree = SOURCE_ROOT; };
 		E1F07896E561472ABC399A29 /* GpBuildNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GpBuildNumber.h; path = Uigp/GpBuildNumber.h; sourceTree = SOURCE_ROOT; };
 		E3BA3F3E2C6B4300BC479BD5 /* GeoApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoApp.h; path = UGeoApp/GeoApp.h; sourceTree = SOURCE_ROOT; };
-		E6144BC8BB514478A9F8E22C /* Pt2dLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dLine.c; path = Ucamera/Pt2dLine.c; sourceTree = SOURCE_ROOT; };
 		E68F0358BF79409FB06A11B7 /* XmlPutCst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XmlPutCst.c; path = Uxml/XmlPutCst.c; sourceTree = SOURCE_ROOT; };
 		E7B0211C5CF3494181A4DA24 /* FbstPut.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FbstPut.c; path = Ufbst/FbstPut.c; sourceTree = SOURCE_ROOT; };
 		E89BC03146FC416A93D6961B /* Vec2dTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Vec2dTool.c; path = Uvec/Vec2dTool.c; sourceTree = SOURCE_ROOT; };
@@ -508,7 +522,6 @@
 		F4DEEF12524846BFA2CA0D5A /* HeapType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeapType.h; path = Uheap/HeapType.h; sourceTree = SOURCE_ROOT; };
 		F50065DF63EE4F88A91CEDFB /* Poly1d4Tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Poly1d4Tool.c; path = UPoly/Poly1d4Tool.c; sourceTree = SOURCE_ROOT; };
 		F6098BD0281E434891737E5E /* MathMatrixInvese4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MathMatrixInvese4.c; path = Umath/base/MathMatrixInvese4.c; sourceTree = SOURCE_ROOT; };
-		F6D0016071B84C509FD847F8 /* Pt2dCurvtur.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Pt2dCurvtur.c; path = Ucamera/Pt2dCurvtur.c; sourceTree = SOURCE_ROOT; };
 		F704461737B1430E8EA80085 /* BstPut.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BstPut.c; path = Ubst/BstPut.c; sourceTree = SOURCE_ROOT; };
 		F832FFA573AF4584954E2BE6 /* Jet2Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet2Array.c; path = Ujet2/Jet2Array.c; sourceTree = SOURCE_ROOT; };
 		F83B7BD258314A94BDE540A0 /* ViewTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewTool.c; path = Uview/ViewTool.c; sourceTree = SOURCE_ROOT; };
@@ -695,21 +708,6 @@
 				9A11A04A2DD4460388123EE3 /* zip_files.c */,
 				0B93FEB4DFAB4BAB87E40AC1 /* zip_ioapi.c */,
 				84E6ADE7A4404EEA8D45EAA8 /* zutil.c */,
-				A0199B35E41E4BBE80361291 /* Pt2dApproximateAb.c */,
-				CAC30F58342A404CA921B6CF /* Pt2dApproximateLine.c */,
-				2D1C3ADE5D6F47588D1D4706 /* Pt2dApproximateLineAxB.c */,
-				A368E2FFF19844448E01AE5C /* Pt2dApproximateLinePv.c */,
-				DD3D36B15B8A4455945E5DFB /* Pt2dApproximatePolylink.c */,
-				A1CECD9C42D04B9C84A94E9F /* Pt2dApproximatePolynom.c */,
-				AC7692B28E9F4CB59EC0B16B /* Pt2dComponnet.c */,
-				F6D0016071B84C509FD847F8 /* Pt2dCurvtur.c */,
-				D78E9EC3895446C2AFF29C18 /* Pt2dGroup.c */,
-				5716A1FDA1364ACABECCEA46 /* Pt2dGTool.c */,
-				19E1DD1B28884AF09338C8C8 /* Pt2dIo.c */,
-				E6144BC8BB514478A9F8E22C /* Pt2dLine.c */,
-				46CD33DEF0144C758690069A /* Pt2dMask.c */,
-				C42BAAC1385C46F79EB69549 /* Pt2dTool.c */,
-				952475986A47497B9B64AC34 /* Pt2dTriangleFilter.c */,
 				F3E573FB8B484C9498794117 /* TriangleTool.c */,
 				4911E85CAB7640F3BEF7482D /* Log.c */,
 				F50065DF63EE4F88A91CEDFB /* Poly1d4Tool.c */,
@@ -722,11 +720,43 @@
 			name = "Source Files";
 			sourceTree = "<group>";
 		};
+		A1AE40C871DA47A89011887E /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				C5FC96924AB44C44A556227E /* CMake Rules */,
+				4E695920C08E421C8DE05DC0 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		B063A3431CBE4111854925F4 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
 		BC5981F84E524649B33AE6BF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		C5FC96924AB44C44A556227E /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		CB3D7C74F5554D41A7489C99 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				B063A3431CBE4111854925F4 /* CMake Rules */,
+				4E695920C08E421C8DE05DC0 /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
 			sourceTree = "<group>";
 		};
 		CE8AC4074D8D4769BDFF0F66 = {
@@ -803,6 +833,36 @@
 				0803D621C1D84808B4B05D04 /* XmlWrite.c */,
 			);
 			name = Uxml;
+			sourceTree = "<group>";
+		};
+		D02F38BF19482EE200FB25A5 /* Ucamera */ = {
+			isa = PBXGroup;
+			children = (
+				D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */,
+				D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */,
+				D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */,
+				D02F38C619482EE200FB25A5 /* Pt2dApproximateLinePv.cpp */,
+				D02F38C719482EE200FB25A5 /* Pt2dApproximatePolylink.c */,
+				D02F38C819482EE200FB25A5 /* Pt2dApproximatePolynom.c */,
+				D02F38C919482EE200FB25A5 /* Pt2dCircle.c */,
+				D02F38CA19482EE200FB25A5 /* Pt2dComponnet.c */,
+				D02F38CB19482EE200FB25A5 /* Pt2dCurvtur.c */,
+				D02F38CC19482EE200FB25A5 /* Pt2dDensity.c */,
+				D02F38CD19482EE200FB25A5 /* Pt2dFTool.cpp */,
+				D02F38CE19482EE200FB25A5 /* Pt2dGroup.c */,
+				D02F38CF19482EE200FB25A5 /* Pt2dGroupType.h */,
+				D02F38D019482EE200FB25A5 /* Pt2dGroupV.c */,
+				D02F38D119482EE200FB25A5 /* Pt2dGTool.c */,
+				D02F38D219482EE200FB25A5 /* Pt2dIo.c */,
+				D02F38D319482EE200FB25A5 /* Pt2dLine.c */,
+				D02F38D419482EE200FB25A5 /* Pt2dMask.c */,
+				D02F38D519482EE200FB25A5 /* Pt2dTool.c */,
+				D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */,
+				D02F38D719482EE200FB25A5 /* Pt2dType.h */,
+				D02F38D819482EE200FB25A5 /* TriangleTool.c */,
+				D02F38D919482EE200FB25A5 /* TriangleType.h */,
+			);
+			path = Ucamera;
 			sourceTree = "<group>";
 		};
 		D03D2BB018C1D331002B7CF4 /* Utime */ = {
@@ -1002,6 +1062,7 @@
 		FA572772C3B248F4AB3EBBC5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D02F38BF19482EE200FB25A5 /* Ucamera */,
 				D025831F1904EA800012BD2B /* Uxml */,
 				D025831E1904EA440012BD2B /* Umath */,
 				D03D2BBF18C1D55B002B7CF4 /* Uinf */,
@@ -1031,7 +1092,9 @@
 		FBE7670B57BC42C5868D9A0E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A1AE40C871DA47A89011887E /* ALL_BUILD */,
 				FA572772C3B248F4AB3EBBC5 /* Util */,
+				CB3D7C74F5554D41A7489C99 /* ZERO_CHECK */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -1098,7 +1161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02F38E619482EE200FB25A5 /* Pt2dFTool.cpp in Sources */,
+				D02F38EC19482EE200FB25A5 /* Pt2dMask.c in Sources */,
 				6F9E0658550A43DAB7FF8608 /* Base64.cpp in Sources */,
+				D02F38E119482EE200FB25A5 /* Pt2dApproximatePolynom.c in Sources */,
 				29774D54C29342FCA73EC4E7 /* Box2Dump.c in Sources */,
 				20D3BA48A4564406A3BB43D7 /* Box2iTool.c in Sources */,
 				9DA375C5DBDB419BA8AFE287 /* Box2Tool.c in Sources */,
@@ -1110,10 +1176,12 @@
 				0FF93215AE75433EA722FB4D /* CfgParser.c in Sources */,
 				B0B80E7B05E54A0B8419C000 /* CfgTool.c in Sources */,
 				DDEEEA6509F04639AA1B7FB9 /* CfgWrite.c in Sources */,
+				D02F38DE19482EE200FB25A5 /* Pt2dApproximateLineAxB.c in Sources */,
 				822C766082694B4CBC78D63B /* code.c in Sources */,
 				BBACB05692064778981E9562 /* Config3dIo.c in Sources */,
 				88FE94D4CA104793A81EFA58 /* Config3dTool.c in Sources */,
 				2565673EC5E14137B67FA202 /* Config3dTrajectory.c in Sources */,
+				D02F38EA19482EE200FB25A5 /* Pt2dIo.c in Sources */,
 				82D178E0505746B7A08E6E98 /* CstFile.c in Sources */,
 				0FF35252819E4EC8BB7FE0DC /* CstTool.c in Sources */,
 				ABD5F9289AB04FFCB1148310 /* CstXml.c in Sources */,
@@ -1121,14 +1189,17 @@
 				A1A68D58CBE54F58948BBBC2 /* GappTool.c in Sources */,
 				0A63EC5A68DC455EB6195A4B /* GeoApp.c in Sources */,
 				504A9F0B6F4048F08DF14446 /* GeoApp1.c in Sources */,
+				D02F38E019482EE200FB25A5 /* Pt2dApproximatePolylink.c in Sources */,
 				BD08F44ED30A473CB8AA37D2 /* GeoApp2.c in Sources */,
 				F5C1A8D6DDBC4DAD854B428F /* GeoAppLine.c in Sources */,
 				28BB371E11C74BC085191EE0 /* ls_appr.c in Sources */,
+				D02F38EF19482EE200FB25A5 /* TriangleTool.c in Sources */,
 				D72E8B40E35848E9BF74C942 /* GioTool.c in Sources */,
 				634F64EF495B457880BC6C4C /* HeapSTool.c in Sources */,
 				7790C1C18F82477A95494201 /* HeapTool.c in Sources */,
 				C195A90EA84A44EE9C32AB2F /* Huffman.c in Sources */,
 				2AFE5BCEFA104149824F8AAC /* HuffmanGet.c in Sources */,
+				D02F38ED19482EE200FB25A5 /* Pt2dTool.c in Sources */,
 				F0FF1DD145134BAE90A582F5 /* HuffmanPut.c in Sources */,
 				492AD4ADDFE24648B86CCF5E /* Jet1Tool.c in Sources */,
 				94119587E7B349ECBD8F09E3 /* GpBuildNumber.c in Sources */,
@@ -1141,6 +1212,7 @@
 				523A2C2DCCB442F8AD0A1AAF /* GpFunction.c in Sources */,
 				7174D9AEE675444895450F19 /* GpIo.c in Sources */,
 				3EC8C4D5F19B478894CDDB4A /* GpMemoryLeak.c in Sources */,
+				D02F38DF19482EE200FB25A5 /* Pt2dApproximateLinePv.cpp in Sources */,
 				5C5D9E1E0C4D4377804653F2 /* GpMsg.c in Sources */,
 				35B8EC6AADB54E0E9F2C2685 /* GpRelinquish.c in Sources */,
 				EE721DEA69FD46FA85FC8DCD /* GpTempFile.c in Sources */,
@@ -1149,13 +1221,16 @@
 				DCE590E579114018B1FCA731 /* AppJet2.c in Sources */,
 				91853A485DA440509C83A6CC /* CuspJmap23.c in Sources */,
 				CFE45EE725FD46BA98A8FF6D /* DiagonalJet2.c in Sources */,
+				D02F38E319482EE200FB25A5 /* Pt2dComponnet.c in Sources */,
 				CE473C7263174CFB862A4D7B /* FoldJmap23.c in Sources */,
 				D382F0F11A764BBE9F7691B9 /* InverseJmap23.c in Sources */,
 				2CED24FF54E74907BEFC712C /* Jet23Array.c in Sources */,
+				D02F38DC19482EE200FB25A5 /* Pt2dApproximateAb.c in Sources */,
 				9F3FB414F3D641399170A564 /* Jet23Map.c in Sources */,
 				809C51E5993647EA8C036E5C /* Jet23Tool.c in Sources */,
 				3CDC465FFF39405991C49240 /* Jet2Array.c in Sources */,
 				C27F68D2E71C4E7589C9BA22 /* Jet2Inverse.c in Sources */,
+				D02F38E519482EE200FB25A5 /* Pt2dDensity.c in Sources */,
 				1D034312F3D64BC3AEEA2088 /* Jet2Io.c in Sources */,
 				7297D9EDAD1945F39C223D06 /* Jet2Map.c in Sources */,
 				312B39D912C84993A38ACF02 /* Jet2Tool.c in Sources */,
@@ -1176,11 +1251,14 @@
 				145F104C78DE4F909A3A6F88 /* Mat2fBaseDct.c in Sources */,
 				D8A2102E8D91428D9D9AE379 /* Mat2fBaseJet2.c in Sources */,
 				E905736FC64A4530AB60C265 /* Mat2fTool.c in Sources */,
+				D02F38E419482EE200FB25A5 /* Pt2dCurvtur.c in Sources */,
 				2C035C213D1D44F4900BE3F5 /* LsfTool.c in Sources */,
 				25B407EB10C3446CA369249B /* LT2sType.c in Sources */,
 				7A28E72BA3F14CE5A09EB853 /* LT2Tool.c in Sources */,
 				C487A31228CB43D1B74AACB8 /* MathVector.c in Sources */,
 				461ABDD4BC1644D9891ECB36 /* MathVectorD.c in Sources */,
+				D02F38E219482EE200FB25A5 /* Pt2dCircle.c in Sources */,
+				D02F38E719482EE200FB25A5 /* Pt2dGroup.c in Sources */,
 				C007A91E174B45DAAFFF2022 /* Matrix.c in Sources */,
 				021189B37656487A97A5F7E1 /* Matrix2Tool.c in Sources */,
 				563E4A191D644604A5140F22 /* Matrix3Tool.c in Sources */,
@@ -1190,11 +1268,13 @@
 				1C555AD785D043FCA1BE87C2 /* LT2Io.c in Sources */,
 				E2A071BB0DFB4C9EA3CECB2B /* Lt2Similarity.c in Sources */,
 				A902D9E5BB9844ABBA0643E1 /* PcaTool.c in Sources */,
+				D02F38EE19482EE200FB25A5 /* Pt2dTriangleFilter.c in Sources */,
 				66D5C14F970B4F67A15D9776 /* MdFormat.cpp in Sources */,
 				0F68039C567E44E1BDE77660 /* MdFormatXml.cpp in Sources */,
 				419BC59560984214B2BE5988 /* MediaDataCo.c in Sources */,
 				022F63E1E5604D31871FBFE5 /* MediaDataMultiPart.c in Sources */,
 				B3A71BA5CDBB4120BDC0B700 /* MediaDataRead.c in Sources */,
+				D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */,
 				F6A06A3CFB2F43508CE2AAA4 /* MediaDataTool.c in Sources */,
 				0EFF07FC8DEE4BFE890643D4 /* MediaFile.c in Sources */,
 				E6501745ADE6452A94577E7C /* MediaFormat.c in Sources */,
@@ -1266,21 +1346,6 @@
 				5BB8E69E05C24FC19F538273 /* zip_files.c in Sources */,
 				970EB8E66AA94046BB8303F9 /* zip_ioapi.c in Sources */,
 				75021EA8D4E6492D95535B21 /* zutil.c in Sources */,
-				4CEACDC341BC4363BE057E72 /* Pt2dApproximateAb.c in Sources */,
-				ADF13730B6814B769208E218 /* Pt2dApproximateLine.c in Sources */,
-				7E268350361C4A31AFEB6E44 /* Pt2dApproximateLineAxB.c in Sources */,
-				90C7276860BE4D5FB4D15A4A /* Pt2dApproximateLinePv.c in Sources */,
-				F9C4C8AB867F4842B54CB13C /* Pt2dApproximatePolylink.c in Sources */,
-				BB8D3242C7A24580B3C1C355 /* Pt2dApproximatePolynom.c in Sources */,
-				5E5487284E4C4449A0C6437F /* Pt2dComponnet.c in Sources */,
-				AB7C8E46A16A4488B213C645 /* Pt2dCurvtur.c in Sources */,
-				B68890D6D1E54A6F85D7595B /* Pt2dGroup.c in Sources */,
-				4F6B414369054D80850D5B32 /* Pt2dGTool.c in Sources */,
-				3B7B07617EE74F9E8B2DBC53 /* Pt2dIo.c in Sources */,
-				8DC6B406AE0C4548AA4B5219 /* Pt2dLine.c in Sources */,
-				5362816FDB7A420FAE515652 /* Pt2dMask.c in Sources */,
-				588CCBC2B7D14C5BA6A93FAC /* Pt2dTool.c in Sources */,
-				02AE557CA85645EE9CDCB567 /* Pt2dTriangleFilter.c in Sources */,
 				8AA6FCFA12044E68B0800AE4 /* TriangleTool.c in Sources */,
 				D3F47DD39A4240FE9F2D9580 /* Log.c in Sources */,
 				60E836EA0CC345088D06D630 /* Poly1d4Tool.c in Sources */,
@@ -1293,10 +1358,12 @@
 				D0A5691218B79F9D0053D55F /* CrPlnToolN.c in Sources */,
 				D0A5691318B79F9E0053D55F /* LnBox.c in Sources */,
 				D0A5691418B79F9E0053D55F /* LnCircle.c in Sources */,
+				D02F38E919482EE200FB25A5 /* Pt2dGTool.c in Sources */,
 				D0A5691518B79F9E0053D55F /* LnFromGapp.c in Sources */,
 				D0A5691618B79F9E0053D55F /* LnRead.c in Sources */,
 				D0A5691718B79F9E0053D55F /* LnSplit.c in Sources */,
 				D0A5691818B79F9E0053D55F /* LnTool.c in Sources */,
+				D02F38E819482EE200FB25A5 /* Pt2dGroupV.c in Sources */,
 				D0A5691918B79F9E0053D55F /* LnTool1.c in Sources */,
 				D0A5691A18B79F9E0053D55F /* LnWrite.c in Sources */,
 				D0A5691B18B79F9E0053D55F /* PlnEigen.cpp in Sources */,
@@ -1311,6 +1378,7 @@
 				D0A5692418B79F9E0053D55F /* PlnWrite.cpp in Sources */,
 				D0E2731918BD438600E239FD /* ClnTool.cpp in Sources */,
 				D0E2731A18BD438600E239FD /* ClnWrite.cpp in Sources */,
+				D02F38EB19482EE200FB25A5 /* Pt2dLine.c in Sources */,
 				D0E2731B18BD438600E239FD /* PlnRead.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1328,13 +1396,7 @@
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/.,
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni/win32",
-					"../**",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(IPPROOT)/include",
-				);
+				HEADER_SEARCH_PATHS = .;
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
@@ -1343,7 +1405,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Util;
 				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Core/Util;
+				SYMROOT = ../Util;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1363,13 +1425,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/.,
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni/win32",
-					"../**",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(IPPROOT)/include",
-				);
+				HEADER_SEARCH_PATHS = .;
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
@@ -1378,7 +1434,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Util;
 				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Core/Util;
+				SYMROOT = ../Util;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1398,13 +1454,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/.,
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni/win32",
-					"../**",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(IPPROOT)/include",
-				);
+				HEADER_SEARCH_PATHS = .;
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
@@ -1413,7 +1463,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Util;
 				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Core/Util;
+				SYMROOT = ../Util;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -1444,13 +1494,7 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/.,
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(Z3RD)/jni/win32",
-					"../**",
-					"/Users/shayrootman/Documents/_work/Gp_Vim/Core/Util/$(IPPROOT)/include",
-				);
+				HEADER_SEARCH_PATHS = .;
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
@@ -1459,7 +1503,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Util;
 				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Core/Util;
+				SYMROOT = ../Util;
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = (
 					"-Wmost",

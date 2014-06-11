@@ -15,11 +15,11 @@
 
 
 
-static int	pln_step_1( pln_type *bpl, float gt0, float wt, pln_type *pl, matrix4_type *A, double D[4] );
+static int	pln_step_1( pln_type *bpl, float gt0, float wt, pln_type *pl, int fside, matrix4_type *A, double D[4] );
 
 
 int
-pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int cycle, lnFit_type *f )
+pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int fside, int cycle, lnFit_type *f )
 {
 pln_type	*bpl;
 int	i,	ret;
@@ -35,7 +35,7 @@ double	s;
 		
 		s = hypot( f->lt.a0, f->lt.b0 );
 
-		ret = pln_fit_step( pl, bpl, gt0*s, gt1*s, &clt );
+		ret = pln_fit_step( pl, bpl, gt0*s, gt1*s, fside, &clt );
 		if( ret < 0 )	break;
 
 		lt2_compose( &clt, &f->lt, &ct );
@@ -62,7 +62,7 @@ double	s;
 
 
 int
-pln_fit_step( pln_type *pl, pln_type *bpl, float gt0, float gt1, lt2_type *lt  )
+pln_fit_step( pln_type *pl, pln_type *bpl, float gt0, float gt1, int fside, lt2_type *lt  )
 {
 matrix4_type A;
 double	D[4],	X[4];
@@ -76,7 +76,7 @@ int	n;
 	n = 0;
 
 
-	n += pln_step_1( bpl, gt0, gt1, pl, &A, D );
+	n += pln_step_1( bpl, gt0, gt1, pl, fside, &A, D );
 
 	if( n < 6 )
 		return( -1 );
@@ -94,13 +94,13 @@ int	n;
 	lt->b1 =  X[2];
 
 
-	return( 1 );
+	return( 1 ); 
 
 }
 
 
 static int
-pln_step_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, matrix4_type *A, double D[4] )
+pln_step_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, int fside, matrix4_type *A, double D[4] )
 {
 float	gt,	v,	u;
 vec2f_type	p,	m,	T;
@@ -128,6 +128,15 @@ dPln_type	d;
 
 		if( ABS(d.u) > 16 )	continue;
 
+
+		if( fside == 1 ){
+			vec2f_type	n,	bn;
+			ln_tanget( d.l, d.t, &bn );
+			pln_tanget( pl, gt, &n );
+			float t = VEC2D_INNER( bn, n );
+			if( t < 0.5 )
+				continue;
+		}
 
 	
 

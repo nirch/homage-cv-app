@@ -101,6 +101,7 @@ int	i,	N;
 				&pt->p.x, &pt->p.y, &pt->n.x, &pt->n.y, 
 				&pt->r, &pt->group ) == EOF )
 				break;
+			pt->f = pt->r;
 
 			pt->id = 0;
 		}
@@ -130,6 +131,7 @@ int	i,	N;
 			pt = &(*av)->p[i];
 			if( fscanf( fp, "%f %f %f %d", &pt->p.x, &pt->p.y, &pt->r, &pt->group ) == EOF )
 				break;
+			pt->f = pt->r;
 			pt->id = 0;
 		}
 
@@ -181,3 +183,15 @@ int	i,	N;
 
 
 
+
+int
+pt2dA_write_to_file_V( vec2f_type p[], int nP, char *file )
+{
+	pt2dA_type *apt = pt2dA_from_point( p, nP );
+
+	pt2dA_write_to_file( apt, file );
+
+	pt2dA_destroy( apt );
+
+	return( 1 );
+}

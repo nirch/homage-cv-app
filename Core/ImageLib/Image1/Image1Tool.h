@@ -366,7 +366,7 @@ image_type *	image1_mask_area( image_type *sim, int rC, image_type *im );
 	// Image1MaskPln.c
 image_type *	image1_mask_plnA( struct plnA_type *apl, int width, int height, image_type *im );
 
-image_type *	image1_mask_cln( struct cln_type *cln, int width, int height, image_type *im );
+image_type *	image1_mask_cln( struct cln_type *cln, int width, int height, int fNormal, image_type *im );
 
 image_type *	image1_mask_pln( struct pln_type *pl, int width, int height, image_type *im );
 

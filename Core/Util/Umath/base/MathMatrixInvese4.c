@@ -182,6 +182,8 @@ math_linear_equation4D( double DA[4][4], double D[4], double X[4] )
 					vectorD_swap( A[i], A[iMax], 4+1 );
 				}
 
+				if( ABS(A[i][i]) < 0.001 )
+					return( -1 );
 				a = 1.0 / A[i][i];
 				vectorD_multiply( A[i], a, 4+1 );
 

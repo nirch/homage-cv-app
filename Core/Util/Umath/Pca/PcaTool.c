@@ -74,6 +74,25 @@ double	*a,	*m;
 	pca->i++;
 }
 
+void
+	pca_addF( pca_type *pca, float f[] )
+{
+	int	i,	j;
+	double	*a,	*m;
+
+	for( i = 0 ; i < pca->n ; i++ ){
+		m = MATRIX_ELM_P( pca->m, i, i );
+		for( j = i ; j < pca->n ; j++, m++ ){
+			*m += f[i]*f[j];
+		}
+
+		a = MATRIX_ELM_P( pca->a, 0, i );
+		*a += f[i];
+	}
+
+	pca->i++;
+}
+
 
 void
 pca_final( pca_type *pca )

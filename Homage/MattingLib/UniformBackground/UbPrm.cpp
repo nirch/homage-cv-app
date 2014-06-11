@@ -19,6 +19,11 @@ ubPrm_alloc()
 
 	prm->fillBlob = 120*120;
 
+//	prm->adjustContour = 0;
+
+	prm->dx = 8;
+	prm->av = 4;
+
 	return( prm );
 }
 
@@ -68,6 +73,24 @@ CUniformBackground::ReadPrm( char *inFile )
 
 		if ( (gp_stricmp(tag->name, "FillBlob") == 0) ){
 			m_prm->fillBlob = atoi( tag->data );
+
+			continue;
+		}
+
+		//if ( (gp_stricmp(tag->name, "AdjustContour") == 0) ){
+		//	m_prm->adjustContour = atoi( tag->data );
+
+		//	continue;
+		//}
+
+		if ( (gp_stricmp(tag->name, "Background-Dx") == 0) ){
+			m_prm->dx = atoi( tag->data );
+
+			continue;
+		}
+
+		if ( (gp_stricmp(tag->name, "Background-Av") == 0) ){
+			m_prm->av = atoi( tag->data );
 
 			continue;
 		}

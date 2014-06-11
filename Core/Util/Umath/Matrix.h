@@ -36,6 +36,7 @@ typedef struct matrix_type {
 
 	union {
 		double *d;
+		double *a;
 		float	*f;
 	};
 
@@ -93,6 +94,9 @@ void	matrixD_const( matrix_type *m, float val );
 void	matrix_centering( matrix_type *m );
 
 int		matrix_inverse( matrix_type *A, matrix_type *B );
+
+int		matrix_solve( matrix_type *m, double D[], double X[] );
+
 
 matrix_type *	matrix_transpose( matrix_type *A, matrix_type *AT );
 

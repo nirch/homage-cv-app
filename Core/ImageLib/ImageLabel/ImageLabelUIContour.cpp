@@ -68,7 +68,7 @@ static void	add_corner_point( gapp_type *gapp, vec2d *v, int side );
 static gapp_type *	gapp_breakpoint( gapp_type *gapp, int d );
 
 
-static int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
+static int	pln_approximateA( gapp_type *gapp, int fClose, pln_type **pl );
 
 
 
@@ -106,7 +106,7 @@ cln_type *cln;
 //			gapp_approximate_link( gapp, 1, &ctr, &link );
 
 
-			pln_approximate( gapp, 1, &pl );
+			pln_approximateA( gapp, 1, &pl );
 
 			pln_inverse( pl );
 
@@ -115,7 +115,7 @@ cln_type *cln;
 //			contour_inverse( c );
 		}
 		else {
-			pln_approximate( gapp, 1, &pl );
+			pln_approximateA( gapp, 1, &pl );
 
 //			gapp_approximate_link( gapp, 1, &ctr, &link );
 //			c = contour_create( &ctr, link, PL_CLOSE, 0 );
@@ -308,7 +308,7 @@ int		i, j;
 
 
 static int
-pln_approximate( gapp_type *gapp, int fClose, pln_type **pl )
+pln_approximateA( gapp_type *gapp, int fClose, pln_type **pl )
 {
 gapp_prm	Qgprm;
 gapp_type	*ga;

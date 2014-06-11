@@ -68,6 +68,12 @@ typedef struct lt2A_type {
 		ty = LT2_F2( lt, x, y ); \
 	}
 
+#define	LT2_T( lt, p, q ) \
+	} \
+	(q).x = ( (lt).f1[0] * (p).x + (lt).f1[1] * (p).y + (lt).f1[2] ); \
+	(q).y = ( (lt).f2[0] * (p).x + (lt).f2[1] * (p)->y + (lt).f2[2] ); \
+	}
+
 
 #define	LT2_SET_F1( lt, a, b, c )	{ (lt).f1[0] = a ; (lt).f1[1] = b; (lt).f1[2] = c; }
 #define	LT2_SET_F2( lt, a, b, c )	{ (lt).f2[0] = a ; (lt).f2[1] = b; (lt).f2[2] = c; }
@@ -98,8 +104,8 @@ int		lt2_inverse( lt2_type *t, lt2_type *it );
 
 void	lt2_shift( lt2_type *t, float x0, float y0, lt2_type *it );
 
-void	lt2_scale( lt2_type *t, float scale );
-
+//void	lt2_scale( lt2_type *t, float scale );
+void	lt2_scaleN( lt2_type *t, float scale );
 
 void	lt2_compose( lt2_type *t, lt2_type *s, lt2_type *ct );
 
@@ -130,12 +136,17 @@ void	lt2A_valueW( lt2A_type *alt, float x, float y, float *u, float *v );
 
 void	lt2_affine_setV( lt2_type *lt, float a, float b, float s, float t );
 
-void	lt2_affine_set( lt2_type *lt, float a, float b, float angle, float scale );
+void	lt2_similarity_set( lt2_type *lt, float a, float b, float angle, float scale );
 
-void	lt2_affine_get( lt2_type *lt, float *a, float *b, float *angle, float *scale );
+void	lt2_similarity_get( lt2_type *lt, float *a, float *b, float *angle, float *scale );
 
 
 int		lt2_affine( lt2_type *lt, vec2f_type s[3], vec2f_type t[3] );
+
+int		lt2_similarityA( lt2_type *lt, vec2f_type ap[2], vec2f_type aq[2] );
+
+int		lt2_asimilarity_eigen2d( lt2_type *lt, struct eigen2d_type *ep, struct eigen2d_type *eq );
+
 
 void	lt2_swap( lt2_type *lt, lt2_type *sw );
 

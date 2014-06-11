@@ -17,14 +17,10 @@
 #include "UniformBackground.h"
 #include "ImageLabel/ImageLabel.h"
 
+#include "../PlnAdjust/PlnAdjust.h"
 
 
 //#define EXCEPTION
-
-
-
-//static void	imageLabelUS_edge( imageLabel_type *abw, image_type *eim );
-
 
 
 
@@ -53,8 +49,15 @@ int	CUniformBackground::ProcessContour()
 	m_abwC = imageLabelUS_N( m_cim, 128, 0, 1, m_abwC );
 
 
-	int i;
 
+	int n = imageLabel_bigest( m_abwC, 1 );
+	
+	m_cln = imageLabelUS_contour( m_abwC->im, n );
+
+	cln_translate( m_cln, -m_abwC->margin, -m_abwC->margin );
+
+#ifdef _AA_
+	int i;
 	for( i = 0; i < m_abwC->nA ; i++  ){
 		if( m_abwC->a[i].id != i )	continue;	
 		if( m_abwC->a[i].color == 0 )
@@ -65,6 +68,7 @@ int	CUniformBackground::ProcessContour()
 		cln_translate( m_cln, -m_abwC->margin, -m_abwC->margin );
 		break;
 	}
+#endif
 
 	
 
@@ -74,6 +78,23 @@ int	CUniformBackground::ProcessContour()
 
 
 	plnA_type *apl = cln_to_plnA( m_cln, 1 );
+
+
+	plnA_smooth( apl );
+
+	plnA_adjust_start( apl );
+
+
+
+	//if( m_contour  == 2 ){
+	//	plnA_adjust_thin( apl, m_iFrame );
+
+	//	
+	//}
+
+	ProcessContourAdjust( apl );
+
+
 	plnF_add( m_fpl, apl, m_iFrame );
 
 
@@ -83,6 +104,35 @@ int	CUniformBackground::ProcessContour()
 }
 
 
+static void	image1_mask_sharp( image_type *sim, float a );
+
+
+int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
+{
+	if( m_contour  < 2  )	
+		return( -1 );
+
+	plnA_adjust_thin( apl, m_iFrame );
+
+
+
+	plnA_adjust_in( apl, m_fpl->a[m_iFrame-1], m_iFrame );
+
+
+
+	cln_type *cln = cln_from_plnA( apl, 1 );
+	m_cim = image1_mask_cln( cln, m_sim->width, m_sim->height, 1, m_cim );
+	cln_destroy( cln );
+
+
+//	image1_mask_sharp( m_cimS, 1.25 );
+
+	ProcessSmooth();
+
+	return( 1 );
+}
+
+#ifdef _AA_
 int	CUniformBackground::ProcessContourUI()
 {
 
@@ -137,7 +187,7 @@ int	CUniformBackground::ProcessContourUI()
 
 	return( 1 );
 }
-
+#endif
 
 int	CUniformBackground::WriteContour( char *file )
 {
@@ -155,3 +205,23 @@ int	CUniformBackground::Write( char *file )
 }
 
 
+
+
+static void
+image1_mask_sharp( image_type *sim, float a )
+{
+	u_char	*sp;
+	int	i,	j;
+
+
+	sp = (u_char *)sim->data;
+
+	for( i = 0 ; i < sim->row ; i++ ){
+		for( j = 0 ; j < sim->column ; j++, sp++ ){
+			if( *sp == 0 || *sp == 255 )	continue;
+
+			int t = (*sp - 128)*a + 0.5;
+			*sp = PUSH_TO_RANGE( t, 0, 255 );
+		}
+	}
+}

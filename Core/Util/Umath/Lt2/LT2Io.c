@@ -14,7 +14,7 @@ lt2_dump( lt2_type *lt, char *prefix, int index, char *suffix )
 {
 	char	file[256];
 
-	if( gpDump_filename( prefix, index, suffix, ".ctr", file ) < 0 )
+	if( gpDump_filename( prefix, index, suffix, ".lt", file ) < 0 )
 		return;
 
 
@@ -66,8 +66,8 @@ lt2_read_file( lt2_type *lt, char *file )
 void
 lt2_read( lt2_type *lt, FILE *fp )
 {
-	fscanf( fp, "%f  %f %f", lt->a0, lt->b0, lt->c0 );
-	fscanf( fp, "%f  %f %f", lt->a1, lt->b1, lt->c1 );
+	fscanf( fp, "%f  %f %f", &lt->a0, &lt->b0, &lt->c0 );
+	fscanf( fp, "%f  %f %f", &lt->a1, &lt->b1, &lt->c1 );
 }
 
 
