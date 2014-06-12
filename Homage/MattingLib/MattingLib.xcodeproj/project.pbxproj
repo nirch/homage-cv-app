@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 085A49792B8245F481C5BBF2 /* ColorBackground.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A4B1949A1550078EB83 /* UbPrm.cpp */; };
 		D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */; };
 		D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */; };
 		D02F38BE19482B0000FB25A5 /* PlnAdjustThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */; };
@@ -29,6 +30,7 @@
 		7885ACADB627440AAA11DA86 /* ColorBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorBackground.h; path = ColorBackground/ColorBackground.h; sourceTree = SOURCE_ROOT; };
 		80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundRemoval.h; path = Background/BackgroundRemoval.h; sourceTree = SOURCE_ROOT; };
 		BDE895EA1510494B83EB22EB /* libMattingLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMattingLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D02C8A4B1949A1550078EB83 /* UbPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbPrm.cpp; path = UniformBackground/UbPrm.cpp; sourceTree = "<group>"; };
 		D02F38B819482B0000FB25A5 /* PlnAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlnAdjust.h; sourceTree = "<group>"; };
 		D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustIn.cpp; sourceTree = "<group>"; };
 		D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustStart.cpp; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
 			isa = PBXGroup;
 			children = (
+				D02C8A4B1949A1550078EB83 /* UbPrm.cpp */,
 				D0E0A58118D0BC99004435E2 /* UbBackground.cpp */,
 				D0E0A58218D0BC99004435E2 /* UbBlob.cpp */,
 				D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */,
@@ -209,6 +212,7 @@
 				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
 				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
 				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
+				D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */,
 				D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */,
 				D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */,
 				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
