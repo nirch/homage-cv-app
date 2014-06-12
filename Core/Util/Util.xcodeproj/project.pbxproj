@@ -152,6 +152,7 @@
 		C9A141DDF734451D82F74285 /* MathMatrixInvese4.c in Sources */ = {isa = PBXBuildFile; fileRef = F6098BD0281E434891737E5E /* MathMatrixInvese4.c */; settings = {COMPILER_FLAGS = ""; }; };
 		CE473C7263174CFB862A4D7B /* FoldJmap23.c in Sources */ = {isa = PBXBuildFile; fileRef = A436D1FAFA2E4242BA53837F /* FoldJmap23.c */; settings = {COMPILER_FLAGS = ""; }; };
 		CFE45EE725FD46BA98A8FF6D /* DiagonalJet2.c in Sources */ = {isa = PBXBuildFile; fileRef = F26CE78C4AFB46FF9A8658C2 /* DiagonalJet2.c */; settings = {COMPILER_FLAGS = ""; }; };
+		D02C8A2D194995FB0078EB83 /* Ellipse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A2B194995FB0078EB83 /* Ellipse.cpp */; };
 		D02F38DC19482EE200FB25A5 /* Pt2dApproximateAb.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */; };
 		D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */; };
 		D02F38DE19482EE200FB25A5 /* Pt2dApproximateLineAxB.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */; };
@@ -435,6 +436,8 @@
 		CF201D71203F4B069A88F8CE /* Config3dTrajectory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Config3dTrajectory.c; path = Uconfig3d/Config3dTrajectory.c; sourceTree = SOURCE_ROOT; };
 		CF285477B8AD4C65BDBC8C69 /* Matrix4Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix4Type.h; path = Umath/Matrix4Type.h; sourceTree = SOURCE_ROOT; };
 		D02013E60DAD4470BB5AA605 /* lz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lz.h; path = Ulz/lz.h; sourceTree = SOURCE_ROOT; };
+		D02C8A2B194995FB0078EB83 /* Ellipse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ellipse.cpp; sourceTree = "<group>"; };
+		D02C8A2C194995FB0078EB83 /* EllipseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EllipseType.h; sourceTree = "<group>"; };
 		D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateAb.c; sourceTree = "<group>"; };
 		D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLine.c; sourceTree = "<group>"; };
 		D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLineAxB.c; sourceTree = "<group>"; };
@@ -835,6 +838,16 @@
 			name = Uxml;
 			sourceTree = "<group>";
 		};
+		D02C8A2A194995FB0078EB83 /* Ellipse */ = {
+			isa = PBXGroup;
+			children = (
+				D02C8A2B194995FB0078EB83 /* Ellipse.cpp */,
+				D02C8A2C194995FB0078EB83 /* EllipseType.h */,
+			);
+			name = Ellipse;
+			path = Umath/Ellipse;
+			sourceTree = "<group>";
+		};
 		D02F38BF19482EE200FB25A5 /* Ucamera */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1075,7 @@
 		FA572772C3B248F4AB3EBBC5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D02C8A2A194995FB0078EB83 /* Ellipse */,
 				D02F38BF19482EE200FB25A5 /* Ucamera */,
 				D025831F1904EA800012BD2B /* Uxml */,
 				D025831E1904EA440012BD2B /* Umath */,
@@ -1211,6 +1225,7 @@
 				4976243B9A00479196A26265 /* GpFileName.c in Sources */,
 				523A2C2DCCB442F8AD0A1AAF /* GpFunction.c in Sources */,
 				7174D9AEE675444895450F19 /* GpIo.c in Sources */,
+				D02C8A2D194995FB0078EB83 /* Ellipse.cpp in Sources */,
 				3EC8C4D5F19B478894CDDB4A /* GpMemoryLeak.c in Sources */,
 				D02F38DF19482EE200FB25A5 /* Pt2dApproximateLinePv.cpp in Sources */,
 				5C5D9E1E0C4D4377804653F2 /* GpMsg.c in Sources */,
