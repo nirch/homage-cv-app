@@ -64,6 +64,11 @@ public:
     static CVPixelBufferRef CVPixelBufferRef_from_image( image_type *im );
     static image_type *CVPixelBufferRef_to_image( CVPixelBufferRef pixelBuffer, image_type *im );
     
+    static image_type * CVPixelBufferRef_to_image_sample2( CVPixelBufferRef pixelBuffer, image_type *im );
+    
+    static image_type * CVPixelBufferRef_to_image_crop( CVPixelBufferRef pixelBuffer,
+                                                int x0, int y0, int width, int height, image_type *im );
+    
 
 protected:
 

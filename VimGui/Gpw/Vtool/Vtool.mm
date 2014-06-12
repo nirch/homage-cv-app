@@ -267,3 +267,35 @@ CVtool::CVPixelBufferRef_to_image( CVPixelBufferRef pixelBuffer, image_type *im 
 	return( im );
 }
 
+
+image_type *
+CVtool::CVPixelBufferRef_to_image_sample2( CVPixelBufferRef pixelBuffer, image_type *im )
+{
+    
+    image_type *tim = CVPixelBufferRef_to_image( pixelBuffer, NULL );
+	
+    
+    im = image_sample2( tim, im );
+    
+    image_destroy( tim, 1 );
+    
+	return( im );
+}
+
+image_type *
+CVtool::CVPixelBufferRef_to_image_crop( CVPixelBufferRef pixelBuffer,
+                        int x0, int y0, int width, int height, image_type *im )
+{
+ 
+    image_type *tim = CVPixelBufferRef_to_image( pixelBuffer, NULL );
+	
+
+    im = image_crop( tim, x0, y0, width, height, im );
+    
+    
+    image_destroy( tim, 1 );
+    
+    
+	return( im );
+}
+
