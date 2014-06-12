@@ -156,6 +156,7 @@
 		D02C8A33194996C80078EB83 /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A2F194996C80078EB83 /* Log.c */; };
 		D02C8A34194996C80078EB83 /* LogFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A31194996C80078EB83 /* LogFile.cpp */; };
 		D02C8A4E1949A4610078EB83 /* PlnSmooth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A4D1949A4610078EB83 /* PlnSmooth.cpp */; };
+		D02C8A501949A6860078EB83 /* PlnApproximate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A4F1949A6860078EB83 /* PlnApproximate.cpp */; };
 		D02F38DC19482EE200FB25A5 /* Pt2dApproximateAb.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */; };
 		D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */; };
 		D02F38DE19482EE200FB25A5 /* Pt2dApproximateLineAxB.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */; };
@@ -446,6 +447,7 @@
 		D02C8A31194996C80078EB83 /* LogFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogFile.cpp; sourceTree = "<group>"; };
 		D02C8A32194996C80078EB83 /* LogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogFile.h; sourceTree = "<group>"; };
 		D02C8A4D1949A4610078EB83 /* PlnSmooth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnSmooth.cpp; path = Uln/PlnSmooth.cpp; sourceTree = "<group>"; };
+		D02C8A4F1949A6860078EB83 /* PlnApproximate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnApproximate.cpp; path = Uln/PlnApproximate.cpp; sourceTree = "<group>"; };
 		D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateAb.c; sourceTree = "<group>"; };
 		D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLine.c; sourceTree = "<group>"; };
 		D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dApproximateLineAxB.c; sourceTree = "<group>"; };
@@ -1054,6 +1056,7 @@
 		D0A568F618B79F0A0053D55F /* Uln */ = {
 			isa = PBXGroup;
 			children = (
+				D02C8A4F1949A6860078EB83 /* PlnApproximate.cpp */,
 				D02C8A4D1949A4610078EB83 /* PlnSmooth.cpp */,
 				D0E2731418BD438600E239FD /* Cln */,
 				D0E2731818BD438600E239FD /* PlnRead.cpp */,
@@ -1315,6 +1318,7 @@
 				D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */,
 				F6A06A3CFB2F43508CE2AAA4 /* MediaDataTool.c in Sources */,
 				0EFF07FC8DEE4BFE890643D4 /* MediaFile.c in Sources */,
+				D02C8A501949A6860078EB83 /* PlnApproximate.cpp in Sources */,
 				E6501745ADE6452A94577E7C /* MediaFormat.c in Sources */,
 				D78BA274FA2A490788CB98C3 /* prm.c in Sources */,
 				8D8095913E2A4C2BA2F1ED00 /* PrmAux.c in Sources */,
