@@ -101,9 +101,15 @@ int	bImage_seg( image_type *bim, image_type *eim, int a[] );
  static void	segC_log( segC_type ac[], int nC );
 
 
+ static int	bImage_smooth_L( image_type *bim, image_type *eim, int a[], segC_type ac[] );
+ static int	bImage_smooth_R( image_type *bim, image_type *eim, int a[], segC_type ac[] );
+
 
  int CUniformBackground::ProcessBackground( image_type *sim, int iFrame )
  {
+#ifdef EXCEPTION
+	 try {
+#endif
 
 	if( m_flip == 1 )
 		m_sim = image3_rotate180( sim, m_sim );
@@ -112,6 +118,14 @@ int	bImage_seg( image_type *bim, image_type *eim, int a[] );
 
 
 	ProcessInitBackground( m_sim, m_mim, 1 );
+
+#ifdef EXCEPTION
+	 }
+
+	 catch (...) {
+		 return( -9 );
+	 }
+#endif
 
 	return( m_state );
 
@@ -162,6 +176,9 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 	bImage_erode( m_bim, m_bimDx, a0, a1, ac0, ac1, m_prm->dx, m_prm->av );
 	bImage_erode_up( m_bim, m_bimDx, a0, a1, ac0, ac1, m_prm->dx, m_prm->av );
 
+
+	bImage_smooth_L( m_bim, m_bimDx, a0, ac0 );
+	bImage_smooth_R( m_bim, m_bimDx, a1, ac1 );
 
 	segC_log( ac0, m_bim->height );
 	segC_log( ac1, m_bim->height );
@@ -694,6 +711,11 @@ bImage_state( segC_type ac0[], segC_type *ac1, int nC, int Dx, int Av )
 
 	bImage_segR( ac0, nC, as0, &nS0, Dx, Av );
 	bImage_segR( ac1, nC, as1, &nS1, Dx, Av );
+
+
+	if( nS0 == 0 && nS0 == 0 ){
+		return( -5 );
+	}
 
 
 
@@ -1289,6 +1311,9 @@ bImage_erode_up( image_type *bim, image_type *eim, int a0[], int a1[], segC_type
 		if( ac0[i].j0 > -1 )	break;
 	}
 
+	if( i >= bim->height-1 )
+		return( -1 );
+
 	int i0 =i;
 
 	int n = 5;
@@ -1365,3 +1390,72 @@ bImage_erode_up( image_type *bim, image_type *eim, int a0[], int a1[], segC_type
 }
 
 
+
+
+
+
+
+static int
+bImage_smooth_L( image_type *bim, image_type *eim, int a[], segC_type ac[] )
+{
+	int	i;
+
+
+
+	for( i = 1 ; i < bim->height - 1 ; i++ )
+		if( ac[i].j0 >=  0 )	break;
+
+	i++;
+
+	for(  ; i < bim->height - 1 ; i++ ){
+		if( ac[i].j1 <= ac[i-1].j1 ||  ac[i].j1 <= ac[i+1].j1 )
+			continue;
+
+		int j = 0.5*(  ac[i-1].j0 + ac[i+1].j0 );
+		bImage_segC( bim, eim, i, j, ac[i].n, &ac[i] );
+	}
+
+
+
+	for( i = 1 ; i < bim->height - 1 ; i++ ){
+		if( a[i] < 0 )	continue;
+		a[i] = ac[i].j1;
+	}
+
+
+
+	return( 1 );
+}
+
+
+static int
+	bImage_smooth_R( image_type *bim, image_type *eim, int a[], segC_type ac[] )
+{
+	int	i;
+
+
+
+	for( i = 1 ; i < bim->height - 1 ; i++ )
+		if( ac[i].j0 >=  0 )	break;
+
+	i++;
+
+	for(  ; i < bim->height - 1 ; i++ ){
+		if( ac[i].j0 >= ac[i-1].j0 ||  ac[i].j0 >= ac[i+1].j0 )
+			continue;
+
+		int j = 0.5*(  ac[i-1].j0 + ac[i+1].j0 );
+		bImage_segC( bim, eim, i, j, ac[i].n, &ac[i] );
+	}
+
+
+
+	for( i = 1 ; i < bim->height - 1 ; i++ ){
+		if( a[i] < 0 )	continue;
+		a[i] = ac[i].j1;
+	}
+
+
+
+	return( 1 );
+}
