@@ -107,6 +107,8 @@ int	bImage_seg( image_type *bim, image_type *eim, int a[] );
 
  int CUniformBackground::ProcessBackground( image_type *sim, int iFrame )
  {
+     if( m_mim == NULL )
+         return( -10 );
 #ifdef EXCEPTION
 	 try {
 #endif
