@@ -106,7 +106,7 @@ float	x0,	y0;
 
 
 // tim(x,y) = sim( lt(x,y) )
-static image_type *
+image_type *
 image3_dewarp_lt2( image_type *sim, lt2_type *lt, image_type *im )
 {
 int	i,	j;

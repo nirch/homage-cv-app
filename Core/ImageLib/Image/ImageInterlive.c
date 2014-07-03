@@ -8,6 +8,7 @@
 
 #include "ImageType/ImageType.h"
 
+static image_type *	imageS_interlive( image_type *aim[], int type, int channel, image_type *im );
 
 static image_type *	image3_interlive( image_type *aim[], int type, image_type *im );
 
@@ -27,7 +28,7 @@ image_interlive( image_type *aim[], int nBand, image_type *im )
 
 
 	if( IMAGE_DATA_BYTE( aim[0] ) == 2 ){
-		im = imageS3_interlive( aim, IMAGE_TYPE(aim[0]), im );
+		im = imageS_interlive( aim, IMAGE_TYPE(aim[0]), nBand, im );
 		return( im );
 	}
 
@@ -47,7 +48,7 @@ image_interlive( image_type *aim[], int nBand, image_type *im )
 
 
 	if( aim[0]->depth == 2 ){
-		im = imageS3_interlive( aim, IMAGE_TYPE_S12, im );
+		im = imageS_interlive( aim, IMAGE_TYPE_S12, nBand, im );
 		return( im );
 	}
 
@@ -89,10 +90,36 @@ image3_interlive( image_type *aim[], int type, image_type *im )
 
 
 static image_type *
-imageS3_interlive( image_type *aim[], int type, image_type *im )
+imageS_interlive( image_type *aim[], int type, int channel, image_type *im )
 {
-int	i,	j;
-short	*sp[3],	*tp;
+	int	i,	j,	k;
+	short	*sp[6],	*tp;
+
+	im = image_recreate( im, aim[0]->height, aim[0]->width, IMAGE_FORMAT(type,channel), 1 );
+
+
+	tp = im->data_s;
+
+	for( k = 0 ; k < channel ; k++ )
+		sp[k] = aim[k]->data_s;
+
+
+
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++ ){
+			for( k = 0 ; k < channel ; k++ )
+				*tp++ = *sp[k]++;
+		}
+	}
+
+	return( im );
+}
+
+static image_type *
+	imageS3_interlive( image_type *aim[], int type, image_type *im )
+{
+	int	i,	j;
+	short	*sp[3],	*tp;
 
 	im = image_recreate( im, aim[0]->height, aim[0]->width, IMAGE_FORMAT(type,3), 1 );
 

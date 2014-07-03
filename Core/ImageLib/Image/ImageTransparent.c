@@ -1033,7 +1033,7 @@ image_type *
 	bp = bim->data;
 	tp = im->data;
 	for( i = 0 ; i < sim->height ; i++ ){
-		for( j = 0 ; j < sim->width ; j++, mp++,sp += 3, *bp += 3 ){
+		for( j = 0 ; j < sim->width ; j++, mp++,sp += 3, bp += 3 ){
 
 			if( *mp == 0 ){
 				*tp++ = bp[0];
