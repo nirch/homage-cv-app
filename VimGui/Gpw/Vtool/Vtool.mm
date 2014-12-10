@@ -221,7 +221,7 @@ CVtool::CVPixelBufferRef_from_image( image_type *im )
 			buffer[k] = sp[0];   // R
 			buffer[k+1] = sp[1]; // G
 			buffer[k+2] = sp[2]; // B
-			buffer[k+3] = 0;     // A
+			buffer[k+3] = 255;     // A
             
             
 		}
