@@ -73,6 +73,22 @@ clnA_destroy( clnA_type *ac )
 }
 
 
+cln_type *
+clnA_detach( clnA_type *ac, int i0 )
+{
+int	i;
+
+	if( i0 >= ac->nA )
+		return( NULL );
+
+	cln_type *cl = ac->a[i0];
+
+	ac->nA--;
+	for( i = i0 ; i < ac->nA ; i++ )
+		ac->a[i] = ac->a[i+1];
+
+	return( cl );
+}
 
 cln_type *
 cln_create( pln_type *pl, int Fdata )
@@ -148,6 +164,9 @@ cln_detach_plink( cln_type *sc, int iPlink )
 {
 cln_type *c;
 int	i;
+
+	if(iPlink >= sc->nA )
+		return( NULL );
 
 	c = cln_alloc();
 
@@ -268,6 +287,7 @@ int	i;
 	for( i = 0 ; i < c->nA ; i++ )
 		polylink_set_ctr( &c->a[i]->ctr, c->a[i]->link );
 }
+#endif
 
 void
 cln_normelize( cln_type *c )
@@ -282,7 +302,7 @@ float	scale;
 
 	p0.x = p0.y = 0;
 	scale = 1.0/c->scale;
-	polylink_rescale( c->a[0]->link, &c->a[0]->ctr, &p0, scale, scale);
+	pln_scaleP( c->a[0], &p0, scale );
 }
 
 
@@ -292,15 +312,16 @@ cln_unnormelize( cln_type *c )
 vec2d	p0;
 
 	p0.x = p0.y = 0;
-	polylink_rescale( c->a[0]->link, &c->a[0]->ctr, &p0, c->scale, c->scale );
+	pln_scaleP( c->a[0], &p0, c->scale );
+	
 
 
 	c->a[0]->ctr.x += c->ctr.x;
 	c->a[0]->ctr.y += c->ctr.y;
 
-	polylink_set_ctr( &c->a[0]->ctr, c->a[0]->link );
+//	polylink_set_ctr( &c->a[0]->ctr, c->a[0]->link );
 }
-#endif
+
 
 void
 cln_box( cln_type *c, box2f_type *box )

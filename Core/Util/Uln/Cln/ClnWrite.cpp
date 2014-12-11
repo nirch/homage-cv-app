@@ -111,6 +111,116 @@ cln_read(cln_type **cln, char *file )
 }
 
 
+static int	cln_read( cln_type **cl, FILE *fp );
+
+
+int
+clnA_read( clnA_type **acl, char *file )
+{
+	FILE	*fp;
+	int	version,	nV;
+	char	signature[64];
+	int	pose;
+
+
+	if( (fp = fopen( file, "rb")) == NULL )
+		return( -1 );
+
+
+	pose = ftell( fp );
+	if( fscanf(fp, "%s  %d  %d", signature, &version, &nV ) != 3 ){
+		fclose( fp );
+		return( -1 );
+	}
+	
+	
+	if( strcmp( signature, "CL") != 0 ){
+
+		fclose( fp );
+
+		plnA_type *apl;
+		if( plnA_read( &apl, file ) < 0 )
+			return( -1 );
+
+		*acl = clnA_alloc( 1 );
+
+		(*acl)->a[(*acl)->nA++] = cln_from_plnA( apl, 0 );
+
+
+		apl->nA = 0;
+		plnA_destroy( apl );
+
+		return( 1 );
+	}
+
+
+	
+	*acl = clnA_alloc( nV );
+
+	cln_type *cl;
+	while( cln_read( &cl, fp) > 0  ){
+		if( version == 1 )
+			cln_unnormelize( cl );
+		(*acl)->a[(*acl)->nA++] = cl;
+	}
+
+
+
+
+	fclose( fp );
+
+	return( 1 );
+}
+
+
+
+static int
+	cln_read( cln_type **cl, FILE *fp )
+{
+	pln_type	*pl;
+
+
+	*cl = cln_alloc();
+
+	int iFrame = 0;
+
+
+
+#ifdef _AA_
+	contour
+		0
+		transform
+		416.389282  667.000000  1.000000   0.000000
+#endif
+	char	buf[256];
+	(*cl)->iFrame = iFrame;
+
+	if( fscanf(fp, "%s  %d", buf, &(*cl)->type ) != 2 )
+		return( -1 );
+	if( gp_strnicmp(buf , "contour", 7) != 0 )
+		return( -1 );
+	fscanf( fp, "%s  %f %f %f %f", buf, &(*cl)->ctr.x, &(*cl)->ctr.y, &(*cl)->scale, &(*cl)->angle );
+
+
+
+	int pose = ftell(fp);
+	int	ret;
+	while( ( ret = pln_read( &pl, fp ))  > 0 ){
+		(*cl)->a[ (*cl)->nA++ ] = pl;
+		pose = ftell(fp);
+	}
+
+//	if( ret == -2 ){
+		fseek( fp, pose, SEEK_SET );
+		return( 1 );
+//	}
+
+
+//	return( -1 );
+	
+}
+
+
 
 #ifdef _AA_
 static int

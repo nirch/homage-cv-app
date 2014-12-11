@@ -18,7 +18,7 @@ extern "C" {
 
 
 
-#define		MAX_PLN		32
+#define		MAX_PLN		128
 
 
 typedef struct cln_type {
@@ -57,6 +57,9 @@ void	cln_destroy( cln_type *c );
 clnA_type *	clnA_alloc( int n );
 
 void	clnA_destroy( clnA_type *ac );
+
+cln_type * clnA_detach( clnA_type *ac, int i0 );
+
 
 
 
@@ -152,6 +155,9 @@ void cln_dump( cln_type *cln, char *prefix, int index, char *suffix );
 int		cln_write(cln_type *cln, char *file );
 
 int		cln_read(cln_type **cln, char *file );
+
+int		clnA_read( clnA_type **acl, char *file );
+
 
 
 plnA_type *	cln_to_plnA( cln_type *cln, int fData );

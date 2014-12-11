@@ -10,7 +10,7 @@
 
 static int	plnA_read( plnA_type **apl, FILE *fp );
 
-static int	pln_read( pln_type **pl,  FILE *fp );
+//static int	pln_read( pln_type **pl,  FILE *fp );
 static int	plnA_read_cl( plnA_type **apl, FILE *fp );
 
 
@@ -332,7 +332,7 @@ contour
 
 
 
-static int
+int
 pln_read( pln_type **pl,  FILE *fp )
 {
 ln_type	*l;
@@ -343,7 +343,7 @@ char	line[512];
 		if( fgets( line, 512, fp ) == NULL )
 			return( -1 );
 
-		if( gp_strnicmp(line , "contour", 8) == 0 )
+		if( gp_strnicmp(line , "contour", 7) == 0 )
 			return( -2 );
 		
 		if( gp_strnicmp(line , "polylink", 8) == 0 )

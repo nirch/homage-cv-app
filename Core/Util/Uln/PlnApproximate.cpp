@@ -80,11 +80,13 @@ gapp_type	*ga;
 
 
 	if( fClose == 1 ){
-		ga->v[ga->no] = ga->v[0];
-		ga->tang[ga->no] = ga->tang[0];
-		ga->flag[ga->no] = ga->flag[0];
+		if( gapp->v[0].x != ga->v[ga->no-1].x || gapp->v[0].y != ga->v[ga->no-1].y ){
+			ga->v[ga->no] = ga->v[0];
+			ga->tang[ga->no] = ga->tang[0];
+			ga->flag[ga->no] = ga->flag[0];
 
-		ga->no++;
+			ga->no++;
+		}
 	}
 
 

@@ -54,6 +54,7 @@ pln_type *pl;
 	*pl = *spl;
 
 	pl->link = lnL_copy( spl->link, NULL );
+	pl->e = NULL;
 
 	return( pl );
 }
@@ -124,6 +125,27 @@ plnA_type	*apl;
 
 
 	GPMEMORY_LEAK_ALLOC( apl );
+
+	return( apl );
+}
+
+
+plnA_type *	
+plnA_realloc( plnA_type *apl, int n )
+{
+	if( apl == NULL ){
+		apl = plnA_alloc( n );
+		return( apl );
+	}
+
+
+	if( apl->NA > n )
+		return( apl );
+	
+	
+	apl->NA = n;
+	apl->a = ( pln_type **)realloc( apl->a, apl->NA * sizeof( pln_type*) );
+	
 
 	return( apl );
 }
@@ -457,6 +479,53 @@ ln_type	*l;
 }
 
 
+void
+pln_scaleP( pln_type *pl, vec2d *point, float scale )
+{
+ln_type *link0,*link1;
+vec2d ctr1, ctr0, endCtr;
+
+
+	link0 = NULL;
+
+	for ( link1 = pl->link, ctr1 = pl->ctr; link1 != NULL ; link1 = LN_NEXT(link1)){
+		endCtr.x = ctr1.x + link1->v.x;
+		endCtr.y = ctr1.y + link1->v.y;
+
+		ctr1.x = point->x + scale * (ctr1.x - point->x);
+		ctr1.y = point->y + scale * (ctr1.y - point->y);
+
+		if ( link0 != NULL ) 
+		{
+			link0->v.x = ctr1.x - ctr0.x;
+			link0->v.y = ctr1.y - ctr0.y;
+			ln_set_aux(link0);
+			link0->a *= link0->len/link0->len;
+			link0->c_prb *= link0->len/link0->len;
+		}				
+
+		link0	= link1;
+		ctr0	= ctr1;
+		ctr1	= endCtr;
+	}
+	
+
+	
+	// shift the end point
+	endCtr.x = point->x + scale * (endCtr.x - point->x);
+	endCtr.y = point->y + scale * (endCtr.y - point->y);
+
+
+	link0->v.x = endCtr.x - ctr0.x;
+	link0->v.y = endCtr.y - ctr0.y;
+	ln_set_aux(link0);
+	link0->a *= link0->len/link0->len;
+
+	pl->ctr.x = point->x + scale * (pl->ctr.x - point->x);
+	pl->ctr.y = point->y + scale * (pl->ctr.y - point->y);
+}
+
+
 pln_type *
 pln_from_lnA( ln_type al[], int nAl )
 {
@@ -621,9 +690,44 @@ pln_type	*pl;
 
 	pl->len = lnL_length( pl->link );
 
+	pl->state = PLN_OPEN;
+
 	return( pl );
 }
 
+
+pln_type *
+pln_copy_subR( pln_type *spl, float gt0, float gt1 )
+{
+pln_type	*pl;
+ln_type *l;
+float gt;
+
+	pl = pln_alloc(0);
+
+	if( gt0 < 0 )	gt0 = 0;
+	if( gt1 > spl->len )	gt1 = spl->len;
+
+	for( l = spl->link, pl->ctr = spl->ctr, gt = 0 ; l != NULL && gt + l->len <= gt0 ; l = LN_NEXT(l) ){
+		gt += l->len;
+		pl->ctr.x += l->v.x;
+		pl->ctr.y += l->v.y;
+	}
+ 
+	pl->link = l;
+
+	for( ; l != NULL && gt < gt1 ; l = LN_NEXT(l) )
+		gt += l->len;
+
+
+
+	pl->link = lnL_copy( pl->link, l );
+
+
+	pl->len = lnL_length( pl->link );
+
+	return( pl );
+}
 
 
 void
@@ -688,6 +792,14 @@ pln_tanget( pln_type *pl, float gt, vec2f_type *v )
 	ln_tanget(  l, t, v );
 }
 
+
+void
+pln_gt2lt( pln_type *pl, float gt, vec2f_type *p, ln_type **l, float *t )
+{
+
+	lnL_gt2lt_p( &pl->ctr, pl->link, gt, p, l, t );
+}
+
 void
 pln_tangetP( pln_type *pl, float gt, vec2f_type *p, vec2f_type *v )
 {
@@ -722,12 +834,47 @@ pln_distance( pln_type *pl, vec2f_type *p, dPln_type *d )
 
 
 int
+pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md )
+{
+	float gt,	dt;
+	vec2f_type p;
+	dt = 2.0;
+
+	dPln_type d;
+
+	md->sgt = -1;
+
+	for( gt = 0 ; gt < pl->len ; gt += dt ){
+
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_distance( bpl, &p, &d ) < 0 )
+			continue;
+
+		if( d.gt < 0 || d.gt > bpl->len )
+			continue;
+
+		if( md->sgt < 0  || ABS(d.u) < ABS(md->u) ){
+			*md = d;
+			md->sgt = gt;
+		}
+	}
+
+	if( md->sgt < 0 )
+		return( -1 );
+
+	return( 1 );
+}
+
+
+int
 plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type *sd )
 {
 	dPln_type d;
-	int i;
+	int i,	iMin;
 
 	*spl = NULL;
+	iMin = -1;
 
 	sd->u = D;
 	for( i = 0 ; i < apl->nA ; i++ ){
@@ -741,13 +888,14 @@ plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type
 		if( ABS(d.u) < ABS(sd->u) ){
 			*spl = pl;
 			*sd = d;
+			iMin = i;
 		}
 	}
 
 	if( *spl == NULL )
 		return( -1 );
 
-	return( 1 );
+	return( iMin );
 }
 
 void
@@ -873,6 +1021,45 @@ float	n;
 		pt->id = 0;
 	}
 }
+
+
+pt2dA_type *
+pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt )
+{
+	pt2d_type	*pt;
+	vec2f_type	p;
+	float	t;
+	float	n;
+
+	if( gt0 < 0 )	gt0 = 0;
+	if( gt1 < 0 || gt1 > pl->len )	gt1 = pl->len;
+
+
+	n = pl->len / dt + 2;
+
+	apt = pt2dA_realloc( apt, n );
+	apt->nA = 0;
+
+	for( t = gt0 ; t < gt1 ; t += dt ){
+
+		pln_gt2p( pl, t, &p );
+
+		pt = &apt->p[apt->nP++];
+		pt->p.x = p.y;
+		pt->p.y = p.x;
+
+		pt->n.x = 1;
+		pt->n.y = 0;
+
+		pt->r = 1.0;
+		pt->f = t;
+		pt->id = 0;
+	}
+
+	return( apt );
+}
+
+
 
 
 
@@ -1145,8 +1332,10 @@ plnA_copy( plnA_type *apl, int fData, plnA_type *capl )
 	int	i;
 
 
-	if( capl == NULL )
-		capl = plnA_alloc( apl->nA );
+//	if( capl == NULL )
+//		capl = plnA_alloc( apl->nA );
+	capl = plnA_realloc( capl, apl->nA );
+
 
 	plnA_clear( capl );
 
@@ -1304,3 +1493,34 @@ pln_close( pln_type *pl, float T )
 }
 
 
+
+
+float
+pln_radius( pln_type *pl, vec2f_type *p0 )
+{
+	vec2f_type	p;
+	float	dt,	t,	r;
+
+	dt = 1.0;
+
+	r = 0;
+
+
+
+	for( t = 0 ; t < pl->len ; t += dt ){
+
+		pln_gt2p( pl, t, &p );
+
+		p.x -= p0->x;
+		p.y -= p0->y;
+
+		float d = p.x*p.x + p.y*p.y;
+
+		if( d > r )
+			r = d;
+	}
+
+	r = sqrt( r );
+
+	return( r );
+}

@@ -9,6 +9,9 @@ static image_type *	image1_sample3( image_type *sim, image_type *im );
 
 static image_type *image1_sample4( image_type *sim, image_type *im );
 
+static image_type *	image1B_sample3( image_type *sim, box2i_type *b, image_type *im );
+
+
 
 
 image_type *
@@ -36,6 +39,42 @@ int	i,	j;
 			sp1 += 1;
 			sp2 += 1;
 			sp3 += 1;
+		}
+	}
+
+	return( im );
+}
+
+
+
+
+image_type *
+image1B_sample2( image_type *sim, box2i_type *b, image_type *im )
+{
+	u_char	*sp0, *sp1,	*tp;
+	int	i,	j;
+
+
+	int width = (b->x1 - b->x0 )/2;
+	int height = (b->y1 - b->y0 )/2;
+
+
+	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	tp = im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		sp0 = IMAGE_PIXEL( sim, b->y0 + 2*i, b->x0 );
+		sp1 = sp0 + sim->width;
+	
+
+		for( j = 0 ; j < im->column ; j++ ){
+
+
+			*tp++ = ( sp0[0] + sp0[1] + sp1[0] + sp1[1] )>>2;
+
+			sp0 += 2;
+			sp1 += 2;
 		}
 	}
 
@@ -134,6 +173,56 @@ int	align,	sum;
 
 
 
+image_type *
+image1B_sample( image_type *sim, box2i_type *b, int d, image_type *im )
+{
+	u_char	*sp,	*sp0,	*tp;
+	int	i,	j;
+	int	id;
+	int	k,	n;
+	int	align,	sum;
+
+	int width,	height;
+
+	if( d == 2 )
+		return image1B_sample2( sim, b, im );
+
+
+	if( d == 3 )
+		return image1B_sample3( sim, b, im );
+
+
+
+	width = (b->x1 - b->x0 )/d;
+	height = (b->y1 - b->y0 )/d;
+
+
+	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
+
+
+
+	align = sim->width - d;
+	tp = im->data;
+	for( i = 0, id = 0 ; i < im->row ; i++, id += d ){
+
+
+		sp0 = IMAGE_PIXEL( sim, b->y0 + id, b->x0 );
+		for( j = 0 ; j < im->column ; j++, sp0 += d ){
+
+			for( k = 0, sp = sp0, sum = 0 ; k < d ; k++, sp += align ){
+				for( n = 0 ; n < d ; n++ )
+					sum += *sp++;
+			}
+
+			*tp++ = sum /( d*d );
+		}
+	}
+
+	return( im );
+}
+
+
+
 static image_type *
 image1_sample3( image_type *sim, image_type *im )
 {
@@ -159,6 +248,44 @@ image1_sample3( image_type *sim, image_type *im )
 
 			*tp++ = (sp0[0] + sp0[1] + sp0[2] + sp1[0] + sp1[1] + sp1[2] + sp2[0] + sp2[1] + sp2[2]) * tmp;
 	
+			sp0 += 3;
+			sp1 += 3;
+			sp2 += 3;
+		}
+	}
+
+	return( im );
+}
+
+
+static image_type *
+image1B_sample3( image_type *sim, box2i_type *b, image_type *im )
+{
+	u_char	*sp0, *sp1,	*sp2,	*tp;
+	int	i,	j;
+	float tmp;
+
+
+	int width = (b->x1 - b->x0 )/3;
+	int height = (b->y1 - b->y0 )/3;
+
+
+	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
+
+	tmp = 1.0/(3.0*3.0 );
+
+	tp = im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		sp0 = IMAGE_PIXEL( sim, b->y0 + 3*i, b->x0 );
+		sp1 = sp0 + sim->width;
+		sp2 = sp1 + sim->width;
+
+
+
+		for( j = 0 ; j < im->column ; j++ ){
+
+			*tp++ = (sp0[0] + sp0[1] + sp0[2] + sp1[0] + sp1[1] + sp1[2] + sp2[0] + sp2[1] + sp2[2]) * tmp;
+
 			sp0 += 3;
 			sp1 += 3;
 			sp2 += 3;

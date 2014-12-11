@@ -109,7 +109,7 @@ int	i;
 }
 
 
-
+#ifdef _AA_
 void	
 pt2dA_dump( pt2dA_type *apt, char *prefix, int index, char *suffix )
 {
@@ -121,6 +121,7 @@ char	file[256];
 
 	pt2dA_write_to_file( apt, file );
 }
+#endif
 
 pt2dA_type *
 pt2dA_copy( pt2dA_type *apt, pt2dA_type *capt )

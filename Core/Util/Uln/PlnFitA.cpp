@@ -27,7 +27,7 @@ int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float
 
 
 int
-plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, lnFit_type *f )
+plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f )
 {
 	pln_type	*bpl;
 	int	i,	ret;
@@ -54,7 +54,7 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, lnFit
 	PLN_DUMP( bpl, "fit", i, NULL );
 
 
-	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, 0.5, &f->cover, &f->dis );
+	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T, &f->cover, &f->dis );
 
 
 	pln_destroy( bpl );

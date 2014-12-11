@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+#include "Uvl/Vl2fType.h"
 #include "Ucamera/Pt2dType.h"
 
 
@@ -135,6 +136,9 @@ void	pln_trim( pln_type *pl, int direct, float gt );
 
 pln_type *	pln_copy_sub( pln_type *spl, float gt0, float gt1 );
 
+pln_type *pln_copy_subR( pln_type *spl, float gt0, float gt1 );
+
+
 void	pln_appendL( pln_type *pl, vec2f_type *ctr, ln_type *link );
 
 void	pln_append( pln_type *pl, pln_type *pl1 );
@@ -142,6 +146,10 @@ void	pln_append( pln_type *pl, pln_type *pl1 );
 void	pln_end_point( pln_type *pl, vec2d *p );
 
 void	pln_gt2p( pln_type *pl, float gt, vec2f_type *p );
+
+
+void	pln_gt2lt( pln_type *pl, float gt, vec2f_type *p, ln_type **l, float *t );
+
 
 void	pln_tanget( pln_type *pl, float gt, vec2f_type *v );
 
@@ -176,6 +184,9 @@ pln_type *	pln_from_lnA( ln_type al[], int nAl );
 
 void	pln_scale( pln_type *pl, float scale );
 
+void	pln_scaleP( pln_type *pl, vec2d *point, float scale );
+
+
 void	pln_translate( pln_type *pl, float x, float y );
 
 void	plnA_clear( plnA_type *apl );
@@ -192,14 +203,22 @@ plnA_type *	plnA_copy( plnA_type *apl, int fData, plnA_type *capl );
 
 int	pln_distance( pln_type *pl, vec2f_type *p, dPln_type *d );
 
+int	pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md );
+
+
 void	pln_box( pln_type *pl, box2f_type *box );
 
 
 plnA_type *		plnA_alloc( int n );
 
+plnA_type *		plnA_realloc( plnA_type *apl, int n );
+
+
 void	plnA_destroy( plnA_type *apl );
 
 void	plnA_destroy_header( plnA_type *apl );
+
+plnA_type *	plnA_from_pl( pln_type *pl );
 
 
 int		plnA_decrease( plnA_type *apl );
@@ -227,6 +246,9 @@ void	plnA_scale( plnA_type *aP, float scale );
 void	pln_sample( pln_type *pl, float t0, float r, int n, int direct, pt2dA_type *apt );
 
 void	pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt );
+
+pt2dA_type * pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt );
+
 
 
 pln_type *	pln_split( pln_type *spl, float gt, float dt );
@@ -268,6 +290,9 @@ int		plnA_write( plnA_type *apl, char *file );
 //int		plnA_read( char *file, plnA_type **apl );
 int		plnA_read( plnA_type **apl, char *file );
 
+int	pln_read( pln_type **pl,  FILE *fp );
+
+
 
 int		pln_write_to_file( pln_type *pl, char *file );
 
@@ -288,6 +313,8 @@ int	pln_parallel( pln_type *bpl, pln_type *pl, int i, float gt, float aT, float 
 int	pln_parallel_distance(  pln_type *bpl, pln_type *pl, float dt, float aT, float D0, float D1, float *u );
 
 float	pln_straightline_measure( pln_type *pl, float gt, float dt, int n );
+
+int		pln_straightline( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl );
 
 
 
@@ -321,20 +348,26 @@ void	plnA_set_groupId( plnA_type *apl, int group );
 
 void	pln_close( pln_type *pl, float T );
 
+float	pln_radius( pln_type *pl, vec2f_type *p0 );
 
 
 
 
 typedef struct lnFit_type {
+	float gt;
 	lt2_type	lt;
 
 	float	dis;
 	float cover;
+
 } lnFit_type;
 
 
 	// PlnFit.cpp
-int	pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int fside, int cycle, lnFit_type *f );
+int	pln_fit( pln_type *pl, pln_type *bpl0, float gt0, float gt1, int fside, int cycle, float T, lnFit_type *f );
+
+int	pln_fit_local( pln_type *pl, pln_type *bpl, float gt, float dt, int side, int cycle, lnFit_type *f );
+
 
 int	pln_fit_step( pln_type *pl, pln_type *bpl, float gt0, float gt1, int fside, lt2_type *lt );
 
@@ -343,7 +376,7 @@ int	pln_fit_compare( pln_type *pl, pln_type *bpl, float gt0, float gt1, float dT
 
 
 	// PlnFitAa.cpp
-int	plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, lnFit_type *f );
+int	plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f );
 
 int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
@@ -375,6 +408,9 @@ pln_type *pln_from_gapp( gapp_type *gapp );
 
 	// PlnEigen.cpp
 int	pln_eigen( pln_type *pl, float dt, struct eigen2d_type *e );
+
+int	pln_eigenS( pln_type *pl, float gt0, float gt1, float dt, struct eigen2d_type *e );
+
 
 pt2dA_type * pln_apt( pln_type *pl, float dt );
 
@@ -409,6 +445,8 @@ void	plnF_destroy( plnF_type *fpl );
 
 void	plnF_add( plnF_type *vpl, plnA_type *apl, int iFrame );
 
+plnA_type *	plnF_get( plnF_type *vpl, int iFrame );
+
 void	plnF_clear( plnF_type *vpl, int iFrame );
 
 
@@ -416,6 +454,7 @@ void	plnF_clear( plnF_type *vpl, int iFrame );
 #ifdef _DUMP
 #define PLNA_DUMP( apl, name, index, ext )  plnA_dump( apl, name, index, ext )
 #define PLN_DUMP( pl, name, index, ext )  pln_dump( pl, name, index, ext )
+#define PLNA_DUMPF( apl, name, index, ext, flag )  if( flag )	plnA_dump( apl, name, index, ext )
 
 #else
 #define PLNA_DUMP( apl, name, index, ext )

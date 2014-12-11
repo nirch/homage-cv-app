@@ -66,10 +66,14 @@ image_type *	image1_sample2( image_type *sim, image_type *im );
 
 image_type *	image1_sample2L( image_type *sim, int level, image_type *im );
 
+image_type *	image1B_sample2( image_type *sim, box2i_type *b, image_type *im );
 
 image_type *	image1_dup2( image_type *sim, image_type *im );
 
 image_type *	image1_sample( image_type *sim, int d, image_type *im );
+
+image_type *	image1B_sample( image_type *sim, box2i_type *b, int d, image_type *im );
+
 
 //image_type *	image1_sample_column( image_type *sim, int si0, int d, image_type *im, int i0 );
 

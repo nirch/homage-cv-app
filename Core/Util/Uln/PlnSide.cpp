@@ -34,7 +34,7 @@ pln_interior_side( pln_type *pl )
 
 	// find the longest link
 	len = -1.0;
-	for ( l = pl->link, gctr = pl->ctr; l; l= LN_NEXT( l ) ) {
+	for ( l = pl->link, gctr = pl->ctr; l != NULL ; l= LN_NEXT( l ) ) {
 		if ( l->len > len ) {
 			len	= l->len;
 			lr	= l;
@@ -45,8 +45,8 @@ pln_interior_side( pln_type *pl )
 		gctr.y += l->v.y;
 	}
 
-	p.x += lr->v.x/2.0 + lr->u.x;
-	p.y += lr->v.y/2.0 + lr->u.y;
+	p.x += lr->v.x/2.0 + 0.25*lr->u.x;
+	p.y += lr->v.y/2.0 + 0.25*lr->u.y;
 
 	return pln_point_side( pl, &p );
 
@@ -87,10 +87,13 @@ pln_point_side( pln_type *pl, vec2d *p )
 		d1 = v1.x*v1.x + v1.y*v1.y;
 		d2 = v2.x*v2.x + v2.y*v2.y;
 		dd = sqrt(d1*d2);
+
+
 		scal = v1.x*v2.x + v1.y*v2.y;
 		cos_delta = scal/dd;
 		vect = v1.x*v2.y - v1.y*v2.x;
 		sin_delta = vect/dd;
+
 
 		al = atan2( sin_delta, cos_delta );
 		sum += al;

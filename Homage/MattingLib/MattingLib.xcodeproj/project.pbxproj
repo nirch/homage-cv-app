@@ -236,6 +236,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../Core/Util,
 					../../Core/ImageLib,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -280,6 +281,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../Core/Util,
 					../../Core/ImageLib,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -324,6 +326,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../Core/Util,
 					../../Core/ImageLib,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -380,6 +383,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../Core/Util,
 					../../Core/ImageLib,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;

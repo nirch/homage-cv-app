@@ -141,7 +141,8 @@ int	pt2dA_write_to_file_V( vec2f_type p[], int nP, char *file );
 
 
 
-void	pt2dA_dump( pt2dA_type *apt, char *prefix, int index, char *suffix );
+
+
 
 pt2dA_type *	pt2dA_copy( pt2dA_type *apt, pt2dA_type *capt );
 
@@ -385,14 +386,18 @@ FILE *	pt2dF_write_open( char *file );
 
 int	pt2dF_write_header( FILE *fp );
 
+void	pt2dA_dump( pt2dA_type *apt, char *prefix, int index, char *suffix );
+
+void	pt2dA_dump_V( vec2f_type av[], int nV, char *prefix, int index, char *suffix );
 
 
 #ifdef _DUMP
 #define PT2DA_DUMP( apt, name, index, ext )  pt2dA_dump( apt, name, index, ext )
+#define PT2DA_DUMP_V( av, nV, name, index, ext )  pt2dA_dump_V( av, nV, name, index, ext )
 
 #else
 #define PT2DA_DUMP( apt, name, index, ext )
-
+#define PT2DA_DUMP_V( av, nV, name, index, ext )
 #endif
 
 

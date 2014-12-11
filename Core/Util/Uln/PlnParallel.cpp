@@ -195,3 +195,26 @@ int	i;
 
 	return( su );
 }
+
+
+int
+pln_straightline( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl )
+{
+	pt2dA_type	*apt;
+	
+
+	apt = pln_sampleP( pl, gt0, gt1, dt, NULL );
+
+
+	if( pt2d_approximate_line_vl( apt, 0, apt->nP, vl ) < 0 ){
+		pt2dA_destroy( apt );
+		return( -1 );
+	}
+
+	pt2dA_destroy( apt );
+
+	if( ABS( vl->e) > 0.125 )
+		return( -1 );
+
+	return( 1 );
+}

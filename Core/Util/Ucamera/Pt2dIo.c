@@ -195,3 +195,30 @@ pt2dA_write_to_file_V( vec2f_type p[], int nP, char *file )
 
 	return( 1 );
 }
+
+
+
+void	
+pt2dA_dump( pt2dA_type *apt, char *prefix, int index, char *suffix )
+{
+	char	file[256];
+
+	if( gpDump_filename( prefix, index, suffix, ".pt", file ) < 0 )
+		return;
+
+
+	pt2dA_write_to_file( apt, file );
+}
+
+
+void	
+pt2dA_dump_V( vec2f_type av[], int nV, char *prefix, int index, char *suffix )
+{
+	char	file[256];
+
+	if( gpDump_filename( prefix, index, suffix, ".pt", file ) < 0 )
+		return;
+
+
+	pt2dA_write_to_file_V( av, nV, file );
+}

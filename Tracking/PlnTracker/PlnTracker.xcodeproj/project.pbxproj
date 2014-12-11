@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		982AA204D70A4DDA999D59AC /* PlnHeadTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		EFA33BB6478C46F5860C08B3 /* PlnHeadPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		035392DD216B487F8A71FD94 /* libPlnTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPlnTracker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnHeadTracker.cpp; path = PlnHeadTracker/PlnHeadTracker.cpp; sourceTree = SOURCE_ROOT; };
+		F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnHeadPose.cpp; path = PlnHeadTracker/PlnHeadPose.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1A5E3F05DA8F4B83A8BD42AF /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */,
+				1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		2B09D89378DC4B5A9BD8CBF7 /* PlnTracker */ = {
+			isa = PBXGroup;
+			children = (
+				1A5E3F05DA8F4B83A8BD42AF /* Source Files */,
+			);
+			name = PlnTracker;
+			sourceTree = "<group>";
+		};
+		502C9C20BC554313841FDFB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				035392DD216B487F8A71FD94 /* libPlnTracker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		579E83ED3E774DA3A0CC90E0 = {
+			isa = PBXGroup;
+			children = (
+				A771D083A950489380CDE30F /* Sources */,
+				F23877ED70F24AACB5AEAACE /* Resources */,
+				502C9C20BC554313841FDFB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A771D083A950489380CDE30F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2B09D89378DC4B5A9BD8CBF7 /* PlnTracker */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		F23877ED70F24AACB5AEAACE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4E3586CE87B4D23BEC72134 /* PlnTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35869D55D85349DF9C1A3711 /* Build configuration list for PBXNativeTarget "PlnTracker" */;
+			buildPhases = (
+				9633B325B67C45B59B06D6D2 /* Sources */,
+				0CD4A638F3CE4153977067E9 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlnTracker;
+			productName = PlnTracker;
+			productReference = 035392DD216B487F8A71FD94 /* libPlnTracker.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		699E7F12E7D7491E8705A6B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 63DEC9FE7081488CB9CAFC80 /* Build configuration list for PBXProject "PlnTracker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 579E83ED3E774DA3A0CC90E0;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4E3586CE87B4D23BEC72134 /* PlnTracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CD4A638F3CE4153977067E9 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9633B325B67C45B59B06D6D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFA33BB6478C46F5860C08B3 /* PlnHeadPose.cpp in Sources */,
+				982AA204D70A4DDA999D59AC /* PlnHeadTracker.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		15ED969D2CDF4071889C1278 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnTracker;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnTracker;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		1774A42852E0466DA24354B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Tracking/PlnTracker/build;
+			};
+			name = Debug;
+		};
+		1F0FB9CAB76A498BAD81056D /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Tracking/PlnTracker/build;
+			};
+			name = MinSizeRel;
+		};
+		484E5782AB3D45DEA4794124 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Tracking/PlnTracker/build;
+			};
+			name = RelWithDebInfo;
+		};
+		69DFC841BCD4406BA2EC9BD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnTracker;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnTracker;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		77E990D952984DD7AFCD88F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Tracking/PlnTracker/build;
+			};
+			name = Release;
+		};
+		790078E394914C68A18A013A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    ";
+				OTHER_CPLUSPLUSFLAGS = "    ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnTracker;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnTracker;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		F30585EE5313465FB12CB539 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../Core/Util,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnTracker;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnTracker;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		35869D55D85349DF9C1A3711 /* Build configuration list for PBXNativeTarget "PlnTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				790078E394914C68A18A013A /* Debug */,
+				69DFC841BCD4406BA2EC9BD8 /* Release */,
+				F30585EE5313465FB12CB539 /* MinSizeRel */,
+				15ED969D2CDF4071889C1278 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		63DEC9FE7081488CB9CAFC80 /* Build configuration list for PBXProject "PlnTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1774A42852E0466DA24354B1 /* Debug */,
+				77E990D952984DD7AFCD88F0 /* Release */,
+				1F0FB9CAB76A498BAD81056D /* MinSizeRel */,
+				484E5782AB3D45DEA4794124 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 699E7F12E7D7491E8705A6B1 /* Project object */;
+}

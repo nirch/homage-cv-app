@@ -129,13 +129,15 @@ lnL_gt2lt_p( vec2f_type *ctr, ln_type *link, float gt, vec2f_type *ctr0, ln_type
 		return;
 	}
 
-	for( l = link ; gt > l->len && LN_NEXT(l) != NULL ; l = LN_NEXT(l) ){
+	for( l = link ; gt+0.01 >= l->len && LN_NEXT(l) != NULL ; l = LN_NEXT(l) ){
 		gt -= l->len;
 		ctr0->x += l->v.x;
 		ctr0->y += l->v.y;
 	}
 
-	if( gt > l->len )	gt = l->len;
+
+
+	if( gt >= l->len )	gt = l->len;
 
 	*l0 = l;
 	*t0 = gt;
