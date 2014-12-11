@@ -190,6 +190,8 @@ void	pt2d_tanget_line( pt2d_type *pt0, pt2d_type *pt1, vec2f_type *p0, vec2f_typ
 
 void	pt2dA_moment( pt2dA_type *apt, vec2f_type *p, vec2f_type *v, float *e1, float *e2 );
 
+int		pt2dA_eigen2d( pt2dA_type *apt, int i0, int i1,  struct eigen2d_type *e );
+
 pt2dA_type	*	pt2dA_append( pt2dA_type *apt, pt2dA_type *sapt );
 
 void	pt2dA_set_r( pt2dA_type *apt, float r );

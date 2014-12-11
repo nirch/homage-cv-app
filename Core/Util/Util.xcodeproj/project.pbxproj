@@ -174,7 +174,6 @@
 		D02F38EA19482EE200FB25A5 /* Pt2dIo.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D219482EE200FB25A5 /* Pt2dIo.c */; };
 		D02F38EB19482EE200FB25A5 /* Pt2dLine.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D319482EE200FB25A5 /* Pt2dLine.c */; };
 		D02F38EC19482EE200FB25A5 /* Pt2dMask.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D419482EE200FB25A5 /* Pt2dMask.c */; };
-		D02F38ED19482EE200FB25A5 /* Pt2dTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D519482EE200FB25A5 /* Pt2dTool.c */; };
 		D02F38EE19482EE200FB25A5 /* Pt2dTriangleFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */; };
 		D02F38EF19482EE200FB25A5 /* TriangleTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D819482EE200FB25A5 /* TriangleTool.c */; };
 		D0A5691118B79F9D0053D55F /* CrPlnTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FD18B79F9D0053D55F /* CrPlnTool.c */; };
@@ -197,6 +196,7 @@
 		D0A5692218B79F9E0053D55F /* PlnSide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5690E18B79F9D0053D55F /* PlnSide.cpp */; };
 		D0A5692318B79F9E0053D55F /* PlnTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5690F18B79F9D0053D55F /* PlnTool.cpp */; };
 		D0A5692418B79F9E0053D55F /* PlnWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5691018B79F9D0053D55F /* PlnWrite.cpp */; };
+		D0D3C1B01A39B027002DD731 /* Pt2dTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0D3C1AF1A39B027002DD731 /* Pt2dTool.cpp */; };
 		D0DAACF9025B4E598B3CF32E /* BstPut.c in Sources */ = {isa = PBXBuildFile; fileRef = F704461737B1430E8EA80085 /* BstPut.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D0E2731918BD438600E239FD /* ClnTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E2731518BD438600E239FD /* ClnTool.cpp */; };
 		D0E2731A18BD438600E239FD /* ClnWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E2731718BD438600E239FD /* ClnWrite.cpp */; };
@@ -466,7 +466,6 @@
 		D02F38D219482EE200FB25A5 /* Pt2dIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dIo.c; sourceTree = "<group>"; };
 		D02F38D319482EE200FB25A5 /* Pt2dLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dLine.c; sourceTree = "<group>"; };
 		D02F38D419482EE200FB25A5 /* Pt2dMask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dMask.c; sourceTree = "<group>"; };
-		D02F38D519482EE200FB25A5 /* Pt2dTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dTool.c; sourceTree = "<group>"; };
 		D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pt2dTriangleFilter.c; sourceTree = "<group>"; };
 		D02F38D719482EE200FB25A5 /* Pt2dType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pt2dType.h; sourceTree = "<group>"; };
 		D02F38D819482EE200FB25A5 /* TriangleTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TriangleTool.c; sourceTree = "<group>"; };
@@ -491,6 +490,7 @@
 		D0A5690E18B79F9D0053D55F /* PlnSide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnSide.cpp; path = Uln/PlnSide.cpp; sourceTree = "<group>"; };
 		D0A5690F18B79F9D0053D55F /* PlnTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnTool.cpp; path = Uln/PlnTool.cpp; sourceTree = "<group>"; };
 		D0A5691018B79F9D0053D55F /* PlnWrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnWrite.cpp; path = Uln/PlnWrite.cpp; sourceTree = "<group>"; };
+		D0D3C1AF1A39B027002DD731 /* Pt2dTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pt2dTool.cpp; sourceTree = "<group>"; };
 		D0E2731518BD438600E239FD /* ClnTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClnTool.cpp; sourceTree = "<group>"; };
 		D0E2731618BD438600E239FD /* ClnType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClnType.h; sourceTree = "<group>"; };
 		D0E2731718BD438600E239FD /* ClnWrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClnWrite.cpp; sourceTree = "<group>"; };
@@ -737,7 +737,6 @@
 			isa = PBXGroup;
 			children = (
 				C5FC96924AB44C44A556227E /* CMake Rules */,
-				4E695920C08E421C8DE05DC0 /* CMakeLists.txt */,
 			);
 			name = ALL_BUILD;
 			sourceTree = "<group>";
@@ -872,6 +871,7 @@
 		D02F38BF19482EE200FB25A5 /* Ucamera */ = {
 			isa = PBXGroup;
 			children = (
+				D0D3C1AF1A39B027002DD731 /* Pt2dTool.cpp */,
 				D02F38C319482EE200FB25A5 /* Pt2dApproximateAb.c */,
 				D02F38C419482EE200FB25A5 /* Pt2dApproximateLine.c */,
 				D02F38C519482EE200FB25A5 /* Pt2dApproximateLineAxB.c */,
@@ -890,7 +890,6 @@
 				D02F38D219482EE200FB25A5 /* Pt2dIo.c */,
 				D02F38D319482EE200FB25A5 /* Pt2dLine.c */,
 				D02F38D419482EE200FB25A5 /* Pt2dMask.c */,
-				D02F38D519482EE200FB25A5 /* Pt2dTool.c */,
 				D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */,
 				D02F38D719482EE200FB25A5 /* Pt2dType.h */,
 				D02F38D819482EE200FB25A5 /* TriangleTool.c */,
@@ -1122,7 +1121,6 @@
 				D0A568F618B79F0A0053D55F /* Uln */,
 				786B78D6A39E4505A1A0C1DC /* Source Files */,
 				3D1C8F22107148D4BAEC436F /* Header Files */,
-				4E695920C08E421C8DE05DC0 /* CMakeLists.txt */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1239,7 +1237,6 @@
 				C195A90EA84A44EE9C32AB2F /* Huffman.c in Sources */,
 				2AFE5BCEFA104149824F8AAC /* HuffmanGet.c in Sources */,
 				D02C8A34194996C80078EB83 /* LogFile.cpp in Sources */,
-				D02F38ED19482EE200FB25A5 /* Pt2dTool.c in Sources */,
 				F0FF1DD145134BAE90A582F5 /* HuffmanPut.c in Sources */,
 				492AD4ADDFE24648B86CCF5E /* Jet1Tool.c in Sources */,
 				94119587E7B349ECBD8F09E3 /* GpBuildNumber.c in Sources */,
@@ -1317,6 +1314,7 @@
 				B3A71BA5CDBB4120BDC0B700 /* MediaDataRead.c in Sources */,
 				D02F38DD19482EE200FB25A5 /* Pt2dApproximateLine.c in Sources */,
 				F6A06A3CFB2F43508CE2AAA4 /* MediaDataTool.c in Sources */,
+				D0D3C1B01A39B027002DD731 /* Pt2dTool.cpp in Sources */,
 				0EFF07FC8DEE4BFE890643D4 /* MediaFile.c in Sources */,
 				D02C8A501949A6860078EB83 /* PlnApproximate.cpp in Sources */,
 				E6501745ADE6452A94577E7C /* MediaFormat.c in Sources */,
