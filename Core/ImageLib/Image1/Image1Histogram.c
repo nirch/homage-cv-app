@@ -407,3 +407,27 @@ int	i,	j;
 
 	return( im );
 }
+
+
+
+
+float
+image1_dark( image_type *sim, int T0 )
+{
+	int	H[256];
+	int	pixles,	sum;
+
+	int	i;
+
+	image1_histogram( sim, NULL, H, 1 );
+
+	pixles = sim->width*sim->height;
+
+
+	for( i = 0, sum = 0 ; i < T0 ; i++ )
+		sum += H[i];
+	
+
+	return( sum / (float)(pixles) );
+
+}

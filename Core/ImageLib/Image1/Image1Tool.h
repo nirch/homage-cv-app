@@ -46,6 +46,7 @@ image_type *	image1_axb( image_type *sim, float a, float b, image_type *im );
 
 image_type *	image1S_axb( image_type *sim, float a, float b, image_type *im );
 
+image_type *	image1S_abs_128( image_type *sim, image_type *im );
 
 
 // tp = a* (sp -b) + b;

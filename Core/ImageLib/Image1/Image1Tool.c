@@ -329,6 +329,33 @@ image1S_axb( image_type *sim, float a, float b, image_type *im )
 }
 
 
+image_type *
+image1S_abs_128( image_type *sim, image_type *im )
+{
+	char	*sp;
+	u_char	*tp;
+	int	i,	j,	tmp;
+
+
+	im = image_reallocL( sim, im );
+
+
+	sp = (char *)sim->data;
+	tp = im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++, sp++, tp++ ){
+			tmp = ABS(*sp);
+
+			
+
+			*tp = PUSH_TO_RANGE( tmp, 0, 255 );
+		}
+	}
+
+	return( im );
+}
+
+
 
 image_type *
 image1_contrast( image_type *sim, float a, float b, image_type *im )

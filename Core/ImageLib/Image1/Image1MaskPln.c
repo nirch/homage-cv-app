@@ -112,8 +112,12 @@ image1_mask_cln( cln_type *cln, int width, int height, int fNormal, image_type *
 
 	image1_mask_pln_fill( im );
 
+	IMAGE_DUMP( im, "im", 1, "fill" );
+
 	if( fNormal )
 		image1_mask_normal( im );
+
+	IMAGE_DUMP( im, "im", 2, "fill" );
 
 	return( im );
 }
