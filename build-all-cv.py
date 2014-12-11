@@ -4,10 +4,11 @@ import sys
 CMD = 'xcodebuild -workspace %(work_space)s -scheme %(scheme)s -sdk %(sdk)s'
 WORK_SPACE = 'HomageCV.xcworkspace'
 SDKS = [
-	'iphonesimulator8.0',
-	'iphoneos8.0'
+	'iphonesimulator8.1',
+	'iphoneos8.1'
 ]
 SCHEMES = [
+	'PlnTracker',
 	'Util',
 	'Gpw',
 	'MattingLib',
