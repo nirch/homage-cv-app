@@ -237,6 +237,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					.,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -282,6 +283,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					.,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -327,6 +329,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					.,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -384,6 +387,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					.,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
