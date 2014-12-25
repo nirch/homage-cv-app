@@ -124,6 +124,9 @@ UIImage* CVtool::CreateUIImage(image_type *imageData)
 
 
 
+
+
+
 image_type * CVtool::DecomposeUIimage( UIImage* image )
 {
     
@@ -153,6 +156,65 @@ image_type * CVtool::DecomposeUIimage( UIImage* image )
 }
 
 
+
+UIImage* CVtool::CreateUIImage( CVPixelBufferRef pixelBuffer )
+{
+    
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    
+
+    
+    
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0 );
+    unsigned char *pixels = (u_char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    
+    
+    
+    int size = (int)(width * height * 4);
+    
+ //   size_t width                    = width;
+ //   size_t height                   = height;
+    size_t bitsPerComponent         = 8;
+    size_t bitsPerPixel             = 32;
+    size_t bytesPerRow              = width * 4;
+    
+    CGColorSpaceRef colorspace      = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo         = kCGBitmapByteOrderDefault;
+    
+    NSData* newPixelData = [NSData dataWithBytes:pixels length:size];
+    CFDataRef imgData = (CFDataRef)newPixelData;
+    CGDataProviderRef imgDataProvider = CGDataProviderCreateWithCFData(imgData);
+    
+    CGImageRef newImageRef = CGImageCreate (
+                                            width,
+                                            height,
+                                            bitsPerComponent,
+                                            bitsPerPixel,
+                                            bytesPerRow,
+                                            colorspace,
+                                            bitmapInfo,
+                                            imgDataProvider,
+                                            NULL,
+                                            NO,
+                                            kCGRenderingIntentDefault
+                                            );
+    
+    UIImage *newImage   = [[UIImage alloc] initWithCGImage:newImageRef];//[UIImage imageWithCGImage:newImageRef];
+    
+    CGColorSpaceRelease(colorspace);
+    CGDataProviderRelease(imgDataProvider);
+    CGImageRelease(newImageRef);
+    
+    
+    CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
+
+    
+    return [newImage autorelease];
+}
+
+
 CFrameLabelMac * CVtool::CreateFrameLabel( UIView *view, NSBundle *bundle, NSString *name,
                                     int fx, int fy )
 {
@@ -179,6 +241,9 @@ CImageLabelIos * CVtool::CreateImageLabel( UIView *view, NSBundle *bundle, NSStr
     
     
     NSString *path = [bundle  pathForResource:name ofType:@"png"];
+    
+    if( path == nil )
+        return( nil );
     
     
     fl->Init(  (char*)path.UTF8String, fx, fx);
@@ -218,10 +283,10 @@ CVtool::CVPixelBufferRef_from_image( image_type *im )
     int k;
 	for( i = 0, k = 0 ; i < im->height ; i++ ){
 		for( j = 0 ; j < im->width ; j++, sp += 3, k+= 4 ){
-			buffer[k] = sp[0];   // R
+			buffer[k  ] = sp[0];   // R
 			buffer[k+1] = sp[1]; // G
 			buffer[k+2] = sp[2]; // B
-			buffer[k+3] = 255;     // A
+            buffer[k+3] = 255;//0;     // A
             
             
 		}
@@ -233,6 +298,28 @@ CVtool::CVPixelBufferRef_from_image( image_type *im )
 	return( pixelBuffer );
 }
 
+image_type *
+CVtool::CVPixelBufferRef_to_image4( CVPixelBufferRef pixelBuffer, image_type *im )
+{
+    
+    //	size_t bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer);
+	size_t width = CVPixelBufferGetWidth(pixelBuffer);
+	size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    
+	im = image_realloc( im, width, height, 4, IMAGE_TYPE_U8, 1 );
+	
+    
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0 );
+	unsigned char *buffer = (u_char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    
+    memcpy(im->data, buffer, width*height*4 );
+    
+	
+    CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
+    
+	return( im );
+}
 
 
 image_type *
@@ -298,4 +385,27 @@ CVtool::CVPixelBufferRef_to_image_crop( CVPixelBufferRef pixelBuffer,
     
 	return( im );
 }
+
+
+
+void
+CVtool::CVPixelBufferRef_rotate180( CVPixelBufferRef pixelBuffer )
+{
+    int i, j, k;
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0 );
+    u_int *sp = (u_int *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    u_int *tp = sp + height*width - 1;
+    for( i = 0, k = 0 ; i < height/2 ; i++ ){
+        for( j = 0 ; j < width ; j++, tp--, sp++ ){
+            int tmp = *sp;
+            *sp = *tp;
+            *tp = tmp;
+        }
+    }
+    CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
+}
+
 
