@@ -12,6 +12,15 @@
 		D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */; };
 		D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */; };
 		D02F38BE19482B0000FB25A5 /* PlnAdjustThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */; };
+		D0C9C0D81A67BE4B008F9D1D /* bImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0CC1A67BE4B008F9D1D /* bImage.cpp */; };
+		D0C9C0DA1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0CF1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp */; };
+		D0C9C0DB1A67BE4B008F9D1D /* UnBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D01A67BE4B008F9D1D /* UnBackground.cpp */; };
+		D0C9C0DC1A67BE4B008F9D1D /* UnBackgroundDrakness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D21A67BE4B008F9D1D /* UnBackgroundDrakness.cpp */; };
+		D0C9C0DD1A67BE4B008F9D1D /* UnBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D31A67BE4B008F9D1D /* UnBlob.cpp */; };
+		D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D41A67BE4B008F9D1D /* UnBlobB.cpp */; };
+		D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D51A67BE4B008F9D1D /* UnBlobC.cpp */; };
+		D0C9C0E01A67BE4B008F9D1D /* UnPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D61A67BE4B008F9D1D /* UnPrm.cpp */; };
+		D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D71A67BE4B008F9D1D /* UnState.cpp */; };
 		D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58118D0BC99004435E2 /* UbBackground.cpp */; };
 		D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58218D0BC99004435E2 /* UbBlob.cpp */; };
 		D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */; };
@@ -35,6 +44,17 @@
 		D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustIn.cpp; sourceTree = "<group>"; };
 		D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustStart.cpp; sourceTree = "<group>"; };
 		D02F38BB19482B0000FB25A5 /* PlnAdjustThin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustThin.cpp; sourceTree = "<group>"; };
+		D0C9C0CC1A67BE4B008F9D1D /* bImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bImage.cpp; sourceTree = "<group>"; };
+		D0C9C0CD1A67BE4B008F9D1D /* bImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bImage.h; sourceTree = "<group>"; };
+		D0C9C0CF1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSilhouetteDeviation.cpp; sourceTree = "<group>"; };
+		D0C9C0D01A67BE4B008F9D1D /* UnBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBackground.cpp; sourceTree = "<group>"; };
+		D0C9C0D11A67BE4B008F9D1D /* UnBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnBackground.h; sourceTree = "<group>"; };
+		D0C9C0D21A67BE4B008F9D1D /* UnBackgroundDrakness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBackgroundDrakness.cpp; sourceTree = "<group>"; };
+		D0C9C0D31A67BE4B008F9D1D /* UnBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBlob.cpp; sourceTree = "<group>"; };
+		D0C9C0D41A67BE4B008F9D1D /* UnBlobB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBlobB.cpp; sourceTree = "<group>"; };
+		D0C9C0D51A67BE4B008F9D1D /* UnBlobC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBlobC.cpp; sourceTree = "<group>"; };
+		D0C9C0D61A67BE4B008F9D1D /* UnPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnPrm.cpp; sourceTree = "<group>"; };
+		D0C9C0D71A67BE4B008F9D1D /* UnState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnState.cpp; sourceTree = "<group>"; };
 		D0E0A58118D0BC99004435E2 /* UbBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBackground.cpp; path = UniformBackground/UbBackground.cpp; sourceTree = "<group>"; };
 		D0E0A58218D0BC99004435E2 /* UbBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob.cpp; path = UniformBackground/UbBlob.cpp; sourceTree = "<group>"; };
 		D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbBlob1.cpp; path = UniformBackground/UbBlob1.cpp; sourceTree = "<group>"; };
@@ -103,6 +123,24 @@
 			path = PlnAdjust;
 			sourceTree = "<group>";
 		};
+		D0C9C0CB1A67BE4B008F9D1D /* UnBackground */ = {
+			isa = PBXGroup;
+			children = (
+				D0C9C0CC1A67BE4B008F9D1D /* bImage.cpp */,
+				D0C9C0CD1A67BE4B008F9D1D /* bImage.h */,
+				D0C9C0CF1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp */,
+				D0C9C0D01A67BE4B008F9D1D /* UnBackground.cpp */,
+				D0C9C0D11A67BE4B008F9D1D /* UnBackground.h */,
+				D0C9C0D21A67BE4B008F9D1D /* UnBackgroundDrakness.cpp */,
+				D0C9C0D31A67BE4B008F9D1D /* UnBlob.cpp */,
+				D0C9C0D41A67BE4B008F9D1D /* UnBlobB.cpp */,
+				D0C9C0D51A67BE4B008F9D1D /* UnBlobC.cpp */,
+				D0C9C0D61A67BE4B008F9D1D /* UnPrm.cpp */,
+				D0C9C0D71A67BE4B008F9D1D /* UnState.cpp */,
+			);
+			path = UnBackground;
+			sourceTree = "<group>";
+		};
 		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +162,7 @@
 		F6160FA366C749B1BC40ABE7 /* MattingLib */ = {
 			isa = PBXGroup;
 			children = (
+				D0C9C0CB1A67BE4B008F9D1D /* UnBackground */,
 				D02F38B719482B0000FB25A5 /* PlnAdjust */,
 				D0E0A58018D0BC65004435E2 /* UniformBackground */,
 				93D3460ADEB24C8EB830AA82 /* Source Files */,
@@ -202,7 +241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */,
+				D0C9C0D81A67BE4B008F9D1D /* bImage.cpp in Sources */,
 				D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */,
+				D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */,
+				D0C9C0E01A67BE4B008F9D1D /* UnPrm.cpp in Sources */,
+				D0C9C0DB1A67BE4B008F9D1D /* UnBackground.cpp in Sources */,
+				D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */,
 				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
 				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
 				D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */,
@@ -215,8 +260,11 @@
 				D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */,
 				D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */,
 				D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */,
+				D0C9C0DA1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp in Sources */,
 				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
 				D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */,
+				D0C9C0DD1A67BE4B008F9D1D /* UnBlob.cpp in Sources */,
+				D0C9C0DC1A67BE4B008F9D1D /* UnBackgroundDrakness.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
