@@ -44,6 +44,8 @@ public:
     
     static UIImage* CreateUIImage( image_type *im );
     
+    UIImage* CreateUIImage( CVPixelBufferRef pixelBuffer );
+    
     static image_type * DecomposeUIimage( UIImage* image );
     
     static CFrameLabelMac* CreateFrameLabel( UIView *view, NSBundle *bundle,
@@ -62,12 +64,17 @@ public:
     
     
     static CVPixelBufferRef CVPixelBufferRef_from_image( image_type *im );
+    static image_type * CVPixelBufferRef_to_image4( CVPixelBufferRef pixelBuffer, image_type *im );
+    
     static image_type *CVPixelBufferRef_to_image( CVPixelBufferRef pixelBuffer, image_type *im );
     
     static image_type * CVPixelBufferRef_to_image_sample2( CVPixelBufferRef pixelBuffer, image_type *im );
     
     static image_type * CVPixelBufferRef_to_image_crop( CVPixelBufferRef pixelBuffer,
                                                 int x0, int y0, int width, int height, image_type *im );
+    
+    
+    static void CVPixelBufferRef_rotate180( CVPixelBufferRef pixelBuffer );
     
 
 protected:
