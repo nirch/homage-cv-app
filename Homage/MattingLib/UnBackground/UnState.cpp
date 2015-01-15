@@ -40,7 +40,6 @@ int	r0[3],	r1[3],	i;
 	}
 
 
-	TestSilhouetteDeviation();
 
 	int	i0 = 0;
 	for( i = i0+1 ; i < m_nM ; i++  )
@@ -54,9 +53,11 @@ int	r0[3],	r1[3],	i;
 
 	if(  m_sWeight[i0] < 30 ){
 		m_state = -11;
-		return( -1 );
+		return( m_state );
 	}
 
+
+#ifdef _AA_
 	if( r0[1] < m_as0.nA - 10 || r0[1] < m_as1.nA - 10 ){
 		m_state = -1;
 		return( m_state );
@@ -67,6 +68,7 @@ int	r0[3],	r1[3],	i;
 		m_state = -1;
 		return( m_state );
 	}
+#endif
 
 
 	int dval = val0 - val1;
@@ -74,10 +76,18 @@ int	r0[3],	r1[3],	i;
 	int	dl = y0 - val0;
 	if(  ABS(dval) > 40 && ( ABS(dr) > 12  || ABS(dl) > 12 ) ){
 		fprintf( stdout, "shdow: %d(%d) %d(%d)\n", val0, y0, val1, y1 );
-		m_state = ( val0 < val1 )? -2 : -3;
+		m_state = -4;//( val0 < val1 )? -2 : -3;
 		return( m_state );
 	}
 	else fprintf( stdout, "shdow: %d(%d) %d(%d)\n", val0, y0, val1, y1 );
+
+
+
+	if( TestSilhouetteDeviation() != 0 ){
+		m_state = -5;
+		return( m_state );;
+	}
+
 
 
 	m_state = 1;

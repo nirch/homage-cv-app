@@ -104,7 +104,7 @@ int	id1,	id,	NBW;
 //	im  = image_recreate( im, sim->height, sim->width, 4, 1 );
 	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
 
-	NBW = sim->row*sim->column/9;
+	NBW = sim->row*sim->column/8;
 	bw = *tbw;
 	if( bw == NULL )
 		bw = (bwLabel_type *)malloc( NBW * sizeof(bwLabel_type) ); //sim->row*sim->column*sizeof(bwLabel_type)/16 );

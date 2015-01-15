@@ -147,6 +147,8 @@ int	CUnBackground::ProcessBlobSide( imageLabel_type *abw, int iB, int i0, int j0
 
 
 	int k = sbA_in( &ac, j00 );
+    if( k < 0 )
+        return( -1 );
 
 	as->a[i0] = ac.a[k];
 
