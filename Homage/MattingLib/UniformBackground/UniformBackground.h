@@ -1,6 +1,6 @@
 
-#ifndef _COLOR_BACKGROUND_H_
-#define _COLOR_BACKGROUND_H_
+#ifndef _UNIFORMA_BACKGROUND_H_
+#define _UNIFORMA_BACKGROUND_H_
 
 
 #include "Uvec/Vec3d.h"
@@ -41,13 +41,6 @@ typedef struct ubPrm_type {
 } ubPrm_type;
 
 
-typedef	struct bImage_type {
-	int n;
-	int	r;
-	int g;
-	int b;
-} bImage_type;	
-
 
 
 typedef	struct mFrame_type {
@@ -74,6 +67,9 @@ public:
 	void	SetFlip( int flip )	{ m_flip = flip; }
 
 	int	Init( char *xmlFile, char *ctrFile, int width, int height );
+
+	int	InitHeadTracker( int iHead );
+
 
 	int	ReadMask( char *inFile, int width, int height );
 
@@ -145,7 +141,11 @@ protected:
 	int ReadPrmDarkTag( ubDarkPrm_type *d, struct xmlTag_type *pTag );
 
 
+	class CUnBackground *m_unBackground;
+
 	class CPlnHeadTracker *m_headTracking;
+
+	int	m_iHead;
 
 	ubPrm_type *m_prm;
 
@@ -197,9 +197,10 @@ protected:
 
 	plnA_type *m_aplEdge;
 
-	class CRidgeDetector *m_dr;
 
 public:
+	class CRidgeDetector *m_dr;
+
 	image_type *m_cim;
 	image_type *m_dim;
 

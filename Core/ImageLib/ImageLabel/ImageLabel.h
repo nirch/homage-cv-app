@@ -33,7 +33,7 @@ int		bwLabel_no( bwLabel_type *bw, int nBw, int T );
 
 void	bwLabel_order( bwLabel_type *abw, int nBw, int NI, int aI[], int *nI );
 
-void	bwLabelA_order( imageLabel_type *abw, int color, int NI, int aI[], int *nI );
+void	bwLabelA_order( imageLabel_type *abw, int color, int nT, int NI, int aI[], int *nI );
 
 
 	// ImageLabelUI.c
@@ -45,6 +45,20 @@ image_type *	image1_label( image_type *sim, bwLabel_type **tbw, int *tnBw, image
 
 void	imageLabelUI_filter( image_type *sim, image_type *lim, bwLabel_type *aBw, int nBw, int nT );
 
+image_type *	imageLabelUI_color_image( imageLabel_type *abw, int color, image_type *im );
+
+image_type *	imageLabelUI_color_imageAXB( imageLabel_type *abw, float a, float b, image_type *im );
+
+image_type *	imageLabelUI_color_imageT( imageLabel_type *abw, u_char T[], image_type *im );
+
+
+
+image_type *	imageLabelUI_imageID( imageLabel_type *abw, image_type *im );
+
+void	imageLabelUI_value( imageLabel_type *abw, image_type *sim );
+
+void	imageLabelUI_svalue( imageLabel_type *abw, image_type *sim );
+
 
 void	imageLabelUI_set_id( imageLabel_type *abw );
 
@@ -54,6 +68,12 @@ void	imageLabelUI_set_box( imageLabel_type *abw );
 
 
 int		imageLabelUI_eigen2d( image_type *im, int id, box2i_type *b, struct eigen2d_type *e );
+
+
+void	imageLabelUI_merge( imageLabel_type *abw, int i0, int i1 );
+int		imageLabelUI_nieg( imageLabel_type *abw, int i0, int g[], int *nG );
+
+int		imageLabelUI_nieg1( imageLabel_type *abw, int i0 );
 
 
 
@@ -80,6 +100,7 @@ int	imageLabelUS_unoinCorner( imageLabel_type *abw );
 
 void	imageLabel_merge( imageLabel_type *abw, int id, int id1 );
 
+image_type *	imageLabelUS_color_image( imageLabel_type *abw, int color, image_type *im );
 
 
 

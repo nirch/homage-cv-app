@@ -89,7 +89,7 @@ int	id,	id1;
 
 	bw = *tbw;
 	if( bw == NULL )
-		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type) );
+		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type)/100 );
 	nBw = 0;
 
 
@@ -515,9 +515,6 @@ imageLabelUS_set_box( imageLabel_type *abw )
 
 			bw = &abw->a[val];
 
-
-
-
 			if( bw->no <= 0 ){
 				bw->b.x0 = j0;
 				bw->b.x1 = j-1;
@@ -534,6 +531,23 @@ imageLabelUS_set_box( imageLabel_type *abw )
 			val = *sp;
 			n = 1;
 			j0 = j;
+		}
+
+		if( n > 0 ){
+			bw = &abw->a[val];
+
+			if( bw->no <= 0 ){
+				bw->b.x0 = j0;
+				bw->b.x1 = j-1;
+				bw->b.y0 = bw->b.y1 = i;
+			}
+			else	{
+				bw->b.y1 = i;
+				if( j0 < bw->b.x0 )	bw->b.x0 = j0;
+				if( j-1 > bw->b.x1 )	bw->b.x1 = j-1;
+			}
+
+			bw->no += n;
 		}
 	}
 }
@@ -575,6 +589,14 @@ imageLabelUS_set_mass( imageLabel_type *abw )
 			val = *sp;
 			n = 1;
 			sj = j;
+		}
+
+		if( n > 0 ){
+			bw = &abw->a[val];
+
+			bw->no += n;
+			bw->p.x += sj;
+			bw->p.y += n * i;
 		}
 	}
 
@@ -786,6 +808,9 @@ imageLabelUS_eigen2d( imageLabel_type *abw, int id,  eigen2d_type *e )
 		}
 	}
 
+	if( n == 0 )
+		return( -1 );
+
 	sx /= n;
 	sy /= n;
 
@@ -885,9 +910,9 @@ imageLabelUS_image( imageLabel_type *abw, image_type *im )
 
 	tp = im->data;
 
-	for( i = 0 ; i < abw->im->height ; i++ ){
+	for( i = 0 ; i < im->height ; i++ ){
 		bp = (short *)IMAGE_PIXEL( abw->im, i + abw->margin, abw->margin );
-		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+		for( j = 0 ; j < im->width ; j++, bp++, tp++ ){
 			*tp = a[*bp];
 
 		}
@@ -1095,9 +1120,41 @@ int
 		}
 	}
 
+
+
+
+	for( i = 1 ; i < im->height-1 ; i++ ){
+		tp = (short*)IMAGE_PIXEL( im, i, 1 );
+		short *tp1 = tp + im->width;
+		short *tp0 = tp - im->width;
+		for( j = 1 ; j < im->width-1 ; j++,  tp++, tp1++, tp0++ ){
+			if( *tp != 0 )	continue;
+
+			if( *(tp-1) > 0 && *(tp+1) > 0 ){
+				int id0 = abw->a[*(tp-1)].id;
+				int id1 = abw->a[*(tp+1)].id;
+
+				if( id0 != id1 && abw->a[id0].no > size && abw->a[id1].no > size ){
+					imageLabel_merge( abw, id0, id1 );
+					continue;
+				}
+			}
+
+			if( *(tp0) > 0 && *tp1 > 0 ){
+				int id0 = abw->a[*tp0].id;
+				int id1 = abw->a[*tp1].id;
+				if( id0 != id1 && abw->a[id0].no > size && abw->a[id1].no > size ){
+					imageLabel_merge( abw, id0, id1 );
+					continue;
+				}
+			}
+		}
+	}
+
 	image_destroy( im, 1 );
 
 	imageLabelUS_set_id( abw );
+	imageLabelUS_set_box( abw );
 
 	return( no );
 
@@ -1151,4 +1208,31 @@ imageLabelUS_unoinCorner( imageLabel_type *abw )
 	return( 1 );
 
 
+}
+
+
+
+image_type *
+	imageLabelUS_color_image( imageLabel_type *abw, int color, image_type *im )
+{
+	int	i,	j;
+
+
+
+	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	u_char *tp = im->data;
+	short *bp = abw->im->data_s;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			bwLabel_type *bw = &abw->a[*bp];
+
+			if( bw->color == color )
+				*tp = 255;
+			else *tp = 0;
+		}
+	}
+
+	return( im );
 }

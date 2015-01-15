@@ -442,6 +442,23 @@ imageLabelUI_set_box( imageLabel_type *abw )
 			n = 1;
 			j0 = j;
 		}
+
+		if( n > 0 ){
+			bw = &abw->a[val];
+
+			if( bw->no <= 0 ){
+				bw->b.x0 = j0;
+				bw->b.x1 = j-1;
+				bw->b.y0 = bw->b.y1 = i;
+			}
+			else	{
+				bw->b.y1 = i;
+				if( j0 < bw->b.x0 )	bw->b.x0 = j0;
+				if( j-1 > bw->b.x1 )	bw->b.x1 = j-1;
+			}
+
+			bw->no += n;
+		}
 	}
 }
 
@@ -530,3 +547,314 @@ u_char	*sp;
 
 
 
+image_type *
+imageLabelUI_color_image( imageLabel_type *abw, int color, image_type *im )
+{
+	int	i,	j;
+
+
+
+	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	u_char *tp = im->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			bwLabel_type *bw = &abw->a[*bp];
+
+			if( bw->color == color )
+				*tp = 255;
+			else *tp = 0;
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageLabelUI_color_imageAXB( imageLabel_type *abw, float a, float b, image_type *im )
+{
+	int	i,	j;
+
+
+
+	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	u_char *tp = im->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			bwLabel_type *bw = &abw->a[*bp];
+
+			int tmp = a*bw->color + b;
+			*tp = PUSH_TO_RANGE( tmp, 0, 255 );
+
+			//if( bw->color == color )
+			//	*tp = 255;
+			//else *tp = 0;
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageLabelUI_color_imageT( imageLabel_type *abw, u_char T[], image_type *im )
+{
+	int	i,	j;
+
+
+
+	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	u_char *tp = im->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			bwLabel_type *bw = &abw->a[*bp];
+
+		
+			*tp = T[bw->color];
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+imageLabelUI_imageID( imageLabel_type *abw, image_type *im )
+{
+	int	i,	j;
+
+
+
+
+	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	u_char *tp = im->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, tp++ ){
+			bwLabel_type *bw = &abw->a[*bp];
+			*tp = bw->id;
+		}
+	}
+
+	return( im );
+}
+
+
+
+void
+	imageLabelUI_value( imageLabel_type *abw, image_type *sim )
+{
+	int	i,	j;
+
+
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		abw->a[i].no = 0;
+		abw->a[i].av = 0;
+		abw->a[i].var = 0;
+	}
+
+
+
+	u_char *sp = sim->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
+			bw = &abw->a[*bp];
+			bw->no++;
+			bw->av += *sp;
+			bw->var += *sp * *sp;
+		}
+	}
+
+
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		bwLabel_type *bw = &abw->a[i];
+
+		if( bw->no == 0  )	continue;
+
+		bw->av /= bw->no;
+		bw->var = bw->var / bw->no - bw->av*bw->av;
+	}
+}
+
+
+
+void
+	imageLabelUI_svalue( imageLabel_type *abw, image_type *sim )
+{
+	int	i,	j;
+
+
+
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		abw->a[i].no = 0;
+		abw->a[i].av = 0;
+		abw->a[i].var = 0;
+	}
+
+
+
+	s_char *sp = (s_char *)sim->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
+			bw = &abw->a[*bp];
+			bw->no++;
+			bw->av += *sp;
+			bw->var += *sp * *sp;
+		}
+	}
+
+
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		bwLabel_type *bw = &abw->a[i];
+
+		if( bw->no == 0  )	continue;
+
+		bw->av /= bw->no;
+		bw->var = bw->var / bw->no - bw->av*bw->av;
+	}
+}
+
+
+
+void
+imageLabelUI_merge( imageLabel_type *abw, int i0, int i1 )
+{
+	int	i,	j;
+	u_int	*tp;
+
+
+
+	image_type *im = abw->im;
+	bwLabel_type *bw = &abw->a[i0];
+	bwLabel_type *nbw = &abw->a[i1];
+
+	for( i = bw->b.y0 ; i <= bw->b.y1 ; i++ ){
+		tp = (u_int *)IMAGE_PIXEL( im, i, bw->b.x0 );
+
+		for( j = bw->b.x0 ; j <= bw->b.x1 ; j++, tp++){
+
+			if( *tp != bw->id )	continue;
+
+			*tp = nbw->id;
+		}
+	}
+
+	nbw->no += bw->no;
+
+	BOX2D_UPDATE_BOX( nbw->b, bw->b );
+
+	bw->id = -1;
+}
+
+
+int
+imageLabelUI_nieg( imageLabel_type *abw, int i0, int g[], int *nG )
+{
+	int	i,	j,	k,	id;
+	u_int	*tp;
+
+
+
+	bwLabel_type *bw = &abw->a[i0];
+	image_type *im = abw->im;
+
+	*nG = 0;
+	for( i = bw->b.y0 ; i <= bw->b.y1 ; i++ ){
+		tp = (u_int *)IMAGE_PIXEL( im, i, bw->b.x0 );
+
+		for( j = bw->b.x0 ; j <= bw->b.x1 ; j++, tp++ ){
+
+			if( *tp != bw->id )	continue;
+
+			if( i > 0 && (id = *(tp- im->width)) != *tp ){
+				for( k = 0 ; k < *nG ; k++ ){
+					if( g[k] == id )	break;
+				}
+				if( k == *nG )	g[(*nG)++] = id;
+			}
+
+			if( i < im->height-1 && (id = *(tp+im->width)) != *tp ){
+				for( k = 0 ; k < *nG ; k++ ){
+					if( g[k] == id )	break;
+				}
+				if( k == *nG )	g[(*nG)++] = id;
+			}
+
+			if( j > 0 && (id = *(tp-1)) != *tp ){
+				for( k = 0 ; k < *nG ; k++ ){
+					if( g[k] == id )	break;
+				}
+				if( k == *nG )	g[(*nG)++] = id;
+			}
+
+			if( j < im->width-1 && (id = *(tp+1)) != *tp ){
+				for( k = 0 ; k < *nG ; k++ ){
+					if( g[k] == id )	break;
+				}
+				if( k == *nG )	g[(*nG)++] = id;
+			}
+		}
+	}
+
+	return( *nG );
+}
+
+
+
+int 
+imageLabelUI_nieg1( imageLabel_type *abw, int i0 )
+{
+	int	i,	j,	id;
+	u_int	*tp;
+
+
+
+	bwLabel_type *bw = &abw->a[i0];
+	image_type *im = abw->im;
+
+
+	for( i = bw->b.y0 ; i <= bw->b.y1 ; i++ ){
+		tp = (u_int *)IMAGE_PIXEL( im, i, bw->b.x0 );
+		for( j = bw->b.x0 ; j <= bw->b.x1 ; j++, tp++ ){
+
+			if( *tp != bw->id )	continue;
+
+			if( i > 0 && (id = *(tp- im->width)) != *tp ){
+				return( id );
+			}
+
+			if( i < im->height-1 && (id = *(tp+im->width)) != *tp ){
+				return( id );
+			}
+
+			if( j > 0 && (id = *(tp-1)) != *tp ){
+				return( id );
+			}
+
+			if( j < im->width-1 && (id = *(tp+1)) != *tp ){
+				return( id );
+			}
+		}
+	}
+
+	return( -1 );
+}

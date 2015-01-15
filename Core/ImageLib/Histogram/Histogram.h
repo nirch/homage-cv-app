@@ -23,7 +23,24 @@ void	histogram_write( int h[], int nH, char *file );
 int		histogram_order( int H[], int nH, int a[] );
 
 
+
+
 	// HistogramClustrringIsodata.c
+
+typedef struct isdata1_type {
+	int	i0,	i1;
+
+	int	n;
+
+	float	mean;
+	float	var;	
+
+	float	d;
+}isdata1_type;
+
+
+void	histogram_clustring_isodataA( int H[], int nH, int K, int nT, float vT, float mT, int Itration, isdata1_type c[], int *nM );
+
 void	histogram_clustring_isodata( int H[], int nH, int K, int nT, float vT, float mT, int Itration, float am[], int *nM );
 
 

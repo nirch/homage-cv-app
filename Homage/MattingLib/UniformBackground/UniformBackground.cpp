@@ -17,9 +17,11 @@
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 #include "UniformBackground.h"
 
+#include "../UnBackground/bImage.h"
+
 #include "ImageMorphology/ImageMorphology.h"
 
-
+#include "../UnBackground/UnBackground.h"
 
 
 //#define EXCEPTION
@@ -43,6 +45,7 @@ static void	image1_close1( image_type *sim );
 
 CUniformBackground::CUniformBackground()
 {
+	m_unBackground = NULL;
 	m_headTracking = NULL;
 
 	m_nM = 0;
@@ -136,6 +139,12 @@ void CUniformBackground::DeleteContents()
 		delete m_headTracking;
 		m_headTracking = NULL;
 	}
+
+	if( m_unBackground != NULL ){
+		delete m_unBackground;
+		m_unBackground = NULL;
+
+	}
 }
 
 
@@ -150,6 +159,11 @@ int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int heigh
 	m_mp.x = width/2;
 	m_mp.y = height/2;
 
+
+	m_unBackground = new CUnBackground();
+
+	if( m_unBackground->Init( xmlFile, ctrFile, width, height) < 0 )
+		return( -1 );
 
 
 	if( xmlFile != NULL && strcmp( xmlFile, "none")  != 0 ){
@@ -175,6 +189,20 @@ int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int heigh
 }
 
 
+int	CUniformBackground::InitHeadTracker( int iHead )
+{
+	cln_type *cln = clnA_detach( m_ac, iHead );
+	if ( cln != NULL ){
+
+
+		if( m_headTracking == NULL )
+			m_headTracking = new CPlnHeadTracker();
+		m_headTracking->Init( cln );
+	}
+
+	return( 1 );
+}
+
 
 void CUniformBackground::SetContour( int contour )
 {
@@ -186,6 +214,8 @@ void CUniformBackground::SetContour( int contour )
 
 	m_contour = contour;
 }
+
+
 
 
 int	CUniformBackground::ReadMask( char *inFile, int width, int height )
@@ -234,8 +264,9 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 
 
 	if( m_bim == NULL ){
-//		ProcessInitBackground( m_sim, m_mim[0] );
 		ProcessInitBackground( m_sim );
+
+		InitHeadTracker( m_iHead );
 	}
 
 
@@ -360,16 +391,15 @@ void CUniformBackground::Trace( FILE *fp )
 	gpTime_print( fp, "Update", &m_tUpdate );
 	gpTime_print( fp, "Contour", &m_tCln );
 
-	gpTime_print( fp, "UniformBackground", &m_gTime );
+	gpTime_print( fp, "Total", &m_gTime );
 
 
 
-	gpTime_print( fp, "Compare-BlobR", &m_tBlobR );
-	gpTime_print( fp, "Compare-BlobF", &m_tBlobF );
-	gpTime_print( fp, "Compare-BlobEdge", &m_tBlobEdge );
-	gpTime_print( fp, "Compare-Open", &m_tOpen );
-
-	gpTime_print( fp, "Compare-Blob", &m_tBlob );
+	//gpTime_print( fp, "Compare-BlobR", &m_tBlobR );
+	//gpTime_print( fp, "Compare-BlobF", &m_tBlobF );
+	//gpTime_print( fp, "Compare-BlobEdge", &m_tBlobEdge );
+	//gpTime_print( fp, "Compare-Open", &m_tOpen );
+	//gpTime_print( fp, "Compare-Blob", &m_tBlob );
 }
 
 

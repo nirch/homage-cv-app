@@ -17,7 +17,7 @@
 #include "UniformBackground.h"
 #include "ImageLabel/ImageLabel.h"
 
-#include "PlnAdjust/PlnAdjust.h"
+#include "../PlnAdjust/PlnAdjust.h"
 
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 
@@ -123,7 +123,8 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	PLNA_DUMPF( apl, "contor", m_iFrame, NULL, m_dFrame == m_iFrame );
 
 
-	plnA_type *bapl1 = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
+//	plnA_type *bapl1 = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
+	plnA_type *bapl = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
 
 	if( m_headTracking != NULL ){
 		pln_type	*spl;
@@ -132,7 +133,12 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	}
 
 
-	if( plnA_adjust_thin( apl, m_iFrame ) > 0 )
+	float gt[2];
+	gt[0] = gt[1] = -1;
+	if( m_headTracking != NULL )
+		m_headTracking->HeadRange( apl, &gt[0], &gt[1] );
+
+	if( plnA_adjust_thin( apl, bapl, gt, m_iFrame ) > 0 )
 		plnA_adjust_start( apl,  m_sim->height );
 	PLNA_DUMPF( apl, "contor", m_iFrame, "thin", m_dFrame == m_iFrame );
 
@@ -162,7 +168,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 
 
-	plnA_type *bapl = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
+
 	plnA_adjust_in( apl, bapl, m_aplEdge, m_prm->in_d, m_iFrame );
 	PLNA_DUMPF( apl, "contor", m_iFrame, "in", m_dFrame == m_iFrame );
 

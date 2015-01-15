@@ -84,6 +84,12 @@ image_type *	image1_dup( image_type *sim, int d, image_type *im );
 
 image_type *	image1_sample_mathlab( image_type *sim, int d, image_type *im );
 
+
+void	image1_average( image_type *im, int x0, int y0, int width, int height, float *av );
+
+void	image1_var( image_type *im, int x0, int y0, int width, int height, float *av, float *var );
+
+
 	// Image1Sample2.c
 image_type *	image1_sample2_1331( image_type *sim, image_type *im );
 
@@ -209,6 +215,9 @@ void	image1_boundary_set( image_type *im, int val );
 void	image1_threshold( image_type *sim, int T );
 
 image_type *image1_threshold2( image_type *sim, int T0, int T1, image_type *im );
+
+image_type *	image1_threshold_in( image_type *sim, int T0, int T1, image_type *im );
+
 
 image_type *	image1_maskT( image_type *sim, image_type *mim, int T0, int T1, image_type *im );
 

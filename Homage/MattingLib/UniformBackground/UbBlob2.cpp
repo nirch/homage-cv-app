@@ -188,7 +188,7 @@ imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp )
 int	a[6],	nA,	i;
 
 
-	bwLabelA_order( abw, color, 4, a, &nA );
+	bwLabelA_order( abw, color, -1, 4, a, &nA );
 
 	if( nA < 0 )	return( -1 );
 	if( nA == 1 )	return( a[0] );

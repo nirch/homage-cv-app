@@ -169,6 +169,7 @@
 		D0A5692D18B7A0040053D55F /* BnImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0A5692B18B7A0040053D55F /* BnImage.cpp */; };
 		D0A5693818B7A01E0053D55F /* Image1LabelInletFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */; };
 		D0A8FE664898491F8F38327F /* ImageEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9934C0A377F04334A5FF1D53 /* ImageEqual.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D0C9C0CA1A67B4CA008F9D1D /* SbTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0C81A67B4CA008F9D1D /* SbTool.cpp */; };
 		D0E0A59918D0BD8B004435E2 /* ImageBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */; };
 		D0E0A59A18D0BD8B004435E2 /* ImageLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */; };
 		D0E0A59B18D0BD8B004435E2 /* ImageLabelUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A59718D0BD8B004435E2 /* ImageLabelUI.cpp */; };
@@ -404,6 +405,8 @@
 		D0A5692F18B7A01E0053D55F /* BwLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BwLabel.h; sourceTree = "<group>"; };
 		D0A5693218B7A01E0053D55F /* Image1LabelInletFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Image1LabelInletFilter.c; sourceTree = "<group>"; };
 		D0A5693418B7A01E0053D55F /* ImageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabel.h; sourceTree = "<group>"; };
+		D0C9C0C81A67B4CA008F9D1D /* SbTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SbTool.cpp; sourceTree = "<group>"; };
+		D0C9C0C91A67B4CA008F9D1D /* SbType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SbType.h; sourceTree = "<group>"; };
 		D0CA2C88838B4E09841B643A /* ImageSubtruct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageSubtruct.c; path = Image/ImageSubtruct.c; sourceTree = SOURCE_ROOT; };
 		D0E0A59518D0BD8B004435E2 /* ImageBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageBlob.cpp; sourceTree = "<group>"; };
 		D0E0A59618D0BD8B004435E2 /* ImageLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabel.cpp; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 		160EBBE57F4B4CA9B71AE097 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D0A5692A18B7A0040053D55F /* BnImage */,
 				D0DF9CC719091A5500ED75AD /* ImageC */,
 				D0DF9CC619091A4D00ED75AD /* ImageF */,
 				D0DF9CC519091A1500ED75AD /* ImageApp */,
@@ -704,14 +708,14 @@
 				D0A5692B18B7A0040053D55F /* BnImage.cpp */,
 				D0A5692C18B7A0040053D55F /* BnImage.h */,
 			);
-			name = BnImage;
-			path = ../BnImage;
+			path = BnImage;
 			sourceTree = "<group>";
 		};
 		D0A5692E18B7A01E0053D55F /* ImageLabel */ = {
 			isa = PBXGroup;
 			children = (
-				D0A5692A18B7A0040053D55F /* BnImage */,
+				D0C9C0C81A67B4CA008F9D1D /* SbTool.cpp */,
+				D0C9C0C91A67B4CA008F9D1D /* SbType.h */,
 				D025830F1902F3150012BD2B /* ImageLabelUIContour.cpp */,
 				D02583101902F3150012BD2B /* ImageLabelUSContour.cpp */,
 				D02583111902F3150012BD2B /* ImageLabelUSN.cpp */,
@@ -1055,6 +1059,7 @@
 				1253470E511C4066BB36B608 /* ImageHistogram.c in Sources */,
 				F9150219AB9743ACBAC9927B /* ImageHsiTune.c in Sources */,
 				2309A0A1AD4E4580B1672CA3 /* ImageLogo.c in Sources */,
+				D0C9C0CA1A67B4CA008F9D1D /* SbTool.cpp in Sources */,
 				11DDB12C23FF41459593F1D7 /* ImageNegative.c in Sources */,
 				B520F010AB9445C290E0E7A3 /* ImagePreview.c in Sources */,
 				531622DF60AA426088928653 /* ImagePyramid.c in Sources */,

@@ -9,16 +9,16 @@
 #include "Histogram.h"
 
 
-typedef struct isdata1_type {
-	int	i0,	i1;
-
-	int	n;
-
-	float	mean;
-	float	var;	
-
-	float	d;
-}isdata1_type;
+//typedef struct isdata1_type {
+//	int	i0,	i1;
+//
+//	int	n;
+//
+//	float	mean;
+//	float	var;	
+//
+//	float	d;
+//}isdata1_type;
 
 
 static void	clustring_isodata_histogram_init( int H[], int nH, int K, isdata1_type c[], int *nC );
@@ -37,13 +37,36 @@ static void	clustring_isodata_print( FILE *fp, isdata1_type c[], int nC );
 
 
 
+void	histogram_clustring_isodataA( int H[], int nH, int K, int nT, float vT, float mT, int Itration, isdata1_type c[], int *nM );
+
+
 void
 histogram_clustring_isodata( int H[], int nH, int K, int nT, float vT, float mT, int Itration, float am[], int *nM )
 {
-isdata1_type	*c;
+	isdata1_type	*ac;
+	int	nC,	i;
+
+	ac = (isdata1_type *)malloc( 2*K*sizeof(isdata1_type));
+
+
+	histogram_clustring_isodataA( H, nH, K, nT, vT, mT, Itration, ac, &nC );
+
+	for( i = 0 ; i < nC ; i++ ){
+		am[i] = ac[i].mean;
+	}
+
+	*nM = nC;
+
+	free( ac );
+}
+
+void
+histogram_clustring_isodataA( int H[], int nH, int K, int nT, float vT, float mT, int Itration, isdata1_type c[], int *nM )
+{
+//isdata1_type	*c;
 int	nC,	i;
 
-	c = (isdata1_type *)malloc( 2*K*sizeof(isdata1_type));
+//	c = (isdata1_type *)malloc( 2*K*sizeof(isdata1_type));
 
 	clustring_isodata_histogram_init( H, nH, K, c, &nC );
 
@@ -53,7 +76,7 @@ int	nC,	i;
 
 
 		clustring_isodata_aux( c, nC, H, nH  );
-		clustring_isodata_print( stdout, c, nC );
+//		clustring_isodata_print( stdout, c, nC );
 
 		clustring_isodata_remove_small( c, &nC, nT  );
 
@@ -74,12 +97,14 @@ int	nC,	i;
 	clustring_isodata_aux( c, nC, H, nH  );
 	clustring_isodata_print( stdout, c, nC );
 
-	for( i = 0 ; i < nC ; i++ )
-		am[i] = c[i].mean;
+	//for( i = 0 ; i < nC ; i++ ){
+	//	am[i] = c[i].mean;
+	//	an[i] = c[i].n;
+	//}
 
 	*nM = nC;
 
-	free( c );
+//	free( c );
 }
 
 
@@ -196,6 +221,12 @@ int	n;
 		sum += H[i]*i;
 		sum2 += H[i]*i*i;
 		n += H[i];
+	}
+
+	if( n == 0 ){
+		c->n = 0;
+		c->var = c->var = c->d = c->mean = 0;
+		return;
 	}
 
 	c->n = n;

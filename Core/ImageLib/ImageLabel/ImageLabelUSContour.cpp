@@ -101,6 +101,8 @@ cln_type *cln;
 
 		if( gapp->no < 64 )	
 			continue;
+
+		
 		
 		pln_type *pl;
 
@@ -127,6 +129,8 @@ cln_type *cln;
 		pln_set_length( pl );
 
 		cln->a[cln->nA ++ ] = pl;
+
+	
 
 //		CONTOUR_DUMP( c, "c", no, NULL );
 //		ac = contour_union( ac, c );

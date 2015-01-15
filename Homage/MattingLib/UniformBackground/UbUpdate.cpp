@@ -16,6 +16,8 @@
 
 #include "UniformBackground.h"
 
+#include "../UnBackground/bImage.h"
+
 #include "ImageMorphology/ImageMorphology.h"
 
 

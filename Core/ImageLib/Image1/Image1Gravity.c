@@ -197,6 +197,28 @@ int	i,	j;
 //	}
 //}
 
+image_type *
+	image1_threshold_in( image_type *sim, int T0, int T1, image_type *im )
+{
+	u_char	*sp,	*tp;
+	int	i,	j;
+
+	im = image_recreate( im, sim->height, sim->width, 1, 1 );
+
+	sp = sim->data;
+	tp = im->data;
+	for( i = 0 ; i < sim->row ; i++ ){
+		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
+
+			if( *sp >= T0 && *sp <= T1 )
+				*tp = 0;
+			else *tp = *sp;
+		}
+	}
+
+	return( im );
+}
+
 
 image_type *
 image1_threshold2( image_type *sim, int T0, int T1, image_type *im )

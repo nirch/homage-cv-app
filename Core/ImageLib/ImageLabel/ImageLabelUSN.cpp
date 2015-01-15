@@ -3,12 +3,13 @@
  ***************************/
 #include <math.h>
 #include "Uigp/igp.h"
+
+
+
+
 #include "ImageType/ImageType.h"
-#include "BwLabel.h"
-
 #include "ImageLabel.h"
-
-
+#include "BwLabel.h"
 
 
 void	imageLabelUS_createN( imageLabel_type *abw );
@@ -69,7 +70,6 @@ imageLabelUS_N( image_type *sim, int T, int inv, int margin, imageLabel_type *ab
 
 
 
-
 void
 imageLabelUS_createN(imageLabel_type *abw )
 {
@@ -86,6 +86,7 @@ int	id;
 	abw->a[0].id = 0;
 	abw->a[0].no = 0;
 	abw->nA = 1;
+
 
 	b0[0].j0 = abw->im->width;
 	lbm_type *b = b1;
@@ -109,6 +110,10 @@ int	id;
 			b->j1 = j -1;
 
 
+			//int j00 = b0[k].j0;
+			//int j1 = b0[k].j1;
+			//int i1 = b0[k].i;
+
 			int	k0,	k1;
 			k0 = k1 = id = -1;
 			for( ; b->j1 >= b0[k].j0  ; k++ ){
@@ -117,8 +122,11 @@ int	id;
 				if( k0 < 0 )	k0 = k;
 				k1 = k;
 
-				if( id < 0 || b0[k].id < id )
-					id = b0[k].id;
+				int id0 = abw->a[b0[k].id].id;
+				if( id < 0 || id0 < id )
+					id = id0;
+//				if( id < 0 || b0[k].id < id )
+//					id = b0[k].id;
 
 			}
 

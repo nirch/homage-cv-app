@@ -25,10 +25,10 @@
 
 
 
-static int		pln_thin( pln_type *pl, int flagIn, int iFrame );
+static int		pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame );
 
 
-int	pln_aa( plnA_type *apl, plnA_type *bpl);
+
 
 pt2dA_type *	pt2dA_max( pt2dA_type *apt );
 
@@ -62,10 +62,16 @@ static int	pt2dA_nId( pt2dA_type *apt,int i0, int i1, int id );
 static int	pt2dA_nId( pt2dA_type *apt,int i0, int i1 );
 
 
+static int	pt2dA_in( pt2dA_type *apt,int i0, int i1 );
+
+
+static int	pt2dA_in_apl( pt2dA_type *apt, float T, plnA_type *apl );
+
+static int	pt2dA_in_head( pt2dA_type *apt, float ht[2] );
 
 
 int
-	plnA_adjust_thin( plnA_type *apl, int iFrame )
+	plnA_adjust_thin( plnA_type *apl, plnA_type *bapl, float ht[2], int iFrame )
 {
 
 
@@ -73,11 +79,11 @@ int
 	if( apl->nA <= 0 || apl->a[0]->len < 40 )
 		return( 1 );
 
-	int ret = pln_thin( apl->a[0], 0, iFrame );
+	int ret = pln_thin( apl->a[0], bapl, ht, 0, iFrame );
 	if( ret > 0 )
-		pln_thin( apl->a[0], 0, iFrame );
+		pln_thin( apl->a[0], bapl, ht, 0, iFrame );
 
-	pln_thin( apl->a[0], 1, iFrame );
+	pln_thin( apl->a[0], bapl, ht, 1, iFrame );
 	return( ret );
 }
 
@@ -85,7 +91,7 @@ int
 
 
 int
-pln_thin( pln_type *pl, int flagIn, int iFrame )
+pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
 {
 
 
@@ -99,6 +105,15 @@ pln_thin( pln_type *pl, int flagIn, int iFrame )
 	pt2dA_type *apt = pt2dA_alloc( n +10 );
 	pln_sampleN( pl, 1, 1, apt );
 	pt2dA_curvtur( apt );
+
+	pt2dA_set_groupId( apt, 0 );
+
+	if( bapl != NULL )
+		pt2dA_in_apl( apt, 16, bapl );
+
+	if( ht[0] >= 0 )
+		pt2dA_in_head( apt, ht );
+
 
 	apt->nA -= 20;
 
@@ -545,15 +560,20 @@ float dis;
 		int n0 = pt2dA_nId( apt, i0,  i1 );
 		int n1 = pt2dA_nId( apt, i1,  i0 );
 
+
+		int in0 = pt2dA_in( apt, i0,  i1 );
+		int in1 = pt2dA_in( apt, i1,  i0 );
+
 //		if( i0 + apt->nA - i1 <  1.1*(i1 - i0) || i1 - i0 > 750 && i0 + apt->nA - i1 > 750 ){
 		if(  n1 < 0.75*n0 ||  n0 > 750 && n1 > 750 ){
 
-	
-			//if( n1 < )
-			//int d = pt2dA_check_thin_dirction( apt,  i0,  i1, dT );
-			//if( d < 0 ){
 
-			if( n1 < 0.25*n0 || pt2dA_check_thin_dirction( apt,  i0,  i1, dT ) < 0 ){
+
+			
+
+			//if( n1 < 0.25*n0 || pt2dA_check_thin_dirction( apt,  i0,  i1, dT ) < 0 ){
+
+			if( in1 < in0 || in1 == in0 && n1 < 0.5 * n0 ){
 				int tmp = i0;
 				i0 = i1;
 				i1 = tmp;
@@ -573,7 +593,7 @@ float dis;
 
 
 
-		if( pt2dA_check_thin( apt, i0, i1, dT ) < 0 )
+		if( pt2dA_check_thin( apt, i0, i1, dT ) < 0 &&  pt2dA_check_thin( apt, i1, i0, dT ) < 0)
 			continue;
 
 
@@ -747,6 +767,79 @@ pt2dA_nId( pt2dA_type *apt,int i0, int i1 )
 		if( i >= apt->nA )	i = 0;
 		if( apt->a[i].id >= 0 )
 			n++;
+	}
+
+	return( n );
+}
+
+
+
+static int
+pt2dA_in( pt2dA_type *apt,int i0, int i1 )
+{
+	int	i,	n;
+	if( i1 == 0 )	 i1 = apt->nA;
+	for( i = i0, n = 0 ; i != i1 ; i++ ){
+		if( i >= apt->nA )	i = 0;
+
+		if( apt->a[i].group > 0 )
+			n++;
+	}
+
+	return( n );
+}
+
+
+
+static int
+pt2dA_in_apl( pt2dA_type *apt, float T, plnA_type *apl )
+{
+	int	i,	n;
+
+
+	for( i = 0, n = 0 ; i < apt->nA ; i++ ){
+		if( i >= apt->nA )	i = 0;
+
+		pt2d_type *pt = &apt->a[i];
+
+		vec2f_type p;
+
+		p.x = pt->p.y;
+		p.y = pt->p.x;
+
+		dPln_type	d;
+		pln_type *spl;
+		if( plnA_distance( apl, &p, 2*T, &spl, &d ) < 0 )
+			continue;
+
+
+		pt->group = 1;
+		n++;
+	}
+
+	return( n );
+}
+
+
+
+static int
+pt2dA_in_head( pt2dA_type *apt, float ht[2] )
+{
+	int	i,	n;
+
+	if( ht[0] < 0 )
+		return( 1 );
+
+
+	for( i = 0, n = 0 ; i < apt->nA ; i++ ){
+		if( i >= apt->nA )	i = 0;
+
+		pt2d_type *pt = &apt->a[i];
+
+		if( pt->f >= ht[0] && pt->f <= ht[1] ){
+			pt->group = 1;
+			n++;
+		}
 	}
 
 	return( n );

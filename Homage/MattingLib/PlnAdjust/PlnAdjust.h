@@ -15,7 +15,7 @@
 int	plnA_adjust_start( plnA_type *apl, float height );
 
 	// PlnAdjustThin.cpp
-int	plnA_adjust_thin( plnA_type *apl, int iFrame );
+int	plnA_adjust_thin( plnA_type *apl, plnA_type *bapl, float ht[2], int iFrame );
 
 
 

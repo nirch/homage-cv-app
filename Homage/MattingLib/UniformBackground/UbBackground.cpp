@@ -22,6 +22,9 @@ static image_type *	image1_sampleN( image_type *sim, int N, image_type *im );
 
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 
+#include "../UnBackground/bImage.h"
+
+#include "../UnBackground/UnBackground.h"
 
 
 
@@ -52,31 +55,6 @@ typedef struct segC_type {
 
 
 
-
-
-
-
-
-image_type *	bImage_realloc(  box2i_type *b, int n, image_type *bim );
-
-image_type *	bImage_copy( image_type *bim, image_type *tim  );
-
-void		bImage_clearN( image_type *bim );
-
-
-image_type *	bImage_set( image_type *sim, image_type *mim, box2i_type *b, int N, image_type *bim );
-
-image_type *	bImage_set( image_type *sim, box2i_type *b, int N, image_type *bim );
-
-
-static void	bImage_mask( image_type *bim, image_type *mim, box2i_type *b, int N );
-
-
-
-void		bImage_dump( image_type *bim, int N, char *prefix, int index, char *suffix );
-image_type *bImage_to_image( image_type *bim, image_type *im );
-
-void		bImage_clear( image_type *bim );
 
 
 int	bImage_complete( image_type *bim );
@@ -114,7 +92,7 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 
 
 
- int	bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[], float dx, float av );
+
  static int	bImage_fill_gap( image_type *bim, image_type *eim, int a[], segC_type ac[], float dx, float av, int side );
 
 
@@ -164,22 +142,28 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 
 int	CUniformBackground::ProcessInitBackground( image_type *sim )
 {
-int	i;
+int	i,	ret;
+
+	if( m_unBackground != NULL ){
+		ret = m_unBackground->Process( sim, 1 );
+
+		if( ret > 0 ){
+			m_iHead = 2*m_unBackground->GetHead() + 1;
+			m_bim = m_unBackground->GetBim( m_bim );
+
+			GPLOG( ("Background: %d", m_unBackground->GetState() ) );
+			return( 1 );
+		}
+	}
 
 	ProcessInitBackground( sim, m_mim[0], 0 );
 	if( m_nM == 1 ){
-
-		cln_type *cln = clnA_detach( m_ac, 1 );
-		if ( cln != NULL ){
-
-#ifdef _HEAD
-			if( m_headTracking == NULL )
-				m_headTracking = new CPlnHeadTracker();
-			m_headTracking->Init( cln );
-#endif
-		}
+		m_iHead = 1;
+		 GPLOG( ("Old Background: %d", m_state ) );
 		return( 1 );
 	}
+
+
 
 
 	image_type *m_bim0 = bImage_copy( m_bim, NULL );
@@ -203,18 +187,12 @@ int	i;
 
 	 m_bim = bImage_copy( m_bim0, m_bim );
 
-	      
-	 cln_type *cln = clnA_detach( m_ac, 1 + 2*iMax );
-	 if ( cln != NULL ){
-#ifdef _HEAD
-		 if( m_headTracking == NULL )
-			 m_headTracking = new CPlnHeadTracker();
-		 m_headTracking->Init( cln );
-#endif
-	 }
+	 m_iHead = 1 + 2*iMax;
 
 
-	 bImage_dump( m_bim, m_N, "bg", 1, "FS" );
+	 GPLOG( ("Old Background: %d", m_state ) );
+
+	 BIMAGE_DUMP( m_bim, m_N, "bg", 1, "FS" );
 
 	 return( 1 );
 }
@@ -234,7 +212,7 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 	bImage_mask( m_bim, mim, &m_roi, m_N );
 
 
-	bImage_dump( m_bim, m_N, "bg", 1, "A" );	
+	BIMAGE_DUMP( m_bim, m_N, "bg", 1, "A" );	
 	
 
 	m_bimDx = bImage_grad_x_c( m_bim, m_bimDx );
@@ -242,6 +220,10 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 #ifdef _DUMP
 	image_type *im = image1S_axb(  m_bimDx, 1, 128, NULL );
 	IMAGE_DUMP_DUP( im, 8, 1, "bg", 1, "D" );
+
+	im = image1_threshold_in( im, 128-18, 128+12, im );
+	IMAGE_DUMP_DUP( im, 8, 1, "bg", 1, "DM" );
+
 
 	image1S_abs_128(  m_bimDx, im );
 	IMAGE_DUMP( im, "bg", 1, "D1" );
@@ -253,6 +235,8 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 
 	IMAGE_DUMP( im, "bg", 1, "D2" );
 	image_destroy( im, 1 );
+
+
 
 #endif
 
@@ -294,7 +278,7 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 	segC_log( ac0, m_bim->height );
 	segC_log( ac1, m_bim->height );
 
-	bImage_dump( m_bim, m_N, "bg", 1, "E" );
+	BIMAGE_DUMP( m_bim, m_N, "bg", 1, "E" );
 
 
 
@@ -318,13 +302,12 @@ int	CUniformBackground::ProcessInitBackground( image_type *sim, image_type *mim,
 	bImage_fill_gap(  m_bim, m_bimDx, a0, ac0, m_prm->dx, m_prm->av, F_LEFT );
 	bImage_fill_gap(  m_bim, m_bimDx, a1, ac1, m_prm->dx, m_prm->av, F_RIGHT );
 
-//	bImage_fill_end(  m_bim, m_bimDx, a0, ac0, m_prm->dx, m_prm->av );
-//	bImage_fill_end(  m_bim, m_bimDx, a1, ac1, m_prm->dx, m_prm->av );
+
 
 
 	bImage_fill( m_bim, a0, a1 );
 
-	bImage_dump( m_bim, m_N, "bg", 1, "F" );
+	BIMAGE_DUMP( m_bim, m_N, "bg", 1, "F" );
 
 
 	gpTime_stop( &m_rTime );
@@ -377,8 +360,8 @@ int	CUniformBackground::ProcessInitBackground_lern( image_type *sim, image_type 
 	bImage_clearN( m_bim );
 	bImage_fill( m_bim, a0, a1 );
 
-	bImage_dump( m_bim, m_N, "bg", step, "EE" );
-	bImage_dump( m_bim, m_N, "bg", 1, "FE" );
+	BIMAGE_DUMP( m_bim, m_N, "bg", step, "EE" );
+	BIMAGE_DUMP( m_bim, m_N, "bg", 1, "FE" );
 	
 
 	image_destroy( cim8, 1 );
@@ -420,306 +403,6 @@ int CUniformBackground::TestDrakness( image_type *sim )
 
 
 
-image_type *
-	bImage_set( image_type *sim, image_type *mim, box2i_type *b, int N, image_type *bim )
-{
-	int	i,	j,	k,	n,	i0,	j0;
-	u_char	*sp,	*mp;
-	bImage_type *bp,	*bp0;
-
-
-	bim = bImage_realloc( b, N,  bim );
-
-	bImage_clear( bim );
-
-
-
-
-	for( i = 1, i0 = b->y0 ; i < bim->height-1 ; i++ ){
-		bp0 = ( bImage_type *)IMAGE_PIXEL( bim, i, 1 );
-
-		for( k = 0 ; k < N ; k++, i0 += 1 ){
-
-			if( i0 >= sim->height-1 )
-				break;
-
-			sp = IMAGE_PIXEL( sim, i0, b->x0 );
-			mp = IMAGE_PIXEL( mim, i0, b->x0 );
-
-
-
-			for( j = 1, j0 = b->x0, bp = bp0 ; j < bim->width-1 ; j++, j0 += N, bp++ ){
-				int n1 = N;
-				if( j0 + n1 > sim->width )	n1 = sim->width - j0;
-
-				for( n = 0 ; n < n1 ; n++, sp += 3, mp++ ){
-					if( *mp != 0 )
-						continue;
-
-					bp->r += sp[0];
-					bp->g += sp[1];
-					bp->b += sp[2];
-					bp->n++;
-				}
-			}
-		}
-	}
-
-
-	bp = ( bImage_type *)bim->data;
-	for( i = 0 ; i < bim->height ; i++ ){
-
-		for( j = 0 ; j < bim->width ; j++, bp++ ){
-			if( bp->n < 0.5*n*n ){
-				bp->n = 0;
-				continue;
-			}
-
-			bp->r /= bp->n;
-			bp->g /= bp->n;
-			bp->b /= bp->n;
-		}
-	}
-
-	return( bim );
-}
-
-
-image_type *
-bImage_set( image_type *sim, box2i_type *b, int N, image_type *bim )
-{
-	int	i,	j,	k,	n,	i0,	j0;
-	u_char	*sp;
-	bImage_type *bp,	*bp0;
-
-
-	bim = bImage_realloc( b, N,  bim );
-
-	bImage_clear( bim );
-
-
-
-	for( i = 1, i0 = b->y0 ; i < bim->height-1 ; i++ ){
-		bp0 = ( bImage_type *)IMAGE_PIXEL( bim, i, 1 );
-
-		for( k = 0 ; k < N ; k++, i0 += 1 ){
-
-			if( i0 >= sim->height-1 )
-				break;
-
-			sp = IMAGE_PIXEL( sim, i0, b->x0 );
-			
-			for( j = 1, j0 = b->x0, bp = bp0 ; j < bim->width-1 ; j++, j0 += N, bp++ ){
-				int n1 = N;
-				if( j0 + n1 > sim->width )	n1 = sim->width - j0;
-
-				for( n = 0 ; n < n1 ; n++, sp += 3 ){
-	
-					bp->r += sp[0];
-					bp->g += sp[1];
-					bp->b += sp[2];
-					bp->n++;
-				}
-			}
-		}
-	}
-
-
-	bp = ( bImage_type *)bim->data;
-	for( i = 0 ; i < bim->height ; i++ ){
-
-		for( j = 0 ; j < bim->width ; j++, bp++ ){
-			if( bp->n == 0 )	continue;
-
-			bp->r /= bp->n;
-			bp->g /= bp->n;
-			bp->b /= bp->n;
-
-			bp->n = N*N;
-		}
-	}
-
-
-
-
-	return( bim );
-}
-
-
-static void
-bImage_mask( image_type *bim, image_type *mim, box2i_type *b, int N )
-{
-	int	i,	j,	k,	n,	i0,	j0;
-	u_char	*mp;
-	bImage_type *bp,	*bp0;
-
-
-	for( i = 1, i0 = b->y0 ; i < bim->height-1 ; i++ ){
-		bp0 = ( bImage_type *)IMAGE_PIXEL( bim, i, 1 );
-
-		for( k = 0 ; k < N ; k++, i0 += 1 ){
-
-			if( i0 >= mim->height-1 )
-				break;
-
-			mp = IMAGE_PIXEL( mim, i0, b->x0 );
-
-			for( j = 1, j0 = b->x0, bp = bp0 ; j < bim->width-1 ; j++, j0 += N, bp++ ){
-				int n1 = N;
-				if( j0 + n1 > mim->width )	n1 = mim->width - j0;
-
-				for( n = 0 ; n < n1 ; n++, mp++ ){
-					if( *mp != 0 )
-						bp->n--;
-				}
-			}
-		}
-	}
-
-	bp = ( bImage_type *)bim->data;
-	for( i = 0 ; i < bim->height ; i++ ){
-
-		for( j = 0 ; j < bim->width ; j++, bp++ ){
-			if( bp->n != N*N )
-				bp->n = 0;
-		}
-	}
-}
-
-
-
-
-
-
-image_type *
-bImage_realloc(  box2i_type *b, int n, image_type *bim )
-{
-
-	int	width,	height,	w,	h;
-	width = b->x1 - b->x0;
-	w = width/n;
-	if( width - w*n > 0.25*n )	w++;
-
-	height = b->y1 - b->y0;
-	h = height/n;
-	if( height - h*n > 0.25*n )	h++;
-
-
-	if( bim != NULL && ( bim->width != w + 2 || bim->height != h + 2 )){
-		image_destroy( bim, 1 );
-		bim = NULL;
-	}
-
-	if( bim == NULL )
-		bim = image_create( h+2, w+2, sizeof(bImage_type), 1, NULL );
-
-
-
-
-	return( bim );
-}
-
-
-
-void
-bImage_clear( image_type *bim )
-{
-	int	i,	j;
-
-	bImage_type *bp = (bImage_type *)bim->data;
-
-	for( i = 0 ; i < bim->height ; i++ ){
-		for( j = 0 ; j < bim->width ; j++, bp++ ){
-			bp->n= 0;
-			bp->r = bp->g = bp->b = 0;
-		}
-	}
-
-}
-
-void
-bImage_clearN( image_type *bim )
-{
-	int	i,	j;
-
-	bImage_type *bp = (bImage_type *)bim->data;
-
-	for( i = 0 ; i < bim->height ; i++ ){
-		for( j = 0 ; j < bim->width ; j++, bp++ ){
-			if( bp->n == 0 )
-				bp->n = 1;
-		}
-	}
-
-}
-
-image_type *
-bImage_copy( image_type *bim, image_type *tim  )
-{
-	int	i,	j;
-
-	if( tim == NULL )
-		tim = image_create( bim->height, bim->width, sizeof(bImage_type), 1, NULL );
-
-
-	bImage_type *bp = (bImage_type *)bim->data;
-	bImage_type *tp = (bImage_type *)tim->data;
-
-	for( i = 0 ; i < bim->height ; i++ ){
-		for( j = 0 ; j < bim->width ; j++, bp++, tp++ ){
-			*tp = *bp;
-		}
-	}
-
-	return( tim );
-}
-
-
-image_type *
-bImage_to_image( image_type *bim, image_type *im )
-{
-	int	i,	j;
-
-	
-	im = image_realloc( im, bim->width-2, bim->height-2, 3, IMAGE_TYPE_U8, 1 );
-
-
-
-	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, 1, 1 );
-	u_char *tp = im->data;
-	for( i = 0 ; i < im->height ; i++, bp += 2 ){
-		for( j = 0 ; j < im->width ; j++, bp++ ){
-			
-			if( bp->n == 0 ){
-				*tp++ = 0;
-				*tp++ = 0;
-				*tp++ = 0;
-				continue;
-			}
-			*tp++ = bp->r;
-			*tp++ = bp->g;
-			*tp++ = bp->b;
-		}
-	}
-
-	return( im );
-}
-
-
-
-
-void
-bImage_dump( image_type *bim, int N, char *prefix, int index, char *suffix )
-{
-#ifdef _DUMP
-	image_type *im = bImage_to_image(  bim, NULL );
-
-	IMAGE_DUMP_DUP( im, N, 1,prefix, index, suffix );
-
-	image_destroy( im, 1 );
-#endif
-}
-
 
 
 
@@ -740,85 +423,6 @@ bImage_grad_xTT( image_type *bim )
 
 	image_destroy( im, 1 );
 
-}
-
-
-image_type *
-bImage_grad_x( image_type *bim, image_type *im )
-{
-	int	i,	j;
-
-
-	im = image_realloc( im, bim->width-2, bim->height-2, 1, IMAGE_TYPE_U8, 1 );
-
-
-	int	y[3];
-	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, 1, 1 );
-	s_char *tp = (s_char *)im->data;
-	for( i = 0 ; i < im->height ; i++, bp += 2 ){
-
-		
-		y[0] = IMAGE_RGB2Y( bp->r, bp->g, bp->b );
-		bp++;
-		y[1] = IMAGE_RGB2Y( bp->r, bp->g, bp->b );
-		*tp++ = y[1] - y[0];
-		bp++;
-
-		for( j = 1 ; j < im->width-1 ; j++, bp++ ){
-
-			y[2] = IMAGE_RGB2Y( bp->r, bp->g, bp->b );
-			
-			*tp++ = y[2] - y[0];
-
-			y[0] = y[1];
-			y[1] = y[2];
-		}
-
-		*tp++ = y[1] - y[0];
-	}
-
-	return( im );
-}
-
-
-image_type *
-bImage_grad_x_c( image_type *bim, image_type *im )
-{
-	int	i,	j;
-
-
-	im = image_realloc( im, bim->width-2, bim->height-2, 1, IMAGE_TYPE_U8, 1 );
-
-	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, 1, 1 );
-	s_char *tp = (s_char *)im->data;
-	for( i = 0 ; i < im->height ; i++, bp += 2 ){
-
-
-//		bImage_type *bp0 = bp++;
-//		bImage_type *bp1 = bp++;
-
-		int	dc;
-		for( j = 0 ; j < im->width ; j++, bp++ ){
-
-			int r = (bp+1)->r - (bp-1)->r;
-			int g = (bp+1)->g - (bp-1)->g;
-			int b = (bp+1)->b - (bp-1)->b;
-
-			dc = r;
-			if( ABS(dc) < ABS(g) )
-				dc = g;
-
-//			if( ABS(dc) < ABS(b) )
-//				dc = b;
-			
-			*tp++ = dc;
-
-//			bp0 = bp1;
-//			bp1 = bp;
-		}
-	}
-
-	return( im );
 }
 
 
@@ -880,7 +484,7 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 	bp = ( bImage_type *)IMAGE_PIXEL( bim, 1, 0 );
 	for( i = 1 ; i < bim->height-1 ; i++, bp += bim->width ){
 
-		if( a0[i] == -1 && a1[i] == -1 )
+		if( a0[i] == -1 || a1[i] == -1 )
 			continue;
 		
 		int	j0,	j1;
@@ -1586,55 +1190,7 @@ segC_log( segC_type ac[], int nC )
 }
 
 
-#ifdef _AA_
-int
-bImage_fill_end( image_type *bim, image_type *eim, int a[], segC_type ac[], float dx, float av )
-{
-	int	i,	j;
 
-
-	seg_type as[100];
-	int nS = 0;
-
-	//int Av = 4;
-	//int Dx = 8;
-	bImage_segR( ac, bim->height, as, &nS, dx, av );
-	if( nS <= 0 )
-		return( -1 );
-
-	seg_type * s = &as[nS-1];
-
-	if( s->i1 >= bim->height -2 )
-		return( -1 );
-
-//	if( s->i1 + 5 < bim->height -2 )
-//		return( -1 );
-
-
-	bImage_type *bp0,	*bp;
-	bp0 = ( bImage_type *)IMAGE_PIXEL( bim, s->i1, a[s->i1] );
-
-	for( i = s->i1+1 ; i < bim->height-1 ; i++ ){
-
-		int	j0,	j1;
-		if( (j0 = a[i]-6) < 1 )	j0 = 1;
-		if( (j1 = a[i]+6) > bim->width-2 )	j1 = bim->width-2;
-
-		bp = ( bImage_type *)IMAGE_PIXEL( bim, i, j0);
-		for( j = j0; j <= j1 ; j++, bp++ ){
-		
-			bp->r = bp0->r;
-			bp->g = bp0->g;
-			bp->b = bp0->b;
-		}
-	}
-
-
-
-
-	return( 1 );
-}
-#endif
 
 
 

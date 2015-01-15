@@ -96,17 +96,20 @@ imageLabel_bigest( imageLabel_type *abw, int color )
 }
 
 
+
 int
 imageLabel_print( imageLabel_type *abw, FILE *fp )
 {
 	int	i,	no;
 
+	fprintf( fp, "Id\tColor\tno\n" );
 	for( i = 0, no = 0 ; i < abw->nA ; i++ ){
 		bwLabel_type *bw = &abw->a[i];
 		if( bw->id != i )	continue;
 
 		no++;
-		fprintf( fp, "%d  -   color: %d   no: %d\n", (int)bw->id, (int)bw->color, bw->no );
+//		fprintf( fp, "%d  -   color: %d   no: %d\n", (int)bw->id, (int)bw->color, bw->no );
+		fprintf( fp, "%d\t%d\t%d\t%d\t%d\n", (int)bw->id, (int)bw->color, (int)bw->av, (int)bw->var, bw->no );
 	}
 
 	return( no );
@@ -186,7 +189,7 @@ bwLabel_order( bwLabel_type *aBw, int nBw, int NI, int aI[], int *nI )
 
 
 void
-bwLabelA_order( imageLabel_type *abw, int color, int NI, int aI[], int *nI )
+bwLabelA_order( imageLabel_type *abw, int color, int nT,  int NI, int aI[], int *nI )
 {
 	int	i,	j;
 	bwLabel_type	*bw;
@@ -195,6 +198,8 @@ bwLabelA_order( imageLabel_type *abw, int color, int NI, int aI[], int *nI )
 	for( i = 0 ; i < abw->nA ; i++ ){
 		bw = &abw->a[i];
 		if( bw->id != i )	continue;
+
+		if( nT > 0 && bw->no < nT )	continue;
 
 		if( bw->color != color )
 			continue;
