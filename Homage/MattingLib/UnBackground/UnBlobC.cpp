@@ -59,28 +59,6 @@ int	CUnBackground::ProcessBlobC()
 
 
 
-#ifdef _AA_
-	for( i = 0 ; i < m_abw->nA ; i++ ){
-		bwLabel_type *bw = &m_abw->a[i];
-		if( i == b0 || i == b1 || bw->id != i )	continue;
-
-		if( bw->color != 0 )	continue;
-
-		float dt0 = bw->av - m_abw->a[b0].av;
-		float dt1 = bw->av - m_abw->a[b1].av;
-		if( dt0 < 0 )	dt0 = -dt0;
-		if( dt1 < 0 )	dt1= -dt1;
-
-		float dt = MIN( dt0, dt1 );
-		
-
-		if( ABS(dt) > 50 || bw->no < 10 ){
-			int k = imageLabelUI_nieg1( m_abw, i );
-			if( k >= 0 )
-				imageLabelUI_merge( m_abw, i, k );
-		}
-	}
-#endif
 
 
 
@@ -147,8 +125,10 @@ int	CUnBackground::ProcessBlobSide( imageLabel_type *abw, int iB, int i0, int j0
 
 
 	int k = sbA_in( &ac, j00 );
-    if( k < 0 )
-        return( -1 );
+
+	if( k < 0 ){
+		return( -1 );
+	}
 
 	as->a[i0] = ac.a[k];
 

@@ -304,6 +304,31 @@ image_type *
 }
 
 image_type *
+	bImage_to_image3( image_type *bim, image_type *im )
+{
+	int	i,	j;
+
+
+	im = image_realloc( im, bim->width-2, bim->height-2, 3, IMAGE_TYPE_U8, 1 );
+
+
+
+	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, 1, 1 );
+	u_char *tp = im->data;
+	for( i = 0 ; i < im->height ; i++, bp += 2 ){
+		for( j = 0 ; j < im->width ; j++, bp++ ){
+
+			*tp++ = bp->r;
+			*tp++ = bp->g;
+			*tp++ = bp->b;
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
 	bImage_to_image( image_type *bim, image_type *im )
 {
 	int	i,	j;
@@ -556,6 +581,12 @@ bImage_set_sb( image_type *bim, int i0, sb_type *s )
 		y += IMAGE_RGB2Y( bp->r, bp->g, bp->b );
 
 		n++;
+	}
+
+	if( n == 0 ){
+		fprintf( stdout, "%d %d\n", s->j0, s->j1 );
+		s->n = 0;
+		return;
 	}
 
 	s->r = r / n;

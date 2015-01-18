@@ -74,7 +74,7 @@ image_realloc( image_type *im, int width, int height, int channel, int type, int
 	}
 
 
-	if( im->width == width && im->height == height && im->depth == im->channel*Im_bytes[ type ] && im->align == align ){
+	if( im->width == width && im->height == height && im->depth == channel*Im_bytes[ type ] && im->align == align ){
 		im->format = IMAGE_FORMAT( type, channel );
 		return( im );
 	}
@@ -278,4 +278,19 @@ int	i;
 	free( aim->a );
 
 	free( aim );
+}
+
+void
+imageA_clear( imageA_type *aim )
+{
+int	i;
+
+	for( i = 0 ; i  < aim->nA ; i++ ){
+		if( aim->a[i] != NULL ){
+			image_destroy( aim->a[i], 1 );
+			aim->a[i] = 0;
+		}
+	}
+
+	aim->nA = 0;
 }

@@ -88,13 +88,13 @@ private:
 	int	ProcessSilhouette();
 
 	int	TestSilhouette( sbA_type *as, imageLabel_type *abw );
-    
-    
+	int TestSilhouetteHead( sbA_type *as, int i1, imageLabel_type *abw, float nw[] );
+
+
 
 
 	int TestSilhouetteDeviation();
-    
-    sbA_type SelectBiggerContour(sbA_type contourArray[4]);
+	sbA_type SelectBiggerContour(sbA_type contourArray[4]);
 	//old
 	int	ProcessInitBackground( image_type *sim, image_type *mim, int fState );
 

@@ -83,6 +83,9 @@ int	CUnBackground::ProcessBlob( image_type *sim )
 	im = bImage_to_image1(m_bim, im );
 	imageLabelUI_value( m_abw, im );
 
+	im = bImage_to_image3(m_bim, im );
+	imageLabelUI_value_rgb( m_abw, im );
+
 	//imageLabel_print( m_abw, stdout );
 
 

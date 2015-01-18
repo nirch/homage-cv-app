@@ -34,6 +34,7 @@ image_type *	bImage_copy( image_type *bim, image_type *tim  );
 image_type *	bImage_to_image( image_type *bim, image_type *im );
 
 image_type *	bImage_to_image1( image_type *bim, image_type *im );
+image_type *	bImage_to_image3( image_type *bim, image_type *im );
 
 
 void	bImage_dump( image_type *bim, int N, char *prefix, int index, char *suffix );

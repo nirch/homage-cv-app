@@ -389,8 +389,8 @@ u_int	*sp,	*tp;
 int		R,	G,	B,	Rb,	Gb,	Bb;
 int		i,j;
 float	trans;
-int		row = IMAGE_ROW(sim), r1;
-int		col = IMAGE_COLUMN(sim), c1;
+int		r1;//row = IMAGE_ROW(sim), r1;
+int		c1;//col = IMAGE_COLUMN(sim), c1;
 int	sc0,	sr0;
 int	t;
 

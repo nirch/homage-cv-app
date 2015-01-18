@@ -21,6 +21,11 @@ image_band( image_type *sim, int iBand, image_type *im )
 	if( sim->channel == 1 )
 		return( sim );
 
+
+	//if( IMAGE_TYPE( im ) == IMAGE_TYPE_F ){
+
+	//}
+
 	if( IMAGE_DATA_BYTE( sim ) == 1 ){
 		im = image1_band( sim, iBand, im );
 		return( im );

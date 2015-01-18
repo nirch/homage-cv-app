@@ -693,6 +693,51 @@ void
 
 
 
+
+void
+	imageLabelUI_value_rgb( imageLabel_type *abw, image_type *sim )
+{
+	int	i,	j;
+
+
+	bwLabel_type *bw;
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		abw->a[i].no = 0;
+		abw->a[i].R = abw->a[i].G = abw->a[i].B = 0;
+	}
+
+
+
+	u_char *sp = sim->data;
+	u_int *bp = abw->im->data_ui;
+	for( i = 0 ; i < abw->im->height ; i++ ){
+		for( j = 0 ; j < abw->im->width ; j++, bp++, sp += 3 ){
+			bw = &abw->a[*bp];
+			bw->no++;
+			bw->R += sp[0];
+			bw->G += sp[1];
+			bw->B += sp[2];
+		}
+	}
+
+
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		bwLabel_type *bw = &abw->a[i];
+
+		if( bw->no == 0  )	continue;
+
+		bw->R /= bw->no;
+		bw->G /= bw->no;
+		bw->B /= bw->no;
+	}
+}
+
+
+
+
+
 void
 	imageLabelUI_svalue( imageLabel_type *abw, image_type *sim )
 {

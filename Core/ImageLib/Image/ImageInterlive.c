@@ -10,11 +10,15 @@
 
 static image_type *	imageS_interlive( image_type *aim[], int type, int channel, image_type *im );
 
+static image_type *	image4_interlive( image_type *aim[], int type, int channel, image_type *im );
+
+
 static image_type *	image3_interlive( image_type *aim[], int type, image_type *im );
 
 static image_type *	imageS3_interlive( image_type *aim[], int type, image_type *im );
 
 static image_type *	imageI3_interlive( image_type *aim[], int type, image_type *im );
+
 
 
 
@@ -33,7 +37,7 @@ image_interlive( image_type *aim[], int nBand, image_type *im )
 	}
 
 	if( IMAGE_DATA_BYTE( aim[0] ) == 4 ){
-		im = imageI3_interlive( aim, IMAGE_TYPE(aim[0]), im );
+		im = image4_interlive( aim, IMAGE_TYPE(aim[0]), nBand, im );
 		return( im );
 	}
 
@@ -102,6 +106,33 @@ imageS_interlive( image_type *aim[], int type, int channel, image_type *im )
 
 	for( k = 0 ; k < channel ; k++ )
 		sp[k] = aim[k]->data_s;
+
+
+
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++ ){
+			for( k = 0 ; k < channel ; k++ )
+				*tp++ = *sp[k]++;
+		}
+	}
+
+	return( im );
+}
+
+
+static image_type *
+image4_interlive( image_type *aim[], int type, int channel, image_type *im )
+{
+	int	i,	j,	k;
+	u_int	*sp[16],	*tp;
+
+	im = image_recreate( im, aim[0]->height, aim[0]->width, IMAGE_FORMAT(type,channel), 1 );
+
+
+	tp = im->data_ui;
+
+	for( k = 0 ; k < channel ; k++ )
+		sp[k] = aim[k]->data_ui;
 
 
 

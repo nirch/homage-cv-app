@@ -36,6 +36,7 @@ typedef struct bwLabel_type {
 	int	boundary;
 	float	av;
 	float	var;
+	int		R,	G,	B;
 
 	int existence;
 

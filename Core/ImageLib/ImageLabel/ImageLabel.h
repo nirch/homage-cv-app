@@ -59,6 +59,9 @@ void	imageLabelUI_value( imageLabel_type *abw, image_type *sim );
 
 void	imageLabelUI_svalue( imageLabel_type *abw, image_type *sim );
 
+void	imageLabelUI_value_rgb( imageLabel_type *abw, image_type *sim );
+
+
 
 void	imageLabelUI_set_id( imageLabel_type *abw );
 
