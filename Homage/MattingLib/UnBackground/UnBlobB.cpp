@@ -59,13 +59,22 @@ int	CUnBackground::ProcessBlobB()
 			i0 = i;
 	}
 
+	fprintf( stdout, "AAA %d %d\n", (int)ac[i0].mean, ac[i0].n );
 
+
+
+
+	int	iB = -1;
 	int	R,	G,	B,	n;
 	R = G = B = n = 0;
 	for( i = 0 ; i < nI ; i++ ){
 		bwLabel_type *bw = &m_abw->a[aI[i]];
-		if( bw->av < ac[i0].i0 || bw->av > ac[i0].i1 )
+		int av = bw->av;
+		if( av < ac[i0].i0 || av > ac[i0].i1 )
 			continue;
+
+		if( iB == -1 || bw->no > m_abw->a[iB].no )
+			iB = aI[i];
 
 		R += bw->R;
 		G += bw->G;
@@ -73,16 +82,32 @@ int	CUnBackground::ProcessBlobB()
 		n++;
 	}
 
+	if( n == 0 )
+		return( 1 );
+
 	R /= n;
 	G /= n;
 	B /= n;
 
 
 
+	for( i = 0 ; i < nI ; i++ ){
+		bwLabel_type *bw = &m_abw->a[aI[i]];
+		int av = bw->av;
+		if( av >= ac[i0].i0 && av <= ac[i0].i1 )
+			continue;
 
 
 
-	fprintf( stdout, "AAA %d %d\n", (int)ac[i0].mean, ac[i0].n );
+		if( ProcessBlobB_TestBlob(  iB, aI[i] ) < 0 )
+			bw->color = 2;
+	}
+
+
+
+
+
+
 
 
 
@@ -91,6 +116,12 @@ int	CUnBackground::ProcessBlobB()
 
 		if( bw->id != i )	continue;
 		if( bw->color != 0 )	continue;
+
+		int	k;
+		for( k = 0 ; k < nI ; k++ )
+			if( aI[k] == i )
+				break;
+		if( k < nI )	continue;
 
 		float dt = bw->av - ac[i0].mean;
 	
@@ -116,9 +147,104 @@ int	CUnBackground::ProcessBlobB()
 	}
 
 
+	return( 1 );
+}
+
+
+int	imageLabelUI_blobe_sb( imageLabel_type *abw, int iB, sbA_type *as );
+
+int	sbA_side( sbA_type *as0, sbA_type *as1 );
+
+
+int	CUnBackground::ProcessBlobB_TestBlob( int b0, int b1 )
+{
+sbA_type as[2];
+int	i;
+
+	imageLabelUI_blobe_sb( m_abw, b0, &as[0] );
+	imageLabelUI_blobe_sb( m_abw, b1, &as[1] );
+
+
+	int i0 = sbA_side( &as[0], &as[1] );
+	int i1 = 1 - i0;
+
+	if( i0 < 0 ){
+		bwLabel_type *bw0 = &m_abw->a[b0];
+		bwLabel_type *bw1 = &m_abw->a[b1];
+		int	r,	g,	b;
+		if( (r = bw0->R - bw1->R) < 0 )	r = -r;
+		if( (g = bw0->G - bw1->G) < 0 )	g = -g;
+		if( (b = bw0->B - bw1->B) < 0 )	b = -b;
+
+		if( r < 64 && g < 64 && b < 64 )
+			return( 1 );
+
+		return( -1 );
+	}
+
+
+
+	bImage_set_sbA_sideR( m_bim, &as[i0], 10 );
+	bImage_set_sbA_sideL( m_bim, &as[i1], 10 );
+
+//	sbA_write3( &as[i0], &m_asB[0], &as[i1], stdout );
+
+	int n;
+	for( i = 0,	n = 0 ; i < as[i0].nA ; i++ ){
+
+
+		sb_type *s0 = &as[i0].a[i];
+		sb_type *s1 = &as[i1].a[i];
+		if( s0->j0 < 0 || s1->j0 < 0 )
+			continue;
+
+		int	r,	g,	b;
+		if( (r = s0->r - s1->r) < 0 )	r = -r;
+		if( (g = s0->g - s1->g) < 0 )	g = -g;
+		if( (b = s0->b - s1->b) < 0 )	b = -b;
+
+
+
+		if( r < 32 && g < 32 && b < 32 )
+			n++;
+
+	}
+
+	if( n < 2 )
+		return( -1 );
+	
+	return( 1 );
+}
+
+
+// return 0 if as0 is left to as1 
+int
+sbA_side( sbA_type *as0, sbA_type *as1 )
+{
+int	i;
+
+	int	n0,	n1;
+	n0 = n1 = 0;
+	for( i = 0 ; i < as0->nA ; i++ ){
+		if( as0->a[i].j0 < 0  ||  as1->a[i].j0 < 0 )
+		continue;
+
+		if( as0->a[i].j0 < as1->a[i].j0 ){
+			n0++;
+		}
+		else	n1++;
+	}
+
+	if( n0 == 0 && n1 == 0 )
+		return( -1 );
+
+	if( n0 > n1 )
+		return( 0 );
 
 	return( 1 );
 }
+
+
 
 
 

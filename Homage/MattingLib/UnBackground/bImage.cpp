@@ -618,27 +618,34 @@ bImage_set_sb_sideL( image_type *bim, int i0, int d, sb_type *s )
 	int		n;
 
 	s->ys = 0;
+	s->r = s->g = s->b = 0;
 	if( s->j0 < 0 || s->j1 < 0 ){
 		return;
 	}
 
 
-
 	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, i0+1, s->j0+1 );
 
-
+	int	R,	G,	B;
+	R = G = B = 0;
 
 	for( j = s->j0, n = 0 ; j < s->j0 + d && j <= s->j1 ; j++, bp++ ){
 
 
 		s->ys += IMAGE_RGB2Y( bp->r, bp->g, bp->b );
 
+		R += bp->r;
+		G += bp->g;
+		B += bp->b;
+
 		n++;
 	}
 
 	s->ys = s->ys / n;
 
-
+	s->r = R / n;
+	s->g = G / n;
+	s->b = B / n;
 
 
 	int j0 = s->j0 + d;
@@ -679,7 +686,7 @@ bImage_set_sb_sideR( image_type *bim, int i0, int d, sb_type *s )
 	int	j;
 	int		n;
 
-	s->ys = 0;
+	s->ys = s->r = s->g = s->b = 0;
 	if( s->j0 < 0 || s->j1 < 0 ){
 		return;
 	}
@@ -692,16 +699,25 @@ bImage_set_sb_sideR( image_type *bim, int i0, int d, sb_type *s )
 	bImage_type *bp = (bImage_type *)IMAGE_PIXEL( bim, i0+1, j0+1 );
 
 
-
+	int	R,	G,	B;
+	R = G = B = 0;
 	for( j = j0, n = 0 ; j <= s->j1 ; j++, bp++ ){
 
 
 		s->ys += IMAGE_RGB2Y( bp->r, bp->g, bp->b );
 
+		R += bp->r;
+		G += bp->g;
+		B += bp->b;
+
 		n++;
 	}
 
 	s->ys = s->ys / n;
+
+	s->r = R / n;
+	s->g = G / n;
+	s->b = B / n;
 
 
 
