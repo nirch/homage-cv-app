@@ -10,9 +10,9 @@ SDKS = [
 SCHEMES = [
 	'Util',
 	'Image',
+	'PlnTracker',
 	'Gpw',
 	'MattingLib',
-	'PlnTracker',
 ]
 
 
