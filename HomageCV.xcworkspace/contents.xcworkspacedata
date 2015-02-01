@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Tracking/PlnTracker/PlnTracker.xcodeproj">
+      location = "group:Core/Util/Util.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Core/Util/Util.xcodeproj">
+      location = "group:Tracking/PlnTracker/PlnTracker.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:VimGui/Gpw/Gpw.xcodeproj">

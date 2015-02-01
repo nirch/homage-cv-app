@@ -1,18 +1,18 @@
 import os
 import sys
 
-CMD = 'xcodebuild -workspace %(work_space)s -scheme %(scheme)s -sdk %(sdk)s'
+CMD = 'xcodebuild -workspace %(work_space)s -scheme %(scheme)s -sdk %(sdk)s -configuration Release'
 WORK_SPACE = 'HomageCV.xcworkspace'
 SDKS = [
 	'iphonesimulator8.1',
 	'iphoneos8.1'
 ]
 SCHEMES = [
-	'PlnTracker',
 	'Util',
+	'Image',
 	'Gpw',
 	'MattingLib',
-	'Image'
+	'PlnTracker',
 ]
 
 
