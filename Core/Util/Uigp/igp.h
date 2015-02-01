@@ -93,8 +93,13 @@ extern "C" {
 
 
 	// byte order
+#ifndef LITTLE_ENDIAN
 #define		LITTLE_ENDIAN		0
+#endif
+    
+#ifndef BIG_ENDIAN
 #define		BIG_ENDIAN			1
+#endif
 
 
 #ifndef M_PI
