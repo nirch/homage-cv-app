@@ -9,7 +9,7 @@
 #include	"ClnType.h"
 
 
-static void	pln_write( pln_type *pl, FILE *fp );
+//static void	pln_write( pln_type *pl, FILE *fp );
 
 
 
@@ -175,7 +175,7 @@ clnA_read( clnA_type **acl, char *file )
 
 
 static int
-	cln_read( cln_type **cl, FILE *fp )
+cln_read( cln_type **cl, FILE *fp )
 {
 	pln_type	*pl;
 
@@ -210,58 +210,63 @@ static int
 		pose = ftell(fp);
 	}
 
-//	if( ret == -2 ){
-		fseek( fp, pose, SEEK_SET );
-		return( 1 );
-//	}
 
-
-//	return( -1 );
-	
+	fseek( fp, pose, SEEK_SET );
+	return( 1 );	
 }
 
 
 
-#ifdef _AA_
-static int
-	cln_read( cln_type **cl, FILE *fp )
+static int	cln_write( cln_type *cl, FILE *fp );
+
+
+int
+clnA_write( clnA_type *acl, char *file )
 {
-	int	i,	version,	nPl;
-	char	signature[64];
-	pln_type	*pl;
+	FILE	*fp;
+	int i;
 
 
-
-	if( fscanf(fp, "%s  %d", signature, &version ) != 2 )
-		return( NULL );
-
-	if( strcmp( signature, "CL") != 0 && strcmp( signature, "PL") != 0 )
-		return( NULL );
-
-	int iFrame = 0;
-	if( version >=2 )
-		fscanf(fp, "%d", &iFrame );
-
-	fscanf(fp, "%d", &nPl );
+	if( (fp = fopen( file, "wb")) == NULL )
+		return( -1 );
 
 
-//	*apl = plnA_alloc( nPl+10 );
-	*cl = cln_alloc();
+	fprintf(fp, "%s  %d  %d\n", "CL", CL_VERSION, acl->nA );
 
-//	(*apl)->iFrame = iFrame;
 
-	for( i = 0 ; i < nPl ; i++ ){
-		pl = pln_read( fp );
+	for( i = 0 ; i < acl->nA ; i++ )
+		cln_write( acl->a[i], fp );
 
-		(*cl)->a[(*cl)->nA++ ] = pl;
-	}
-
+	fclose( fp );
 
 	return( 1 );
+
 }
-#endif
+
+static int
+cln_write( cln_type *cl, FILE *fp )
+{
 
 
+	//contour
+	//0
+	//transform
+	//416.389282  667.000000  1.000000   0.000000
+
+	fprintf(fp, "contour  %d\n", cl->type );
+
+	fprintf( fp, "transform\n" );
+	fprintf( fp, "%f %f %f %f\n", cl->ctr.x, cl->ctr.y, cl->scale, cl->angle );
+
+
+
+
+	int	i = 0;
+	for( i = 0 ; i < cl->nA ; i++ )
+		pln_write( cl->a[i], fp );
+
+	return( 1 );	
+}
 
 
 

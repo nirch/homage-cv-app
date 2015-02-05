@@ -88,6 +88,8 @@ cln_type *	cln_detach_plink( cln_type *sc, int iPlink );
 
 cln_type *	cln_lt2( cln_type *sc, lt2_type *lt, cln_type *c );
 
+void	cln_scale( cln_type *sc, float scale );
+
 
 void	cln_affine( cln_type *c, float a, float b, float s, float t );
 
@@ -157,6 +159,9 @@ int		cln_write(cln_type *cln, char *file );
 int		cln_read(cln_type **cln, char *file );
 
 int		clnA_read( clnA_type **acl, char *file );
+
+int		clnA_write( clnA_type *acl, char *file );
+
 
 
 

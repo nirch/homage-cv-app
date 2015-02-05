@@ -50,6 +50,7 @@ typedef struct dPln_type {
 	float	gt;
 	ln_type	*l;
 
+
 } dPln_type;
 
 
@@ -76,6 +77,8 @@ void	ln_set_aux( ln_type *l ) ;
 ln_type *	ln_create( vec2f_type *p0, vec2f_type *p1, float crbA );
 
 float	lnL_length( ln_type *link );
+float	lnL_lengthE( ln_type *link, ln_type *el );
+
 
 int		lnL_no( ln_type *link );
 
@@ -163,6 +166,10 @@ int	lnL_from_circle( vec2f_type *ctr0, float R, float dr, vec2f_type *ctr, ln_ty
 int	lnL_from_sub_circle( vec2f_type *ctr0, float R, vec2f_type *p0, vec2f_type *p1, float dr, vec2f_type *ctr, ln_type **lnL );
 
 
+
+void	ln_to_vlf( vec2f_type *ctr, ln_type *l, struct vl2f_type *vl );
+
+void	ln_from_vlf( vec2f_type *ctr, ln_type *l, struct vl2f_type *vl );
 
 	// LnSplt.c
 ln_type *	ln_split( ln_type *link, float t, float dt );

@@ -6,6 +6,7 @@
 #include	<math.h>
 #include	<stdlib.h>
 
+#include "Uvl/Vl2fType.h"
 
 #include	"Uigp/igp.h"
 #include	"Umath/Lt2Type.h"
@@ -176,6 +177,11 @@ lnL_copy_sub( vec2d *pctr, ln_type *plink, float gt0, float gt1, vec2d *ctr, ln_
 			l = LN_PREV(l);
 
 		free( l2 );
+
+		if( l == NULL ){
+			*link = NULL;
+			return( 1 );
+		}
 		l->p[1] = NULL;
 
 	}
@@ -386,4 +392,31 @@ lnL_from_points( vec2d p[], int no, int Fclose, vec2f_type *ctr, ln_type **lnL )
 	*ctr = p[0];
 	*lnL = link;
 	return( 1 );
+}
+
+
+
+void
+	ln_to_vlf( vec2f_type *ctr, ln_type *l, vl2f_type *vl )
+{
+	vl->p.x = ctr->x + 0.5 * l->v.x;
+	vl->p.y = ctr->y + 0.5 * l->v.y;
+
+	vl->d = 0.5*l->len;
+
+	vl->v.x = l->v.x / l->len;
+	vl->v.y = l->v.y / l->len;
+}
+
+
+void
+	ln_from_vlf( vec2f_type *ctr, ln_type *l, vl2f_type *vl )
+{
+	ctr->x = vl->p.x - vl->d*vl->v.x;
+	ctr->y = vl->p.y - vl->d*vl->v.y;
+
+	l->v.x = 2*vl->d *vl->v.x;
+	l->v.y = 2*vl->d *vl->v.y;
+
+	ln_set_aux( l );
 }

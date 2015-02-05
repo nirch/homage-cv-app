@@ -17,6 +17,7 @@ extern "C" {
 
 
 #define	PL_VERSION	4
+#define CL_VERSION  1	
 
 #define PLN_OPEN	1
 #define PLN_CLOSE	2
@@ -46,9 +47,14 @@ typedef struct pln_type {
 	int	id;
 
 	float	qulity;
+	
+	// RGB
+	int	color[2];		// rgb value
 
 
 	struct ellipse_type *e;
+	struct  crPlnA_type *ac;
+	struct intA_type	*ai;
 
 } pln_type;
 
@@ -75,6 +81,7 @@ typedef struct plnA_type {
 	float	scale;
 
 	vec2f_type	v;
+
 
 
 
@@ -172,7 +179,15 @@ pln_type *	pln_from_circle( vec2f_type *ctr, float R, float dr );
 
 pln_type *	pln_from_sub_circle( vec2f_type *ctr0, float R, vec2f_type *p0, vec2f_type *p1, float dr );
 
+pln_type *	pln_from_vl_N( struct vl2f_type *vl );
+
 pln_type *	pln_from_vl( struct vl2f_type *vl );
+plnA_type *	plnA_from_vlA( vl2fA_type *avl, plnA_type *apl );
+
+
+void	pln_to_vl_1( pln_type *pl, struct vl2f_type *v );
+
+
 
 float	plnA_group_length( plnA_type *aP, int group );
 
@@ -196,6 +211,8 @@ void	plnA_destroy_pl( plnA_type *apl, int i0 );
 
 plnA_type *	plnA_copy( plnA_type *apl, int fData, plnA_type *capl );
 
+
+pln_type *	plnA_get( plnA_type *apl, int i0, int detouch );
 
 
 
@@ -232,7 +249,7 @@ float	plnA_length( plnA_type *apl );
 
 int		plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type *sd );
 
-void	plnA_add( plnA_type *apl, pln_type *pl );
+int	plnA_add( plnA_type *apl, pln_type *pl );
 
 void	plnA_addA( plnA_type *apl, plnA_type *apl1 );
 
@@ -245,10 +262,11 @@ void	plnA_scale( plnA_type *aP, float scale );
 
 void	pln_sample( pln_type *pl, float t0, float r, int n, int direct, pt2dA_type *apt );
 
-void	pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt );
+pt2dA_type *	pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt );
 
 pt2dA_type * pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt );
 
+pt2dA_type *	pln_sampleC( pln_type *pl, float gt0, int n, float dt, pt2dA_type *apt );
 
 
 pln_type *	pln_split( pln_type *spl, float gt, float dt );
@@ -286,6 +304,8 @@ void	pln_dump( pln_type *pl, char *prefix, int index, char *suffix );
 
 int		plnA_write( plnA_type *apl, char *file );
 
+void	pln_write( pln_type *pl, FILE *fp );
+
 
 //int		plnA_read( char *file, plnA_type **apl );
 int		plnA_read( plnA_type **apl, char *file );
@@ -316,6 +336,8 @@ float	pln_straightline_measure( pln_type *pl, float gt, float dt, int n );
 
 int		pln_straightline( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl );
 
+plnA_type *	plnA_straightline( plnA_type *apl, plnA_type *apl1 );
+
 
 
 void	pPln_reorder( pPln_type a[], int n );
@@ -345,6 +367,9 @@ void	plnA_append( plnA_type *tapl, plnA_type *apl );
 
 
 void	plnA_set_groupId( plnA_type *apl, int group );
+
+void	plnA_set_qulity( plnA_type *apl, float qulity );
+
 
 void	pln_close( pln_type *pl, float T );
 
@@ -405,6 +430,9 @@ int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
 	// lnFromGapp.c
 pln_type *pln_from_gapp( gapp_type *gapp );
 
+void	pln_to_gapp( pln_type *pl, float dt, gapp_type *gapp );
+
+
 
 	// PlnEigen.cpp
 int	pln_eigen( pln_type *pl, float dt, struct eigen2d_type *e );
@@ -437,6 +465,9 @@ int		plnA_smooth( plnA_type *apl );
 pln_type *	pln_smooth( pln_type *pl );
 
 
+	// PlnSmoothSegment.cpp
+int	pln_smooth_segment( pln_type *pl, float minLen, gapp_type *gapp, float ag[], int *nG );
+
 
 	// PlnVTool.cpp
 plnF_type *		plnF_alloc( int n );
@@ -450,6 +481,10 @@ plnA_type *	plnF_get( plnF_type *vpl, int iFrame );
 void	plnF_clear( plnF_type *vpl, int iFrame );
 
 
+	// PlnStraightlineSplit.cpp
+plnA_type *	plnA_straightline_split( plnA_type *apl, plnA_type *apl1 );
+
+
 
 #ifdef _DUMP
 #define PLNA_DUMP( apl, name, index, ext )  plnA_dump( apl, name, index, ext )
@@ -459,7 +494,7 @@ void	plnF_clear( plnF_type *vpl, int iFrame );
 #else
 #define PLNA_DUMP( apl, name, index, ext )
 #define PLN_DUMP( pl, name, index, ext )
-
+#define PLNA_DUMPF( apl, name, index, ext, flag ) 
 #endif
 
 

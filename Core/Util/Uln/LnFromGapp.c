@@ -78,3 +78,38 @@ int	i,	iseg;
 	return( gapp->ino );
 }
 
+
+
+void
+pln_to_gapp( pln_type *pl, float dt, gapp_type *gapp )
+{
+ln_type	*l;
+vec2d	v;
+float	t,	t0;//,	len;//,	a;
+int	no;
+
+	no = pl->len + 10;
+
+	gapp_realloc( gapp, no );
+
+
+	gapp->no = 0;
+	t0 = 0;
+
+	for( l = pl->link, v = pl->ctr ; l != NULL ; l = LN_NEXT(l) ){
+
+		for( t = t0 ; t < l->len ; t += dt ){
+			ln_t2xy( &v, l, t, &gapp->v[gapp->no] );
+			ln_tanget( l, t, &gapp->tang[gapp->no] );
+
+			gapp->flag[gapp->no] = 0;
+
+			gapp->no++;
+		}
+
+		t0 = t - l->len;
+
+		v.x += l->v.x;
+		v.y += l->v.y;
+	}
+}

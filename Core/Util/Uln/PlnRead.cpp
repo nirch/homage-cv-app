@@ -359,6 +359,9 @@ char	line[512];
 
 	fscanf( fp, "%d   %d", &(*pl)->state, &type );
 
+	if( type & 0x02 )	fscanf( fp, "%X   %X", &(*pl)->color[0], &(*pl)->color[1] );
+	if( type & 0x04 )	fscanf( fp, "%d", &(*pl)->group );
+
 	fscanf( fp, "%f  %f", &(*pl)->ctr.x, &(*pl)->ctr.y );
 
 	int	anchor;

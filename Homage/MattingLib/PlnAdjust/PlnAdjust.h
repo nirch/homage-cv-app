@@ -37,6 +37,11 @@ int	plnA_adjust_edge( plnA_type *apl, plnA_type *eapl, float height, float ht[2]
 int	plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int iFrame );
 
 
+	// PlnIntersect.cpp
+int	pln_adjust_intersect( pln_type *pl );
+
+int	plnA_adjust_intersect( plnA_type *apl );
+
 
 
 #endif

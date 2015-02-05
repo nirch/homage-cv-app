@@ -14,6 +14,7 @@
 #include "Uvl/Vl2fType.h"
 #include "Uln/PlnType.h"
 #include "Umath/Ellipse/EllipseType.h"
+#include "CrPlnType.h"
 
 
 pln_type *
@@ -29,15 +30,20 @@ pln_alloc( int no )
 	pl->step = 0;
 	pl->id = 0;
 
+	pl->group = 0;
+
 	pl->link = NULL;
 
 	if( no > 0 )
 		pl->link = lnL_alloc( no );
 
+	pl->color[0] = pl->color[1] = 0xFF000000;
 
 	pl->e = NULL;
-//	pl->type = 0;
-//	pl->data = NULL;
+
+
+	pl->ac = NULL;
+	pl->ai = NULL;
 
 	GPMEMORY_LEAK_ALLOC( pl );
 
@@ -70,6 +76,12 @@ pln_destroy( pln_type *pl )
 
 	if( pl->e != NULL )
 		free( pl->e );
+
+
+	if( pl->ac != NULL ){
+		crPlnA_destroy( pl->ac );
+		pl->ac = NULL;
+	}
 
 //	if( pl->data = NULL )
 //		free( pl->data );
@@ -190,6 +202,19 @@ plnA_destroy_pl( plnA_type *apl, int i0 )
 }
 
 
+pln_type * 
+plnA_get( plnA_type *apl, int i0, int detouch )
+{
+	pln_type *pl = apl->a[i0];
+
+	if( detouch == 1 ){
+		apl->a[i0] = NULL;
+
+		plnA_decrease( apl );
+	}
+
+	return( pl );
+}
 
 
 
@@ -415,7 +440,7 @@ pln_from_sub_circle( vec2f_type *ctr0, float R, vec2f_type *p0, vec2f_type *p1, 
 
 
 pln_type *
-pln_from_vl( vl2f_type *vl )
+pln_from_vl_N( vl2f_type *vl )
 {
 pln_type	*pl;
 ln_type *l;
@@ -441,7 +466,64 @@ ln_type *l;
 
 	pl->len = l->len;
 
+	pl->state = PLN_OPEN;
+
 	return( pl );
+}
+
+
+pln_type *
+pln_from_vl( vl2f_type *vl )
+{
+	pln_type	*pl;
+	ln_type *l;
+
+	pl = pln_alloc( 1 );
+
+	l = pl->link;
+
+	pl->ctr.x = vl->p.x - vl->d * vl->v.x;
+	pl->ctr.y = vl->p.y - vl->d * vl->v.y;
+
+
+	l->len = 2*vl->d;
+
+	l->v.y = l->len * vl->v.y;
+	l->v.x = l->len * vl->v.x;
+
+
+	l->a = l->c_prb = 0;
+
+	l->u.x = vl->v.y;
+	l->u.y = -vl->v.x;
+
+	pl->len = l->len;
+
+	pl->state = PLN_OPEN;
+
+	return( pl );
+}
+
+
+plnA_type *
+plnA_from_vlA( vl2fA_type *avl, plnA_type *apl )
+{
+	int i;
+
+	apl = plnA_realloc( apl, avl->nA );
+	apl->nA = 0;
+
+	for( i = 0 ; i < avl->nA ; i++ )
+		apl->a[apl->nA++] = pln_from_vl( &avl->a[i] );
+
+	return( apl );
+}
+
+
+void
+pln_to_vl_1( pln_type *pl, vl2f_type *v )
+{
+	ln_to_vlf( &pl->ctr, pl->link, v );
 }
 
 
@@ -661,8 +743,30 @@ pln_trim( pln_type *pl, int direct, float gt )
 	vec2f_type	ctr;
 	ln_type	*link;
 
-//	if( pl->len < gt )
-//		gt = 0.5*pl->len;
+
+
+
+	if( direct == F_END ){
+		ln_type *l, *l2;
+		float t;
+		lnL_gt2lt( pl->link, pl->len-gt, &l, &t );
+		l2 = ln_split( l, t, 0.25 );
+		if( l2 == l )
+			l = LN_PREV( l );
+
+		lnL_destroy( l2 );
+
+		if( l == NULL ){
+			pl->link = 0;
+			pl->len = 0;
+			return;
+		}
+			
+		l->p[1] = NULL;
+		pln_set_length( pl );
+
+		return;
+	}
 
 
 	if( direct == F_BEGIN )
@@ -691,6 +795,7 @@ pln_type	*pl;
 	pl->len = lnL_length( pl->link );
 
 	pl->state = PLN_OPEN;
+
 
 	return( pl );
 }
@@ -745,7 +850,7 @@ pln_appendL( pln_type *pl, vec2f_type *ctr, ln_type *link )
 void
 pln_append( pln_type *pl, pln_type *pl1 )
 {
-	lnL_connect_s( &pl->ctr, pl->link, &pl1->ctr, pl1->link, 1.0 );
+	lnL_connect_s( &pl->ctr, pl->link, &pl1->ctr, pl1->link, 0.5 );
 
 	pl1->link = NULL;
 
@@ -898,7 +1003,7 @@ plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type
 	return( iMin );
 }
 
-void
+int
 plnA_add( plnA_type *apl, pln_type *pl )
 {
 	if( apl->nA >= apl->NA ){
@@ -907,6 +1012,8 @@ plnA_add( plnA_type *apl, pln_type *pl )
 	}
 
 	apl->a[apl->nA++] = pl;
+
+	return( apl->nA-1);
 }
 
 void
@@ -993,7 +1100,7 @@ pln_sample( pln_type *pl, float t0, float r, int n, int direct, pt2dA_type *apt 
 }
 
 
-void
+pt2dA_type *
 pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt )
 {
 pt2d_type	*pt;
@@ -1002,8 +1109,11 @@ float	dt,	t;
 float	n;
 
 
-	n = pl->len / D + 0.5;
-	dt = pl->len /n;
+	n = pl->len / D + 0.5 + 2;
+	//dt = pl->len /n;// + 2;
+	dt = D;
+
+	apt = pt2dA_realloc( apt, n );
 
 	for( t = 0 ; t < pl->len ; t += dt ){
 
@@ -1020,6 +1130,9 @@ float	n;
 		pt->f = t;
 		pt->id = 0;
 	}
+
+
+	return( apt );
 }
 
 
@@ -1061,6 +1174,45 @@ pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt )
 
 
 
+pt2dA_type *
+pln_sampleC( pln_type *pl, float gt0, int n, float dt, pt2dA_type *apt )
+{
+	pt2d_type	*pt;
+	vec2f_type	p;
+	float	gt;
+	int	i;
+	
+
+	if( n * dt > pl->len )	
+		n = pl->len / dt;
+
+	apt = pt2dA_realloc( apt, n );
+
+	apt->nA = 0;
+
+	for( gt = gt0, i = 0 ; i < n ; i++, gt += dt ){
+
+		pt = &apt->p[apt->nP++];
+
+		if( gt > pl->len )
+			gt = gt - pl->len;
+
+		pln_gt2p( pl, gt, &p );
+
+		pt->p.x = p.y;
+		pt->p.y = p.x;
+
+		pt->n.x = 1;
+		pt->n.y = 0;
+
+		pt->r = 1.0;
+		pt->f = gt;
+		pt->id = 0;
+	}
+
+	return( apt );
+}
+
 
 
 pln_type *
@@ -1078,7 +1230,9 @@ float	t;
 
 	pl = pln_alloc(0);
 
-	pl->link = ln_split_t( l, t );
+//	pl->link = ln_split_t( l, t );
+
+	pl->link = ln_split( l, t, 0.5 );
 
 
 
@@ -1094,8 +1248,10 @@ float	t;
 	pl->link->p[0] = NULL;
 
 	pl->len = lnL_length( pl->link );
+	pl->state = PLN_OPEN;
 
 	spl->len = lnL_length( spl->link );
+
 
 	return( pl );
 
@@ -1446,6 +1602,17 @@ plnA_set_groupId( plnA_type *apl, int group )
 	}
 }
 
+
+
+void
+plnA_set_qulity( plnA_type *apl, float qulity )
+{
+	int	i;
+
+	for( i = 0 ; i < apl->nA ; i++ ){
+		apl->a[i]->qulity = qulity;
+	}
+}
 
 
 

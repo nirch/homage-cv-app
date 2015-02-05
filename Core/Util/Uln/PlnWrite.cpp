@@ -7,7 +7,7 @@
 #include	"PlnType.h"
 
 
-static void	pln_write( pln_type *pl, FILE *fp );
+//static void	pln_write( pln_type *pl, FILE *fp );
 
 static int	plnA_read( plnA_type **apl, FILE*fp );
 
@@ -122,7 +122,7 @@ plnA_write( plnA_type *apl, FILE *fp )
 }
 
 
-static void
+void
 pln_write(pln_type *pl, FILE *fp )
 {
 	ln_type	*l;
@@ -133,8 +133,28 @@ pln_write(pln_type *pl, FILE *fp )
 
 	no = lnL_no( pl->link );
 
+	int	type = 0;
+	if( (pl->color[0] & 0xff0000) != 0 )
+		type = 0x02;
+
+	if( pl->group > 0 )
+		type |= 0x04;
+
 	fprintf( fp, "polylink\n" );
-	fprintf( fp, "%d   %d   %d\n", no, pl->state, 0 );
+
+
+	fprintf( fp, "%d   %d   %d", no, pl->state, type );
+	if( type & 0x02 )
+		fprintf( fp, "  0x%X   0x%X", pl->color[0], pl->color[1] );
+
+	if( type & 0x04 )
+		fprintf( fp, "  %d", pl->group );
+
+	fprintf( fp, "\n" );
+
+
+
+
 	fprintf( fp, "%.6f  %.6f\n", pl->ctr.x, pl->ctr.y );
 
 

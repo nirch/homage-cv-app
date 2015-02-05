@@ -197,6 +197,30 @@ int	i;
 }
 
 
+plnA_type *
+plnA_straightline( plnA_type *apl, plnA_type *apl1 )
+{
+	vl2f_type vl;
+	int	i;
+
+	apl1 = plnA_realloc( apl1, apl->nA );
+
+
+	for( i = 0 ; i <  apl->nA ; i++ ){
+
+		if( pln_straightline( apl->a[i], 0, -1, 1, &vl ) < 0 )
+			continue;
+
+		apl1->a[apl1->nA++] = pln_from_vl( &vl );
+
+		//fprintf( stdout, ". " );
+	}
+
+	return( apl1 );
+}
+
+
+
 int
 pln_straightline( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl )
 {
@@ -211,10 +235,15 @@ pln_straightline( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl )
 		return( -1 );
 	}
 
+
+
 	pt2dA_destroy( apt );
 
 	if( ABS( vl->e) > 0.125 )
 		return( -1 );
+
+
+	vl2f_swap( vl );
 
 	return( 1 );
 }

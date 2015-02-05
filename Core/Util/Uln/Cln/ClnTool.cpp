@@ -214,6 +214,21 @@ cln_lt2( cln_type *sc, lt2_type *lt, cln_type *c )
 }
 
 
+void
+cln_scale( cln_type *c, float scale )
+{
+	int	i;
+
+
+	c->ctr.x *= scale;
+	c->ctr.y *= scale;
+
+
+	for( i = 0 ; i < c->nA ; i++ )
+		pln_scale( c->a[i], scale );
+
+}
+
 
 #ifdef _AA_
 void 

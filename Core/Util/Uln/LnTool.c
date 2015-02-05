@@ -7,6 +7,8 @@
 #include	<stdlib.h>
 
 
+
+
 #include	"Uigp/igp.h"
 
 
@@ -472,6 +474,21 @@ float len;
 	return( len );
 }
 
+float
+	lnL_lengthE( ln_type *link, ln_type *el )
+{
+	ln_type	*l;
+	float len;
+
+	if( link == NULL )	return( 0 );
+
+	for( l = link, len = 0 ; l != el && l != NULL ; l = l->p[F_END] )
+		len += l->len;
+
+	return( len );
+}
+
+
 
 int
 lnL_no( ln_type *link )
@@ -497,3 +514,6 @@ ln_connect( ln_type *l, ln_type *nl )
 	l->p[1] = nl;
 	nl->p[0] = l;
 }
+
+
+

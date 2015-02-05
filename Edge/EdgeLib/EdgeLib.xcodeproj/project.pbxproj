@@ -1,0 +1,902 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		50F05EB878124D9183BEF19A /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5966C10D77CC44C891B9E492 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				CFC1D4EB7B1D4917932B53D5 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		BEB153ABC3EE4A1F8BBBD92B /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6B4EAE9C0AB84CEDAA3E52C6 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				813508D777F149ACAA1FA2D4 /* CMake Rules */,
+			);
+			dependencies = (
+				75842C705AB444D59DD2187A /* PBXTargetDependency */,
+				CBF6CBCFCC3C4D5D9A670F7E /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0AA45BAA595449BE969173CB /* pEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40BCB42871B04139A4D84FC7 /* pEdgeDetector.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1EB1B4AC038F455384AB5905 /* pEdgeLinking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52FFE68A9E9143C993343107 /* pEdgeLinking.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		34954110D0E244BAA9D4E61C /* RidgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FED24286622446FCB070DBCF /* RidgeDetector.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		54B915133A6F4B749CBA98FF /* pEdgeLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DB4F1105704F12B6AA2C8E /* pEdgeLine.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5D0A158FA8A54881B1FA8881 /* plEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1486F8AE183B458CAF941582 /* plEdge.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		698AEFA163534783814D58D4 /* pEdgeDump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE3192A015E943B3B5BDB317 /* pEdgeDump.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6AEBC714E9E946B5BD881B05 /* pEdgePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 951E32C395AB49EDB43175CB /* pEdgePrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		83C4179C3DF7486F9FEAB563 /* pEdgeStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF4722D8104FB2BA34B577 /* pEdgeStatic.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C9A22F33BB8F4C1C808259E8 /* RidgeCentering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBE86D6C67B47FBAC56D896 /* RidgeCentering.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D03A31CA174E40DF00AE12A1 /* HunchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03A31C3174E40DF00AE12A1 /* HunchDetector.cpp */; };
+		D03A31CC174E40DF00AE12A1 /* pHunchDetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03A31C6174E40DF00AE12A1 /* pHunchDetect.cpp */; };
+		D03A31CD174E40DF00AE12A1 /* pHunchPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03A31C7174E40DF00AE12A1 /* pHunchPrm.cpp */; };
+		D03A31CE174E40DF00AE12A1 /* pHunchTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03A31C8174E40DF00AE12A1 /* pHunchTool.cpp */; };
+		D03A31D0175A400C00AE12A1 /* pEdgeSLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03A31CF175A400B00AE12A1 /* pEdgeSLine.cpp */; };
+		D0EEE2FB17CA148400AF0AB5 /* plRidge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2E717CA148400AF0AB5 /* plRidge.cpp */; };
+		D0EEE2FC17CA148400AF0AB5 /* plRidgeUnion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2E917CA148400AF0AB5 /* plRidgeUnion.cpp */; };
+		D0EEE2FD17CA148400AF0AB5 /* pRidgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2EA17CA148400AF0AB5 /* pRidgeDetector.cpp */; };
+		D0EEE2FE17CA148400AF0AB5 /* pRidgeEdgeMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2EB17CA148400AF0AB5 /* pRidgeEdgeMask.cpp */; };
+		D0EEE2FF17CA148400AF0AB5 /* pRidgeLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2EC17CA148400AF0AB5 /* pRidgeLine.cpp */; };
+		D0EEE30017CA148400AF0AB5 /* pRidgeLineN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2ED17CA148400AF0AB5 /* pRidgeLineN.cpp */; };
+		D0EEE30117CA148400AF0AB5 /* pRidgeLinking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2EE17CA148400AF0AB5 /* pRidgeLinking.cpp */; };
+		D0EEE30217CA148400AF0AB5 /* pRidgeMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2EF17CA148400AF0AB5 /* pRidgeMask.cpp */; };
+		D0EEE30317CA148400AF0AB5 /* pRidgeDetectPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2F117CA148400AF0AB5 /* pRidgeDetectPrm.cpp */; };
+		D0EEE30417CA148400AF0AB5 /* pRidgeLinePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2F217CA148400AF0AB5 /* pRidgeLinePrm.cpp */; };
+		D0EEE30517CA148400AF0AB5 /* pRidgePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2F317CA148400AF0AB5 /* pRidgePrm.cpp */; };
+		D0EEE30617CA148400AF0AB5 /* RidgeCentering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2F617CA148400AF0AB5 /* RidgeCentering.cpp */; };
+		D0EEE30717CA148400AF0AB5 /* RidgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0EEE2F717CA148400AF0AB5 /* RidgeDetector.cpp */; };
+		D777C50372A0479A818D7B16 /* LineDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D76319573417AAAA351B7 /* LineDetector.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4B6A19C00D2D434687A7F35A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0508E50F67F42C3A3167EA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50F05EB878124D9183BEF19A;
+			remoteInfo = ZERO_CHECK;
+		};
+		DE27E7DF3CC44828AE18BD94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0508E50F67F42C3A3167EA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D745E1F1586F462C92C4D734;
+			remoteInfo = EdgeLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1486F8AE183B458CAF941582 /* plEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = plEdge.cpp; path = LineDetector/plEdge.cpp; sourceTree = SOURCE_ROOT; };
+		1DC1F4B9B89B4FF6AEEFE6C4 /* libEdgeLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEdgeLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CBE86D6C67B47FBAC56D896 /* RidgeCentering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RidgeCentering.cpp; path = Ridge/RidgeCentering.cpp; sourceTree = SOURCE_ROOT; };
+		40BCB42871B04139A4D84FC7 /* pEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeDetector.cpp; path = LineDetector/pEdgeDetector.cpp; sourceTree = SOURCE_ROOT; };
+		52FFE68A9E9143C993343107 /* pEdgeLinking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeLinking.cpp; path = LineDetector/pEdgeLinking.cpp; sourceTree = SOURCE_ROOT; };
+		5883A54B52AA4F5196463C60 /* pEdgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pEdgeType.h; path = LineDetector/pEdgeType.h; sourceTree = SOURCE_ROOT; };
+		5DAF4722D8104FB2BA34B577 /* pEdgeStatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeStatic.cpp; path = LineDetector/pEdgeStatic.cpp; sourceTree = SOURCE_ROOT; };
+		67B35EF79A064CEC86FAC020 /* LineDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineDetector.h; path = LineDetector/LineDetector.h; sourceTree = SOURCE_ROOT; };
+		6BF6653DF0964BCEA202A5AB /* plRidgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = plRidgeType.h; path = Ridge/plRidgeType.h; sourceTree = SOURCE_ROOT; };
+		72DB4F1105704F12B6AA2C8E /* pEdgeLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeLine.cpp; path = LineDetector/pEdgeLine.cpp; sourceTree = SOURCE_ROOT; };
+		7912767CF5F44E019C6AFEC2 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.text; path = ReadMe.txt; sourceTree = SOURCE_ROOT; };
+		7B4D76319573417AAAA351B7 /* LineDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LineDetector.cpp; path = LineDetector/LineDetector.cpp; sourceTree = SOURCE_ROOT; };
+		951E32C395AB49EDB43175CB /* pEdgePrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgePrm.cpp; path = LineDetector/pEdgePrm.cpp; sourceTree = SOURCE_ROOT; };
+		D03A31C3174E40DF00AE12A1 /* HunchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HunchDetector.cpp; path = Hunch/HunchDetector.cpp; sourceTree = "<group>"; };
+		D03A31C4174E40DF00AE12A1 /* HunchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HunchDetector.h; path = Hunch/HunchDetector.h; sourceTree = "<group>"; };
+		D03A31C6174E40DF00AE12A1 /* pHunchDetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pHunchDetect.cpp; path = Hunch/pHunchDetect.cpp; sourceTree = "<group>"; };
+		D03A31C7174E40DF00AE12A1 /* pHunchPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pHunchPrm.cpp; path = Hunch/pHunchPrm.cpp; sourceTree = "<group>"; };
+		D03A31C8174E40DF00AE12A1 /* pHunchTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pHunchTool.cpp; path = Hunch/pHunchTool.cpp; sourceTree = "<group>"; };
+		D03A31C9174E40DF00AE12A1 /* pHunchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pHunchType.h; path = Hunch/pHunchType.h; sourceTree = "<group>"; };
+		D03A31CF175A400B00AE12A1 /* pEdgeSLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeSLine.cpp; path = LineDetector/pEdgeSLine.cpp; sourceTree = "<group>"; };
+		D0EEE2E717CA148400AF0AB5 /* plRidge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plRidge.cpp; sourceTree = "<group>"; };
+		D0EEE2E817CA148400AF0AB5 /* plRidgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plRidgeType.h; sourceTree = "<group>"; };
+		D0EEE2E917CA148400AF0AB5 /* plRidgeUnion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plRidgeUnion.cpp; sourceTree = "<group>"; };
+		D0EEE2EA17CA148400AF0AB5 /* pRidgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeDetector.cpp; sourceTree = "<group>"; };
+		D0EEE2EB17CA148400AF0AB5 /* pRidgeEdgeMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeEdgeMask.cpp; sourceTree = "<group>"; };
+		D0EEE2EC17CA148400AF0AB5 /* pRidgeLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeLine.cpp; sourceTree = "<group>"; };
+		D0EEE2ED17CA148400AF0AB5 /* pRidgeLineN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeLineN.cpp; sourceTree = "<group>"; };
+		D0EEE2EE17CA148400AF0AB5 /* pRidgeLinking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeLinking.cpp; sourceTree = "<group>"; };
+		D0EEE2EF17CA148400AF0AB5 /* pRidgeMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeMask.cpp; sourceTree = "<group>"; };
+		D0EEE2F117CA148400AF0AB5 /* pRidgeDetectPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeDetectPrm.cpp; sourceTree = "<group>"; };
+		D0EEE2F217CA148400AF0AB5 /* pRidgeLinePrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgeLinePrm.cpp; sourceTree = "<group>"; };
+		D0EEE2F317CA148400AF0AB5 /* pRidgePrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pRidgePrm.cpp; sourceTree = "<group>"; };
+		D0EEE2F417CA148400AF0AB5 /* pRidgePrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pRidgePrm.h; sourceTree = "<group>"; };
+		D0EEE2F517CA148400AF0AB5 /* PRidgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRidgeType.h; sourceTree = "<group>"; };
+		D0EEE2F617CA148400AF0AB5 /* RidgeCentering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RidgeCentering.cpp; sourceTree = "<group>"; };
+		D0EEE2F717CA148400AF0AB5 /* RidgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RidgeDetector.cpp; sourceTree = "<group>"; };
+		D0EEE2F817CA148400AF0AB5 /* RidgeDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidgeDetector.h; sourceTree = "<group>"; };
+		D93F12C8D0AA47C1B9CF7C0D /* RidgeDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidgeDetector.h; path = Ridge/RidgeDetector.h; sourceTree = SOURCE_ROOT; };
+		DFC8D9C6F65540AB84B5B73D /* PRidgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PRidgeType.h; path = Ridge/PRidgeType.h; sourceTree = SOURCE_ROOT; };
+		E99DF10F0F1548B0A7426FA1 /* plEdgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = plEdgeType.h; path = LineDetector/plEdgeType.h; sourceTree = SOURCE_ROOT; };
+		FB66A59B99BD485F9ED396CF /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		FDAB82126E294C30AD5F6771 /* pRidgePrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pRidgePrm.h; path = Ridge/pRidgePrm/pRidgePrm.h; sourceTree = SOURCE_ROOT; };
+		FE3192A015E943B3B5BDB317 /* pEdgeDump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeDump.cpp; path = LineDetector/pEdgeDump.cpp; sourceTree = SOURCE_ROOT; };
+		FED24286622446FCB070DBCF /* RidgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RidgeDetector.cpp; path = Ridge/RidgeDetector.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0626B7F629124E3B89E90DD3 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		129F45511A7E4A0781FBC97A /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				D03A31CF175A400B00AE12A1 /* pEdgeSLine.cpp */,
+				7B4D76319573417AAAA351B7 /* LineDetector.cpp */,
+				40BCB42871B04139A4D84FC7 /* pEdgeDetector.cpp */,
+				FE3192A015E943B3B5BDB317 /* pEdgeDump.cpp */,
+				72DB4F1105704F12B6AA2C8E /* pEdgeLine.cpp */,
+				52FFE68A9E9143C993343107 /* pEdgeLinking.cpp */,
+				951E32C395AB49EDB43175CB /* pEdgePrm.cpp */,
+				5DAF4722D8104FB2BA34B577 /* pEdgeStatic.cpp */,
+				1486F8AE183B458CAF941582 /* plEdge.cpp */,
+				3CBE86D6C67B47FBAC56D896 /* RidgeCentering.cpp */,
+				FED24286622446FCB070DBCF /* RidgeDetector.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		229F062E97F14E3AA2042D4A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4E2C9C0F6DDC47EABE4AC46D /* ALL_BUILD */,
+				BA03EE465A8446F48A1B9FED /* EdgeLib */,
+				2C8604698A8E40C3821E6783 /* ZERO_CHECK */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		2C8604698A8E40C3821E6783 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				3D79A5CE4AEB45268A2E4A75 /* CMake Rules */,
+				FB66A59B99BD485F9ED396CF /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		3D79A5CE4AEB45268A2E4A75 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		4E2C9C0F6DDC47EABE4AC46D /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				0626B7F629124E3B89E90DD3 /* CMake Rules */,
+				FB66A59B99BD485F9ED396CF /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		4FA93D4297384E60B59D6CE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5DCE82E1573149409807BE5E /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				67B35EF79A064CEC86FAC020 /* LineDetector.h */,
+				5883A54B52AA4F5196463C60 /* pEdgeType.h */,
+				E99DF10F0F1548B0A7426FA1 /* plEdgeType.h */,
+				6BF6653DF0964BCEA202A5AB /* plRidgeType.h */,
+				FDAB82126E294C30AD5F6771 /* pRidgePrm.h */,
+				DFC8D9C6F65540AB84B5B73D /* PRidgeType.h */,
+				D93F12C8D0AA47C1B9CF7C0D /* RidgeDetector.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		9DE41353B7FC47C18F7E140C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DC1F4B9B89B4FF6AEEFE6C4 /* libEdgeLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A768E4CD5E724409BDD09300 = {
+			isa = PBXGroup;
+			children = (
+				229F062E97F14E3AA2042D4A /* Sources */,
+				4FA93D4297384E60B59D6CE4 /* Resources */,
+				9DE41353B7FC47C18F7E140C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA03EE465A8446F48A1B9FED /* EdgeLib */ = {
+			isa = PBXGroup;
+			children = (
+				D0EEE2E317CA148400AF0AB5 /* Ridge */,
+				D03A31C2174E408900AE12A1 /* Hunch */,
+				129F45511A7E4A0781FBC97A /* Source Files */,
+				5DCE82E1573149409807BE5E /* Header Files */,
+				7912767CF5F44E019C6AFEC2 /* ReadMe.txt */,
+				FB66A59B99BD485F9ED396CF /* CMakeLists.txt */,
+			);
+			name = EdgeLib;
+			sourceTree = "<group>";
+		};
+		D03A31C2174E408900AE12A1 /* Hunch */ = {
+			isa = PBXGroup;
+			children = (
+				D03A31C3174E40DF00AE12A1 /* HunchDetector.cpp */,
+				D03A31C4174E40DF00AE12A1 /* HunchDetector.h */,
+				D03A31C6174E40DF00AE12A1 /* pHunchDetect.cpp */,
+				D03A31C7174E40DF00AE12A1 /* pHunchPrm.cpp */,
+				D03A31C8174E40DF00AE12A1 /* pHunchTool.cpp */,
+				D03A31C9174E40DF00AE12A1 /* pHunchType.h */,
+			);
+			name = Hunch;
+			sourceTree = "<group>";
+		};
+		D0EEE2E317CA148400AF0AB5 /* Ridge */ = {
+			isa = PBXGroup;
+			children = (
+				D0EEE2E717CA148400AF0AB5 /* plRidge.cpp */,
+				D0EEE2E817CA148400AF0AB5 /* plRidgeType.h */,
+				D0EEE2E917CA148400AF0AB5 /* plRidgeUnion.cpp */,
+				D0EEE2EA17CA148400AF0AB5 /* pRidgeDetector.cpp */,
+				D0EEE2EB17CA148400AF0AB5 /* pRidgeEdgeMask.cpp */,
+				D0EEE2EC17CA148400AF0AB5 /* pRidgeLine.cpp */,
+				D0EEE2ED17CA148400AF0AB5 /* pRidgeLineN.cpp */,
+				D0EEE2EE17CA148400AF0AB5 /* pRidgeLinking.cpp */,
+				D0EEE2EF17CA148400AF0AB5 /* pRidgeMask.cpp */,
+				D0EEE2F017CA148400AF0AB5 /* pRidgePrm */,
+				D0EEE2F517CA148400AF0AB5 /* PRidgeType.h */,
+				D0EEE2F617CA148400AF0AB5 /* RidgeCentering.cpp */,
+				D0EEE2F717CA148400AF0AB5 /* RidgeDetector.cpp */,
+				D0EEE2F817CA148400AF0AB5 /* RidgeDetector.h */,
+			);
+			path = Ridge;
+			sourceTree = "<group>";
+		};
+		D0EEE2F017CA148400AF0AB5 /* pRidgePrm */ = {
+			isa = PBXGroup;
+			children = (
+				D0EEE2F117CA148400AF0AB5 /* pRidgeDetectPrm.cpp */,
+				D0EEE2F217CA148400AF0AB5 /* pRidgeLinePrm.cpp */,
+				D0EEE2F317CA148400AF0AB5 /* pRidgePrm.cpp */,
+				D0EEE2F417CA148400AF0AB5 /* pRidgePrm.h */,
+			);
+			path = pRidgePrm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D745E1F1586F462C92C4D734 /* EdgeLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57EBCDC1E8074B029247CBC3 /* Build configuration list for PBXNativeTarget "EdgeLib" */;
+			buildPhases = (
+				7898F00194C34D1B8443455A /* Sources */,
+				7AE10075DB2E4697828383C8 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75842C705AB444D59DD2187A /* PBXTargetDependency */,
+			);
+			name = EdgeLib;
+			productName = EdgeLib;
+			productReference = 1DC1F4B9B89B4FF6AEEFE6C4 /* libEdgeLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0508E50F67F42C3A3167EA6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 6317ED51231F4ECEBCC7C3C6 /* Build configuration list for PBXProject "EdgeLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A768E4CD5E724409BDD09300;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEB153ABC3EE4A1F8BBBD92B /* ALL_BUILD */,
+				D745E1F1586F462C92C4D734 /* EdgeLib */,
+				50F05EB878124D9183BEF19A /* ZERO_CHECK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7AE10075DB2E4697828383C8 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib -f /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/CMakeScripts/EdgeLib_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		813508D777F149ACAA1FA2D4 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib -f /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		CFC1D4EB7B1D4917932B53D5 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib -f /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7898F00194C34D1B8443455A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D777C50372A0479A818D7B16 /* LineDetector.cpp in Sources */,
+				0AA45BAA595449BE969173CB /* pEdgeDetector.cpp in Sources */,
+				698AEFA163534783814D58D4 /* pEdgeDump.cpp in Sources */,
+				54B915133A6F4B749CBA98FF /* pEdgeLine.cpp in Sources */,
+				1EB1B4AC038F455384AB5905 /* pEdgeLinking.cpp in Sources */,
+				6AEBC714E9E946B5BD881B05 /* pEdgePrm.cpp in Sources */,
+				83C4179C3DF7486F9FEAB563 /* pEdgeStatic.cpp in Sources */,
+				5D0A158FA8A54881B1FA8881 /* plEdge.cpp in Sources */,
+				C9A22F33BB8F4C1C808259E8 /* RidgeCentering.cpp in Sources */,
+				34954110D0E244BAA9D4E61C /* RidgeDetector.cpp in Sources */,
+				D03A31CA174E40DF00AE12A1 /* HunchDetector.cpp in Sources */,
+				D03A31CC174E40DF00AE12A1 /* pHunchDetect.cpp in Sources */,
+				D03A31CD174E40DF00AE12A1 /* pHunchPrm.cpp in Sources */,
+				D03A31CE174E40DF00AE12A1 /* pHunchTool.cpp in Sources */,
+				D03A31D0175A400C00AE12A1 /* pEdgeSLine.cpp in Sources */,
+				D0EEE2FB17CA148400AF0AB5 /* plRidge.cpp in Sources */,
+				D0EEE2FC17CA148400AF0AB5 /* plRidgeUnion.cpp in Sources */,
+				D0EEE2FD17CA148400AF0AB5 /* pRidgeDetector.cpp in Sources */,
+				D0EEE2FE17CA148400AF0AB5 /* pRidgeEdgeMask.cpp in Sources */,
+				D0EEE2FF17CA148400AF0AB5 /* pRidgeLine.cpp in Sources */,
+				D0EEE30017CA148400AF0AB5 /* pRidgeLineN.cpp in Sources */,
+				D0EEE30117CA148400AF0AB5 /* pRidgeLinking.cpp in Sources */,
+				D0EEE30217CA148400AF0AB5 /* pRidgeMask.cpp in Sources */,
+				D0EEE30317CA148400AF0AB5 /* pRidgeDetectPrm.cpp in Sources */,
+				D0EEE30417CA148400AF0AB5 /* pRidgeLinePrm.cpp in Sources */,
+				D0EEE30517CA148400AF0AB5 /* pRidgePrm.cpp in Sources */,
+				D0EEE30617CA148400AF0AB5 /* RidgeCentering.cpp in Sources */,
+				D0EEE30717CA148400AF0AB5 /* RidgeDetector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		75842C705AB444D59DD2187A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50F05EB878124D9183BEF19A /* ZERO_CHECK */;
+			targetProxy = 4B6A19C00D2D434687A7F35A /* PBXContainerItemProxy */;
+		};
+		CBF6CBCFCC3C4D5D9A670F7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D745E1F1586F462C92C4D734 /* EdgeLib */;
+			targetProxy = DE27E7DF3CC44828AE18BD94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		19051445D92B4DA5875CA94D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/build;
+			};
+			name = Release;
+		};
+		3725C8A7D48F4E1884753914 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/build;
+			};
+			name = MinSizeRel;
+		};
+		4CA925AFB3DB4258945DD717 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		5793F241351944D49A1CE04E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		5F53C4573D42413FB3ED7DA9 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/build;
+			};
+			name = RelWithDebInfo;
+		};
+		7D59F36C95FB43D0AD34EDC0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = EdgeLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		8A2D55ECB65647F4A9114B00 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = EdgeLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		A3E89E5BA3E34BCD8954A0C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = EdgeLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		A6064957436F4406B87B54F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		AF15C8D364154C9189B9D3E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = EdgeLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		BCF22A0E20F249408ADC4DB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		BEC7C2BF1E1E4789B316238F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		C1E422CD4CD7446F85EEC4E1 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		C93426A19C8B4EF787A55DAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/build;
+			};
+			name = Debug;
+		};
+		C9806661F3F1427DBD6DC804 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		CD2A6676702047778B41EC31 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
+					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57EBCDC1E8074B029247CBC3 /* Build configuration list for PBXNativeTarget "EdgeLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF15C8D364154C9189B9D3E9 /* Debug */,
+				A3E89E5BA3E34BCD8954A0C4 /* Release */,
+				8A2D55ECB65647F4A9114B00 /* MinSizeRel */,
+				7D59F36C95FB43D0AD34EDC0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5966C10D77CC44C891B9E492 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6064957436F4406B87B54F7 /* Debug */,
+				5793F241351944D49A1CE04E /* Release */,
+				BEC7C2BF1E1E4789B316238F /* MinSizeRel */,
+				4CA925AFB3DB4258945DD717 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6317ED51231F4ECEBCC7C3C6 /* Build configuration list for PBXProject "EdgeLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C93426A19C8B4EF787A55DAF /* Debug */,
+				19051445D92B4DA5875CA94D /* Release */,
+				3725C8A7D48F4E1884753914 /* MinSizeRel */,
+				5F53C4573D42413FB3ED7DA9 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6B4EAE9C0AB84CEDAA3E52C6 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF22A0E20F249408ADC4DB5 /* Debug */,
+				C9806661F3F1427DBD6DC804 /* Release */,
+				C1E422CD4CD7446F85EEC4E1 /* MinSizeRel */,
+				CD2A6676702047778B41EC31 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0508E50F67F42C3A3167EA6 /* Project object */;
+}

@@ -54,7 +54,7 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float
 	PLN_DUMP( bpl, "fit", i, NULL );
 
 
-	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T, &f->cover, &f->dis );
+	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T*s, &f->cover, &f->dis );
 
 
 	pln_destroy( bpl );
