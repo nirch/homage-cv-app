@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0833345D1A7E5B63008AC771"
-               BuildableName = "libPlnTracker copy.a"
+               BuildableName = "libPlnTrackerOSX.a"
                BlueprintName = "PlnTrackerOSX"
                ReferencedContainer = "container:PlnTracker.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0833345D1A7E5B63008AC771"
-            BuildableName = "libPlnTracker copy.a"
+            BuildableName = "libPlnTrackerOSX.a"
             BlueprintName = "PlnTrackerOSX"
             ReferencedContainer = "container:PlnTracker.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0833345D1A7E5B63008AC771"
-            BuildableName = "libPlnTracker copy.a"
+            BuildableName = "libPlnTrackerOSX.a"
             BlueprintName = "PlnTrackerOSX"
             ReferencedContainer = "container:PlnTracker.xcodeproj">
          </BuildableReference>

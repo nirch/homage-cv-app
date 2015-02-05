@@ -10,7 +10,7 @@
 
 
 image_type *
-image3_bluring_y( image_type *sim, int thresh )
+image3_bluring_y( image_type *sim )
 {
 u_char	*sp0, *sp1, *sp2;
 int	i,	j, sumR, sumG, sumB, k;
@@ -52,7 +52,7 @@ image_type * im = image_create( sim->row, sim->column, 3, 1, NULL );
 
 
 image_type *
-image3_bluring_x( image_type *sim, int thresh )
+image3_bluring_x( image_type *sim )
 {
 u_char	*sp0, *sp1, *sp2;
 int	i,	j, sumR, sumG, sumB, k;

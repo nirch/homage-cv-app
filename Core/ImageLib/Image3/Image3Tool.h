@@ -34,6 +34,9 @@ image_type *	image3_sample( image_type *sim, int d, image_type *im );
  
 image_type *	image3_to_y( image_type *sim, image_type *im );
 
+image_type *	image3_to_cr( image_type *sim, image_type *yim, image_type *im );
+
+
 //image_type *	image3_linear_combination( image_type *sim, float a, float fR, float fG, float fB, image_type *im );
 image_type *	image3_linear_combinationF( image_type *sim, float a, float fR, float fG, float fB, image_type *im );
 
@@ -52,6 +55,9 @@ image_type *	image3_sample2( image_type *sim, image_type *im );
 image_type *	image3_rotate90( image_type *sim, image_type *im );
 
 image_type *	image3_rotate180( image_type *sim, image_type *im );
+
+void		image3_rotate180_I( image_type *sim );
+
 
 
 image_type *	image3_maskT( image_type *sim, image_type *mim, int T0, int T1, image_type *im );
@@ -140,9 +146,9 @@ image_type *	image3_findLiklihoodYCbCr(image_type *im_YCbCr,int cb,int cr,int Y)
 
 
 	// Image3Bluring.c
-image_type *    image3_bluring_x( image_type *sim, int thresh );
+image_type *    image3_bluring_x( image_type *sim );
 
-image_type *    image3_bluring_y( image_type *sim, int thresh );
+image_type *    image3_bluring_y( image_type *sim );
 
 
 	// Image3Extend.c
@@ -181,6 +187,18 @@ image_type *	image3_histogram_CrCb( image_type *sim,  image_type *mim, image_typ
 	// Image3DewarpLt2.c
 image_type *	image3_dewarp_lt2S( image_type *sim, lt2_type *lt, float scale, image_type *tim );
 
+
+
+	// Image3FilterBoox.c
+image_type *image3_filter_box( image_type *sim, int n, image_type *im );
+
+	// Image3Streo.cc
+image_type *image3_stereo( image_type *sim, image_type *mim, float _shiftSilh, float _shiftBgr, image_type *im );
+
+
+	// ImagerLayer.cpp
+void	image3_add_layer( image_type *im, image_type *sim, image_type *mim, int x0, int y0 );
+void	image3_add_layerA( image_type *im, image_type *sim, int x0, int y0 );
 
 
 #ifdef __cplusplus

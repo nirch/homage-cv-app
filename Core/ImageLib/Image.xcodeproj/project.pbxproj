@@ -194,6 +194,7 @@
 		EB7B312DB3F642349F861E56 /* ImageInterpolatePv.c in Sources */ = {isa = PBXBuildFile; fileRef = 540327BA4FAE44E8BB778423 /* ImageInterpolatePv.c */; settings = {COMPILER_FLAGS = ""; }; };
 		EEF615E2C7564828A411EBA6 /* ImageReadBmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BE39B26584246F5A84BBB03 /* ImageReadBmp.c */; settings = {COMPILER_FLAGS = ""; }; };
 		EFC3E3268FB94DF59CC678DA /* ImageToR.c in Sources */ = {isa = PBXBuildFile; fileRef = E04E20BAA8294E10B2A0A143 /* ImageToR.c */; settings = {COMPILER_FLAGS = ""; }; };
+		F1B902391A83737000F966F6 /* Image3Layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1B902381A83737000F966F6 /* Image3Layer.cpp */; };
 		F1E0EDDC118E43C7976B19F2 /* ImageApp.c in Sources */ = {isa = PBXBuildFile; fileRef = 88B0F484FB9340EAAE1248B5 /* ImageApp.c */; settings = {COMPILER_FLAGS = ""; }; };
 		F2978ED350AB42DC96E027C2 /* ImageFHistogram.c in Sources */ = {isa = PBXBuildFile; fileRef = 99247D2EBACE4D20A446B3CC /* ImageFHistogram.c */; settings = {COMPILER_FLAGS = ""; }; };
 		F2EEA9AF7DD944DC9D4F4A00 /* Image6Convolution.c in Sources */ = {isa = PBXBuildFile; fileRef = F2D2F6226E8D486FB82E3640 /* Image6Convolution.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -439,6 +440,7 @@
 		EEBD72BC8F50497A9D9BB7C3 /* ImageDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDraw.c; path = ImageMark/ImageDraw.c; sourceTree = SOURCE_ROOT; };
 		EF43A69BDD074C09B9CE8CAE /* ImageDump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDump.c; path = ImageDump/ImageDump.c; sourceTree = SOURCE_ROOT; };
 		EFF6B3224DCE4B60A335DA6C /* ImageIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageIo.c; path = Image/ImageIo.c; sourceTree = SOURCE_ROOT; };
+		F1B902381A83737000F966F6 /* Image3Layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image3Layer.cpp; path = Image3/Image3Layer.cpp; sourceTree = "<group>"; };
 		F2D2F6226E8D486FB82E3640 /* Image6Convolution.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image6Convolution.c; path = Image6/Image6Convolution.c; sourceTree = SOURCE_ROOT; };
 		F3A65448E6A94911A4434710 /* PaletteTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = PaletteTool.c; path = Image/PaletteTool.c; sourceTree = SOURCE_ROOT; };
 		F634C4DC9D284FD791E43757 /* Image1Sample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image1Sample.c; path = Image1/Image1Sample.c; sourceTree = SOURCE_ROOT; };
@@ -747,6 +749,7 @@
 		D0DF9CC31909166500ED75AD /* Image3 */ = {
 			isa = PBXGroup;
 			children = (
+				F1B902381A83737000F966F6 /* Image3Layer.cpp */,
 				6F63929378494B0494B64626 /* Image3Bilnear.c */,
 				D323976EDF654708A99052AA /* Image3Bluring.c */,
 				D67A4552B87D4BBDB4E1F2A9 /* Image3Color.c */,
@@ -1049,6 +1052,7 @@
 				697E14D34FB242028DF83763 /* ImageAux.c in Sources */,
 				310463F369134358A2B537A7 /* ImageBackgroundRemoval.c in Sources */,
 				B11A2BB6FABD481DA03FC49E /* ImageComparison.c in Sources */,
+				F1B902391A83737000F966F6 /* Image3Layer.cpp in Sources */,
 				547D7D0A5A32469A8C5A5A79 /* ImageCut.c in Sources */,
 				323AABEAF93042CCB09CE84D /* ImageCutUarray.c in Sources */,
 				255A2FBCE4C043808FDA22A9 /* ImageDifference.c in Sources */,
