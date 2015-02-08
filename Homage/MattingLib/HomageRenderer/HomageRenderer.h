@@ -12,6 +12,8 @@
 #include "ImageType/ImageType.h"
 #include "Utime/GpTime.h"
 
+#include "HrSourceI.h"
+#include "HrOutputI.h"
 
 
 
@@ -27,12 +29,17 @@ public:
 	void DeleteContents();
 
 
+	int	Process( CHrSourceI *b, CHrSourceI *f,  CHrSourceI *h, CHrOutputI *out );
+
+
 
 	int SetBackground( image_type *bim );
 
 	int AddLayer( int x0, int y0, image_type *sim, image_type *aim );
 
 	int AddLayer( int x0, int y0, image_type *sim );
+
+
 
 
 	image_type * Process( image_type *bim,  

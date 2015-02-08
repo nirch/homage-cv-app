@@ -42,6 +42,11 @@ void CHomageRenderer::DeleteContents()
 }
 
 
+int
+CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *f,  CHrSourceI *h, CHrOutputI *out )
+{
+	return( -1 );
+}
 
 
 image_type *

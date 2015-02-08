@@ -36,6 +36,8 @@
 		F130B10E1A83D6910094F801 /* PlnAdjustIntersect - 15-01-29.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1081A83D6910094F801 /* PlnAdjustIntersect - 15-01-29.cpp */; };
 		F130B10F1A83D6910094F801 /* PlnAdjustEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1091A83D6910094F801 /* PlnAdjustEdge.cpp */; };
 		F130B1111A83D6910094F801 /* PlnAdjustBottom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B10B1A83D6910094F801 /* PlnAdjustBottom.cpp */; };
+		F19E841C1A875A3800F25232 /* HrSourceI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19E84181A875A3800F25232 /* HrSourceI.cpp */; };
+		F19E841D1A875A3800F25232 /* HrOutputI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19E841A1A875A3800F25232 /* HrOutputI.cpp */; };
 		F1B902371A83719800F966F6 /* HomageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1B902351A83719800F966F6 /* HomageRenderer.cpp */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,10 @@
 		F130B1081A83D6910094F801 /* PlnAdjustIntersect - 15-01-29.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "PlnAdjustIntersect - 15-01-29.cpp"; sourceTree = "<group>"; };
 		F130B1091A83D6910094F801 /* PlnAdjustEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustEdge.cpp; sourceTree = "<group>"; };
 		F130B10B1A83D6910094F801 /* PlnAdjustBottom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustBottom.cpp; sourceTree = "<group>"; };
+		F19E84181A875A3800F25232 /* HrSourceI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HrSourceI.cpp; sourceTree = "<group>"; };
+		F19E84191A875A3800F25232 /* HrOutputI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HrOutputI.h; sourceTree = "<group>"; };
+		F19E841A1A875A3800F25232 /* HrOutputI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HrOutputI.cpp; sourceTree = "<group>"; };
+		F19E841B1A875A3800F25232 /* HrSourceI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HrSourceI.h; sourceTree = "<group>"; };
 		F1B902351A83719800F966F6 /* HomageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HomageRenderer.cpp; sourceTree = "<group>"; };
 		F1B902361A83719800F966F6 /* HomageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomageRenderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +186,10 @@
 		F1B902341A83719800F966F6 /* HomageRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				F19E84181A875A3800F25232 /* HrSourceI.cpp */,
+				F19E84191A875A3800F25232 /* HrOutputI.h */,
+				F19E841A1A875A3800F25232 /* HrOutputI.cpp */,
+				F19E841B1A875A3800F25232 /* HrSourceI.h */,
 				F1B902351A83719800F966F6 /* HomageRenderer.cpp */,
 				F1B902361A83719800F966F6 /* HomageRenderer.h */,
 			);
@@ -272,6 +282,7 @@
 				D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */,
 				D0C9C0D81A67BE4B008F9D1D /* bImage.cpp in Sources */,
 				D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */,
+				F19E841C1A875A3800F25232 /* HrSourceI.cpp in Sources */,
 				F130B10F1A83D6910094F801 /* PlnAdjustEdge.cpp in Sources */,
 				D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */,
 				F130B1111A83D6910094F801 /* PlnAdjustBottom.cpp in Sources */,
@@ -286,6 +297,7 @@
 				D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */,
 				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
 				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
+				F19E841D1A875A3800F25232 /* HrOutputI.cpp in Sources */,
 				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
 				D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */,
 				D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */,
