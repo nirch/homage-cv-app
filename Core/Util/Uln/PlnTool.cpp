@@ -37,7 +37,7 @@ pln_alloc( int no )
 	if( no > 0 )
 		pl->link = lnL_alloc( no );
 
-	pl->color[0] = pl->color[1] = 0xFF000000;
+	pl->color[0].val = pl->color[1].val = 0xFF000000;
 
 	pl->e = NULL;
 

@@ -50,13 +50,17 @@ image3_green_alpha( image_type *sim, image_type *im )
 	u_int *tp = im->data_ui;
 
 	for(i = 0 ; i < im->height ; i++ ){
-		for( j = 0 ; j < im->width ; j++, tp++ ){
-			if( sp[0] == 0 && sp[1] == 255 && sp[2] == 0  ){
+		for( j = 0 ; j < im->width ; j++, tp++, sp += 3 ){
+			int t0 = sp[0] - 1;
+			int t1 = sp[1] - 254;
+			int t2 = sp[2] - 6;
+			if( ABS(t0) < 16 && ABS(t1) < 16 && ABS(t2) <16 ){
+		//	if( sp[0] == 1 && sp[1] == 254 && sp[2] == 6  ){
 				*tp = 0;
 				continue;
 			}
 
-			*tp = IMAGE4_RGB( sp[0], sp[1], sp[2] );
+			*tp = 0xFF000000 | IMAGE4_RGB( sp[0], sp[1], sp[2] );
 		}
 	}
 

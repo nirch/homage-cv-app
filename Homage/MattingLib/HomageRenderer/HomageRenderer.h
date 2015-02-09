@@ -66,7 +66,7 @@ private:
 	int	m_iFrame;
 
 	image_type	*m_im;
-
+	image_type *m_oim;
 
 
 };

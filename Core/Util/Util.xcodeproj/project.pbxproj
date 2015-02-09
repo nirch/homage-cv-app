@@ -176,7 +176,8 @@
 		D02F38EC19482EE200FB25A5 /* Pt2dMask.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D419482EE200FB25A5 /* Pt2dMask.c */; };
 		D02F38EE19482EE200FB25A5 /* Pt2dTriangleFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D619482EE200FB25A5 /* Pt2dTriangleFilter.c */; };
 		D02F38EF19482EE200FB25A5 /* TriangleTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D02F38D819482EE200FB25A5 /* TriangleTool.c */; };
-		D0A5691118B79F9D0053D55F /* CrPlnTool.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FD18B79F9D0053D55F /* CrPlnTool.c */; };
+		D04D18DB1A88A45E00104D52 /* ColorTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04D18D81A88A45E00104D52 /* ColorTool.cpp */; };
+		D04D18DD1A88A47A00104D52 /* CrPlnTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04D18DC1A88A47A00104D52 /* CrPlnTool.cpp */; };
 		D0A5691218B79F9D0053D55F /* CrPlnToolN.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FE18B79F9D0053D55F /* CrPlnToolN.c */; };
 		D0A5691318B79F9E0053D55F /* LnBox.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A568FF18B79F9D0053D55F /* LnBox.c */; };
 		D0A5691418B79F9E0053D55F /* LnCircle.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A5690018B79F9D0053D55F /* LnCircle.c */; };
@@ -470,7 +471,9 @@
 		D02F38D719482EE200FB25A5 /* Pt2dType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pt2dType.h; sourceTree = "<group>"; };
 		D02F38D819482EE200FB25A5 /* TriangleTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TriangleTool.c; sourceTree = "<group>"; };
 		D02F38D919482EE200FB25A5 /* TriangleType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleType.h; sourceTree = "<group>"; };
-		D0A568FD18B79F9D0053D55F /* CrPlnTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CrPlnTool.c; path = Uln/CrPlnTool.c; sourceTree = "<group>"; };
+		D04D18D81A88A45E00104D52 /* ColorTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorTool.cpp; sourceTree = "<group>"; };
+		D04D18D91A88A45E00104D52 /* ColorType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorType.h; sourceTree = "<group>"; };
+		D04D18DC1A88A47A00104D52 /* CrPlnTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CrPlnTool.cpp; path = Uln/CrPlnTool.cpp; sourceTree = "<group>"; };
 		D0A568FE18B79F9D0053D55F /* CrPlnToolN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CrPlnToolN.c; path = Uln/CrPlnToolN.c; sourceTree = "<group>"; };
 		D0A568FF18B79F9D0053D55F /* LnBox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LnBox.c; path = Uln/LnBox.c; sourceTree = "<group>"; };
 		D0A5690018B79F9D0053D55F /* LnCircle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LnCircle.c; path = Uln/LnCircle.c; sourceTree = "<group>"; };
@@ -1052,14 +1055,23 @@
 			name = Uinf;
 			sourceTree = "<group>";
 		};
+		D04D18D61A88A45E00104D52 /* Ucolor */ = {
+			isa = PBXGroup;
+			children = (
+				D04D18D81A88A45E00104D52 /* ColorTool.cpp */,
+				D04D18D91A88A45E00104D52 /* ColorType.h */,
+			);
+			path = Ucolor;
+			sourceTree = "<group>";
+		};
 		D0A568F618B79F0A0053D55F /* Uln */ = {
 			isa = PBXGroup;
 			children = (
+				D04D18DC1A88A47A00104D52 /* CrPlnTool.cpp */,
 				D02C8A4F1949A6860078EB83 /* PlnApproximate.cpp */,
 				D02C8A4D1949A4610078EB83 /* PlnSmooth.cpp */,
 				D0E2731418BD438600E239FD /* Cln */,
 				D0E2731818BD438600E239FD /* PlnRead.cpp */,
-				D0A568FD18B79F9D0053D55F /* CrPlnTool.c */,
 				D0A568FE18B79F9D0053D55F /* CrPlnToolN.c */,
 				D0A568FF18B79F9D0053D55F /* LnBox.c */,
 				D0A5690018B79F9D0053D55F /* LnCircle.c */,
@@ -1097,6 +1109,7 @@
 		FA572772C3B248F4AB3EBBC5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D04D18D61A88A45E00104D52 /* Ucolor */,
 				D02C8A2E194996C80078EB83 /* Ulog */,
 				D02C8A2A194995FB0078EB83 /* Ellipse */,
 				D02F38BF19482EE200FB25A5 /* Ucamera */,
@@ -1254,6 +1267,7 @@
 				5C5D9E1E0C4D4377804653F2 /* GpMsg.c in Sources */,
 				35B8EC6AADB54E0E9F2C2685 /* GpRelinquish.c in Sources */,
 				EE721DEA69FD46FA85FC8DCD /* GpTempFile.c in Sources */,
+				D04D18DD1A88A47A00104D52 /* CrPlnTool.cpp in Sources */,
 				0E287284893541909594649B /* hyputA.c in Sources */,
 				0CDEC647D91F47FFA193E85F /* inf.c in Sources */,
 				DCE590E579114018B1FCA731 /* AppJet2.c in Sources */,
@@ -1394,7 +1408,6 @@
 				68B2DA7C31E94C40B304C390 /* FbstGet.c in Sources */,
 				ED7B009DBF80431589B44124 /* FbstPut.c in Sources */,
 				15BCE4CDB0734C6F9C67B0F3 /* FbstTool.c in Sources */,
-				D0A5691118B79F9D0053D55F /* CrPlnTool.c in Sources */,
 				D0A5691218B79F9D0053D55F /* CrPlnToolN.c in Sources */,
 				D0A5691318B79F9E0053D55F /* LnBox.c in Sources */,
 				D0A5691418B79F9E0053D55F /* LnCircle.c in Sources */,
@@ -1419,6 +1432,7 @@
 				D0A5692418B79F9E0053D55F /* PlnWrite.cpp in Sources */,
 				D0E2731918BD438600E239FD /* ClnTool.cpp in Sources */,
 				D0E2731A18BD438600E239FD /* ClnWrite.cpp in Sources */,
+				D04D18DB1A88A45E00104D52 /* ColorTool.cpp in Sources */,
 				D02F38EB19482EE200FB25A5 /* Pt2dLine.c in Sources */,
 				D0E2731B18BD438600E239FD /* PlnRead.cpp in Sources */,
 			);

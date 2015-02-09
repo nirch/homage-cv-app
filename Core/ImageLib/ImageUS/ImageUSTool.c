@@ -215,7 +215,7 @@ imageUS_to_U8( image_type *sim, int min, int max, image_type *im )
 	u_short	*sp;
 	u_char	*tp;
 	int	i,	j;
-	float	t;
+	double	t;
 	int	tmp;
 
 
@@ -279,3 +279,7 @@ imageUS_linearAB( image_type *sim, float a, float b, image_type *im )
 
 	return( im );
 }
+
+
+
+

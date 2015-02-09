@@ -61,6 +61,12 @@ image_type *	imageAS_interpolation_V( imageA_type *aim, vec2f_type *p, vec2f_typ
 						image_type *im );
 
 
+
+	// ImageUSDynamicRange.cpp
+void	imageUS_dynamic_rangeH( image_type *im, float h0, float h1, int *a0, int *a1 );
+
+
+
 #ifdef __cplusplus
 }
 #endif

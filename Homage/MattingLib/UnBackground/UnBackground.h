@@ -92,6 +92,8 @@ private:
 	int	TestSilhouette( sbA_type *as, imageLabel_type *abw );
 	int TestSilhouetteHead( sbA_type *as, int i1, imageLabel_type *abw, float nw[] );
 
+	int	TestShadowIn();
+
 
 
 

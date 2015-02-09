@@ -181,6 +181,11 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	}
 
 
+
+	plnA_adjust_intersect( apl );
+	plnA_adjust_start( apl,  m_sim->height );
+	PLNA_DUMPF( apl, "contor", m_iFrame, "intersect", m_dFrame == m_iFrame );
+
 #ifdef _AA_
 	if( m_iFrame > 0 && m_fpl->a[m_iFrame-1]->nA > 0 ){
 		pln_coherent( apl, m_fpl->a[m_iFrame-1], m_sim->height, m_iFrame );

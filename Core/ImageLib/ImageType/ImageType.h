@@ -249,6 +249,8 @@ imageA_type *	imageA_realloc( imageA_type *aim, int n );
 
 void	imageA_destroy( imageA_type *aim );
 
+void	imageA_clear( imageA_type *aim );
+
 
 
 

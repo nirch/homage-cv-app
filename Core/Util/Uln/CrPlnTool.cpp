@@ -26,10 +26,84 @@ int	siA_max( si_type as[], int nS );
 
 
 
+crPlnA_type *
+crPlnA_alloc ( int n )
+{
+	crPlnA_type *ac = ( crPlnA_type *)malloc( sizeof( crPlnA_type) );
+
+	ac->NA = n;
+	ac->nA = 0;
+	ac->a = ( crPln_type *)malloc( ac->NA*sizeof( crPln_type) );
+
+	return( ac );
+}
+
+void
+crPlnA_destroy( crPlnA_type *ac )
+{
+	free( ac->a );
+
+	free( ac );
+}
+
+
+void
+crPlnA_destroy_cr( crPlnA_type *ac, int i0 )
+{
+int	i;
+
+	ac->nA--;
+
+	for( i = i0 ; i < ac->nA ; i++ )
+		ac->a[i] = ac->a[i+1];
+}
+
+
+//int
+//crPln_createA( pln_type *bpl, plnA_type *apl, int i0,  float r1, float r2, int affine, crPln_type acr[], int *nCr )
+//{
+//	int	i,	n;
+//
+//	for( i = 0, n = 0 ; i < apl->nA ; i++ ){
+//
+//		if( i == i0 )	continue;
+//		if( apl->a[i] == NULL || apl->a[i]->link == NULL )
+//			continue;
+//
+//		n += crPln_create( bpl, apl->a[i], i, r1, r2, affine, &acr[n] );
+//	}
+//
+//	*nCr = n;
+//
+//	return( n );
+//}
+
 
 
 int
-crPln_create( pln_type *bpl, pln_type *pl, int iPl, float r1, float r2, crPln_type cr[] )
+crPln_createA( pln_type *bpl, plnA_type *apl, int i0,  float r1, float r2, int affine, crPlnA_type *ac )
+{
+	int	i,	n;
+
+	for( i = 0, n = 0 ; i < apl->nA ; i++ ){
+
+		if( i == i0 )	continue;
+		if( apl->a[i] == NULL || apl->a[i]->link == NULL )
+			continue;
+
+		n += crPln_create( bpl, apl->a[i], i, r1, r2, affine, &ac->a[n] );
+	}
+
+
+	ac->nA = n;
+
+	return( n );
+}
+
+
+
+int
+crPln_create( pln_type *bpl, pln_type *pl, int iPl, float r1, float r2, int affine, crPln_type cr[] )
 {
 vec2f_type	ctr,	v;
 ln_type	*l;
@@ -44,7 +118,7 @@ int nS;
 int	i;
 
 
-	n = (pl->len + 2.0 )/4;
+	n = (pl->len + 2.0 )/2;
 	dt = (pl->len-0.125) /n;
 
 
@@ -95,26 +169,29 @@ int	i;
 
 
 	a = b = 0;
-	if( pt2dA_app_b( apt, 0, apt->nP, a, b, r1, &b ) < 2 || 
-		pt2dA_app_b( apt, 0, apt->nP, a, b, r2, &b ) < 2 ){
+	a1 = b1 = 0;
+	if( affine == 1 ){
+		if( pt2dA_app_b( apt, 0, apt->nP, a, b, r1, &b ) < 2 || 
+			pt2dA_app_b( apt, 0, apt->nP, a, b, r2, &b ) < 2 ){
+				free( ad );
+				pt2dA_destroy( apt );
+				return( 0 );
+		}
+
+
+
+		pt2dA_app_ab(  apt, 0, apt->nP, a, b, r2, &a1, &b1 );
+
+		if( ABS(a1) > 0.15 ){
 			free( ad );
 			pt2dA_destroy( apt );
 			return( 0 );
+		}
 	}
 
 
 
-	pt2dA_app_ab(  apt, 0, apt->nP, a, b, r2, &a1, &b1 );
-
-	if( ABS(a1) > 0.1 ){
-		free( ad );
-		pt2dA_destroy( apt );
-		return( 0 );
-	}
-
-
-
-	pt2dA_segement( apt, a1, b1, 3, as, &nS );
+	pt2dA_segement( apt, a1, b1, r2, as, &nS );
 
 
 
@@ -495,6 +572,14 @@ crPlnA_union( crPln_type acr[], int *nAcr )
 			continue;
 		}
 
+		float t = acr[i].d[0].sgt - acr[j-1].d[1].sgt;
+		if( t > 40 ){
+			acr[j] = acr[i];
+			j++;
+			continue;
+		}
+
+
 		acr[j-1].d[1] = acr[i].d[1];
 		acr[j-1].end |= acr[i].end & 0x02;
 		acr[j-1].type |= acr[i].type & 0x02;
@@ -506,4 +591,71 @@ crPlnA_union( crPln_type acr[], int *nAcr )
 
 
 	return( *nAcr );
+}
+
+
+
+
+void
+crPlnA_direction( crPlnA_type *ac )
+{
+	int	i;
+
+	
+	for( i = 0 ; i < ac->nA ; i++ ){
+		crPln_type *cr = &ac->a[i];
+
+		if( cr->d[0].gt < cr->d[1].gt ){
+			cr->direction = 0;
+			cr->gt0 = cr->d[0].gt;
+			cr->gt1 = cr->d[1].gt;
+		}
+
+		else {
+			cr->direction = 1;
+			cr->gt0 = cr->d[1].gt;
+			cr->gt1 = cr->d[0].gt;
+		}
+	}
+
+}
+
+
+int
+crPlnA_order( crPlnA_type *ac )
+{
+	int	i,	j,	j0;
+
+
+	for( i = 0 ; i < ac->nA-1 ; i++ ){
+
+		j0 = i;
+		for( j = i+1 ; j < ac->nA ; j++ ){
+			if( ac->a[j].gt0 < ac->a[j0].gt0 )	j0 = j;
+		}
+
+		if( i != j0 ){
+			crPln_type cr = ac->a[i];
+			ac->a[i] = ac->a[j0];
+			ac->a[j0] = cr;
+		}
+	}
+
+	return( 1 );
+}
+
+
+
+void
+crPlnA_print( crPlnA_type *ac, FILE *fp )
+{
+	int	i;
+
+
+	for( i = 0 ; i < ac->nA ; i++ ){
+		crPln_type *cr = &ac->a[i];
+		fprintf( fp, "%.2f %.2f(%d)  ", cr->gt0, cr->gt1, cr->direction );
+	}
+
+	fprintf( fp, "\n" );
 }

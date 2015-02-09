@@ -35,6 +35,12 @@
 
 #define	PALETTE_IS_VALID( colorSpace )	( colorSpace >= 0 && colorSpace <= 7 )
 
+
+
+#include "Ucolor/ColorType.h"
+
+
+#ifdef _AA_
 typedef struct color_type
 {
 	union {
@@ -50,7 +56,7 @@ typedef struct color_type
 
 
 } color_type;
-
+#endif
 
 
 

@@ -17,7 +17,6 @@
 
 
 #include	"Uigp/igp.h"
-//#include	"Utime\GpTime.h"
 #include	"Ulog/Log.h"
 
    
@@ -576,7 +575,7 @@ pt2dA_seg_union( pt2dA_type *apt, plnA_type *apl, eseg_type as[], int *nS )
 		
 		if( ABS(dt) < 20 ){
 			as[j].i1 = as[i].i1;
-			pt2dA_distane_update( apt, i0+1, i1-1, apl, as[j].id );
+			pt2dA_distane_update( apt, i0+1, i1, apl, as[j].id );
 			continue;
 		}
 

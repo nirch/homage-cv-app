@@ -310,6 +310,49 @@ int	Y;
 }
 
 
+image_type *
+image3_to_cr( image_type *sim, image_type *yim, image_type *im )
+{
+u_char	*sp;
+u_char	*yp,	*tp;
+int	i,	j;
+
+int	R,	Y;
+#ifdef RGB2Y_FLOAT
+int	cr;
+#endif
+
+
+
+
+	im = image_recreate( im, sim->height, sim->width, 1, 1 );
+
+	sp = (u_char *)sim->data;
+	yp = (u_char *)yim->data;
+	tp = (u_char *)im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++, sp+=3 ){
+			R = *sp;
+			Y = *yp++;
+			
+
+#ifdef RGB2Y_FLOAT
+
+			//Y  =  0.29900 * R + 0.58700 * G + 0.11400 * B + 0.5;
+			cr = (  R - Y )*0.7132 + 128;
+			*tp++ = PUSH_TO_RANGE( cr, 0, 255 );
+#else
+			*tp++ = (((  R - Y )*46740)>>16) + 128;
+#endif
+
+
+
+		}
+	}
+
+	return( im );
+}
+
 //image_type *
 //image3_linear_combination( image_type *sim, float a, float fR, float fG, float fB, image_type *im )
 //{
@@ -500,6 +543,34 @@ int	i,	j;
 	return( im );
 }
 
+
+void
+image3_rotate180_I( image_type *sim )
+{
+	u_char	*sp,	*tp;
+	int	i,	j;
+
+
+
+	tp = sim->data;
+	sp = IMAGE_PIXEL( sim, sim->height-1, sim->width-1 );
+	for ( i = 0 ; i < sim->height / 2 ; i++ ){
+		
+		for ( j = 0 ; j < sim->column ; j++, sp -= 3 ){
+			u_char tmp = sp[0];
+			sp[0] = *tp;
+			*tp++ = tmp;
+
+			tmp = sp[1];
+			sp[1] = *tp;
+			*tp++ = tmp;
+
+			tmp = sp[2];
+			sp[2] = *tp;
+			*tp++ = tmp;
+		}
+	}
+}
 
 
 image_type *

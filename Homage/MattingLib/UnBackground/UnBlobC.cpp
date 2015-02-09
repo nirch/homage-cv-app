@@ -394,6 +394,8 @@ sbA_type ac;
 
 		as->a[i].j0 = ac.a[k0].j0;
 		as->a[i].j1 = ac.a[k0].j1;
+
+
 	}
 
 	for( i = bw->b.y1 ; i < abw->im->height ; i++ )
@@ -404,6 +406,42 @@ sbA_type ac;
 
 
 		return( 1 );
+}
+
+
+int
+	imageLabelUI_blobe_sbA( imageLabel_type *abw, int iB, sbA_type *as )
+{
+	int	i;
+	sbA_type ac;
+
+	bwLabel_type *bw = &abw->a[iB];
+
+	for( i = 0 ; i < bw->b.y0 ; i++ )
+		as->a[i].j0 = as->a[i].j1 = -1;
+
+
+	for( i = bw->b.y0 ; i < bw->b.y1 ; i++ ){
+		imageLabelUI_blobe_seg( abw, i, bw->b.x0, bw->b.x1, iB, &ac );
+		if( ac.nA == 0 ){
+			as->a[i].j0 = as->a[i].j1 = -1;
+			continue;
+		}
+
+		as->a[i].j0 = ac.a[0].j0;
+		as->a[i].j1 = ac.a[ac.nA-1].j1;
+
+
+	}
+
+	for( i = bw->b.y1 ; i < abw->im->height ; i++ )
+		as->a[i].j0 = as->a[i].j1 = -1;
+
+
+	as->nA = abw->im->height;
+
+
+	return( 1 );
 }
 
 

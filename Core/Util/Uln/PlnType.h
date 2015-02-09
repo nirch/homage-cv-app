@@ -14,6 +14,7 @@ extern "C" {
 
 #include "Uvl/Vl2fType.h"
 #include "Ucamera/Pt2dType.h"
+#include "Ucolor/ColorType.h"
 
 
 #define	PL_VERSION	4
@@ -49,7 +50,7 @@ typedef struct pln_type {
 	float	qulity;
 	
 	// RGB
-	int	color[2];		// rgb value
+	color_type	color[2];		// rgb value
 
 
 	struct ellipse_type *e;
@@ -479,6 +480,8 @@ void	plnF_add( plnF_type *vpl, plnA_type *apl, int iFrame );
 plnA_type *	plnF_get( plnF_type *vpl, int iFrame );
 
 void	plnF_clear( plnF_type *vpl, int iFrame );
+
+void	plnF_destroy_empty( plnF_type *fpl );
 
 
 	// PlnStraightlineSplit.cpp

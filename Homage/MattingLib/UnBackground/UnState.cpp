@@ -46,15 +46,21 @@ int	r0[3],	r1[3],	i;
 		if( m_sWeight[i] > m_sWeight[i0] )	i0  = i;
 
 
-	float	wh[2];
+	float	wh[3];
 	int i1 = m_hbox[i0].x1/8;
 	TestSilhouetteHead( &m_asB[0], i1, m_abw, wh );
+
 
 	if( wh[0] < 0.25 || wh[1] < 0.25 ){
 		m_state = -11;
 		return( m_state );
 	}
 
+
+	if( wh[2] > 0.85 ){
+		m_state = -6;
+		return( m_state );
+	}
 	
 	int	val0,	val1,	y0,	y1;
 	r0[2] = sbA_value( &m_as0, &r0[0], &r0[1], &y0, &val0 );
@@ -97,12 +103,15 @@ int	r0[3],	r1[3],	i;
 	else fprintf( stdout, "shadow: %d(%d) %d(%d)\n", val0, y0, val1, y1 );
 
 
+#ifdef _SHADOW_IN
+	if( TestShadowIn() > 0 ){
+		m_state = -7;
+		return( m_state );
+	}
+#endif
 
 	if( TestSilhouetteDeviation() != 0 ){
-		//if( nw[0] < 0.25 || nw[1] < 0.25 ){
-		//	m_state = -11;
-		//	return( m_state );
-		//}
+
 		m_state = -5;
 		return( m_state );
 	}
@@ -114,4 +123,91 @@ int	r0[3],	r1[3],	i;
 	return( m_state );
 }
 
+
+
+
+int	imageLabelUI_blobe_sbA( imageLabel_type *abw, int iB, sbA_type *as );
+
+int	sbA_in( sbA_type *as0, sbA_type *as1, sbA_type *as );
+
+int	sbA_in_side( sbA_type *as0, sbA_type *as1, sbA_type *as, float *d0, float *d1 );
+
+
+int	CUnBackground::TestShadowIn()
+{
+
+sbA_type as;
+int	i;
+
+
+	for( i = 0 ; i < m_abw->nA ; i++ ){
+
+		bwLabel_type *bw = &m_abw->a[i];
+		if( bw->id != i )	continue;
+		if( bw->color != 2 )	continue;
+		if( bw->no < 30 )	continue;
+
+
+		imageLabelUI_blobe_sbA( m_abw, i, &as );
+
+		if( sbA_in( &m_as0, &m_as1, &as ) < 0 )
+			continue;
+
+
+		float d0,	d1;
+		sbA_in_side( &m_as0, &m_as1, &as, &d0, &d1 );
+
+		if( d0 < 10 && d1 > 10 ||  d0 > 10 && d1 < 10)
+			return( 1 );
+
+	}
+
+	return( -1 );
+
+}
+
+
+
+int
+sbA_in( sbA_type *as0, sbA_type *as1, sbA_type *as )
+{
+	int	i;
+
+	int	n0,	n1;
+	n0 = n1 = 0;
+	for( i = 0 ; i < as0->nA ; i++ ){
+		if( as->a[i].j0 < 0 )	continue;
+
+
+		if( as0->a[i].j1 > as->a[i].j0  ||  as1->a[i].j0 < as->a[i].j1 )
+			return( -1 );
+
+	}
+
+
+	return( 1 );
+}
+
+
+int
+	sbA_in_side( sbA_type *as0, sbA_type *as1, sbA_type *as, float *d0, float *d1 )
+{
+	int	i;
+
+	int	n;
+	n = 0;
+	*d0 = *d1 = 0;
+	for( i = 0 ; i < as0->nA ; i++ ){
+		if( as->a[i].j0 < 0 )	continue;
+
+		*d0 += as->a[i].j0 - as0->a[i].j1;
+		*d1 += as1->a[i].j0 - as->a[i].j1;
+		n++;
+	}
+
+	*d0 /= n;
+	*d1 /= n;
+
+	return( 1 );
+}
 

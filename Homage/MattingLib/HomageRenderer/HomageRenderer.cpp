@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 #ifdef _DEBUG
-//#define _DUMP
+#define _DUMP
 #endif
 
 #include "Ulog/Log.h"
@@ -21,6 +21,7 @@
 CHomageRenderer::CHomageRenderer()
 {
 	m_im = NULL;
+
 
 }
 
@@ -39,12 +40,55 @@ void CHomageRenderer::DeleteContents()
 		image_destroy( m_im, 1 );
 			m_im = NULL;
 	}
+
 }
 
 
 int
 CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *f,  CHrSourceI *h, CHrOutputI *out )
 {
+int	i;
+image_type *im;
+
+	for( i = 0 ; ; i++ ){
+
+		if( b->ReadFrame( i, &im ) < 0 )
+			break;
+
+		IMAGE_DUMP( im, "aa", i, "0" );
+		IMAGE_DUMP_ALPHA( im, "aa", i, "0-a" );
+
+		m_im = image_make_copy( im, m_im );
+
+		IMAGE_DUMP( m_im, "aa", i, "1" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "1-a" );
+
+
+		if( f->ReadFrame( i, &im ) < 0 )
+			break;
+
+		imageA_combine( im, m_im );
+
+		IMAGE_DUMP( m_im, "aa", i, "2" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "2-a" );
+
+
+
+		if( h->ReadFrame( i, &im ) < 0 )
+			continue;
+
+		imageA_combine( im, m_im );
+
+		IMAGE_DUMP( m_im, "aa", i, "3" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "3-a" );
+
+
+		out->WriteFrame( m_im );
+
+	}
+	
+
+
 	return( -1 );
 }
 

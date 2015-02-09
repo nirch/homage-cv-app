@@ -1012,7 +1012,124 @@ imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im )
 
 
 image_type *
-	imageA_set_backgorund( image_type *sim, image_type *mim, image_type *bim, image_type *im )
+	imageA_set_colorM( image_type *sim, int color, image_type *im )
+{
+	u_char	*tp;
+	u_int	*sp;
+	int	i,	j;
+	int	R,	G,	B;
+
+
+
+
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
+
+
+	R = IMAGE4_RED(color);
+	G = IMAGE4_GREEN(color);
+	B = IMAGE4_BLUE(color);
+
+
+	sp = sim->data_ui;
+	
+	tp = im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp ++ ){
+
+			int r = IMAGE4_RED(*sp);
+			int g = IMAGE4_GREEN(*sp);
+			int b = IMAGE4_BLUE(*sp);
+			int w = (*sp)>>24 & 0xFF;
+
+
+			if( w == 0 ){
+				*tp++ = R;
+				*tp++ = G;
+				*tp++ = B;
+				continue;
+			}
+
+
+
+
+			if( w == 255 ){
+				*tp++ = r;
+				*tp++ = g;
+				*tp++ = b;
+				continue;
+			}
+
+
+			w = w +1 ;
+
+
+			*tp++ =  (( w * ( r - R)) >> 8)  + R;
+			*tp++ =  (( w * ( g - G)) >> 8)  + G;
+			*tp++ =  (( w * ( b - B)) >> 8)  + B;
+
+		}
+	}
+
+	return( im );
+}
+
+
+
+void
+imageA_combine( image_type *sim, image_type *im )
+{
+
+	int	i,	j;
+	
+
+
+
+	u_int *sp = sim->data_ui;
+	u_int *tp = im->data_ui;
+
+
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, tp++, sp++ ){
+
+			int r = IMAGE4_RED(*sp);
+			int g = IMAGE4_GREEN(*sp);
+			int b = IMAGE4_BLUE(*sp);
+			int w = (*sp)>>24 & 0xFF;
+
+			int tr = IMAGE4_RED(*sp);
+			int tg = IMAGE4_GREEN(*sp);
+			int tb = IMAGE4_BLUE(*sp);
+			int tw = (*sp)>>24 & 0xFF;
+
+			if( w == 0 )
+				continue;
+
+
+
+
+			if( w == 255 ){
+				*tp = *sp;
+				continue;
+			}
+
+
+			float f = 1.0 / ( tw + w );
+			int R = (tw*tr + w*r )* f;
+			int G = (tw*tg + w*g )* f;
+			int B = (tw*b + w*b )* f;
+			int A = tw + w;
+
+			*tp = ( A << 24 ) | IMAGE4_RGB( R, G, B ); 
+
+		}
+	}
+
+
+}
+
+
+image_type *
+imageA_set_backgorund( image_type *sim, image_type *mim, image_type *bim, image_type *im )
 {
 	u_char	*tp;
 	u_char	*sp,	*mp,	*bp;
@@ -1063,3 +1180,7 @@ image_type *
 
 	return( im );
 }
+
+
+
+

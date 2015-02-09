@@ -294,10 +294,10 @@ int	i,		nW,	n;
 
 int	CUnBackground::TestSilhouetteHead( sbA_type *as, int i1, imageLabel_type *abw, float nw[] )
 {
-	int	i,	n[2];
-	float	w[2];
+	int	i,	n[3];
+	float	w[3];
 
-	w[0] = w[1] = n[0] = n[1] = 0;
+	w[0] = w[1] = w[2] = n[0] = n[1] = n[2] = 0;
 
 
 	for( i = 0 ; i < i1 ; i++ ){
@@ -311,12 +311,16 @@ int	CUnBackground::TestSilhouetteHead( sbA_type *as, int i1, imageLabel_type *ab
 		w[1] += imageLabelUI_nColor( abw, i, s->j1, s->j1+8, 0 );
 		n[1] += 8;
 
+		w[2] += imageLabelUI_nColor( abw, i, s->j0+4, s->j1-4, 0 );
+		n[2] += s->j1 - s->j0 - 8;
+
 	}
 
 	nw[0] = (n[0] > 0 )? w[0] / (float)n[0] : 0;
 	nw[1] = (n[1] > 0 )? w[1] / (float)n[1] : 0;
+	nw[2] = (n[2] > 0 )? w[2] / (float)n[2] : 0;
 
-	fprintf( stdout, "TestSilhouette -SIDE: %.2f( %d )   %.2f( %d ) \n", nw[0], n[0], nw[1], n[1]);
+	fprintf( stdout, "TestSilhouette- Head: %.2f( %d )   %.2f( %d )   %.2f( %d )  \n", nw[0], n[0], nw[1], n[1], nw[2], n[2] );
 
 
 	return( 1 );

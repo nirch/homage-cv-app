@@ -134,7 +134,7 @@ pln_write(pln_type *pl, FILE *fp )
 	no = lnL_no( pl->link );
 
 	int	type = 0;
-	if( (pl->color[0] & 0xff0000) != 0 )
+	if( (pl->color[0].val & 0xff0000) != 0 )
 		type = 0x02;
 
 	if( pl->group > 0 )

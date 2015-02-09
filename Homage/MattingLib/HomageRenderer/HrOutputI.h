@@ -28,7 +28,7 @@ public:
 	virtual int	WriteFrame( image_type *im ) = 0;
 
 
-
+	virtual int Close() = 0;
 private:
 
 	int	m_iFrame;

@@ -106,7 +106,19 @@ int	i;
 
 
 
+void
+plnF_destroy_empty( plnF_type *fpl )
+{
+int	i;
 
+	for( i = 0 ; i <  fpl->nA ; i++ ){
+		if( fpl->a[i] == NULL )	continue;
+		if( fpl->a[i]->nA == 0 ){
+			plnA_destroy( fpl->a[i] );
+			fpl->a[i] = NULL;
+		}
+	}
+}
 
 
 void

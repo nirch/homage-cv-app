@@ -53,6 +53,9 @@ image_type *	image_4to1( image_type *sim );
 	/* Image4Tool.c */
 image_type *	image4_from( image_type *sim, image_type *im );
 
+image_type *	image4_to_android( image_type *sim, image_type *im );
+
+
 
 
 void		image4_mark( image_type *im, int row0, int col0,
@@ -234,7 +237,12 @@ image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent
 
 image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
 
+image_type * imageA_set_colorM( image_type *sim, int color, image_type *im );
+
+
 image_type *imageA_set_backgorund( image_type *sim, image_type *mim, image_type *bim, image_type *im );
+
+void	imageA_combine( image_type *sim, image_type *im );
 
 
 

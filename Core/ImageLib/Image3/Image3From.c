@@ -135,7 +135,7 @@ int	tmp;
 
 	im = image_recreate( im, sim->row, sim->column, 3 , 1 );
 
-	sp = (u_short *)sim->data;
+	sp = (short *)sim->data;
 	tp = im->data;
 
 	for( i = 0 ; i < im->row ; i++ ){
@@ -169,7 +169,7 @@ int	tmp;
 
 	im = image_recreate( im, sim->row, sim->column, 3 , 1 );
 
-	sp = (u_short *)sim->data;
+	sp = (short *)sim->data;
 	tp = im->data;
 
 	for( i = 0 ; i < im->row ; i++ ){
