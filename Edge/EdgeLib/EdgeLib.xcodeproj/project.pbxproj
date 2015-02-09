@@ -377,11 +377,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -412,11 +412,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -447,11 +447,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
@@ -482,11 +482,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/..,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/ImageLib,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Core/Util,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../VimGui,
-					/Users/shayrootman/Documents/_work/Gp_Vim/Edge/EdgeLib/../../Tracking,
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
 				);
 				INSTALL_PATH = "";
 				LIBRARY_STYLE = STATIC;
