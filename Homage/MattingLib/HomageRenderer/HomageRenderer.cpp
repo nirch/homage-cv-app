@@ -85,6 +85,8 @@ image_type *im;
 
 		out->WriteFrame( m_im );
 
+		fprintf( stdout, "  ." );
+
 	}
 	
 

@@ -51,6 +51,11 @@ void CHrOutputGreenWin::DeleteContents()
 		delete m_videoEncoder;
 		m_videoEncoder = NULL;
 	}
+
+	if( m_im != NULL ){
+		image_destroy( m_im, 1 );
+		m_im = NULL;
+	}
 }
 
 void CHrOutputGreenWin::Set( int codec , int frameRate, int bitrate )
@@ -96,6 +101,7 @@ int	CHrOutputGreenWin::Close()
 	if( m_videoEncoder != NULL ){
 		m_videoEncoder->Close();
 		delete m_videoEncoder;
+		m_videoEncoder = NULL;
 	}
 
 

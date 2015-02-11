@@ -215,6 +215,8 @@ gio_type	*gio;
 gifIo_type	*gifIo;
 
 	gio = gio_open_file_to_read( file );
+	if( gio == NULL )
+		return( NULL );
 
 	gifIo = image_read_gif_open( gio );
 
@@ -406,6 +408,9 @@ int	r,	g,	b,	color;
 		b = gifIo->palette->data[gifIo->BgColor].Blue;
 		color = IMAGE4_RGB( r, g, b );
 
+		if( gifIo->transparent_flag == 1 )
+			color |= 0xFF000000;
+
 		image4_const( gifIo->im, color ); 
 //		image4_const( gifIo->im, 0xffffff ); 
 	}
@@ -439,7 +444,9 @@ int	r,	g,	b,	color;
 		r = gifIo->palette->data[gifIo->BgColor].Red;
 		g = gifIo->palette->data[gifIo->BgColor].Green;
 		b = gifIo->palette->data[gifIo->BgColor].Blue;
-		color = IMAGE4_RGB( r, g, b );
+		color = IMAGE4_RGB( r, g, b );\
+		if( gifIo->transparent_flag == 1)
+			color |= 0xFF000000;
 		image4_const( gifIo->im, color );
 	}
 
@@ -450,8 +457,12 @@ int	r,	g,	b,	color;
 	else	image_8to24_copy( im, gifIo->im, top, left, palette );
 
 
-	gifIo->transparent_flag = 0;
-	gifIo->disposal_method = 0;
+	if( gifIo->transparent_flag == 1 )
+		imageT_negative_alpha( gifIo->im, gifIo->im );
+
+
+//	gifIo->transparent_flag = 0;
+//	gifIo->disposal_method = 0;
 
 		
 	image_destroy( im, 1 );

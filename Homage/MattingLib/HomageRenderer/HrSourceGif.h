@@ -1,6 +1,6 @@
 
-#ifndef _HR_SOURCE_GREEN_WIN_H
-#define _HR_SOURCE_GREEN_WIN_H
+#ifndef _HR_SOURCE_GIF_H
+#define _HR_SOURCE_GIF_H
 
 
 
@@ -14,17 +14,16 @@
 
 
 
-class CHrSourceGreenWin : public CHrSourceI
+class CHrSourceGif : public CHrSourceI
 {
 public:
 	
-	CHrSourceGreenWin();
+	CHrSourceGif();
 
-	~CHrSourceGreenWin();
+	~CHrSourceGif();
 
 	void DeleteContents();
 
-	void SetColor( int color )	{ m_color = color; }
 
 
 	int Init( char *inFile );
@@ -34,12 +33,16 @@ public:
 	int	Close();
 
 private:
+	int m_width;
+	int m_height;
+
+	int m_nFrame;
 
 	int	m_iFrame;
 
-	int	m_color;
 
-	class CVideoDecoder	*m_videoDecoder;
+
+	struct gifIo_type	*m_gifIo;
 
 	image_type *m_im;
 

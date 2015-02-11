@@ -4,6 +4,11 @@
 #ifndef	_IMAGE_READ_GIF_IO_
 #define _IMAGE_READ_GIF_IO_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #include	"ImageType/ImageType.h"
 #include	"Ugio/GioType.h"
 
@@ -80,4 +85,10 @@ int				image_read_gif_info( char *file, int *row, int *column, int *frame_no, pa
 
 
 int				image_gif_get_frame_no( char *data, int bytes, int Fdata );
+
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

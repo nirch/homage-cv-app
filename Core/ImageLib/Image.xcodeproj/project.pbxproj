@@ -194,6 +194,8 @@
 		EB7B312DB3F642349F861E56 /* ImageInterpolatePv.c in Sources */ = {isa = PBXBuildFile; fileRef = 540327BA4FAE44E8BB778423 /* ImageInterpolatePv.c */; settings = {COMPILER_FLAGS = ""; }; };
 		EEF615E2C7564828A411EBA6 /* ImageReadBmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BE39B26584246F5A84BBB03 /* ImageReadBmp.c */; settings = {COMPILER_FLAGS = ""; }; };
 		EFC3E3268FB94DF59CC678DA /* ImageToR.c in Sources */ = {isa = PBXBuildFile; fileRef = E04E20BAA8294E10B2A0A143 /* ImageToR.c */; settings = {COMPILER_FLAGS = ""; }; };
+		F10052161A8B68FD00714FF8 /* ImageReadGifIo.c in Sources */ = {isa = PBXBuildFile; fileRef = F10052121A8B68FD00714FF8 /* ImageReadGifIo.c */; };
+		F10052171A8B68FD00714FF8 /* ImageWriteGifIo.c in Sources */ = {isa = PBXBuildFile; fileRef = F10052141A8B68FD00714FF8 /* ImageWriteGifIo.c */; };
 		F1B902391A83737000F966F6 /* Image3Layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1B902381A83737000F966F6 /* Image3Layer.cpp */; };
 		F1E0EDDC118E43C7976B19F2 /* ImageApp.c in Sources */ = {isa = PBXBuildFile; fileRef = 88B0F484FB9340EAAE1248B5 /* ImageApp.c */; settings = {COMPILER_FLAGS = ""; }; };
 		F2978ED350AB42DC96E027C2 /* ImageFHistogram.c in Sources */ = {isa = PBXBuildFile; fileRef = 99247D2EBACE4D20A446B3CC /* ImageFHistogram.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -440,6 +442,10 @@
 		EEBD72BC8F50497A9D9BB7C3 /* ImageDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDraw.c; path = ImageMark/ImageDraw.c; sourceTree = SOURCE_ROOT; };
 		EF43A69BDD074C09B9CE8CAE /* ImageDump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDump.c; path = ImageDump/ImageDump.c; sourceTree = SOURCE_ROOT; };
 		EFF6B3224DCE4B60A335DA6C /* ImageIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageIo.c; path = Image/ImageIo.c; sourceTree = SOURCE_ROOT; };
+		F10052121A8B68FD00714FF8 /* ImageReadGifIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageReadGifIo.c; path = Gif/ImageReadGifIo.c; sourceTree = "<group>"; };
+		F10052131A8B68FD00714FF8 /* ImageReadGifIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageReadGifIo.h; path = Gif/ImageReadGifIo.h; sourceTree = "<group>"; };
+		F10052141A8B68FD00714FF8 /* ImageWriteGifIo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageWriteGifIo.c; path = Gif/ImageWriteGifIo.c; sourceTree = "<group>"; };
+		F10052151A8B68FD00714FF8 /* ImageWriteGifIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageWriteGifIo.h; path = Gif/ImageWriteGifIo.h; sourceTree = "<group>"; };
 		F1B902381A83737000F966F6 /* Image3Layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image3Layer.cpp; path = Image3/Image3Layer.cpp; sourceTree = "<group>"; };
 		F2D2F6226E8D486FB82E3640 /* Image6Convolution.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image6Convolution.c; path = Image6/Image6Convolution.c; sourceTree = SOURCE_ROOT; };
 		F3A65448E6A94911A4434710 /* PaletteTool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = PaletteTool.c; path = Image/PaletteTool.c; sourceTree = SOURCE_ROOT; };
@@ -525,6 +531,10 @@
 		4C04DAF749E04E74B5B4D388 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				F10052121A8B68FD00714FF8 /* ImageReadGifIo.c */,
+				F10052131A8B68FD00714FF8 /* ImageReadGifIo.h */,
+				F10052141A8B68FD00714FF8 /* ImageWriteGifIo.c */,
+				F10052151A8B68FD00714FF8 /* ImageWriteGifIo.h */,
 				EEBD72BC8F50497A9D9BB7C3 /* ImageDraw.c */,
 				B9B04B8B4F3440798AC27F54 /* ImagePrint.c */,
 				F7EEF2F341514F53A79ADEE9 /* BitMatrix.cpp */,
@@ -1024,6 +1034,7 @@
 				50877983CB294E4D8D772C88 /* ImageNdrgi.c in Sources */,
 				7A6AD59F731447EE9DD4E00A /* ImageNdrgiF.c in Sources */,
 				1F5D801082BA4021BC65D57E /* ImageYUVSampling.c.cpp in Sources */,
+				F10052161A8B68FD00714FF8 /* ImageReadGifIo.c in Sources */,
 				8A7ED0D9B6D14B7E8DB7B920 /* BmpDecoder.cpp in Sources */,
 				FE74946FCFAA41908C4B0519 /* BmpEncoder.cpp in Sources */,
 				EEF615E2C7564828A411EBA6 /* ImageReadBmp.c in Sources */,
@@ -1037,6 +1048,7 @@
 				15F95A51B00F477090E22686 /* ImageEnhancement.c in Sources */,
 				2067819909824E828EEE5D5C /* ImageGrayEnhancement.c in Sources */,
 				B89A8B0FA3B3408C9D231C51 /* GifDecoder.cpp in Sources */,
+				F10052171A8B68FD00714FF8 /* ImageWriteGifIo.c in Sources */,
 				6280B419738F49A0BABC3168 /* GifEncoder.cpp in Sources */,
 				86AA2F070C4F4FA8BAFEDC64 /* ImageReadGif.c in Sources */,
 				CC9A74ED1BE042B2BAA58B09 /* ImageReadGifFrame.c in Sources */,

@@ -134,7 +134,7 @@ cst_type	cst;
 int bytes,	size;
 u_char codeLength;
 float var,	dev,	average;
-int	a;
+//int	a;
 
 
 

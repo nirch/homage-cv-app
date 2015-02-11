@@ -54,6 +54,11 @@ void CHrSourceGreenWin::DeleteContents()
 		delete m_videoDecoder;
 		m_videoDecoder = NULL;
 	}
+
+	if( m_im != NULL ){
+		image_destroy( m_im, 1 );
+		m_im = NULL;
+	}
 }
 
 int CHrSourceGreenWin::Init( char *inFile )
@@ -101,9 +106,9 @@ image_type	*sim;
 
 int	CHrSourceGreenWin::Close()
 {
-		DeleteContents();
+	DeleteContents();
 
-		return( 1 );
+	return( 1 );
 }
 
 

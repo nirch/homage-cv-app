@@ -32,6 +32,7 @@
 		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
 		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
 		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F10052111A8B68DD00714FF8 /* HrSourceGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F100520F1A8B68DD00714FF8 /* HrSourceGif.cpp */; };
 		F130B1061A83D26E0094F801 /* UbEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1051A83D26E0094F801 /* UbEdge.cpp */; };
 		F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1071A83D6910094F801 /* PlnAdjustIntersect.cpp */; };
 		F130B10F1A83D6910094F801 /* PlnAdjustEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1091A83D6910094F801 /* PlnAdjustEdge.cpp */; };
@@ -75,6 +76,8 @@
 		D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UniformBackground.cpp; path = UniformBackground/UniformBackground.cpp; sourceTree = "<group>"; };
 		D0E0A58A18D0BC99004435E2 /* UniformBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniformBackground.h; path = UniformBackground/UniformBackground.h; sourceTree = "<group>"; };
 		DFF34186925240D695E86042 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = /Users/shayrootman/Documents/_work/Gp_Vim/Homage/MattingLib/CMakeLists.txt; sourceTree = "<absolute>"; };
+		F100520F1A8B68DD00714FF8 /* HrSourceGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HrSourceGif.cpp; sourceTree = "<group>"; };
+		F10052101A8B68DD00714FF8 /* HrSourceGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HrSourceGif.h; sourceTree = "<group>"; };
 		F130B1051A83D26E0094F801 /* UbEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbEdge.cpp; path = UniformBackground/UbEdge.cpp; sourceTree = "<group>"; };
 		F130B1071A83D6910094F801 /* PlnAdjustIntersect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustIntersect.cpp; sourceTree = "<group>"; };
 		F130B1091A83D6910094F801 /* PlnAdjustEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlnAdjustEdge.cpp; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 		F1B902341A83719800F966F6 /* HomageRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				F100520F1A8B68DD00714FF8 /* HrSourceGif.cpp */,
+				F10052101A8B68DD00714FF8 /* HrSourceGif.h */,
 				F19E84181A875A3800F25232 /* HrSourceI.cpp */,
 				F19E84191A875A3800F25232 /* HrOutputI.h */,
 				F19E841A1A875A3800F25232 /* HrOutputI.cpp */,
@@ -287,6 +292,7 @@
 				D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */,
 				F130B1111A83D6910094F801 /* PlnAdjustBottom.cpp in Sources */,
 				D0C9C0E01A67BE4B008F9D1D /* UnPrm.cpp in Sources */,
+				F10052111A8B68DD00714FF8 /* HrSourceGif.cpp in Sources */,
 				D0C9C0DB1A67BE4B008F9D1D /* UnBackground.cpp in Sources */,
 				D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */,
 				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
