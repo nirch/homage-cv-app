@@ -832,6 +832,7 @@ imageA_finalB( image_type *sim, int color, image_type *im )
 
 
 static image_type *imageA_set_alpha3( image_type *sim, int transparent, image_type *mim, image_type *im );
+static image_type *imageA_set_alpha3_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
 
 image_type *
 imageA_set_alpha( image_type *sim, int transparent, image_type *mim, image_type *im )
@@ -867,6 +868,39 @@ float f;
 	return( im );
 }
 
+image_type *
+imageA_set_alpha_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im )
+{
+    u_int	*sp,	*tp;
+    u_char	*mp;
+    int	i,	j;
+    float f;
+    
+    
+    if( sim->depth == 3 ){
+        im = imageA_set_alpha3_inversed_mask( sim, transparent, mim, im );
+        return( im );
+    }
+    
+    
+    f = transparent / 255.0;
+    
+    im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
+    
+    sp = sim->data_ui;
+    mp = mim->data;
+    tp = im->data_ui;
+    for( i = 0 ; i < sim->height ; i++ ){
+        for( j = 0 ; j < sim->width ; j++, sp++, mp++, tp++ ){
+            
+            int t = 255 - f* (255-*mp);
+            
+            *tp = *sp | ( t << 24 );
+        }
+    }
+    
+    return( im );
+}
 
 static image_type *
 imageA_set_alpha3( image_type *sim, int transparent, image_type *mim, image_type *im )
@@ -897,6 +931,34 @@ imageA_set_alpha3( image_type *sim, int transparent, image_type *mim, image_type
 	return( im );
 }
 
+static image_type *
+imageA_set_alpha3_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im )
+{
+    u_int	*tp;
+    u_char	*sp,	*mp;
+    int	i,	j;
+    int	R,	G,	B;
+    
+    float	f = transparent / 255.0;
+    
+    im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
+    
+    sp = sim->data;
+    mp = mim->data;
+    tp = im->data_ui;
+    for( i = 0 ; i < sim->height ; i++ ){
+        for( j = 0 ; j < sim->width ; j++, mp++, tp++ ){
+            
+            int t = 255 - f* (255-*mp);
+            R = *sp++;
+            G = *sp++;
+            B = *sp++;
+            *tp = IMAGE4_RGB( R, G, B ) | ( t << 24 );
+        }
+    }
+    
+    return( im );
+}
 
 
 
