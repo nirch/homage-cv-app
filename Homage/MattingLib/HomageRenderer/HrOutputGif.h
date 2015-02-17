@@ -13,6 +13,9 @@
 #include "HrOutputI.h"
 
 
+
+
+
 class CHrOutputGif : public CHrOutputI
 {
 public:
@@ -23,12 +26,9 @@ public:
 
 	void DeleteContents();
 
-	void SetColor( int color )	{ m_color = color; }
+	int Init( char *outFile, int width, int height, int frameSpeed );
 
-
-	int Init( char *outFile, int width, int height );
-
-	virtual int	WriteFrame( image_type *im );
+	virtual int	WriteFrame( image_type *im, int iFrame );
 
 	int	Close();
 
@@ -37,6 +37,8 @@ private:
 	int	m_iFrame;
 
 	int	m_color;
+
+	int m_delay;
 
 	int	m_width;
 	int	m_height;

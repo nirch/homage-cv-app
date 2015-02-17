@@ -84,7 +84,7 @@ int CHrOutputGreenWin::Init( char *outFile, int width, int height )
 
 
 
-int CHrOutputGreenWin::WriteFrame( image_type *im )
+int CHrOutputGreenWin::WriteFrame( image_type *im, int iFrame )
 {
 
 	m_im = imageA_set_colorM( im, m_color, m_im );

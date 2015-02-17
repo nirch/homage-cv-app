@@ -32,7 +32,7 @@ public:
 
 	int Init( char *outFile, int width, int height );
 
-	virtual int	WriteFrame( image_type *im );
+	virtual int	WriteFrame( image_type *im, int iFrame );
 
 	int	Close();
 

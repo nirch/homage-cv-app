@@ -192,8 +192,8 @@ float var,	dev,	average;
 	}
 #endif
 
-	if( gifIo->im8 != NULL && gifIo->transparent_index >= 0 )
-		image_transparent_set( gifIo->im8, &Dif, im8, gifIo->transparent_index );
+	//if( gifIo->im8 != NULL && gifIo->transparent_index >= 0 )
+	//	image_transparent_set( gifIo->im8, &Dif, im8, gifIo->transparent_index );
 
 
 
@@ -480,8 +480,13 @@ int	mask;
 	buf[1] = 0xf9;
 	buf[2] = 4;  // BlockSize 
 
+
 	mask = ( gifIo->frame_no > 0 && transparentIndex >= 0 )? 0x05: 0x4;
+	if( transparentIndex > 0 )
+		mask = 0x09;
+
 	buf[3] = mask;
+
 
 	buf[4] = (u_char)DelayTime;
 	buf[5] = (u_char)(DelayTime >> 8);

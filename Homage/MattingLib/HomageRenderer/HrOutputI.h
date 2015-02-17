@@ -23,9 +23,7 @@ public:
 
 	void DeleteContents();
 
-		virtual int Init( char *outFile, int width, int height ) = 0;
-
-	virtual int	WriteFrame( image_type *im ) = 0;
+	virtual int	WriteFrame( image_type *im, int iFrame ) = 0;
 
 
 	virtual int Close() = 0;

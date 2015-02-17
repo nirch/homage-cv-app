@@ -92,7 +92,7 @@ image_type *im;
 
 		int	k;
 		for( k = 0 ; k < nOut ; k++ )
-			out[k]->WriteFrame( m_im );
+			out[k]->WriteFrame( m_im, i );
 
 
 		fprintf( stdout, "  ." );

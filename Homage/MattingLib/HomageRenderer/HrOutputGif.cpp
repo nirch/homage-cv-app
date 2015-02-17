@@ -10,6 +10,7 @@
 
 #include "Ulog/Log.h"
 
+
 #include "ImageType/ImageType.h"
 #include "ImageDump/ImageDump.h"
 
@@ -28,6 +29,8 @@ CHrOutputGif::CHrOutputGif()
 	m_im = NULL;
 
 	m_color = 0x02FE05;
+
+	m_delay = 30;
 }
 
 CHrOutputGif::~CHrOutputGif()
@@ -51,7 +54,7 @@ void CHrOutputGif::DeleteContents()
 
 
 
-int CHrOutputGif::Init( char *outFile, int width, int height )
+int CHrOutputGif::Init( char *outFile, int width, int height, int frameSpeed )
 {	
 	m_width = width;
 	m_height = height;
@@ -59,6 +62,7 @@ int CHrOutputGif::Init( char *outFile, int width, int height )
 	
 	strcpy( m_file, outFile );
 
+    m_delay = frameSpeed / 10;
 
 	//m_gifIo = image_write_gifIo_open_file( outFile, height, width,
 	//	30,
@@ -76,10 +80,9 @@ int CHrOutputGif::Init( char *outFile, int width, int height )
 
 
 
-int CHrOutputGif::WriteFrame( image_type *im )
+int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 {
-
-//	m_im = image_make_copy( im, m_im );
+    //	m_im = image_make_copy( im, m_im );
 	m_im = imageT_negative_alpha( im, m_im );
 	if( m_gifIo == NULL ){
 
@@ -102,7 +105,7 @@ int CHrOutputGif::WriteFrame( image_type *im )
 
 
 		m_gifIo = image_write_gifIo_open_file( m_file, m_height, m_width,
-			30,
+			m_delay,
 			m_palette, transparent_index, 0,
 			-1 );
 
