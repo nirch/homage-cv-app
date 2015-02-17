@@ -45,7 +45,7 @@ void CHomageRenderer::DeleteContents()
 
 
 int
-CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *f,  CHrSourceI *h, CHrOutputI *out )
+CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *u,  CHrSourceI *f, CHrOutputI *out[], int nOut )
 {
 int	i;
 image_type *im;
@@ -55,35 +55,45 @@ image_type *im;
 		if( b->ReadFrame( i, &im ) < 0 )
 			break;
 
-		IMAGE_DUMP( im, "aa", i, "0" );
-		IMAGE_DUMP_ALPHA( im, "aa", i, "0-a" );
+		IMAGE_DUMP( im, "aa", i, "b" );
+		IMAGE_DUMP_ALPHA( im, "aa", i, "ba" );
 
 		m_im = image_make_copy( im, m_im );
 
 		IMAGE_DUMP( m_im, "aa", i, "1" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "1-a" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "1a" );
 
 
-		if( f->ReadFrame( i, &im ) < 0 )
+
+		if( u->ReadFrame( i, &im ) < 0 )
 			break;
+
+		IMAGE_DUMP( im, "aa", i, "u" );
+		IMAGE_DUMP_ALPHA( im, "aa", i, "ua" );
 
 		imageA_combine( im, m_im );
 
 		IMAGE_DUMP( m_im, "aa", i, "2" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "2-a" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "2a" );
 
 
 
-		if( h->ReadFrame( i, &im ) < 0 )
+		if( f->ReadFrame( i, &im ) < 0 )
 			continue;
+
+		IMAGE_DUMP( im, "aa", i, "f" );
+		IMAGE_DUMP_ALPHA( im, "aa", i, "f-a" );
 
 		imageA_combine( im, m_im );
 
 		IMAGE_DUMP( m_im, "aa", i, "3" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "3-a" );
+		IMAGE_DUMP_ALPHA( m_im, "aa", i, "3a" );
 
 
-		out->WriteFrame( m_im );
+		int	k;
+		for( k = 0 ; k < nOut ; k++ )
+			out[k]->WriteFrame( m_im );
+
 
 		fprintf( stdout, "  ." );
 

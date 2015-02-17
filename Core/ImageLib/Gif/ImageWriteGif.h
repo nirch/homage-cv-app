@@ -4,6 +4,10 @@
 #ifndef	_IMAGE_WRITE_GIF_
 #define _IMAGE_WRITE_GIF_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "ImageType/ImageType.h"
 //#include "ImageType/PaletteTypeHash.h"
 
@@ -58,6 +62,10 @@ int		image_write_gif_GraphicControl( gifIo_type *gifIo, int DelayTime, int trans
 
 int		image_write_gif_close( FILE *fp );
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

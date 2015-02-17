@@ -29,7 +29,8 @@ public:
 	void DeleteContents();
 
 
-	int	Process( CHrSourceI *b, CHrSourceI *f,  CHrSourceI *h, CHrOutputI *out );
+	int	Process( CHrSourceI *b, CHrSourceI *u, CHrSourceI *f, CHrOutputI *out[], int nOut );
+
 
 
 

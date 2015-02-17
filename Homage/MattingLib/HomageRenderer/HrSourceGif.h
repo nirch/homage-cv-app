@@ -44,6 +44,7 @@ private:
 
 	struct gifIo_type	*m_gifIo;
 
+	
 	image_type *m_im;
 
 

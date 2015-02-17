@@ -1140,53 +1140,62 @@ image_type *
 void
 imageA_combine( image_type *sim, image_type *im )
 {
-
-	int	i,	j;
-	
-
-
-
-	u_int *sp = sim->data_ui;
-	u_int *tp = im->data_ui;
-
-
-	for( i = 0 ; i < sim->height ; i++ ){
-		for( j = 0 ; j < sim->width ; j++, tp++, sp++ ){
-
-			int r = IMAGE4_RED(*sp);
-			int g = IMAGE4_GREEN(*sp);
-			int b = IMAGE4_BLUE(*sp);
-			int w = (*sp)>>24 & 0xFF;
-
-			int tr = IMAGE4_RED(*sp);
-			int tg = IMAGE4_GREEN(*sp);
-			int tb = IMAGE4_BLUE(*sp);
-			int tw = (*sp)>>24 & 0xFF;
-
-			if( w == 0 )
-				continue;
-
-
-
-
-			if( w == 255 ){
-				*tp = *sp;
-				continue;
-			}
-
-
-			float f = 1.0 / ( tw + w );
-			int R = (tw*tr + w*r )* f;
-			int G = (tw*tg + w*g )* f;
-			int B = (tw*b + w*b )* f;
-			int A = tw + w;
-
-			*tp = ( A << 24 ) | IMAGE4_RGB( R, G, B ); 
-
-		}
-	}
-
-
+    
+    int	i,	j;
+    
+    
+    
+    
+    u_int *sp = sim->data_ui;
+    u_int *tp = im->data_ui;
+    
+    
+    for( i = 0 ; i < sim->height ; i++ ){
+        for( j = 0 ; j < sim->width ; j++, tp++, sp++ ){
+            
+            int r = IMAGE4_RED(*sp);
+            int g = IMAGE4_GREEN(*sp);
+            int b = IMAGE4_BLUE(*sp);
+            int w = (*sp)>>24 & 0xFF;
+            
+            int tr = IMAGE4_RED(*tp);
+            int tg = IMAGE4_GREEN(*tp);
+            int tb = IMAGE4_BLUE(*tp);
+            int tw = (*tp)>>24 & 0xFF;
+            
+            if( w == 0 )
+                continue;
+            
+            
+            
+            
+            if( w == 255 ){
+                *tp = *sp;
+                continue;
+            }
+            
+            
+            
+            float f = 1.0 / 255.0;
+            int R = ((255-w)*tr + w*r )* f;
+            int G = ((255-w)*tg + w*g )* f;
+            int B = ((255-w)*tb + w*b )* f;
+            int A = tw + w;
+            
+            
+            //float f = 1.0 / ( tw + w );
+            //int R = (tw*tr + w*r )* f;
+            //int G = (tw*tg + w*g )* f;
+            //int B = (tw*b + w*b )* f;
+            //int A = tw + w;
+            if( A > 255 )	A = 255;
+            
+            *tp = ( A << 24 ) | IMAGE4_RGB( R, G, B ); 
+            
+        }
+    }
+    
+    
 }
 
 

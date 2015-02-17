@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 085A49792B8245F481C5BBF2 /* ColorBackground.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		54368A671A910672001578B4 /* HrOutputGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54368A651A910672001578B4 /* HrOutputGif.cpp */; };
 		D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A4B1949A1550078EB83 /* UbPrm.cpp */; };
 		D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */; };
 		D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */; };
@@ -44,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		085A49792B8245F481C5BBF2 /* ColorBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorBackground.cpp; path = ColorBackground/ColorBackground.cpp; sourceTree = SOURCE_ROOT; };
+		54368A651A910672001578B4 /* HrOutputGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HrOutputGif.cpp; sourceTree = "<group>"; };
+		54368A661A910672001578B4 /* HrOutputGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HrOutputGif.h; sourceTree = "<group>"; };
 		5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackgroundRemoval.cpp; path = Background/BackgroundRemoval.cpp; sourceTree = SOURCE_ROOT; };
 		7885ACADB627440AAA11DA86 /* ColorBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorBackground.h; path = ColorBackground/ColorBackground.h; sourceTree = SOURCE_ROOT; };
 		80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundRemoval.h; path = Background/BackgroundRemoval.h; sourceTree = SOURCE_ROOT; };
@@ -189,6 +192,8 @@
 		F1B902341A83719800F966F6 /* HomageRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				54368A651A910672001578B4 /* HrOutputGif.cpp */,
+				54368A661A910672001578B4 /* HrOutputGif.h */,
 				F100520F1A8B68DD00714FF8 /* HrSourceGif.cpp */,
 				F10052101A8B68DD00714FF8 /* HrSourceGif.h */,
 				F19E84181A875A3800F25232 /* HrSourceI.cpp */,
@@ -311,6 +316,7 @@
 				D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */,
 				F130B1061A83D26E0094F801 /* UbEdge.cpp in Sources */,
 				D0C9C0DA1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp in Sources */,
+				54368A671A910672001578B4 /* HrOutputGif.cpp in Sources */,
 				F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */,
 				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
 				D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */,
