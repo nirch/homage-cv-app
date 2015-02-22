@@ -233,8 +233,6 @@ image_type * imageT_copy_alpha( image_type *sim, image_type *im );
 
 image_type * imageA_set_alpha( image_type *sim, int transparent, image_type *mim, image_type *im );
 
-image_type * imageA_set_alpha_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
-
 image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, image_type *im );
 
 image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
@@ -359,7 +357,7 @@ image_type *	image_8to24_transparent( image_type *sim, int transparent_index, pa
 void	image_8to24_copy( image_type *sim, image_type *im, 
 						 int row0, int col0, palette_type *p );
 void	image_8to24_copy_transparent( image_type *sim, image_type *im, 
-									 int row0, int col0, int transparent_index, palette_type *p);
+									 int row0, int col0, palette_type *p, int transparent_index, int fCopy);
 
 
 	/* ImageSmartPalette.c */

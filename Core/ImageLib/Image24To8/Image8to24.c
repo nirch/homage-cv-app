@@ -100,7 +100,8 @@ int	i,	j,	k,	align;
 
 
 void
-image_8to24_copy_transparent( image_type *sim, image_type *im, int row0, int col0, int transparent_index, palette_type *p)
+image_8to24_copy_transparent( image_type *sim, image_type *im,
+			int row0, int col0, palette_type *p, int transparent_index, int fCopy )
 {
 u_int	*tp;
 u_char	*sp;
@@ -119,13 +120,17 @@ int	i,	j,	k,	align;
 		color_arr[i] = IMAGE4_RGB( r, g, b );
 	}
 
+
 	for( i = 0 ; i < sim->row ; i++, tp += align ) {
-		for( j = 0; j < sim->column ; j++ ){
+		for( j = 0; j < sim->column ; j++, tp++ ){
 			k = *sp++;
-			if ( k != transparent_index ) 
-				*tp++ = color_arr[k];
-			else 
-				tp++;
+			if ( k != transparent_index ){
+				*tp = color_arr[k];
+				continue;
+			}
+			if( fCopy == 1 )
+				*tp = 0xFF000000;
+
 		}
 	}
 }

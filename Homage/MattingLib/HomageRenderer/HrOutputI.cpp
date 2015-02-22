@@ -21,7 +21,6 @@
 CHrOutputI::CHrOutputI()
 {
 
-
 }
 
 CHrOutputI::~CHrOutputI()
@@ -36,6 +35,7 @@ CHrOutputI::~CHrOutputI()
 void CHrOutputI::DeleteContents()
 {
 }
+
 
 
 

@@ -1,13 +1,16 @@
 /****************************
  ***	ImageWriteGif.c   ***
  ****************************/
-
+#ifdef _DEBUG
+#define _DUMP
+#endif
 
 #include "ImageWriteGif.h"
 #include "Ucst/CstType.h"
 #include "Ubst/BstType.h"
 #include "lzw.h"
 #include	"Bmp/ImageBmp.h"
+#include "ImageDump/ImageDump.h"
 
 static void	image_write_gif_header( FILE *fp, int row, int col,
 							palette_type *p, int BackgroundColor );
@@ -80,6 +83,8 @@ gifIo_type	*gifIo;
 	gifIo->im = NULL;
 	gifIo->im8 = NULL;
 
+	gifIo->bim = NULL;
+
 
 	gifIo->transparent_flag = 0;
 	gifIo->disposal_method = 0;
@@ -134,7 +139,7 @@ cst_type	cst;
 int bytes,	size;
 u_char codeLength;
 float var,	dev,	average;
-//int	a;
+int	a;
 
 
 
@@ -142,21 +147,27 @@ float var,	dev,	average;
 	Dif.x1 = rim->column - 1;
 	Dif.y1 = rim->row - 1;
 
+	if( gifIo->bim == NULL ){
+		gifIo->bim = image_make_copy( rim, gifIo->bim );
+		IMAGE_DUMP_ALPHA( gifIo->bim, "WG",1, NULL );
+	}
+
 
 	if( gifIo->im != NULL ){
-		image_difference_rectangle( gifIo->im, rim,
-							&Dif.y0, &Dif.y1, &Dif.x0, &Dif.x1 );
+		//image_difference_rectangle( gifIo->im, rim,
+		//					&Dif.y0, &Dif.y1, &Dif.x0, &Dif.x1 );
 
-		//a = Dif.x1 - Dif.x0;
-		//if( (a & 0x01) != 0  ){
-		//	if( Dif.x1 < rim->width-1 )
-		//		Dif.x1 += 1;
-		//	else
-		//		Dif.x0 -= 1;
-		//}
+		image_difference_rectangle( gifIo->bim, rim,
+			&Dif.y0, &Dif.y1, &Dif.x0, &Dif.x1 );
 
 
-		image4_comparisonG( gifIo->im, rim, &var, &dev, &average );
+		if( (Dif.x1 - Dif.x0 + 1) & 0x01 )
+			Dif.x1++;
+		if( (Dif.y1 - Dif.y0 + 1) & 0x01 )
+			Dif.y1++;
+
+
+		image4_comparisonG( gifIo->bim, rim, &var, &dev, &average );
 		gifIo->dev += dev;
 
 
@@ -165,32 +176,28 @@ float var,	dev,	average;
 			return( 1 );
 	}
 
-/*
-	{
-		static int no = 0;
-		char	name[256];
-		sprintf( name, "cc%d", no++ );
-		image_write_bmp( rim, "d:/aa/yy", name );
-	}
-*/
 
+
+	Dif.x0 = Dif.y0 = 0;
+	Dif.x1 = rim->column - 1;
+	Dif.y1 = rim->row - 1;
 
 	if( gifIo->Fdither )
 			im8 = image_24to8_dithering_floyd(rim, gifIo->palette, &Dif);
 	else	im8 = image_24to8(rim, gifIo->palette, &Dif);
 
 //#define _DUMP
-#ifdef _DUMP
-	{
-		static int no = 0;
-		image_type *im1;
-
-		im1 = image4_from_y( im8 );
-
-		image_writeFN_bmp( im1, "d:/_out/gif/im8", no++ );
-		image_destroy( im1, 1 );
-	}
-#endif
+//#ifdef _DUMP
+//	{
+//		static int no = 0;
+//		image_type *im1;
+//
+//		im1 = image4_from_y( im8 );
+//
+//		image_writeFN_bmp( im1, "d:/_out/gif/im8", no++ );
+//		image_destroy( im1, 1 );
+//	}
+//#endif
 
 	//if( gifIo->im8 != NULL && gifIo->transparent_index >= 0 )
 	//	image_transparent_set( gifIo->im8, &Dif, im8, gifIo->transparent_index );
@@ -252,10 +259,12 @@ float var,	dev,	average;
 //		gifIo->im = image_make_copy( rim, gifIo->im );
 	}
 	else	{
-		if( gifIo->im == NULL )
-			gifIo->im = image_create( rim->row, rim->column, 4, 4, NULL );
+		//if( gifIo->im == NULL )
+		//	gifIo->im = image_create( rim->row, rim->column, 4, 4, NULL );
 
-		memcpy(gifIo->im->data, rim->data, rim->row * rim->column * 4);
+		//memcpy(gifIo->im->data, rim->data, rim->row * rim->column * 4);
+
+		gifIo->im = image_make_copy( rim, gifIo->im );
 	}
 //#endif	
 //	gifIo->im = image_make_copy( rim, gifIo->im );
@@ -384,7 +393,7 @@ FILE	*fp;
 		return NULL;
 
 
-	image_write_gif_header( fp, height, width, palette, 0 );
+	image_write_gif_header( fp, height, width, palette, 255 );
 
 	image_write_gif_application( fp );
 	
@@ -481,8 +490,8 @@ int	mask;
 	buf[2] = 4;  // BlockSize 
 
 
-	mask = ( gifIo->frame_no > 0 && transparentIndex >= 0 )? 0x05: 0x4;
-	if( transparentIndex > 0 )
+	mask = ( transparentIndex >= 0 )? 0x05: 0x4;
+	if( gifIo->frame_no > 0 && transparentIndex > 0  )
 		mask = 0x09;
 
 	buf[3] = mask;
@@ -626,13 +635,13 @@ image_write_gif_ImageDescriptor( FILE *fp, int left, int width,
 u_char buf[10];
 
 	buf[0] = 0x2c;
-	buf[1] = (unsigned char)left;
+	buf[1] = (unsigned char)(left&0xFF);
 	buf[2] = (unsigned char)(left >> 8);
-	buf[3] = (unsigned char)top;
+	buf[3] = (unsigned char)(top&0xFF);
 	buf[4] = (unsigned char)(top >> 8);
-	buf[5] = (unsigned char)width;
+	buf[5] = (unsigned char)(width&0xFF);
 	buf[6] = (unsigned char)(width >> 8);
-	buf[7] = (unsigned char)height;
+	buf[7] = (unsigned char)(height&0xFF);
 	buf[8] = (unsigned char)(height >> 8);
 
 	buf[9] = ( p == NULL)? 0 : 0xf0 | (u_char)log2m1(p->nColor);

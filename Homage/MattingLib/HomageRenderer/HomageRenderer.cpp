@@ -95,6 +95,10 @@ image_type *im;
 			out[k]->WriteFrame( m_im, i );
 
 
+		IMAGE_DUMP( m_im, "im", i, NULL );
+		IMAGE_DUMP_ALPHA( m_im, "im-a", i, NULL );
+
+
 		fprintf( stdout, "  ." );
 
 	}

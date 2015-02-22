@@ -321,7 +321,7 @@ int	k;
 		for (j = left; j <= right; j++){
 
 
-			if( *sp & 0xF0000000 ){
+			if( *sp & 0xFF000000 ){
 				*tp++ = palette->nColor;
 				*sp++;
 				continue;

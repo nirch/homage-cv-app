@@ -100,7 +100,11 @@ int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 //		if( tim != im )
 //			image_destroy( tim, 1 );
 
-		m_palette->data[255].val = m_color;
+		m_palette->data[255].r = 255;
+		m_palette->data[255].b = 255;
+		m_palette->data[255].g = 255;
+
+//		m_palette->nColor = 255;
 		int transparent_index = 255;
 
 

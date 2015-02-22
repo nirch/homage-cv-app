@@ -29,10 +29,15 @@ public:
 
 	virtual int Close() = 0;
 
+	void SetAlpha( image_type *im );
+
+	void MergeAlpha( image_type *sim );
+
 private:
 
 	int	m_iFrame;
 
+	image_type *m_alphaIm;
 
 
 

@@ -2,7 +2,7 @@
  ***	Image24To8.c   ***
  *************************/
 
-#include	<memory.h>
+#include	<string.h>
 #include	"Uigp/igp.h"
 #include	"Uvec/BitVector.h"
 

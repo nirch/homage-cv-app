@@ -257,6 +257,7 @@ gifIo_type	*gifIo;
 	gifIo->frame_no = -1;
 
 	gifIo->im = NULL;
+	gifIo->bim = NULL;
 
 	gifIo->transparent_flag = 0;
 	gifIo->disposal_method = 0;
@@ -371,6 +372,8 @@ int	gif89a;
 		gifIo->palette = palette_create( PALETTE_GRAY );
 
 	gifIo->palette->type = PALETTE_UNKNOWN;
+
+
 		
 	return( 1 );
 }
@@ -444,21 +447,25 @@ int	r,	g,	b,	color;
 		r = gifIo->palette->data[gifIo->BgColor].Red;
 		g = gifIo->palette->data[gifIo->BgColor].Green;
 		b = gifIo->palette->data[gifIo->BgColor].Blue;
-		color = IMAGE4_RGB( r, g, b );\
+		color = IMAGE4_RGB( r, g, b );
 		if( gifIo->transparent_flag == 1)
 			color |= 0xFF000000;
 		image4_const( gifIo->im, color );
+
+		if( gifIo->bim != NULL )
+			gifIo->im = image_make_copy( gifIo->bim, gifIo->im );
 	}
 
 
 
-	if ( gifIo->transparent_flag )
-			image_8to24_copy_transparent( im, gifIo->im, top, left, gifIo->transparent_index, palette );	
+	if ( gifIo->transparent_flag ){
+			image_8to24_copy_transparent( im, gifIo->im, top, left, palette, gifIo->transparent_index,  (gifIo->frame_i < 0 )? 1: 0 );
+	}
 	else	image_8to24_copy( im, gifIo->im, top, left, palette );
 
 
-	if( gifIo->transparent_flag == 1 )
-		imageT_negative_alpha( gifIo->im, gifIo->im );
+//	if( gifIo->transparent_flag == 1 )
+//		imageT_negative_alpha( gifIo->im, gifIo->im );
 
 
 //	gifIo->transparent_flag = 0;
@@ -469,6 +476,9 @@ int	r,	g,	b,	color;
 
 	if ( palette != gifIo->palette )
 		palette_destroy( palette );
+
+	if( gifIo->bim == NULL || gifIo->disposal_method == 1 )
+		gifIo->bim = image_make_copy( gifIo->im, gifIo->bim );
 
 	return( 1 );
 }
@@ -583,6 +593,8 @@ int	a,	b,	mask;
 
 	gifIo->disposal_method = mask&0x1c;
 	gifIo->disposal_method = gifIo->disposal_method >> 2;
+
+	fprintf( stdout, "%d", gifIo->disposal_method );
 	
 	gifIo->transparent_index = GIO_GETC( gifIo->gio);
 

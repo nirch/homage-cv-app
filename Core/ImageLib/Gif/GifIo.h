@@ -45,6 +45,7 @@ typedef struct gifIo_type {
 	image_type	*im;	// current image
 	image_type	*im8;	// current index image
 
+	image_type *bim;
 	unsigned char *pVimatixData;
 
 	gio_type *gio;

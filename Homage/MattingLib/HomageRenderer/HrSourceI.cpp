@@ -16,12 +16,15 @@
 #include "HrSourceI.h"
 
 
+void	imageA_merge_alpha( image_type *sim, image_type *im );
+
+
 
 
 CHrSourceI::CHrSourceI()
 {
 
-
+	m_alphaIm = NULL;
 }
 
 CHrSourceI::~CHrSourceI()
@@ -35,6 +38,24 @@ CHrSourceI::~CHrSourceI()
 
 void CHrSourceI::DeleteContents()
 {
+}
+
+
+void CHrSourceI::SetAlpha( image_type *im)
+{
+	if( im->depth != 1 ){
+		m_alphaIm = image1_from( im, NULL );
+		image_destroy( im, 1 );
+		return;
+	}
+
+	m_alphaIm = im;
+}
+
+void CHrSourceI::MergeAlpha( image_type *sim )
+{
+	if( m_alphaIm != NULL )
+		imageA_merge_alpha( sim, m_alphaIm );
 }
 
 
@@ -65,4 +86,28 @@ image3_green_alpha( image_type *sim, image_type *im )
 	}
 
 	return( im );
+}
+
+
+
+void
+imageA_merge_alpha( image_type *sim, image_type *im )
+{
+	int	i,	j;
+
+
+
+	u_int *sp = sim->data_ui;
+	u_char *ap = im->data;
+
+	for(i = 0 ; i < im->height ; i++ ){
+		for( j = 0 ; j < im->width ; j++, ap++, sp ++ ){
+			int a = (*sp)>>24;
+
+			if( a > *ap ){
+				a = *ap;
+				*sp = (*sp&0X00FFFFFF) | ( (a << 24 ));
+			}
+		}
+	}
 }
