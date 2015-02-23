@@ -338,6 +338,9 @@ int bytes;
 	if( gifIo->im8 != NULL )
 		image_destroy( gifIo->im8, 1 );
 
+	if( gifIo->bim != NULL )
+		image_destroy( gifIo->bim, 1 );
+
 
 	if( gifIo->ftell_delayTime != NULL )
 		free( gifIo->ftell_delayTime );

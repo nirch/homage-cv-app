@@ -132,6 +132,11 @@ int	CHrOutputGif::Close()
 		m_gifIo = NULL;
 	}
 
+	if( m_im != NULL ){
+		image_destroy( m_im, 1 );
+		m_im = NULL;
+	}
+
 
 	return( 1 );
 }

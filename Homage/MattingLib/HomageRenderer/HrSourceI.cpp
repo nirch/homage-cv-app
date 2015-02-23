@@ -38,6 +38,10 @@ CHrSourceI::~CHrSourceI()
 
 void CHrSourceI::DeleteContents()
 {
+	if( m_alphaIm != NULL ){
+		image_destroy( m_alphaIm, 1 );
+		m_alphaIm = NULL;
+	}
 }
 
 

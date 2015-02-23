@@ -494,6 +494,9 @@ image_read_gif_close( gifIo_type *gifIo )
 	if( gifIo->im != NULL )
 		image_destroy( gifIo->im, 1 );
 
+	if( gifIo->bim != NULL )
+		image_destroy( gifIo->bim, 1 );
+
 	if( gifIo->pVimatixData != NULL )
 		free( gifIo->pVimatixData );
 
@@ -594,7 +597,7 @@ int	a,	b,	mask;
 	gifIo->disposal_method = mask&0x1c;
 	gifIo->disposal_method = gifIo->disposal_method >> 2;
 
-	fprintf( stdout, "%d", gifIo->disposal_method );
+	//fprintf( stdout, "%d", gifIo->disposal_method );
 	
 	gifIo->transparent_index = GIO_GETC( gifIo->gio);
 
