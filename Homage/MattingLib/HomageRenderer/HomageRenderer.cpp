@@ -52,18 +52,19 @@ image_type *im;
 
 	for( i = 0 ; ; i++ ){
 
-		if( b->ReadFrame( i, &im ) < 0 )
-			break;
-
-		IMAGE_DUMP( im, "aa", i, "b" );
-		IMAGE_DUMP_ALPHA( im, "aa", i, "ba" );
-
-		m_im = image_make_copy( im, m_im );
-
-		IMAGE_DUMP( m_im, "aa", i, "1" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "1a" );
-
-
+        if (b != NULL)
+        {
+            if( b->ReadFrame( i, &im ) < 0 )
+                break;
+            
+            IMAGE_DUMP( im, "aa", i, "b" );
+            IMAGE_DUMP_ALPHA( im, "aa", i, "ba" );
+            
+            m_im = image_make_copy( im, m_im );
+            
+            IMAGE_DUMP( m_im, "aa", i, "1" );
+            IMAGE_DUMP_ALPHA( m_im, "aa", i, "1a" );
+        }
 
 		if( u->ReadFrame( i, &im ) < 0 )
 			break;
@@ -71,23 +72,32 @@ image_type *im;
 		IMAGE_DUMP( im, "aa", i, "u" );
 		IMAGE_DUMP_ALPHA( im, "aa", i, "ua" );
 
-		imageA_combine( im, m_im );
+        if (b != NULL)
+        {
+            imageA_combine( im, m_im );
+        }
+        else
+        {
+            m_im = image_make_copy( im, m_im );
+        }
 
 		IMAGE_DUMP( m_im, "aa", i, "2" );
 		IMAGE_DUMP_ALPHA( m_im, "aa", i, "2a" );
 
 
+        if (f != NULL)
+        {
+            if( f->ReadFrame( i, &im ) < 0 )
+                continue;
 
-		if( f->ReadFrame( i, &im ) < 0 )
-			continue;
+            IMAGE_DUMP( im, "aa", i, "f" );
+            IMAGE_DUMP_ALPHA( im, "aa", i, "f-a" );
 
-		IMAGE_DUMP( im, "aa", i, "f" );
-		IMAGE_DUMP_ALPHA( im, "aa", i, "f-a" );
+            imageA_combine( im, m_im );
 
-		imageA_combine( im, m_im );
-
-		IMAGE_DUMP( m_im, "aa", i, "3" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "3a" );
+            IMAGE_DUMP( m_im, "aa", i, "3" );
+            IMAGE_DUMP_ALPHA( m_im, "aa", i, "3a" );
+        }
 
 
 		int	k;

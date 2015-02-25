@@ -95,7 +95,15 @@ int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 
 //		image_type *tim = image4_from( m_im, NULL );
 		image_adaptive_palette( &m_im, 1, m_palette, (1<<8) - 1 );
+
+		int	i;
+		for( i = m_palette->nColor ; i < 255 ; i++  ){
+			m_palette->data[i].r = 255;
+			m_palette->data[i].b = 255;
+			m_palette->data[i].g = 255;
+		}
 	
+		m_palette->nColor = 255;
 
 //		if( tim != im )
 //			image_destroy( tim, 1 );
