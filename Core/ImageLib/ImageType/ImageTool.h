@@ -233,6 +233,8 @@ image_type * imageT_copy_alpha( image_type *sim, image_type *im );
 
 image_type * imageA_set_alpha( image_type *sim, int transparent, image_type *mim, image_type *im );
 
+image_type * imageA_set_alpha_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
+    
 image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, image_type *im );
 
 image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
