@@ -335,6 +335,9 @@ imageLabelUI_nColor( imageLabel_type *abw, int i0, int j0, int j1, int color )
 	
 	u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0 );
 
+	if( j0 < 0 )	j0 = 0;
+	if( j1 >= abw->im->width )	j1 = abw->im->width;
+
 	for( j = j0, n = 0 ; j < j1 ; j++, sp++ ){
 		if( abw->a[*sp].color == color )
 			n++;

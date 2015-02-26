@@ -99,6 +99,11 @@ int	CUnBackground::ReadMask( char *inFile, int width, int height )
 		return( -1 );
 
 
+	if( m_ac->nA == 1 ){
+		gpWarning( "UnBackground::ReadMask", "There is no head contour" );
+		return( -1 );
+	}
+
 
 	for( i = 0, m_nM = 0 ; i < m_ac->nA ; i += 2 ){
 		image_type *im = image1_mask_cln( m_ac->a[i], width, height, 1, NULL );
@@ -152,6 +157,7 @@ int	ret;
 	iFrame = m_iFrame;
 
 
+
 	IMAGE_DUMP( sim, "ub", 1, "SRC" );	
 
 	gpTime_start( &m_gTime );
@@ -192,7 +198,8 @@ int	ret;
 		else
 			m_state = -11;
 
-		fprintf( stdout, "State: %d\n", m_state );
+		//fprintf( stdout, "State: %d\n", m_state );
+		GPTRACE( (3, "Background: %d\n", m_state ) );
 		return( -1 );
 	}
 
@@ -214,7 +221,8 @@ int	ret;
 
 	ProcessState();
 
-	fprintf( stdout, "State: %d\n", m_state );
+//	fprintf( stdout, "State: %d\n", m_state );
+	GPTRACE( (3, "Background: %d\n", m_state ) );
 
 
 	gpTime_stop( &m_gTime );

@@ -56,6 +56,9 @@ static void	seg_printf( char *title, eseg_type *as, int nS, FILE *fp  );
 
 static int	pt2dA_seg_ended( pt2dA_type *apt, eseg_type as[], int *nS );
 
+static int	pt2dA_seg_endedE( pt2dA_type *apt, plnA_type *apl, eseg_type as[], int *nS );
+
+
 
 static int	pt2dA_seg_finish( pln_type *pl, pt2dA_type *apt, plnA_type *eapl, eseg_type as[], int nS );
 
@@ -149,11 +152,16 @@ float gt0, gt1;
 	pt2dA_seg_ended( apt, as, &nS );
 	SEG_PRINT( "end", as, nS, stdout );
 
+	pt2dA_seg_endedE( apt, eapl, as, &nS );
+	SEG_PRINT( "end", as, nS, stdout );
+
+
 	pt2dA_seg_filter_order( apt, as, &nS );
 	SEG_PRINT( "order", as, nS, stdout );
 
 
-
+	pt2dA_seg_endedE( apt, eapl, as, &nS );
+	SEG_PRINT( "end", as, nS, stdout );
 
 	int i;
 	for( i = 0 ; i < nS ; i++ )
@@ -550,6 +558,50 @@ int	i;
 	return( 1  );
 }
 
+
+
+static int	pt2dA_seg_endedE( pt2dA_type *apt, plnA_type *apl, eseg_type *s );
+
+static int
+	pt2dA_seg_endedE( pt2dA_type *apt, plnA_type *apl, eseg_type as[], int *nS )
+{
+	int	i,	j;
+
+	for( i =0, j =0 ; i < *nS ; i++ ){
+		pt2dA_seg_endedE( apt, apl, &as[i] );
+		if( as[i].i1 - as[i].i0 > 8 )
+			as[j++] = as[i];
+	}
+
+	*nS = j;
+
+	return( 1 );
+}
+
+
+static int
+	pt2dA_seg_endedE( pt2dA_type *apt, plnA_type *apl, eseg_type *s )
+{
+	int	i;
+
+	pln_type *pl = apl->a[s->id];
+
+	for( i = s->i0 ; i < s->i1 - 4 ; i++ ){
+		if(apt->a[i].r > 0 && apt->a[i].r < pl->len )
+			break;
+	}
+
+	s->i0 = i;
+
+	for( i = s->i1 ; i > s->i0 + 4 ; i-- ){
+		if(apt->a[i].r > 0 && apt->a[i].r < pl->len )
+			break;
+	}
+
+	s->i1 = i;
+
+	return( 1  );
+}
 
 
 

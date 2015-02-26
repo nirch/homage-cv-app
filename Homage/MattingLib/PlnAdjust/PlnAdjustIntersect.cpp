@@ -110,6 +110,13 @@ plnC_crop( pln_type *pl, float gt0, float gt1 )
 		l = LN_NEXT( pl->link );
 
 	}
+	else 
+		if( gt1 >= pl->len ){
+			pln_trim( pl, F_END, pl->len - gt0 );
+			pln_close( pl, 0.25 );
+			l = lnL_last( pl->link );
+		}
+	
 	else {
 		pln_type *pl1 =	pln_split( pl, gt1, 0.25 );
 		pln_trim( pl, F_END, pl->len - gt0 );

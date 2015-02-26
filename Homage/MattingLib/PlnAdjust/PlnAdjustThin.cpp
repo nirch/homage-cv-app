@@ -101,7 +101,6 @@ pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
 	if( n < 40 )	return( -1 );
 
 
-
 	pt2dA_type *apt = pt2dA_alloc( n +10 );
 	pln_sampleN( pl, 1, 1, apt );
 	pt2dA_curvtur( apt );
