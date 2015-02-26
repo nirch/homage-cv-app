@@ -153,6 +153,8 @@ int	i,	ret;
 		if( ret > 0 ){
 			m_iHead = 2*m_unBackground->GetHead() + 1;
 			m_bim = m_unBackground->GetBim( m_bim );
+            
+            m_state = m_unBackground->GetState();
 
 			GPLOG( ("Background: %d", m_unBackground->GetState() ) );
 			return( 1 );
