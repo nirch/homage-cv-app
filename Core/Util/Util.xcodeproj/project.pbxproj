@@ -315,7 +315,6 @@
 		4A08D57934D44C489BBB1D0A /* BstGet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BstGet.c; path = Ubst/BstGet.c; sourceTree = SOURCE_ROOT; };
 		4B1F9613DADA47BFA7E7FF91 /* CfgType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CfgType.h; path = Ucfg/CfgType.h; sourceTree = SOURCE_ROOT; };
 		4E208D1230844D7988AF5E74 /* XmlDoc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XmlDoc.c; path = Uxml/XmlDoc.c; sourceTree = SOURCE_ROOT; };
-		4E695920C08E421C8DE05DC0 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 		4E7009EB99B34048B0A08235 /* Jet2Io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet2Io.c; path = Ujet2/Jet2Io.c; sourceTree = SOURCE_ROOT; };
 		501A8779A1BB4DE885CD11A7 /* XmlParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XmlParser.c; path = Uxml/XmlParser.c; sourceTree = SOURCE_ROOT; };
 		517EEDC194D641EFB89C85E8 /* UnityS4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UnityS4.c; path = Uunity/UnityS4.c; sourceTree = SOURCE_ROOT; };
@@ -736,42 +735,11 @@
 			name = "Source Files";
 			sourceTree = "<group>";
 		};
-		A1AE40C871DA47A89011887E /* ALL_BUILD */ = {
-			isa = PBXGroup;
-			children = (
-				C5FC96924AB44C44A556227E /* CMake Rules */,
-			);
-			name = ALL_BUILD;
-			sourceTree = "<group>";
-		};
-		B063A3431CBE4111854925F4 /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
 		BC5981F84E524649B33AE6BF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		C5FC96924AB44C44A556227E /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		CB3D7C74F5554D41A7489C99 /* ZERO_CHECK */ = {
-			isa = PBXGroup;
-			children = (
-				B063A3431CBE4111854925F4 /* CMake Rules */,
-				4E695920C08E421C8DE05DC0 /* CMakeLists.txt */,
-			);
-			name = ZERO_CHECK;
 			sourceTree = "<group>";
 		};
 		CE8AC4074D8D4769BDFF0F66 = {
@@ -1141,9 +1109,7 @@
 		FBE7670B57BC42C5868D9A0E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A1AE40C871DA47A89011887E /* ALL_BUILD */,
 				FA572772C3B248F4AB3EBBC5 /* Util */,
-				CB3D7C74F5554D41A7489C99 /* ZERO_CHECK */,
 			);
 			name = Sources;
 			sourceTree = "<group>";

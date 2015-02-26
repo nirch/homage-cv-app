@@ -78,20 +78,12 @@
 		D93F12C8D0AA47C1B9CF7C0D /* RidgeDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidgeDetector.h; path = Ridge/RidgeDetector.h; sourceTree = SOURCE_ROOT; };
 		DFC8D9C6F65540AB84B5B73D /* PRidgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PRidgeType.h; path = Ridge/PRidgeType.h; sourceTree = SOURCE_ROOT; };
 		E99DF10F0F1548B0A7426FA1 /* plEdgeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = plEdgeType.h; path = LineDetector/plEdgeType.h; sourceTree = SOURCE_ROOT; };
-		FB66A59B99BD485F9ED396CF /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 		FDAB82126E294C30AD5F6771 /* pRidgePrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pRidgePrm.h; path = Ridge/pRidgePrm/pRidgePrm.h; sourceTree = SOURCE_ROOT; };
 		FE3192A015E943B3B5BDB317 /* pEdgeDump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pEdgeDump.cpp; path = LineDetector/pEdgeDump.cpp; sourceTree = SOURCE_ROOT; };
 		FED24286622446FCB070DBCF /* RidgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RidgeDetector.cpp; path = Ridge/RidgeDetector.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		0626B7F629124E3B89E90DD3 /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
 		129F45511A7E4A0781FBC97A /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,35 +105,9 @@
 		229F062E97F14E3AA2042D4A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4E2C9C0F6DDC47EABE4AC46D /* ALL_BUILD */,
 				BA03EE465A8446F48A1B9FED /* EdgeLib */,
-				2C8604698A8E40C3821E6783 /* ZERO_CHECK */,
 			);
 			name = Sources;
-			sourceTree = "<group>";
-		};
-		2C8604698A8E40C3821E6783 /* ZERO_CHECK */ = {
-			isa = PBXGroup;
-			children = (
-				3D79A5CE4AEB45268A2E4A75 /* CMake Rules */,
-				FB66A59B99BD485F9ED396CF /* CMakeLists.txt */,
-			);
-			name = ZERO_CHECK;
-			sourceTree = "<group>";
-		};
-		3D79A5CE4AEB45268A2E4A75 /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		4E2C9C0F6DDC47EABE4AC46D /* ALL_BUILD */ = {
-			isa = PBXGroup;
-			children = (
-				0626B7F629124E3B89E90DD3 /* CMake Rules */,
-			);
-			name = ALL_BUILD;
 			sourceTree = "<group>";
 		};
 		4FA93D4297384E60B59D6CE4 /* Resources */ = {
