@@ -41,12 +41,23 @@ public:
     
     static image_type *  LoadPng( char *file );
     
+    static image_type *  ImageRead( char *file, image_type *im );
     
+    static image_type *  Image3Read( char *file, image_type *im );
+    
+    
+    
+    // UIImage
     static UIImage* CreateUIImage( image_type *im );
     
-    UIImage* CreateUIImage( CVPixelBufferRef pixelBuffer );
+    static UIImage* CreateUIImage( CVPixelBufferRef pixelBuffer );
     
     static image_type * DecomposeUIimage( UIImage* image );
+    
+    static image_type * UIimage_to_image( UIImage* image, image_type *im );
+    
+    
+    
     
     static CFrameLabelMac* CreateFrameLabel( UIView *view, NSBundle *bundle,
                                           NSString *name, int fx, int fy );
@@ -74,7 +85,7 @@ public:
                                                 int x0, int y0, int width, int height, image_type *im );
     
     
-    static void CVPixelBufferRef_rotate180( CVPixelBufferRef pixelBuffer );
+    void    CVPixelBufferRef_rotate180( CVPixelBufferRef pixelBuffer );
     
 
 protected:

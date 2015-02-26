@@ -33,6 +33,8 @@
 		D07DD2E01822DDC200D3FA69 /* GpwImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C2174CDFF384614BF7D68A9 /* GpwImage.cpp */; };
 		D07DD2E11822DDC500D3FA69 /* GpwMarker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D83A561EAD714E4F88F15C55 /* GpwMarker.cpp */; };
 		D07DD2E21823129A00D3FA69 /* FrameLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0200C6017DC582F00080EAB /* FrameLabel.cpp */; };
+		D07E8EC01A9F0A56004465A8 /* VtoolUIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D07E8EBF1A9F0A56004465A8 /* VtoolUIImage.mm */; };
+		D07E8EC11A9F0A56004465A8 /* VtoolUIImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D07E8EBF1A9F0A56004465A8 /* VtoolUIImage.mm */; };
 		D09493B317DF8BB80048A9C5 /* TextLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09493AD17DF8BB80048A9C5 /* TextLabel.cpp */; };
 		D094940517DFB40C0048A9C5 /* GpwMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = D094940417DFB40C0048A9C5 /* GpwMac.mm */; };
 		D0A1FCEE182BFB8900C358DD /* GpwIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0A1FCEC182BFB8900C358DD /* GpwIos.mm */; };
@@ -88,6 +90,7 @@
 		D05435E2182D94A9007954D8 /* TouchEventWrappar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchEventWrappar.h; path = TouchEvent/TouchEventWrappar.h; sourceTree = "<group>"; };
 		D06B7B5018363D160009C6B0 /* GpwPln.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GpwPln.cpp; sourceTree = "<group>"; };
 		D07DD2D41822DC7E00D3FA69 /* libGpwOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGpwOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07E8EBF1A9F0A56004465A8 /* VtoolUIImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VtoolUIImage.mm; path = Vtool/VtoolUIImage.mm; sourceTree = "<group>"; };
 		D09493AC17DF8BB80048A9C5 /* TextBoxX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBoxX.h; sourceTree = "<group>"; };
 		D09493AD17DF8BB80048A9C5 /* TextLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextLabel.cpp; sourceTree = "<group>"; };
 		D09493AE17DF8BB80048A9C5 /* TextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextLabel.h; sourceTree = "<group>"; };
@@ -308,6 +311,7 @@
 		D0DD9419181BE5B200084E8F /* Vtool */ = {
 			isa = PBXGroup;
 			children = (
+				D07E8EBF1A9F0A56004465A8 /* VtoolUIImage.mm */,
 				D0DD9422181C0C0800084E8F /* OpenUDID.h */,
 				D0DD9423181C0C0800084E8F /* OpenUDID.m */,
 				D0DD9420181BEB8100084E8F /* VtoolUid.mm */,
@@ -433,6 +437,7 @@
 				D07DD2DD1822DDAD00D3FA69 /* FrameBuffer.cpp in Sources */,
 				D07DD2DE1822DDBC00D3FA69 /* Gpw.cpp in Sources */,
 				D07DD2DF1822DDBF00D3FA69 /* GpwEllipse.cpp in Sources */,
+				D07E8EC11A9F0A56004465A8 /* VtoolUIImage.mm in Sources */,
 				D07DD2E01822DDC200D3FA69 /* GpwImage.cpp in Sources */,
 				D07DD2E11822DDC500D3FA69 /* GpwMarker.cpp in Sources */,
 				D07DD2E21823129A00D3FA69 /* FrameLabel.cpp in Sources */,
@@ -451,6 +456,7 @@
 				F07E28480131425DACE97DC7 /* GpwEllipse.cpp in Sources */,
 				F167C474DD7F4A2AA57A55AD /* GpwImage.cpp in Sources */,
 				349E33F1549E42EF9FE785B9 /* GpwMarker.cpp in Sources */,
+				D07E8EC01A9F0A56004465A8 /* VtoolUIImage.mm in Sources */,
 				D0200C5B17DC582100080EAB /* FrameBuffer.cpp in Sources */,
 				D0200C5C17DC582100080EAB /* FrameBufferMac.mm in Sources */,
 				D0200C6917DC582F00080EAB /* FrameLabel.cpp in Sources */,

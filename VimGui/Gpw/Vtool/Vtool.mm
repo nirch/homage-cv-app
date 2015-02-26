@@ -78,7 +78,41 @@ image_type *  CVtool::LoadPng( char *file )
 }
 
 
+image_type *  CVtool::ImageRead( char *file, image_type *im )
+{
+   
+    
+    NSString *filename = [NSString stringWithUTF8String:file];
+    UIImage *image = [UIImage imageWithContentsOfFile:filename];
+    
+    
+    im =  UIimage_to_image( image, im );
+    
+    return( im );
+    
+}
 
+
+image_type *  CVtool::Image3Read( char *file, image_type *im )
+{
+    
+    
+    NSString *filename = [NSString stringWithUTF8String:file];
+    UIImage *image = [UIImage imageWithContentsOfFile:filename];
+    
+    
+    image_type *tim =  UIimage_to_image( image, NULL );
+    
+    im = image3_from( tim, im );
+    
+    return( im );
+    
+}
+
+
+
+
+#ifdef _AA_
 
 UIImage* CVtool::CreateUIImage(image_type *imageData)
 {
@@ -213,7 +247,7 @@ UIImage* CVtool::CreateUIImage( CVPixelBufferRef pixelBuffer )
     
     return [newImage autorelease];
 }
-
+#endif
 
 CFrameLabelMac * CVtool::CreateFrameLabel( UIView *view, NSBundle *bundle, NSString *name,
                                     int fx, int fy )
@@ -391,20 +425,28 @@ CVtool::CVPixelBufferRef_to_image_crop( CVPixelBufferRef pixelBuffer,
 void
 CVtool::CVPixelBufferRef_rotate180( CVPixelBufferRef pixelBuffer )
 {
-    int i, j, k;
+    int i,   j;
+    
+    //	size_t bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer);
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
     size_t height = CVPixelBufferGetHeight(pixelBuffer);
     
+   
+    
+  
+    
     CVPixelBufferLockBaseAddress(pixelBuffer, 0 );
+    
     u_int *sp = (u_int *)CVPixelBufferGetBaseAddress(pixelBuffer);
     u_int *tp = sp + height*width - 1;
-    for( i = 0, k = 0 ; i < height/2 ; i++ ){
+    for( i = 0 ; i < height/2 ; i++ ){
         for( j = 0 ; j < width ; j++, tp--, sp++ ){
             int tmp = *sp;
             *sp = *tp;
             *tp = tmp;
         }
     }
+    
     CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
 }
 
