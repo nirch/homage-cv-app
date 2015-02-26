@@ -125,7 +125,10 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 
 
 
-	ProcessInitBackground( m_sim, m_mim[0], 1 );
+	// ProcessInitBackground( m_sim, m_mim[0], 1 );
+    ProcessInitBackground( m_sim );
+    
+        
 
 #ifdef EXCEPTION
 	 }
