@@ -121,20 +121,25 @@ plnC_crop( pln_type *pl, float gt0, float gt1 )
 		pln_type *pl1 =	pln_split( pl, gt1, 0.25 );
 		pln_trim( pl, F_END, pl->len - gt0 );
 
-		l = pl1->link;
-
-		if( pl->link == NULL ){
-			free( pl );
-			*pl = *pl1;
-
-			pl1->link = NULL;
-			pln_destroy( pl1 );
-
+		if( pl1 == NULL ){
 			pln_close( pl, 0.25 );
 			l = LN_NEXT( pl->link );
 		}
-		else	pln_append( pl, pl1 );
+		else {
+			l = pl1->link;
 
+			if( pl->link == NULL ){
+	//			free( pl );
+				*pl = *pl1;
+
+				pl1->link = NULL;
+				pln_destroy( pl1 );
+
+				pln_close( pl, 0.25 );
+				l = LN_NEXT( pl->link );
+			}
+			else	pln_append( pl, pl1 );
+		}
 		pl->state = PLN_CLOSE;
 	}
 

@@ -41,6 +41,13 @@ imageLabel_type *imageLabelUI( image_type *sim, imageLabel_type *abw );
 
 imageLabel_type *imageLabelUI_T( image_type *sim, int T, int margin, imageLabel_type *abw );
 
+
+
+imageLabel_type *	imageLabelUI3( image_type *sim, imageLabel_type *abw );
+
+static image_type *	imageLabelUI_create4( image_type *sim, bwLabel_type **tbw, int *tnBw, image_type *im );
+
+
 image_type *	image1_label( image_type *sim, bwLabel_type **tbw, int *tnBw, image_type *im );
 
 void	imageLabelUI_filter( image_type *sim, image_type *lim, bwLabel_type *aBw, int nBw, int nT );
@@ -62,6 +69,7 @@ void	imageLabelUI_svalue( imageLabel_type *abw, image_type *sim );
 void	imageLabelUI_value_rgb( imageLabel_type *abw, image_type *sim );
 
 
+int	imageLabelUI_pixel_id( imageLabel_type *abw, int i0, int j0 );
 
 void	imageLabelUI_set_id( imageLabel_type *abw );
 
@@ -77,6 +85,8 @@ void	imageLabelUI_merge( imageLabel_type *abw, int i0, int i1 );
 int		imageLabelUI_nieg( imageLabel_type *abw, int i0, int g[], int *nG );
 
 int		imageLabelUI_nieg1( imageLabel_type *abw, int i0 );
+
+image_type *	imageLabelUI_crop( imageLabel_type *abw, int iGroup, image_type *sim, int *x0, int *y0, image_type *im );
 
 
 
@@ -127,7 +137,15 @@ void	image1_fill_blobV( image_type *vim, image_type *sim, int nP, int pT, int bT
 
 
 	// ImageLabelUIContour.cpp
-cln_type *	imageLabelUI_contour( image_type *im, int id );
+clnA_type *	imageLabelUI_clnA( imageLabel_type *abw, clnA_type *ac );
+
+cln_type *	imageLabelUI_cln( image_type *im, int id );
+
+	// ImageLabelUITopology.cpp
+
+
+plnA_type *	imageLabelUI_plnA( imageLabel_type *abw, plnA_type *apl );
+
 
 	// ImageLabelUSContour.cpp
 cln_type *	imageLabelUS_contour( image_type *im, int id );

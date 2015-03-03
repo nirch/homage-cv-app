@@ -17,7 +17,7 @@
 #include "UniformBackground.h"
 #include "ImageLabel/ImageLabel.h"
 
-#include "../PlnAdjust/PlnAdjust.h"
+#include "PlnAdjust/PlnAdjust.h"
 
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 
@@ -57,6 +57,11 @@ int	CUniformBackground::ProcessContour()
 
 	int n = imageLabel_bigest( m_abwC, 1 );
 	
+	if( m_cln != NULL ){
+		cln_destroy( m_cln );
+		m_cln = NULL;
+	}
+
 	m_cln = imageLabelUS_contour( m_abwC->im, n );
 
 
@@ -98,6 +103,10 @@ int	CUniformBackground::ProcessContour()
 
 	ProcessContourAdjust( apl );
 
+	if( apl != NULL ){
+		PLNA_DUMP( apl, "DD", m_iFrame, "thin-bpl" );
+	}
+
 
 	plnF_add( m_fpl, apl, m_iFrame );
 
@@ -120,17 +129,25 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	try {
 #endif
 
+
 	PLNA_DUMPF( apl, "contor", m_iFrame, NULL, m_dFrame == m_iFrame );
 
 
-//	plnA_type *bapl1 = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
+
 	plnA_type *bapl = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
+
+
+	
+
 
 	if( m_headTracking != NULL ){
 		pln_type	*spl;
-		if( m_headTracking->Process( apl, &spl, m_iFrame ) > 0 )
+		if( m_headTracking->Process( apl, &spl, m_iFrame ) > 0 )	
 			plnF_add( m_fplH, plnA_from_pl(spl), m_iFrame );
 	}
+
+
+
 
 
 	float gt[2];
@@ -143,8 +160,11 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	PLNA_DUMPF( apl, "contor", m_iFrame, "thin", m_dFrame == m_iFrame );
 
 
-	if( m_prm->enableEdge != 0 ){
 
+
+
+
+	if( m_prm->enableEdge != 0 ){
 
 		plnA_adjust_bottom( apl, m_aplEdge, m_sim->height, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "bottom", m_dFrame == m_iFrame );
@@ -182,9 +202,16 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 
 
+
+	if( bapl != NULL ){
+		PLNA_DUMP( bapl, "DD", m_iFrame, "thin-bpl-6" );
+	}
+
+	//if( m_iFrame != 39 ){
 	plnA_adjust_intersect( apl );
 	plnA_adjust_start( apl,  m_sim->height );
 	PLNA_DUMPF( apl, "contor", m_iFrame, "intersect", m_dFrame == m_iFrame );
+//	}
 
 #ifdef _AA_
 	if( m_iFrame > 0 && m_fpl->a[m_iFrame-1]->nA > 0 ){
@@ -243,62 +270,6 @@ if( m_iFrame == m_dFrame ){
 	return( 1 );
 }
 
-#ifdef _AA_
-int	CUniformBackground::ProcessContourUI()
-{
-
-	if( m_prm->contour ==  0  )
-		return( 1 );
-
-
-	gpTime_start( &m_tCln );
-
-
-	//	m_eim = image1_gridient_sobol_value( m_yim, m_eim );
-
-	if( m_dFrame == m_iFrame ){
-		IMAGE_DUMP( m_cim, "cim", m_iFrame, NULL );
-	}
-
-
-
-	//	m_abwC = imageLabelUS( m_cim, 128, 0, m_abwC );
-
-
-	m_abwC = imageLabelUI_T( m_cim, 128, 1, m_abwC );
-
-	//	imageLabelUI_set_aux( m_abwC->im, m_abwC->a, m_abwC->nA );
-	imageLabelUI_set_box( m_abwC );
-
-
-
-
-	int i;
-
-	for( i = 0; i < m_abwC->nA ; i++  ){
-		if( m_abwC->a[i].id != i )	continue;	
-		if( m_abwC->a[i].color == 0 )
-			continue;
-
-		m_cln = imageLabelUI_contour( m_abwC->im, i );
-
-		cln_translate( m_cln, -m_abwC->margin, -m_abwC->margin );
-		break;
-	}
-
-
-	//	CLN_DUMP( m_cln, "AA", m_iFrame,  NULL );
-
-
-	plnA_type *apl = cln_to_plnA( m_cln, 1 );
-	plnF_add( m_fpl, apl, m_iFrame );
-
-
-	gpTime_stop( &m_tCln );
-
-	return( 1 );
-}
-#endif
 
 int	CUniformBackground::WriteContour( char *file )
 {

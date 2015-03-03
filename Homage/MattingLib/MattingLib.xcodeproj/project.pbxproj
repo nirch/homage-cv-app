@@ -343,6 +343,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					"../../Edge/**",
 					.,
 				);
 				INSTALL_PATH = "";
@@ -389,6 +390,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					"../../Edge/**",
 					.,
 				);
 				INSTALL_PATH = "";
@@ -435,6 +437,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					"../../Edge/**",
 					.,
 				);
 				INSTALL_PATH = "";
@@ -493,6 +496,7 @@
 					../../Core/Util,
 					../../Core/ImageLib,
 					../../Tracking,
+					"../../Edge/**",
 					.,
 				);
 				INSTALL_PATH = "";

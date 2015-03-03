@@ -18,6 +18,63 @@ void	plnA_group_set( plnA_type *apl, int group );
 
 
 
+void
+plnA_group( plnA_type *apl, float dT )
+{
+	int	i,	j;
+	int	nGroup;
+	pln_type	*pl,	*cpl;
+
+
+	apl->nGroup = 0;
+
+	nGroup = 0;
+	apl->a[0]->group = nGroup++;
+	apl->nGroup = 1;
+
+
+	for( i = 1; i < apl->nA; i++ ){
+		pl = apl->a[i];
+		pl->group = -1;
+
+		for( j = 0 ; j < i ; j++ ){
+			cpl = apl->a[j];
+
+			if( cpl->group == pl->group )
+				continue;
+
+			dPln_type d;
+			if( pln_distance_pln_u( pl, cpl, &d ) < 0 )
+				continue;
+
+			if( ABS(d.u) > dT )
+				continue;
+
+
+
+			if( pl->group == -1 ){
+				pl->group = cpl->group;
+				continue;
+			}
+
+			if( pl->group < cpl->group )
+				plnA_group_set_id( apl, i+1, cpl->group, pl->group );
+			else
+				plnA_group_set_id( apl, i+1, pl->group, cpl->group );
+
+			apl->nGroup--;
+		}
+
+		if( pl->group == -1 ){
+			pl->group = nGroup++;
+			apl->nGroup++;
+		}
+	}
+
+	apl->mGroup = nGroup;
+}
+
+
 		
 void
 plnA_group_parallel( plnA_type *apl, float dt, float aT, float D0, float D1 )

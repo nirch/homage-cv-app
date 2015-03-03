@@ -6,10 +6,11 @@
 
 
 #ifdef _DEBUG
-#define _DUMP 
+//#define _DUMP 
 #endif
 
 #ifdef _DUMP
+#define SEGF_PRINT( title, as, nS, fp )  if( falg != 0 ) seg_printf( title, as, nS, fp );
 #define SEG_PRINT( title, as, nS, fp )  seg_printf( title, as, nS, fp );
 #else 
 #define SEG_PRINT( title, as, nS, fp ) 
@@ -208,6 +209,8 @@ float gt0, gt1;
 
 
 //	PLN_DUMP( pl, "pl",1, NULL );
+
+	pt2dA_destroy( apt );
 
 	return( 1 );
 

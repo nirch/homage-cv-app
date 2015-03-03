@@ -223,6 +223,8 @@ int	pln_distance( pln_type *pl, vec2f_type *p, dPln_type *d );
 
 int	pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md );
 
+int	pln_distance_pln_u( pln_type *bpl, pln_type *pl, dPln_type *md );
+
 
 void	pln_box( pln_type *pl, box2f_type *box );
 
@@ -247,6 +249,9 @@ int		plnA_selectI( plnA_type *apl, vec2f_type *v, int ignore, float mDis, dPln_t
 
 
 float	plnA_length( plnA_type *apl );
+
+float	plnA_max_length( plnA_type *aP );
+
 
 int		plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type *sd );
 
@@ -409,11 +414,19 @@ int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float
 
 
 	// PlnGroup.c
+
+void	plnA_group( plnA_type *apl, float dT );
+
 void plnA_group_parallel( plnA_type *apl, float dt, float aT, float D0, float D1 );
 
 int	plnA_group_max( plnA_type *apl, int *iG, int *no );
 
 pt2dGroupA_type *	pt2dGroupA_set_pln( pt2dGroupA_type *ag, plnA_type *apl );
+
+
+	// PlnBounding.cpp
+pln_type *	plnA_bounding( plnA_type *apl, float radius );
+
 
 
 // PlnParallelDistance.c
@@ -430,6 +443,9 @@ int	pln_approximate( gapp_type *gapp, int fClose, pln_type **pl );
 
 	// lnFromGapp.c
 pln_type *pln_from_gapp( gapp_type *gapp );
+
+pln_type *	pln_from_gappA( gapp_type *gapp, int i0, int i1 );
+
 
 void	pln_to_gapp( pln_type *pl, float dt, gapp_type *gapp );
 

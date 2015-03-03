@@ -80,6 +80,69 @@ int	i,	iseg;
 
 
 
+pln_type *
+pln_from_gappA( gapp_type *gapp, int i0, int i1 )
+{
+	ln_type	*l,	*l0;
+
+	vec2d	p,	v;
+	int	i,	iseg;
+
+
+	pln_type *pl = pln_alloc( 0 );
+	pl->ctr = gapp->v[i0];
+
+
+
+
+	p = gapp->v[i0];
+	for(i = i0, l0 = NULL ; i < i1; i = iseg, l0 = l ){
+
+		iseg = gapp_next( gapp, i, GEOM_DIVISION);
+
+		v = gapp->v[iseg];
+
+		l = LN_ALLOC();
+
+		l->p[1] = NULL;
+
+		if( l0 != NULL ){
+			l0->p[1] = l;
+			l->p[0] = l0;
+		}
+		else
+			pl->link = l;
+
+		l->v.x = v.x - p.x;
+		l->v.y = v.y - p.y;
+
+		p.x += l->v.x;
+		p.y += l->v.y;
+
+
+
+		/* set AUX */
+		if( l->v.x == 0.0 && l->v.y == 0 ){
+			l->len = l->u.x = l->u.y = l->c_prb = l->a = 0.0;
+			continue;
+		}
+
+
+		l->len = hypot( l->v.x, l->v.y );
+
+		l->u.x = l->v.y/l->len;
+		l->u.y = -l->v.x/l->len;
+
+		l->c_prb = gapp->a[iseg];
+		l->a = - l->c_prb * l->len * l->len*0.25 ;	
+	}
+
+	pln_set_length( pl );
+
+	return( pl );
+}
+
+
 void
 pln_to_gapp( pln_type *pl, float dt, gapp_type *gapp )
 {

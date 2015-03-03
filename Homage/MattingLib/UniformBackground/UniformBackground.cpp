@@ -17,11 +17,13 @@
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 #include "UniformBackground.h"
 
-#include "../UnBackground/bImage.h"
+#include "UnBackground/bImage.h"
 
 #include "ImageMorphology/ImageMorphology.h"
 
-#include "../UnBackground/UnBackground.h"
+#include "UnBackground/UnBackground.h"
+
+#include "EdgeLib/Ridge/RidgeDetector.h"
 
 
 //#define EXCEPTION
@@ -143,8 +145,115 @@ void CUniformBackground::DeleteContents()
 	if( m_unBackground != NULL ){
 		delete m_unBackground;
 		m_unBackground = NULL;
-
 	}
+
+
+	if( m_dr != NULL ){
+		//m_dr->DeleteContents();
+		delete m_dr;
+		m_dr = NULL;
+	}
+	
+
+	if( m_ac != NULL ){
+		clnA_destroy( m_ac );
+		m_ac = NULL;
+	}
+	
+
+	int	i;
+	for( i = 0 ; i < m_nM ; i++ ){
+		image_destroy( m_mim[i], 1 );
+		m_mim[i] = NULL;
+	}
+
+	if( m_sim != NULL ){
+		image_destroy( m_sim, 1 );
+		m_sim = NULL;
+	}
+
+	if( m_yim != NULL ){
+		image_destroy( m_yim, 1 );
+		m_yim = NULL;
+	}
+
+	if( m_bim != NULL ){
+		image_destroy( m_bim, 1 );
+		m_bim = NULL;
+	}
+
+	if( m_bimC != NULL ){
+		image_destroy( m_bimC, 1 );
+		m_bimC = NULL;
+	}
+	
+
+	if( m_dim != NULL ){
+		image_destroy( m_dim, 1 );
+		m_dim = NULL;
+	}
+
+	if( m_cim != NULL ){
+		image_destroy( m_cim, 1 );
+		m_cim = NULL;
+	}
+
+	if( m_cimS != NULL ){
+		image_destroy( m_cimS, 1 );
+		m_cimS = NULL;
+	}
+
+	if( m_bnIm != NULL ){
+		image_destroy( m_bnIm, 1 );
+		m_bnIm = NULL;
+	}
+
+	if( m_bnImD != NULL ){
+		image_destroy( m_bnImD, 1 );
+		m_bnImD = NULL;
+	}
+
+	if( m_eim != NULL ){
+		image_destroy( m_eim, 1 );
+		m_eim = NULL;
+	}
+
+	if( m_abwBlob != NULL ){
+		imageLabel_destroy( m_abwBlob );
+		m_abwBlob = NULL;
+	}
+
+
+	if( m_abw != NULL ){
+		imageLabel_destroy( m_abw );
+		m_abw = NULL;
+	}
+
+	if( m_abwC != NULL ){
+		imageLabel_destroy( m_abwC );
+		m_abwC = NULL;
+	}
+
+
+
+	if( m_fpl != NULL ){
+		plnF_destroy( m_fpl );
+		m_fpl = NULL;
+	}
+
+	if( m_fplH != NULL ){
+		plnF_destroy( m_fplH );
+		m_fplH = NULL;
+	}
+	
+	if( m_aplEdge != NULL ){
+		plnA_destroy( m_aplEdge );
+		m_aplEdge = NULL;
+	}
+	
+
+	
+
 }
 
 
@@ -253,7 +362,7 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	gpTime_start( &m_gTime );
 
 
-#ifdef EXCEPTION
+#ifdef EXCEPTION1
 	try {
 #endif
 
@@ -303,7 +412,7 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 
 	ProcessLog();
 
-#ifdef EXCEPTION
+#ifdef EXCEPTION1
 	}
 
 	catch (...) {

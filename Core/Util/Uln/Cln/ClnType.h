@@ -58,6 +58,9 @@ clnA_type *	clnA_alloc( int n );
 
 void	clnA_destroy( clnA_type *ac );
 
+void	clnA_add( clnA_type *ac, cln_type *c );
+
+
 cln_type * clnA_detach( clnA_type *ac, int i0 );
 
 
@@ -153,6 +156,8 @@ cln_type *	cln_detach_transparent( cln_type *c );
 
 	// ClnWrite.cpp
 void cln_dump( cln_type *cln, char *prefix, int index, char *suffix );
+
+void clnA_dump( clnA_type *ac, char *prefix, int index, char *suffix );
 
 int		cln_write(cln_type *cln, char *file );
 

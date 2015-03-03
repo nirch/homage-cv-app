@@ -72,6 +72,18 @@ clnA_destroy( clnA_type *ac )
 	free( ac );
 }
 
+void
+clnA_add( clnA_type *ac, cln_type *c )
+{
+
+	if( ac->nA == ac->NA ){
+		ac->NA += 10;
+		ac->a = (cln_type **)realloc( ac->a, sizeof(cln_type *)*ac->NA );
+	}
+
+	ac->a[ac->nA++] = c;
+}
+
 
 cln_type *
 clnA_detach( clnA_type *ac, int i0 )

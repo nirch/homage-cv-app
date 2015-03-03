@@ -9,6 +9,7 @@
 #endif
 
 #include	 "Umath/Matrix4Type.h"
+#include	 "Umath/Matrix2Type.h"
 
 #include "Uln/PlnType.h"
 
@@ -24,7 +25,10 @@ static int	pln_step_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, matrix
 int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
 
+int	plnA_fitT_step( plnA_type *apl, pln_type *bpl, float gt0, float gt1, lt2_type *lt );
 
+
+static int GGG = 0;
 
 int
 plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f )
@@ -36,6 +40,27 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float
 
 
 	bpl = NULL;
+
+
+	// translate
+	GGG = 1;
+	if( GGG == 1 ){
+		for( i = 0 ; i < 6 ; i++ ){
+			bpl = pln_affine_lt( bpl0, &f->lt, bpl );
+			PLN_DUMP( bpl, "fit", i, "T" );
+
+			s = hypot( f->lt.a0, f->lt.b0 );
+			ret = plnA_fitT_step( apl, bpl, gt0*s, gt1*s, &clt );
+			if( ret < 0 )	break;
+
+			lt2_compose( &clt, &f->lt, &ct );
+			f->lt = ct;
+		}
+	}
+
+
+
+
 	for( i = 0 ; i < cycle ; i++ ){
 
 		bpl = pln_affine_lt( bpl0, &f->lt, bpl );
@@ -188,6 +213,117 @@ dPln_type	d;
 		A->a[3][2] += H[2] * H[3];
 		A->a[3][3] += H[3] * H[3];
 		D[3] += H[4] * H[3];
+
+
+		n++;
+	}
+
+
+
+	return( n );
+}
+
+static int	pln_stepT_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, matrix2_type *A, double D[2] );
+
+int
+plnA_fitT_step( plnA_type *apl, pln_type *bpl, float gt0, float gt1, lt2_type *lt )
+{
+	matrix2_type A;
+	double	D[2],	X[2];
+	int	i,	n;
+
+
+	matrix2_zero( &A );
+	D[0] = D[1] =  0;
+
+
+	n = 0;
+
+	for( i = 0 ; i < apl->nA ; i++ )
+		n += pln_stepT_1( bpl, gt0, gt1, apl->a[i], &A, D );
+
+
+	if( n < 10 )	
+		return( -1 );
+
+	if( matrix2_solve( &A, (vec2d_type *)D, (vec2d_type *)X ) < 0 )
+		return( -1 );
+
+	
+
+	lt->c0 = X[0];
+	lt->a0 = 1;
+	lt->b0 = 0;
+	lt->c1 = X[1];
+	lt->a1 = 0;
+	lt->b1 = 1;
+
+
+	return( 1 );
+
+}
+
+
+static int
+	pln_stepT_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, matrix2_type *A, double D[2] )
+{
+	float	gt,	v,	u;
+	vec2f_type	p,	m,	T;
+	float	H[5],	w;
+	int	n;
+	dPln_type	d;
+
+	n = 0;
+
+
+	for( gt = 0 ; gt < pl->len ; gt += 2 ){
+
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_distance( bpl, &p, &d ) < 0 )
+			continue;
+
+		if( d.gt < gt0 || d.gt > gt1 )	continue;
+
+		if( ABS(d.u) > 16 )	continue;
+
+
+
+		pln_gt2p( bpl, d.gt, &m );
+
+		pln_tanget( pl, gt, &T );
+		u = T.y;
+		v = -T.x;
+
+		H[0] = u;
+		H[1] = v;
+		H[2] = (m.x*u + m.y*v);
+		H[3] = (m.y*u -m.x*v);
+		H[4] = (p.x*u + p.y *v);
+
+
+		// weight 
+		if( (w = H[2] - H[4]) < 0 )
+			w = -w;
+		w = 1.0 / ( 1+ w );
+
+		H[0] *= w;
+		H[1] *= w;
+		H[2] *= w;
+		H[3] *= w;
+		H[4] *= w;
+
+
+
+
+		A->a[0][0] += H[0] * H[0];
+		A->a[0][1] += H[1] * H[0];
+		D[0] += (H[4] - H[2]) * H[0];
+
+
+		A->a[1][0] += H[0] * H[1];
+		A->a[1][1] += H[1] * H[1];
+		D[1] += (H[4] -H[2])* H[1];
 
 
 		n++;

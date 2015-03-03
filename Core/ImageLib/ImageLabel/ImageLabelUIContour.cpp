@@ -22,34 +22,34 @@
 
 
 
-vec2f_type	DV[] = { -0.5, 0,
+static vec2f_type	DV[] = { -0.5, 0,
 					  0,  -0.5,
 					  0.5, 0,
 					  0,   0.5 };
 
-vec2f_type	DT[] = { -1,   0,
+static vec2f_type	DT[] = { -1,   0,
 					  0,  -1,
 					  1,   0,
 					  0,   1 };
 
 
-vec2f_type	DVC[] = {	-0.5,  -0.5,
+static vec2f_type	DVC[] = {	-0.5,  -0.5,
 						 0.5,  -0.5,
 						 0.5,   0.5,
 						-0.5,   0.5 };
 
-vec2f_type	DTC[] = {	-1,  -1,
+static vec2f_type	DTC[] = {	-1,  -1,
 						 1,  -1,
 						 1,   1,
 						-1,   1 };
 
 
-vec2f_type	DP[] = { 0, -1,
+static vec2f_type	DP[] = { 0, -1,
 					 1,  0,
 					 0,  1,
 					 -1, 0 };
 
-vec2f_type	DPC[] = {  -1, -1,
+static vec2f_type	DPC[] = {  -1, -1,
 						1,  -1,
 						1,  1,
 						-1, 1 };
@@ -72,8 +72,43 @@ static int	pln_approximateA( gapp_type *gapp, int fClose, pln_type **pl );
 
 
 
+clnA_type *
+imageLabelUI_clnA( imageLabel_type *abw, clnA_type *ac )
+{
+	int	i;
+
+	int n = imageLabel_no( abw );
+	
+
+
+	ac = clnA_alloc( n + 1 );
+
+
+	int	iContour = 0;
+
+	for( i = 1 ; i < abw->nA ; i++ ){
+
+		if( abw->a[i].id != i )	continue;
+
+		cln_type *c = imageLabelUI_cln( abw->im, i );
+
+
+		clnA_add( ac, c );
+
+
+		CLN_DUMP( c, "ac", i, NULL );
+
+		iContour++;
+	}
+
+
+
+	return( ac );
+}
+
+
 cln_type *
-imageLabelUI_contour( image_type *im, int id )
+imageLabelUI_cln( image_type *im, int id )
 {
 int	i,	j,	i0,	j0,	side;
 int	no;
@@ -94,7 +129,7 @@ cln_type *cln;
 	while( image_find_border( im, id, i0, j0, &i,  &j, &side ) > 0 ){
 
 		agpLevel_contour_1( im, i, j, side, gapp );
-//		gapp_dump( gapp, "gapp", no, NULL );
+		GAPP_DUMP( gapp, "gapp", no, NULL );
 
 		if( gapp->no < 64 )	continue;
 
@@ -360,15 +395,21 @@ gapp_breakpoint( gapp_type *gapp, int d )
 {
 gapp_type	*ga;
 int	i,	j,	i0;
+	
+	i0 = gapp_get_breakpoint( gapp, 0 );
 
 	gapp_breakpoint_x( gapp, d );
 		
 	gapp_breakpoint_y( gapp, d );
 
+
+	if( i0 < 0 )
+		i0 = gapp_get_breakpoint( gapp, 0 );
+	if( i0 < 0 )	i0 = 0;
+
+
 	ga = gapp_alloc( gapp->no+1 );
 
-	i0 = gapp_get_breakpoint( gapp, 0 );
-	if( i0 < 0 )	i0 = 0;
 
 	for( j = 0, i = i0 ; j < gapp->no ; j++, i++ ){
 		if( i >= gapp->no )	i = 0;

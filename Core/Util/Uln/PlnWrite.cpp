@@ -70,7 +70,7 @@ plnF_write( plnF_type *fpl, char *file )
 	fprintf(fp, "%s  %d  %d\n", "PLV", PL_VERSION, fpl->nA );
 	
 	for( i = 0 ; i < fpl->nA ; i++ ){
-		if( fpl->a[i] != NULL )
+		if( fpl->a[i] != NULL && fpl->a[i]->nA > 0 )
 			plnA_write( fpl->a[i], fp );
 	}
 

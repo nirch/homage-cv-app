@@ -81,8 +81,10 @@ int	i,	j,	ret;
 			continue;
 		}
 
-		if( pl->e->ry *1.5 < pl->e->rx && ABS(pl->e->v.x) > 0.9 )
+		if( pl->e->ry *1.5 < pl->e->rx && ABS(pl->e->v.x) > 0.9 ){
+			pln_destroy( pl );
 			continue;
+		}
 
 
 
@@ -96,8 +98,10 @@ int	i,	j,	ret;
 				continue;
 			}
 
-			if( t < 0.1 )
+			if( t < 0.1 ){
+				pln_destroy( pl );
 				continue;
+			}
 		}
 
 

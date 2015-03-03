@@ -137,8 +137,12 @@ plnF_read( plnF_type **vpl, char *file )
 
 	plnA_type *apl;
 	for( i = 0 ; i < nV ; i++ ){
-		if( plnA_read( &apl, fp ) < 0 )
+		int ret = plnA_read( &apl, fp );
+		if( ret == -1 )
 			break;
+
+		if( ret < 0 )
+			continue;
 
 		plnF_add( *vpl, apl, apl->iFrame );
 	}
@@ -189,11 +193,11 @@ plnA_read( plnA_type **apl, char *file )
 		fseek( fp, pose, SEEK_SET );
 	}
 
-	plnA_read( apl, fp );
+	int ret = plnA_read( apl, fp );
 
 	fclose( fp );
 
-	return( 1 );
+	return( ret );
 }
 
 
@@ -254,6 +258,8 @@ plnA_read( plnA_type **apl, FILE *fp )
 	
 	fscanf(fp, "%d", &nPl );
 
+	//if( nPl <= 0 )
+	//	return( -2 );
 
 
 
@@ -263,6 +269,11 @@ plnA_read( plnA_type **apl, FILE *fp )
 	if( version >= 4 )
 		fscanf( fp, "%s  %f %f %f %f", buf, &(*apl)->p.x, &(*apl)->p.y, &(*apl)->scale, &(*apl)->angle );
 
+
+	if( nPl <= 0 ){
+		plnA_destroy( *apl );
+		return( -2 );
+	}
 
 
 	(*apl)->iFrame = iFrame;

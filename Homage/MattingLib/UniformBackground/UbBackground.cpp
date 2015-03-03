@@ -22,9 +22,9 @@ static image_type *	image1_sampleN( image_type *sim, int N, image_type *im );
 
 #include "plnTracker/PlnHeadTracker/PlnHeadTracker.h"
 
-#include "../UnBackground/bImage.h"
+#include "UnBackground/bImage.h"
 
-#include "../UnBackground/UnBackground.h"
+#include "UnBackground/UnBackground.h"
 
 
 
@@ -115,7 +115,7 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 		 return( -10 );
 
 
-#ifdef EXCEPTION
+#ifdef EXCEPTION1
 	 try {
 #endif
 
@@ -125,12 +125,11 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 
 
 
-	// ProcessInitBackground( m_sim, m_mim[0], 1 );
-    ProcessInitBackground( m_sim );
-    
-        
+//	ProcessInitBackground( m_sim, m_mim[0], 1 );
 
-#ifdef EXCEPTION
+	ProcessInitBackground( m_sim );
+
+#ifdef EXCEPTION1
 	 }
 
 	 catch (...) {
@@ -153,10 +152,10 @@ int	i,	ret;
 		if( ret > 0 ){
 			m_iHead = 2*m_unBackground->GetHead() + 1;
 			m_bim = m_unBackground->GetBim( m_bim );
-            
-            m_state = m_unBackground->GetState();
 
-			GPLOG( ("Background: %d", m_unBackground->GetState() ) );
+			m_state = m_unBackground->GetState();
+
+//			GPLOG( ("Background: %d", m_unBackground->GetState() ) );
 			return( 1 );
 		}
 	}
@@ -195,7 +194,7 @@ int	i,	ret;
 	 m_iHead = 1 + 2*iMax;
 
 
-	 GPLOG( ("Old Background: %d", m_state ) );
+	GPTRACE( (3, "Old Background: %d\n", m_state ) );
 
 	 BIMAGE_DUMP( m_bim, m_N, "bg", 1, "FS" );
 
@@ -703,8 +702,8 @@ bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, segC_type ac
 
 	}
 
-	if( no > 0 )
-		fprintf( stdout, "Dilate %d\n", no );
+//	if( no > 0 )
+//		fprintf( stdout, "Dilate %d\n", no );
 
 	return( 1 );
 }
@@ -1635,7 +1634,7 @@ bImage_erodeG( image_type *bim, image_type *eim, image_type *cim, int a0[], int 
 	}
 
 
-	fprintf( stdout, "erode: %d\n", no );
+//	fprintf( stdout, "erode: %d\n", no );
 
 	return( no );
 }

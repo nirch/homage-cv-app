@@ -55,7 +55,23 @@ cln_from_plnA( plnA_type *apl, int fData )
 }
 
 	
+void	
+clnA_dump( clnA_type *ac, char *prefix, int index, char *suffix )
+{
+	char	file[256];
 
+	if( ac == NULL )
+		return;
+
+
+	if( gpDump_filename( prefix, index, suffix, ".ctr", file ) < 0 )
+		return;
+
+
+
+
+	clnA_write( ac, file );
+}
 
 
 void	

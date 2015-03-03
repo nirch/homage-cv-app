@@ -89,7 +89,7 @@ int	id,	id1;
 
 	bw = *tbw;
 	if( bw == NULL )
-		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type)/100 );
+		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type)/10 );
 	nBw = 0;
 
 

@@ -41,6 +41,9 @@ plnA_adjust_start( plnA_type *apl, float height )
 	float ag[100];
 	int n =	pln_rangeH(  apl->a[0], height, ag );
 
+	if( n == 0 )
+		return( 1 );
+
 	if( n > 2 && ag[n-1] - ag[n-2] < 10 )
 		n -= 2;
 

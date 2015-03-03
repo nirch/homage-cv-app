@@ -19,7 +19,12 @@
 #include "SbType.h"
 
 
-
+sbA_type *
+sbA_alloc()
+{
+	sbA_type *as = ( sbA_type *)malloc( sizeof(sbA_type) );
+	return( as );
+}
 
 
 int

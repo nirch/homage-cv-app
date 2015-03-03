@@ -719,6 +719,23 @@ float	len;
 }
 
 float 
+plnA_max_length( plnA_type *aP )
+{
+	pln_type	*pl;
+	int	i;
+	float	len;
+
+	len = 0;
+	for( i = 0, len = 0 ; i < aP->nA ; i++ ){
+		pl = aP->a[i];
+		if( len < pl->len )
+			len = pl->len;
+	}
+
+	return( len );
+}
+
+float 
 plnA_group_length( plnA_type *aP, int group )
 {
 	pln_type	*pl;
@@ -854,6 +871,8 @@ pln_append( pln_type *pl, pln_type *pl1 )
 
 	pl1->link = NULL;
 
+	pln_destroy( pl1 );
+
 	pl->len = lnL_length( pl->link );
 }
 
@@ -935,6 +954,41 @@ pln_distance( pln_type *pl, vec2f_type *p, dPln_type *d )
 	ret = lnL_distance( &pl->ctr, pl->link, NULL, p, &d->l, &d->u, &d->t, &d->gt );
 
 	return( ret );
+}
+
+
+
+int
+pln_distance_pln_u( pln_type *bpl, pln_type *pl, dPln_type *md )
+{
+	float gt,	dt;
+	vec2f_type p;
+	dt = 2.0;
+
+	dPln_type d;
+
+	md->sgt = -1;
+
+	for( gt = 0 ; gt < pl->len ; gt += dt ){
+
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_distance( bpl, &p, &d ) < 0 )
+			continue;
+
+//		if( d.gt < 0 || d.gt > bpl->len )
+//			continue;
+
+		if( md->sgt < 0  || ABS(d.u) < ABS(md->u) ){
+			*md = d;
+			md->sgt = gt;
+		}
+	}
+
+	if( md->sgt < 0 )
+		return( -1 );
+
+	return( 1 );
 }
 
 

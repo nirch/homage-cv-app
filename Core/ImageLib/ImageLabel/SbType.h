@@ -24,11 +24,13 @@ typedef struct sbA_type {
 	int NA;
 	int	nA;
 
+	int	ib;
 
 	sb_type a[256];
 } sbA_type;
 
 
+sbA_type  * sbA_alloc();
 
 int	sbA_write( sbA_type *as, FILE *fp );
 
