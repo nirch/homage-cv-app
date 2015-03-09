@@ -26,7 +26,7 @@ int	pln_rangeH( pln_type *pl, float h, float ag[] );
 
 
 int
-plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int iFrame )
+plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int fillAll, int iFrame )
 {
 	int	i;
 
@@ -55,7 +55,7 @@ plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int iFrame )
 		float gt1 = ag[i];
 		float t = pln_is_in_apl( pl, gt0, gt1, eapl, 2.0 );
 
-		if( t > 0.4 )	continue;
+		if( fillAll == 0 && t > 0.4 )	continue;
 
 		vec2f_type	p0,	p1;
 		pln_gt2p( pl, gt0, &p0 );

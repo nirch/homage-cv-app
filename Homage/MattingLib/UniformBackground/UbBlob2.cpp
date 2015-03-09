@@ -27,7 +27,7 @@ static void	image1_set( image_type *sim, image_type *im );
 static int	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color, vec2f_type *mp );
 
 
-static int	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int color );
+static int	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int fillAll, int color );
 
 
 static void	imageLabelUS_remove( image_type *sim, imageLabel_type *abw, int color );
@@ -65,7 +65,7 @@ int	CUniformBackground::ProcessBlob2()
 	m_abwBlob = imageLabelUS_N( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );
-	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob/4, 0x06 );
+	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob/4, m_prm->fillBlobAll, 0x06 );
 
 
 	if( m_iFrame == m_dFrame ){
@@ -218,17 +218,18 @@ int	a[6],	nA,	i;
 
 
 static int
-	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int color )
+	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int fillAll, int color )
 {
 
 
 	float vT = 12;
 	int	i;
-	for( i = 0 ; i < abw->nA ; i++ ){
+	for( i = 1 ; i < abw->nA ; i++ ){
 		bwLabel_type *bw = &abw->a[i];
 		bw->existence = 0;
 		if( bw->id != i )	continue;
-		if( bw->no > nT || bw->av < vT  )	continue;
+		if( bw->no > nT || (fillAll == 0 && bw->av < vT)  )
+			continue;
 
 		bw->existence = -1;
 

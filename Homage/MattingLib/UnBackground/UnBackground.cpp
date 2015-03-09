@@ -49,11 +49,51 @@ CUnBackground::CUnBackground()
 
 	m_bimDx = NULL;
 
+	m_ac = NULL;
+
 	gpTime_init( &m_gTime );
 }
 
 CUnBackground::~CUnBackground()
 {
+	if( m_ac != NULL ){
+		clnA_destroy( m_ac );
+		m_ac = NULL;
+	}
+
+
+	if( m_yim != NULL ){
+		image_destroy( m_yim, 1 );
+		m_yim = NULL;
+	}
+
+	if( m_bim != NULL ){
+		image_destroy( m_bim, 1 );
+		m_bim = NULL;
+	}
+
+	if( m_bimDx != NULL ){
+		image_destroy( m_bimDx, 1 );
+		m_bimDx = NULL;
+	}
+
+	if( m_bimD != NULL ){
+		image_destroy( m_bimD, 1 );
+		m_bimD = NULL;
+	}
+
+
+	int i;
+	for( i = 0 ; i < m_nM ; i++ ){
+		image_destroy( m_mim[i], 1 );
+		m_mim[i] = NULL;
+
+	}
+
+	if( m_abw != NULL ){
+		imageLabel_destroy( m_abw );
+		m_abw = NULL;
+	}
 
 }
 

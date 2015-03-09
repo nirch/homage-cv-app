@@ -166,7 +166,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 	if( m_prm->enableEdge != 0 ){
 
-		plnA_adjust_bottom( apl, m_aplEdge, m_sim->height, m_iFrame );
+		plnA_adjust_bottom( apl, m_aplEdge, m_sim->height, m_prm->fillBlobAll, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "bottom", m_dFrame == m_iFrame );
 	}
 

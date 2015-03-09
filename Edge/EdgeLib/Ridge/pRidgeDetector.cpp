@@ -47,7 +47,7 @@ static void	pRidge_filter( image_type *rim );
 
 
 image_type *
-pRidge_detector( image_type *sim, image_type *mim, image_type *rmim, pRidgeDetectPrm_type *prm, image_type *rim )
+pRidge_detector( image_type *sim, image_type *mim, image_type *rmim[], int nRmim, pRidgeDetectPrm_type *prm, image_type *rim )
 {
 
 	IMAGE_DUMP( sim, "r", 1, "src" );
@@ -66,8 +66,12 @@ pRidge_detector( image_type *sim, image_type *mim, image_type *rmim, pRidgeDetec
 
 	PRIDGE_DUMP( rim, "r", 0, "3" );
 
-	if( rmim != NULL )
-		pRidge_mask( rim, 0, rmim );
+//	if( rmim != NULL )
+//		pRidge_mask( rim, 0, rmim );
+
+	int i;
+	for( i = 0 ; i < nRmim ; i++ )
+		pRidge_mask( rim, 0, rmim[i] );
 
 	pRidge_linking( rim );
 

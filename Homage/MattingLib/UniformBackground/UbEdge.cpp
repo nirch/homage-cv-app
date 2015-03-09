@@ -22,7 +22,7 @@
 
 
 
-
+#define _USE_EDGE
 
 #ifdef _USE_EDGE
 #include "EdgeLib/Ridge/RidgeDetector.h"

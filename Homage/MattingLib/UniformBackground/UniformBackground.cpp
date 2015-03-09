@@ -354,6 +354,16 @@ int	i;
 
 
 
+int	CUniformBackground::ResetBackground()
+{
+	if( m_bim != NULL ){
+		image_destroy( m_bim, 1 );
+		m_bim = NULL;
+	}
+
+	return( 1 );
+}
+
 
 int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 {
@@ -391,7 +401,8 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	ProcessSmooth();
 
 //	*cim = m_cim;
-	*cim = m_cimS;
+	if( cim != NULL )
+		*cim = m_cimS;
 
 
 	ProcessContour();

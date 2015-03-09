@@ -19,6 +19,8 @@ ubPrm_alloc()
 
 	prm->fillBlob = 120*120;
 
+	prm->fillBlobAll = 0;
+
 //	prm->adjustContour = 0;
 
 	prm->dx = 8;
@@ -88,6 +90,12 @@ CUniformBackground::ReadPrm( char *inFile )
 
 		if ( (gp_stricmp(tag->name, "FillBlob") == 0) ){
 			m_prm->fillBlob = atoi( tag->data );
+
+			continue;
+		}
+
+		if ( (gp_stricmp(tag->name, "FillBlobAll") == 0) ){
+			m_prm->fillBlobAll = atoi( tag->data );
 
 			continue;
 		}

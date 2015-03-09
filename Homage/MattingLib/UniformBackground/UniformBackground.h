@@ -21,6 +21,7 @@ typedef struct ubPrm_type {
 	int thin;
 
 	int fillBlob;
+	int fillBlobAll;
 
 //	int	adjustContour;
 
@@ -72,6 +73,9 @@ public:
 
 
 	int	ReadMask( char *inFile, int width, int height );
+
+	int	ResetBackground();
+
 
 	int ProcessBackground( image_type *sim, int iFrame );
 	

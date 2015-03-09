@@ -26,11 +26,14 @@
 #define _DUMP 
 #endif
 
+int	pRidge_line_close( image_type *dim, int d,  pRidgeLinePrm_type *prm, plRidgeA_type *ar );
+
 
 static pt2dA_type *	apt_from_pRidge( pRidge_type *ad[200], int nD, pt2dA_type *apt );
 
 static plRidge_type *	plRidge_set(  pRidge_type *arp[], int nRp, pRidgeLinePrm_type *prm );
 
+static int	pRidge_line_start( image_type *rim, pRidge_type *dp00, pRidge_type **s );
 
 
 int
@@ -39,12 +42,12 @@ pRidge_line( image_type *dim, int d,  pRidgeLinePrm_type *prm, plRidgeA_type *ar
 	pRidge_type	*dp;
 	int	i,	j;
 
-	pRidge_type	*ad[1024];
+	pRidge_type	*ad[4096];
 	int	nD;
 
 
 
-
+	
 
 	dp = (pRidge_type *)dim->data;
 	for( i = d ; i < dim->height-d ; i++ ){
@@ -56,6 +59,12 @@ pRidge_line( image_type *dim, int d,  pRidgeLinePrm_type *prm, plRidgeA_type *ar
 			if( dp->ng[0] >= 0 && dp->ng[1] >= 0 )
 				continue;
 
+
+//			pRidge_type *dp0;
+//			if( pRidge_line_start( dim, dp, &dp0 ) < 0 )
+//				continue;
+
+//			pRidge_line_1( dim, dp0, ad, &nD );
 			pRidge_line_1( dim, dp, ad, &nD );
 			
 
@@ -75,7 +84,59 @@ pRidge_line( image_type *dim, int d,  pRidgeLinePrm_type *prm, plRidgeA_type *ar
 		}
 	}
 
+
+	pRidge_line_close( dim, d,  prm, ar );
+
 //	plnA_dump( aPl, "aa", 1, "2" );
+
+
+	return( 1 );
+}
+
+
+int
+pRidge_line_close( image_type *dim, int d,  pRidgeLinePrm_type *prm, plRidgeA_type *ar )
+{
+	pRidge_type	*dp;
+	int	i,	j;
+
+	pRidge_type	*ad[4096];
+	int	nD;
+
+
+
+
+
+	dp = (pRidge_type *)dim->data;
+	for( i = d ; i < dim->height-d ; i++ ){
+		dp = (pRidge_type *)IMAGE_PIXEL( dim, i, d );
+		for( j = d ; j < dim->width-d ; j++, dp++ ){
+
+			if( dp->state == 0 || dp->state & 0x8 )	continue;
+
+//			if( dp->ng[0] >= 0 && dp->ng[1] >= 0 )
+//				continue;
+
+			pRidge_line_1( dim, dp, ad, &nD );
+
+
+			if( nD < 3 )	
+				continue;
+
+
+			//if( (n = pRidge_approximate_pl( ad, nD, &aPl->a[aPl->nA] )) > 0 )
+			//	aPl->nA++;
+
+			plRidge_type *r;
+
+			if( ( r = plRidge_set( ad, nD, prm ) ) != NULL )
+				plRidgeA_add( ar, r );
+
+
+		}
+	}
+
+	//	plnA_dump( aPl, "aa", 1, "2" );
 
 
 	return( 1 );
@@ -139,6 +200,11 @@ plRidge_type	*r;
 
 	pRidge_approximate_pl( arp, nRp, &r->pl );
 
+	if( r->pl->len < prm->lenMin ){
+		plRidge_destroy( r );
+		return( NULL );
+	}
+
 
 	return( r );
 }
@@ -175,7 +241,10 @@ int	arp[9];
 	*nD = 0;
 	ad[(*nD)++] = dp00;
 
+
 	for( rp = dp00, k = direct ; rp != NULL ;  ){
+
+		rp->state |= 0x08;
 
 		if( rp->ng[k] < 0 )	break;
 
@@ -188,7 +257,7 @@ int	arp[9];
 
 		rp = nrp;
 
-		rp->state |= 0x08;
+//		rp->state |= 0x08;
 
 		ad[(*nD)++] = rp;
 	}
@@ -197,6 +266,65 @@ int	arp[9];
 
 
 	return( 1 );
+
+}
+
+
+
+static int
+pRidge_line_start( image_type *rim, pRidge_type *dp00, pRidge_type **s )
+{
+	pRidge_type	*rp,	*nrp;
+	int	arp[9];
+
+
+
+	arp[0] = -rim->width - 1;
+	arp[1] = -rim->width;
+	arp[2] = -rim->width + 1;
+
+	arp[3] = - 1;
+	arp[4] = 0;
+	arp[5] = + 1;
+
+	arp[6] = rim->width - 1;
+	arp[7] = rim->width;
+	arp[8] = rim->width + 1;
+
+
+
+	int	direct = ( dp00->ng[0] < 0 )? 1 : 0;
+	int	k,	n;
+
+
+	for( rp = dp00, k = direct, n = 0 ; rp != NULL ; n++  ){
+
+		if( rp->ng[k] < 0 ){
+			*s = rp;
+			return( n );
+		}
+
+		nrp = rp + arp[ rp->ng[k] ];
+
+
+		if( rp->v.x * nrp->v.x + rp->v.y * nrp->v.y < 0 )
+			k = 1-k;
+
+		rp = nrp;
+		n++;
+
+		rp->state |= 0x08;
+
+		if( rp == dp00 ){
+			*s = dp00;
+			return( n );
+		}
+	}
+
+
+
+
+	return( -1 );
 
 }
 
@@ -215,6 +343,8 @@ pt2dA_type *apt;
 	pt2d_approximate_linkO( apt, &pl[0]->ctr, &pl[0]->link );
 
 	pl[0]->len = lnL_length( pl[0]->link );
+
+	pl[0]->state = PLN_OPEN;
 
 	pt2dA_destroy( apt );
 

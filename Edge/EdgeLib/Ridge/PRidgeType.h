@@ -52,7 +52,7 @@ typedef struct pRidge_type	{
 
 
 	// pRidgeDetector.cpp
-image_type *	pRidge_detector( image_type *sim, image_type *mim, image_type *rmim, pRidgeDetectPrm_type *prm, image_type *im );
+image_type *	pRidge_detector( image_type *sim, image_type *mim, image_type *rmim[], int nRmim, pRidgeDetectPrm_type *prm, image_type *im );
 
 int				pRidge_detector( image_type *sim, int i0, int j0, pRidge_type *rp, struct jet2App_type *ja, pRidgeDetectPrm_type *prm );
 

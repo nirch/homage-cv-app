@@ -43,7 +43,7 @@ vim_detect_ridge( image_type *sim, box2i *box, pRidgePrm_type *prm, plRidgeA_typ
 //	IMAGE_DUMP( im, "ridge", -1, NULL );
 
 
-	image_type *rim = pRidge_detector( imy, NULL, NULL, &prm->detect, NULL );
+	image_type *rim = pRidge_detector( imy, NULL, NULL, 0, &prm->detect, NULL );
 
 
 	pRidge_lineN(  rim, 2, &prm->line, ar );
@@ -74,7 +74,7 @@ pRidge_lineN( image_type *dim, int d, pRidgeLinePrm_type *prm, plRidgeA_type *aR
 pRidge_type	*dp;
 int	i,	j;
 
-pRidge_type	*ad[2048];
+pRidge_type	*ad[4096];
 int	nD;
 
 

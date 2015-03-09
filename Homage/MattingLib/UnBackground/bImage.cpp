@@ -837,8 +837,14 @@ bImage_fill_gap( image_type *bim, int a[], int i0, int i1, int side )
 
 
 		int	j0,	j1;
-		if( (j0 = a[i]-6) < 1 )	j0 = 1;
-		if( (j1 = a[i]+6) > bim->width-2 )	j1 = bim->width-2;
+		if( (j0 = a[i]-10) < 1 )	j0 = 1;
+		if( (j1 = a[i]+10) > bim->width-2 )	j1 = bim->width-2;
+
+		if( side == F_LEFT )
+			j0 = 1;
+
+		if( side == F_RIGHT )
+			j1 = bim->width -2;
 
 		bp = ( bImage_type *)IMAGE_PIXEL( bim, i, j0);
 		for( j = j0; j <= j1 ; j++, bp++ ){

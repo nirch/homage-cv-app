@@ -34,7 +34,7 @@ int	pln_coherent( plnA_type *apl, plnA_type *bpl, int height, int iFrame);
 int	plnA_adjust_edge( plnA_type *apl, plnA_type *eapl, float height, float ht[2], int iFrame );
 
 	// PlnAdjustBottom.cpp
-int	plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int iFrame );
+int	plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int fillAll, int iFrame );
 
 
 	// PlnIntersect.cpp

@@ -22,7 +22,7 @@ public:
 
 	CRidgeDetector();
 
-	~CRidgeDetector();
+	virtual ~CRidgeDetector();
 
 	void DeleteContents();
 
@@ -36,10 +36,13 @@ public:
 	int Detect( image_type *sim, image_type *mim );
 
 
-	int SetMask( image_type *sim, image_type *mim );
+	int SetMask( image_type *sim, image_type *mim, int add = 0 );
 
 	int Union( float lenT, float dT, float aT );
 
+	image_type *GetRimage( image_type *im );
+
+	plnA_type * Component( float dT, float sLen, float mLen );;
 
 
 	int Write( char *file );
@@ -47,7 +50,7 @@ public:
 
 	void Draw( struct gpw_type *gpw, int fLine, int fCircle );
 
-	plnA_type * Get( float tLen );
+	plnA_type * Get( float tLen, int fData = 0 );
 
 
 
@@ -70,7 +73,8 @@ public:
 
 	image_type *m_rim;
 
-	image_type *m_rmim;
+	int m_nRmim;
+	image_type *m_rmim[4];
 
 	plRidgeA_type *m_ar;
 };

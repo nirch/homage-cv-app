@@ -48,7 +48,7 @@ int	i,	j;
 	if( fLine != 0 && m_ar != NULL ){
 		for( i = 0 ; i < m_ar->nR ; i++ ){
 //			pln_draw( gpw, m_ar->r[i]->pl, CYAN, CYAN, 0 );
-			gpw_pln( gpw, m_ar->r[i]->pl, CYAN, CYAN, 0 );
+			gpw_pln( gpw, m_ar->r[i]->pl, 0x00A000, 0x00A000, 0 );
 
 		}
 	}
