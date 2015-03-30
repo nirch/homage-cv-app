@@ -451,11 +451,15 @@ int	r,	g,	b,	color;
 		if( gifIo->transparent_flag == 1)
 			color |= 0xFF000000;
 		image4_const( gifIo->im, color );
+		if( gifIo->bim != NULL )
+			gifIo->bim = image_make_copy( gifIo->im, gifIo->bim );
+		
 
 		if( gifIo->bim != NULL ){
-			gifIo->bim = image_make_copy( gifIo->im, gifIo->bim );
+			gifIo->im = image_make_copy( gifIo->bim, gifIo->im );
 		}
 	}
+
 
 
 
@@ -598,7 +602,7 @@ int	a,	b,	mask;
 	gifIo->disposal_method = mask&0x1c;
 	gifIo->disposal_method = gifIo->disposal_method >> 2;
 
-	//fprintf( stdout, "%d", gifIo->disposal_method );
+//	fprintf( stdout, "%d", gifIo->disposal_method );
 	
 	gifIo->transparent_index = GIO_GETC( gifIo->gio);
 
