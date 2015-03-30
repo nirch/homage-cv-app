@@ -452,8 +452,9 @@ int	r,	g,	b,	color;
 			color |= 0xFF000000;
 		image4_const( gifIo->im, color );
 
-		if( gifIo->bim != NULL )
-			gifIo->im = image_make_copy( gifIo->bim, gifIo->im );
+		if( gifIo->bim != NULL ){
+			gifIo->bim = image_make_copy( gifIo->im, gifIo->bim );
+		}
 	}
 
 

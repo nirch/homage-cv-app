@@ -139,7 +139,7 @@ cst_type	cst;
 int bytes,	size;
 u_char codeLength;
 float var,	dev,	average;
-int	a;
+
 
 
 
@@ -156,6 +156,9 @@ int	a;
 	if( gifIo->im != NULL ){
 		//image_difference_rectangle( gifIo->im, rim,
 		//					&Dif.y0, &Dif.y1, &Dif.x0, &Dif.x1 );
+
+		IMAGE_DUMP( gifIo->bim, "gif", gifIo->frame_i, "bim" );
+		IMAGE_DUMP( rim, "gif", gifIo->frame_i, "rim" );
 
 		image_difference_rectangle( gifIo->bim, rim,
 			&Dif.y0, &Dif.y1, &Dif.x0, &Dif.x1 );
