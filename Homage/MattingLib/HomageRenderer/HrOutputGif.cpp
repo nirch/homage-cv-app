@@ -106,7 +106,7 @@ int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 
 		image_adaptive_palette( m_aim->a, m_aim->nA, m_palette, (1<<8) - 1 );
 
-		imageA_destroy( m_aim );
+
 
 		int	i;
 		for( i = m_palette->nColor ; i < 255 ; i++  ){
@@ -133,11 +133,20 @@ int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 			m_palette, transparent_index, 0,
 			-1 );
 
+
+		for( i = 0 ; i < m_aim->nA-1 ; i++ ){
+			image_write_gifIo_add_frame( m_gifIo, m_aim->a[i], 0 );
+		}
+		imageA_destroy( m_aim );
+
 	}
 
 
 
 	int ret = image_write_gifIo_add_frame( m_gifIo, m_im, 0 );
+
+
+
 
 	return( ret );
 }
