@@ -108,7 +108,6 @@ imageLabelUI_plnA( imageLabel_type *abw, plnA_type *apl )
 	// Set Color
 	for( i = 0 ; i < apl->nA ; i++ ){
 		pln_type *pl = apl->a[i];
-
 		bwLabel_color( abw, pl->id, &pl->color[1] );
 		bwLabel_color( abw, pl->group, &pl->color[0] );
 	}
@@ -375,6 +374,7 @@ gapp_type	*ga;
 		if( (gapp->flag[i] & 0x01 ) == 0  )
 			continue;
 
+	
 
 		a[n++] = i;
 		a[n++] = gapp->flag[i+1]>>2;
@@ -415,9 +415,11 @@ gapp_type	*ga;
 	for( i = 0 ; i < n ; i += 2 ){
 		if( a[i+1] > 0 && a[i+1] < id  )	continue;
 		pln_type *pl = pln_from_gappA( ga, a[i]-di, a[i+2]-di );
+
+	
 		pl->id = a[i+1];
 		pl->group = id;
-
+//		fprintf( stdout, "%d %d  %d  %d %d\n", n, gapp->no, i, pl->id, pl->group );
 		if( n == 2 )
 			(pl)->state = ( fClose == 1 )? PLN_CLOSE : PLN_OPEN;
 

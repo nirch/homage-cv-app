@@ -402,7 +402,7 @@ imageLabelUI_create4( image_type *sim, bwLabel_type **tbw, int *tnBw, image_type
 			bw[*tp].no++;
 		}
 
-		if( nBw+im->width >= NBW ){
+		if( nBw >= NBW ){
 			gpWarning( "imageLabelUI_create", "Out of Range" );
 			break;
 		}
@@ -1301,7 +1301,7 @@ image_type *
 
 	if( b.y0 > 0 )	b.y0 -= 1;
 	b.y1 += 1;
-	if( b.y1 < sim->width )	b.y1 += 1;
+	if( b.y1 < sim->height )	b.y1 += 1;
 
 	*x0 = b.x0;
 	*y0 = b.y0;
