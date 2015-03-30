@@ -73,6 +73,8 @@
 		50E0345BBB4B41EDB3235BA8 /* UnityS4.c in Sources */ = {isa = PBXBuildFile; fileRef = 517EEDC194D641EFB89C85E8 /* UnityS4.c */; settings = {COMPILER_FLAGS = ""; }; };
 		50E840F71D354637BAE4CD58 /* GpTime.c in Sources */ = {isa = PBXBuildFile; fileRef = F23EC5E6EC9348A8B5467DE2 /* GpTime.c */; settings = {COMPILER_FLAGS = ""; }; };
 		523A2C2DCCB442F8AD0A1AAF /* GpFunction.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F89CEF8CD79402E94EDE9F5 /* GpFunction.c */; settings = {COMPILER_FLAGS = ""; }; };
+		54C681F41AC954570006A0F3 /* PlnBounding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C681F11AC954570006A0F3 /* PlnBounding.cpp */; };
+		54C681F51AC954570006A0F3 /* PlnStraightlineSplit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C681F21AC954570006A0F3 /* PlnStraightlineSplit.cpp */; };
 		563E4A191D644604A5140F22 /* Matrix3Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 077F17A648EB4430ADFC330D /* Matrix3Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		5BB8E69E05C24FC19F538273 /* zip_files.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A11A04A2DD4460388123EE3 /* zip_files.c */; settings = {COMPILER_FLAGS = ""; }; };
 		5C2F7ED158F842A3B1770567 /* lz_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 69F36E3D2FF544C1B0735348 /* lz_encode.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -321,6 +323,8 @@
 		51B6102A7693438381675F08 /* uinf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uinf.h; path = Uinf/uinf.h; sourceTree = SOURCE_ROOT; };
 		5372996C1A1047779F653E5C /* HuffmanPut.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = HuffmanPut.c; path = Uhuffman/HuffmanPut.c; sourceTree = SOURCE_ROOT; };
 		537D1F019DAB4868B49E77EC /* CstFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CstFile.c; path = Ucst/CstFile.c; sourceTree = SOURCE_ROOT; };
+		54C681F11AC954570006A0F3 /* PlnBounding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnBounding.cpp; path = Uln/PlnBounding.cpp; sourceTree = "<group>"; };
+		54C681F21AC954570006A0F3 /* PlnStraightlineSplit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnStraightlineSplit.cpp; path = Uln/PlnStraightlineSplit.cpp; sourceTree = "<group>"; };
 		54F7B2BE89AE47BCA9A875F5 /* Jet23Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Jet23Array.c; path = Ujet2/Jet23Array.c; sourceTree = SOURCE_ROOT; };
 		55611A1FD66943E68C327755 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffixed.h; path = UZlib/inffixed.h; sourceTree = SOURCE_ROOT; };
 		582CFDEB15D940B78BF6360E /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = UZlib/crc32.c; sourceTree = SOURCE_ROOT; };
@@ -1035,6 +1039,8 @@
 		D0A568F618B79F0A0053D55F /* Uln */ = {
 			isa = PBXGroup;
 			children = (
+				54C681F11AC954570006A0F3 /* PlnBounding.cpp */,
+				54C681F21AC954570006A0F3 /* PlnStraightlineSplit.cpp */,
 				D04D18DC1A88A47A00104D52 /* CrPlnTool.cpp */,
 				D02C8A4F1949A6860078EB83 /* PlnApproximate.cpp */,
 				D02C8A4D1949A4610078EB83 /* PlnSmooth.cpp */,
@@ -1202,9 +1208,11 @@
 				ABD5F9289AB04FFCB1148310 /* CstXml.c in Sources */,
 				03C2670B0D064E3DBE6B75E9 /* GappDump.c in Sources */,
 				A1A68D58CBE54F58948BBBC2 /* GappTool.c in Sources */,
+				54C681F41AC954570006A0F3 /* PlnBounding.cpp in Sources */,
 				0A63EC5A68DC455EB6195A4B /* GeoApp.c in Sources */,
 				504A9F0B6F4048F08DF14446 /* GeoApp1.c in Sources */,
 				D02F38E019482EE200FB25A5 /* Pt2dApproximatePolylink.c in Sources */,
+				54C681F51AC954570006A0F3 /* PlnStraightlineSplit.cpp in Sources */,
 				BD08F44ED30A473CB8AA37D2 /* GeoApp2.c in Sources */,
 				F5C1A8D6DDBC4DAD854B428F /* GeoAppLine.c in Sources */,
 				28BB371E11C74BC085191EE0 /* ls_appr.c in Sources */,

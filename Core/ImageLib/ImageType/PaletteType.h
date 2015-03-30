@@ -67,8 +67,16 @@ typedef struct palette_type
 	int		bitPerPixel;
 
 	int		ALLOCATED;
-	int		nColor;
-	color_type *data;
+
+	union {
+		int	nColor;
+		int nA;
+	};
+
+	union {
+		color_type *data;
+		color_type *a;
+	};
 
 	char	*table;
 
@@ -105,6 +113,12 @@ void	palette_write( palette_type *p, int no, FILE *fp );
 int		palette_write_to_file( palette_type *p, char *file );
 
 int		palette_write_to_open_file( palette_type *p, FILE *fp );
+
+int		palette_write_hexa_to_file( palette_type *p, char *file );
+
+palette_type *	palette_read_heax_data( char *data );
+
+
 
 
 palette_type *	palette_read_file( char *file );

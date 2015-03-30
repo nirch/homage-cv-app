@@ -242,10 +242,32 @@ palette_write_to_open_file( palette_type *p, FILE *fp )
 {
 int	i;
 
-	fprintf( fp, "Colors: %4d\n", p->nColor );
+	fprintf( fp, "%4d\n", p->nColor );
 
 	for( i = 0 ; i < p->nColor ; i++ )
-		fprintf( fp, "%4d,  %4d,  %4d,\n", (int)p->data[i].Red, (int)p->data[i].Green, (int)p->data[i].Blue );
+		fprintf( fp, "%3d  %3d  %3d\n", (int)p->data[i].Red, (int)p->data[i].Green, (int)p->data[i].Blue );
+
+	return( 1 );
+}
+
+
+
+int 
+palette_write_hexa_to_file( palette_type *p, char *file )
+{
+	int	i;
+
+	FILE * fp;
+	//int	i;
+	if( (fp = fopen( file, "w" )) == NULL )
+		return(1);
+
+	fprintf( fp, "PAL-X %4d\n", p->nColor );
+
+	for( i = 0 ; i < p->nColor ; i++ )
+		fprintf( fp, "%.8X\n", COLOR_RGB( p->data[i].Red, (int)p->data[i].Green, (int)p->data[i].Blue) );
+
+	fclose( fp );
 
 	return( 1 );
 }
@@ -301,6 +323,60 @@ palette_type *p;
 
 
 palette_type *
+palette_read_heax_data( char *data )
+{
+	int	i;
+	int	r,	g,	b,	color;
+	int	nColor;
+	palette_type *p;
+	char	signature[256];
+
+
+	
+	if( gp_strtok_string( data, " \t\r\n", signature ) < 0 )
+		return( NULL );
+
+	if( gp_strtok_int( NULL, " \t\r\n", &nColor ) < 0 )
+		return(NULL );
+
+
+	p = palette_alloc( 256 );
+
+
+
+	for( i = 0 ; i < nColor ; i++ ){
+
+		if( gp_strtok_hexa( NULL, " \t\r\n", &color ) < 0 )
+			break;
+
+
+		r = IMAGE4_RED( color );
+		g = IMAGE4_GREEN( color );
+		b = IMAGE4_BLUE( color );
+
+
+
+
+		p->data[i].Red = r;
+		p->data[i].Green = g;
+		p->data[i].Blue = b;
+
+	}
+
+	if( i < 0 ){
+		palette_destroy( p );
+		return( NULL );
+	}
+
+	p->nColor = i;
+
+
+	return( p );
+}
+
+
+
+palette_type *
 palette_read_data( char *data )
 {
 int	i,	k,	k0,	k1;
@@ -310,7 +386,6 @@ int	nColor;
 palette_type *p;
 
 
-	p = palette_alloc( 256 );
 
 	if( gp_strtok_int( data, " \t\r\n", &nColor ) < 0 )
 		return(NULL );

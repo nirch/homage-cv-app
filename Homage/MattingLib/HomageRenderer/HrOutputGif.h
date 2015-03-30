@@ -28,6 +28,8 @@ public:
 
 	int Init( char *outFile, int width, int height, int frameSpeed );
 
+	int SetPalette( char *data );
+
 	virtual int	WriteFrame( image_type *im, int iFrame );
 
 	int	Close();
@@ -50,6 +52,8 @@ private:
 
 	palette_type *m_palette;
 	image_type *m_im;
+
+	imageA_type *m_aim;
 };
 
 

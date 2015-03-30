@@ -30,8 +30,14 @@ CHrOutputGif::CHrOutputGif()
 
 	m_color = 0x02FE05;
 
+	m_palette = NULL;
+
 	m_delay = 30;
+
+	m_aim = NULL;
 }
+
+
 
 CHrOutputGif::~CHrOutputGif()
 {
@@ -64,20 +70,17 @@ int CHrOutputGif::Init( char *outFile, int width, int height, int frameSpeed )
 
     m_delay = frameSpeed / 10;
 
-	//m_gifIo = image_write_gifIo_open_file( outFile, height, width,
-	//	30,
-	//	palette, transparent_index, 0,
-	//	-1 );
-
-
-	//if( m_gifIo == NULL )
-	//	return( -1 );
 
 	return( 1 );
 }
 
 
+int CHrOutputGif::SetPalette( char *data )
+{
+	m_palette = palette_read_heax_data( data );
 
+	return( 1 );
+}
 
 
 int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
@@ -86,15 +89,24 @@ int CHrOutputGif::WriteFrame( image_type *im, int iFrame )
 	m_im = imageT_negative_alpha( im, m_im );
 	if( m_gifIo == NULL ){
 
-		m_palette = palette_alloc( 256 );
+		if( m_aim == NULL )
+			m_aim = imageA_alloc( 4 );
 
-		
-		m_palette->nColor = 0;
+		m_aim->a[m_aim->nA++] = image_make_copy( m_im, NULL );
+		if( m_aim->nA < 4 )
+			return( 1 );
 
-		//image_24to8_smart( im, m_palette, NULL);
 
-//		image_type *tim = image4_from( m_im, NULL );
-		image_adaptive_palette( &m_im, 1, m_palette, (1<<8) - 1 );
+
+		if( m_palette == NULL ){
+			m_palette = palette_alloc( 256 );
+			m_palette->nColor = 0;
+		}
+
+
+		image_adaptive_palette( m_aim->a, m_aim->nA, m_palette, (1<<8) - 1 );
+
+		imageA_destroy( m_aim );
 
 		int	i;
 		for( i = m_palette->nColor ; i < 255 ; i++  ){

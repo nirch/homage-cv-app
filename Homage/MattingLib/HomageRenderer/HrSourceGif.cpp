@@ -91,7 +91,8 @@ int	CHrSourceGif::ReadFrame( int iFrame, image_type **im )
 	//}
 
 
-	image_read_gif_i( m_gifIo, iFrame );
+	if( image_read_gif_i( m_gifIo, iFrame ) < 0 )
+		return( -1 );
 
 	m_im = image_make_copy( m_gifIo->im, m_im );
 	imageT_negative_alpha( m_im, m_im );
