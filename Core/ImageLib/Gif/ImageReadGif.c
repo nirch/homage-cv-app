@@ -451,7 +451,7 @@ int	r,	g,	b,	color;
 		if( gifIo->transparent_flag == 1)
 			color |= 0xFF000000;
 		image4_const( gifIo->im, color );
-		if( gifIo->bim != NULL )
+		if( gifIo->bim == NULL )
 			gifIo->bim = image_make_copy( gifIo->im, gifIo->bim );
 		
 
