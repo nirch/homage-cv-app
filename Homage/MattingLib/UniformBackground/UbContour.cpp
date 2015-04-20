@@ -34,9 +34,9 @@ int	CUniformBackground::ProcessContour()
 		return( 1 );
 
 
-#ifdef _USE_EDGE
-	ProcessEdgeContour();
-#endif
+	if( m_prm->enableEdge == 1 ) 
+		ProcessEdgeContour();
+
 
 	gpTime_start( &m_tCln );
 
@@ -103,9 +103,7 @@ int	CUniformBackground::ProcessContour()
 
 	ProcessContourAdjust( apl );
 
-	if( apl != NULL ){
-		PLNA_DUMP( apl, "DD", m_iFrame, "thin-bpl" );
-	}
+
 
 
 	plnF_add( m_fpl, apl, m_iFrame );
@@ -203,9 +201,9 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 
 
-	if( bapl != NULL ){
-		PLNA_DUMP( bapl, "DD", m_iFrame, "thin-bpl-6" );
-	}
+	//if( bapl != NULL ){
+	//	PLNA_DUMP( bapl, "DD", m_iFrame, "thin-bpl-6" );
+	//}
 
 	//if( m_iFrame != 39 ){
 	plnA_adjust_intersect( apl );

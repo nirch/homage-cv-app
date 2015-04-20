@@ -287,7 +287,7 @@ int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int heigh
 			return( -1 );
 	}
 
-	if( m_contour >= 0 )
+	if( m_contour > 0 )
 		m_prm->contour = m_contour;
 
 	ProcessEdgeContourInit();
