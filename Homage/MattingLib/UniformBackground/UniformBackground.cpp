@@ -25,6 +25,13 @@
 
 #include "EdgeLib/Ridge/RidgeDetector.h"
 
+//#define _DYNAMIC_BACKGROUND
+
+#ifdef _DYNAMIC_BACKGROUND
+#include "../DynamicMask/DynamicMask.h"
+#endif
+
+
 
 //#define EXCEPTION
 
@@ -39,6 +46,7 @@ image_type *	bImage_realloc(  box2i_type *b, int n, image_type *bim );
 
 
 image_type *	bImage_diff( image_type *sim, box2i_type *b, int N, image_type *bim, int T, image_type *im );
+
 
 static void	image1_close1( image_type *sim );
 
@@ -98,6 +106,10 @@ CUniformBackground::CUniformBackground()
 
 	m_dr = NULL;
 
+#ifdef _DYNAMIC_BACKGROUND
+	m_dm = NULL;
+#endif
+
 	m_prm = ubPrm_alloc();
 
 	gpTime_init( &m_rTime );
@@ -153,6 +165,13 @@ void CUniformBackground::DeleteContents()
 		delete m_dr;
 		m_dr = NULL;
 	}
+
+#ifdef _DYNAMIC_BACKGROUND
+	if( m_dm != NULL ){
+		delete m_dm;
+		m_dm = NULL;
+	}
+#endif
 	
 
 	if( m_ac != NULL ){
@@ -372,6 +391,7 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	gpTime_start( &m_gTime );
 
 
+
 #ifdef EXCEPTION1
 	try {
 #endif
@@ -381,11 +401,16 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	else m_sim = image_make_copy( sim, m_sim );
 	
 
+	m_yim = image1_from( m_sim, m_yim );
 
 	if( m_bim == NULL ){
 		ProcessInitBackground( m_sim );
 
 		InitHeadTracker( m_iHead );
+
+#ifdef _DYNAMIC_BACKGROUND
+		ProcessDynamicMaskInit();
+#endif
 	}
 
 
@@ -393,6 +418,11 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	m_yim = image1_from( m_sim, m_yim );
 
 	ProcessCompare( m_sim );
+
+
+#ifdef _DYNAMIC_BACKGROUND
+	ProcessDynamicMask();
+#endif
 
 
 
@@ -475,8 +505,8 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 
 
 	gpTime_start( &m_tOpen );
-//	image1_open( m_cim, 1, 0 );
-	image1_close( m_cim, 1, 255 );
+	image1_open( m_cim, 1, 0 );
+//	image1_close( m_cim, 1, 255 );
 	gpTime_stop( &m_tOpen );
 
 
@@ -509,9 +539,13 @@ void CUniformBackground::Trace( FILE *fp )
 
 	gpTime_print( fp, "Bn-dd", &m_tBn );
 	gpTime_print( fp, "Update", &m_tUpdate );
+	gpTime_print( fp, "Edge", &m_tEdge );
 	gpTime_print( fp, "Contour", &m_tCln );
 
 	gpTime_print( fp, "Total", &m_gTime );
+
+//	if( m_dr != NULL )
+//		m_dr->Trace( fp );
 
 
 
