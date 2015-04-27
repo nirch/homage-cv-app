@@ -12,6 +12,8 @@
 #include "Ulog/Log.h"
 #include "Ucamera/Pt2dType.h"
 
+#include "Uln/PlnType.h"
+
 
 
 #include "Vl2fType.h"
@@ -136,6 +138,16 @@ vl2f_distance2( vl2f_type *vl, vec2f_type *p )
 
 
 
+void
+vl2fA_set_group( vl2fA_type *avl, int iGroup )
+{
+	int	i;
+
+	for( i = 0; i < avl->nA ; i++ )
+		avl->a[i].group = -1;
+}
+
+
 int
 vl2fA_select( vl2fA_type *avl, vec2f_type *p, float D )
 {
@@ -221,18 +233,20 @@ vl2fA_type	*avl;
 int
 vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix )
 {
-pt2dA_type	*apt;
+plnA_type *apl;
 
+	if( avl->nA == 0 )
+		return( -1 );
 
-	apt = vl2fA_to_pt2dA( avl );
+	apl = plnA_from_vlA( avl, NULL );
 
-	PT2DA_DUMP( apt, prefix, index, suffix );
+	PLNA_DUMP( apl, prefix, index, suffix );
 
-	pt2dA_destroy( apt );
+	plnA_destroy( apl );
 
 	return( 1 );
-
 }
+
 
 
 int
@@ -370,3 +384,13 @@ vl2f_cutpoint( vl2f_type *vl0, vl2f_type *vl1, vec2f_type *p )
 #endif
 }
 
+
+
+void
+vl2fA_inverse_direction( vl2fA_type *avl )
+{
+	int i;
+
+	for( i = 0 ; i < avl->nA ; i++ )
+		VEC2D_MINUS( avl->a[i].v );
+}

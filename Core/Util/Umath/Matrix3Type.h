@@ -116,6 +116,10 @@ double	matrix3_dmax( matrix3_type *m1, matrix3_type *m2 );
 int	matrix3_test( matrix3_type *m );
 
 
+void	matrix3_linaer_equation_add( matrix3_type *m, double D[], double X[], double y );
+
+
+
 	// MatrixEigen.c
 int	matrixS3_eigen( matrix3_type *m, matrix3_type *em, double ev[] );
 

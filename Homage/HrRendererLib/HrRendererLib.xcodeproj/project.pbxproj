@@ -1,0 +1,381 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6DC2090F3D3440DEBD09775B /* HrEffectPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF45EF48597F44E4B177BA5E /* HrEffectPose.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		7436A85718894C0397EA4822 /* HrEffectMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		80D0D51F86444963B3D1B413 /* HrOutputI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		B146982E045748D2B30B4BA3 /* HrEffectI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		CEE063DFF96A4B32A699CDE1 /* HrSourceI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7EFB15A79465EB6F17C69 /* HrSourceI.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F29186AFF9704B59A5D9A1AE /* HomageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C81184561E014C9197D0FE67 /* HomageRenderer.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02C98FCC108E423989C880FF /* HrOutputI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputI.h; path = HrOutput/HrOutputI.h; sourceTree = SOURCE_ROOT; };
+		0A38D6FEDC4940509F60690B /* libHrRendererLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHrRendererLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2A64373BC2424F9AF4B6F4 /* HrEffectI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectI.h; path = HrEffect/HrEffectI.h; sourceTree = SOURCE_ROOT; };
+		18D19644009C48818E0FE1A9 /* HrOutputGreenWin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputGreenWin.h; path = HrOutput/HrOutputGreenWin.h; sourceTree = SOURCE_ROOT; };
+		1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectMask.cpp; path = HrEffect/HrEffectMask.cpp; sourceTree = SOURCE_ROOT; };
+		3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectI.cpp; path = HrEffect/HrEffectI.cpp; sourceTree = SOURCE_ROOT; };
+		3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrOutputI.cpp; path = HrOutput/HrOutputI.cpp; sourceTree = SOURCE_ROOT; };
+		542606E4854441F3BD28ECD3 /* HomageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomageRenderer.h; sourceTree = SOURCE_ROOT; };
+		5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrSourceGif.cpp; path = HrSource/HrSourceGif.cpp; sourceTree = SOURCE_ROOT; };
+		6E5946CEA0A94BB3931BE656 /* HrOutputGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputGif.h; path = HrOutput/HrOutputGif.h; sourceTree = SOURCE_ROOT; };
+		7A7DF00408684FF99F6257F5 /* HrSourceGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrSourceGif.h; path = HrSource/HrSourceGif.h; sourceTree = SOURCE_ROOT; };
+		9BD7EFB15A79465EB6F17C69 /* HrSourceI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrSourceI.cpp; path = HrSource/HrSourceI.cpp; sourceTree = SOURCE_ROOT; };
+		A913C22E19D54912B0C6E223 /* HrEffectMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectMask.h; path = HrEffect/HrEffectMask.h; sourceTree = SOURCE_ROOT; };
+		AF45EF48597F44E4B177BA5E /* HrEffectPose.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectPose.cpp; path = HrEffect/HrEffectPose.cpp; sourceTree = SOURCE_ROOT; };
+		B19A0E7BFD1A499CBD787339 /* HrEffectPose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectPose.h; path = HrEffect/HrEffectPose.h; sourceTree = SOURCE_ROOT; };
+		B87FE4980F66478E92324C7C /* HrSourceGreenWin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrSourceGreenWin.h; path = HrSource/HrSourceGreenWin.h; sourceTree = SOURCE_ROOT; };
+		BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrOutputGif.cpp; path = HrOutput/HrOutputGif.cpp; sourceTree = SOURCE_ROOT; };
+		C81184561E014C9197D0FE67 /* HomageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HomageRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		FCB5C78D9B1945F1B0916B86 /* HrSourceI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrSourceI.h; path = HrSource/HrSourceI.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0500224ADDB64E0E8093D5F7 /* HrRendererLib */ = {
+			isa = PBXGroup;
+			children = (
+				8B1E1C5AC29749E1948F4173 /* Source Files */,
+				970C00B9B348496AAEE84342 /* Header Files */,
+			);
+			name = HrRendererLib;
+			sourceTree = "<group>";
+		};
+		369B646E22F248BABEBB091E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A38D6FEDC4940509F60690B /* libHrRendererLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		51E078E072FF47C08881FEB5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8B1E1C5AC29749E1948F4173 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				C81184561E014C9197D0FE67 /* HomageRenderer.cpp */,
+				3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */,
+				1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */,
+				AF45EF48597F44E4B177BA5E /* HrEffectPose.cpp */,
+				BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */,
+				3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */,
+				5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */,
+				9BD7EFB15A79465EB6F17C69 /* HrSourceI.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		970C00B9B348496AAEE84342 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				542606E4854441F3BD28ECD3 /* HomageRenderer.h */,
+				0D2A64373BC2424F9AF4B6F4 /* HrEffectI.h */,
+				A913C22E19D54912B0C6E223 /* HrEffectMask.h */,
+				B19A0E7BFD1A499CBD787339 /* HrEffectPose.h */,
+				6E5946CEA0A94BB3931BE656 /* HrOutputGif.h */,
+				18D19644009C48818E0FE1A9 /* HrOutputGreenWin.h */,
+				02C98FCC108E423989C880FF /* HrOutputI.h */,
+				7A7DF00408684FF99F6257F5 /* HrSourceGif.h */,
+				B87FE4980F66478E92324C7C /* HrSourceGreenWin.h */,
+				FCB5C78D9B1945F1B0916B86 /* HrSourceI.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		CF478351FA9340CE87CDA9C6 = {
+			isa = PBXGroup;
+			children = (
+				D04442A2DF4844E8A82D8E2A /* Sources */,
+				51E078E072FF47C08881FEB5 /* Resources */,
+				369B646E22F248BABEBB091E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D04442A2DF4844E8A82D8E2A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0500224ADDB64E0E8093D5F7 /* HrRendererLib */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C6AEAA31E3D147A2AA9B30A8 /* HrRendererLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B551EBA0CB44B73A825C209 /* Build configuration list for PBXNativeTarget "HrRendererLib" */;
+			buildPhases = (
+				EBFCCE37721B46D6B402395A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HrRendererLib;
+			productName = HrRendererLib;
+			productReference = 0A38D6FEDC4940509F60690B /* libHrRendererLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACBD737554754717A0F4A67A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = CA47C9BF2D24477F982B056E /* Build configuration list for PBXProject "HrRendererLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF478351FA9340CE87CDA9C6;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C6AEAA31E3D147A2AA9B30A8 /* HrRendererLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EBFCCE37721B46D6B402395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F29186AFF9704B59A5D9A1AE /* HomageRenderer.cpp in Sources */,
+				B146982E045748D2B30B4BA3 /* HrEffectI.cpp in Sources */,
+				7436A85718894C0397EA4822 /* HrEffectMask.cpp in Sources */,
+				6DC2090F3D3440DEBD09775B /* HrEffectPose.cpp in Sources */,
+				5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */,
+				80D0D51F86444963B3D1B413 /* HrOutputI.cpp in Sources */,
+				106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */,
+				CEE063DFF96A4B32A699CDE1 /* HrSourceI.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		03DBDABC684F420B8F70563F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+					.,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HrRendererLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Homage;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		5C3E55FE87744ECFB1C9E0FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+					.,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HrRendererLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Homage;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		5C73A7D340BF42479597E121 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+					.,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    ";
+				OTHER_CPLUSPLUSFLAGS = "    ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HrRendererLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Homage;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		65A3DCDADE0F46F2A66EA8A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = ../Homage;
+			};
+			name = Debug;
+		};
+		68D9C6E5A3DB49D79241F8F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = ../Homage;
+			};
+			name = Release;
+		};
+		6F5E02BD65A44DB1989FC230 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = ../Homage;
+			};
+			name = MinSizeRel;
+		};
+		C45343ED1CA443DF99F0A73C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SYMROOT = ../Homage;
+			};
+			name = RelWithDebInfo;
+		};
+		D5D71C96A18D463A938D6BB0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					../../Core/Util,
+					../../Core/ImageLib,
+					.,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG  ";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = HrRendererLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../Homage;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B551EBA0CB44B73A825C209 /* Build configuration list for PBXNativeTarget "HrRendererLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C73A7D340BF42479597E121 /* Debug */,
+				5C3E55FE87744ECFB1C9E0FE /* Release */,
+				03DBDABC684F420B8F70563F /* MinSizeRel */,
+				D5D71C96A18D463A938D6BB0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CA47C9BF2D24477F982B056E /* Build configuration list for PBXProject "HrRendererLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A3DCDADE0F46F2A66EA8A4 /* Debug */,
+				68D9C6E5A3DB49D79241F8F9 /* Release */,
+				6F5E02BD65A44DB1989FC230 /* MinSizeRel */,
+				C45343ED1CA443DF99F0A73C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ACBD737554754717A0F4A67A /* Project object */;
+}

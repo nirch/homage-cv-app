@@ -3,9 +3,11 @@
  **********************/
 #include	<math.h>
 #include	"Uigp/igp.h"
+#include "Ubox/Box2d.h"
 #include	"Vec2d.h"
 
 #include "Umath/Matrix2Type.h"
+
 
 vec2fA_type *
 vec2fA_alloc( int n )
@@ -209,8 +211,53 @@ float	l0,	l1;
 int
 vec2fA_write_to_file( vec2fA_type *av, char *file )
 {
-	return vec2dA_write_to_file( av->a, av->nA, file );
+FILE *fp;
+
+	if( (fp = fopen( file, "wb" ) ) == NULL )
+		return( -1 );
+
+	vec2fA_write( av, fp );
+
+	fclose( fp );
+
+	return( 1 );
 }
+
+
+int
+vec2fA_write( vec2fA_type *av, FILE *fp )
+{
+	int	i;
+
+	fprintf( fp, "%d\n", av->nA );
+
+	for( i = 0 ; i < av->nA ; i++ ){
+		fprintf( fp, "%f %f\n", av->a[i].x, av->a[i].y );
+	}
+
+	return( 1 );
+}
+
+
+vec2fA_type *
+vec2fA_read( FILE *fp )
+{
+int	i,	nA;
+vec2fA_type *av;
+
+	fscanf( fp, "%d", &nA );
+
+	av = vec2fA_alloc( nA );
+
+	for( i = 0 ; i < av->nA ; i++ ){
+		fscanf( fp, "%f %f", &av->a[i].x, &av->a[i].y );
+	}
+
+	return( av );
+}
+
+
+
 
 
 int
@@ -231,6 +278,8 @@ int	i;
 
 	return( 1 );
 }
+
+
 
 
 void
@@ -339,3 +388,19 @@ vec2fA_select( vec2fA_type *av, vec2d *p, float dT )
 
 	return( -1 );
 }
+
+
+int
+vec2fA_box( vec2f_type ap[], int nA, struct box2f_type *b )
+{
+int	i;
+
+	BOX2D_INIT( *b, ap[0].x, ap[0].y );
+
+	for( i = 0 ; i < nA ; i++ ){
+		BOX2D_UPDATE( *b, ap[1].x, ap[1].y );
+	}
+
+	return( 1 );
+}
+	

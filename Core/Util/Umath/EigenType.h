@@ -11,6 +11,7 @@ extern "C" {
 #endif
 
 #include "Uigp/igp.h"
+#include "Uvec/Vec2d.h"
 
 
 typedef struct eigen2d_type {

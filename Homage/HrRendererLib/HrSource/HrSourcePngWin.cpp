@@ -96,9 +96,11 @@ image_type	*sim;
 		
 	imageT_negative_alpha( m_im, m_im );
 
-	MergeAlpha( m_im );
+	//MergeAlpha( m_im );
 
-	*im = m_im;
+	ProcessEffect( m_im, iFrame, im );
+
+	//*im = m_im;
 
 	return( 1 );
 }

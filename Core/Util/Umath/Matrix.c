@@ -597,3 +597,21 @@ matrix_print( char *title, matrix_type *A, FILE *fp )
 
 	return( 1 );
 }
+
+
+
+void
+matrix_linaer_equation_add( matrix_type *M, matrix_type *D, double X[], double y )
+{
+	int	i,	j;
+
+
+	for( i = 0 ; i < M->ni ; i++  ){
+		double *m = MATRIX_ROW( M, i );
+		for( j = 0 ; j < M->nj ; j++ ){
+			m[j] += X[j] *X[i];
+		}
+
+		D->d[i] += y*X[i];
+	}
+}

@@ -120,6 +120,8 @@ void	matrixF_diagonal( float *A, int m, int n, float *D, int p );
 void	matrixD_diagonal( double *A, int m, int n, double *D, int p );
 
 
+void	matrix_linaer_equation_add( matrix_type *M, matrix_type *D, double X[], double y );
+
 
 
 

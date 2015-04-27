@@ -115,10 +115,11 @@ ellipse_distanceN( ellipse_type *be, ellipse_type *e, int N )
 {
 	float	t,	tMin;
 	vec2f_type	p,	p1;
+	int iMin;
 //	int N = 16;
 
 	tMin = ellipse_distance( be, &e->p );
-
+	iMin = -1;
 	vec2f_type	u;
 	VEC2D_RIGHT( e->v, u );
 
@@ -136,16 +137,48 @@ ellipse_distanceN( ellipse_type *be, ellipse_type *e, int N )
 
 		t = ellipse_distance( be, &p );
 
-		if( t < tMin )	tMin = t;
+		if( t < tMin ){
+			tMin = t;
+			iMin = i;
+		}
 	}
 
 	if( tMin < 1 )
 		return( 0 );
 
-	t = (sqrt( tMin ) -1 )*be->rx;
+	int n = N / 4;
+	t = (iMin % n)/(float)n;
+	int k = iMin / n;
+
+	if( k & 0x01 )
+		t = 1 - t;
+
+	float w = be->rx * t  + ( 1 -t)*be->ry;
+
+
+
+
+	t = (sqrt( tMin ) -1 )*w;
 
 	return( t );
 }
+
+
+
+
+float
+ellipse_distanceD( ellipse_type *be, ellipse_type *e, int N )
+{
+float	t,	t1;
+
+	t = ellipse_distanceN( be, e, N );
+	t1 = ellipse_distanceN( e, be, N );
+
+	if( t1 < t )	t = t1;
+
+	return( t );
+}
+
 
 
 
@@ -185,6 +218,66 @@ ellipse_union( ellipse_type *e0, float w0, ellipse_type *e1, float w1, ellipse_t
 
 	e->rx = 2.0*sqrt(e->rx);
 	e->ry = 2.0*sqrt(e->ry);
+
+	e->s = M_PI * e->rx*e->ry;
+
+	return( 1 );
+}
+
+
+int
+ellipse_union( ellipse_type *ae[], float aw[], int nA, ellipse_type *e )
+{
+int	i;
+float	w,	t;
+
+	matrix2_type	m;
+
+	matrix2_zero( &m );
+	e->p.x = e->p.y = 0;
+
+	w = 0;
+	for( i = 0 ; i < nA ; i++ ){
+		matrix2_type m0;
+
+		matrix2S_eigen_inv( &m0, 0.25*ae[i]->rx*ae[i]->rx, &ae[i]->v, 0.25*ae[i]->ry*ae[i]->ry );
+
+		e->p.x += aw[i] * ae[i]->p.x;
+		e->p.y += aw[i] * ae[i]->p.y;
+
+		t = m0.a00 + ae[i]->p.x*ae[i]->p.x;
+		m.a00 += aw[i] * t;
+
+		t = m0.a01 + ae[i]->p.x*ae[i]->p.y;
+		m.a01 += aw[i] * t;
+
+		t = m0.a10 + ae[i]->p.x*ae[i]->p.y;
+		m.a10 += aw[i] * t;
+
+		t = m0.a11 + ae[i]->p.y*ae[i]->p.y;
+		m.a11 += aw[i] * t;
+
+		w += aw[i];
+	}
+
+
+	e->p.x /= w;
+	e->p.y /= w;
+
+
+	m.a00 = m.a00 / w - e->p.x*e->p.x;
+	m.a01 = m.a01 / w - e->p.x*e->p.y;
+	m.a10 = m.a10 / w - e->p.x*e->p.y;
+	m.a11 = m.a11 / w - e->p.y*e->p.y;
+
+
+
+	matrix2S_eigen( &m, &e->rx, &e->v, &e->ry );
+
+	e->rx = 2.0*sqrt(e->rx);
+	e->ry = 2.0*sqrt(e->ry);
+
+	e->s = M_PI * e->rx*e->ry;
 
 	return( 1 );
 }

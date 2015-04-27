@@ -14,6 +14,7 @@
 extern "C" {
 #endif
 
+#include "Ucolor/ColorType.h"
 
 #include "Uvec/Vec2d.h"
 #include "Uvec/Vec3d.h"
@@ -38,6 +39,10 @@ typedef struct vl2f_type {
 	int	id;
 
 	int	group;
+
+	color_type	color[2];
+
+	short	ng[2];
 
 } vl2f_type;
 
@@ -67,6 +72,8 @@ float	vl2f_distance2( vl2f_type *vl, vec2f_type *p );
 int		vl2f_lt2( vl2f_type *s0, vl2f_type *s1, vl2f_type *t0, vl2f_type *t1, struct lt2_type *lt );
 
 
+void	vl2f_compute_lt2( vl2f_type *vl, struct lt2_type *lt );
+
 int		vl2f_middle( vl2f_type *vl0, vl2f_type *vl1, vl2f_type *vl );
 
 
@@ -88,6 +95,20 @@ void	vl2fA_reorder( vl2fA_type *avl, struct pt2dA_type *apt, float dis );
 
 void	vl2f_cutpoint( vl2f_type *vl0, vl2f_type *vl1, vec2f_type *p );
 
+void	vl2fA_inverse_direction( vl2fA_type *avl );
+
+void		vl2fA_set_group( vl2fA_type *avl, int iGroup );
+
+
+
+
+	// Vl2fGroup.cpp
+
+struct pt2dGroupA_type *	vl2fA_group_v( vl2fA_type *avl, float d );
+
+void	vl2fA_group_replace_id( vl2fA_type *avl, int no, int cgroup, int group );
+
+
 
 
 struct pt2dA_type *	vl2fA_to_pt2dA( vl2fA_type *avl );
@@ -106,10 +127,10 @@ int	vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix );
 
 #ifdef _DUMP
 #define VL2FA_DUMP( apt, name, index, ext )  vl2fA_dump( apt, name, index, ext )
-
+#define VL2FA_DUMPF( apl, name, index, ext, flag )  if( flag )	vl2fA_dump( apl, name, index, ext )
 #else
 #define VL2FA_DUMP( apt, name, index, ext )
-
+#define VL2FA_DUMPF( apl, name, index, ext, flag )
 #endif
 
 

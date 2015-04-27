@@ -24,9 +24,9 @@ tfA_mean( tfA_type *tfA, float T, float *av, float *var, int aI[] )
 	int	cI[100];
 
 	nMax = -1;
-	for( i = 0 ; i < tfA->nT ; i++ ){
+	for( i = 0 ; i < tfA->nA ; i++ ){
 
-		n = tfA_mean_1( tfA, tfA->t[i],  T,  &cav, &cvar, cI );
+		n = tfA_mean_1( tfA, tfA->a[i],  T,  &cav, &cvar, cI );
 
 		if( nMax < 0 || n > nMax || n == nMax && cvar < *var ){
 			nMax = n;
@@ -35,7 +35,7 @@ tfA_mean( tfA_type *tfA, float T, float *av, float *var, int aI[] )
 
 			//			memcpy( aI, cI, tfA->nT *sizeof(int) );
 
-			for( int k = 0 ; k < tfA->nT ; k++ )
+			for( int k = 0 ; k < tfA->nA ; k++ )
 				aI[k] = cI[k];
 		}	
 	}
@@ -67,7 +67,7 @@ tfA_mean_1( tfA_type *tfA, tf_type *tf, float T, float *av, float *var, int aI[]
 			*var = cvar;
 
 			//			memcpy( aI, cI, tfA->nT *sizeof(int) );
-			for( int k = 0 ; k < tfA->nT ; k++ )
+			for( int k = 0 ; k < tfA->nA ; k++ )
 				aI[k] = cI[k];
 
 		}	
@@ -84,9 +84,9 @@ tfA_mean_1( tfA_type *tfA, float a0, float T,  float *av, float *var, int aI[] )
 
 	n = 0;
 	*av = *var = 0;
-	for( i = 0 ; i < tfA->nT ; i++ ){
+	for( i = 0 ; i < tfA->nA ; i++ ){
 
-		tf_type *tf = tfA->t[i];
+		tf_type *tf = tfA->a[i];
 
 
 		j = tfA_nearest( tf, a0, T );

@@ -22,7 +22,8 @@ CHomageRenderer::CHomageRenderer()
 {
 	m_im = NULL;
 
-
+	m_nS = 0;
+	m_nOut = 0;
 }
 
 CHomageRenderer::~CHomageRenderer()
@@ -43,12 +44,39 @@ void CHomageRenderer::DeleteContents()
 
 }
 
+int CHomageRenderer::AddSource( CHrSourceI *s )
+{
+	m_as[m_nS++] = s;
+
+	return( 1 );
+}
+
+int CHomageRenderer::AddOutput( CHrOutputI *o )
+{
+	m_aOut[m_nOut++] = o;
+
+	return( 1 );
+}
 
 int
 CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *u,  CHrSourceI *f, CHrOutputI *out[], int nOut )
 {
 int	i;
 image_type *im;
+
+
+	AddSource( b );
+	AddSource( u );
+	AddSource( f );
+
+	for( i = 0 ; i < nOut ; i++ )
+		AddOutput( out[i] );
+
+	Process();
+	return( 1 );
+
+
+
 
 	for( i = 0 ; ; i++ ){
 
@@ -115,6 +143,50 @@ image_type *im;
 
 	}
 	
+
+
+	return( -1 );
+}
+
+
+
+int
+CHomageRenderer::Process()
+{
+	int	i,	k;
+	image_type *im;
+
+	for( i = 0 ; ; i++ ){
+
+		for( k = 0 ; k < m_nS ; k++ ){
+			if( m_as[k]->ReadFrame( i, &im ) < 0 )
+				break;
+
+			if( k == 0 ){
+				m_im = image_make_copy( im, m_im );
+				continue;
+			}
+
+			imageA_combine( im, m_im );
+		}
+
+		if( k < m_nS )
+			break;
+
+
+
+		for( k = 0 ; k < m_nOut ; k++ )
+			m_aOut[k]->WriteFrame( m_im, i );
+
+
+		IMAGE_DUMP( m_im, "im", i, NULL );
+		IMAGE_DUMP_ALPHA( m_im, "im-a", i, NULL );
+
+
+		fprintf( stdout, "  ." );
+
+	}
+
 
 
 	return( -1 );

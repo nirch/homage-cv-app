@@ -10,7 +10,7 @@
 #include "Utime/GpTime.h"
 
 
-
+#include "../HrEffect/HrEffectI.h"
 
 
 class CHrSourceI 
@@ -27,11 +27,18 @@ public:
 
 	virtual int	ReadFrame( int iFrame, image_type **im ) = 0;
 
+
 	virtual int Close() = 0;
+
+
 
 	void SetAlpha( image_type *im );
 
 	void MergeAlpha( image_type *sim );
+
+	int ProcessEffect( image_type *sim, int iFrame, image_type **im );
+
+	void AddEffect( CHrEffectI *e );
 
 private:
 
@@ -41,6 +48,8 @@ private:
 
 
 
+	int	m_nE;
+	CHrEffectI	*m_ae[128];
 
 };
 

@@ -201,7 +201,7 @@ void
 matrix2S_eigen_inv( matrix2_type *m, float e1, vec2f_type *v1, float e2 )
 {
 
-	matrix2_type m1,	m2,	im1,	m3;
+	matrix2_type m1,	m2;//,	im1,	m3;
 
 	m1.a00 = e1 * v1->x;
 	m1.a10 = e1 * v1->y;

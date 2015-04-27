@@ -609,3 +609,20 @@ matrix3_test( matrix3_type *m )
 
 	return( 1 );
 }
+
+
+	// a*X = y;
+void
+matrix3_linaer_equation_add( matrix3_type *m, double D[], double X[], double y )
+{
+	int	i,	j;
+
+	for( i = 0 ; i < 3 ; i++  ){
+
+		for( j = 0 ; j < 3 ; j++ ){
+			m->a[i][j] += X[j] *X[i];
+		}
+
+		D[i] += y*X[i];
+	}
+}

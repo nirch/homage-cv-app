@@ -34,9 +34,13 @@ float	ellipse_distance( ellipse_type *be, ellipse_type *e );
 
 float	ellipse_distanceN( ellipse_type *be, ellipse_type *e, int N );
 
+float	ellipse_distanceD( ellipse_type *be, ellipse_type *e, int N );
+
+
 
 int		ellipse_union( ellipse_type *e0, float w0, ellipse_type *e1, float w1, ellipse_type *e );
 
+int	ellipse_union( ellipse_type *ae[], float aw[], int nA, ellipse_type *e );
 
 #endif
 

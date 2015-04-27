@@ -12,8 +12,8 @@
 #include "ImageType/ImageType.h"
 #include "Utime/GpTime.h"
 
-#include "HrSourceI.h"
-#include "HrOutputI.h"
+#include "HrSource/HrSourceI.h"
+#include "HrOutput/HrOutputI.h"
 
 
 
@@ -31,6 +31,8 @@ public:
 
 	int	Process( CHrSourceI *b, CHrSourceI *u, CHrSourceI *f, CHrOutputI *out[], int nOut );
 
+	int AddSource( CHrSourceI *s );
+	int AddOutput( CHrOutputI *out );
 
 
 
@@ -49,6 +51,7 @@ public:
 						image_type *im );
 
 
+	int	Process();
 
 
 	image_type * GetImage()	{ return m_im; }
@@ -70,6 +73,11 @@ private:
 	image_type *m_oim;
 
 
+	int	m_nS;
+	CHrSourceI	*m_as[16];
+
+	int	m_nOut;
+	CHrOutputI	*m_aOut[16];
 };
 
 

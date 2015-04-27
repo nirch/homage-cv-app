@@ -119,3 +119,20 @@ vl2f_lt2( vl2f_type *s0, vl2f_type *s1, vl2f_type *t0, vl2f_type *t1, lt2_type *
 	return( 1 );
 }
 
+
+
+
+
+
+void
+vl2f_compute_lt2( vl2f_type *vl, lt2_type *lt )
+{
+	vec2f_type	p0,	p1,	q0,	q1;
+
+	vl2f_points( vl, &p0, &p1 );
+
+	LT2_F( *lt, p0, q0 );
+	LT2_F( *lt, p1, q1 );
+
+	vl2f_set( vl, &q0, &q1 );
+}

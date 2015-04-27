@@ -8,7 +8,6 @@
 
 #include "Matrix3Type.h"
 #include "Matrix2Type.h"
-
 #include "EigenType.h"
 
 #include "LT2Type.h"
@@ -663,6 +662,9 @@ lt2_similarityA( lt2_type *lt, vec2f_type ap[2], vec2f_type aq[2] )
 	VEC2D_LEFT( p, pu );
 	VEC2D_LEFT( q, qu );
 
+	//VEC2D_RIGHT( p, pu );
+	//VEC2D_RIGHT( q, qu );
+
 	
 
 
@@ -711,7 +713,7 @@ lt2_similarityA( lt2_type *lt, vec2f_type ap[2], vec2f_type aq[2] )
 
 //    t = lt( s )
 int
-lt2_asimilarity_eigen2d( lt2_type *lt,  eigen2d_type *ep,  eigen2d_type *eq )
+lt2_asimilarity_eigen2d( lt2_type *lt, eigen2d_type *ep, eigen2d_type *eq )
 {
 int	ret;
 float	t;

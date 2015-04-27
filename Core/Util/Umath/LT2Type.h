@@ -68,10 +68,10 @@ typedef struct lt2A_type {
 		ty = LT2_F2( lt, x, y ); \
 	}
 
-#define	LT2_T( lt, p, q ) \
-	} \
+#define	LT2_F( lt, p, q ) \
+	{ \
 	(q).x = ( (lt).f1[0] * (p).x + (lt).f1[1] * (p).y + (lt).f1[2] ); \
-	(q).y = ( (lt).f2[0] * (p).x + (lt).f2[1] * (p)->y + (lt).f2[2] ); \
+	(q).y = ( (lt).f2[0] * (p).x + (lt).f2[1] * (p).y + (lt).f2[2] ); \
 	}
 
 
@@ -154,6 +154,8 @@ void	lt2_swap( lt2_type *lt, lt2_type *sw );
 
 	// Lt2Similarity.c
 int	lt2_similarity( lt2_type *lt, vec2f_type *sp0, vec2f_type *sp1, vec2f_type *tp0, vec2f_type *tp1 );
+
+int		lt2_similarity_approximate( lt2_type *lt, vec2fA_type *as, vec2fA_type *at );
 
 
 

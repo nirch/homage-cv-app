@@ -77,10 +77,14 @@ double	max;
 		max = A[i][i];
 		iMax = i;
 		for( k = i+1 ; k < MSIZE ; k++ )
-			if( ABS(A[i][k]) > ABS(max) ){
+			if( ABS(A[k][i]) > ABS(max) ){
 				iMax = k;
-				max = A[i][k];
+				max = A[k][i];
 			}
+			//if( ABS(A[i][k]) > ABS(max) ){
+			//	iMax = k;
+			//	max = A[i][k];
+			//}
 	
 		if( i != iMax ){
 			vectorD_swap( A[i], A[iMax], MSIZE );

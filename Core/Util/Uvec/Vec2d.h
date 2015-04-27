@@ -9,6 +9,9 @@
 #ifndef	_VEC2D_TYPE_
 #define _VEC2D_TYPE_
 
+#include <stdio.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -57,6 +60,8 @@ typedef struct vec2fA_type {
 } vec2fA_type;
 
 
+//#include "Ubox/Box2d.h"
+
 #define		VEC2D_EQUAL(u,v)	( ((v).x == (u).x ) && ((v).y == (u).y) )
 
 #define		VEC2D_SET( v, xval, yval )     { (v).x = xval; (v).y = yval; }
@@ -95,6 +100,11 @@ typedef struct vec2fA_type {
 	(u).y = -(v).x; \
 }
 
+#define		VEC2D_MINUS( v )	\
+{ \
+	(v).x = -(v).x; \
+	(v).y = -(v).y; \
+}
 
 
 #define         VEC2D_UPDATE_BOUND( v, beg, end ) \
@@ -112,6 +122,11 @@ vec2fA_type *	vec2fA_alloc( int n );
 void	vec2fA_destroy( vec2fA_type *av );
 
 int	vec2fA_write_to_file( vec2fA_type *av, char *file );
+
+int	vec2fA_write( vec2fA_type *av,  FILE *fp );
+
+vec2fA_type *	vec2fA_read( FILE *fp );
+
 
 
 
@@ -142,6 +157,7 @@ void	vec2fA_approximate_line( vec2fA_type *av, vec2f_type *ctr, vec2f_type *v, f
 
 int	vec2fA_select( vec2fA_type *av, vec2d *p, float dT );
 
+//int	vec2fA_box(vec2f_type ap[], int nA,  box2f_type *b  );
 
 
 #ifdef __cplusplus

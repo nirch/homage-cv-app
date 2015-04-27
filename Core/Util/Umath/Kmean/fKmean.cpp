@@ -146,6 +146,7 @@ float	T,	m;
 			fk->dm = m - fk->m;
 			fk->m = m;
 		}
+		else fk->dm = 0;
 	}
 
 	fKmean_type *fk = &ak[k];

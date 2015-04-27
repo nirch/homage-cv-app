@@ -25,6 +25,8 @@ CHrSourceI::CHrSourceI()
 {
 
 	m_alphaIm = NULL;
+
+	m_nE = 0;
 }
 
 CHrSourceI::~CHrSourceI()
@@ -38,12 +40,40 @@ CHrSourceI::~CHrSourceI()
 
 void CHrSourceI::DeleteContents()
 {
+int	i;
+
 	if( m_alphaIm != NULL ){
 		image_destroy( m_alphaIm, 1 );
 		m_alphaIm = NULL;
 	}
+
+
+	for( i = 0 ; i < m_nE ; i++ ){
+		delete m_ae[i];
+	}
+	m_nE = 0;
 }
 
+
+void CHrSourceI::AddEffect( CHrEffectI *e )
+{
+	m_ae[m_nE++] = e;
+}
+
+
+int CHrSourceI::ProcessEffect( image_type *sim, int iFrame, image_type **im )
+{
+int	i;
+
+	*im = sim;
+
+	for( i = 0 ; i < m_nE ; i++ ){
+		m_ae[i]->Process( sim, iFrame, im );
+		sim = *im;
+	}
+
+	return( 1 );
+}
 
 void CHrSourceI::SetAlpha( image_type *im)
 {
