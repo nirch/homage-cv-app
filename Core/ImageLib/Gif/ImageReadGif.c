@@ -464,7 +464,8 @@ int	r,	g,	b,	color;
 
 
 	if ( gifIo->transparent_flag ){
-			image_8to24_copy_transparent( im, gifIo->im, top, left, palette, gifIo->transparent_index,  (gifIo->frame_i < 0 )? 1: 0 );
+//			image_8to24_copy_transparent( im, gifIo->im, top, left, palette, gifIo->transparent_index,  (gifIo->frame_i < 0 )? 1: 0 );
+			image_8to24_copy_transparent( im, gifIo->im, top, left, palette, gifIo->transparent_index,  1 );
 	}
 	else	image_8to24_copy( im, gifIo->im, top, left, palette );
 
