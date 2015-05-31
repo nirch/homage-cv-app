@@ -48,15 +48,34 @@ int CHomageRenderer::AddSource( CHrSourceI *s )
 {
 	m_as[m_nS++] = s;
 
-	return( 1 );
+	return( m_nS -1  );
 }
+
+CHrSourceI * CHomageRenderer::GetSource( int i )
+{
+	if( i < 0 || i >= m_nS )
+		return( NULL );
+
+	return( m_as[i] );
+}
+
+
 
 int CHomageRenderer::AddOutput( CHrOutputI *o )
 {
 	m_aOut[m_nOut++] = o;
 
-	return( 1 );
+	return( m_nOut-1 );
 }
+
+CHrOutputI * CHomageRenderer::GetOuput( int i )
+{
+	if( i < 0 || i >= m_nOut )
+		return( NULL );
+
+	return( m_aOut[i] );
+}
+
 
 int
 CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *u,  CHrSourceI *f, CHrOutputI *out[], int nOut )

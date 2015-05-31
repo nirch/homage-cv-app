@@ -12,6 +12,7 @@
 #include "Uvl/TfType.h"
 
 #include "Umath/Matrix3Type.h"
+#include "Umath/Matrix2Type.h"
 
 #include "ImageType/ImageType.h"
 #include "ImageDump/ImageDump.h"
@@ -179,9 +180,17 @@ void
 lt2_affine_setR( lt2_type *lt, float x0, float y0, float dx, float dy, float scale, float rx, float ry, float rz )
 {
 
-	matrix3_type m;
+	matrix3_type m3;
+	matrix2_type m,	im;
 
-	matrix3_rotationXYZ( &m, ANGLE_D2R(rx), ANGLE_D2R(ry), ANGLE_D2R(rz) );
+	matrix3_rotationXYZ( &m3, ANGLE_D2R(rx), ANGLE_D2R(ry), ANGLE_D2R(rz) );
+
+	im.a00 = m3.a00;
+	im.a01 = m3.a01;
+	im.a10 = m3.a10;
+	im.a11 = m3.a11;
+
+	matrix2_inverse( &im, &m );
 
 	vec3f_type	a[4];
 

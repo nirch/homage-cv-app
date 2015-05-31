@@ -10,8 +10,9 @@
 #include "Utime/GpTime.h"
 
 
-
-
+#define EFFECT_MASK				1
+#define EFFECT_POSE				2
+#define EFFECT_ALIGNMENT		3
 
 class CHrEffectI 
 {
@@ -23,7 +24,8 @@ public:
 
 	void DeleteContents();
 
-
+	virtual int Init( char *file )	{return( -1 ); }
+	virtual int InitFromData( char *data )	{return( -1 ); }
 
 	virtual int	Process( image_type *sim, int iFrame, image_type **im ) = 0;
 

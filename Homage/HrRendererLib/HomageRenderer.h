@@ -57,7 +57,9 @@ public:
 	image_type * GetImage()	{ return m_im; }
 
 
+	class CHrSourceI * GetSource( int i  );
 
+	class CHrOutputI * GetOuput( int i  );
 
 
 	void	Trace( FILE *fp )	{}

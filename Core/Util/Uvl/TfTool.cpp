@@ -335,9 +335,11 @@ int	nA;
 	atf = tfA_alloc( nA );
 
 
-
+	int n = 0;
 	while( (tf = tf_read( fp )) != NULL ){
 		tfA_add( atf, tf->iFrame, tf );
+
+		n++;
 
 	}
 
@@ -358,6 +360,7 @@ tfA_read( tfA_type **atf, char *file )
 
 	//	gp_filename_force_extension( file, ".tf" );
 
+	*atf = NULL;
 	if(  (fp = fopen( file, "rb" ) ) == NULL )
 		return( NULL );
 
@@ -442,7 +445,7 @@ int
 	
 
 
-	*atf = tfA_alloc( nS );
+	*atf = tfA_alloc( 100 );//nS );
 
 
 
@@ -521,7 +524,7 @@ tfA_add( tfA_type *tfA, int iFrame, tf_type *t )
 
 	if( iFrame < 0 )	iFrame = tfA->nA;
 
-	if( tfA->a[iFrame] != NULL )
+	if( iFrame < tfA->nA && tfA->a[iFrame] != NULL )
 		free( tfA->a[iFrame] );
 
 

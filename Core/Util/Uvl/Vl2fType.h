@@ -53,6 +53,9 @@ typedef struct vl2fA_type {
 	int nA;
 	int	NA;
 
+	int	iFrame;
+	int fit;
+
 	vl2f_type	*a;
 
 } vl2fA_type;
@@ -82,6 +85,9 @@ vl2fA_type *	vl2fA_alloc( int n );
 
 vl2fA_type *	vl2fA_realloc( vl2fA_type *avl, int n );
 
+vl2fA_type *	vl2fA_copy( vl2fA_type *bavl, vl2fA_type *avl );
+
+
 void	vl2fA_destroy( vl2fA_type *avl );
 
 int		vl2fA_select( vl2fA_type *Avl, vec2f_type *p, float D );
@@ -99,14 +105,54 @@ void	vl2fA_inverse_direction( vl2fA_type *avl );
 
 void		vl2fA_set_group( vl2fA_type *avl, int iGroup );
 
+vl2fA_type *	vl2fA_from( vl2f_type *av[], int nV, vl2fA_type *avl );
+
+
+
+vl2fA_type *	vl2fA_transform_lt2( vl2fA_type *bavl, struct lt2_type *lt, vl2fA_type *avl );
+
+void	vl2f_transform_lt2( vl2f_type *bvl, struct lt2_type *lt, vl2f_type *vl );
+
+
+
+	// Vl2fMatch.cpp
+int	vl2fA_match( vl2fA_type *bavl, vl2fA_type *avl );
+
+int	vl2fA_match_lt( vl2fA_type *bavl, struct lt2_type *lt, float aT, float dT, vl2fA_type *avl );
+
+
+
+
+int	vl2fA_match_no( vl2fA_type *avl, int ng );
+
+int	vl2fA_match_set( vl2fA_type *bavl, vl2fA_type *avl, int ng );
+
+int	vl2fA_match_set_inv( vl2fA_type *bavl, vl2fA_type *avl, int ng );
+
+vl2fA_type *	vl2fA_match_field( vl2fA_type *bavl, vl2fA_type *avl1, int ng, vl2fA_type *avl );
+
+vl2fA_type *	vl2fA_match_field_ev( vl2fA_type *bavl, int ng, vl2fA_type *avl );
+
+int			vl2fA_match_connect( vl2fA_type *bavl, vl2fA_type *avl, int ng );
 
 
 
 	// Vl2fGroup.cpp
-
 struct pt2dGroupA_type *	vl2fA_group_v( vl2fA_type *avl, float d );
 
 void	vl2fA_group_replace_id( vl2fA_type *avl, int no, int cgroup, int group );
+
+
+
+
+
+	// Vl2fFitLt.cpp
+int	vl2fA_fit_lt_smart( vl2fA_type *bavl,  vl2fA_type *avl, int g, struct lt2_type *lt );
+int	vl2fA_fit_lt( vl2fA_type *bavl,  vl2fA_type *avl, struct lt2_type *lt );
+
+int	vl2fA_fit_affine_lt( vl2fA_type *bavl,  vl2fA_type *avl, int g, struct lt2_type *lt );
+
+vl2fA_type *	vl2fA_fit_lt_field( vl2fA_type *bavl,  struct lt2_type *lt, vl2fA_type *avl );
 
 
 

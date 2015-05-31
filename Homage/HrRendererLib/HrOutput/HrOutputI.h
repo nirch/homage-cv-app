@@ -23,6 +23,8 @@ public:
 
 	void DeleteContents();
 
+	virtual int SetPalette( char *data )	{ return( -1 ); }
+
 	virtual int	WriteFrame( image_type *im, int iFrame ) = 0;
 
 

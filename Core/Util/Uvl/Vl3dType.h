@@ -79,6 +79,10 @@ void	vl3d_points( vl3d_type *vl, vec3d_type *p0, vec3d_type *p1 );
 
 void	vl3d_set( vl3d_type *vl, vec3d_type *w0, vec3d_type *w1 );
 
+void	vl3dA_set_group( vl3dA_type *av, int group );
+int		vl3dA_get_group_size( vl3dA_type *av, int group );
+
+
 
 
 double	vl3d_distane2( vl3d_type *vl, vec3f_type *p );

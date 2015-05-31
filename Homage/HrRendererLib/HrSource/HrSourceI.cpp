@@ -55,9 +55,11 @@ int	i;
 }
 
 
-void CHrSourceI::AddEffect( CHrEffectI *e )
+int CHrSourceI::AddEffect( CHrEffectI *e )
 {
 	m_ae[m_nE++] = e;
+
+	return( m_nE-1 );
 }
 
 

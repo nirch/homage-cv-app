@@ -12,6 +12,9 @@
 
 #include "../HrEffect/HrEffectI.h"
 
+#define HR_GIF	1
+#define HR_PNG	2
+
 
 class CHrSourceI 
 {
@@ -24,6 +27,7 @@ public:
 	void DeleteContents();
 
 
+    virtual int Init( char *file ) { return -1; }
 
 	virtual int	ReadFrame( int iFrame, image_type **im ) = 0;
 
@@ -38,7 +42,7 @@ public:
 
 	int ProcessEffect( image_type *sim, int iFrame, image_type **im );
 
-	void AddEffect( CHrEffectI *e );
+	int AddEffect( CHrEffectI *e );
 
 private:
 
