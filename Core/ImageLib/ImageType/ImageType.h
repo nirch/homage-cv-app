@@ -185,6 +185,23 @@ typedef struct imageA_type {
 #define		IMAGE4_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
 #endif
 
+#ifdef __APPLE__
+#define		IMAGE4_RED( pixel )		( ((pixel) >> 16) &0xff )
+#define		IMAGE4_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
+#define		IMAGE4_BLUE( pixel )	(  (pixel)&0xff )
+
+#define		IMAGE4_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
+#endif
+
+
+#ifdef  __ANDROID__
+#define		IMAGE4_RED( pixel )		( ((pixel) >> 16) &0xff )
+#define		IMAGE4_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
+#define		IMAGE4_BLUE( pixel )	(  (pixel)&0xff )
+
+#define		IMAGE4_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
+#endif
+
 
 #ifdef __linux
 #define		IMAGE4_RED( pixel )		( ((pixel) >> 16) &0xff )

@@ -120,6 +120,9 @@ int	i,	j,	k,	align;
 		color_arr[i] = IMAGE4_RGB( r, g, b );
 	}
 
+	if( transparent_index < 256 )
+		color_arr[transparent_index] = 0xFF000000;
+
 
 	for( i = 0 ; i < sim->row ; i++, tp += align ) {
 		for( j = 0; j < sim->column ; j++, tp++ ){
@@ -134,4 +137,7 @@ int	i,	j,	k,	align;
 		}
 	}
 }
+
+
+
 

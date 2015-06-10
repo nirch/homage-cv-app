@@ -10,7 +10,7 @@
 
 
 
-
+#ifdef _AA_
 image_type *
 image3_to_BGR( image_type *sim, image_type *im )
 {
@@ -60,7 +60,7 @@ int	i,	j;
 			*(sp+2) = tmp;
 		}
 }
-
+#endif
 
 void
 image3_VH_RGB_flip( image_type *im )

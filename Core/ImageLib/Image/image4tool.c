@@ -499,3 +499,27 @@ int	R,	G,	B;
 
 	return( im );
 }
+
+
+
+image_type *
+image4_binaryM( image_type *sim, int color, image_type *im )
+{
+u_int	*sp;
+u_char	*tp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data_ui;
+	tp = im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0; j < sim->width ; j++, sp ++, tp ++ ){
+			if( *sp == color )
+				*tp = 0;
+			else *tp = 255;
+		}
+	}
+
+	return( im );
+}

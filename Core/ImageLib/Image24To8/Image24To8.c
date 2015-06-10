@@ -281,7 +281,8 @@ int	k;
 #ifdef WIN32
 #define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)>>12) | ((color&0xf000)>>8) | ((color&0xf0)>>4))
 #else
-#define		COLOR_TO_INDEX4F( color )		( ((color&0xf0)<<4) | ((color&0xf000)>>8) | ((color&0xf00000)>>20))
+#define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)>>12) | ((color&0xf000)>>8) | ((color&0xf0)>>4))
+//#define		COLOR_TO_INDEX4F( color )		( ((color&0xf0)<<4) | ((color&0xf000)>>8) | ((color&0xf00000)>>20))
 #endif
 
 image_type *

@@ -53,8 +53,13 @@ image_type *	image_4to1( image_type *sim );
 	/* Image4Tool.c */
 image_type *	image4_from( image_type *sim, image_type *im );
 
+
+	/// ImageAndroid.cpp
+image_type *	image_android( image_type *sim, image_type *im );
+
 image_type *	image4_to_android( image_type *sim, image_type *im );
 
+image_type *	image3_to_android( image_type *sim, image_type *im );
 
 
 
@@ -100,6 +105,9 @@ image_type *	image4_rotate90( image_type *sim, image_type *tim );
 image_type *	image4_rotate180( image_type *sim, image_type *tim);
 
 image_type *	image4_rotate270( image_type *sim, image_type *tim );
+
+image_type *	image4_binaryM( image_type *sim, int color, image_type *im );
+
 
 
 		// Image4CopyIn.c
@@ -231,10 +239,12 @@ void	imageT_clear( image_type *im, int color );
 
 image_type * imageT_copy_alpha( image_type *sim, image_type *im );
 
+
 image_type * imageA_set_alpha( image_type *sim, int transparent, image_type *mim, image_type *im );
 
 image_type * imageA_set_alpha_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
-    
+
+
 image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, image_type *im );
 
 image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
@@ -556,6 +566,23 @@ image_type *	image_interpolation_pv( image_type *sim, vec2f_type *p, vec2f_type 
 image_type *	image3_to_cmyk( image_type *sim, image_type *im );
 
 image_type *	image_cmyk2rgb( image_type *sim, image_type *im );
+
+
+	// ImageBgr.cpp
+image_type *	image_bgr2rgb( image_type *sim, image_type *im );
+
+image_type *	image4_bgr2rgb( image_type *sim, image_type *im );
+
+image_type *	image3_bgr2rgb( image_type *sim, image_type *im );
+
+
+
+	// ImageBoundary.cpp
+int		image_boundary( image_type *sim, int color );
+
+void	image4_boundary( image_type *sim, int color );
+
+void	image1_boundary( image_type *sim, int color );
 
 
 

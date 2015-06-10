@@ -70,6 +70,7 @@ image_type *image3_abs_diff_image1( image_type *im0, image_type *im1, image_type
 
 image_type *	image3_binary( image_type *sim, int Tr, int Tg, int Tb, image_type *im );
 
+image_type *	image3_binaryM( image_type *sim, int r, int g, int b, image_type *im );
 
 
 
@@ -79,6 +80,9 @@ image_type *	image3_from( image_type *sim, image_type *im );
 image_type *	image3_from_image4( image_type *sim, image_type *im );
 
 image_type *	image3_from_image1( image_type *sim, image_type *im );
+
+image_type *	image3_to_android( image_type *sim, image_type *im );
+
 
 	// Image3Convolution.c 
 image_type *	image3_convolution_separably( image_type *im,
@@ -125,9 +129,9 @@ float	image3_distance( image_type *im0, image_type *im1 );
 
 
 	// IMage3Color.c
-image_type *	image3_to_BGR( image_type *sim, image_type *im );
-
-void	image3_bgr2rgb( image_type *im );
+//image_type *	image3_to_BGR( image_type *sim, image_type *im );
+//
+//void	image3_bgr2rgb( image_type *im );
 
 
 void			image3_VH_RGB_flip( image_type *im );

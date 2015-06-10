@@ -16,7 +16,8 @@
 #ifdef WIN32
 #define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)>>12) | ((color&0xf000)>>8) | ((color&0xf0)>>4))
 #else
-#define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)<<4) | ((color&0xf000)>>8) | ((color&0xf0)>>20))
+#define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)>>12) | ((color&0xf000)>>8) | ((color&0xf0)>>4))
+///#define		COLOR_TO_INDEX4F( color )		( ((color&0xf00000)<<4) | ((color&0xf000)>>8) | ((color&0xf0)>>20))
 #endif
 
 #define		INDEX4_TO_RED( index )			( ( index >>4) & 0xf0 )
@@ -90,6 +91,12 @@ int	ncolor;
 		}
 	}
 
+
+	for( i = 0 ; i < palette->nColor ; i++ ){
+		k = COLOR_TO_INDEX4( palette->data[i].r, palette->data[i].g, palette->data[i].b );
+		H[k].n = 0;
+	}
+
 	ncolor = MIN( nColor, 64 );
 	for( i = palette->nColor; i < ncolor ; i++ ){
 		k = image_adaptive_palette_get_max( H, CELL_NO, palette, 32 );
@@ -101,6 +108,8 @@ int	ncolor;
 		palette->data[i].Blue  = H[k].b / H[k].n;
 
 		palette->nColor++;
+
+		//fprintf( stdout, "%d   ", H[k].n );
 
 		H[k].n = 0;
 	}

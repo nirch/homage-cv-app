@@ -724,3 +724,25 @@ image3_binary( image_type *sim, int Tr, int Tg, int Tb, image_type *im )
 
 	return( im );
 }
+
+
+image_type *
+image3_binaryM( image_type *sim, int r, int g, int b, image_type *im )
+{
+	u_char *sp,	*tp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data;
+	tp = im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0; j < sim->width ; j++, sp += 3, tp ++ ){
+			if(sp[0] == r && sp[1] == g && sp[2] == b )
+				*tp = 0;
+			else *tp = 255;
+		}
+	}
+
+	return( im );
+}

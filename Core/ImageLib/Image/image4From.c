@@ -227,13 +227,17 @@ image4_from_imageUS( image_type *sim, image_type *im )
 }
 
 
-
+#ifdef _AA_
 image_type *
 image4_to_android( image_type *sim, image_type *im )
 {
 u_char	*sp,	*tp,	sp0,	sp2;
 	int	i,	j;
 
+	if( sim->depth == 3 ){
+		im = image3_to_android( sim, im );
+		return( im );
+	}
 
 	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
 
@@ -255,3 +259,4 @@ u_char	*sp,	*tp,	sp0,	sp2;
 
 	return( im );
 }
+#endif
