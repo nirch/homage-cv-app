@@ -28,7 +28,7 @@ public:
 
 
 	int Init( char *inFile );
-	int InitFromData( char *data );
+	int InitFromData( char *data0, char *data );
 
 	 int Process( image_type *sim, int iFrame, image_type **im );
 
@@ -42,6 +42,8 @@ private:
 	int m_nFrame;
 
 	int	m_iFrame;
+
+	box2f_type m_box0;
 
 	box2f_type m_box;
 	lt2_type m_lt;

@@ -299,6 +299,8 @@ float	pt2dA_curvtur_1( pt2dA_type *apt, vec2f_type *p0,int i0, int i1, vec2f_typ
 
 pt2dA_type *	pt2dA_smooth( pt2dA_type *apt, float r, pt2dA_type	*tapt );
 
+pt2dA_type *	pt2dA_smoothN( pt2dA_type *apt, int dr, int fclose, pt2dA_type	*tapt );
+
 
 	// Pt2dLine.c
 pt2dA_type *	pt2dA_get_pt( pt2dA_type *apt, int i0, pt2dA_type *capt );

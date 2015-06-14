@@ -526,7 +526,7 @@ int i,	n;
 float dis;
 
 #ifdef _DUMP
-	fprintf( stdout, "NN\n" );
+//	fprintf( stdout, "NN\n" );
 #endif
 
 	for( i = 0, n = 0 ; i < mapt->nA ; i++ ){

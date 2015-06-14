@@ -6,9 +6,12 @@
 #include	<math.h>
 #include	<string.h>
 
+
 #ifdef _DEBUG
-#define _DUMP
+#define _DUMP 
 #endif
+
+
 
 #include	"Uigp/igp.h"
 #include "Ulog/Log.h"
@@ -25,11 +28,6 @@
 
 
 
-#ifdef _DEBUG
-#ifndef WINCE
-#define _DUMP 
-#endif
-#endif
 
 image_type *	image_ar_edge_1( image_type *eim, image_type *lim, int T, image_type *im );
 
@@ -49,6 +47,8 @@ static void	pEdge_filter( image_type *dim,int d );
 
 static int	pEdge_filter_1( image_type *dim, pEdge_type *dp0 );
 
+
+static void	pEdge_direction_filter( image_type *dim, vec2f_type *v, float angle );
 
 
 
@@ -77,8 +77,11 @@ image_type *gim,	*eim;
 //	im = image_ar_edge_1( gim, lim, T,  im );
 	im = image_ar_edge_11( gim, lim, prm->d, prm->gradT,  im );
 
-
 	PEDGE_DUMP( im, "e", 0, NULL );
+
+	if( prm->directAngle > 0 ){
+		pEdge_direction_filter( im, &prm->directV, prm->directAngle );
+	}
 
 
 
@@ -270,6 +273,35 @@ image_ar_edge_11( image_type *eim, image_type *lim, int D, int T, image_type *im
 
 	return( im );
 }
+
+
+static void
+pEdge_direction_filter( image_type *dim, vec2f_type *v, float angle )
+{
+	pEdge_type	*dp;
+	int	i,	j;
+
+	float aT = cos( ANGLE_D2R(angle) );
+
+	vec2f_type u;
+	VEC2D_RIGHT( *v, u );
+	//u = *v;
+	
+
+	dp = (pEdge_type *)dim->data;
+	for( i = 0 ; i < dim->height ; i++ ){
+		for( j = 0 ; j < dim->width ; j++, dp++ ){
+			if( dp->state == 0 )	continue;
+
+			float t = VEC2D_INNER( u, dp->v );
+
+			if( ABS(t) < aT )
+				dp->state = 0;
+		}
+	}
+}
+
+
 
 
 static void

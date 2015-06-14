@@ -24,7 +24,7 @@ public:
 	
 	CHomageRenderer();
 
-	~CHomageRenderer();
+	virtual ~CHomageRenderer();
 
 	void DeleteContents();
 
@@ -67,8 +67,8 @@ public:
 
 
 
-private:
-
+//private:
+public:
 	int	m_iFrame;
 
 	image_type	*m_im;

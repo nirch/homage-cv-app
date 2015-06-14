@@ -48,9 +48,13 @@ typedef struct pln_type {
 	int	id;
 
 	float	qulity;
+	float	height;
+	float	size;
 	
 	// RGB
 	color_type	color[2];		// rgb value
+
+	box2f_type	b;
 
 
 	struct ellipse_type *e;
@@ -137,6 +141,8 @@ void	pln_set_length( pln_type *pl );
 void	pln_inverse( pln_type *pl );
 int		plnA_length_filter( plnA_type *apl, float minLen );
 
+void	plnA_set_id( plnA_type *apl, int id );
+
 
 int		pln_create( pln_type *pl, pt2dA_type *apt );
 
@@ -160,6 +166,8 @@ void	pln_gt2lt( pln_type *pl, float gt, vec2f_type *p, ln_type **l, float *t );
 
 
 void	pln_tanget( pln_type *pl, float gt, vec2f_type *v );
+void	pln_Ntanget( pln_type *pl, float gt, vec2f_type *v );
+
 
 void	pln_tangetP( pln_type *pl, float gt, vec2f_type *p, vec2f_type *v );
 
@@ -187,6 +195,7 @@ plnA_type *	plnA_from_vlA( vl2fA_type *avl, plnA_type *apl );
 
 
 void	pln_to_vl_1( pln_type *pl, struct vl2f_type *v );
+vl2fA_type *	plnA_to_vlA( plnA_type *apl, vl2fA_type *avl );
 
 
 
@@ -221,12 +230,17 @@ pln_type *	plnA_get( plnA_type *apl, int i0, int detouch );
 
 int	pln_distance( pln_type *pl, vec2f_type *p, dPln_type *d );
 
+int	pln_distanceG( pln_type *pl, float gt0, float gt1, vec2f_type *p, dPln_type *d );
+
+
 int	pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md );
 
 int	pln_distance_pln_u( pln_type *bpl, pln_type *pl, dPln_type *md );
 
 
 void	pln_box( pln_type *pl, box2f_type *box );
+
+void	plnA_set_box( plnA_type *apl );
 
 
 plnA_type *		plnA_alloc( int n );
@@ -268,6 +282,8 @@ void	plnA_scale( plnA_type *aP, float scale );
 
 void	pln_sample( pln_type *pl, float t0, float r, int n, int direct, pt2dA_type *apt );
 
+pt2dA_type *	plnA_sample( plnA_type *apl, pt2dA_type *apt );
+
 pt2dA_type *	pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt );
 
 pt2dA_type * pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt );
@@ -304,6 +320,8 @@ int		plnA_iLine_get( plnA_type *apl );
 
 
 	// PlnWrite.c
+void	plnF_dump( plnF_type *apl, char *prefix, int index, char *suffix );
+
 void	plnA_dump( plnA_type *apl, char *prefix, int index, char *suffix );
 
 void	pln_dump( pln_type *pl, char *prefix, int index, char *suffix );
@@ -381,6 +399,7 @@ void	pln_close( pln_type *pl, float T );
 
 float	pln_radius( pln_type *pl, vec2f_type *p0 );
 
+void	plnA_reorder_length( plnA_type *apl );
 
 
 
@@ -408,6 +427,9 @@ int	pln_fit_compare( pln_type *pl, pln_type *bpl, float gt0, float gt1, float dT
 
 	// PlnFitAa.cpp
 int	plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f );
+
+int	plnA_fitT( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f );
+
 
 int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
@@ -472,6 +494,9 @@ void	pln_interior_force_right( pln_type *pl );
 // return 1 if p inside p2, else 0
 int		pln_inside( pln_type *p, pln_type *p2 );
 
+int			pln_insideA( pln_type *p, pln_type *p2 );
+
+
 // if the point  is in the right side of the close contour pl  return 1  otherwise 0
 int		pln_point_side( pln_type *pl, vec2d *p );
 
@@ -480,6 +505,18 @@ int		pln_point_side( pln_type *pl, vec2d *p );
 int		plnA_smooth( plnA_type *apl );
 
 pln_type *	pln_smooth( pln_type *pl );
+
+
+int	plnA_smoothN( plnA_type *apl, int dr );
+
+pln_type * pln_smoothN( pln_type *pl, int dr );
+
+
+	// PlnSmoothA.cpp
+int	plnA_smoothA( plnA_type *apl, int d );
+
+pln_type *	pln_smoothA( pln_type *pl, int d );
+
 
 
 	// PlnSmoothSegment.cpp
@@ -501,19 +538,23 @@ void	plnF_destroy_empty( plnF_type *fpl );
 
 
 	// PlnStraightlineSplit.cpp
-plnA_type *	plnA_straightline_split( plnA_type *apl, plnA_type *apl1 );
+plnA_type *	plnA_straightline_split( plnA_type *apl, float minLen, plnA_type *apl1 );
+
+plnA_type * plnA_straightline_remove( plnA_type *apl, float minLen, plnA_type *apl1 );
 
 
 
 #ifdef _DUMP
+#define PLNF_DUMP( fpl, name, index, ext )  plnF_dump( fpl, name, index, ext )
 #define PLNA_DUMP( apl, name, index, ext )  plnA_dump( apl, name, index, ext )
 #define PLN_DUMP( pl, name, index, ext )  pln_dump( pl, name, index, ext )
 #define PLNA_DUMPF( apl, name, index, ext, flag )  if( flag )	plnA_dump( apl, name, index, ext )
 
 #else
-#define PLNA_DUMP( apl, name, index, ext )
-#define PLN_DUMP( pl, name, index, ext )
-#define PLNA_DUMPF( apl, name, index, ext, flag ) 
+#define PLNF_DUMP( fpl, name, index, ext ) {};
+#define PLNA_DUMP( apl, name, index, ext )	{};
+#define PLN_DUMP( pl, name, index, ext )	{};
+#define PLNA_DUMPF( apl, name, index, ext, flag ) {};
 #endif
 
 

@@ -4,9 +4,9 @@
 
 #include	"Ulog/Log.h"
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
 #define _DUMP 
-//#endif
+#endif
 
 
 
@@ -26,6 +26,8 @@ CPlnHeadTracker::CPlnHeadTracker()
 {
 	m_cln = NULL;
 //	m_pl = NULL;
+
+	m_pose.smooth = 0;
 }
 
 
@@ -40,6 +42,10 @@ CPlnHeadTracker::~CPlnHeadTracker()
 void CPlnHeadTracker::DeleteContents()
 {
 
+	if( m_cln != NULL ){
+		cln_destroy( m_cln );
+		m_cln = NULL;
+	}
 
 
 }
@@ -87,8 +93,181 @@ int	CPlnHeadTracker::GetPose( float *x, float *y, float *angle, float *scale )
 	return( 1 );
 }
 
+pln_type*	CPlnHeadTracker::GetHeadPln( headPose_type *h )
+{
+lt2_type lt;
 
-int	CPlnHeadTracker::ProcessS( plnA_type *apl, vec2f_type *p, pln_type **spl, int iFrame )
+	if( h == NULL )
+		h = &m_pose;
+
+	lt2_similarity_set( &lt, h->p.x, h->p.y, h->angle, h->scale );
+
+
+	pln_type *pl =  pln_affine_lt( m_cln->a[0], &lt, NULL );
+
+	return( pl );
+}
+
+int	CPlnHeadTracker::Process( plnA_type *apl, headPose_type *pose0, vec2f_type ap[], int nP, int iFrame )
+{
+lnFit_type lf,	clf;
+
+	lf.cover = 0;
+
+
+	if( ProcessPrev( apl, pose0, &clf, iFrame ) > 0 ){
+		if( clf.cover > lf.cover )
+			lf = clf;
+	}
+
+
+	int	i;
+	for( i = 0 ; i < nP ; i++ ){
+		if( ProcessPrediction( apl, pose0, &ap[i], &clf, iFrame ) > 0 ){
+			if( clf.cover > lf.cover )
+				lf = clf;
+		}
+	}
+
+
+	if( lf.cover <= 0 ){
+		m_pose.state = 0;
+		m_pose.qulity = 0;
+		return( -1 );
+	}
+
+
+	m_lf = lf;
+
+
+
+	m_pose.iFrame = iFrame;
+
+	lt2_similarity_get( &m_lf.lt, &m_pose.p.x, &m_pose.p.y, &m_pose.angle, &m_pose.scale );
+
+	m_pose.qulity = m_lf.cover;
+
+	m_pose.state = 1;
+	GPLOG(("%.4f\t%.4f\t%.4f\n", m_lf.cover, m_pose.angle, m_pose.scale ) );
+
+
+	return( 1 );
+
+}
+
+
+int	CPlnHeadTracker::ProcessPrev( plnA_type *apl, headPose_type *pose0, lnFit_type *lf, int iFrame )
+{
+	lf->cover = 0;
+
+	if( pose0->state < 1 )
+		return( -1 );
+
+
+	SetPose( pose0->p.x, pose0->p.y, pose0->angle, pose0->scale );
+
+	int ret = ProcessA( apl, NULL, iFrame );
+	if( ret > 0  && m_lf.cover > lf->cover )
+		*lf = m_lf; 
+
+
+	if( lf->cover == 0 )
+		return( -1 );
+
+
+	return( 1 );
+}
+
+
+
+int	CPlnHeadTracker::ProcessPrediction( plnA_type *apl, headPose_type *pose0, vec2f_type *p, lnFit_type *lf, int iFrame )
+{
+	int	ret;
+
+	lf->cover = 0;
+
+
+
+	if( pose0->state == 1 ){
+		SetPose( p->x + m_p0.x*(1 - pose0->scale), p->y + m_p0.y*(1 - pose0->scale), 0, pose0->scale );
+		ret = ProcessA( apl, NULL, iFrame );
+		if( ret > 0  && m_lf.cover > lf->cover )
+			*lf = m_lf;
+	}
+
+	SetPose( p->x, p->y, 0, 1.0 );
+	ret = ProcessA( apl, NULL, iFrame );
+	if( ret > 0  && m_lf.cover > lf->cover )
+		*lf = m_lf;  
+
+
+	SetPose( p->x, p->y, ANGLE_D2R(30), 1.0 );
+	ret = ProcessA( apl, NULL, iFrame );
+	if( ret > 0 && m_lf.cover > lf->cover )
+		*lf = m_lf;
+
+
+
+	SetPose( p->x, p->y, ANGLE_D2R(-30), 1.0 );
+	ret = ProcessA( apl, NULL, iFrame );
+	if( ret > 0 && m_lf.cover > lf->cover )
+		*lf = m_lf;
+
+
+	if( lf->cover <= 0 )
+		return( -1 );
+
+
+	return( 1 );
+}
+
+
+
+
+int	CPlnHeadTracker::ProcessTranslate( plnA_type *apl, headPose_type *pose0, int iFrame )
+{
+
+
+	if( pose0->state < 1 )
+		return( -1 );
+
+
+	//SetPose( pose0->p.x, pose0->p.y, pose0->angle, pose0->scale );
+
+
+	pln_type *bpl = m_cln->a[0];
+
+	lnFit_type lf;
+
+	lt2_similarity_set( &lf.lt, pose0->p.x, pose0->p.y, pose0->angle, pose0->scale );
+	lf.cover = 0;
+
+	int ret = plnA_fitT( apl, bpl, 0, bpl->len, 10, 4.0, &lf );
+
+	if( ret < 0 )
+		return( ret );
+
+	if( lf.cover < 0.4 )
+		return( -1 );
+
+
+
+	m_pose.iFrame = iFrame;
+
+	lt2_similarity_get( &lf.lt, &m_pose.p.x, &m_pose.p.y, &m_pose.angle, &m_pose.scale );
+
+	m_pose.qulity = m_lf.cover;
+
+	m_pose.state = 1;
+
+
+	*pose0 = m_pose;
+
+	return( 1 );
+}
+
+
+int	CPlnHeadTracker::Process( plnA_type *apl, vec2f_type *p, pln_type **spl, int iFrame )
 {
 	
 
@@ -99,6 +278,20 @@ int	CPlnHeadTracker::ProcessS( plnA_type *apl, vec2f_type *p, pln_type **spl, in
 	int ret = ProcessA( apl, NULL, iFrame );
 	if( ret > 0  && m_lf.cover > lf.cover )
 		lf = m_lf;  
+
+	if( m_pose.state == 1 ){
+		//SetPose( p->x, p->y, 0, m_pose.scale );
+		SetPose( p->x + m_p0.x*(1 - m_pose.scale), p->y + m_p0.y*(1 - m_pose.scale), 0, m_pose.scale );
+		ret = ProcessA( apl, NULL, iFrame );
+		if( ret > 0  && m_lf.cover > lf.cover )
+			lf = m_lf;
+	}
+
+	/*	float s = 1.5;
+	SetPose( p->x + m_p0.x*(1 - s), p->y + m_p0.y*(1 - s), 0, s );
+	ret = ProcessA( apl, NULL, iFrame );
+	if( ret > 0  && m_lf.cover > lf.cover )
+	lf = m_lf;*/ 
 
 	SetPose( p->x, p->y, 0, 1.0 );
 	ret = ProcessA( apl, NULL, iFrame );
@@ -121,16 +314,23 @@ int	CPlnHeadTracker::ProcessS( plnA_type *apl, vec2f_type *p, pln_type **spl, in
 
 	m_lf = lf;
 
+	m_pose.iFrame = iFrame;
+	m_pose.qulity = m_lf.cover;
 
-	float x,	y,	angle, scale;
-	lt2_similarity_get( &m_lf.lt, &x, &y, &angle, &scale );
-	GPLOG(("%.4f\t%.4f\t%.4f\n", m_lf.cover, angle, scale ) );
+	if( m_lf.cover > 0 ){
+		lt2_similarity_get( &m_lf.lt, &m_pose.p.x, &m_pose.p.y, &m_pose.angle, &m_pose.scale );
+
+		m_pose.state = 1;
+		GPLOG(("%.4f\t%.4f\t%.4f\n", m_lf.cover, m_pose.angle, m_pose.scale ) );
+	}
+	else m_pose.state = 0;
+
 
 	if( spl != NULL )
 		*spl =  pln_affine_lt( m_cln->a[0], &m_lf.lt, NULL );
 
 
-	if( m_lf.cover <= 0 )
+	if(m_pose.state == 0 )
 		return( -1 );
 
 	return( 1 );
@@ -140,7 +340,7 @@ int	CPlnHeadTracker::ProcessS( plnA_type *apl, vec2f_type *p, pln_type **spl, in
 int	CPlnHeadTracker::ProcessA( plnA_type *apl, pln_type **spl, int iFrame )
 {
 
-	if( apl->nA ==  0  )
+	if( apl == NULL || apl->nA ==  0 )
 		return( -1 );
 
 	int ret = plnA_adjust_head( apl, m_cln, iFrame, spl, &m_lf );
@@ -356,7 +556,7 @@ static int
 		return( -1 );
 	}
 
-	fprintf( stdout, "h" );
+	//fprintf( stdout, "h" );
 
 	if( ret > 0 ){
 		if( spl != NULL )

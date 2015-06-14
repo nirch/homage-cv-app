@@ -797,9 +797,9 @@ bImage_fill_gap( image_type *bim, int a[], int i0, int i1, int side )
 
 			int k0 = ( a[i1] - a[i0])*f + a[i0];
 			if( side == F_LEFT ){
-				if( k0 < a[k] )	a[k] = k0;
+				if( k0 < a[k] || a[k] < 0 )	a[k] = k0;
 			}
-			else if( k0 > a[k] )	a[k] = k0;
+			else if( k0 > a[k] || a[k] < 0 )	a[k] = k0;
 
 
 			int	j0,	j1;

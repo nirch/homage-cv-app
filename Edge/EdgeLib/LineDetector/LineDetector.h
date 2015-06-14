@@ -26,6 +26,8 @@ public:
 
 	int		Init( char *prmFile );
 
+	int		InitDirection( vec2f_type *v, float angle );
+
 
 	int		Process( image_type *sim, box2i *box, int iFrame = 0 );
 
@@ -38,6 +40,9 @@ public:
 	plnA_type *	Get( int fCopy );
 
 	plnA_type *	Get( int minLen, int fCopy );
+
+	vl2fA_type *Get( int minLen, vl2fA_type *avl );
+
 
 
 

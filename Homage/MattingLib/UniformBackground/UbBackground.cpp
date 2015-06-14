@@ -109,6 +109,28 @@ static int	bImage_dilate_L0( image_type *bim, image_type *eim, int a[], int n, s
 #endif
 
 
+ int CUniformBackground::ProcessBackgroundState( image_type *sim, int iFrame )
+ {
+
+	 if( m_flip == 1 )
+		 m_sim = image3_rotate180( sim, m_sim );
+	 else m_sim = image_make_copy( sim, m_sim );
+
+
+	 m_unBackground->Process( sim, 1 );
+		
+
+
+	 m_state = m_unBackground->GetState();
+
+	 GPLOG(("ProcessBackgroundState: %d ", iFrame, m_state ) );
+
+
+	return( 1 );
+}
+
+
+
  int CUniformBackground::ProcessBackground( image_type *sim, int iFrame )
  {
 	 if( m_mim == NULL )

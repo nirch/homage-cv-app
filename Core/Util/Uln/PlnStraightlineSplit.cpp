@@ -14,24 +14,25 @@
 
 
 
-int	pln_split_straightline( pln_type *pl, pln_type *apl[] );
+int	pln_split_straightline( pln_type *pl, float minLen, pln_type *apl[] );
 
 static int	pt2dA_line_approximateA( pt2dA_type *apt, int i0, int i1, vl2f_type av[] );
 
 
 
 plnA_type *
-plnA_straightline_split( plnA_type *apl, plnA_type *apl1 )
+plnA_straightline_split( plnA_type *apl, float minLen, plnA_type *apl1 )
 {
  vl2f_type vl;
 int	i;
 
-	apl1 = plnA_alloc( 2*apl->nA );
+	apl1 = plnA_alloc( 4*apl->nA );
 
 
 	for( i = 0 ; i <  apl->nA ; i++ ){
 
 		if( pln_straightline( apl->a[i], 0, -1, 1, &vl ) > 0 ){
+			if( vl.d < minLen )	continue;
 			pln_type *spl = pln_from_vl( &vl );
 			spl->color[0] = apl->a[i]->color[0];
 			spl->color[1] = apl->a[i]->color[1];
@@ -41,11 +42,49 @@ int	i;
 		}
 
 
-		apl1->nA += pln_split_straightline( apl->a[i], &apl1->a[apl1->nA] );
+		apl1->nA += pln_split_straightline( apl->a[i], minLen, &apl1->a[apl1->nA] );
 
 
 
-		fprintf( stdout, ". " );
+	//	fprintf( stdout, ". " );
+	}
+
+	return( apl1 );
+}
+
+
+
+
+
+plnA_type *
+	plnA_straightline_remove( plnA_type *apl, float minLen, plnA_type *apl1 )
+{
+	vl2f_type vl;
+	int	i;
+
+	apl1 = plnA_alloc( 4*apl->nA );
+
+
+	for( i = 0 ; i <  apl->nA ; i++ ){
+
+		if( pln_straightline( apl->a[i], 0, -1, 1, &vl ) > 0 ){
+			continue;
+		}
+
+
+		plnA_type *tapl = plnA_alloc( 100 );
+		tapl->nA += pln_split_straightline( apl->a[i], minLen, &tapl->a[tapl->nA] );
+		if( tapl->nA > 0 ){
+			plnA_destroy( tapl );
+			continue;
+		}
+
+		plnA_destroy( tapl );
+
+		apl1->a[apl1->nA++] = pln_copy( apl->a[i] );
+
+
+		//	fprintf( stdout, ". " );
 	}
 
 	return( apl1 );
@@ -57,11 +96,11 @@ int	i;
 
 
 
-
+static int	pt2dA_line_approximateA_union( pt2dA_type *apt,  vl2f_type av[], int *nV );
 
 
 int
-pln_split_straightline( pln_type *pl, pln_type *apl[] )
+pln_split_straightline( pln_type *pl, float minLen, pln_type *apl[] )
 {
 	static int iLine = 0;
 	pt2dA_type *apt;
@@ -76,22 +115,28 @@ pln_split_straightline( pln_type *pl, pln_type *apl[] )
 
 	nA = pt2dA_line_approximateA( apt, 0, apt->nP-1, av );
 
+	pt2dA_line_approximateA_union( apt,  av,  &nA );
+
+
 	int j;
 	for( i = 0, j = 0 ; i < nA ; i++ ){
-		if( av[i].d < 2 )	continue;
+		if( av[i].d < minLen )	continue;
 		av[j++] = av[i];
 	}
 	nA = j;
 
 
-	float T = cos( ANGLE_D2R(75) );
-	float t;
-	for( i = 0 ; i < nA-1 ; i++ ){
-		t = VEC2D_INNER( av[i].v, av[i+1].v );
+	//float T = cos( ANGLE_D2R(75) );
+	//float t;
+	//for( i = 0 ; i < nA-1 ; i++ ){
+	//	t = VEC2D_INNER( av[i].v, av[i+1].v );
 
-		if( ABS(t) > T )
-			return( 0 );
-	}
+	//	if( ABS(t) > T )
+	//		return( 0 );
+	//}
+
+
+
 
 
 	for( i = 0, n = 0 ; i < nA ; i++ ){
@@ -106,6 +151,8 @@ pln_split_straightline( pln_type *pl, pln_type *apl[] )
 
 
 	}
+
+
 
 
 
@@ -130,6 +177,7 @@ pt2dA_line_approximateA( pt2dA_type *apt, int i0, int i1, vl2f_type av[] )
 	pt2d_approximate_line_vl( apt, i0, i1, &vl );
 
 	if( vl.e < 0.25 ){//|| no < 3 ){
+		vl.id = i0;
 		av[0] = vl;
 
 		return( 1 );
@@ -150,7 +198,7 @@ pt2dA_line_approximateA( pt2dA_type *apt, int i0, int i1, vl2f_type av[] )
 	i = pt2d_approximate_line_pv_split( apt, i0, i1, &vl.p, &vl.v, &m, &sm );
 
 	if(  i < i0+3 || i1 -i < 3 ){
-		//ln_set( apt, i0, i1, &p, &v, &lnA[0] );
+		vl.id = i0;
 		av[0] = vl;
 		return( 1 );
 	}
@@ -166,3 +214,31 @@ pt2dA_line_approximateA( pt2dA_type *apt, int i0, int i1, vl2f_type av[] )
 
 
 
+static int
+	pt2dA_line_approximateA_union( pt2dA_type *apt,  vl2f_type av[], int *nV )
+{
+	int	i,	j;
+
+
+	for( i = 1, j = 1 ; i < *nV ; i++ ){
+		int i0 = av[j-1].id;
+		int i1 = ( i < *nV-1 )? av[i+1].id : apt->nA-1;
+	
+		vl2f_type vl;
+		pt2d_approximate_line_vl( apt, i0, i1, &vl );
+
+		if( vl.e < 0.25 ){//|| no < 3 ){
+			vl.id = i0;
+			av[j-1] = vl;
+
+			continue;
+		}
+		else {
+			av[j++] = av[i];
+		}
+	}
+
+	*nV = j;
+
+	return( 1 );
+}

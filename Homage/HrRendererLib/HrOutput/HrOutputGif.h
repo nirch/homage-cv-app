@@ -22,7 +22,7 @@ public:
 	
 	CHrOutputGif();
 
-	~CHrOutputGif();
+	virtual ~CHrOutputGif();
 
 	void DeleteContents();
 

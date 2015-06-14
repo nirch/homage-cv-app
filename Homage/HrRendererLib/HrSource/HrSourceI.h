@@ -22,12 +22,14 @@ public:
 	
 	CHrSourceI();
 
-	~CHrSourceI();
+	virtual ~CHrSourceI();
 
 	void DeleteContents();
 
 
-    virtual int Init( char *file ) { return -1; }
+	virtual int Init( char *file ) { return( -1 ); };
+
+	virtual int Init( char *inFile, int aFrame[], int nF )	{ return( -1 ); };
 
 	virtual int	ReadFrame( int iFrame, image_type **im ) = 0;
 

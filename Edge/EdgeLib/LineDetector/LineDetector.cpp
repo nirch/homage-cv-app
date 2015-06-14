@@ -7,7 +7,7 @@
 #include "Uvl/Vl2fType.h"
 
 #ifdef _DEBUG
-#define _DUMP 
+//#define _DUMP 
 #endif
 
 
@@ -93,6 +93,15 @@ void CLineDetector::DeleteContents()
 
 int CLineDetector::Init( char *prmFile )
 {
+	return( 1 );
+}
+
+
+int CLineDetector::InitDirection( vec2f_type *v, float angle )
+{
+	m_prm->directAngle = angle;
+	m_prm->directV = *v;
+
 	return( 1 );
 }
 
@@ -296,23 +305,39 @@ CLineDetector::Get( int minLen, int fCopy )
 	return( apl );
 }
 
-void		
-CLineDetector::Write( char *outFile )
+
+
+
+vl2fA_type *		
+CLineDetector::Get( int minLen, vl2fA_type *avl )
 {
-char	file[256];
+int	i;
 
-	plEdgeA_write( m_ae, outFile );
+	avl = vl2fA_realloc( avl, m_ae->nA );
+	avl->nA = 0;
+
+	for( i = 0 ; i < m_ae->nA ; i++ ){
+		pln_type *pl = m_ae->a[i]->pl;
+		if( pl->len < minLen )
+			continue;
+
+		vl2f_type *vl = &avl->a[avl->nA++];
 
 
+		vl->p.y = pl->ctr.x + 0.5*pl->link->v.x;
+		vl->p.x = pl->ctr.y + 0.5*pl->link->v.y;
 
+		vl->v.y = -pl->link->u.y;
+		vl->v.x =  pl->link->u.x;
 
-	gpFilename_force_extension( outFile, ".pt", file );
-	pEdge_write_to_file( m_gim, file );
+		vl->d = 0.5*pl->link->len;
+
+		vl->id = pl->id;
+		vl->e = pl->qulity;
+	}
+
+	return( avl );
 }
-
-
-
-
 
 
 int	
@@ -330,4 +355,19 @@ CLineDetector::RrapproximateStraightLine( int i0, int i1, vl2f_type *vl )
 //	vl->p.y += m_box.y0;
 
 	return( ret );
+}
+
+
+void		
+CLineDetector::Write( char *outFile )
+{
+char	file[256];
+
+	plEdgeA_write( m_ae, outFile );
+
+
+
+
+	gpFilename_force_extension( outFile, ".pt", file );
+	pEdge_write_to_file( m_gim, file );
 }

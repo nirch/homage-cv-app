@@ -51,6 +51,9 @@ CUnBackground::CUnBackground()
 
 	m_ac = NULL;
 
+	m_apt = NULL;
+	m_imMask = NULL;
+
 	gpTime_init( &m_gTime );
 }
 
@@ -95,6 +98,16 @@ CUnBackground::~CUnBackground()
 		m_abw = NULL;
 	}
 
+
+	if( m_apt != NULL ){
+		pt2dA_destroy( m_apt );
+		m_apt = NULL;
+	}
+
+	if( m_imMask != NULL ){
+		image_destroy( m_imMask, 1 );
+		m_imMask = NULL;
+	}
 }
 
 
@@ -196,7 +209,7 @@ int	ret;
 
 	iFrame = m_iFrame;
 
-
+	GPLOG(("CUnBackground: %d %d %d %d", iFrame, sim->width, sim->height, sim->channel ) );
 
 	IMAGE_DUMP( sim, "ub", 1, "SRC" );	
 
@@ -265,6 +278,11 @@ int	ret;
 	GPTRACE( (3, "Background: %d\n", m_state ) );
 
 
+#ifdef _DYNAMIC
+	ProcessBlobD();
+#endif
+
+
 	gpTime_stop( &m_gTime );
 
 	return( 1 );
@@ -298,6 +316,14 @@ int	CUnBackground::ProcessFill()
 	bImage_fill( m_bim, a0, a1 );
 
 	BIMAGE_DUMP( m_bim, m_N, "un", 1, "F" );
+
+
+
+	for( i = 0 ; i < m_as0.nA ; i++ ){
+		m_asFigure.a[i].j0 = a0[i];
+		m_asFigure.a[i].j1 = a1[i];
+	}
+	m_asFigure.nA = m_as0.nA;
 
 	return( 1 );
 }

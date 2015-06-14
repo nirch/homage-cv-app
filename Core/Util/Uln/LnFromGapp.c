@@ -11,6 +11,7 @@
 
 #include "PlnType.h"
 
+#define IS_NAN( f )	 (!(f <= 1.0 ) && !(f>1.0))
 
 
 pln_type *
@@ -71,7 +72,15 @@ int	i,	iseg;
 		l->u.y = -l->v.x/l->len;
 
 		l->c_prb = gapp->a[iseg];
+
+		//if( IS_NAN( l->c_prb) )
+		//	fprintf( stdout, "PaP" );
+
 		l->a = - l->c_prb * l->len * l->len*0.25 ;	
+
+		//if( IS_NAN( l->a) )
+		//	fprintf( stdout, "NaN" );
+
 	}
 
 

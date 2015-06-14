@@ -42,7 +42,7 @@ public:
 
 	image_type *GetRimage( image_type *im );
 
-	plnA_type * Component( float dT, float sLen, float mLen );;
+	plnA_type * Component( float dT, float sLen, float mLen );
 
 
 	int Write( char *file );
@@ -50,13 +50,15 @@ public:
 
 	void Draw( struct gpw_type *gpw, int fLine, int fCircle );
 
-	plnA_type * Get( float tLen, int fData = 0 );
+	plnA_type * Get( float tLen, float tLm, int fData );
 
 
 
 	void Trace( LogCallback logCallback, vec2f_type *p, float D);
 
 	void TraceStatus( LogCallback logCallback );
+
+	void Trace( FILE *fp );
 public:
 
 
@@ -77,6 +79,10 @@ public:
 	image_type *m_rmim[4];
 
 	plRidgeA_type *m_ar;
+
+
+	gpTime_type	m_tDetector;
+	gpTime_type m_tLine;
 };
 
 

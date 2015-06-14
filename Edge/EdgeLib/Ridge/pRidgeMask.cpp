@@ -36,7 +36,7 @@ pRidge_mask( image_type *dim, int d,  image_type *mim )
 	int	i,	j;
 
 
-	float dT = 0.85;
+	float dT = 0.90;
 
 //	int	d = 0;
 

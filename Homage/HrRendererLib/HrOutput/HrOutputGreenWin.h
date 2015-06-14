@@ -22,7 +22,7 @@ public:
 	
 	CHrOutputGreenWin();
 
-	~CHrOutputGreenWin();
+	virtual ~CHrOutputGreenWin();
 
 	void DeleteContents();
 

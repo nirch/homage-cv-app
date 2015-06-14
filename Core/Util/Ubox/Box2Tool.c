@@ -213,7 +213,7 @@ box2dA_union( box2f_type ab[], int *nB, float d )
 
 //return positive value if the box are separate and negative value for intersect 
 float
-box2d_distance( box2d *b, box2d *b1 )
+box2f_distance( box2f_type *b, box2f_type *b1 )
 {
 float	x,	y,	dis;
 
@@ -236,7 +236,7 @@ float	x,	y,	dis;
 
 
 int
-box2d_read( FILE *fp, box2d *b )
+box2f_read( FILE *fp, box2f_type *b )
 {
 	char	str[256];
 
@@ -252,7 +252,7 @@ box2d_read( FILE *fp, box2d *b )
 }
 
 int
-box2d_read_from_file( char *file, box2d *b )
+box2f_read_from_file( box2f_type *b, char *file )
 {
 FILE	*fp;
 
@@ -260,12 +260,153 @@ FILE	*fp;
 		return( -1 );
 
 
-	box2d_read( fp, b );
+	box2f_read( fp, b );
 
 
 	fclose( fp );
 
 	return( 1 );
+}
+
+int
+box2f_read_data( box2f_type *b, char *data )
+{
+char str[16];
+
+
+	if( sscanf( data, "%s %f %f %f %f", str, &b->x0, &b->y0, &b->x1, &b->y1 ) != 5 )
+		return( -1 );
+
+	if( str[0] == 'R' ){
+		b->x1 += b->x0;
+		b->y1 += b->y0;
+	}
+
+
+	return( 1 );
+}
+int
+	box2f_write_from_file( box2f_type *b, char *file )
+{
+	FILE	*fp;
+
+
+	if( (fp = fopen( file, "wb" )) == NULL )
+		return( -1 );
+
+
+	fprintf( fp, "%s %f %f %f %f", "N", b->x0, b->y0, b->x1, b->y1 );
+
+
+
+	fclose( fp );
+
+	return( 1 );
+}
+
+
+
+int
+box2d_read_from_file( box2d_type *b, char *file )
+{
+	FILE	*fp;
+	char str[256];
+
+	if( (fp = fopen( file, "rb" )) == NULL )
+		return( -1 );
+
+
+	fscanf( fp, "%s %lf %lf %lf %lf", str, &b->x0, &b->y0, &b->x1, &b->y1 );
+
+	if( str[0] == 'R' ){
+		b->x1 += b->x0;
+		b->y1 += b->y0;
+	}
+
+
+	fclose( fp );
+
+	return( 1 );
+}
+
+
+int
+box2d_write_from_file( box2d_type *b, char *file )
+{
+	FILE	*fp;
+
+
+	if( (fp = fopen( file, "wb" )) == NULL )
+		return( -1 );
+
+
+	fprintf( fp, "%s %lf %lf %lf %lf", "N", b->x0, b->y0, b->x1, b->y1 );
+
+
+
+	fclose( fp );
+
+	return( 1 );
+}
+
+//
+//int
+//	box2f_read_from_file( box2f_type *b, char *file )
+//{
+//	FILE	*fp;
+//	char str[256];
+//
+//	if( (fp = fopen( file, "rb" )) == NULL )
+//		return( -1 );
+//
+//
+//	fscanf( fp, "%s %f %f %f %f", str, &b->x0, &b->y0, &b->x1, &b->y1 );
+//
+//	if( str[0] == 'R' ){
+//		b->x1 += b->x0;
+//		b->y1 += b->y0;
+//	}
+//
+//
+//	fclose( fp );
+//
+//	return( 1 );
+//}
+
+
+
+
+
+
+
+int
+box2f_push_in( box2f_type *b, vec2f_type *p )
+{
+	
+	int n = 0;
+
+	if( p->x < b->x0 ){
+		p->x = b->x0;
+		n += 1;
+	}
+	else
+		if( p->x > b->x1 ){
+			p->x = b->x1;
+			n += 1;
+		}
+
+
+	if( p->y < b->y0 ){
+		p->y = b->y0;
+		n += 1;
+	}
+	else
+		if( p->y > b->y1 ){
+			p->y = b->y1;
+			n += 1;
+		}
+
+	return( n );
 }
 
 

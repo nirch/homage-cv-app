@@ -196,11 +196,24 @@ void	box2d_round( box2f_type *b );
 void	box2dA_union( box2f_type ab[], int *nB, float d );
 
 
+int	box2f_push_in( box2f_type *b, vec2f_type *p );
+
+
 //return positive value if the box are separate and negative value for intersect 
-float	box2d_distance( box2f_type *b, box2f_type *b1 );
+float	box2f_distance( box2f_type *b, box2f_type *b1 );
 
+#define box2d_distance	box2f_distance
 
-int	box2d_read_from_file( char *file, box2f_type *b );
+//int	box2f_read_from_file( char *file, box2f_type *b );
+
+int	box2d_read_from_file( box2d_type *b, char *file );
+int	box2d_write_from_file( box2d_type *b, char *file  );
+
+int	box2f_read_from_file( box2f_type *b, char *file );
+int	box2f_write_from_file( box2f_type *b, char *file );
+
+int	box2f_read_data( box2f_type *b, char *data );
+
 
 
 	/* Box2iTool.c */

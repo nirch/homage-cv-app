@@ -3,7 +3,10 @@
 #include	<string.h>
 #include	<math.h>
 #include <stdlib.h>
+
+#ifndef _GPLOG
 #define _GPLOG
+#endif
 
 #ifdef _DEBUG
 #define _DUMP
@@ -28,6 +31,8 @@
 CHrSourcePng::CHrSourcePng()
 {
 	m_im = NULL;
+
+	m_af = NULL;
 }
 
 CHrSourcePng::~CHrSourcePng()
@@ -46,6 +51,10 @@ void CHrSourcePng::DeleteContents()
 		image_destroy( m_im, 1 );
 		m_im = NULL;
 	}
+
+	if( m_af != NULL )
+		intA_destroy( m_af );
+
 }
 
 int CHrSourcePng::Init( char *inFile )
@@ -61,12 +70,44 @@ int CHrSourcePng::Init( char *inFile )
 }
 
 
+int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
+{
+
+	strcpy( m_dir, inFile );
+
+
+	m_af = intA_alloc( nF );
+
+	GPLOG(("PngSource:nF %d", nF ) );
+
+	int	i;
+	for( i = 0 ; i < nF ; i++ ){
+		m_af->a[i] = aFrame[i];
+		GPLOG(("PngSource:  %d", aFrame[i] ) );
+	}
+
+	GPLOG(("\n" ) );
+	m_iFrame = 0;
+
+	return( 1 );
+
+
+}
+
+
 int	CHrSourcePng::ReadFrame( int iFrame, image_type **im )
 {
 image_type	*sim;
 
+	int rFrame = ( m_af != NULL )? m_af->a[iFrame] : iFrame;
+
+	m_iFrame = rFrame;
+
+
+	GPLOG(("PngSource:  %d %d", iFrame, rFrame ) );
+
 	char file[256];
-	sprintf( file, "%s/im-%.4d.png", m_dir, m_iFrame++ );
+	sprintf( file, "%s/im-%.4d.png", m_dir, rFrame );
 	sim = image_read_png_file( file );
 	if( sim == NULL ){
 		GPLOG(( "reading %s failed\n", file ) );
@@ -86,7 +127,6 @@ image_type	*sim;
 
 	image_destroy( sim, 1 );
 
-	//*im = m_im;
 
 	return( 1 );
 }

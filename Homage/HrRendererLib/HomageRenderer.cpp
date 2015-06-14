@@ -37,6 +37,21 @@ CHomageRenderer::~CHomageRenderer()
 
 void CHomageRenderer::DeleteContents()
 {
+int	i;
+
+	for( i = 0 ; i < m_nS ; i++ ){
+		delete m_as[i];
+		m_as[i]  = 0;
+	}
+	m_nS = 0;
+
+	for( i = 0 ; i < m_nOut ; i++ ){
+		delete m_aOut[i];
+		m_aOut[i]  = 0;
+	}
+
+	m_nOut = 0;
+
 	if( m_im != NULL ){
 		image_destroy( m_im, 1 );
 			m_im = NULL;

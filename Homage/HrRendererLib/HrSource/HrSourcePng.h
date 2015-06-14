@@ -8,6 +8,7 @@
 
 #include "ImageType/ImageType.h"
 #include "Utime/GpTime.h"
+#include "Uvl/IntType.h"
 
 
 #include "HrSourceI.h"
@@ -20,7 +21,7 @@ public:
 	
 	CHrSourcePng();
 
-	~CHrSourcePng();
+	virtual ~CHrSourcePng();
 
 	void DeleteContents();
 
@@ -28,7 +29,9 @@ public:
 
 	int Init( char *inFile );
 
-	 int	ReadFrame( int iFrame, image_type **im );
+	int Init( char *inFile, int aFrame[], int nF );
+
+	int	ReadFrame( int iFrame, image_type **im );
 
 	int	Close();
 
@@ -38,7 +41,11 @@ private:
 
 	char m_dir[256];
 
+	intA_type	*m_af;
+
 	image_type *m_im;
+
+
 
 
 };

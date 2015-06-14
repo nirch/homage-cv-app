@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0833345F1A7E5B63008AC771 /* PlnHeadPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		083334601A7E5B63008AC771 /* PlnHeadTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		54C68E411B283F08008BDDD9 /* HeadPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E3D1B283F08008BDDD9 /* HeadPose.cpp */; };
+		54C68E421B283F08008BDDD9 /* PlnHeadBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E3E1B283F08008BDDD9 /* PlnHeadBox.cpp */; };
 		982AA204D70A4DDA999D59AC /* PlnHeadTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		EFA33BB6478C46F5860C08B3 /* PlnHeadPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
@@ -17,6 +19,10 @@
 		035392DD216B487F8A71FD94 /* libPlnTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPlnTracker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083334671A7E5B63008AC771 /* libPlnTrackerOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlnTrackerOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnHeadTracker.cpp; path = PlnHeadTracker/PlnHeadTracker.cpp; sourceTree = SOURCE_ROOT; };
+		54C68E3D1B283F08008BDDD9 /* HeadPose.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HeadPose.cpp; path = PlnHeadTracker/HeadPose.cpp; sourceTree = "<group>"; };
+		54C68E3E1B283F08008BDDD9 /* PlnHeadBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnHeadBox.cpp; path = PlnHeadTracker/PlnHeadBox.cpp; sourceTree = "<group>"; };
+		54C68E3F1B283F08008BDDD9 /* PlnHeadTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlnHeadTracker.h; path = PlnHeadTracker/PlnHeadTracker.h; sourceTree = "<group>"; };
+		54C68E401B283F08008BDDD9 /* HeadPose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadPose.h; path = PlnHeadTracker/HeadPose.h; sourceTree = "<group>"; };
 		F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnHeadPose.cpp; path = PlnHeadTracker/PlnHeadPose.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -24,6 +30,10 @@
 		1A5E3F05DA8F4B83A8BD42AF /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				54C68E3D1B283F08008BDDD9 /* HeadPose.cpp */,
+				54C68E3E1B283F08008BDDD9 /* PlnHeadBox.cpp */,
+				54C68E3F1B283F08008BDDD9 /* PlnHeadTracker.h */,
+				54C68E401B283F08008BDDD9 /* HeadPose.h */,
 				F171591A444242FB8B1764C9 /* PlnHeadPose.cpp */,
 				1AD823028E2E47CCA1037BAC /* PlnHeadTracker.cpp */,
 			);
@@ -170,8 +180,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54C68E421B283F08008BDDD9 /* PlnHeadBox.cpp in Sources */,
 				EFA33BB6478C46F5860C08B3 /* PlnHeadPose.cpp in Sources */,
 				982AA204D70A4DDA999D59AC /* PlnHeadTracker.cpp in Sources */,
+				54C68E411B283F08008BDDD9 /* HeadPose.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

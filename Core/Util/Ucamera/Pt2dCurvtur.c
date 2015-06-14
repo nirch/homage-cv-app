@@ -165,3 +165,88 @@ float	t,	b,	d;
 
 	return( tapt );
 }
+
+
+
+
+pt2dA_type *
+	pt2dA_smoothN( pt2dA_type *apt, int dr, int fclose, pt2dA_type	*tapt )
+{
+	pt2d_type	*pt,	*tpt;
+	vec2f_type	p,	v;
+	int	i,	i0;
+	poly1d4_type pl;
+	float	t,	b,	d;
+	int	di,	nP;
+	int	nr;
+
+
+	tapt = pt2dA_realloc( tapt, apt->nP );
+
+	tapt->nP = 0;
+
+	di = 0;
+	nP = apt->nP;
+	if( fclose == 1 ){
+		for( i = 0 ; i < dr ; i++ )
+			apt->a[apt->nA+i] = apt->a[i];
+
+		di = dr;
+		nP = apt->nP+dr;
+	}
+
+	nr = 2*dr + 1;
+
+	for( i = 0 ; i < apt->nP ; i++ ){
+
+		pt = &apt->p[i];
+
+		i0 = i - dr+di;
+		if( i <= 1 )
+			i0 = 0;
+		else	
+			if( i >= nP-dr )
+				i0 = apt->nP - nr;
+
+
+
+
+		pt2d_approximate_line_pv( apt, i0, i0+nr, &p, &v, &d, NULL );
+
+
+
+		pt2d_approximate_polynom_2( apt, &pt->p, &v, i0, i0+nr, &pl );
+
+
+
+		tpt = &tapt->p[i];
+		tpt->p.x = pt->p.x + pl.a0 * -v.y;
+		tpt->p.y = pt->p.y + pl.a0 * v.x;
+
+
+		tpt->n.x = v.x + pl.a1 * -v.y;
+		tpt->n.y = v.y + pl.a1 * v.x;
+
+		t = hypot( pt->n.x, pt->n.y );
+		tpt->n.x /= t;
+		tpt->n.y /= t;
+
+		b = poly1d4_curvtur( &pl, 0 );
+
+		//	fprintf( stdout, "%.4f  %.4f\n", pl.a2, b );
+
+
+		//		pt2d_approximate_polynom_2( apt, i, nI, &pt->p, &pt->n, 6*r, &pl0 );
+		//fprintf( stdout, "%.4f  %.4f\n", pl.a2, pl0.a2 );
+
+		tapt->nP++;
+	}
+
+	tapt->nP = apt->nP;
+	tapt->type = PT2D_4V;
+	//	pt2dA_dump( tapt, "1", 1, NULL );
+
+
+
+	return( tapt );
+}

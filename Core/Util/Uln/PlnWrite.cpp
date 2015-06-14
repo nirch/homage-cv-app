@@ -16,7 +16,17 @@ static int	plnA_write( plnA_type *apl, FILE *fp );
 
 
 	
+void	
+plnF_dump( plnF_type *fpl, char *prefix, int index, char *suffix )
+{
+	char	file[256];
 
+	if( gpDump_filename( prefix, index, suffix, ".plf", file ) < 0 )
+		return;
+
+
+	plnF_write( fpl, file );
+}
 
 
 

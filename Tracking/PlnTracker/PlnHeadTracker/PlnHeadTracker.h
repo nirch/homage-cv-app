@@ -6,6 +6,8 @@
 #include "Uvec/Vec3d.h"
 
 
+#include "HeadPose.h"
+
 
 #include	"Uln/Cln/ClnType.h"
 
@@ -27,7 +29,20 @@ public:
 	
 	int	GetPose( float *x, float *y, float *angle, float *scale );
 
-	int	ProcessS( plnA_type *apl, vec2f_type *p, pln_type **spl, int iFrame );
+	pln_type*	GetHeadPln( headPose_type *h );
+
+	int	Process( plnA_type *apl, headPose_type *pose0, vec2f_type ap[], int nP, int iFrame );
+
+	int	Process( plnA_type *apl, vec2f_type *p, pln_type **spl, int iFrame );
+
+
+	int	ProcessTranslate( plnA_type *apl, headPose_type *pose0, int iFrame );
+
+	int	ProcessPrev( plnA_type *apl, headPose_type *pose0, lnFit_type *lf, int iFrame );
+
+	int	ProcessPrediction ( plnA_type *apl, headPose_type *pose0, vec2f_type *p, lnFit_type *lf, int iFrame );
+
+
 
 	int	ProcessA( plnA_type *apl, pln_type **spl, int iFrame );
 
@@ -44,9 +59,23 @@ public:
 
 	int HeadPose( pln_type *pl, pln_type **spl, vec2f_type *p );
 
+	int HeadPose( pln_type *pl, vec2f_type *p0, pln_type **spl, vec2f_type *p );
+
+	int HeadPose( plnA_type *apl, vec2f_type *p0, pln_type **spl, vec2f_type *p );
+
+
+	int HeadBox( pln_type *pl, float len, box2f_type *b );
+
+
+	int HeadPose_peak( pln_type *pl, float gt,  pln_type **spl, vec2f_type *p );
+
+
+
 	static int HeadPose( pln_type *pl, vec2f_type *p );
 
 	pln_type *	GetPln();
+
+	headPose_type *GetPose()	{ return( &m_pose ); }
 
 
 	float GetCover()	{ return( m_lf.cover);}
@@ -69,6 +98,9 @@ protected:
 
 
 	lnFit_type m_lf;
+
+
+	headPose_type	m_pose;
 
 	//pln_type *m_pl;
 

@@ -3,6 +3,7 @@
 #include	<math.h>
 
 #include	"Ulog/Log.h"
+#include "Ubox/Box2d.h"
 
 //#ifdef _DEBUG
 #define _DUMP 
@@ -142,6 +143,12 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 		pln_type	*spl;
 		if( m_headTracking->Process( apl, &spl, m_iFrame ) > 0 )	
 			plnF_add( m_fplH, plnA_from_pl(spl), m_iFrame );
+
+
+		if( m_headBoxF == 0 ){
+			m_headTracking->HeadBox( apl->a[0], 64, &m_headBox );
+			m_headBoxF = 1;
+		}
 	}
 
 
@@ -276,19 +283,33 @@ int	CUniformBackground::WriteContour( char *file )
 	return( 1 );
 }
 
-
-int	CUniformBackground::Write( char *file )
+#ifdef _AA_
+int	CUniformBackground::Write( char *outFile )
 {
-	plnF_write( m_fpl, file );
+	plnF_write( m_fpl, outFile );
 
 
-	char	file1[256];
-	gpFilename_force_extension( file, "-h.plf", file1 );
-	plnF_write( m_fplH, file1 );
+	char	file[256];
+	gpFilename_force_extension( outFile, "-h.plf", file );
+	plnF_write( m_fplH, file );
+
+
+	if( m_headBoxF == 1 ){
+
+		gpFilename_force_extension( outFile, ".ebox", file );
+		box2f_write_from_file( &m_headBox, file );
+
+
+		pln_type *pl = pln_from_box( &m_headBox );
+
+		gpFilename_force_extension( outFile, "-box.plf", file );
+		pln_write_to_file( pl, file );
+
+	}
 
 	return( 1 );
 }
-
+#endif
 
 
 

@@ -67,6 +67,10 @@ pEdgePrm_update( pEdgePrm_type *prm )
 	prm->linking_A = Linking_a;
 
 	prm->straightLine = StraightLine;
+
+	prm->directAngle = 0;
+	prm->directV.x = 0;
+	prm->directV.y = 0;
 }
 
 

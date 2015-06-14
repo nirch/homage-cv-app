@@ -270,10 +270,11 @@ plnA_read( plnA_type **apl, FILE *fp )
 		fscanf( fp, "%s  %f %f %f %f", buf, &(*apl)->p.x, &(*apl)->p.y, &(*apl)->scale, &(*apl)->angle );
 
 
-	if( nPl <= 0 ){
-		plnA_destroy( *apl );
-		return( -2 );
-	}
+	//if( nPl <= 0 ){
+	//	plnA_destroy( *apl );
+	//	return( -2 );
+	//	return( 1 )
+	//}
 
 
 	(*apl)->iFrame = iFrame;
@@ -326,14 +327,16 @@ contour
 	fscanf( fp, "%s  %f %f %f %f", buf, &(*apl)->p.x, &(*apl)->p.y, &(*apl)->scale, &(*apl)->angle );
 
 
-	for( i = 0 ; i < nPl ; i++ ){
+	for( i = 0 ;  ; i++ ){
 		if( pln_read( &pl, fp ) < 0 )
 			break;
 
 		pl->ctr.x += (*apl)->p.x;
 		pl->ctr.y += (*apl)->p.y;
 
-		(*apl)->a[(*apl)->nA++ ] = pl;
+		//(*apl)->a[(*apl)->nA++ ] = pl;
+
+		plnA_add( *apl, pl );
 	}
 
 

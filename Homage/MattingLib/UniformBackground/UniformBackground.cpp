@@ -8,6 +8,8 @@
 #define _DUMP 
 #endif
 
+#include "Uvl/TfType.h"
+
 #include	"ImageType/ImageType.h"
 #include	"ImageDump/ImageDump.h"
 #include	"ImageMark/ImageMark.h"
@@ -386,6 +388,8 @@ int	CUniformBackground::ResetBackground()
 
 int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 {
+
+
 	m_iFrame = iFrame;
 
 	gpTime_start( &m_gTime );
@@ -407,6 +411,9 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 		ProcessInitBackground( m_sim );
 
 		InitHeadTracker( m_iHead );
+
+		m_headBoxF = 0;
+
 
 #ifdef _DYNAMIC_BACKGROUND
 		ProcessDynamicMaskInit();
@@ -531,6 +538,36 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 
 
 
+int	CUniformBackground::Write( char *outFile )
+{
+	plnF_write( m_fpl, outFile );
+
+
+	char	file[256];
+	gpFilename_force_extension( outFile, "-h.plf", file );
+	plnF_write( m_fplH, file );
+
+
+	if( m_headBoxF == 1 ){
+
+		gpFilename_force_extension( outFile, ".ebox", file );
+		box2f_write_from_file( &m_headBox, file );
+
+
+		pln_type *pl = pln_from_box( &m_headBox );
+
+		gpFilename_force_extension( outFile, "-box.plf", file );
+		pln_write_to_file( pl, file );
+
+
+		DynamicPose( outFile );
+
+	}
+
+	return( 1 );
+}
+
+
 
 void CUniformBackground::Trace( FILE *fp )
 {
@@ -546,8 +583,8 @@ void CUniformBackground::Trace( FILE *fp )
 
 	gpTime_print( fp, "Total", &m_gTime );
 
-//	if( m_dr != NULL )
-//		m_dr->Trace( fp );
+	if( m_dr != NULL )
+		m_dr->Trace( fp );
 
 
 
@@ -708,6 +745,13 @@ image_type *CUniformBackground::GetImage(  image_type *bim, image_type *im )
 	return( im );
 }
 
+image_type *CUniformBackground::GetImageAlpha( image_type *im )
+{
+	im = imageA_set_alpha( m_sim, 255, m_cimS, im );
+
+	return( im );
+}
+
 int CUniformBackground::ProcessPl(  image_type *sim, int iFrame, plnA_type *apl )
 {
 	m_iFrame = iFrame;
@@ -724,6 +768,53 @@ int CUniformBackground::ProcessPl(  image_type *sim, int iFrame, plnA_type *apl 
 	m_cimS = image1_mask_cln( cln, sim->width, sim->height, 0, m_cimS );
 
 	cln_destroy( cln );
+
+	return( 1 );
+}
+
+
+
+int	CUniformBackground::DynamicPose( char *outFile )
+{
+	if( m_headBoxF == 0 )
+		return( -1 );
+
+	box2f_type	b;
+
+	float x0 = 0.5*(m_headBox.x0 + m_headBox.x1 );
+	float y0 = 0.5*(m_headBox.y0 + m_headBox.y1 );
+
+
+	b.x0 = m_headBox.x0 - x0 + 240;
+	b.x1 = m_headBox.x1 - x0 + 240;
+
+	b.y0 = m_headBox.y0 - y0 + 160;
+	b.y1 = m_headBox.y1 - y0 + 160;
+
+
+	lt2_type lt;
+
+	lt.c0 = 240 - y0; 
+	lt.c1 = 160 - x0;
+
+
+
+	tf_type *tf = tf_alloc( 6 );
+	tf->a[0] = lt.c0;
+	tf->a[1] = lt.c1;
+	tf->a[2] = 1.0;
+
+	tf->a[3] = 0;
+	tf->a[4] = 0;
+	tf->a[5] = 0;
+
+
+	tfA_type *atf = tfA_alloc( 1 );
+	tfA_add( atf, 0, tf );
+	
+	char file[256];
+	gpFilename_force_extension( outFile, "-box.tf", file );
+	tfA_write( atf, 1, file );
 
 	return( 1 );
 }

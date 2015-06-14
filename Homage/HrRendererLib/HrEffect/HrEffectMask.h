@@ -28,6 +28,8 @@ public:
 
 	int Init( image_type *im );
 
+	int Init( char *file );
+
 
 	 int Process( image_type *sim, int iFrame, image_type **im );
 

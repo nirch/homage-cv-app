@@ -220,7 +220,7 @@ int	a[6],	nA,	i;
 static int
 	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int fillAll, int color )
 {
-
+	fillAll = 0;
 
 	float vT = 12;
 	int	i;
@@ -228,8 +228,15 @@ static int
 		bwLabel_type *bw = &abw->a[i];
 		bw->existence = 0;
 		if( bw->id != i )	continue;
-		if( bw->no > nT || (fillAll == 0 && bw->av < vT)  )
+
+		if( bw->no > sim->width*sim->height/8 )
 			continue;
+
+		if( fillAll == 0 ){
+			//if( bw->no > nT ||  (fillAll == 0 && bw->av < vT)  )
+			if( bw->no > nT || bw->av < vT )
+				continue;
+		}
 
 		bw->existence = -1;
 

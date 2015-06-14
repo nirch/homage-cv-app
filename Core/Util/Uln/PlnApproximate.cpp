@@ -68,7 +68,7 @@ gapp_type	*ga;
 
 	Qgprm.min_len = 30;//3.0;
 	Qgprm.Min_pnumber = 4;
-	Qgprm.max_len = 60.0;
+	Qgprm.max_len = 40.0;
 
 	Qgprm.Max_dev = 2;
 	Qgprm.Min_dev = 0.5;
@@ -76,6 +76,12 @@ gapp_type	*ga;
 
 
 	ga = gapp_breakpoint( gapp,  4 );
+
+	int i;
+	for( i = 0 ; i < ga->no ; i++ ){
+		ga->tang[i].x = 1.0;
+		ga->tang[i].y = 0;
+	}
 
 
 

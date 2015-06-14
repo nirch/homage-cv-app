@@ -26,6 +26,8 @@ plnA_group( plnA_type *apl, float dT )
 	pln_type	*pl,	*cpl;
 
 
+	plnA_set_box( apl );
+
 	apl->nGroup = 0;
 
 	nGroup = 0;
@@ -41,6 +43,9 @@ plnA_group( plnA_type *apl, float dT )
 			cpl = apl->a[j];
 
 			if( cpl->group == pl->group )
+				continue;
+
+			if( box2f_distance( &pl->b, &cpl->b) > dT )
 				continue;
 
 			dPln_type d;

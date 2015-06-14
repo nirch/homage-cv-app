@@ -7,7 +7,7 @@
 #include	<string.h>
 
 #ifdef _DEBUG
-#define _DUMP
+//#define _DUMP
 #endif
 
 #include	"Uigp/igp.h"

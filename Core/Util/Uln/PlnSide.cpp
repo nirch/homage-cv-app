@@ -61,6 +61,24 @@ pln_inside( pln_type *p, pln_type *p2 )
 	return pln_point_side( p2, &p->ctr );
 }
 
+int		
+pln_insideA( pln_type *pl, pln_type *bpl )
+{
+float	gt;
+vec2f_type	p;
+
+	for( gt = 0 ; gt < pl->len ; gt += 2 ){
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_point_side( bpl, &p ) == 0 )
+			return( 0 );
+	}
+
+	return( 1 );
+}
+
+
+
 
 
 // if the point  is in the right side of the close contour pl  return 1  otherwise 0

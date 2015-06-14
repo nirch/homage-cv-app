@@ -66,7 +66,7 @@ int	i;
 		int NA = vpl->NA + iFrame+32;
 		vpl->a = ( pt2dA_type **)realloc( vpl->a, NA*sizeof(pt2dA_type *) );
 
-		for( i = NA ; i <  vpl->NA ; i++ )
+		for( i = vpl->NA ; i <  NA ; i++ )
 			vpl->a[i] = NULL;
 
 		vpl->NA = NA;
@@ -171,7 +171,7 @@ char	signature[64];
 			apt = NULL;
 		}
 		if( apt == NULL ){
-			apt = pt2dA_alloc( 16 );
+			apt = pt2dA_alloc( 64 );
 			apt->iFrame = iFrame;
 			apt->axis = PT2D_AXIS_XY;
 		}

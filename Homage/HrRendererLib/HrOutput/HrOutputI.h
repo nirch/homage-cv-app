@@ -19,9 +19,11 @@ public:
 	
 	CHrOutputI();
 
-	~CHrOutputI();
+	virtual ~CHrOutputI();
 
 	void DeleteContents();
+
+	virtual int Init( char *outFile, int width, int height, int frameSpeed )	{ return( -1 ); }
 
 	virtual int SetPalette( char *data )	{ return( -1 ); }
 

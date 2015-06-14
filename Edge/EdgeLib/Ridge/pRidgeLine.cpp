@@ -6,6 +6,10 @@
 #include	<math.h>
 #include	<string.h>
 
+#ifdef _DEBUG
+#define _DUMP
+#endif
+
 #include	"Uigp/igp.h"
 #include "Ulog/Log.h"
 #include "Uvec/Vec3d.h"
@@ -205,6 +209,7 @@ plRidge_type	*r;
 		return( NULL );
 	}
 
+	
 
 	return( r );
 }
@@ -339,6 +344,8 @@ pt2dA_type *apt;
 
 	apt = apt_from_pRidge( ad, nD, NULL );
 
+//	PT2DA_DUMP( apt, "ridge", 1, NULL );
+
 	pl[0] = pln_alloc( 0 );
 	pt2d_approximate_linkO( apt, &pl[0]->ctr, &pl[0]->link );
 
@@ -347,6 +354,8 @@ pt2dA_type *apt;
 	pl[0]->state = PLN_OPEN;
 
 	pt2dA_destroy( apt );
+
+//	PLN_DUMP( pl[0], "ridge", 1, NULL );
 
 	return( 1 );
 

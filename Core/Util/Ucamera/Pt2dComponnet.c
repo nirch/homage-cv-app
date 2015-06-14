@@ -84,7 +84,7 @@ pt2dA_bounding_contour( pt2dA_type *apt )
 {
 pln_type	*pl;
 box2d	b;
-int a[100],	nA;
+int a[1000],	nA;
 int i,	j;
 
 	if( apt->nP == 1 ){
@@ -178,7 +178,7 @@ int	iMin,	i;
 
 	*k = iMin;
 
-	if( tMin < 0 )
+	if( tMin < -0.001 )
 		return( 1 );
 
 	return( -1 );
@@ -239,11 +239,13 @@ pln_type *
 pt2dA_to_pl( pt2dA_type *apt, int a[], int nA )
 {
 int	i,	n;
-vec2d	p[100],	v,	p0,	p1;
+vec2d	*p,	v,	p0,	p1;
 ln_type	*l,	*pl,	*nl;
 
 pln_type	*pln;
 
+
+	p = (  vec2f_type *)malloc( 2*nA * sizeof(vec2f_type) );
 
 	for( i = 0, n = 0 ; i < nA-1 ; i++ ){
 		pt2d_tanget_line( &apt->p[a[i]], &apt->p[a[i+1]], &p0, &p1, &v );
@@ -278,7 +280,7 @@ pln_type	*pln;
 		ln_smooth_a(  l, pl, nl );
 	}
 
-
+	free( p );
 
 	return( pln );
 }

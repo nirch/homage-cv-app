@@ -2,7 +2,7 @@
  ***   plEdge.cpp   ***
  **********************/
 #ifdef _DEBUG
-#define	_DUMP
+//#define	_DUMP
 #endif
 
 #include	<math.h>

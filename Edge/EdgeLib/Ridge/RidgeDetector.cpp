@@ -33,6 +33,9 @@ CRidgeDetector::CRidgeDetector()
 	m_rmim[0] = m_rmim[1] = m_rmim[2] = m_rmim[3] = NULL;
 	
 
+	gpTime_init( &m_tDetector );
+	gpTime_init( &m_tLine );
+
 	m_prm = pRidgePrm_alloc();
 }
 
@@ -169,14 +172,16 @@ int CRidgeDetector::Detect( image_type *sim, image_type *mim )
 	image_type *imy = image1_from( sim, NULL );
 
 
+	gpTime_start( &m_tDetector );
 	m_rim = pRidge_detector( imy, mim, m_rmim, m_nRmim, &m_prm->detect, m_rim );
-
+	gpTime_stop( &m_tDetector );
 
 	int no = sim->width*sim->height / 16;
 
+	gpTime_start( &m_tLine );
 	m_ar = plRidgeA_alloc( no );
 	pRidge_line( m_rim, 2, &m_prm->line, m_ar );
-
+	gpTime_stop( &m_tLine );
 
 	if( imy != sim )
 		image_destroy( imy, 1 );
@@ -214,7 +219,7 @@ int CRidgeDetector::SetMask( image_type *sim, image_type *mim, int add )
 
 
 
-plnA_type * CRidgeDetector::Get( float tLen, int fData )
+plnA_type * CRidgeDetector::Get( float tLen, float tLm, int fData )
 {
 plnA_type	*apl;
 	int	i;
@@ -225,18 +230,37 @@ plnA_type	*apl;
 
 	
 	for( i = 0 ; i < m_ar->nR ; i++ ){
-		pln_type *pl = m_ar->r[i]->pl;
-		if(  pl->len > tLen ){
+		plRidge_type *r = m_ar->r[i];
 
-			if( fData == 1 )
-				pl = pln_copy( pl );
-			apl->a[apl->nA++] = pl;
-		}
+		if( r->pl->len < tLen || ABS(r->lm) < tLm )
+			continue;
+
+
+		//pln_type *pl = m_ar->r[i]->pl;
+		//if(  pl->len > tLen ){
+
+		pln_type *pl = r->pl;
+
+		if( fData == 1 )
+			pl = pln_copy( pl );
+
+		pl->qulity = r->lm;
+		apl->a[apl->nA++] = pl;
+//		}
 	}
 
 	return( apl );
 
 }
+
+
+
+void CRidgeDetector::Trace( FILE *fp )
+{
+	gpTime_print( fp, "Ridge-Detector", &m_tDetector );
+	gpTime_print( fp, "Ridge-Line", &m_tLine );
+}
+
 
 
 
@@ -311,7 +335,14 @@ plnA_type * CRidgeDetector::Component( float dT, float sLen, float mLen )
 {
 int	i;
 
-	plnA_type *apl =  Get( 1, 0 );
+	plnA_type *apl =  Get( 1, 1, 0 );
+
+	if( apl->nA == 0  ){
+		plnA_destroy( apl );
+		return( NULL );
+	}
+
+	PLNA_DUMP( apl, "Aa", 1, "before-comp" );
 
 
 	plnA_group( apl, dT );

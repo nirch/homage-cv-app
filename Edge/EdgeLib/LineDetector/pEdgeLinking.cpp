@@ -30,7 +30,7 @@
 
 
 #ifdef _DEBUG
-#define _DUMP 
+//#define _DUMP 
 #endif
 
 

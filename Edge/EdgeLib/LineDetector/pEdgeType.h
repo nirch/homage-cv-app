@@ -36,6 +36,9 @@ typedef struct pEdgePrm_type {
 
 	float	straightLine;
 
+	vec2f_type directV;
+	float	   directAngle;
+
 } pEdgePrm_type;
 
 

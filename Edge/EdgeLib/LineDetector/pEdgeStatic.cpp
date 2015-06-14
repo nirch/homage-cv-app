@@ -27,7 +27,7 @@
 
 #ifdef _DEBUG
 #ifndef WINCE
-#define _DUMP 
+//#define _DUMP 
 #endif
 #endif
 

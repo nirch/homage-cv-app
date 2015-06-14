@@ -106,6 +106,12 @@ private:
 
 
 
+	int	ProcessBlobD();
+
+	int	ProcessBlobD_figure_blob( imageLabel_type *abw, sbA_type *as );
+
+	pt2dA_type * ProcessBlobD_point( imageLabel_type *abw, pt2dA_type *apt );
+
 private:
 	int	m_iFrame;
 
@@ -142,6 +148,13 @@ private:
 
 
 	sbA_type	m_as0,	m_as1;
+
+
+	sbA_type	m_asFigure;
+
+public:
+	pt2dA_type *m_apt;
+	image_type *m_imMask;
 
 	int	m_state;
 

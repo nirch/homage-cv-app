@@ -16,6 +16,7 @@
 #include "Ulog/Log.h"
 #include "Uvec/Vec3d.h"
 #include "Uln/PlnType.h"
+#include "Umath/Matrix2Type.h"
 
 #include "Ucamera/Pt2dType.h"
 #include "ImageType/ImageType.h"
@@ -43,6 +44,10 @@ static pt2dA_type *	apt_from_pEdge( pEdge_type *ad[200], int nD, pt2dA_type *apt
 
 
 pln_type *pln_create_lnA( ln_type al[], int nAl );
+
+
+static float	pt2d_approximate_line_pv_testT( pt2dA_type *apt, int i0, int i1, vec2f_type *p, vec2f_type *v, float *a, float D, int *nD );
+
 
 
 
@@ -106,7 +111,7 @@ pEdge_line( image_type *dim, int d, pEdgePrm_type *prm, plEdgeA_type *aPl )
 static int
 image_pEdge_line_1( image_type *rim, pEdge_type *dp00, pEdgePrm_type *prm, plEdge_type **ple )
 {
-	pEdge_type	*ad[512];
+	pEdge_type	*ad[4096];
 	int	nD;
 
 	pEdge_type	*rp;
@@ -231,16 +236,16 @@ static int
 pt2dA_line_approximate( pt2dA_type *apt, int i0, int i1, ln_type lnA[] )
 {
 	vec2f_type	p,	v;
-	float	dMax,	d, e;
+	float	dMax,	d, e,	a;
 	int	no,	i,	n;
 
 
 	pt2d_approximate_line_pv( apt, i0, i1, &p, &v, &d, &e );
 
-	dMax = pt2d_approximate_line_pv_test( apt, i0, i1, &p, &v, 2.5, &no );
+	dMax = pt2d_approximate_line_pv_testT( apt, i0, i1, &p, &v, &a, 2.5, &no );
 
 
-	if( ABS(dMax) < 2.5 ){//|| no < 3 ){
+	if( ABS(dMax) < 2.5 && ABS(a) < 0.5 ){//|| no < 3 ){
 		ln_set( apt, i0, i1, &p, &v, &lnA[0] );
 
 		return( 1 );
@@ -355,3 +360,72 @@ int	i;
 	return( apt );
 }
 
+
+
+
+
+static float
+pt2d_approximate_line_pv_testT( pt2dA_type *apt, int i0, int i1, vec2f_type *p, vec2f_type *v, float *a, float TD, int *nD )
+{
+	vec2d_type	u;
+
+	int	i;
+
+	float	d,	dMax;
+
+	matrix2_type m;
+	vec2d_type D,	X;
+
+	matrix2_zero( &m );
+	D.x = D.y = 0;
+
+
+
+	VEC2D_LEFT( *v, u );
+
+
+	*nD = 0;
+	dMax = 0;
+	for( i = i0 ; i < i1 ; i++ ){
+		pt2d_type	*pt = &apt->p[i];
+
+		vec2f_type	dp;
+		dp.x = pt->p.x - p->x;
+		dp.y = pt->p.y - p->y;
+
+		d = VEC2D_INNER( u, dp );
+		float t = VEC2D_INNER( *v, dp );
+
+		float t2 = t*t;
+
+		m.a00 += t2*t2;
+		m.a01 += t2;
+		D.x += d*t2;
+
+		m.a10 += t2;
+		m.a11 += 1;
+		D.y += d;
+
+		pt->r = d;
+
+		if( ABS(d) > TD )	(*nD)++;
+
+		if( ABS(d) > ABS(dMax) ){
+			dMax = d;
+		}
+	}
+
+	*a = 0;
+	if( i1 - i0 > 6 ){
+		matrix2_solve( &m, &D, &X );
+
+		*a = X.y;
+		float b = X.y;
+	}
+
+
+	//fprintf( stdout, " %.2f ", *a );
+
+
+	return( dMax );
+}

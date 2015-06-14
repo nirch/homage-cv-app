@@ -89,11 +89,38 @@ int CHrEffectAlignment::Init( char *inFile )
 }
 
 
-int CHrEffectAlignment::InitFromData( char *data )
+int CHrEffectAlignment::InitFromData( char *data0, char *data )
 {
+
+	if( box2f_read_data( &m_box, data ) < 0 )
+		return( -1 );
+
+
+	float x0 = 0.5*(m_box.x0 + m_box.x1 );
+	float y0 = 0.5*(m_box.y0 + m_box.y1 );
+	x0 *= 0.5;
+	y0 *= 0.5;
+
+
+
+	float x00 = 80;
+	float y00 = 120;
+	if( data0 != NULL ){
+		if( box2f_read_data( &m_box0, data0 ) < 0 )
+			return( -1 );
+
+		x00 = 0.5*(m_box0.x0 + m_box0.x1 );
+		y00 = 0.5*(m_box0.y0 + m_box0.y1 );
+		
+	}
+
+
+	m_lt.c0 =  y0 - y00; 
+	m_lt.c1 =  x0 - x00;
 
 
 	m_iFrame = -1;
+
 	return( 1 );
 }
 

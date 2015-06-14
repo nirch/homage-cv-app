@@ -50,8 +50,16 @@ int	CUniformBackground::ProcessEdgeContour()
 	gpTime_start( &m_tEdge );
 
 	m_eim  = image1_gridient_sobol_value( m_yim, m_eim );
-	image_type *mim = image1_binary( m_eim, 4, NULL );
+	image_type *mim = image1_binary( m_eim, 8, NULL );
 
+#define _TEST
+#ifdef _TEST
+	image1_threshold( m_eim, 8 );
+	image_dump_scale( m_eim, 4, "EDGE", m_iFrame, "1" );
+#endif
+
+	//int nPixel = image1_nPixel_nonzero( mim );
+	//fprintf( stdout, "%d ", nPixel );
 
 
 
@@ -64,7 +72,7 @@ int	CUniformBackground::ProcessEdgeContour()
 	if( m_aplEdge != NULL )
 		plnA_destroy( m_aplEdge );
 
-	m_aplEdge = m_dr->Get( 16, 1 );
+	m_aplEdge = m_dr->Get( 16, 0.5, 1 );
 
 	PLNA_DUMP( m_aplEdge, "edge", m_iFrame, NULL );
 

@@ -30,6 +30,49 @@ int	plnA_fitT_step( plnA_type *apl, pln_type *bpl, float gt0, float gt1, lt2_typ
 
 static int GGG = 0;
 
+
+int
+plnA_fitT( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f )
+{
+	pln_type	*bpl;
+	int	i,	ret;
+	lt2_type	clt,	ct;
+	double	s;
+
+
+	bpl = NULL;
+
+
+	for( i = 0 ; i < cycle ; i++ ){
+
+		bpl = pln_affine_lt( bpl0, &f->lt, bpl );
+		PLN_DUMP( bpl, "fit", i, NULL );
+
+		s = hypot( f->lt.a0, f->lt.b0 );
+
+		ret = plnA_fitT_step( apl, bpl, gt0*s, gt1*s, &clt );
+		if( ret < 0 )	break;
+
+		lt2_compose( &clt, &f->lt, &ct );
+		f->lt = ct;
+	}
+
+	bpl = pln_affine_lt( bpl0, &f->lt, bpl );
+	PLN_DUMP( bpl, "fit", i, NULL );
+
+
+	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T*s, &f->cover, &f->dis );
+
+
+	pln_destroy( bpl );
+
+	return( ret );
+
+}
+
+
+
+
 int
 plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f )
 {
@@ -45,7 +88,7 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float
 	// translate
 	GGG = 1;
 	if( GGG == 1 ){
-		for( i = 0 ; i < 6 ; i++ ){
+		for( i = 0 ; i < 8 ; i++ ){
 			bpl = pln_affine_lt( bpl0, &f->lt, bpl );
 			PLN_DUMP( bpl, "fit", i, "T" );
 
@@ -78,7 +121,12 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float
 	bpl = pln_affine_lt( bpl0, &f->lt, bpl );
 	PLN_DUMP( bpl, "fit", i, NULL );
 
+	if( ret < 0 ){
+		pln_destroy( bpl );
+		return( -1 );
+	}
 
+	PLNA_DUMP( apl, "fit", i, "apl" );
 	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T*s, &f->cover, &f->dis );
 
 
@@ -125,8 +173,8 @@ plnA_fit_step( plnA_type *apl, pln_type *bpl, float gt0, float gt1, lt2_type *lt
 	if( t < 0.5*0.5 || t > 2.0*2.0 )
 		return( -1 );
 
-	if( ABS(X[0]) > 100 || ABS(X[1]) > 100 )
-		return( -1 );
+	//if( ABS(X[0]) > 100 || ABS(X[1]) > 100 )
+	//	return( -1 );
 
 
 	return( 1 );

@@ -20,7 +20,7 @@ public:
 	
 	CHrSourceGif();
 
-	~CHrSourceGif();
+	virtual ~CHrSourceGif();
 
 	void DeleteContents();
 

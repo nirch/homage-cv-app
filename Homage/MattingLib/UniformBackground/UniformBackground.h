@@ -77,6 +77,8 @@ public:
 	int	ResetBackground();
 
 
+	int ProcessBackgroundState( image_type *sim, int iFrame );
+
 	int ProcessBackground( image_type *sim, int iFrame );
 	
 	int	ProcessInitBackground( image_type *sim );
@@ -91,6 +93,8 @@ public:
 
 
 	int	Process( image_type *sim, int iFrame, image_type **cim );
+
+	int	DynamicPose( char *outFile );
 
 
 	void SetDframe( int iFrame )	{ m_dFrame = iFrame; }
@@ -109,6 +113,7 @@ public:
 	image_type *GetImage(  int color, image_type *im );
 
 	image_type *GetImage(  image_type *bim, image_type *im );
+	image_type * GetImageAlpha( image_type *im );
 
 protected:
 
@@ -136,7 +141,11 @@ protected:
 	int	ProcessEdgeContourInit();
 	int	ProcessEdgeContour();
 
-//	int	ProcessContourUI();
+
+
+
+	int	ProcessDynamicMaskInit();
+	int	ProcessDynamicMask();
 
 
 	int TestDrakness( image_type *yim );
@@ -148,6 +157,9 @@ protected:
 	class CUnBackground *m_unBackground;
 
 	class CPlnHeadTracker *m_headTracking;
+
+	int m_headBoxF;
+	box2f_type m_headBox;
 
 	int	m_iHead;
 
@@ -204,6 +216,8 @@ protected:
 
 public:
 	class CRidgeDetector *m_dr;
+
+	class CDynamicMask	*m_dm;
 
 	image_type *m_cim;
 	image_type *m_dim;
