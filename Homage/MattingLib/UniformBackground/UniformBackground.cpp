@@ -70,7 +70,6 @@ CUniformBackground::CUniformBackground()
 	m_dim = NULL;
 
 	m_bim = NULL;
-	m_bimDx = NULL;
 	m_bimC = NULL;
 
 	m_N = 8;

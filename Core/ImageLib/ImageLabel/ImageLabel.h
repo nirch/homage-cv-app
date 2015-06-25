@@ -21,6 +21,7 @@ int imageLabel_no( imageLabel_type *abw );
 
 int	imageLabel_bigest( imageLabel_type *abw, int color );
 
+int	imageLabel_pixel_id( imageLabel_type *abw, int i0, int j0 );
 
 int	imageLabel_print( imageLabel_type *abw, FILE *fp );
 
@@ -88,6 +89,10 @@ int		imageLabelUI_nieg1( imageLabel_type *abw, int i0 );
 
 image_type *	imageLabelUI_crop( imageLabel_type *abw, int iGroup, image_type *sim, int *x0, int *y0, image_type *im );
 
+
+void	imageLabelUI_image1_set( imageLabel_type *abw, int i0, int color, image_type *tim );
+
+void	imageLabelUI_imageUS3_set( imageLabel_type *abw, int i0, int R, int G, int B, image_type *tim );
 
 
 	// ImageLabelUS.cpp

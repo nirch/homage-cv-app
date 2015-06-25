@@ -220,7 +220,9 @@ int	a[6],	nA,	i;
 static int
 	imageLabelUS_remove_B( image_type *sim, imageLabel_type *abw, int nT, int fillAll, int color )
 {
-	fillAll = 0;
+//	fillAll = 0;
+
+	imageLabelUS_set_boundary( abw );
 
 	float vT = 12;
 	int	i;
@@ -228,6 +230,9 @@ static int
 		bwLabel_type *bw = &abw->a[i];
 		bw->existence = 0;
 		if( bw->id != i )	continue;
+
+		if( bw->boundary > 0 && bw->boundary != 3 )
+			continue;
 
 		if( bw->no > sim->width*sim->height/8 )
 			continue;

@@ -23,11 +23,6 @@ typedef struct ubPrm_type {
 	int fillBlob;
 	int fillBlobAll;
 
-//	int	adjustContour;
-
-	int dx;
-	int av;
-
 
 	int enableEdge;
 
@@ -37,19 +32,14 @@ typedef struct ubPrm_type {
 
 	int contour;
 
-	ubDarkPrm_type	d;
+	//ubDarkPrm_type	d;
 
 } ubPrm_type;
 
 
 
 
-typedef	struct mFrame_type {
-	image_type *im;
 
-	cln_type *cln;
-
-} mFrame_type;
 
 
 
@@ -148,10 +138,9 @@ protected:
 	int	ProcessDynamicMask();
 
 
-	int TestDrakness( image_type *yim );
+
 	
 	int	ReadPrm( char *inFile );
-	int ReadPrmDarkTag( ubDarkPrm_type *d, struct xmlTag_type *pTag );
 
 
 	class CUnBackground *m_unBackground;
@@ -187,7 +176,6 @@ protected:
 	image_type	*m_bim;
 	int	m_nc[2];
 	
-	image_type	*m_bimDx;
 
 	image_type	*m_bimC;
 

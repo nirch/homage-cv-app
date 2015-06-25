@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		54B9871F1B3AFD410012387E /* HrEffectMaskGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B9871B1B3AFD410012387E /* HrEffectMaskGif.cpp */; };
+		54B987201B3AFD410012387E /* HrEffectAlignment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B9871D1B3AFD410012387E /* HrEffectAlignment.cpp */; };
 		6DC2090F3D3440DEBD09775B /* HrEffectPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF45EF48597F44E4B177BA5E /* HrEffectPose.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		7436A85718894C0397EA4822 /* HrEffectMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		80D0D51F86444963B3D1B413 /* HrOutputI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */; settings = {COMPILER_FLAGS = ""; }; };
@@ -26,6 +28,10 @@
 		3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectI.cpp; path = HrEffect/HrEffectI.cpp; sourceTree = SOURCE_ROOT; };
 		3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrOutputI.cpp; path = HrOutput/HrOutputI.cpp; sourceTree = SOURCE_ROOT; };
 		542606E4854441F3BD28ECD3 /* HomageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomageRenderer.h; sourceTree = SOURCE_ROOT; };
+		54B9871B1B3AFD410012387E /* HrEffectMaskGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectMaskGif.cpp; path = HrEffect/HrEffectMaskGif.cpp; sourceTree = "<group>"; };
+		54B9871C1B3AFD410012387E /* HrEffectMaskGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectMaskGif.h; path = HrEffect/HrEffectMaskGif.h; sourceTree = "<group>"; };
+		54B9871D1B3AFD410012387E /* HrEffectAlignment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectAlignment.cpp; path = HrEffect/HrEffectAlignment.cpp; sourceTree = "<group>"; };
+		54B9871E1B3AFD410012387E /* HrEffectAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectAlignment.h; path = HrEffect/HrEffectAlignment.h; sourceTree = "<group>"; };
 		5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrSourceGif.cpp; path = HrSource/HrSourceGif.cpp; sourceTree = SOURCE_ROOT; };
 		6E5946CEA0A94BB3931BE656 /* HrOutputGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputGif.h; path = HrOutput/HrOutputGif.h; sourceTree = SOURCE_ROOT; };
 		7A7DF00408684FF99F6257F5 /* HrSourceGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrSourceGif.h; path = HrSource/HrSourceGif.h; sourceTree = SOURCE_ROOT; };
@@ -67,6 +73,10 @@
 		8B1E1C5AC29749E1948F4173 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				54B9871B1B3AFD410012387E /* HrEffectMaskGif.cpp */,
+				54B9871C1B3AFD410012387E /* HrEffectMaskGif.h */,
+				54B9871D1B3AFD410012387E /* HrEffectAlignment.cpp */,
+				54B9871E1B3AFD410012387E /* HrEffectAlignment.h */,
 				C81184561E014C9197D0FE67 /* HomageRenderer.cpp */,
 				3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */,
 				1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */,
@@ -162,10 +172,12 @@
 			files = (
 				F29186AFF9704B59A5D9A1AE /* HomageRenderer.cpp in Sources */,
 				B146982E045748D2B30B4BA3 /* HrEffectI.cpp in Sources */,
+				54B987201B3AFD410012387E /* HrEffectAlignment.cpp in Sources */,
 				7436A85718894C0397EA4822 /* HrEffectMask.cpp in Sources */,
 				6DC2090F3D3440DEBD09775B /* HrEffectPose.cpp in Sources */,
 				5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */,
 				80D0D51F86444963B3D1B413 /* HrOutputI.cpp in Sources */,
+				54B9871F1B3AFD410012387E /* HrEffectMaskGif.cpp in Sources */,
 				106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */,
 				CEE063DFF96A4B32A699CDE1 /* HrSourceI.cpp in Sources */,
 			);

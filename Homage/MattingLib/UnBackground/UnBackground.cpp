@@ -28,6 +28,8 @@
 
 #include "bImage.h"
 
+#include "../UnBackgroundM/UnBackgroundM.h"
+
 
 int	image1_mask_sbA( image_type *im, sbA_type *as );
 
@@ -47,18 +49,27 @@ CUnBackground::CUnBackground()
 
 	m_prm = NULL;
 
-	m_bimDx = NULL;
 
 	m_ac = NULL;
 
 	m_apt = NULL;
 	m_imMask = NULL;
 
+
+	m_unBackgroundM = NULL;
+
 	gpTime_init( &m_gTime );
 }
 
 CUnBackground::~CUnBackground()
 {
+
+	if( m_unBackgroundM != NULL ){
+		delete m_unBackgroundM;
+		m_unBackgroundM = NULL;
+	}
+
+
 	if( m_ac != NULL ){
 		clnA_destroy( m_ac );
 		m_ac = NULL;
@@ -75,10 +86,7 @@ CUnBackground::~CUnBackground()
 		m_bim = NULL;
 	}
 
-	if( m_bimDx != NULL ){
-		image_destroy( m_bimDx, 1 );
-		m_bimDx = NULL;
-	}
+
 
 	if( m_bimD != NULL ){
 		image_destroy( m_bimD, 1 );
@@ -137,7 +145,9 @@ int	CUnBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
 
 
 
+	m_unBackgroundM = new CUnBackgroundM();
 
+	m_unBackgroundM->Init( xmlFile, ctrFile, width, height );
 
 
 	return( 1 );
@@ -251,9 +261,17 @@ int	ret;
 		else
 			m_state = -11;
 
+
+		m_unBackgroundM->Process( sim );
+
+		m_iHead = 1;
+		m_bim = m_unBackgroundM->GetBim( m_bim );
+
+		//m_state = m_unBackgroundM->GetState();
+
 		//fprintf( stdout, "State: %d\n", m_state );
 		GPTRACE( (3, "Background: %d\n", m_state ) );
-		return( -1 );
+		return( 1 );
 	}
 
 

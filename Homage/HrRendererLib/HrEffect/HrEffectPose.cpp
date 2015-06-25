@@ -214,13 +214,20 @@ lt2_affine_setR( lt2_type *lt, float x0, float y0, float dx, float dy, float sca
 	//}
 
 
+	scale = 1.0 / scale;
+
+	// dx -= 120;
+	// dy -= 120
 
 	lt->a0 = scale * m.a00;
 	lt->b0 = scale * m.a01;
-	lt->c0 = -lt->a0 *x0 - lt->b0 *y0 +x0 + dx;
+//	lt->c0 = -lt->a0 *x0 - lt->b0 *y0 + dx;
+	lt->c0 = -lt->a0 *dx - lt->b0 *dy + x0;
+
 	lt->a1 = scale * m.a10;
 	lt->b1 = scale * m.a11;
-	lt->c1 = -lt->a1 *x0 - lt->b1 *y0 +x0 + dx;
+//	lt->c1 = -lt->a1 *x0 - lt->b1 *y0 + dy;
+	lt->c1 = -lt->a1 *dx - lt->b1 *dy + y0;
 
 #ifdef _TEST
 	for( i = 0 ; i < 4 ; i++ ){

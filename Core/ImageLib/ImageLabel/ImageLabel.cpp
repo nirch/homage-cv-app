@@ -96,6 +96,23 @@ imageLabel_bigest( imageLabel_type *abw, int color )
 }
 
 
+int
+imageLabel_pixel_id( imageLabel_type *abw, int i0, int j0 )
+{
+	if( abw->im->depth == 4 ){
+		u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0 );
+
+		return( (int )*sp );
+	}
+
+	if( abw->im->depth == 2 ){
+		u_short *sp = (u_short *)IMAGE_PIXEL( abw->im, i0, j0 );
+
+		return( (int )*sp );
+	}
+
+	return( -1 );
+}
 
 int
 imageLabel_print( imageLabel_type *abw, FILE *fp )

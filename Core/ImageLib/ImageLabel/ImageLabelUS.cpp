@@ -377,6 +377,37 @@ imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB )
 
 
 
+void
+imageLabelUS_set_boundary( imageLabel_type *abw )
+{
+	short	*sp;
+	int	i,	j;
+
+	image_type *im = abw->im;
+
+	for( i = 0 ; i < abw->nA ; i++ )
+		abw->a[i].boundary = 0;
+
+	sp = (short *)im->data;
+	for( j = 0 ; j < im->column ; j++, sp++ )
+		abw->a[*sp].boundary = 1;
+
+
+	sp = (short *)IMAGE_PIXEL( im, im->height-1, 0 );
+	for( j = 0 ; j < im->column ; j++, sp++ )
+		abw->a[*sp].boundary = 3;
+
+
+	sp = (short *)IMAGE_PIXEL( im, 0, 0 );
+	for( i = 0 ; i < im->row ; i++, sp += im->width )
+		abw->a[*sp].boundary = 1;
+
+
+	sp = (short *)IMAGE_PIXEL( im, 0, im->width-1 );
+	for( i = 0 ; i < im->row ; i++, sp += im->width )
+		abw->a[*sp].boundary = 2;
+}
+
 
 void
 imageLabelUS_value( imageLabel_type *abw, image_type *sim )

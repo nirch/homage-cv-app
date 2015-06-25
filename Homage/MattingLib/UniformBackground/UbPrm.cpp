@@ -21,10 +21,6 @@ ubPrm_alloc()
 
 	prm->fillBlobAll = 0;
 
-//	prm->adjustContour = 0;
-
-	prm->dx = 8;
-	prm->av = 4;
 
 	prm->enableEdge = 1;
 
@@ -35,11 +31,7 @@ ubPrm_alloc()
 	prm->contour = 1;
 
 
-	prm->d.T0 = 64;
-	prm->d.F0 = 0.75;
 
-	prm->d.T1 = 144;
-	prm->d.F1 = 0.9;
 
 	return( prm );
 }
@@ -100,23 +92,8 @@ CUniformBackground::ReadPrm( char *inFile )
 			continue;
 		}
 
-		//if ( (gp_stricmp(tag->name, "AdjustContour") == 0) ){
-		//	m_prm->adjustContour = atoi( tag->data );
 
-		//	continue;
-		//}
 
-		if ( (gp_stricmp(tag->name, "Background-Dx") == 0) ){
-			m_prm->dx = atoi( tag->data );
-
-			continue;
-		}
-
-		if ( (gp_stricmp(tag->name, "Background-Av") == 0) ){
-			m_prm->av = atoi( tag->data );
-
-			continue;
-		}
 
 		if ( (gp_stricmp(tag->name, "Enable-Edge") == 0) ){
 			m_prm->enableEdge = atoi( tag->data );
@@ -138,10 +115,6 @@ CUniformBackground::ReadPrm( char *inFile )
 			continue;
 		}
 
-		if ( (gp_stricmp(tag->name, "Dark") == 0) ){
-			ReadPrmDarkTag( &m_prm->d, tag );
-			continue;
-		}
 	}
 
 
@@ -155,36 +128,3 @@ CUniformBackground::ReadPrm( char *inFile )
 }
 
 
-
-int
-	CUniformBackground::ReadPrmDarkTag( ubDarkPrm_type *d, xmlTag_type *pTag )
-{
-xmlTag_type	*tag;
-
-
-	for( tag = pTag->firstChild ; tag != NULL ; tag = tag->next ){
-
-
-		if ( (gp_stricmp(tag->name, "T0") == 0) ){
-			d->T0 = atoi( tag->data );
-			continue;
-		}
-
-		if ( (gp_stricmp(tag->name, "F0") == 0) ){
-			d->F0 = atof( tag->data );
-			continue;
-		}
-
-		if ( (gp_stricmp(tag->name, "T1") == 0) ){
-			d->T1 = atoi( tag->data );
-			continue;
-		}
-
-		if ( (gp_stricmp(tag->name, "F1") == 0) ){
-			d->F1 = atof( tag->data );
-			continue;
-		}
-	}
-
-	return( 1 );
-}

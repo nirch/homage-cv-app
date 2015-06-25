@@ -122,7 +122,7 @@ int	id1,	id,	NBW;
 //	im  = image_recreate( im, sim->height, sim->width, 4, 1 );
 	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
 
-	NBW = sim->row*sim->column/8;
+	NBW = sim->row*sim->column/4;
 	bw = *tbw;
 	if( bw == NULL )
 		bw = (bwLabel_type *)malloc( NBW * sizeof(bwLabel_type) ); //sim->row*sim->column*sizeof(bwLabel_type)/16 );
@@ -795,7 +795,7 @@ image_type *
 
 
 
-	im = image_alloc( abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
+	im = image_realloc( im, abw->im->width, abw->im->height, 1, IMAGE_TYPE_U8, 1 );
 
 
 	u_char *tp = im->data;
@@ -901,18 +901,35 @@ imageLabelUI_value_rgb( imageLabel_type *abw, image_type *sim )
 	}
 
 
-
-	u_char *sp = sim->data;
-	u_int *bp = abw->im->data_ui;
-	for( i = 0 ; i < abw->im->height ; i++ ){
-		for( j = 0 ; j < abw->im->width ; j++, bp++, sp += 3 ){
-			bw = &abw->a[*bp];
-			bw->no++;
-			bw->R += sp[0];
-			bw->G += sp[1];
-			bw->B += sp[2];
+	if( IMAGE_TYPE(sim) == IMAGE_TYPE_U8 ){
+		u_char *sp = sim->data;
+		u_int *bp = abw->im->data_ui;
+		for( i = 0 ; i < abw->im->height ; i++ ){
+			for( j = 0 ; j < abw->im->width ; j++, bp++, sp += 3 ){
+				bw = &abw->a[*bp];
+				bw->no++;
+				bw->R += sp[0];
+				bw->G += sp[1];
+				bw->B += sp[2];
+			}
 		}
 	}
+
+	else 
+		if( IMAGE_TYPE(sim) == IMAGE_TYPE_U16 ){
+			u_short *sp = sim->data_us;
+			u_int *bp = abw->im->data_ui;
+			for( i = 0 ; i < abw->im->height ; i++ ){
+				for( j = 0 ; j < abw->im->width ; j++, bp++, sp += 3 ){
+					bw = &abw->a[*bp];
+					bw->no++;
+					bw->R += sp[0];
+					bw->G += sp[1];
+					bw->B += sp[2];
+				}
+			}
+		}
+
 
 
 
@@ -1338,4 +1355,62 @@ image_type *
 	}
 
 	return( im );
+}
+
+
+
+void
+imageLabelUI_image1_set( imageLabel_type *abw, int i0, int color, image_type *tim )
+{
+	int	i,	j;
+	u_int	*tp;
+
+
+
+	image_type *im = abw->im;
+	bwLabel_type *bw = &abw->a[i0];
+
+
+
+	for( i = bw->b.y0 ; i <= bw->b.y1 ; i++ ){
+		tp = (u_int *)IMAGE_PIXEL( im, i, bw->b.x0 );
+		u_char *sp = (u_char *)IMAGE_PIXEL( tim, i, bw->b.x0 );
+
+		for( j = bw->b.x0 ; j <= bw->b.x1 ; j++, tp++, sp++){
+
+			if( *tp != bw->id )	continue;
+
+			*sp = color;
+		}
+	}
+}
+
+
+
+void
+imageLabelUI_imageUS3_set( imageLabel_type *abw, int i0, int R, int G, int B, image_type *tim )
+{
+	int	i,	j;
+	u_int	*tp;
+
+
+
+	image_type *im = abw->im;
+	bwLabel_type *bw = &abw->a[i0];
+
+
+
+	for( i = bw->b.y0 ; i <= bw->b.y1 ; i++ ){
+		tp = (u_int *)IMAGE_PIXEL( im, i, bw->b.x0 );
+		u_short *sp = (u_short *)IMAGE_PIXEL( tim, i, bw->b.x0 );
+
+		for( j = bw->b.x0 ; j <= bw->b.x1 ; j++, tp++, sp += 3 ){
+
+			if( *tp != bw->id )	continue;
+
+			sp[0] = R;
+			sp[1] = G;
+			sp[2] = B;
+		}
+	}
 }

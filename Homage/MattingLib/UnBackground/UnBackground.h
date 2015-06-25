@@ -161,7 +161,7 @@ public:
 
 
 	// old algorithm
-	image_type *m_bimDx; // old
+	class CUnBackgroundM *m_unBackgroundM;
 
 	gpTime_type m_gTime;
 

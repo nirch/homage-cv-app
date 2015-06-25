@@ -82,7 +82,7 @@ int bwLabel_color( imageLabel_type *abw, int i0, color_type *c );
 plnA_type *
 imageLabelUI_plnA( imageLabel_type *abw, plnA_type *apl )
 {
-	int	i;
+	int	i,	j;
 
 	int n = imageLabel_no( abw );
 	
@@ -104,6 +104,15 @@ imageLabelUI_plnA( imageLabel_type *abw, plnA_type *apl )
 	}
 
 
+	for( i = 0, j = 0 ; i < apl->nA ; i++ ){
+		if( apl->a[i]->len == 0 ){
+			pln_destroy( apl->a[i] );
+			continue;
+		}
+
+		apl->a[j++] = apl->a[i];
+	}
+	apl->nA = j;
 
 	// Set Color
 	for( i = 0 ; i < apl->nA ; i++ ){

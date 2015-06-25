@@ -131,7 +131,7 @@ cln_type *cln;
 		agpLevel_contour_1( im, i, j, side, gapp );
 		GAPP_DUMP( gapp, "gapp", no, NULL );
 
-		if( gapp->no < 64 )	continue;
+		if( gapp->no < 48 )	continue;
 
 
 		pln_type *pl;
@@ -361,6 +361,12 @@ gapp_type	*ga;
 
 
 	ga = gapp_breakpoint( gapp,  4 );
+
+	int i;
+	for( i = 0; i < ga->no ; i++ ){
+		ga->tang[i].x = 1.0;
+		ga->tang[i].y = 0;
+	}
 
 
 

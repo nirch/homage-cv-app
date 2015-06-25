@@ -36,7 +36,13 @@ typedef struct bwLabel_type {
 	int	boundary;
 	float	av;
 	float	var;
-	int		R,	G,	B;
+	union {
+		struct {
+			int		R,	G,	B;
+		};
+		int rgb[3];
+	};
+	
 
 	int existence;
 
@@ -72,6 +78,9 @@ void	image2_bwLabel_remove_boundary( image_type *im, bwLabel_type *bw );
 void	imageLabel2_set_id( image_type *im, bwLabel_type *bw );
 
 void	imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB );
+
+void	imageLabelUS_set_boundary( imageLabel_type *abw );
+
 
 void	imageLabel2_set_value( image_type *sim, image_type *im, bwLabel_type *abw, int nBw );
 

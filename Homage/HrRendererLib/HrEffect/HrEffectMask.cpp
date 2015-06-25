@@ -15,9 +15,8 @@
 #include "ImageDump/ImageDump.h"
 
 #ifndef __APPLE__
-    #include "Png/PngCodec/Png/ImageReadPng.h"
+#include "Png/PngCodec/Png/ImageReadPng.h"
 #endif
-
 
 
 #include "HrEffectMask.h"
@@ -78,22 +77,25 @@ int CHrEffectMask::Init( image_type *im )
 
 }
 
+
+
 int CHrEffectMask::Init( char *file )
 {
 #ifndef __APPLE__
-    image_type *im = image_read_png_file( file );
-    if( im == NULL )
-        return( -1 );
+	image_type *im = image_read_png_file( file );
+	if( im == NULL )
+		return( -1 );
 
-    if( im->depth != 1 ){
-        m_alphaIm = image1_from( im, NULL );
-        image_destroy( im, 1 );
-        return( 1 );
-    }
+	if( im->depth != 1 ){
+		m_alphaIm = image1_from( im, NULL );
+		image_destroy( im, 1 );
+		return( 1 );
+	}
 
-    m_alphaIm = im;
+	m_alphaIm = im;
 
-    return( 1 );
+	return( 1 );
+
 #endif
 }
 
