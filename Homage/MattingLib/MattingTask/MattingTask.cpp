@@ -29,7 +29,7 @@
 
 #include "../UniformBackground/UniformBackground.h"
 
-//#include "Png/PngCodec/Png/ImageWritePng.h"
+#include "PngCodec/PngWriter/PngWriter.h"
 
 
 
@@ -64,6 +64,12 @@ CMattingTask::CMattingTask()
 	m_sim = NULL;
 
 	m_dumpDir[0] = 0;
+
+	m_frameRate = 15;
+
+
+	m_recorder = NULL;
+	m_record = 0;
 
 
 //	vTimer_init( &m_timer, 66 );
@@ -196,7 +202,7 @@ int CMattingTask::StartTask()
 {
 	m_process = 1;
 
-	vTimer_init( &m_timer, 66.66 );
+	vTimer_init( &m_timer, 1000.0/m_frameRate );//66.66 );
 
 	StartThread();
 
@@ -209,6 +215,13 @@ int CMattingTask::StartTask()
 
 int CMattingTask::StopTask()
 {
+	GPLOGF(("<CMattingTask: Stop Task ... ") );
+
+	if( m_process < 0 ){
+		GPLOGF((" m_process == -1 >\n") );
+		return( 1 );
+	}
+
 	m_process = 0;
 
 	while( m_process >= 0 )
@@ -216,7 +229,7 @@ int CMattingTask::StopTask()
 
 
 
-	GPLOGF(("CMattingTask: Stop Task\n") );
+	GPLOGF((" stop task succuss>\n") );
 
 	return( 1 );
 }
@@ -260,7 +273,7 @@ int CMattingTask::Process()
 //	GPLOGF(("."));
 
 	gpTime_stop( &m_tCapture );
-	GPLOG_TIMEM(( "\nHiPark-Capture", &m_tCapture, 16) );
+	GPLOG_TIMEM(( "m_imageAcquisition->Get", &m_tCapture, 16) );
 
 	m_iFrame++;
 
@@ -278,15 +291,18 @@ int CMattingTask::Process()
 		m_sim = image_sample2( im, m_sim );
 	else m_sim = image_make_copy( im, m_sim );
 
+
+	Record( m_sim );
 	 
 	int operation = m_operation;
 
-	GPLOGF(("Process: %d \n", operation ) );
+	GPLOGF(("< Process: %d ", operation ) );
 
 	switch( operation ){
 	case 1:
+
 		DumpImage( m_sim, "dump-Background.bmp" );
-//		m_matting->ProcessBackground( m_sim, m_iFrame );
+
 		m_matting->ProcessBackgroundState( m_sim, m_iFrame );
 	break;
 
@@ -296,8 +312,12 @@ int CMattingTask::Process()
 		break;
 	}
 
+	GPLOGF((" 1" ) );
+
 
 	SetOutput( operation, &m_vf, m_sim );
+
+	GPLOGF((">" ) );
 	
 	gpTime_stop( &m_tProcess );
 
@@ -403,6 +423,8 @@ int	CMattingTask::GetOutput( u_char *data, int *nData )
 int	CMattingTask::GetOutput( u_char *data, int *nData, u_char *data1, int *nData1 )
 {
 
+	if( m_process < 0 )
+		return( -1 );
 
 	gpTime_start( &m_tGet );
 
@@ -445,33 +467,45 @@ int	CMattingTask::GetOutput( u_char *data, int *nData, u_char *data1, int *nData
 
 
 
-#ifdef _AA_
-int	CMattingTask::GetOutputM( u_char *data, int *nData, int afl[] )
+
+
+int	CMattingTask::Record( image_type *im )
 {
-	if( m_vf.iFrame <= 0 )
-		return( -1 );
 
-	gpTime_start( &m_tGet );
+	GPLOGF(("< Record  " ));
 
+	if( m_record == 1 && m_recorder != NULL )
+		m_recorder->WriteFrame( im );
 
-	m_mutex->Lock();
-
-	*nData = m_vf.im->width * m_vf.im->height * 4;
-	memcpy( data, m_vf.im->data, *nData );
-
-	int	i;
-	for( i = 0 ; i < m_vf.nFl ; i++ )
-		afl[i] = m_vf.afl[i];
-
-	m_vf.iFrame = -1;
-
-	m_mutex->Unlock();
-
-
-	gpTime_stop( &m_tGet );
-	GPLOG_TIMEM(( "imGlassesPlaer-GET", &m_tGet, 16) );
-
-
-	return( m_vf.status );
+	GPLOGF((">" ));
+	return( 1 );
 }
-#endif
+
+int	CMattingTask::StartRecord( char *dir )
+{
+	GPLOGF(("<start recorde -- " ));
+
+	if( m_recorder == NULL ){
+
+		m_recorder = new CPngWriter();
+
+		m_recorder->Open( 100, (char *)dir );
+	}
+
+	m_record = 1;
+
+	GPLOGF((" >"));
+	return( 1 );
+}
+
+
+int	CMattingTask::StopRecord()
+{
+	GPLOGF(("<Stop recorde -- " ));
+
+	m_record = 0;
+
+	GPLOGF((" >"));
+
+	return( 1 );
+}

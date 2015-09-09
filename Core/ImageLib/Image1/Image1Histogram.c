@@ -60,6 +60,30 @@ int	i,	j;
 
 
 void
+image1M_histogramS( image_type *im, image_type *mim, int x0, int y0, int h[] )
+{
+	u_char	*sp,	*mp;
+	int	i,	j;
+
+
+
+
+	for( i = 0 ; i < 256 ; i++ )	h[i] = 0;
+
+
+	mp = mim->data;
+	for( i = 0 ; i < mim->row ; i++ ){
+		sp = IMAGE_PIXEL( im, i+y0, x0 );
+		for( j = 0 ; j < mim->column ; j++, sp++, mp++ ){
+			if( *mp != 0 )
+				h[*sp] ++;
+		}
+	}
+}
+
+
+
+void
 image1_range( image_type *im, box2i *box, float h0, float h1, float *a0, float *a1 )
 {
 	int	h[256];

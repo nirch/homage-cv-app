@@ -60,6 +60,9 @@ void	image2_print( image_type *sim, int i0, int j0, int n );
 	// ImageDraw.c
 void	image4_draw_point( image_type *im, int x, int y, int color );
 
+void	image4_draw_pointA( image_type *im, int x, int y, int color );
+
+
 void	image4_draw_circle( image_type *sim, float x, float y, float r, int color );
 
 void	image_mask_circle( image_type *im, float x, float y, float r, int color );
@@ -74,6 +77,8 @@ void	image_draw_line( image_type *im, float x0, float y0, float x1, float y1, in
 
 void	image4_draw_line( image_type *im, float x0, float y0, float x1, float y1, int color );
 
+
+
 void	image_draw_strip( image_type *im, vec2d *p0, vec2d *p1, float tm, float um, int color );
 
 
@@ -82,6 +87,10 @@ void	image4_draw_skeleton( image_type *im, vec2d p[], int color, int color1 );
 
 void	image_draw_ellipse( image_type *im, float x, float y,
 				   float r1, float r2, float angle, int color );
+
+
+void	image1_draw_ellipse_fill( image_type *im, float x0, float y0, float Rx, float Ry, float angle );
+
 
 
 #ifdef __cplusplus

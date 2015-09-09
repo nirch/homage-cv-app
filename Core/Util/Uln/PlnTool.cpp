@@ -5,6 +5,10 @@
 #include <math.h>
 #include "Uigp/igp.h"
 
+#ifdef _DEBUG
+#define _DUMP
+#endif
+
 #ifdef _WIN32
 #define _GPMEMORY_LEAK 
 #endif
@@ -38,8 +42,10 @@ pln_alloc( int no )
 		pl->link = lnL_alloc( no );
 
 	pl->color[0].val = pl->color[1].val = 0xFF000000;
+
 	pl->height = 0;
 	pl->size = 0;
+	pl->qulity = 0;
 
 	pl->e = NULL;
 
@@ -60,6 +66,8 @@ pln_type *pl;
 
 	pl = pln_alloc(0);
 	*pl = *spl;
+
+	pl->ac = NULL;
 
 	pl->link = lnL_copy( spl->link, NULL );
 	pl->e = NULL;
@@ -202,6 +210,11 @@ plnA_destroy_pl( plnA_type *apl, int i0 )
 
 	apl->a[i0] = NULL;
 }
+
+
+
+
+
 
 
 pln_type * 
@@ -935,6 +948,38 @@ pln_end_point( pln_type *pl, vec2d *p )
 
 
 
+void
+pln_remove_zero( pln_type *pl )
+{
+	ln_type	*l,	*l0,	*nl;
+
+
+	for( l = pl->link, l0 = NULL ; l != NULL ; ){
+		nl = l->p[1];
+
+		if( l->len > 0 ){
+			l0 = l;
+			l = nl;
+			continue;
+		}
+
+
+		if( l0 != NULL ){
+			free( l );
+			l0->p[1] = nl;
+			if( nl != NULL )
+				nl->p[0] = l0;
+
+			l = nl;
+			continue;
+		}
+
+		pl->link = nl;
+		l = nl;
+	}
+}
+
+
 
 void
 pln_gt2p( pln_type *pl, float gt, vec2f_type *p )
@@ -1113,6 +1158,46 @@ pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md )
 
 	return( 1 );
 }
+
+
+
+int
+	pln_distance_plnM( pln_type *bpl, pln_type *pl, float *m0, float *m1 )
+{
+	float gt,	dt;
+	vec2f_type p;
+	dt = 2.0;
+
+	dPln_type d;
+
+	*m0 = *m1 = 0;
+	int	m = -1;
+
+	for( gt = 0 ; gt < pl->len ; gt += dt ){
+
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_distance( bpl, &p, &d ) < 0 )
+			continue;
+
+		if( d.gt < 0 || d.gt > bpl->len )
+			continue;
+
+		if( m < 0 ){
+			*m0 = *m1 = d.u;
+			m = 1;
+			continue;
+		}
+
+		if( d.u < *m0 )	*m0 = d.u;
+		else if( d.u > *m1 )	*m1 = d.u;
+	}
+
+
+
+	return( m );
+}
+
 
 
 int
@@ -1613,6 +1698,8 @@ pln_pv_d( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl )
 
 	
 	pln_sample( pl, gt0, dt, n, 0, apt );
+
+	PT2DA_DUMP( apt, "pl_vp", 1, NULL );
 
 	pt2d_approximate_line_vl( apt, 0, apt->nP, vl );
 

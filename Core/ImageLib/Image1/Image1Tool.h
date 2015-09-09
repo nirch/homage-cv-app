@@ -76,6 +76,9 @@ image_type *	image1_sample( image_type *sim, int d, image_type *im );
 image_type *	image1B_sample( image_type *sim, box2i_type *b, int d, image_type *im );
 
 
+image_type *	image1_sample2x( image_type *sim, image_type *im );
+
+
 //image_type *	image1_sample_column( image_type *sim, int si0, int d, image_type *im, int i0 );
 
 
@@ -108,6 +111,12 @@ image_type *	image1_interpolationS( image_type *sim,
 					 float x0, float y0, int width, int height,
 					 float dx, float dy, float s,
 					 image_type *im );
+
+
+int image1_interpolation_lt2_test_in( image_type *sim, lt2_type *lt,
+					int x0, int y0,
+					int width, int height );
+
 
 image_type *	image1_interpolation_lt2( image_type *sim, struct lt2_type *lt,
 					int x0, int y0,
@@ -211,10 +220,19 @@ image_type *	image1_binaryM( image_type *sim, int T, image_type *im );
 
 void	image1_boundary_set( image_type *im, int val );
 
+int	image1_boundary_nZero( image_type *im );
+
+
 
 void	image1_threshold( image_type *sim, int T );
 
+image_type *	image1_threshold1( image_type *sim, int T, image_type *im );
+
+
 image_type *image1_threshold2( image_type *sim, int T0, int T1, image_type *im );
+
+image_type *imageS1_threshold_in( image_type *sim, int T0, int T1, image_type *im );
+
 
 image_type *	image1_threshold_in( image_type *sim, int T0, int T1, image_type *im );
 
@@ -226,6 +244,9 @@ image_type *	imageM_inverse( image_type *sim, image_type *im );
 //void	image1_mask( image_type *sim, image_type *mim );
 
 int		image1_mask_no( image_type *sim );
+
+int	image1_mask_append( image_type *sim, image_type *im );
+
 
 void	image1_set( image_type *sim, box2i *b, int val );
 
@@ -291,6 +312,9 @@ image_type *	image1_median3( image_type *sim, image_type *im );
 int	image1_histogram( image_type *im, box2i *box, int h[], int fclear );
 
 void	image1M_histogram( image_type *im, image_type *mim, int h[] );
+
+void	image1M_histogramS( image_type *im, image_type *mim, int x0, int y0, int h[] );
+
 
 void	image1_range( image_type *im, box2i *box, float h0, float h1, float *a0, float *a1 );
 
@@ -384,6 +408,12 @@ image_type *	image1_mask_cln( struct cln_type *cln, int width, int height, int f
 
 image_type *	image1_mask_pln( struct pln_type *pl, int width, int height, image_type *im );
 
+
+
+	// ImageEigen.cpp
+image_type *	image1_eigen8( image_type *yim, image_type *im );
+
+image_type *	image1_eigen8E( image_type *yim, image_type *im );
 
 
 #ifdef __cplusplus

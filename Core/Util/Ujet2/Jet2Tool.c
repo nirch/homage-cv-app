@@ -4,6 +4,10 @@
 #include	<stdio.h>
 #include	<math.h>
 
+#ifdef WIN32
+#pragma warning(disable :4789)
+#endif
+
 #include	"Uigp/igp.h"
 #include	"Jet2Type.h"
 

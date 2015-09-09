@@ -183,6 +183,39 @@ int	i;
 
 
 
+void
+cst_put_int( cst_type *cst, int a )
+{
+	char	c[4];
+
+	c[0] = (((unsigned int) a)>>24) & 0xff;
+	c[1] = (((unsigned int) a)>>16) & 0xff;
+	c[2] = (((unsigned int) a)>>8) & 0xff;
+	c[3] = (((unsigned int) a)) & 0xff;
+
+	cst_put_buffer( cst, c, 4 );
+}
+
+
+int
+cst_get_int( cst_type *cst )
+{
+	u_char	c[4];
+	int	a;
+
+	cst_get_buffer( cst, c, 4 );
+
+
+	a = (((unsigned int) c[0])<<24) +
+		(((unsigned int) c[1])<<16) +
+		(((unsigned int) c[2])<<8) +
+		(((unsigned int) c[3]));
+
+	return( a );
+}
+
+
+
 cst_type *
 cst_make_copy( cst_type *cst )
 {
@@ -287,7 +320,7 @@ char	*buf;
 void
 cst_rewind_data( cst_type *cst )
 {
-
+int	n;
 	if( cst->wp == cst->rp ){
 		cst->wp = cst->rp = cst->data;
 		return;
@@ -295,8 +328,15 @@ cst_rewind_data( cst_type *cst )
 
 	if( cst->rp != cst->data ){
 
-		memcpy( cst->data, cst->rp, cst->wp - cst->rp );
-		cst->wp -= (cst->rp - cst->data);
+		n = cst->wp - cst->rp;
+
+		memcpy( cst->data, cst->rp, n );
 		cst->rp = cst->data;
+		cst->wp = cst->rp + n;
+
+
+		//memcpy( cst->data, cst->rp, cst->wp - cst->rp );
+		//cst->wp -= (cst->rp - cst->data);
+		//cst->rp = cst->data;
 	}
 }

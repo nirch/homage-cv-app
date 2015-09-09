@@ -821,3 +821,21 @@ matrix4A_transform( matrix4A_type *oM, matrix4_type *T, matrix4A_type *tM )
 
 	return( tM );
 }
+
+
+
+// a*X = y;
+void
+	matrix4_linaer_equation_add( matrix4_type *m, double D[], double X[], double y )
+{
+	int	i,	j;
+
+	for( i = 0 ; i < 4 ; i++  ){
+
+		for( j = 0 ; j < 4 ; j++ ){
+			m->a[i][j] += X[j] *X[i];
+		}
+
+		D[i] += y*X[i];
+	}
+}

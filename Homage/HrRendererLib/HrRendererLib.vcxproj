@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EE156E09-CED7-4538-9B20-3D349938840D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MattingLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_GPLOG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\Core\ImageLib;..\..\Core\Util;..\..\Video;..\..\Image;$(Z3RD)\jni;$(Z3RD)\jni\win32;..\..\Image\Png</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_GPLOG;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\Core\ImageLib;..\..\Core\Util;..\..\Video;..\..\Image</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HomageRenderer.cpp" />
+    <ClCompile Include="HrEffect\HrEffectAlignment.cpp" />
+    <ClCompile Include="HrEffect\HrEffectI.cpp" />
+    <ClCompile Include="HrEffect\HrEffectMask.cpp" />
+    <ClCompile Include="HrEffect\HrEffectMaskGif.cpp" />
+    <ClCompile Include="HrEffect\HrEffectPose.cpp" />
+    <ClCompile Include="HrOutput\HrOutputGif.cpp" />
+    <ClCompile Include="HrOutput\HrOutputGreenWin.cpp" />
+    <ClCompile Include="HrOutput\HrOutputI.cpp" />
+    <ClCompile Include="HrOutput\HrOutputJava.cpp" />
+    <ClCompile Include="HrOutput\HrOutputPng.cpp" />
+    <ClCompile Include="HrSource\HrSourceGif.cpp" />
+    <ClCompile Include="HrSource\HrSourceGreenWin.cpp" />
+    <ClCompile Include="HrSource\HrSourceI.cpp" />
+    <ClCompile Include="HrSource\HrSourceLive.cpp" />
+    <ClCompile Include="HrSource\HrSourcePng.cpp" />
+    <ClCompile Include="HrSource\HrSourcePngWin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HomageRenderer.h" />
+    <ClInclude Include="HrEffect\HrEffectAlignment.h" />
+    <ClInclude Include="HrEffect\HrEffectI.h" />
+    <ClInclude Include="HrEffect\HrEffectMask.h" />
+    <ClInclude Include="HrEffect\HrEffectMaskGif.h" />
+    <ClInclude Include="HrEffect\HrEffectPose.h" />
+    <ClInclude Include="HrOutput\HrOutputGif.h" />
+    <ClInclude Include="HrOutput\HrOutputGreenWin.h" />
+    <ClInclude Include="HrOutput\HrOutputI.h" />
+    <ClInclude Include="HrOutput\HrOutputJava.h" />
+    <ClInclude Include="HrOutput\HrOutputPng.h" />
+    <ClInclude Include="HrSource\HrSourceGif.h" />
+    <ClInclude Include="HrSource\HrSourceGreenWin.h" />
+    <ClInclude Include="HrSource\HrSourceI.h" />
+    <ClInclude Include="HrSource\HrSourceLive.h" />
+    <ClInclude Include="HrSource\HrSourcePng.h" />
+    <ClInclude Include="HrSource\HrSourcePngWin.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

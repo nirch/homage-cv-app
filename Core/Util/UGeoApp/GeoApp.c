@@ -83,8 +83,14 @@ int	dk,	n,	k,	no;
 
 	if ((len2 == 0) && (to == gapp->no - 1))
 		ans = gprm->err+ 1.0;
-	else	ans = ls_approx( &gapp->v[from], &gapp->tang[from],
+	else	{
+		ans = ls_approx( &gapp->v[from], &gapp->tang[from],
 			to - from + 1, gprm, &a );
+
+//		if( IS_NAN( a) )
+//			fprintf( stdout, "NaN" );
+	}
+
 
 
 
@@ -188,6 +194,9 @@ int	i;
 
 
 	length = hypot( v[no-1].x - v[0].x, v[no-1].y - v[0].y );
+
+	if( length < 0.5 && no > 32 )
+		return (1000000.13f);
 
 	asin = (v[no-1].x - v[0].x)/length;
 	acos = (v[no-1].y - v[0].y)/length;

@@ -26,8 +26,8 @@ gapp_type *gapp;
 	gapp->flag = (int *) malloc( sizeof(int)*gapp->N );
 
 	gapp->a = (float *) malloc( sizeof(float)*gapp->N );
-    
-    gapp->no = 0;
+
+	gapp->no = 0;
 
 	return( gapp );
 

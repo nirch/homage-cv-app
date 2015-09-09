@@ -3,6 +3,8 @@
 #include	"Uigp/igp.h"
 
 
+#include <windows.h>
+#include	<Winuser.h>
 
 #include "VMouseEvent.h"
 

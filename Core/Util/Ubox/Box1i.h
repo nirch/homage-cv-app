@@ -65,6 +65,7 @@ typedef struct box1i_type {
 
 
 
+void	box1i_print(  char *title, box1i_type ab[], int nP, FILE *fp );
 
 
 

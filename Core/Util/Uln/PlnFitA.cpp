@@ -22,7 +22,8 @@ static int	pln_step_1( pln_type *bpl, float gt0, float gt1, pln_type *pl, matrix
 //
 //static int	pln_fit_compare( pln_type *pl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis, float *len );
 
-int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
+//int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
+//int	plnA_fit_compareN( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
 
 int	plnA_fitT_step( plnA_type *apl, pln_type *bpl, float gt0, float gt1, lt2_type *lt );
@@ -62,6 +63,9 @@ plnA_fitT( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, floa
 
 
 	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T*s, &f->cover, &f->dis );
+
+	float dis;
+	plnA_fit_compareN( apl, bpl, gt0*s, gt1*s, T*s, &f->cover1, &dis );
 
 
 	pln_destroy( bpl );
@@ -128,6 +132,9 @@ plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float
 
 	PLNA_DUMP( apl, "fit", i, "apl" );
 	plnA_fit_compare( apl, bpl, gt0*s, gt1*s, T*s, &f->cover, &f->dis );
+
+	float dis;
+	plnA_fit_compareN( apl, bpl, gt0*s, gt1*s, T*s, &f->cover1, &dis );
 
 
 	pln_destroy( bpl );
@@ -415,6 +422,8 @@ plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT,
 			continue;
 
 
+
+
 		*dis += ABS(d.u);
 
 
@@ -431,6 +440,160 @@ plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT,
 	return( 1 );
 }
 
+
+int
+	plnA_fit_compareN( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis )
+{
+	int	n,	n1,	i;
+	vec2f_type	p;
+	dPln_type	d;
+	float	gt,	dt;
+
+	*cover = *dis = 0;
+	n = n1 = 0;
+
+	dt = 2.0;
+	for( gt = gt0 ; gt < gt1 ; gt += dt, n++ ){
+
+		pln_gt2p( bpl, gt, &p );
+
+		for( i = 0 ; i < apl->nA ; i++ ){
+
+			if( pln_distance( apl->a[i], &p, &d ) < 0 )
+				continue;
+
+
+			if( d.gt < 0 || d.gt > apl->a[i]->len )	continue;
+
+			if( ABS(d.u) > dT )	continue;
+			break;
+		}
+
+		if( i >= apl->nA )
+			continue;
+
+
+		vec2f_type	m,	T;
+		pln_gt2p( apl->a[i], d.gt, &m );
+
+		pln_tanget( bpl, gt, &T );
+		float u = T.y;
+		float v = -T.x;
+
+		vec2f_type	dp;
+		dp.x = m.x - p.x;
+		dp.y = m.y - p.y;
+
+		float t = dp.x * u + dp.y*v;
+		if( t < 0 )	t = -t;
+//		if( ABS( t) < 0.25 )	continue;
+		if( t < 0.25 )	continue;
+		
+		float w = VEC2D_INNER( dp, dp );
+		w /= t;
+
+//		if( w < 0 )	w = -w;
+
+		w -= 2;
+		if( w < 0 )	w = 0;
+
+		w = 1 / ( 1 + w );
+
+
+		*dis += ABS(d.u);
+
+
+		*cover += dt * w;
+		n1++;
+	}
+
+	if( n1 == 0 )
+		return( -1 );
+
+	*dis /= n1;
+
+	*cover /= (n*dt);
+
+	return( 1 );
+}
+
+
+
+int
+	plnA_fit_compareW( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float W, float *cover, float *dis )
+{
+	int	n,	n1,	i;
+	vec2f_type	p;
+	dPln_type	d;
+	float	gt,	dt;
+
+	*cover = *dis = 0;
+	n = n1 = 0;
+
+	dt = 2.0;
+	for( gt = gt0 ; gt < gt1 ; gt += dt, n++ ){
+
+		pln_gt2p( bpl, gt, &p );
+
+		for( i = 0 ; i < apl->nA ; i++ ){
+
+			if( pln_distance( apl->a[i], &p, &d ) < 0 )
+				continue;
+
+
+			if( d.gt < 0 || d.gt > apl->a[i]->len )	continue;
+
+			if( ABS(d.u) > dT )	continue;
+			break;
+		}
+
+		if( i >= apl->nA )
+			continue;
+
+
+		vec2f_type	m,	T;
+		pln_gt2p( apl->a[i], d.gt, &m );
+
+		pln_tanget( bpl, gt, &T );
+		float u = T.y;
+		float v = -T.x;
+
+		vec2f_type	dp;
+		dp.x = m.x - p.x;
+		dp.y = m.y - p.y;
+
+		float t = dp.x * u + dp.y*v;
+		if( t < 0 )	t = -t;
+		//		if( ABS( t) < 0.25 )	continue;
+		if( t < 0.25 )	continue;
+
+		float w = VEC2D_INNER( dp, dp );
+		w /= t;
+
+		//		if( w < 0 )	w = -w;
+
+		w -= W;
+		if( w < 0 )	w = 0;
+
+		w = 1 / ( 1 + w );
+
+
+		*dis += ABS(d.u);
+
+
+		*cover += dt * w;
+		n1++;
+	}
+
+	if( n1 == 0 )
+		return( -1 );
+
+	*dis /= n1;
+
+	*cover /= (n*dt);
+
+	return( 1 );
+}
 
 
 #ifdef _AA_

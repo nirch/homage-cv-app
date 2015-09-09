@@ -1,11 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
-UNAME := $(shell uname)
-ifeq ($(UNAME),Windows_NT)
-LOCAL_PATH := $(call  my-dir)
-else
-LOCAL_PATH := $(abspath $(call my-dir)/../Util)
-endif
+#UNAME := $(shell uname)
+
 
 include $(CLEAR_VARS)
 
@@ -14,13 +10,13 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/.
 
-$(info $(LOCAL_C_INCLUDES))
+#$(info $(LOCAL_C_INCLUDES))
 
 LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Ucamera/Pt2dApproximateAb.c \
 	./Ucamera/Pt2dApproximateLine.c \
 	./Ucamera/Pt2dApproximateLineAxB.c \
-	./Ucamera/Pt2dApproximateLinePv.c \
+	./Ucamera/Pt2dApproximateLinePv.cpp \
 	./Ucamera/Pt2dApproximatePolylink.c \
 	./Ucamera/Pt2dApproximatePolynom.c \
  	./Ucamera/Pt2dComponnet.c \
@@ -32,7 +28,8 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Ucamera/Pt2dIo.c \
 	./Ucamera/Pt2dLine.c \
 	./Ucamera/Pt2dMask.c \
-	./Ucamera/Pt2dTool.c \
+	./Ucamera/Pt2dTool.cpp \
+	./Ucamera/Pt2dFTool.cpp \
 	./Ucamera/Pt2dTriangleFilter.c \
 	./Ucamera/TriangleTool.c \
 	./UGeoApp/GappDump.c \
@@ -41,9 +38,10 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Uigp/GpDump.c \
 	./Uigp/GpMemoryLeak.c \
 	./Uigp/hyputA.c \
-	./Uln/CrPlnTool.c \
+	./Uln/Cln/ClnTool.cpp \
+	./Uln/Cln/ClnWrite.cpp \
 	./Uln/CrPlnToolN.c \
-	./Uln/Dp/DpTool.cpp \
+	./Uln/CrPlnTool.cpp \
 	./Uln/LnBox.c \
 	./Uln/LnCircle.c \
 	./Uln/LnFromGapp.c \
@@ -52,10 +50,20 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Uln/LnTool.c \
 	./Uln/LnTool1.c \
 	./Uln/LnWrite.c \
-	./Uln/PlnGroup.c \
-	./Uln/PlnParallel.c \
-	./Uln/PlnTool.c \
-	./Uln/PlnWrite.c \
+	./Uln/PlnApproximate.cpp \
+	./Uln/PlnEigen.cpp \
+	./Uln/PlnFit.cpp \
+	./Uln/PlnFitA.cpp \
+	./Uln/PlnFTool.cpp \
+	./Uln/PlnGroup.cpp \
+	./Uln/PlnParallel.cpp \
+	./Uln/PlnParallelDistance.cpp \
+	./Uln/PlnRead.cpp \
+	./Uln/PlnSide.cpp \
+	./Uln/PlnSmooth.cpp \
+	./Uln/PlnTool.cpp \
+	./Uln/PlnWrite.cpp \
+	./Uln/PlnBounding.cpp \
 	./Ulog/Log.c \
 	./Umath/base/MathLinearEquation2.c \
 	./Umath/base/MathLinearEquation3.c \
@@ -66,9 +74,10 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Umath/base/MathMatrixInvese6.c \
 	./Umath/Kmean/fKmean.cpp \
 	./Umath/LsfTool.c \
-	./Umath/Lt2/LT2Io.c \
-	./Umath/Lt2/Lt2Similarity.c \
+	./Umath/Lt2/LT2Io.cpp \
+	./Umath/Lt2/Lt2Similarity.cpp \
 	./Umath/LT2sType.c \
+	./Umath/Eigen2dTool.cpp \
 	./Umath/MathVector.c \
 	./Umath/MathVectorD.c \
 	./Umath/Matrix.c \
@@ -77,17 +86,23 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Umath/MatrixSvd.c \
 	./Umath/Pca/PcaTool.c \
 	./Umath/Quaternion.c \
+	./Umath/Ellipse/Ellipse.cpp \
 	./Umedia/MediaDataMultiPart.c \
 	./UPoly/Poly1d4Tool.c \
 	./UPoly/Poly2d3Tool.c \
 	./UPoly/Poly2d4Tool.c \
-	./Utime/GpTime.c \
 	./Uvec/Vec3dTool.c \
 	./Uview/ViewActualBox.c \
-	./Uvl/Vl2f_Lt2.c \
-	./Uvl/Vl2fTool.c \
+	./Uvl/Vl2f_Lt2.cpp \
+	./Uvl/Vl2fTool.cpp \
+	./Uvl/Vl2fGroup.cpp \
+	./Uvl/Vl2fMatch.cpp \
 	./Uvl/Vl3dIo.c \
-	./Uvl/Vl3dTool.c \
+	./Uvl/Vl3dTool.cpp \
+	./Uvl/TfTool.cpp \
+	./Uvl/TfMean.cpp \
+	./Uvl/IntTool.cpp \
+	./Uvl/FloatTool.cpp \
 	./Uxml/XmlParser.c \
 	./Uxml/XmlPut.c \
 	./Uxml/XmlPutCst.c \
@@ -174,6 +189,10 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	Usmil/SmilParser.c \
 	Usmil/SmilTool.c \
 	Usmil/SmilUnion.c \
+	Utime/GpTime.cpp \
+	UThread/VMutex.cpp \
+	UThread/VConditionMutex.cpp \
+	UThread/VThread.cpp \
 	Uunity/unity.c \
 	Uunity/UnityS2.c \
 	Uunity/UnityS3.c \

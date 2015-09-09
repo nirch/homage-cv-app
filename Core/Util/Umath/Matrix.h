@@ -47,6 +47,8 @@ matrix_type *	matrix_alloc( int ni, int nj, int type );
 
 matrix_type *	matrix_realloc( matrix_type *mt, int m, int n, int type );
 
+#define matrixd_alloc( ni, nj )		matrix_alloc( ni, nj, MT_DOUBLE );
+
 
 void	matrix_destroy( matrix_type *m );
 

@@ -153,7 +153,7 @@ pt2d_type	*pt,	*cpt;
 				continue;
 
 //			td = pt->r + cpt->r + dis;
-			td = dis* dis;
+			td = dis;//* dis;
 
 			x = pt->p.x - cpt->p.x;
 			y = pt->p.y - cpt->p.y;

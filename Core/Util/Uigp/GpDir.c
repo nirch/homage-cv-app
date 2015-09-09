@@ -71,7 +71,7 @@ int	n;
 	//char m_sSearch[2048] ;
 
 	char * fullPathName ;
-	int dirStrLength = strlen(dir);
+	int dirStrLength = (int)strlen(dir);
 
 
 
@@ -102,7 +102,7 @@ int	n;
 	
 	if( ext != NULL ){
 		strcpy( extension, ext );
-		n = strlen( extension );
+		n = (int)strlen( extension );
 
 		extension[n] = ';';
 		extension[n+1] = 0;
@@ -123,7 +123,7 @@ int	n;
 
 		if( ext != NULL ){
 			gp_filename_extract_extension( m_w32fdFindFileData.cFileName, cext, 256 );
-			n = strlen( cext );
+			n = (int)strlen( cext );
 			if( n == 0 )	continue;
 
 			cext[n] = ';';
@@ -232,7 +232,7 @@ int nFiles = 0;
 	HANDLE m_hFind = NULL;	
 
 	char * fullPathName ;
-	int dirStrLength = strlen(dir);
+	int dirStrLength = (int)strlen(dir);
 
 	strcpy(m_sFilter,dir);
 	if ( dir[dirStrLength -1] != '/' && 
@@ -313,7 +313,7 @@ gpDir_get_directory( char *dir, char *precede, char *extension,
 //	int	bFullPath = 1;
 
 	char * fullPathName ;
-	int dirStrLength = strlen(dir);
+	int dirStrLength = (int)strlen(dir);
 
 	int numOfFilesFound = 0;
 
@@ -562,6 +562,24 @@ int	no,	plen,	elen,	len,	k;
 #endif
 }
 
+void
+gpDir_delete(  char *dir )
+{
+int	i,	no;
+char	*adir[1000];
+
+	gpDir_delete_files(  dir, NULL, NULL );
+
+	while( (no = gpDir_get_directory( dir, NULL, NULL, adir, 1000, 1 ) ) > 0 ){
+		for( i = 0 ; i < no ; i++ ){
+			gpDir_delete( adir[i] );
+			free( adir[i] );
+		}
+	}
+
+	gp_rmdir(dir );
+}
+
 
 
 void
@@ -569,6 +587,9 @@ gpDir_delete_files(  char *dir, char *prefix, char *ext )
 {
 	char	*file[100];
 	int	i,	no;
+
+	if( gpDir_exist( dir ) != 1 )
+		return;
 
 	while( (no = gpDir_get_files_list( dir, prefix, ext, file, 100, 1 )) > 0 ){
 		for( i = 0 ; i < no ; i++ ){
@@ -579,6 +600,119 @@ gpDir_delete_files(  char *dir, char *prefix, char *ext )
 }
 
 
+int
+gpDir_delete_files_size(  char *dir, char *prefix, char *ext, double size )
+{
+	char	*file[1000];
+	int	i,	no;
+
+	if( gpDir_exist( dir ) != 1 )
+		return( -1 );
+
+
+
+	while( (no = gpDir_get_files_list( dir, prefix, ext, file, 1000, 1 )) > 0 ){
+		for( i = 0 ; i < no ; i++ ){
+
+			size -= gpFile_size( file[i] )/ 1000000.0;
+			gpFile_delete( file[i] );
+			free( file[i] );
+
+			if( size < 0 )
+				return( 1 );
+		}
+	}
+
+	return( -1 );
+}
+
+
+int
+	gpDir_delete_files_sizeMoify(  char *dir, char *prefix, char *ext, double size )
+{
+	char	*file[100000];
+	int	i,	no,	i0;
+	vTime_type	t,	t0;
+
+	if( gpDir_exist( dir ) != 1 )
+		return( -1 );
+
+
+
+	while( (no = gpDir_get_files_list( dir, prefix, ext, file, 1000, 1 )) > 0 ){
+		while( no > 0 ){
+			t0 = 0;
+			i0 = -1;
+			for( i = 0 ; i < no ; i++ ){			
+				t = gpFile_mtime( file[i] );
+				if( i0 < 0 || t0 > t ){
+					t = t0;
+					i0 = i;
+				}
+			}
+
+
+			size -= gpFile_size( file[i0] )/ 1000000.0;
+			gpFile_delete( file[i0] );
+			free( file[i0] );
+			file[i0] = NULL;
+
+			no--;
+			file[i0] = file[no];
+
+			if( size < 0 ){
+				for( i = 0 ; i < no ; i++ ){
+					free( file[i] );
+				}
+
+				return( 1 );
+			}
+		}
+	}
+
+	return( -1 );
+}
+
+
+
+int
+gpDir_copy_to( char *sdir, char *tdir )
+{
+char	dir[256];
+int	ret;
+
+	gpFilename_force_dir( sdir, tdir, dir );
+
+	ret = gpDir_copy( sdir, dir );
+
+	return( ret );
+}
+
+
+int
+gpDir_copy( char *sdir, char *dir )
+{
+	char	file[256];
+	int	ret;
+	char	*aFile[1000];
+	int	i,	nFile;
+
+	gpDir_force_exist( dir );
+
+
+
+//	gpFilename_backslash( sdir, sdir );
+	nFile = gpDir_get_files_list( sdir, NULL, NULL, aFile, 1000, 1 );
+
+	for( i = 0 ; i < nFile ; i++ ){
+		gpFilename_force_dir( aFile[i], dir, file );	
+		ret = gpFile_copy( aFile[i], file );
+		free( aFile[i] );
+	}
+
+
+	return( ret );
+}
 
 
 
@@ -597,3 +731,33 @@ char	*fname[1];
 
 	return( 1 );
 }
+
+
+
+
+int gpDir_FreeDiskSpace( char *dir, double *free_space )
+{
+#ifdef	WIN32
+	long SectorsPerCluster, BytesPerSector, NumberOfFreeClusters, TotalNumberOfClusters;
+
+
+	char root[512];
+
+
+	gpFile_fullpath( dir, root );
+	root[3] = 0;
+
+
+	if (!GetDiskFreeSpace( root, &SectorsPerCluster, &BytesPerSector, &NumberOfFreeClusters, &TotalNumberOfClusters))
+		return -1;
+
+
+	//in GB
+	*free_space = ((double) (NumberOfFreeClusters) * SectorsPerCluster * BytesPerSector) / (1e9);
+
+	return( 1 );
+#else
+	return( -1 );
+#endif
+}
+	

@@ -24,6 +24,8 @@ image_type *	imageF_to_image1( image_type *sim, image_type *im );
 
 image_type *	imageF_to_image1_S( image_type *sim, image_type *im );
 
+image_type *	imageF_to_image1_axb( image_type *sim, float a, float b, image_type *im );
+
 
 
 image_type *	imageF_from_image2( image_type *im, image_type *imc );
@@ -84,6 +86,7 @@ void			imageF_normal( image_type *im );
 
 image_type *	imageF_binary( image_type *sim, int T, image_type *im );
 
+image_type *	imageF_levelR( image_type *sim, float min, float max, image_type *im );
 
 
 
@@ -102,7 +105,12 @@ image_type *	imageF_subtrct_U8( image_type *im1, image_type *im0, image_type *im
 double	imageF_inner( image_type *im0, image_type *im1 );
 double	imageF_inner_U( image_type *im0, image_type *im1 );
 
+double	imageF_innerW( image_type *sim, int i0, int j0, image_type *wim );
+
 void	imageF_sum( image_type *sim, float f, image_type *im );
+
+
+
 
 
 
@@ -243,6 +251,7 @@ image_type *	imageF2_resize_bilinear( image_type *sim, float scale, image_type *
 
 	// Image1Level.c
 //image_type *	imageFM_level( image_type *sim, image_type *mim, float hp, int nRange, float range[], image_type *im );
+image_type *	imageF_level( image_type *sim, float m0, float m1, float range[], int nRange, image_type *im );
 
 
 	// ImageFMedian.c

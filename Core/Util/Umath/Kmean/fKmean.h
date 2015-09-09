@@ -29,6 +29,7 @@ typedef struct fKmean_type {
 
 
 
+int		fKmean( float a[], int nA, fKmean_type ak[], int nK );
 
 int		fKmean( float a[], int nA, fKmean_type ak[], int nK, float d );
 

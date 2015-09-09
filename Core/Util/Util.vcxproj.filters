@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Ubase64">
+      <UniqueIdentifier>{8b08eae4-ca9a-4d7b-9914-5c4aef7c732f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ubox">
+      <UniqueIdentifier>{088ef2b6-152a-4599-ac06-88d7aa5ada52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ubst">
+      <UniqueIdentifier>{3908a6bc-7953-416a-9aab-a3ab7e5f1c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ucfg">
+      <UniqueIdentifier>{62ea97a6-cf0d-42a3-bb3c-121748b51f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ucode">
+      <UniqueIdentifier>{806c9fae-c8c0-491b-9c8b-162c58972ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uconfig3d">
+      <UniqueIdentifier>{c02a2581-9bff-404f-b9b5-69c32a6ba561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ucst">
+      <UniqueIdentifier>{652040ed-8aeb-48c5-82ec-1253e0d03e87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UGeoApp">
+      <UniqueIdentifier>{23eedcc9-41b5-44f3-8d6d-44ed97968da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ugio">
+      <UniqueIdentifier>{2fa502f1-cfc7-4fbd-a330-6d83b4e40370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uhuffman">
+      <UniqueIdentifier>{f2a537bd-24b7-4163-afff-4603fbf2fb8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uinf">
+      <UniqueIdentifier>{71eda19d-4f94-4519-8662-82983f681b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ujet2">
+      <UniqueIdentifier>{838a613d-1ade-4486-b134-fde44588ccdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ujni">
+      <UniqueIdentifier>{74b9b6a6-e699-4a57-bb24-e3c37a14980c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ulz">
+      <UniqueIdentifier>{23952069-cefc-4df3-9533-2d64d270253f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umat">
+      <UniqueIdentifier>{317dd9ea-29fb-49a3-8672-5f1a33d6c6de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath">
+      <UniqueIdentifier>{befe0418-41e4-4967-b6fa-d701df193bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Lt2">
+      <UniqueIdentifier>{67657886-9cf5-40f5-b27b-c6d82673033d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Pca">
+      <UniqueIdentifier>{1727587c-01ae-4d0b-8452-7a55998a71c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Sl">
+      <UniqueIdentifier>{7bd39cef-27dd-46b6-a47b-9fc53fa9c537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umedia">
+      <UniqueIdentifier>{1093b33c-4b60-4c48-9be2-b715356fd377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uprm">
+      <UniqueIdentifier>{b4c6b770-c2b7-43d4-be57-5cfc4ca566d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Usmil">
+      <UniqueIdentifier>{86290e6f-0920-4353-8245-cbd500f9dfd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utime">
+      <UniqueIdentifier>{52325186-7e39-45e4-8f35-c0d53390f4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uunity">
+      <UniqueIdentifier>{3ee7f9fa-0add-4164-a26f-be9d098ae5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uvec">
+      <UniqueIdentifier>{b36b278a-e8f3-4c47-8475-53e887a806c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uview">
+      <UniqueIdentifier>{7ff0040f-ed4d-4ae0-89d3-2cc187bd666b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uxml">
+      <UniqueIdentifier>{ccd0cd4b-abb3-485c-bed6-8dec859dd37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ulog">
+      <UniqueIdentifier>{1e6535e4-4837-4cac-828d-b116e72e4dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Upoly">
+      <UniqueIdentifier>{2fdec72e-1c61-4493-b0fd-3b2e05e03228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uln">
+      <UniqueIdentifier>{925ed059-d7ba-4513-826c-170beb0742af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ufbst">
+      <UniqueIdentifier>{ba9e0eec-5eed-49df-8871-5f6203a4fab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UThread">
+      <UniqueIdentifier>{853b72dd-57de-4dd3-b0fd-581b070c6f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\base">
+      <UniqueIdentifier>{dcfa3158-d02e-4cf8-9ce1-cc79903e9905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UZlib">
+      <UniqueIdentifier>{8d1faf68-8946-4a60-95e9-bb38b272204d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uvl">
+      <UniqueIdentifier>{fd299356-931f-4abd-be3c-17e68a949034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Upt">
+      <UniqueIdentifier>{a3baaf09-8ae5-4e29-98d3-09bdc76c9186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Blt">
+      <UniqueIdentifier>{acf1d1f6-67ae-49ba-98e2-24adc83e1cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uigp">
+      <UniqueIdentifier>{a333ed13-f55b-4601-94fa-30d512122fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ujet1">
+      <UniqueIdentifier>{4806396f-9628-46ef-a840-16add3eecc68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Plane">
+      <UniqueIdentifier>{b9651c2b-dd97-413b-80d1-dd168b22a971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uln\Cln">
+      <UniqueIdentifier>{8a76a860-2978-477e-acf5-f96b4670c0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Uheap">
+      <UniqueIdentifier>{fdafb24a-1d31-4dea-b0b5-d698cc9e28e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\St">
+      <UniqueIdentifier>{a508baf9-2954-4e78-98f5-3dc1658d9905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Ellipse">
+      <UniqueIdentifier>{24a1630b-8a00-4c68-86aa-8c01e9ebaffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Umath\Kmean">
+      <UniqueIdentifier>{34ab0158-decc-4ff5-b0d5-1de915c342c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ucamera">
+      <UniqueIdentifier>{74920d02-bfee-4ce9-8e58-a922659e4b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ucolor">
+      <UniqueIdentifier>{87acfdce-9292-4bf2-b81d-769e341a9b01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Ubase64\Base64.cpp">
+      <Filter>Ubase64</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubox\Box2Dump.c">
+      <Filter>Ubox</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubox\Box2iTool.c">
+      <Filter>Ubox</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubox\Box2Tool.c">
+      <Filter>Ubox</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubst\BstFile.c">
+      <Filter>Ubst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubst\BstGet.c">
+      <Filter>Ubst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubst\BstIn.c">
+      <Filter>Ubst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubst\BstPut.c">
+      <Filter>Ubst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubst\BstTool.c">
+      <Filter>Ubst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucfg\CfgParser.c">
+      <Filter>Ucfg</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucfg\CfgTool.c">
+      <Filter>Ucfg</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucfg\CfgWrite.c">
+      <Filter>Ucfg</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucode\code.c">
+      <Filter>Ucode</Filter>
+    </ClCompile>
+    <ClCompile Include="Uconfig3d\Config3dIo.c">
+      <Filter>Uconfig3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Uconfig3d\Config3dTool.c">
+      <Filter>Uconfig3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Uconfig3d\Config3dTrajectory.c">
+      <Filter>Uconfig3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucst\CstFile.c">
+      <Filter>Ucst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucst\CstTool.c">
+      <Filter>Ucst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucst\CstXml.c">
+      <Filter>Ucst</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GappDump.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GappTool.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GeoApp.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GeoApp1.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GeoApp2.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GeoAppLine.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\ls_appr.c">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Ugio\GioTool.c">
+      <Filter>Ugio</Filter>
+    </ClCompile>
+    <ClCompile Include="Uheap\HeapSTool.c">
+      <Filter>Uheap</Filter>
+    </ClCompile>
+    <ClCompile Include="Uheap\HeapTool.c">
+      <Filter>Uheap</Filter>
+    </ClCompile>
+    <ClCompile Include="Uhuffman\Huffman.c">
+      <Filter>Uhuffman</Filter>
+    </ClCompile>
+    <ClCompile Include="Uhuffman\HuffmanGet.c">
+      <Filter>Uhuffman</Filter>
+    </ClCompile>
+    <ClCompile Include="Uhuffman\HuffmanPut.c">
+      <Filter>Uhuffman</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet1\Jet1Tool.c">
+      <Filter>Ujet1</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpBuildNumber.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpByteOrder.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpDir.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpDump.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpFile.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpFile1.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpFileName.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpFunction.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpIo.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpMemoryLeak.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpMsg.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpRelinquish.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\GpTempFile.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uigp\hyputA.c">
+      <Filter>Uigp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uinf\inf.c">
+      <Filter>Uinf</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\AppJet2.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\CuspJmap23.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\DiagonalJet2.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\FoldJmap23.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\InverseJmap23.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet23Array.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet23Map.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet23Tool.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet2Array.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet2Inverse.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet2Io.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet2Map.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujet2\Jet2Tool.c">
+      <Filter>Ujet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujni\VimJni.cpp">
+      <Filter>Ujni</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujni\VimJvm.cpp">
+      <Filter>Ujni</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulz\lz12_decode.c">
+      <Filter>Ulz</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulz\lz12_encode.c">
+      <Filter>Ulz</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulz\lz_decode.c">
+      <Filter>Ulz</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulz\lz_encode.c">
+      <Filter>Ulz</Filter>
+    </ClCompile>
+    <ClCompile Include="Umat\Mat2fBase.c">
+      <Filter>Umat</Filter>
+    </ClCompile>
+    <ClCompile Include="Umat\Mat2fBaseDct.c">
+      <Filter>Umat</Filter>
+    </ClCompile>
+    <ClCompile Include="Umat\Mat2fBaseJet2.c">
+      <Filter>Umat</Filter>
+    </ClCompile>
+    <ClCompile Include="Umat\Mat2fTool.c">
+      <Filter>Umat</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\LsfTool.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\LT2sType.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\LT2Tool.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\MathVector.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\MathVectorD.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Matrix.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Matrix2Tool.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Matrix3Tool.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Matrix4Tool.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\MatrixEigen.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Quaternion.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Pca\PcaTool.c">
+      <Filter>Umath\Pca</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MdFormat.cpp">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MdFormatXml.cpp">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaDataCo.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaDataMultiPart.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaDataRead.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaDataTool.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaFile.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Umedia\MediaFormat.c">
+      <Filter>Umedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Uprm\prm.c">
+      <Filter>Uprm</Filter>
+    </ClCompile>
+    <ClCompile Include="Uprm\PrmAux.c">
+      <Filter>Uprm</Filter>
+    </ClCompile>
+    <ClCompile Include="Uprm\PrmGroup.c">
+      <Filter>Uprm</Filter>
+    </ClCompile>
+    <ClCompile Include="Usmil\SmilBuild.c">
+      <Filter>Usmil</Filter>
+    </ClCompile>
+    <ClCompile Include="Usmil\SmilParser.c">
+      <Filter>Usmil</Filter>
+    </ClCompile>
+    <ClCompile Include="Usmil\SmilTool.c">
+      <Filter>Usmil</Filter>
+    </ClCompile>
+    <ClCompile Include="Usmil\SmilUnion.c">
+      <Filter>Usmil</Filter>
+    </ClCompile>
+    <ClCompile Include="Uunity\unity.c">
+      <Filter>Uunity</Filter>
+    </ClCompile>
+    <ClCompile Include="Uunity\UnityS2.c">
+      <Filter>Uunity</Filter>
+    </ClCompile>
+    <ClCompile Include="Uunity\UnityS3.c">
+      <Filter>Uunity</Filter>
+    </ClCompile>
+    <ClCompile Include="Uunity\UnityS4.c">
+      <Filter>Uunity</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvec\BitVector.c">
+      <Filter>Uvec</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvec\Vec2dTool.c">
+      <Filter>Uvec</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvec\Vec3dTool.c">
+      <Filter>Uvec</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewActualBox.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewBasePrm.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewCamera.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewConfig.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewCreate.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewCreateNormal.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewDump.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewEulerAngle.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewEulerV.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewJet.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewLoad.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewNormal.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewObject.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewObject1.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewPer.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewPlane.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewPrm.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewRoll.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewSub.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uview\ViewTool.c">
+      <Filter>Uview</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\Ustr.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlDoc.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlIO.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlParser.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlPut.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlPutCst.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlStr.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlType.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="Uxml\XmlWrite.c">
+      <Filter>Uxml</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\adler32.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\compress.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\crc32.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\deflate.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\inffast.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\inflate.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\inftrees.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\trees.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\uncompr.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zip.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zip_file.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zip_files.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zip_ioapi.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zip_iowin32.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="UZlib\zutil.c">
+      <Filter>UZlib</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximateAb.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximateLine.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximateLineAxB.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximatePolylink.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximatePolynom.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dComponnet.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dCurvtur.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dGroup.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dGTool.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dIo.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dLine.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dMask.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dTriangleFilter.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\TriangleTool.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulog\Log.c">
+      <Filter>Ulog</Filter>
+    </ClCompile>
+    <ClCompile Include="UPoly\Poly1d4Tool.c">
+      <Filter>Upoly</Filter>
+    </ClCompile>
+    <ClCompile Include="UPoly\Poly2d3Tool.c">
+      <Filter>Upoly</Filter>
+    </ClCompile>
+    <ClCompile Include="UPoly\Poly2d4Tool.c">
+      <Filter>Upoly</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnBox.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnCircle.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnFromGapp.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnRead.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnSplit.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnTool.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\LnTool1.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ufbst\FbstGet.c">
+      <Filter>Ufbst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ufbst\FbstPut.c">
+      <Filter>Ufbst</Filter>
+    </ClCompile>
+    <ClCompile Include="Ufbst\FbstTool.c">
+      <Filter>Ufbst</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VCriticalSection.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VEvent.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VSemaphore.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VThread.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathLinearEquation2.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathLinearEquation3.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathLinerExquation9.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathMatrix.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathMatrixInvese.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathMatrixInvese4.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\base\MathMatrixInvese6.c">
+      <Filter>Umath\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvec\Vec3dApp.c">
+      <Filter>Uvec</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\TfMean.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\TfTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Upt\Pt3fTool.c">
+      <Filter>Upt</Filter>
+    </ClCompile>
+    <ClCompile Include="Upt\Pt3fIo.c">
+      <Filter>Upt</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Sl\SlTool.c">
+      <Filter>Umath\Sl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnFit.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnEigen.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnFitA.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VExcute.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VPipeTask.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Blt\Blt.cpp">
+      <Filter>Umath\Blt</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\CrPlnToolN.c">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ulog\LogFile.cpp">
+      <Filter>Ulog</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\MatrixSvd.c">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VQueue.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\IntTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Plane\Plane3d.cpp">
+      <Filter>Umath\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\Cln\ClnTool.cpp">
+      <Filter>Uln\Cln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\Cln\ClnWrite.cpp">
+      <Filter>Uln\Cln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnWrite.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnFTool.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnGroup.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnParallel.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnParallelDistance.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnSide.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnTool.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VLogger.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnRead.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\St\StTool.c">
+      <Filter>Umath\St</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Map2dTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VProcess.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dFTool.cpp">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnApproximate.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnSmooth.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Ellipse\Ellipse.cpp">
+      <Filter>Umath\Ellipse</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dApproximateLinePv.cpp">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VQueueFile.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Utime\GpTime.cpp">
+      <Filter>Utime</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VMutex.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dTool.cpp">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Kmean\fKmean.cpp">
+      <Filter>Umath\Kmean</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VConditionMutex.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="UGeoApp\GeoSmooth.cpp">
+      <Filter>UGeoApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnSmoothSegment.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\CrPlnTool.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dDensity.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnStraightlineSplit.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucolor\ColorTool.cpp">
+      <Filter>Ucolor</Filter>
+    </ClCompile>
+    <ClCompile Include="UThread\VHttpClient.cpp">
+      <Filter>UThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnBounding.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnSmothA.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\FloatTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Lt2\Lt2Similarity.cpp">
+      <Filter>Umath\Lt2</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Lt2\LT2Io.cpp">
+      <Filter>Umath\Lt2</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2fGroup.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dGroupV.c">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl3dIo.c">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl3dStl.c">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl3dTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2f_Lt2.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2fTool.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2fMatch.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2fFitLt.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2dIo.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+    <ClCompile Include="UPoly\Poly3d3Tool.cpp">
+      <Filter>Upoly</Filter>
+    </ClCompile>
+    <ClCompile Include="Umath\Eigen2dTool.cpp">
+      <Filter>Umath</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnFilterParallelIn.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ucamera\Pt2dEigen.cpp">
+      <Filter>Ucamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ubox\Box1iTool.cpp">
+      <Filter>Ubox</Filter>
+    </ClCompile>
+    <ClCompile Include="Uln\PlnPlygon.cpp">
+      <Filter>Uln</Filter>
+    </ClCompile>
+    <ClCompile Include="Ujni\UjniTool.cpp">
+      <Filter>Ujni</Filter>
+    </ClCompile>
+    <ClCompile Include="Uvl\Vl2fPrincipalDirection.cpp">
+      <Filter>Uvl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ubase64\Base64.h">
+      <Filter>Ubase64</Filter>
+    </ClInclude>
+    <ClInclude Include="Ubox\Box2d.h">
+      <Filter>Ubox</Filter>
+    </ClInclude>
+    <ClInclude Include="Ubst\BstType.h">
+      <Filter>Ubst</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucfg\CfgType.h">
+      <Filter>Ucfg</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucode\code.h">
+      <Filter>Ucode</Filter>
+    </ClInclude>
+    <ClInclude Include="Uconfig3d\Config3d.h">
+      <Filter>Uconfig3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucst\CstType.h">
+      <Filter>Ucst</Filter>
+    </ClInclude>
+    <ClInclude Include="UGeoApp\GeoApp.h">
+      <Filter>UGeoApp</Filter>
+    </ClInclude>
+    <ClInclude Include="UGeoApp\ls_appr.h">
+      <Filter>UGeoApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Ugio\GioType.h">
+      <Filter>Ugio</Filter>
+    </ClInclude>
+    <ClInclude Include="Uheap\HeapSType.h">
+      <Filter>Uheap</Filter>
+    </ClInclude>
+    <ClInclude Include="Uheap\HeapType.h">
+      <Filter>Uheap</Filter>
+    </ClInclude>
+    <ClInclude Include="Uhuffman\Huffman.h">
+      <Filter>Uhuffman</Filter>
+    </ClInclude>
+    <ClInclude Include="Uhuffman\HuffmanIn.h">
+      <Filter>Uhuffman</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujet1\Jet1Type.h">
+      <Filter>Ujet1</Filter>
+    </ClInclude>
+    <ClInclude Include="Uigp\GpBuildNumber.h">
+      <Filter>Uigp</Filter>
+    </ClInclude>
+    <ClInclude Include="Uigp\GpMemoryLeak.h">
+      <Filter>Uigp</Filter>
+    </ClInclude>
+    <ClInclude Include="Uigp\igp.h">
+      <Filter>Uigp</Filter>
+    </ClInclude>
+    <ClInclude Include="Uigp\M64Type.h">
+      <Filter>Uigp</Filter>
+    </ClInclude>
+    <ClInclude Include="Uinf\uinf.h">
+      <Filter>Uinf</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujet2\Jet23Type.h">
+      <Filter>Ujet2</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujet2\Jet2Type.h">
+      <Filter>Ujet2</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujni\VimJni.h">
+      <Filter>Ujni</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujni\VimJvm.h">
+      <Filter>Ujni</Filter>
+    </ClInclude>
+    <ClInclude Include="Ulz\lz.h">
+      <Filter>Ulz</Filter>
+    </ClInclude>
+    <ClInclude Include="Umat\Mat2fType.h">
+      <Filter>Umat</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\LsfType.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\LT2sType.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\LT2Type.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Matrix.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Matrix2Type.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Matrix3Type.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Matrix4Type.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\umath.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Pca\PcaType.h">
+      <Filter>Umath\Pca</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Sl\SlType.h">
+      <Filter>Umath\Sl</Filter>
+    </ClInclude>
+    <ClInclude Include="Umedia\MdFormat.h">
+      <Filter>Umedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Umedia\MdFormatIn.h">
+      <Filter>Umedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Umedia\MediaDataType.h">
+      <Filter>Umedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Uprm\prm.h">
+      <Filter>Uprm</Filter>
+    </ClInclude>
+    <ClInclude Include="Usmil\SmilType.h">
+      <Filter>Usmil</Filter>
+    </ClInclude>
+    <ClInclude Include="Utime\GpTime.h">
+      <Filter>Utime</Filter>
+    </ClInclude>
+    <ClInclude Include="Uunity\unity.h">
+      <Filter>Uunity</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvec\Vec2d.h">
+      <Filter>Uvec</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvec\Vec3d.h">
+      <Filter>Uvec</Filter>
+    </ClInclude>
+    <ClInclude Include="Uview\ViewType.h">
+      <Filter>Uview</Filter>
+    </ClInclude>
+    <ClInclude Include="Uxml\Ustr.h">
+      <Filter>Uxml</Filter>
+    </ClInclude>
+    <ClInclude Include="Uxml\XmlParser.h">
+      <Filter>Uxml</Filter>
+    </ClInclude>
+    <ClInclude Include="Uxml\XmlPut.h">
+      <Filter>Uxml</Filter>
+    </ClInclude>
+    <ClInclude Include="Uxml\XmlStr.h">
+      <Filter>Uxml</Filter>
+    </ClInclude>
+    <ClInclude Include="Uxml\XmlType.h">
+      <Filter>Uxml</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\deflate.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\inffast.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\inffixed.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\inflate.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\inftrees.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\trees.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zconf.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zip.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zip_crypt.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zip_file.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zip_ioapi.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zip_iowin32.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zlib.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="UZlib\zutil.h">
+      <Filter>UZlib</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucamera\Pt2dGroupType.h">
+      <Filter>Ucamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucamera\Pt2dType.h">
+      <Filter>Ucamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucamera\TriangleType.h">
+      <Filter>Ucamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Ulog\Log.h">
+      <Filter>Ulog</Filter>
+    </ClInclude>
+    <ClInclude Include="UPoly\Poly1d4Type.h">
+      <Filter>Upoly</Filter>
+    </ClInclude>
+    <ClInclude Include="UPoly\Poly2d3Type.h">
+      <Filter>Upoly</Filter>
+    </ClInclude>
+    <ClInclude Include="UPoly\Poly2d4Type.h">
+      <Filter>Upoly</Filter>
+    </ClInclude>
+    <ClInclude Include="Uln\CrPlnType.h">
+      <Filter>Uln</Filter>
+    </ClInclude>
+    <ClInclude Include="Uln\LnType.h">
+      <Filter>Uln</Filter>
+    </ClInclude>
+    <ClInclude Include="Uln\PlnType.h">
+      <Filter>Uln</Filter>
+    </ClInclude>
+    <ClInclude Include="Ufbst\FbstType.h">
+      <Filter>Ufbst</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VCriticalSection.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VEvent.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VSemaphore.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VThread.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\TfType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\Vl2fType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="Upt\Pt3fType.h">
+      <Filter>Upt</Filter>
+    </ClInclude>
+    <ClInclude Include="Ubox\Box3d.h">
+      <Filter>Ubox</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Sl\pLineType.h">
+      <Filter>Umath\Sl</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\EigenType.h">
+      <Filter>Umath</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VExcute.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvec\BitVector.h">
+      <Filter>Uvec</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VPipeTask.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Blt\BltType.h">
+      <Filter>Umath\Blt</Filter>
+    </ClInclude>
+    <ClInclude Include="Ulog\LogFile.h">
+      <Filter>Ulog</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VQueue.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\IntType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Plane\Plane3d.h">
+      <Filter>Umath\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Uln\Cln\ClnType.h">
+      <Filter>Uln\Cln</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VLogger.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\St\StType.h">
+      <Filter>Umath\St</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\Map2dType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VProcess.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Ellipse\EllipseType.h">
+      <Filter>Umath\Ellipse</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VQueueFile.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VMutex.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Umath\Kmean\fKmean.h">
+      <Filter>Umath\Kmean</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VConditionMutex.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Ucolor\ColorType.h">
+      <Filter>Ucolor</Filter>
+    </ClInclude>
+    <ClInclude Include="UThread\VHttpClient.h">
+      <Filter>UThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Ubox\Box1i.h">
+      <Filter>Ubox</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\FloatType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="Uvl\Vl3dType.h">
+      <Filter>Uvl</Filter>
+    </ClInclude>
+    <ClInclude Include="UPoly\Poly3d3Type.h">
+      <Filter>Upoly</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujni\Vjni.h">
+      <Filter>Ujni</Filter>
+    </ClInclude>
+    <ClInclude Include="Ujni\UjniTool.h">
+      <Filter>Ujni</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ubase64\Makefile">
+      <Filter>Ubase64</Filter>
+    </None>
+    <None Include="Ubox\Makefile">
+      <Filter>Ubox</Filter>
+    </None>
+    <None Include="Ubst\Makefile">
+      <Filter>Ubst</Filter>
+    </None>
+    <None Include="Ucfg\Makefile">
+      <Filter>Ucfg</Filter>
+    </None>
+    <None Include="Ucode\Makefile">
+      <Filter>Ucode</Filter>
+    </None>
+    <None Include="Uconfig3d\Makefile">
+      <Filter>Uconfig3d</Filter>
+    </None>
+    <None Include="Ucst\Makefile">
+      <Filter>Ucst</Filter>
+    </None>
+    <None Include="UGeoApp\Makefile">
+      <Filter>UGeoApp</Filter>
+    </None>
+    <None Include="Ugio\Makefile">
+      <Filter>Ugio</Filter>
+    </None>
+    <None Include="Uheap\Makefile">
+      <Filter>Uheap</Filter>
+    </None>
+    <None Include="Uhuffman\Makefile">
+      <Filter>Uhuffman</Filter>
+    </None>
+    <None Include="Ujet1\Makefile">
+      <Filter>Ujet1</Filter>
+    </None>
+    <None Include="Uigp\hypotA.tab">
+      <Filter>Uigp</Filter>
+    </None>
+    <None Include="Uigp\Makefile">
+      <Filter>Uigp</Filter>
+    </None>
+    <None Include="Uinf\Makefile">
+      <Filter>Uinf</Filter>
+    </None>
+    <None Include="Ujet2\Makefile">
+      <Filter>Ujet2</Filter>
+    </None>
+    <None Include="Ujni\Makefile">
+      <Filter>Ujni</Filter>
+    </None>
+    <None Include="Ulz\Makefile">
+      <Filter>Ulz</Filter>
+    </None>
+    <None Include="Umat\Makefile">
+      <Filter>Umat</Filter>
+    </None>
+    <None Include="Umedia\Makefile">
+      <Filter>Umedia</Filter>
+    </None>
+    <None Include="Uprm\Makefile">
+      <Filter>Uprm</Filter>
+    </None>
+    <None Include="Usmil\Makefile">
+      <Filter>Usmil</Filter>
+    </None>
+    <None Include="Utime\Makefile">
+      <Filter>Utime</Filter>
+    </None>
+    <None Include="Uunity\Makefile">
+      <Filter>Uunity</Filter>
+    </None>
+    <None Include="Uview\Makefile">
+      <Filter>Uview</Filter>
+    </None>
+    <None Include="Uxml\Makefile">
+      <Filter>Uxml</Filter>
+    </None>
+    <None Include="UZlib\Makefile">
+      <Filter>UZlib</Filter>
+    </None>
+    <None Include="Ufbst\Makefile">
+      <Filter>Ufbst</Filter>
+    </None>
+    <None Include="Makefile" />
+  </ItemGroup>
+</Project>

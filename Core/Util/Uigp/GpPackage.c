@@ -136,7 +136,6 @@ static int	vimLib_extract_dir( FILE *fp, char *path );
 
 int gpPackage_extract( char *file, char *dir )
 {
-char	file[256];
 FILE *fp;
 int	version,	ret;
 char	c;

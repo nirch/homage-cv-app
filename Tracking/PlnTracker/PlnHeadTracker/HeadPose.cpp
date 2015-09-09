@@ -2,14 +2,24 @@
  ***   HeadPose.cpp   ***
  *************************/
 #include	<math.h>
+#include	 <string.h>
 #include	"Uigp/igp.h"
+
+#ifdef _DEBUG
+#define _DUMP
+#endif
+
 #include "Ucamera/Pt2dType.h"
+
+#include "Uln/PlnType.h"
 
 #include	"HeadPose.h"
 
 
+#define HEAD_VERSION 0x01
+
 //static void	headPose_write( headPose_type *pose, FILE *fp );
-static headPose_type *	headPose_readA( FILE *fp );
+static headPose_type *	headPose_readA( FILE *fp, int version );
 
 
 headPose_type *
@@ -17,6 +27,21 @@ headPose_alloc()
 {
 
 	headPose_type *f = (headPose_type*)malloc( sizeof(headPose_type) );
+
+	f->p.x = f->p.y = 0;
+	f->angle = 0;
+	f->scale = 0;
+
+	f->iFrame = 0;
+
+	f->group = 0;
+	f->smooth = 0;
+
+
+	f->qulity = 0;
+
+
+
 
 	return( f );
 }
@@ -83,13 +108,86 @@ headPoseA_realloc( headPoseA_type *ah, int no )
 }
 
 void 
-headPoseA_destroy( headPoseA_type *af )
+headPoseA_destroy( headPoseA_type *ah, int fData )
 {	
-	headPoseA_clear( af );
+	if( fData == 1)
+		headPoseA_clear( ah );
+
+	free( ah->a );
+	free( ah );
+}
+
+
+
+headPoseF_type *
+	headPoseF_alloc( int no )
+{
+	headPoseF_type *af;
+	int	i;
+
+	af = (headPoseF_type*)malloc( sizeof(headPoseF_type) );
+
+	af->NA = no;
+	af->a = (headPoseA_type **)malloc( af->NA * sizeof(headPoseA_type *) );
+
+	for( i = 0 ; i < af->NA ; i++ )
+		af->a[i] = NULL;
+
+	af->nA = 0;
+	return( af );
+}
+
+
+headPoseF_type *
+	headPoseF_realloc( headPoseF_type *ah, int no )
+{
+
+
+	if( ah == NULL ){
+		ah = headPoseF_alloc( no );
+		return( ah );
+	}
+
+	int i0 = ah->NA;
+	ah->NA = no;
+	ah->a = ( headPoseA_type **)realloc( ah->a, ah->NA * sizeof( headPoseA_type*) );
+
+	int	i;
+	for( i = i0 ; i < ah->NA ; i++ )
+		ah->a[i] = NULL;
+
+	return( ah );
+}
+
+
+void 
+headPoseF_destroy( headPoseF_type *af )
+{	
+int	i;
+
+	for( i = 0 ; i < af->nA ; i++ )
+		headPoseA_destroy( af->a[i] );
 
 	free( af->a );
 	free( af );
 }
+
+
+
+void 
+headPoseF_add( headPoseF_type *af, headPoseA_type *ah, int iFrame )
+{	
+
+	if( af->NA >= iFrame )
+		headPoseF_realloc( af, iFrame+32 );
+
+
+	if( af->a[iFrame] != NULL )
+		headPoseA_destroy( af->a[iFrame] );
+
+	af->a[iFrame] = ah;
+}
+
 
 
 void
@@ -118,6 +216,8 @@ headPoseA_clear( headPoseA_type *af )
 			af->a[i] = NULL;
 		}
 	}
+
+	af->nA = 0;
 }
 
 void 
@@ -194,6 +294,75 @@ headPoseA_set( headPoseA_type *af, headPose_type *pose, int iFrame, int fCopy )
 }
 
 
+void 
+headPoseA_append( headPoseA_type *ah, headPoseA_type *sah, int fCopy )
+{	
+int	i;
+
+	if( ah->nA + sah->nA >= ah->NA )
+		headPoseA_realloc( ah, ah->nA + sah->nA + 64 );
+
+
+
+	for( i = 0 ; i < sah->nA ; i++ ){
+		headPose_type *h = sah->a[i];
+		
+		if( fCopy == 1 )
+			h = headPose_copy( h, NULL );
+		
+		ah->a[ah->nA++] = h;
+	}
+
+}
+
+
+void 
+headPoseA_set_iFrame( headPoseA_type *ah, int iFrame )
+{	
+	int	i;
+
+	for( i = 0 ; i < ah->nA ; i++ ){
+		headPose_type *h = ah->a[i];
+		h->iFrame = iFrame;
+	}
+}
+
+
+
+void 
+headPoseA_set_group( headPoseA_type *ah, int group )
+{	
+	int	i;
+
+	for( i = 0 ; i < ah->nA ; i++ ){
+		headPose_type *h = ah->a[i];
+		h->group = group;
+	}
+}
+
+headPoseA_type *
+	headPoseA_merge( headPoseA_type *a[], int nA )
+{
+
+
+	int	i,	n;
+
+	for( i = 0, n = 0 ; i < nA ; i++ ){
+		if( a[i] == NULL )	continue;
+
+		n += a[i]->nA;
+	}
+
+
+	headPoseA_type *ah = headPoseA_alloc( n );
+
+	for( i = 0 ; i < nA ; i++ ){
+		if( a[i] == NULL )	continue;
+		headPoseA_append( ah, a[i], 0 );
+	}
+
+	return( ah );
+}
 
 int
 headPoseA_write( headPoseA_type *af, char *file )
@@ -209,7 +378,7 @@ int	i;
 	for( i = 0, nA = 0 ; i < af->nA ; i++ )
 		if(  af->a[i] != NULL )	nA++;
 
-	fprintf( fp, "%d\n", nA );
+	fprintf( fp, "HEAD  %d %d\n", HEAD_VERSION, nA );
 
 
 	for( i = 0 ; i < af->nA ; i++ ){
@@ -226,10 +395,13 @@ int	i;
 
 
 
+
+
+
 void
 headPose_write( headPose_type *pose, FILE *fp )
 {
-	fprintf( fp, "%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%d\n", pose->iFrame, pose->state, pose->p.x, pose->p.y, pose->scale, pose->angle, pose->qulity, pose->smooth );
+	fprintf( fp, "%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%d\t%d\n", pose->iFrame, pose->state, pose->p.x, pose->p.y, pose->scale, pose->angle, pose->qulity, pose->group, pose->smooth );
 }
 
 
@@ -239,7 +411,8 @@ headPoseA_read( headPoseA_type **ah, char *file )
 {
 headPose_type *s;
 FILE	*fp;
-int	nS;
+int	nS,	version;
+char siegnture[64];
 
 //	gp_filename_force_extension( file, ".skl2" );
 
@@ -247,13 +420,23 @@ int	nS;
 		return( -1 );
 
 
-	fscanf( fp, "%d", &nS );
+	char buf[256];
+	fgets( buf, 1024, fp );
+
+	if( strncmp( buf, "HEAD", 4) != 0 ){
+		sscanf( buf, "%d", &nS );
+		version = 0;
+	}
+	else	sscanf( buf, "%s %d %d", siegnture, &version, &nS );
+		
+		
+//	fscanf( fp, "%d", &nS );
 
 	*ah = headPoseA_alloc( nS+64 );
 
 
 
-	while( (s = headPose_readA( fp )) != NULL ){
+	while( (s = headPose_readA( fp, version )) != NULL ){
 		(*ah)->a[ s->iFrame ] = s;
 
 		(*ah)->nA = s->iFrame + 1;
@@ -266,8 +449,48 @@ int	nS;
 }
 
 
+
+int
+	headPoseA_readG( headPoseA_type **ah, char *file )
+{
+	headPose_type *s;
+	FILE	*fp;
+	int	nS,	version;
+	char siegnture[64];
+
+	//	gp_filename_force_extension( file, ".skl2" );
+
+	if(  (fp = fopen( file, "rb" ) ) == NULL )
+		return( -1 );
+
+
+	char buf[256];
+	fgets( buf, 1024, fp );
+
+	if( strncmp( buf, "HEAD", 4) != 0 ){
+		sscanf( buf, "%d", &nS );
+		version = 0;
+	}
+	else	sscanf( buf, "%s %d %d", siegnture, &version, &nS );
+//	fscanf( fp, "%d", &nS );
+
+	*ah = headPoseA_alloc( nS+64 );
+
+
+
+	while( (s = headPose_readA( fp, version )) != NULL ){
+		(*ah)->a[ (*ah)->nA++] = s;
+	}
+
+
+	fclose( fp );
+
+	return( 1 );
+}
+
+
 static headPose_type *
-headPose_readA( FILE *fp )
+headPose_readA( FILE *fp, int version )
 {
 	
 	headPose_type *pose = headPose_alloc();
@@ -275,7 +498,7 @@ headPose_readA( FILE *fp )
 //	if( fscanf( fp, "%d  %d  %f  %f  %f   %f %f %d", &pose->iFrame, &pose->state, &pose->p.x, &pose->p.y, &pose->scale, &pose->angle, &pose->qulity, &pose->smooth  ) != 8 )
 //		return( NULL );
 
-	if( headPose_read( pose, fp ) < 0 ){
+	if( headPose_read( pose, version, fp ) < 0 ){
 		headPose_destroy( pose );
 		return( NULL );
 	}
@@ -286,34 +509,68 @@ headPose_readA( FILE *fp )
 
 
 int 
-headPose_read( headPose_type *pose, FILE *fp )
+headPose_read( headPose_type *pose, int version, FILE *fp )
 {
 
-	if( fscanf( fp, "%d  %d  %f  %f  %f   %f %f %d", &pose->iFrame, &pose->state, &pose->p.x, &pose->p.y, &pose->scale, &pose->angle, &pose->qulity, &pose->smooth  ) != 8 )
-		return( -1 );
+	if( version == 0 ){
+		if( fscanf( fp, "%d  %d  %f  %f  %f   %f %f %d", &pose->iFrame, &pose->state, &pose->p.x, &pose->p.y, &pose->scale, &pose->angle, &pose->qulity, &pose->smooth  ) != 8 )
+			return( -1 );
+		return( 1 );
+	}
 
-
+	if( fscanf( fp, "%d  %d  %f  %f  %f   %f %f %d %d", &pose->iFrame, &pose->state, &pose->p.x, &pose->p.y, &pose->scale, &pose->angle, &pose->qulity, &pose->group, &pose->smooth  ) != 9 )
+			return( -1 );
 
 	return( 1 );
 }
 
+
 headPoseA_type *
-headPoseA_copy( headPoseA_type *af )
+headPoseA_copy( headPoseA_type *ah )
 {
 	int	i;
 
-	headPoseA_type *as = headPoseA_alloc( af->nA+1 );
+	headPoseA_type *as = headPoseA_alloc( ah->nA+1 );
 
+	for( i = 0 ; i < ah->nA ; i++ ){
 
-	for( i = 0 ; i < af->nA ; i++ ){
-		af->a[i] = NULL;
+		ah->a[i] = NULL;
 
-		if( af->a[i] != NULL )
-			af->a[i] = headPose_copy( af->a[i], NULL );
+		if( ah->a[i] != NULL )
+			as->a[i] = headPose_copy( as->a[i], NULL );
 
 	}
 
-	af->nA = af->nA;
+	as->nA = ah->nA;
+
+	return( as );
+}
+
+
+
+headPoseA_type *
+headPoseA_copy_group( headPoseA_type *ah, int group, int fCopy )
+{
+	int	i;
+
+	headPoseA_type *as = headPoseA_alloc( ah->nA );
+
+
+	for( i = 0 ; i < ah->nA ; i++ ){
+
+		headPose_type *h = ah->a[i];
+
+		if( h == NULL || h->group != group )
+			continue;
+
+
+		if( fCopy == 1 )
+			h = headPose_copy( h, NULL );
+
+
+		as->a[as->nA++] = h;
+	}
+
 
 	return( as );
 }
@@ -357,4 +614,159 @@ headPoseA_box( headPoseA_type *af, box2f_type *b )
 
 		k++;
 	}
+}
+
+
+int 
+headPoseA_decrease( headPoseA_type *ah )
+{
+int	i,	j;
+
+	for( i = 0, j = 0 ; i < ah->nA ; i++ ){
+		if( ah->a[i] == NULL )
+			continue;
+		
+		ah->a[j++] = ah->a[i];
+	}
+
+	ah->nA = j;
+
+	return( ah->nA );
+}
+
+
+
+int
+	headPoseA_insert( headPoseA_type *bah, headPoseA_type *ah )
+{
+	int i;
+
+	for( i = ah->nA-1 ; i >= 0 ; i-- ){
+
+		headPoseA_insert( bah, ah->a[i] );
+	}
+
+	return( 1 );
+}
+
+int
+	headPoseA_insert( headPoseA_type *ah, headPose_type *h )
+{
+	int i;
+
+	for( i = ah->nA-1 ; i >= 0 ; i-- ){
+		if( ah->a[i]->iFrame < h->iFrame )
+			break;
+
+		ah->a[i+1] = ah->a[i];
+	}
+
+	ah->a[i+1] = h;
+
+	ah->nA++;
+
+	return( 1 );
+}
+
+
+
+
+plnA_type *	headPoseA_to_plnA(  headPoseA_type *ah, pln_type *bpl )
+{
+int	i;
+
+	plnA_type *apl = plnA_alloc( ah->nA );
+
+	for( i = 0 ; i < ah->nA ; i++ ){
+		apl->a[apl->nA++] = headPose_pl( ah->a[i], bpl );
+	}
+
+	return( apl );
+}
+
+plnF_type *	headPoseA_to_plnF(  headPoseA_type *ah, pln_type *bpl )
+{
+	int	i;
+
+	plnF_type *fpl = plnF_alloc( ah->nA );
+
+	//plnA_type *apl = plnA_alloc( ah->nA );
+
+	for( i = 0 ; i < ah->nA ; i++ ){
+		headPose_type *h = ah->a[i];
+		plnA_type *apl = plnF_get( fpl, h->iFrame );
+
+		if( apl == NULL ){
+			apl = plnA_alloc( 36 );
+			plnF_add( fpl, apl, h->iFrame);
+		}
+
+
+		apl->a[apl->nA++] = headPose_pl( ah->a[i], bpl );
+	}
+
+	return( fpl );
+}
+
+
+pln_type *	headPose_pl(  headPose_type *h, pln_type *bpl  )
+{
+	pln_type *pl;
+	lt2_type	lt;
+
+	lt2_similarity_set( &lt, h->p.x, h->p.y, h->angle, h->scale );
+
+	pl =  pln_affine_lt( bpl, &lt, NULL );
+
+	return( pl );
+}
+
+
+
+void
+headPoseA_dump_pl( headPoseA_type *ah, pln_type *bpl, char *prefix, int index, char *suffix )
+{
+
+	plnA_type *apl = headPoseA_to_plnA( ah, bpl );
+
+	PLNA_DUMP( apl, prefix, index, suffix );
+
+	plnA_destroy( apl );
+}
+
+
+void
+	headPoseA_dump_plF( headPoseA_type *ah, pln_type *bpl, char *prefix, int index, char *suffix )
+{
+
+	plnF_type *fpl = headPoseA_to_plnF( ah, bpl );
+
+	PLNF_DUMP( fpl, prefix, index, suffix );
+
+	plnF_destroy( fpl );
+}
+
+void
+	headPoseA_dump( headPoseA_type *ag[], int nG, pln_type *hpl, char *prefix, int index, char *suffix )
+{
+
+	headPoseA_type *ah = headPoseA_merge( ag, nG );
+
+	HEADPOSEA_DUMP( ah, "HH", 100, suffix );
+	HEADPOSEA_DUMP_PLF( ah, hpl, "HH", 100, suffix );
+
+	ah->nA = 0;
+	headPoseA_destroy( ah );
+}
+
+
+
+void
+headPoseA_dump( headPoseA_type *ah, char *prefix, int index, char *suffix )
+{
+char	file[256];
+
+	gpDump_filename( prefix, index, suffix, ".txt", file );
+
+	headPoseA_write( ah, file );
 }

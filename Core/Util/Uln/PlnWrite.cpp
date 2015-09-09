@@ -9,8 +9,6 @@
 
 //static void	pln_write( pln_type *pl, FILE *fp );
 
-static int	plnA_read( plnA_type **apl, FILE*fp );
-
 
 static int	plnA_write( plnA_type *apl, FILE *fp );
 
@@ -118,6 +116,7 @@ plnA_write( plnA_type *apl, FILE *fp )
 	int	i;
 
 
+
 	fprintf( fp, "%s  %d  %d   %d\n", "PL", PL_VERSION, apl->iFrame, apl->nA );
 
 	fprintf( fp, "AXIS  %f %f %f %f\n", apl->p.x, apl->p.y, apl->scale, apl->angle );
@@ -150,6 +149,9 @@ pln_write(pln_type *pl, FILE *fp )
 	if( pl->group > 0 )
 		type |= 0x04;
 
+	if( pl->height != 0 || pl->size != 0 || pl->qulity != 0 )
+		type |= 0x08;
+
 	fprintf( fp, "polylink\n" );
 
 
@@ -159,6 +161,11 @@ pln_write(pln_type *pl, FILE *fp )
 
 	if( type & 0x04 )
 		fprintf( fp, "  %d", pl->group );
+
+
+	if( type & 0x08 )
+		fprintf( fp, "  %.4f  %.4f   %.4f", pl->qulity, pl->height, pl->size );
+
 
 	fprintf( fp, "\n" );
 
@@ -197,153 +204,3 @@ int	ret;
 
 
 
-#ifdef _AA_
-static pln_type *	pln_read( FILE *fp );
-
-int
-plnF_read( plnF_type **vpl, char *file )
-{
-FILE	*fp;
-int	i,	version,	nV;
-char	signature[64];
-
-
-	if( (fp = fopen( file, "rb")) == NULL )
-		return( -1 );
-
-
-	if( fscanf(fp, "%s  %d", signature, &version ) != 2 ){
-		fclose( fp );
-		return( NULL );
-	}
-
-
-	if( strcmp( signature, "PLV") != 0 ){
-		fclose( fp );
-		if( strcmp( signature, "PL") != 0 ){
-			plnA_type	*apl;
-			plnA_read( file, &apl );
-			*vpl = plnF_alloc( 1 );
-			plnF_add( *vpl, apl, apl->iFrame );
-
-			return( 1 );
-		}
-
-		return( NULL );
-	}
-
-	fscanf(fp, "%d", &nV );
-
-	*vpl = plnF_alloc( nV );
-
-
-	plnA_type *apl;
-	for( i = 0 ; i < nV ; i++ ){
-		plnA_read( &apl, fp );
-
-		plnF_add( *vpl, apl, apl->iFrame );
-	}
-
-	fclose( fp );
-
-	return( 1 );
-}
-
-
-int
-plnA_read( char *file, plnA_type **apl )
-{
-	FILE	*fp;
-
-	if( (fp = fopen( file, "rb")) == NULL )
-		return( -1 );
-
-
-	int ret = plnA_read( apl, fp );
-
-
-	fclose( fp );
-
-	return( ret );
-
-}
-
-
-static int
-plnA_read( plnA_type **apl, FILE *fp )
-{
-	int	i,	version,	nPl;
-	char	signature[64];
-	pln_type	*pl;
-
-
-
-	if( fscanf(fp, "%s  %d", signature, &version ) != 2 )
-		return( NULL );
-
-	if( strcmp( signature, "PL") != 0 )
-		return( NULL );
-
-	int iFrame = 0;
-	if( version >=2 )
-		fscanf(fp, "%d", &iFrame );
-	
-	fscanf(fp, "%d", &nPl );
-
-
-	*apl = plnA_alloc( nPl+10 );
-
-	(*apl)->iFrame = iFrame;
-
-	for( i = 0 ; i < nPl ; i++ ){
-		pl = pln_read( fp );
-
-		(*apl)->a[(*apl)->nA++ ] = pl;
-	}
-
-
-	return( 1 );
-}
-
-
-
-
-
-
-static pln_type *
-pln_read( FILE *fp )
-{
-pln_type *pl;
-	ln_type	*l;
-	int	no,	type;
-	char	line[512];
-
-	while( 1 ){
-		if( fgets( line, 512, fp ) == NULL )
-			return( NULL );
-		if( gp_strnicmp(line , "polylink", 8) == 0 )
-			break;
-	}
-
-
-
-	fscanf( fp, "%d", &no );
-
-	pl = pln_alloc( no );
-
-
-
-	fscanf( fp, "%d   %d", &pl->state, &type );
-
-	fscanf( fp, "%f  %f", &pl->ctr.x, &pl->ctr.y );
-
-	for( l = pl->link ; l != NULL ; l = LN_NEXT(l) ){
-		fscanf( fp, "%f  %f  %f", &l->v.x, &l->v.y, &l->a );
-		ln_set_aux( l );
-	}
-
-	pl->len = lnL_length( pl->link );
-
-	return( pl );
-}
-#endif

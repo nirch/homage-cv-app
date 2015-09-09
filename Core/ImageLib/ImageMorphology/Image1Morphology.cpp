@@ -46,8 +46,11 @@ image1_open( image_type *im, int n, int val )
 
 	//	bm.Dump( "1", 1 );
 
-	bm.open( n );
-	//	bm.Dump( "1-close3", 1 );
+//	bm.open( n );
+
+	bm.erode( n );
+	bm.dilate( n );
+
 
 	bm.Mask( im, val );
 

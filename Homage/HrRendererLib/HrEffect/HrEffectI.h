@@ -13,6 +13,7 @@
 #define EFFECT_MASK				1
 #define EFFECT_POSE				2
 #define EFFECT_ALIGNMENT		3
+#define EFFECT_MASKGIF			4
 
 class CHrEffectI 
 {

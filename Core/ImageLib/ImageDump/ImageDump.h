@@ -32,6 +32,9 @@ void	image_dump_scale( image_type *im, float scale, char *prefix, int index, cha
 
 void	image_dump_dup( image_type *sim, int dup, float a, char *name, int index, char *ext );
 
+void	image_dump_data( int width, int height, int depth, u_char *data, char *prefix, int index, char *suffix );
+
+
 
 
 void	image_dump_band( image_type *sim, int iBand, char *name, int index, char *suffix );
@@ -45,21 +48,27 @@ void	imageT_dump( image_type *sim, char *name, int index, char *suffix );
 
 #ifdef _DUMP
 #define IMAGE_DUMP( im, name, index, ext )  image_dump( im, name, index, ext )
+#define IMAGE_DUMPF( im, name, index, ext, flag  )  if( flag ) image_dump( im, name, index, ext )
 #define IMAGEF_DUMP( im, stretch, name, index, ext )  imageF_dump( im, stretch, name, index, ext )
 #define IMAGE_DUMP_SCALE( im, scale, name, index, ext )  image_dump_scale( im, scale, name, index, ext )
 #define IMAGEF_DUMPAB( im, a, b, name, index, ext )  imageF_dumpAB( im, a, b, name, index, ext )
 #define IMAGE_DUMP_ALPHA( im, name, index, ext )  image_dump_alpha( im, name, index, ext )
 #define IMAGET_DUMP( im, name, index, ext )  imageT_dump( im, name, index, ext )
 #define IMAGE_DUMP_DUP( im, dup, a, name, index, ext )  image_dump_dup( im, dup, a, name, index, ext )
+#define IMAGE_DUMP_DUPF( im, dup, a, name, index, ext, flag )  if( flag )  image_dump_dup( im, dup, a, name, index, ext )
+#define IMAGE_DUMP_DATA( width, height, depth, data, name, index, ext )  image_dump_data( width, height, depth, data, name, index, ext )
 
 #else
-#define IMAGE_DUMP( im, name, index, ext )
-#define IMAGEF_DUMP( im, stretch, name, index, ext )
-#define IMAGE_DUMP_SCALE( im, scale, name, index, ext )
-#define IMAGEF_DUMPAB( im, a, b, name, index, ext )
-#define IMAGE_DUMP_ALPHA( im, name, index, ext )
-#define IMAGET_DUMP( im, name, index, ext )
-#define IMAGE_DUMP_DUP( im, dup, a, name, index, ext )
+#define IMAGE_DUMP( im, name, index, ext )	{}
+#define IMAGE_DUMPF( im, name, index, ext, flag  )	{}
+#define IMAGEF_DUMP( im, stretch, name, index, ext ) {}
+#define IMAGE_DUMP_SCALE( im, scale, name, index, ext ) {}
+#define IMAGEF_DUMPAB( im, a, b, name, index, ext ) {}
+#define IMAGE_DUMP_ALPHA( im, name, index, ext ) {}
+#define IMAGET_DUMP( im, name, index, ext )		{}
+#define IMAGE_DUMP_DUP( im, dup, a, name, index, ext )	{}
+#define IMAGE_DUMP_DUPF( im, dup, a, name, index, ext, flag ) {}
+#define IMAGE_DUMP_DATA( width, height, depth, data, name, index, ext )	{}
 
 #endif
 

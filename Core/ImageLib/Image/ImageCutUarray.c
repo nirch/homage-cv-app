@@ -1,4 +1,4 @@
-#include <memory.h>
+#include <string.h>
 
 #include	"Uigp/igp.h"
 #include "ImageType/ImageType.h"

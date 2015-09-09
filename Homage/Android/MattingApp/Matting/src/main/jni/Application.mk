@@ -1,0 +1,11 @@
+APP_PLATFORM := android-14
+NDK_NO_WARNINGS :=
+LOCAL_CFLAGS := -w
+APP_ABI := all
+#APP_ABI := armeabi-v7a
+APP_MODULES := Matting
+NDK_DEBUG:=true
+NDK_LOG=1
+#APP_OPTIM := release 
+APP_OPTIM := debug 
+APP_STL := gnustl_static

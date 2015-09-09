@@ -146,6 +146,7 @@ void	matrix4A_destroy( matrix4A_type *am );
 
 matrix4A_type *	matrix4A_transform( matrix4A_type *oM, matrix4_type *T, matrix4A_type *tM );
 
+void	matrix4_linaer_equation_add( matrix4_type *m, double D[], double X[], double y );
 
 
 #ifdef __cplusplus

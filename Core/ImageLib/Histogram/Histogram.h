@@ -19,6 +19,9 @@ void	histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 
 void	histogram_write( int h[], int nH, char *file );
 
 
+float	histogram_median( int h[], int nH );
+
+
 	// HistogramOrder.c
 int		histogram_order( int H[], int nH, int a[] );
 

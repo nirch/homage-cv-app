@@ -22,6 +22,9 @@ int	i;
 int	decoder_[256];
 int	member_[256];
 
+
+
+
 	for( i = 0 ; i < 256 ; i++ )
 		member_[i] = 0;
 	
@@ -78,7 +81,6 @@ int	member_[256];
 
 	*tp = 0;
 	*bytes = tp - (*data );
-
 
 	if( char_count > 0 )	return( 2 );
 

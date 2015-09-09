@@ -66,7 +66,10 @@ typedef struct palette_type
 
 	int		bitPerPixel;
 
-	int		ALLOCATED;
+	union {
+		int		ALLOCATED;
+		int NA;
+	};
 
 	union {
 		int	nColor;

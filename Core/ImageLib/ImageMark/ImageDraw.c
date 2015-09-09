@@ -3,10 +3,12 @@
  *************************/
 #include	<math.h>
 #include	"Uigp/igp.h"
+#include "Umath/Matrix2Type.h"
 
 #include	"ImageType/ImageType.h"
 
 #include	"ImageMark.h"
+
 
 
 
@@ -51,7 +53,8 @@ image1_mask_circle( image_type *im, float x, float y, float r, int color )
 {
 u_char	*tp;
 int	i0,	j0,	i,	j;
-float	dx,	dy,	d;
+float	dx,	dy,	d,	t;
+float	w;
 
 	j0 = x -r -1;
 	i0 = y -r -1;
@@ -70,6 +73,13 @@ float	dx,	dy,	d;
 			d = dx *dx + dy * dy;
 
 			if( d > r*r )	continue;
+
+			t = sqrt(d);
+			w = 0;
+			if( t > r-1.0 );
+				w = 255*(-t + r);
+
+
 
 			*tp = color;
 		}
@@ -94,6 +104,24 @@ int	x1,	y1;
 			u_char *tp = IMAGE_PIXEL( im, i, x0 );
 			for( j = x0 ; j < x1 ; j++, tp++ )
 				*tp = color;
+		}
+		return;
+	}
+
+
+	if( im->depth == 3 ){
+		int R,	G,	B;
+		R = IMAGE4_RED( color );
+		G = IMAGE4_GREEN( color );
+		B = IMAGE4_BLUE( color );
+
+		for( i = y0 ; i < y1 ; i++ ){
+			u_char *tp = IMAGE_PIXEL( im, i, x0 );
+			for( j = x0 ; j < x1 ; j++, tp ){
+				*tp++ = R;
+				*tp++ = G;
+				*tp++ = B;
+			}
 		}
 		return;
 	}
@@ -145,6 +173,7 @@ image4_draw_point( image_type *im, int x, int y, int color )
 		*IMAGE4_PIXEL( im, y-1, x ) = color;
 	if( x > 0 )
 		*IMAGE4_PIXEL( im, y, x-1 ) = color;
+
 	*IMAGE4_PIXEL( im, y, x ) = color;
 
 	if( x < im->column-2 )
@@ -154,6 +183,16 @@ image4_draw_point( image_type *im, int x, int y, int color )
 		*IMAGE4_PIXEL( im, y+1, x ) = color;
 }
 
+
+void
+image4_draw_pointA( image_type *im, int x, int y, int color )
+{
+	if( x < 1 || x >= im->column-2 || y < 1 || y >= im->row-2 )
+		return;
+
+	if( y > 0 && x >= 0  )
+		*IMAGE4_PIXEL( im, y, x ) = color;
+}
 
 
 
@@ -266,7 +305,7 @@ image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int col
 				t = v.x * dx + v.y * dy;
 				if( t < -0.5 || t > len+0.5 )	continue;
 				d = u.x * dx + u.y * dy;
-				if( d < -0.5 || d > 0.5 )	continue;
+				if( d < -0.75 || d > 0.75 )	continue;
 
 				*tp     = R;
 				*(tp+1) = G;
@@ -494,5 +533,43 @@ image_draw_ellipse( image_type *im, float x, float y,
 		}
 
 
+	}
+}
+
+
+
+
+void
+image1_draw_ellipse_fill( image_type *im, float x0, float y0, float Rx, float Ry, float angle )
+{
+	int	i,	j;
+	float	x,	y,	Rx2,	Ry2,	rx,	ry,	t;
+	u_char	*tp;
+	matrix2_type m;
+	m.a00 = cos( angle );
+	m.a01 = sin( angle );
+	m.a10 = -m.a01;
+	m.a11 = m.a00;
+
+
+
+
+	Rx2 = Rx*Rx;
+	Ry2 = Ry*Ry;
+
+	tp = im->data;
+	for( i = 0 ; i < im->height ; i++ ){
+		y = i + 0.5 - y0;
+		for( j = 0 ; j < im->width ; j++, tp++ ){
+			x = j + 0.5 - x0;
+
+			rx = m.a00 * x + m.a01 * y;// + x0;
+			ry = m.a10 * x + m.a11 * y;// + y0;
+
+			t = rx*rx / Rx2 + ry*ry / Ry2;
+
+			if( t < 1 )
+				*tp = 255;
+		}
 	}
 }

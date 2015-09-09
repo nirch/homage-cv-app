@@ -22,7 +22,8 @@ static	int	Im_bytes[] = {  0,
 							4, //	IMAGE_TYPE_32S		6
 
 							4, //	IMAGE_TYPE_F		7
-							8  //	IMAGE_TYPE_C		8
+							8,  //	IMAGE_TYPE_C		8
+							8
 							};
 
 

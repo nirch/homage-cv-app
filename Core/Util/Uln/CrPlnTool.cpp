@@ -85,10 +85,17 @@ crPln_createA( pln_type *bpl, plnA_type *apl, int i0,  float r1, float r2, int a
 {
 	int	i,	n;
 
+	box2f_type	b0,	b1;
+	pln_box( bpl, &b0 );
+
 	for( i = 0, n = 0 ; i < apl->nA ; i++ ){
 
 		if( i == i0 )	continue;
 		if( apl->a[i] == NULL || apl->a[i]->link == NULL )
+			continue;
+
+		pln_box( apl->a[i], &b1 );
+		if( box2f_distance( &b0, &b1 ) > 8 )
 			continue;
 
 		n += crPln_create( bpl, apl->a[i], i, r1, r2, affine, &ac->a[n] );
@@ -220,6 +227,171 @@ int	i;
 //		cr[i]->end = 0;
 //		if( i == 0 )	cr->end |= 0x01;
 //		if( i == nS-1 )	cr->end |= 0x02;
+
+
+		n++;
+	}
+
+
+	for( i = 0 ; i < n ; i++ ){
+		cr[i].end = 0;
+		if( i == 0 )	cr[i].end |= 0x01;
+		if( i == n-1 )	cr[i].end |= 0x02;
+	}
+
+
+	pt2dA_destroy( apt );
+	free( ad );
+
+
+	return( n );
+}
+
+
+
+int
+	crPlnA_parallel( pln_type *bpl, plnA_type *apl, int i0,  float r1, float r2, float aT, crPlnA_type *ac )
+{
+	int	i,	n;
+
+	box2f_type	b0,	b1;
+	pln_box( bpl, &b0 );
+
+	for( i = 0, n = 0 ; i < apl->nA ; i++ ){
+
+		if( i == i0 )	continue;
+		if( apl->a[i] == NULL || apl->a[i]->link == NULL )
+			continue;
+
+		pln_box( apl->a[i], &b1 );
+		if( box2f_distance( &b0, &b1 ) > 8 )
+			continue;
+
+
+	
+		n += crPln_create_parallel( bpl, apl->a[i], i, r1, r2, aT, &ac->a[n] );
+	}
+
+
+	ac->nA = n;
+
+	return( n );
+}
+
+int
+crPln_create_parallel( pln_type *bpl, pln_type *pl, int iPl, float r1, float r2, float aT, crPln_type cr[] )
+{
+	vec2f_type	ctr,	v;
+	ln_type	*l;
+	float	t,	gt;
+	dPln_type	*ad,	*d;
+	int	nD,	n;
+	float	dt;
+	pt2dA_type *apt;
+	float	a,	b,	a1,	b1;
+	si_type	as[100];
+	int nS;
+	int	i;
+
+
+	n = (pl->len + 2.0 )/2;
+	dt = (pl->len-0.125) /n;
+
+
+	ad = (dPln_type *)malloc( (n+2) *sizeof(dPln_type));
+
+
+	apt = pt2dA_alloc( n+2 );
+
+
+
+
+	nD = n = 0;
+	for( t = 0, gt = 0, l = pl->link, ctr = pl->ctr ; gt < pl->len ; t += dt, gt += dt ){
+		for( ;  t > l->len ; l = LN_NEXT(l) ){
+			ctr.x += l->v.x;
+			ctr.y += l->v.y;
+
+			t -= l->len;
+		}
+
+
+		ln_t2xy( &ctr, l, t, &v );
+
+
+
+		d = &ad[nD++];
+		if( lnL_distance( &bpl->ctr, bpl->link, NULL, &v, &d->l, &d->u, &d->t, &d->gt ) < 0 ||  d->gt < 0 || d->gt > bpl->len ){
+			apt->p[apt->nP].p.x = gt;
+			apt->p[apt->nP].p.y = 1000;
+			apt->nP++;
+			continue;
+		}
+
+		vec2f_type	v0,	v1;
+		ln_tanget( l, t, &v0 );
+		ln_tanget( d->l, d->t, &v1 );
+
+		a = VEC2D_INNER( v0, v1 );
+
+		if( ABS(a) < aT ){
+			apt->p[apt->nP].p.x = gt;
+			apt->p[apt->nP].p.y = 1000;
+			apt->nP++;
+			continue;
+
+		}
+
+
+		n++;
+	
+		d->sgt = gt;
+
+
+		apt->p[apt->nP].p.x = gt;
+		apt->p[apt->nP].p.y = d->u;
+		apt->nP++;
+
+	}
+
+	if( n < 2 ){
+		free( ad );
+		pt2dA_destroy( apt );
+		return( 0 );
+	}
+
+
+
+	a = b = 0;
+	a1 = b1 = 0;
+
+
+
+
+	pt2dA_segement( apt, a1, b1, r2, as, &nS );
+
+
+
+	for( i = 0, n = 0 ; i < nS ; i++ ){
+		if( as[i].i1 - as[i].i0 < 4 )
+			continue;
+
+		cr[n].d[0] = ad[as[i].i0];
+		cr[n].d[1] = ad[as[i].i1];
+
+
+		cr[n].type = 0;
+		if( as[i].i0 == 0 ) cr[n].type |= 0x1;
+		if( as[i].i1 == apt->nP-1 ) cr[n].type |= 0x2;
+
+
+
+		cr[n].du = cr[n].d[0].u - cr[n].d[1].u;
+
+		cr[n].u = 0.5*(cr[n].d[0].u + cr[n].d[1].u);
+
+		cr[n].pl = pl;
+		cr[n].iPl = iPl;
 
 
 		n++;

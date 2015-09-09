@@ -17,6 +17,7 @@
 
 
 
+//#include "Utime/GpTime.h"
 
 
 #include	"igp.h"
@@ -66,7 +67,7 @@ struct stat     statbuf;
 }
 
 
-long
+vTime_type
 gpFile_mtime( char *file )
 {
 #ifdef WINCE
@@ -153,6 +154,9 @@ int gp_setcwd(char *dir)
 int
 gpDir_force_exist( char *dir )
 {
+#ifdef __ANDROID__
+	return( 1 );
+#endif
 
 	if( gpDir_exist( dir ) == 1 )
 		return( 1 );
@@ -259,6 +263,21 @@ return( -1 );
 #endif
 }
 
+
+int
+gpFile_moveto( char *inFile, char *dir )
+{
+	char	fname[256],	file[256];
+	int		ret;
+
+	gpFilename_fullname( inFile, fname );
+
+	sprintf( file, "%s\\%s", dir, fname );
+
+	ret = gpFile_rename( inFile, file );
+
+	return( ret );
+}
 
 int gpDir_unuse_id( char *base, int i0, char *dirName )
 {

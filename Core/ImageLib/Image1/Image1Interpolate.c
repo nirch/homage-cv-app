@@ -205,6 +205,44 @@ int	s;
 
 
 
+int image1_interpolation_lt2_test_in( image_type *sim, lt2_type *lt,
+								int x0, int y0,
+								int width, int height )
+{
+vec2f_type	p;
+
+	p.x = LT2_F1( *lt, 0, 0 ) + x0;
+	p.y = LT2_F2( *lt, 0, 0 ) + y0;
+
+	if( p.x < 0 || p.x >= sim->width || p.y < 0 || p.y >= sim->height )
+		return( -1 );
+
+	p.x = LT2_F1( *lt, width, 0 ) + x0;
+	p.y = LT2_F2( *lt, width, 0 ) + y0;
+
+	if( p.x < 0 || p.x >= sim->width || p.y < 0 || p.y >= sim->height )
+		return( -1 );
+
+
+
+	p.x = LT2_F1( *lt, width, height ) + x0;
+	p.y = LT2_F2( *lt, width, height ) + y0;
+
+	if( p.x < 0 || p.x >= sim->width || p.y < 0 || p.y >= sim->height )
+		return( -1 );
+
+
+	p.x = LT2_F1( *lt, 0, height ) + x0;
+	p.y = LT2_F2( *lt, 0, height ) + y0;
+
+	if( p.x < 0 || p.x >= sim->width || p.y < 0 || p.y >= sim->height )
+		return( -1 );
+
+	return( 1 );
+
+}
+
+
 //#define _USE_ASM
 #ifndef _USE_ASM
 image_type *

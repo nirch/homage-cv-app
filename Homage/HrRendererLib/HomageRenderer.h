@@ -28,6 +28,8 @@ public:
 
 	void DeleteContents();
 
+	int IsProcess()	{ return m_process; }
+
 
 	int	Process( CHrSourceI *b, CHrSourceI *u, CHrSourceI *f, CHrOutputI *out[], int nOut );
 
@@ -80,6 +82,9 @@ public:
 
 	int	m_nOut;
 	CHrOutputI	*m_aOut[16];
+
+
+	int m_process;
 };
 
 

@@ -104,8 +104,8 @@ image1_binary( image_type *sim, int T, image_type *im )
 	sp = sim->data;
 	tp = im->data;
 
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
 
 			*tp = ( *sp <= T )? 0 : 1;
 
@@ -128,12 +128,10 @@ image1_binaryM( image_type *sim, int T, image_type *im )
 	sp = sim->data;
 	tp = im->data;
 
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
 
-			//			*sp = ( *sp < T )? 1 : 0;
 			*tp = ( *sp <= T )? 0 : 255;
-
 
 		}
 	}
@@ -150,18 +148,54 @@ image1_boundary_set( image_type *im, int val )
 
 
 	tp = im->data;
-	for( j = 0 ; j < im->column ; j++ )
+	for( j = 0 ; j < im->width ; j++ )
 		*tp++ = val;
 
 
 	tp = IMAGE_PIXEL(im, im->height-1, 0 );
-	for( j = 0 ; j < im->column ; j++ )
+	for( j = 0 ; j < im->width ; j++ )
 		*tp++ = val;
 
 	tp = IMAGE_PIXEL(im, 0, im->width-1 );
 	for( i = 0 ; i < im->height-1 ; i++, tp += im->width )
 		tp[0] = tp[1] = val;
 }
+
+
+
+int
+image1_boundary_nZero( image_type *im )
+{
+	u_char	*tp;
+	int	i,	j,	n;
+
+
+	n = 0;
+	tp = im->data;
+	for( j = 0 ; j < im->width ; j++, tp++ ){
+		if( *tp == 0 )
+			n++;
+	}
+
+
+	tp = IMAGE_PIXEL(im, im->height-1, 0 );
+	for( j = 0 ; j < im->width ; j++, tp++ ){
+		if( *tp == 0 )
+			n++;
+	}
+
+	tp = IMAGE_PIXEL(im, 0, im->width-1 );
+	for( i = 0 ; i < im->height-1 ; i++, tp += im->width ){
+		if( tp[0] == 0 )
+			n++;
+		if( tp[1] == 0 )
+			n++;
+	}
+
+	return( n );
+}
+
+
 
 
 void
@@ -172,12 +206,32 @@ int	i,	j;
 
 
 	sp = (u_char *)sim->data;
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++ ){
 
 			if( *sp < T )	*sp = 0;
 		}
 	}
+}
+
+image_type *
+image1_threshold1( image_type *sim, int T, image_type *im )
+{
+	u_char	*sp,	*tp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = (u_char *)sim->data;
+	tp = (u_char *)im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
+
+			*tp = ( *sp < T )? 0 : *sp;
+		}
+	}
+
+	return( im );
 }
 
 
@@ -189,8 +243,8 @@ int	i,	j;
 //
 //
 //	sp = (u_char *)sim->data;
-//	for( i = 0 ; i < sim->row ; i++ ){
-//		for( j = 0 ; j < sim->column ; j++, sp++ ){
+//	for( i = 0 ; i < sim->height ; i++ ){
+//		for( j = 0 ; j < sim->width ; j++, sp++ ){
 //
 //			if( *sp < T0 || *sp > T1 )	*sp = 0;
 //		}
@@ -207,8 +261,8 @@ image_type *
 
 	sp = sim->data;
 	tp = im->data;
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
 
 			if( *sp >= T0 && *sp <= T1 )
 				*tp = 0;
@@ -230,10 +284,33 @@ int	i,	j;
 
 	sp = sim->data;
 	tp = im->data;
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
 
 			if( *sp < T0 || *sp > T1 )
+				*tp = 0;
+			else *tp = *sp;
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageS1_threshold_in( image_type *sim, int T0, int T1, image_type *im )
+{
+	s_char	*sp,	*tp;
+	int	i,	j;
+
+	im = image_recreate( im, sim->height, sim->width, 1, 1 );
+
+	sp = (s_char *)sim->data;
+	tp = (s_char *)im->data;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
+
+			if( *sp > T0 && *sp < T1 )
 				*tp = 0;
 			else *tp = *sp;
 		}
@@ -256,8 +333,8 @@ image1_maskT( image_type *sim, image_type *mim, int T0, int T1, image_type *im )
 	mp = mim->data;
 
 	tp = im->data;
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, mp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, mp++ ){
 			if( *mp < T0 || *mp > T1 ){
 				*tp++ = 0;
 				sp++;
@@ -284,8 +361,8 @@ int	i,	j;
 	sp = (u_char *)sim->data;
 	mp = im->data;
 
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++, mp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, mp++ ){
 
 			*mp = ( *sp == 0 )? 1 : 0;
 		}
@@ -305,8 +382,8 @@ int	i,	j;
 //	sp = (u_char *)sim->data;
 //	mp = mim->data;
 //
-//	for( i = 0 ; i < sim->row ; i++ ){
-//		for( j = 0 ; j < sim->column ; j++, sp++, mp++ ){
+//	for( i = 0 ; i < sim->height ; i++ ){
+//		for( j = 0 ; j < sim->width ; j++, sp++, mp++ ){
 //
 //			if( *mp == 0  )	*sp = 0;
 //		}
@@ -324,8 +401,8 @@ int	i,	j,	no;
 	sp = (u_char *)sim->data;
 
 	no = 0;
-	for( i = 0 ; i < sim->row ; i++ ){
-		for( j = 0 ; j < sim->column ; j++, sp++ ){
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++ ){
 
 			if( *sp != 0  )	no++;
 		}
@@ -333,6 +410,28 @@ int	i,	j,	no;
 
 	return( no );
 }
+
+int
+image1_mask_append( image_type *sim, image_type *im )
+{
+	u_char	*sp,	*tp;
+	int	i,	j,	no;
+
+
+	sp = (u_char *)sim->data;
+	tp = (u_char *)im->data;
+
+	no = 0;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
+			if( *sp > *tp )
+				*tp = *sp;
+		}
+	}
+
+	return( 1 );
+}
+
 
 
 void

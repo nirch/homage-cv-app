@@ -252,8 +252,8 @@ gp_write_short( int fd, int a )
 {
 char	c[2];
 
-	c[1] = (((unsigned int) a)>>8) & 0xff;
-	c[2] = (((unsigned int) a)) & 0xff;
+	c[0] = (((unsigned int) a)>>8) & 0xff;
+	c[1] = (((unsigned int) a)) & 0xff;
 
 	write( fd, c, 2 );
 }

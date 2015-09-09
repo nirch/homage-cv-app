@@ -23,7 +23,8 @@ static void	image_writeBMP24( FILE *fp, image_type *im );
 static void	image4_writeBMP24( FILE *fp, image_type *im );
 static void image_writeBMP8( FILE *fp, image_type *im );
 
-
+//static int	DPI = 720;
+static int	DPI = 2160;
 
 //retCode : -1 - could not open outFile
 //			number of bytes written on success
@@ -127,8 +128,8 @@ int	row,	col;
 	putshort(fp, nbits);	/* biBitCount: 1,4,8, or 24 */
 	putint(fp, BI_RGB);	/* biCompression:  BI_RGB, BI_RLE8 or BI_RLE4 */
 	putint(fp, bperlin * row);/* biSizeImage:  size of raw image data */
-	putint(fp, 75 * 39);	/* biXPelsPerMeter: (75dpi * 39" per meter) */
-	putint(fp, 75 * 39);	/* biYPelsPerMeter: (75dpi * 39" per meter) */
+	putint(fp, DPI * 39.37);	/* biXPelsPerMeter: (75dpi * 39" per meter) */
+	putint(fp, DPI * 39.37);	/* biYPelsPerMeter: (75dpi * 39" per meter) */
 	putint(fp, nc);		/* biClrUsed: # of colors used in cmap */
 	putint(fp, nc);		/* biClrImportant: same as above */
 
@@ -280,3 +281,130 @@ int	c,	c1,	c2,	c3;
 	putc(c, fp);   putc(c1,fp);  putc(c2,fp);  putc(c3,fp);
 }
 
+
+
+
+static void		image4_writeBMP_ARGB( FILE *fp, image_type *im );
+
+int 
+image4_write_bmp_T( image_type *im, char *file )
+{
+	FILE	*fp;
+	int     i,	nc, nbits, bperlin, bytes;
+	int	row,	col;
+
+	if( (fp = fopen( file, "wb" )) == NULL )
+		return( -1 );
+
+	row = IMAGE_ROW( im );
+	col = IMAGE_COLUMN( im );
+
+	nc = nbits = 0;
+
+	nbits = 32;//(im->palette == NULL )? 24 : 8;
+
+	nc = (im->palette == NULL )? 0 : im->palette->nColor;
+
+	bperlin = ((col * nbits + 31) / 32) * 4;
+	/* # bytes written per line */
+
+	putc('B', fp);
+	putc('M', fp);		/* BMP file magic number */
+
+	/* compute filesize and write it */
+	i = 14 +		/* size of bitmap file header */
+		40 +		/* size of bitmap info header */
+		(nc * 4) +	/* size of colormap */
+		bperlin * row;	/* size of image data */
+
+	putint(fp, i);
+	putshort(fp, 0);	/* reserved1 */
+	putshort(fp, 0);	/* reserved2 */
+	putint(fp, 14 + 40 + (nc * 4));	/* offset from BOfile to BObitmap */
+
+	putint(fp, 40);		/* biSize: size of bitmap info header */
+	putint(fp, col);		/* biWidth */
+	putint(fp, row);		/* biHeight */
+	putshort(fp, 1);	/* biPlanes:  must be '1' */
+	putshort(fp, nbits);	/* biBitCount: 1,4,8, or 24 */
+	putint(fp, BI_RGB);	/* biCompression:  BI_RGB, BI_RLE8 or BI_RLE4 */
+	putint(fp, bperlin * row);/* biSizeImage:  size of raw image data */
+	putint(fp, DPI * 39.37);	/* biXPelsPerMeter: (75dpi * 39" per meter) */
+	putint(fp, DPI * 39.37);	/* biYPelsPerMeter: (75dpi * 39" per meter) */
+	putint(fp, nc);		/* biClrUsed: # of colors used in cmap */
+	putint(fp, nc);		/* biClrImportant: same as above */
+
+	/* write COLORMAP if exist */
+	//if( im->palette != NULL ){
+	//	int	r,	g,	b;
+	//	for( i = 0 ; i < nc ; i++ ){
+	//		b = im->palette->data[i].Blue;
+	//		g = im->palette->data[i].Green;
+	//		r = im->palette->data[i].Red;
+	//		putc(b, fp);
+	//		putc(g, fp);
+	//		putc(r, fp);
+	//		putc(0, fp);
+	//	}
+	//}
+
+	//if( im->depth == 4 )
+	//	image4_writeBMP24( fp, im );
+	//else if( im->depth == 1 )
+	//	image_writeBMP8( fp, im );
+	//else	image_writeBMP24( fp, im );
+
+	image4_writeBMP_ARGB( fp, im );
+
+	bytes = ftell(fp);
+	fclose( fp );
+
+
+	return bytes;
+}
+
+
+
+static void 
+image4_writeBMP_ARGB( FILE *fp, image_type *im )
+{
+int     i, j;//,	padb;
+u_int	*p;
+int	h,	w,	a;
+
+	h = IMAGE_ROW( im );
+	w = IMAGE_COLUMN( im );
+
+//	padb = (4 - ((w * 3) % 4)) & 0x03;	/* # of pad bytes to write at * EOscanline */
+
+	for (i = h - 1; i >= 0; i--) {
+		p = IMAGE4_PIXEL( im, i, 0 );
+
+		for (j = 0; j < w; j++) {
+/*
+			putc( ((*p)>>16)&0xff, fp);
+			putc( ((*p)>>8)&0xff, fp);
+			putc( (*p)&0xff, fp);
+*/			
+	
+			a = ((*p)>>24)&0xFF;
+			if( a == 255 ){
+				fputc( 0, fp);
+				fputc( 0, fp);
+				fputc( 0, fp);
+				fputc( 255-255, fp);
+				p++;
+				continue;
+			}
+
+			putc( IMAGE4_BLUE(*p), fp );
+			putc( IMAGE4_GREEN(*p), fp );
+			putc( IMAGE4_RED(*p), fp );
+
+		putc( 255-a, fp );
+			p++;
+		}
+
+//		for (j = 0; j < padb; j++)	putc(0, fp);
+	}
+}

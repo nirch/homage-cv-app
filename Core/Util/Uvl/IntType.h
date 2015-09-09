@@ -35,6 +35,9 @@ void	intA_add( intA_type *as, int val[], int nVal );
 
 int		intA_index( intA_type *ai, int val );
 
+void	intA_flip( intA_type *b );
+
+
 void	intA_write( intA_type *ai, FILE *fp );
 
 void	intA_writeb( intA_type *ai, FILE *fp );

@@ -376,6 +376,11 @@ char	line[512];
 	if( type & 0x02 )	fscanf( fp, "%X   %X", &(*pl)->color[0].val, &(*pl)->color[1].val );
 	if( type & 0x04 )	fscanf( fp, "%d", &(*pl)->group );
 
+
+	if( type & 0x08 )
+		fscanf( fp, "  %f  %f   %f", &(*pl)->qulity, &(*pl)->height, &(*pl)->size );
+
+
 	fscanf( fp, "%f  %f", &(*pl)->ctr.x, &(*pl)->ctr.y );
 
 	int	anchor;

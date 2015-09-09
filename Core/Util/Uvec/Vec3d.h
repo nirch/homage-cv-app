@@ -101,6 +101,13 @@ typedef struct vec3dA_type {
 
    
 
+#define		VEC3D_MINUS( v )	\
+{ \
+	(v).x = -(v).x; \
+	(v).y = -(v).y; \
+	(v).z = -(v).z; \
+}
+
 
 	// make R2 to be orthonormal to R1;  assume that R1 is unit vector
 void		vec3d_orthonormal( vec3d_type *R1, vec3d_type *R2 );

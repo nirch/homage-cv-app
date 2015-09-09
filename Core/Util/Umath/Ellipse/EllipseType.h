@@ -7,6 +7,8 @@
 
 typedef struct ellipse_type {
 
+	int group;
+
 	vec2f_type	p;
 
 	vec2f_type	v;

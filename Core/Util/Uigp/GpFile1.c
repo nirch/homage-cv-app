@@ -74,10 +74,10 @@ FILE	*ifp,	*fp;
 int	c;
 
 	if ( (ifp = fopen( sfile, "rb" )) == NULL )
-		return( 0 );
+		return( -1 );
 
 	if ( (fp = fopen( tfile, "wb" )) == NULL )
-		return( 0 );
+		return( -1 );
 
 	 while ((c = getc( ifp )) != EOF) 
 		putc( c, fp );
@@ -114,7 +114,7 @@ int	c;
 
 
 int
-gp_file_compare( char *file1, char *file2 )
+gpFile_compare( char *file1, char *file2 )
 {
 FILE	*fp1, *fp2;
 int	c1,	c2;
@@ -353,6 +353,15 @@ int gpFile_sread_path( char *str, char *dir, char *path )
 	return( 1 );
 }
 
+
+int gpFilename_is_abs_path( char *fname )
+{
+	if( fname[0] == '\\' || fname[0] == '/'  || fname[1] == ':' ){
+		return( 1 );
+	}
+
+	return( -1 );
+}
 
 int gpFile_abs_path( char *fname, char *dir, char *path )
 {

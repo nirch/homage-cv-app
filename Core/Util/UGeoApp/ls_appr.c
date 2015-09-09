@@ -17,8 +17,19 @@ int i;
 
 		fsum += ftemp * ftemp + dw *dtemp * dtemp; 
 		dsum += v[i].y * ftemp + dw * tg[i] * dtemp;
+
+		//if( IS_NAN( dsum) ){
+		//	fprintf( stdout, "NaN  %f %f %f %f  %f", dsum, fsum, dw,  v[i].y, tg[i] );
+		//	exit(0);
+		//}
 	}
+//	if( fsum == 0 )
+//		return( 0 );
+
 	a = dsum/fsum;
+
+	if( IS_NAN( a) )
+		fprintf( stdout, "NaN  %f %f %f", dsum, fsum, dw );
 	return( a );
 }
 

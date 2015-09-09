@@ -32,6 +32,9 @@ extern  void gpLogFile( const char *format, ... );
 
 void	gpLog_time( char *title, struct gpTime_type *gt );
 
+void	gpLog_timeM( char *title, struct gpTime_type *gt, int modulo );
+
+
 
 #ifdef _GPLOG
 #define	GPLOG_OPEN( file )	gpLog_open( file )
@@ -45,6 +48,7 @@ void	gpLog_time( char *title, struct gpTime_type *gt );
 #define	GPLOGFILE( prm )	gpLogFile prm
 #define	GPTRACE( prm )		gpTrace prm
 #define	GPLOG_TIME( prm )	gpLog_time prm
+#define	GPLOG_TIMEM( prm )	gpLog_timeM prm
 #else
 #define	GPLOG_OPEN( file )
 #define	GPLOG_OPENR( dir, file )
@@ -57,6 +61,7 @@ void	gpLog_time( char *title, struct gpTime_type *gt );
 
 #define	GPTRACE( prm )
 #define	GPLOG_TIME( prm )
+#define	GPLOG_TIMEM( prm )
 #endif
 
 #ifdef __cplusplus

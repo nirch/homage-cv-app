@@ -23,6 +23,19 @@ int	no;
 }
 
 
+int 
+cst_readN( cst_type *cst, int nByte, FILE *fp )
+{
+	int	n;
+
+	n = fread( cst->wp, 1, nByte, fp );
+	if( n == 0 )	return( 0 );
+
+	cst->wp = cst->wp + n;
+
+	return( n );
+}
+
 
 void
 cst_write( FILE *fp, cst_type *cst )
@@ -53,6 +66,25 @@ int	byte_no;
 	return( cst );
 }
 
+
+int
+	cst_read_file( cst_type **cst, char *file )
+{
+	FILE	*fp;
+	int	byte_no;
+
+	byte_no = gpFile_size( file );
+
+	if ( (fp = fopen ( file, "rb" )) == NULL )
+		return( -1 );
+
+	*cst = cst_alloc( byte_no );
+	cst_read( fp, *cst, byte_no );
+
+	fclose( fp );
+
+	return( 1 );
+}
 
 int
 cst_write_to_file( cst_type *cst, char *file )

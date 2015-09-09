@@ -50,7 +50,10 @@ int	image_write_gif_set_frameDelayA( gifIo_type *gifIo, int delayTime[] );
 
 
 
-int		image_write_gif( image_type *im, palette_type *palette, char *dir, char *name );
+int		image_write_gif( image_type *im, palette_type *palette, char *file ); 
+
+int image_gif_write_to_buffer( image_type *im, palette_type *pl, u_char **data, int *nData ) ;
+
 
 FILE *	image_write_gif_open( char *file,int height, int width, palette_type *p );
 
@@ -58,7 +61,7 @@ int		image_write_gif_add_frame(FILE * fp, image_type *im,
 							image_type * rim, palette_type *palette,
 							int sizeLimit, int delay, int Fdither );
 
-int		image_write_gif_GraphicControl( gifIo_type *gifIo, int DelayTime, int transparentIndex );
+int		image_write_gif_GraphicControl( gifIo_type *gifIo, int DelayTime, int transparentIndex, int disposal );
 
 int		image_write_gif_close( FILE *fp );
 

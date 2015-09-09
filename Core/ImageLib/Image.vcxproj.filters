@@ -1,0 +1,873 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Dithering">
+      <UniqueIdentifier>{f0344f59-a325-44f0-a355-4115efacc6a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image1">
+      <UniqueIdentifier>{3a392bf1-441b-4736-817a-5bb11c1e3aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image3">
+      <UniqueIdentifier>{b36ea058-8a11-460c-b52b-bc61db132163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image6">
+      <UniqueIdentifier>{11f19d3f-008d-4f76-9fde-19e8225a037a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageF">
+      <UniqueIdentifier>{387ba0f6-4c55-4e56-b13a-d6ec59b70d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageType">
+      <UniqueIdentifier>{84584484-837e-4cce-9f4a-5680b26a2759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PSD">
+      <UniqueIdentifier>{2607bdd2-1078-4d4e-ad79-a8fbd94ebda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YUV">
+      <UniqueIdentifier>{dc135eee-b47f-442c-9aa9-b9fc0e29a91a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image2">
+      <UniqueIdentifier>{c930fdf6-4887-4d83-acb4-eaf19bd820f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageDump">
+      <UniqueIdentifier>{e03251a3-152c-4711-b8bf-8212907b00dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageApp">
+      <UniqueIdentifier>{09e88bff-f495-49bc-8051-bd0c103e5d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageMark">
+      <UniqueIdentifier>{129dd569-b41b-4fe6-809b-8cd12c4a22c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{b410835e-8cf4-4920-8287-2a81e5cdd94e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageMorphology">
+      <UniqueIdentifier>{f37ba693-4a70-4c38-9353-ffcf5e55d0f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VegetationIndex">
+      <UniqueIdentifier>{374e4988-5060-4591-8b3c-e8df4d4e3502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bmp">
+      <UniqueIdentifier>{863a263a-e723-4e57-aa3c-cccbcb800f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageUS">
+      <UniqueIdentifier>{25e4ba25-a3a4-4eab-86bd-22e06307ef92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codecs">
+      <UniqueIdentifier>{6048d613-55cf-45ca-ad8d-39ad01f8c623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageLabel">
+      <UniqueIdentifier>{985b3537-4f10-4c6d-82c3-5e25110bd7ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageResize">
+      <UniqueIdentifier>{5353a39a-f394-4aa2-8c41-a3b841ec13f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Histogram">
+      <UniqueIdentifier>{8a080c4f-134f-40e9-aaf6-5f07a2c7fc67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clustring">
+      <UniqueIdentifier>{fdb78408-9c8e-46c8-a67c-6e748fa1b586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageC">
+      <UniqueIdentifier>{9e83e0cc-6ba3-40e5-9935-daceb639a359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageTransform">
+      <UniqueIdentifier>{85aff3cb-ac27-426d-8af7-ea40090d6fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageUI">
+      <UniqueIdentifier>{da9dd6ae-e474-4e90-aadf-004a0ce96ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BnImage">
+      <UniqueIdentifier>{c1433fab-8bfb-469c-8f25-d67482582d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gif">
+      <UniqueIdentifier>{7c2012e3-aa5e-454b-8358-017856dad971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image24To8">
+      <UniqueIdentifier>{0edd6542-59d3-4082-a263-3c0e9eac30f2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Dithering\ImageDitherAll.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageDitherErr.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageDitherErrExp.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageDitherFloyd.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageDitherOrd.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageDitherPat.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageEnhancement.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Dithering\ImageGrayEnhancement.c">
+      <Filter>Dithering</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Bluring.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Convolution.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1ConvolutionM.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1ConvolutionSeparably.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1CornerFilter.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1EdgeSobol.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1EqualNeighbor.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1FilterBox.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1FilterIir.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1FisherMatrix.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1From.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Gravity.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Histogram.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Integral.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Interpolate.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Majority.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Mask.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Median.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1NoiseEstimation.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Pixel.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Sample.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Sample2.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Ssd.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Tool.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Bluring.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Color.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Convolution.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3DewarpLt2.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Distance.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3DynamicRange.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Extend.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3From.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Sample2_1331.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Tool.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3YCrCb.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image6\Image6Convolution.c">
+      <Filter>Image6</Filter>
+    </ClCompile>
+    <ClCompile Include="Image6\Image6From.c">
+      <Filter>Image6</Filter>
+    </ClCompile>
+    <ClCompile Include="Image6\Image6Tool.c">
+      <Filter>Image6</Filter>
+    </ClCompile>
+    <ClCompile Include="Image6\Image6YCrCb.c">
+      <Filter>Image6</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFAccumulate.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFArithmetic.cpp">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFConvolution.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFDensity.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFDynamicRange.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImagefFilterBox.cpp">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFHistogram.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFLog.cpp">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFMedian.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFPyramid.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFResizeBilinear.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFTool.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageF\ImageFYCrCb.c">
+      <Filter>ImageF</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTransform\Image3KLTransform.c">
+      <Filter>ImageTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTransform\ImageDct.c">
+      <Filter>ImageTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTransform\ImageDct88.c">
+      <Filter>ImageTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTransform\ImageFFT.c">
+      <Filter>ImageTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTransform\ImageFourier.c">
+      <Filter>ImageTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="Image24To8\Image24To8.c">
+      <Filter>Image24To8</Filter>
+    </ClCompile>
+    <ClCompile Include="Image24To8\Image24To8DitherFloyd.c">
+      <Filter>Image24To8</Filter>
+    </ClCompile>
+    <ClCompile Include="Image24To8\Image8to24.c">
+      <Filter>Image24To8</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\GifDecoder.cpp">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\GifEncoder.cpp">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\ImageReadGif.c">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\ImageReadGifFrame.c">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\ImageWriteGif.c">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\LzwEncoding.c">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="PSD\ImageReadPSD.c">
+      <Filter>PSD</Filter>
+    </ClCompile>
+    <ClCompile Include="PSD\PsdRead.c">
+      <Filter>PSD</Filter>
+    </ClCompile>
+    <ClCompile Include="PSD\PsdTool.c">
+      <Filter>PSD</Filter>
+    </ClCompile>
+    <ClCompile Include="PSD\PsdWrite.c">
+      <Filter>PSD</Filter>
+    </ClCompile>
+    <ClCompile Include="YUV\Image2YUV.cpp">
+      <Filter>YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Accumulate.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Bilateral.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Color.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Convolution.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Derivative.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2DynamicRange.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Edge.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2EdgeSobol.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Interpolate.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Log.cpp">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Pyramid.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Ssd.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\Image2Tool.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDump\ImageDump.c">
+      <Filter>ImageDump</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageApp\ImageApp.c">
+      <Filter>ImageApp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageApp\ImageAppW.c">
+      <Filter>ImageApp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMark\ImageDraw.c">
+      <Filter>ImageMark</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMark\ImagePrint.c">
+      <Filter>ImageMark</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Guasian.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Image.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\image4From.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Image4to1.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Image4Tool.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageAdaptivePalette.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageAdd.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageAlpha.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageAppend.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageAux.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageBackgroundRemoval.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageBand.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageComparison.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageCreate.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageCrop.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageCut.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageCutUarray.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageDewarpLt2.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageDifference.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageEqual.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageExtend.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageFields.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageFile.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageFlipH.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageFlipV.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageHistogram.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageHsiTune.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageInterlive.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageIo.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageLeak.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageLevel.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageLinearCombination.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageLogo.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageMask.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageNegative.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImagePixel.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImagePreview.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImagePyramid.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageRgbYCrCb.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageRgbYiq.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageSline.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageSmartPalette.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageStretch.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageSubtruct.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageToY.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\PaletteTool.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMorphology\BitMatrix.cpp">
+      <Filter>ImageMorphology</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMorphology\Image1Morphology.cpp">
+      <Filter>ImageMorphology</Filter>
+    </ClCompile>
+    <ClCompile Include="VegetationIndex\ImageExG.c">
+      <Filter>VegetationIndex</Filter>
+    </ClCompile>
+    <ClCompile Include="VegetationIndex\ImageNdi.c">
+      <Filter>VegetationIndex</Filter>
+    </ClCompile>
+    <ClCompile Include="VegetationIndex\ImageNdrgi.c">
+      <Filter>VegetationIndex</Filter>
+    </ClCompile>
+    <ClCompile Include="VegetationIndex\ImageNdrgiF.c">
+      <Filter>VegetationIndex</Filter>
+    </ClCompile>
+    <ClCompile Include="BMP\BmpDecoder.cpp">
+      <Filter>Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="BMP\BmpEncoder.cpp">
+      <Filter>Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="BMP\ImageReadBmp.c">
+      <Filter>Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="BMP\ImageWriteBmp.c">
+      <Filter>Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="Codecs\ImageDecoder.cpp">
+      <Filter>Codecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Codecs\ImageEncoder.cpp">
+      <Filter>Codecs</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\Image1LabelInletFilter.c">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageResample.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageResize.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageResizeBilinear.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageResizeIpp.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\imageSample.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\imageSampleColumn.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageSampleDown.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageSampleDownTransparent.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageSampleG.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageSampleNew.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResize\ImageSamplingF.c">
+      <Filter>ImageResize</Filter>
+    </ClCompile>
+    <ClCompile Include="Histogram\Histogram.c">
+      <Filter>Histogram</Filter>
+    </ClCompile>
+    <ClCompile Include="Histogram\HistogramClustringIsoda.c">
+      <Filter>Histogram</Filter>
+    </ClCompile>
+    <ClCompile Include="Histogram\HistogramOrder.c">
+      <Filter>Histogram</Filter>
+    </ClCompile>
+    <ClCompile Include="Clustring\ImageClustringIsodata.c">
+      <Filter>Clustring</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageC\ImageCTool.c">
+      <Filter>ImageC</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Average.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="Image2\ImageSBluring.c">
+      <Filter>Image2</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Image4CopyIn.c">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageCmyk.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageApp\ImageAppJet3.c">
+      <Filter>ImageApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Histogram.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUI\ImageUITool.c">
+      <Filter>ImageUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUI\ImageUIBluring.cpp">
+      <Filter>ImageUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BnImage\BnImage.cpp">
+      <Filter>BnImage</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1MaskPln.c">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabel.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageBlob.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUI.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUS.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUSContour.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUIContour.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUSN.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="YUV\ImageNV21.cpp">
+      <Filter>YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="YUV\ImageYUVSampling.cpp">
+      <Filter>YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="YUV\ImageReadYuv.cpp">
+      <Filter>YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Bilnear.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3FilterBox.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Stero.c">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\SbTool.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUS\ImageUSDynamicRange.cpp">
+      <Filter>ImageUS</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageTransparent.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3\Image3Layer.cpp">
+      <Filter>Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel\ImageLabelUITopology.cpp">
+      <Filter>ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageBoundary.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\imageAndroid.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ImageBgr.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUI\ImageUIFrom.cpp">
+      <Filter>ImageUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Image1\Image1Eigen.cpp">
+      <Filter>Image1</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUS\ImageUSTool.cpp">
+      <Filter>ImageUS</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUS\ImageUSInterpolate.cpp">
+      <Filter>ImageUS</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUS\ImageUSInterpolateV.cpp">
+      <Filter>ImageUS</Filter>
+    </ClCompile>
+    <ClCompile Include="Gif\ImageReadGift.cpp">
+      <Filter>Gif</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dithering\ImageDithering.h">
+      <Filter>Dithering</Filter>
+    </ClInclude>
+    <ClInclude Include="Image1\Image1Tool.h">
+      <Filter>Image1</Filter>
+    </ClInclude>
+    <ClInclude Include="Image3\Image3Tool.h">
+      <Filter>Image3</Filter>
+    </ClInclude>
+    <ClInclude Include="Image6\Image6Tool.h">
+      <Filter>Image6</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageF\ImageFTool.h">
+      <Filter>ImageF</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageType\ImageTool.h">
+      <Filter>ImageType</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageType\ImageType.h">
+      <Filter>ImageType</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageType\PaletteType.h">
+      <Filter>ImageType</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageTransform\ImageTransform.h">
+      <Filter>ImageTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\GifDecoder.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\GifEncoder.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\GifIo.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\ImageReadGif.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\ImageWriteGif.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Gif\lzw.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="PSD\ImageReadPSD.h">
+      <Filter>PSD</Filter>
+    </ClInclude>
+    <ClInclude Include="PSD\PsdType.h">
+      <Filter>PSD</Filter>
+    </ClInclude>
+    <ClInclude Include="YUV\Image2YUV.h">
+      <Filter>YUV</Filter>
+    </ClInclude>
+    <ClInclude Include="Image2\Image2Tool.h">
+      <Filter>Image2</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDump\ImageDump.h">
+      <Filter>ImageDump</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageApp\ImageApp.h">
+      <Filter>ImageApp</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMark\ImageMark.h">
+      <Filter>ImageMark</Filter>
+    </ClInclude>
+    <ClInclude Include="Image\ImageLeak.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMorphology\BitMatrix.h">
+      <Filter>ImageMorphology</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMorphology\ImageMorphology.h">
+      <Filter>ImageMorphology</Filter>
+    </ClInclude>
+    <ClInclude Include="VegetationIndex\VegetationIndex.h">
+      <Filter>VegetationIndex</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP\BmpDecoder.h">
+      <Filter>Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP\BmpEncoder.h">
+      <Filter>Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP\ImageBmp.h">
+      <Filter>Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageUS\ImageUSTool.h">
+      <Filter>ImageUS</Filter>
+    </ClInclude>
+    <ClInclude Include="Codecs\ImageCodec.h">
+      <Filter>Codecs</Filter>
+    </ClInclude>
+    <ClInclude Include="Codecs\ImageDecoder.h">
+      <Filter>Codecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLabel\BwLabel.h">
+      <Filter>ImageLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLabel\ImageLabel.h">
+      <Filter>ImageLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageResize\ImageResize.h">
+      <Filter>ImageResize</Filter>
+    </ClInclude>
+    <ClInclude Include="Histogram\Histogram.h">
+      <Filter>Histogram</Filter>
+    </ClInclude>
+    <ClInclude Include="Clustring\ImageClustring.h">
+      <Filter>Clustring</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageC\ImageCTool.h">
+      <Filter>ImageC</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageUI\ImageUITool.h">
+      <Filter>ImageUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BnImage\BnImage.h">
+      <Filter>BnImage</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLabel\SbType.h">
+      <Filter>ImageLabel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dithering\Makefile">
+      <Filter>Dithering</Filter>
+    </None>
+    <None Include="Image1\Makefile">
+      <Filter>Image1</Filter>
+    </None>
+    <None Include="Image3\Makefile">
+      <Filter>Image3</Filter>
+    </None>
+    <None Include="ImageTransform\Makefile">
+      <Filter>ImageTransform</Filter>
+    </None>
+    <None Include="Image24To8\Makefile">
+      <Filter>Image24To8</Filter>
+    </None>
+    <None Include="Gif\Makefile">
+      <Filter>Gif</Filter>
+    </None>
+    <None Include="PSD\Makefile">
+      <Filter>PSD</Filter>
+    </None>
+    <None Include="Image\Makefile">
+      <Filter>Image</Filter>
+    </None>
+    <None Include="BMP\Makefile">
+      <Filter>Bmp</Filter>
+    </None>
+    <None Include="Image.mk" />
+  </ItemGroup>
+</Project>

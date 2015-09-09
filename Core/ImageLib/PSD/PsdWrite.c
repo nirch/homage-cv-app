@@ -43,6 +43,8 @@ static void	psd_write_image_data_channel( gio_type *gio, image_type *im, int shi
 static void	psd_write_image_data( gio_type *gio, psd_type *psd );
 
 
+int	WriteImageResource_ESOLUTION( gio_type *gio, int resultion );
+
 
 int	
 psd_write_file( psd_type *psd, char *file )
@@ -86,7 +88,9 @@ int pos,	sizePos,	size;
 	gio_put_noM( gio, psd->height, 4 );	
 	gio_put_noM( gio, psd->width, 4 );	
 	gio_put_noM( gio, 8, 2 );					// 8 bits depth
-	gio_put_noM( gio, 3, 2 );					// mode
+
+	gio_put_noM( gio, psd->mode, 2 );			// mode
+//	gio_put_noM( gio, 3, 2 );					// mode
 	//0-Bitmap, 1-Grayscale, 2-Indexed, 3-RGB, 4-CMYK, 7-Multichannel,
 	//8-Duetone, 9-Lab
 
@@ -99,7 +103,9 @@ int pos,	sizePos,	size;
 
 
 //--- Image resources block
-	gio_put_noM( gio, 0, 4 );	// empty block
+	gio_put_noM( gio, 28, 4 );	// empty block
+
+	WriteImageResource_ESOLUTION( gio, psd->resolution );
 
 
 
@@ -207,7 +213,7 @@ int	imageDataSize;
 	gio_put_buffer( gio, "norm", 4 );
 	gio_put_noM( gio, MaxRGB, 1 );	//opacity
 	gio_put_noM( gio, 0, 1 );		// clipping
-	gio_put_noM( gio, 40, 1 );		// flags
+	gio_put_noM( gio, 26, 1 );		// flags
 	gio_put_noM( gio, 0, 1 );		// padding
 
 
@@ -290,4 +296,29 @@ int	i,	j;
 }
 
 
+int
+WriteImageResource_ESOLUTION( gio_type *gio, int resultion )
+{
+	gio_put_buffer( gio, "8BIM", 4 );
 
+	gio_put_noM( gio, 0x03ed, 2 ); 
+
+	
+	// name
+	gio_put_noM( gio, 0, 1 ); 
+	gio_put_noM( gio, 0, 1 ); 
+
+
+	// size
+	gio_put_noM( gio, 16, 4 ); 
+
+	gio_put_noM( gio, resultion*(1<<16), 4 ); 
+	gio_put_noM( gio, 1, 2 ); 
+	gio_put_noM( gio, 2, 2 ); 
+
+	gio_put_noM( gio, resultion*(1<<16), 4 ); 
+	gio_put_noM( gio, 1, 2 ); 
+	gio_put_noM( gio, 2, 2 ); 
+
+	return( 28 );
+}

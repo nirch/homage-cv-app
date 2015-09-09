@@ -9,6 +9,28 @@
 #define FIX(x) ((int) ((x) * (1L<<SCALEBITS) + 0.5))
 
 
+#ifdef _FIX
+#define COLOR_YUV2RGB( y, u, v, R, G, B )	\
+	{ \
+			R = 1.402*( u - (128)) + Y; \
+			B = 1.772*(v - (128)) + Y; \
+			G = 1.7035*( Y - 0.299*R - 0.114*B); \
+	}
+#else	
+#define COLOR_YUV2RGB( y, u, v, R, G, B )	\
+	{ \
+		R = ((FIX(1.402)*( u - (128)))>>SCALEBITS) + Y; \
+		B = ((FIX(1.772)*(v - (128)))>>SCALEBITS) + Y; \
+		G = (FIX(1.7035)* Y - FIX(1.7035*0.299)*R -FIX(1.7035* 0.114)*B )>>SCALEBITS; \
+	}
+#endif
+
+
+
+
+
+
+
 int 
 image_GetYUVFrame( image_type *sim, u_char **data, int *bytes )
 {
@@ -153,7 +175,7 @@ int	i,	j;
 //      Cr =  0.50000 * R - 0.41869 * G - 0.08131 * B  + 128
 
 
-#define MEP_FLOAT
+//#define MEP_FLOAT
 
 image_type *
 imageYUV420_to_RGB( image_type *sim, image_type *im )
@@ -165,7 +187,8 @@ int	i,	j;
 int	R,	G,	B,	Y,	Cr,	Cb;
 
 
-	im = image_recreate( im, sim->height, sim->width, 3, 1 );
+//	im = image_recreate( im, sim->height, sim->width, 3, 1 );
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
 
 
 
@@ -184,29 +207,22 @@ int	R,	G,	B,	Y,	Cr,	Cb;
 			Y  = *pY++;
 
 
-#ifdef MEP_FLOAT
-			R = 1.402*( Cr - (128)) + Y;
-			B = 1.772*(Cb - (128)) + Y;
-			G = 1.7035*( Y - 0.299*R - 0.114*B);
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B );
 
 			*tp++ = PUSH_TO_RANGE( R, 0, 255 );
 			*tp++ = PUSH_TO_RANGE( G, 0, 255 );
 			*tp++ = PUSH_TO_RANGE( B, 0, 255 );
-#else
-#endif
 
 			Y  = *pY++;
 
-#ifdef MEP_FLOAT
-			R = 1.402*( Cr - (128)) + Y;
-			B = 1.772*(Cb - (128)) + Y;
-			G = 1.7035*( Y - 0.299*R - 0.114*B);
+
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B );
+
 
 			*tp++ = PUSH_TO_RANGE( R, 0, 255 );
 			*tp++ = PUSH_TO_RANGE( G, 0, 255 );
 			*tp++ = PUSH_TO_RANGE( B, 0, 255 );
-#else
-#endif
+
 		}
 		if( (i & 0x01) == 0 ){
 			pCr -= sim->width/2;
@@ -219,3 +235,130 @@ int	R,	G,	B,	Y,	Cr,	Cb;
 
 	return( im );
 }
+
+
+
+#ifdef _AA_
+image_type *
+image_NV21_YUV_to_RGB( image_type *sim, image_type *im )
+{
+	u_char	*tp;
+	u_char	*pY,	*pCr,	*pCb;
+
+	int	i,	j;
+	int	R,	G,	B,	Y,	Cr,	Cb;
+
+
+//	im = image_recreate( im, sim->height, sim->width, 3, 1 );
+	im = image_realloc( im, sim->width, sim->height, 3, IMAGE_TYPE_U8, 1 );
+
+
+
+
+	tp = im->data;
+	pY = sim->data;
+	pCr = sim->data + sim->width*sim->height;
+
+
+	for( i = 0 ; i < im->row ; i++ ){
+		pCb = pCr+1; 
+		for( j = 0 ; j < im->column/2 ; j++ ){
+
+			Cr = *pCr++;
+			Cb = *pCr++;
+	
+			Y  = *pY++;
+
+
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B )
+
+			*tp++ = PUSH_TO_RANGE( R, 0, 255 );
+			*tp++ = PUSH_TO_RANGE( G, 0, 255 );
+			*tp++ = PUSH_TO_RANGE( B, 0, 255 );
+			
+			Y  = *pY++;
+
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B )
+
+			*tp++ = PUSH_TO_RANGE( R, 0, 255 );
+			*tp++ = PUSH_TO_RANGE( G, 0, 255 );
+			*tp++ = PUSH_TO_RANGE( B, 0, 255 );
+		}
+
+
+		if( (i & 0x01) == 0 ){
+			//pCr -= sim->width/2;
+			pCr -= sim->width;
+		}
+
+
+	}
+
+
+	return( im );
+}
+
+
+
+
+
+image_type *
+image_NV21_YUV_to_RGB_swap( image_type *sim, image_type *im )
+{
+	u_char	*tp;
+	u_char	*pY,	*pCr;
+
+	int	i,	j;
+	int	R,	G,	B,	Y,	Cr,	Cb;
+
+
+	im = image_realloc( im, sim->height, sim->width, 3, IMAGE_TYPE_U8, 1 );
+
+
+	tp = im->data;
+	pY = sim->data;
+	pCr = sim->data + sim->width*sim->height;
+
+
+	for( i = 0 ; i < im->width ; i++ ){
+		tp = IMAGE_PIXEL( im, im->height-1, i );
+		for( j = 0 ; j < im->height/2 ; j++ ){
+
+			Cr = *pCr++;
+			Cb = *pCr++;
+	
+			Y  = *pY++;
+
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B )
+
+			tp[0] = PUSH_TO_RANGE( R, 0, 255 );
+			tp[1] = PUSH_TO_RANGE( G, 0, 255 );
+			tp[2] = PUSH_TO_RANGE( B, 0, 255 );
+
+			tp -= 3*im->width;
+
+			Y  = *pY++;
+
+			COLOR_YUV2RGB( y, Cr, Cb, R, G, B )
+
+
+			tp[0] = PUSH_TO_RANGE( R, 0, 255 );
+			tp[1] = PUSH_TO_RANGE( G, 0, 255 );
+			tp[2] = PUSH_TO_RANGE( B, 0, 255 );
+
+			tp -= 3*im->width;
+
+		}
+
+
+		if( (i & 0x01) == 0 ){
+			pCr -= sim->width;
+		}
+
+	}
+
+
+	return( im );
+}
+#endif
+

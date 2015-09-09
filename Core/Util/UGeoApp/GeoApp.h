@@ -96,6 +96,14 @@ int	geo_approximate_line( vec2f_type v[], int no, float max_err, vec2f_type *p0,
 float	geo_approximate2( vec2f_type *p0, vec2f_type *p1, vec2f_type *v, vec2f_type *tang, int no, gapp_prm *gprm, float *a );
 
 
+	// GeoSmooth.cpp
+void	gapp_smooth( gapp_type *gapp );
+
+int		gapp_smooth_next( gapp_type *gapp, int k, int *i0, int *i1 );
+
+void	gapp_smooth_extend_end( gapp_type *gapp, int *i0, int *i1 );
+
+
 
 	// GappDump.c
 void	gapp_dump( gapp_type *gapp,  char *prefix, int index, char *suffix );

@@ -44,6 +44,23 @@ matrix3_set( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 )
 	m->a22 = R2->z;
 }
 
+
+void
+matrix3_get( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 )
+{
+	R0->x = m->a00;
+	R0->y = m->a10;
+	R0->z = m->a20;
+
+	R1->x = m->a01;
+	R1->y = m->a11;
+	R1->z = m->a21;
+
+	R2->x = m->a02;
+	R2->y = m->a12;
+	R2->z = m->a22;
+}
+
 void
 matrix3_set_row( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 )
 {

@@ -1,29 +1,34 @@
 #ifndef THREAD_H
 #define THREAD_H
 
-#ifdef _WIN32
+#ifdef WIN32
 #ifndef _WINDOWS_
 #include <windows.h>
 #endif
+#include "UThread/VEvent.h"
 #else
-#error _WIN32 must be defined before you include thread.h
+#include <pthread.h>
 #endif
 
 
-#include "UThread/VEvent.h"
+
 
 
 class CVThread
 {
+#ifdef WIN32
 	static DWORD WINAPI ThreadFunc(LPVOID pv)
+#else
+    static void *  ThreadFunc( void * pv)
+#endif
 	{
-		try
-		{
+//		try
+//		{
 		(reinterpret_cast<CVThread *>(pv))->Run();
-		}
-		catch(...)
-		{
-		}
+//		}
+//		catch(...)
+//		{
+//		}
 	return 0;
 	}
 public:
@@ -39,7 +44,7 @@ public:
 	
 	static void Sleep(long milliseconds=1);
 	
-	long StartThread( int flag=0 );	// flag == CREATE_SUSPENDED
+	int StartThread( int flag=0 );	// flag == CREATE_SUSPENDED
 
 	int ResumeThread();
 
@@ -47,21 +52,25 @@ public:
 	
 	virtual void Run()=0;
 
-	HANDLE m_handle;
 
 
 
-
+#ifdef _WIN32
 	void SetEventBegin();
 	long WaitEventBegin(  long milliseconds = INFINITE  );
 
 	void SetEventEnd();
 	long WaitEventEnd( long milliseconds = INFINITE  );
+#endif
 
-
+#ifdef _WIN32
+	HANDLE m_handle;
 
 	CVEvent	m_eBegin;
 	CVEvent	m_eEnd;
+#else 
+	pthread_t       m_threadId;
+#endif
 
 };
 

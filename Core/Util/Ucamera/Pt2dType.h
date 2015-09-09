@@ -32,7 +32,9 @@ extern "C" {
 #define PT2D_AXIS_XY	0		// NORMAL
 #define PT2D_AXIS_YX	1		// VIM
 
-
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored  "-Wvisibility"
+#endif
 
 
 	// p2d	-  2d point
@@ -190,7 +192,7 @@ void	pt2d_tanget_line( pt2d_type *pt0, pt2d_type *pt1, vec2f_type *p0, vec2f_typ
 
 void	pt2dA_moment( pt2dA_type *apt, vec2f_type *p, vec2f_type *v, float *e1, float *e2 );
 
-int		pt2dA_eigen2d( pt2dA_type *apt, int i0, int i1,  struct eigen2d_type *e );
+int		pt2dA_eigen2d( pt2dA_type *apt, int i0, int i1, struct eigen2d_type *e );
 
 pt2dA_type	*	pt2dA_append( pt2dA_type *apt, pt2dA_type *sapt );
 
@@ -268,6 +270,12 @@ int		pt2d_approximate_line_pv_split( pt2dA_type *apt, int i0, int i1, vec2f_type
 
 int		pt2dA_ellipse( pt2dA_type *apt, int i0, int i1, struct ellipse_type *e );
 
+
+
+	// Pt2dEigen.cpp
+int pt2A_eigen( pt2dA_type *apt, int i00, int ni, int cyclic, struct eigen2d_type *e );
+
+int pt2A_eigen_T( pt2dA_type *apt, int i0, float T, struct eigen2d_type *e );
 
 	//Pt2dApproximateLink.c
 void	pt2d_approximate_linkO( pt2dA_type *apt, vec2f_type *ctr, ln_type **link );

@@ -1,7 +1,8 @@
 /************************
  *	ImagePSDFile.c	*
  ************************/
-#include	<memory.h>
+//#include	<memory.h>
+#include <string.h>
 
 
 #include	"Uigp/igp.h"
@@ -118,6 +119,7 @@ static void	IndexPixel( PSDInfo *psd_info, u_int pixel, u_int *tp );
 static void	DecoderPixel( int channel, u_int pixel, u_int *tp );
 
 
+int	ReadResources( gio_type *gio );
 
 
 int	
@@ -173,8 +175,8 @@ LayerInfoEx *arr_layer_infoEx;
 	//0-Bitmap, 1-Grayscale, 2-Indexed, 3-RGB, 4-CMYK, 7-Multichannel,
 	//8-Duetone, 9-Lab
 
-
-	//psd_info.storage_class = ;
+//yoram 13-01-13
+//	psd_info.storage_class = PseudoClass;
 
 	if (psd_info.mode == CMYKMode)
 		psd_info.colorspace = CMYKColorspace;
@@ -206,6 +208,10 @@ LayerInfoEx *arr_layer_infoEx;
 	//Image resources
 	length = gio_get_noM( gio, 4 );
 	pos = gio_ftell( gio );
+
+
+//	ReadResources( gio );
+
 	gio_seek( gio, pos + length );
 
 /////////////////////////////////////////////////	
@@ -228,6 +234,7 @@ LayerInfoEx *arr_layer_infoEx;
 	psd = *ppsd = psd_alloc( nLayer );
 	psd->height = psd_info.rows;
 	psd->width = psd_info.columns;
+	psd->mode = psd_info.mode;
 
 
 	for ( i = 0; i < nLayer; i++ ){
@@ -239,6 +246,14 @@ LayerInfoEx *arr_layer_infoEx;
 		psdL->image = arr_layer_infoEx[i].image;
 		memcpy( psdL->name, arr_layer_infoEx[i].name, 32 );
 
+		psdL->flag = arr_layer_infoEx[i].flags;
+		psdL->clipping = arr_layer_infoEx[i].clipping;
+		psdL->matte = arr_layer_infoEx[i].matte;
+//		psdL->blendkey = arr_layer_infoEx[i].blendkey;
+
+
+
+
 		psd_add_layer( psd, psdL );
 	}
 
@@ -248,6 +263,7 @@ LayerInfoEx *arr_layer_infoEx;
 	pos = gio_ftell( gio );
 
 
+	return( 1 );
 
 	// image data bloack
 
@@ -351,12 +367,13 @@ char name_layer[256];
     gio_getc( gio);  // padding 
 
 
-/* 30.12.03  Variant without name of Layer  
-    size=gio_get_noM( gio, 4 );
-    for ( j=0; j < size; j++)
-		gio_getc( gio);
-30.12.03  Variant without name of Layer  */
-    size=gio_get_noM( gio, 4 );
+/* 30.12.03  Variant without name of Layer  */
+//   size=gio_get_noM( gio, 4 );
+//  for ( j=0; j < size; j++)
+//		gio_getc( gio);
+/*30.12.03  Variant without name of Layer  */
+   size=gio_get_noM( gio, 4 );
+
     sizeMaskData=gio_get_noM( gio, 4 );
     for ( j=0; j < sizeMaskData; j++)
 		gio_getc( gio);
@@ -732,4 +749,76 @@ u_int *tp;
 
 		}
 	}
+}
+
+#ifdef _AA_
+struct _ImageDataBlock
+{
+	BYTE Type[4];  /* Always "8BIM" */
+	WORD ID;       /* (See table below) */
+	BYTE Name[];   /* Even-length Pascal-format string, 2 bytes or longer */
+	LONG Size;     /* Length of resource data following, in bytes */
+	BYTE Data[];   /* Resource data, padded to even length */
+};
+
+#endif
+
+typedef struct _ResolutionInfo
+{
+	int hRes;              /* Fixed-point number: pixels per inch */
+	short hResUnit;          /* 1=pixels per inch, 2=pixels per centimeter */
+	short WidthUnit;         /* 1=in, 2=cm, 3=pt, 4=picas, 5=columns */
+	int vRes;              /* Fixed-point number: pixels per inch */
+	short vResUnit;          /* 1=pixels per inch, 2=pixels per centimeter */
+	short HeightUnit;        /* 1=in, 2=cm, 3=pt, 4=picas, 5=columns */
+} RESOLUTIONINFO;
+
+
+int	ReadImageBlock( gio_type *gio );
+
+
+int	ReadResources( gio_type *gio )
+{
+	while( 1 )
+		ReadImageBlock( gio );
+}
+
+int
+ReadImageBlock( gio_type *gio )
+{
+char	type[8],	name[1024];
+int	id,	len,	size,	pos;
+
+RESOLUTIONINFO aa;
+
+	gio_get_buffer( gio, type, 4 );
+	type[4] = 0;
+
+	id	= (short)gio_get_noM( gio, 2 ); 
+
+	len	= (short)gio_get_noM( gio, 1 ); 
+//	if( len > 0 ){
+		gio_get_buffer( gio, name, len+1 );
+		name[len+1] = 0;
+//	}
+
+
+	size	= gio_get_noM( gio, 4 );
+
+	pos = gio_ftell( gio );
+
+	if( id == 0x03ed ){
+		aa.hRes = gio_get_noM( gio, 4 );              /* Fixed-point number: pixels per inch */
+		aa.hResUnit = gio_get_noM( gio, 2 );          /* 1=pixels per inch, 2=pixels per centimeter */
+		aa.WidthUnit = gio_get_noM( gio, 2 );         /* 1=in, 2=cm, 3=pt, 4=picas, 5=columns */
+		aa.vRes = gio_get_noM( gio, 4 );;            /* Fixed-point number: pixels per inch */
+		aa.vResUnit = gio_get_noM( gio, 2 );          /* 1=pixels per inch, 2=pixels per centimeter */
+		aa.HeightUnit = gio_get_noM( gio, 2 );      /* 1=in, 2=cm, 3=pt, 4=picas, 5=columns */
+	}
+
+
+	if( size &0x01 )	size += 1;
+	gio_seek( gio, pos + size );
+
+	return( 1 );
 }

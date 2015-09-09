@@ -22,6 +22,12 @@ typedef struct matrix3_type {
             double        a20, a21, a22;
         };
 
+		struct {
+			vec3d_type	R0;
+			vec3d_type	R1;
+			vec3d_type	R2;
+		};
+
         double a[3][3];
 
 		double A[3*3];
@@ -36,6 +42,9 @@ void	matrix3_unit( matrix3_type *m );
 void	matrix3_zero( matrix3_type *m );
 
 void	matrix3_set( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 );
+
+void	matrix3_get( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 );
+
 
 void	matrix3_set_row( matrix3_type *m, vec3d_type *R0, vec3d_type *R1, vec3d_type *R2 );
 

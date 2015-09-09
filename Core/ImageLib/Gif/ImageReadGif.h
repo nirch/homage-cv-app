@@ -49,6 +49,15 @@ image_type *	image_read_gif_file( char *file );
 
 image_type *	image_read_gif_buffer( char *data, int bytes, int Fdata );
 
+
+	// ImageReadGift.cpp
+image_type *	image_read_gift( char *file );
+
+image_type *	image_read_gift_from_buffer( u_char *data, int nData );
+
+
+
+
 int				image_read_gif_is_valid_SINGATURE( char *data, int bytes );
 
 

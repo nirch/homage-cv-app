@@ -105,6 +105,7 @@ int Suffix[4096];
 		no = 1<<((Misc&7)+1);
 //		if( *pal != NULL )	palette_destroy( *pal );
 		*pal = palette_alloc( no );
+		(*pal)->nA = no;
 		for( i = 0 ; i < no ; i++ ){
 			(*pal)->data[i].Red = GIO_GETC( gifIo->gio);
 			(*pal)->data[i].Green = GIO_GETC( gifIo->gio);

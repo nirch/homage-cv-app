@@ -1,9 +1,10 @@
 //  Defines the entry point for the console application.
 //
 
-#include <memory.h>
+//#include <memory.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "Uigp/igp.h"
 
@@ -1376,6 +1377,7 @@ void BitMatrix::ilya1d_simple_new2(int *bitWidth,int *centers,float x0,float y0,
 }//ilya1d_reduction
 
 
+#ifdef _AA_
 void BitMatrix::buildIntegratedMatrix(BitMatrix SubMatrix, int *bitWidth, float x0, float y0, int width,
 								  int length,float nx,float ny, int& integralCount, float& meanX, float& meanY,
 								  std::vector< std::pair<int,int> > &raw_points) const
@@ -1698,7 +1700,7 @@ void BitMatrix::buildIntegratedMatrix(BitMatrix SubMatrix, int *bitWidth, float 
 	meanX /= integralCount;
 	meanY /= integralCount;
 }//ilya1d_reduction
-
+#endif
 
 
 void BitMatrix::ilya1d_simple_new3(int *bitWidth,int *centers,float x0,float y0,int width,

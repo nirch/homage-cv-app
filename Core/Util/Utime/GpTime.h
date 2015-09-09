@@ -17,12 +17,14 @@ extern "C" {
 
 #include "Uigp/igp.h"
 
+
+#ifndef vTime_type
 #ifdef WIN32
 	typedef _int64	vTime_type;
 #else
 	typedef long long vTime_type;
 #endif
-
+#endif
 
 
 typedef struct gpTime_type {
@@ -98,14 +100,24 @@ int	gpTime_base();
 
 
 int	gpTime(  int base_time  );
-#define	gp_time	gpTime
+//#define	gp_time	gpTime
+
 
 vTime_type 	vTime();
 
+int vTime_scheduler( int type );
+
+void	vTimer_init( vTimer_type *vt, float mpt );
+
+int		vTimer_test( vTimer_type *vt, vTime_type t );
+
+
 
 char *	gp_dateTime_iso681( char *buf, time_t timeStamp );
+char *	gpTime_date_iso681( char *buf, time_t timeStamp );
+
 char *	gp_time_iso681( char *buf, time_t timeStamp );
-char *	gp_time_iso681( char *buf, time_t timeStamp );
+
 
 
 char *	gp_time_string( char *buf, int Fhour );
@@ -120,9 +132,6 @@ char *	gpTime_asctime( char *str, vTime_type vt );
 
 
 
-void	vTimer_init( vTimer_type *vt, float mpt );
-
-int		vTimer_test( vTimer_type *vt, vTime_type t );
 
 
 

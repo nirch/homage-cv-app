@@ -159,6 +159,9 @@ void	pln_append( pln_type *pl, pln_type *pl1 );
 
 void	pln_end_point( pln_type *pl, vec2d *p );
 
+void	pln_remove_zero( pln_type *pl );
+
+
 void	pln_gt2p( pln_type *pl, float gt, vec2f_type *p );
 
 
@@ -201,7 +204,6 @@ vl2fA_type *	plnA_to_vlA( plnA_type *apl, vl2fA_type *avl );
 
 float	plnA_group_length( plnA_type *aP, int group );
 
-void	plnA_destroy_group( plnA_type *apl, int group );
 
 
 
@@ -217,6 +219,8 @@ void	pln_translate( pln_type *pl, float x, float y );
 void	plnA_clear( plnA_type *apl );
 
 void	plnA_destroy_pl( plnA_type *apl, int i0 );
+
+void	plnA_destroy_group( plnA_type *apl, int group );
 
 
 plnA_type *	plnA_copy( plnA_type *apl, int fData, plnA_type *capl );
@@ -236,6 +240,9 @@ int	pln_distanceG( pln_type *pl, float gt0, float gt1, vec2f_type *p, dPln_type 
 int	pln_distance_pln( pln_type *bpl, pln_type *pl, dPln_type *md );
 
 int	pln_distance_pln_u( pln_type *bpl, pln_type *pl, dPln_type *md );
+
+int	pln_distance_plnM( pln_type *bpl, pln_type *pl, float *m0, float *m1 );
+
 
 
 void	pln_box( pln_type *pl, box2f_type *box );
@@ -410,6 +417,8 @@ typedef struct lnFit_type {
 	float	dis;
 	float cover;
 
+	float cover1;
+
 } lnFit_type;
 
 
@@ -433,6 +442,9 @@ int	plnA_fitT( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, 
 
 int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
+int	plnA_fit_compareN( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
+
+int	plnA_fit_compareW( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float W, float *cover, float *dis );
 
 
 	// PlnGroup.c
@@ -478,6 +490,8 @@ int	pln_eigen( pln_type *pl, float dt, struct eigen2d_type *e );
 
 int	pln_eigenS( pln_type *pl, float gt0, float gt1, float dt, struct eigen2d_type *e );
 
+int	plnA_eigen( plnA_type *apl, struct eigen2d_type *e );
+
 
 pt2dA_type * pln_apt( pln_type *pl, float dt );
 
@@ -488,6 +502,8 @@ pt2dA_type * pln_apt( pln_type *pl, float dt );
 int		pln_interior_side( pln_type *pl );
 
 void	pln_interior_force_right( pln_type *pl );
+
+void		pln_interior_force_left( pln_type *pl );
 
 
 
@@ -537,10 +553,24 @@ void	plnF_clear( plnF_type *vpl, int iFrame );
 void	plnF_destroy_empty( plnF_type *fpl );
 
 
+	// PlnPolygon.cpp
+vec2fA_type *	pln_to_polygon( pln_type *pl, float DT );
+
+
+
 	// PlnStraightlineSplit.cpp
 plnA_type *	plnA_straightline_split( plnA_type *apl, float minLen, plnA_type *apl1 );
 
 plnA_type * plnA_straightline_remove( plnA_type *apl, float minLen, plnA_type *apl1 );
+
+
+
+	// PlnFilterParallelIn.cpp
+int	plnF_filter_parallel_in( plnF_type *fpl, float dT );
+
+int	plnA_filter_parallel_in( plnA_type *apl, float dT );
+
+int	plnA_filter_parallel_in_1( plnA_type *apl, int i0, float dT );
 
 
 

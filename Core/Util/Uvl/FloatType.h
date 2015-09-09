@@ -33,6 +33,14 @@ void	floatA_add( floatA_type *tai, floatA_type *ai );
 
 void	floatA_add( floatA_type *as, int val[], int nVal );
 
+void	floatA_cycle( floatA_type *as, int n );
+
+
+void	floatA_st( floatA_type *as, struct st_type *st );
+
+float	floatA_average( floatA_type *as );
+
+
 int		floatA_index( floatA_type *ai, int val );
 
 void	floatA_write( floatA_type *ai, FILE *fp );

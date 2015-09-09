@@ -77,6 +77,24 @@ CVimJni::CreateJByteArray(JNIEnv *env, char *data, int len )
 }
 
 
+//void
+//ujni_releaseJByteArray(JNIEnv *env, jbyteArray arr )
+//{
+//	jbyte *data;
+//	int len = 1;
+//
+//	if (env == NULL) return;
+//
+//	env->ReleaseByteArrayElements(arr, data, len);
+//
+//	if (data != NULL)
+//	{
+//		delete data;
+//		data = NULL;
+//	}
+//}
+
+
 jstring 
 CVimJni::CreateJString( JNIEnv *env, char *data, int len )
 {

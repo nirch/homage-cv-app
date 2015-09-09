@@ -67,10 +67,13 @@ image1_gridient_sobol_value( image_type *sim, image_type *tim )
 	int	cx,	cy,	val;
 
 
-	if( tim == NULL ){
-		tim = image_create( sim->row, sim->column, 1, 1, NULL );
-		image1_const( tim, 0 );
-	}
+	//if( tim == NULL ){
+	//	tim = image_create( sim->row, sim->column, 1, 1, NULL );
+	//	image1_const( tim, 0 );
+	//}
+
+	tim = image_realloc( tim, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+	image1_const( tim, 0 );
 
 
 	sp = (u_char *)sim->data;

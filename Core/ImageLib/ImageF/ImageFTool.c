@@ -122,6 +122,30 @@ int	i,	j;
 }
 
 
+image_type *
+imageF_to_image1_axb( image_type *sim, float a, float b, image_type *im )
+{
+	float	*sp;
+	u_char	*tp;
+	int	tmp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+
+	sp = (float *)sim->data;
+	tp = im->data;
+
+	for( i = 0 ; i < im->row ; i++ )
+		for( j = 0 ; j < im->column ; j++, sp++, tp++ ){
+			tmp = *sp * a + b;
+			*tp = PUSH_TO_RANGE( tmp, 0, 255 );
+		}
+
+
+		return( im );
+}
+
 
 
 
@@ -306,7 +330,7 @@ int	i,	j,	fSet;
 	for( i = 0 ; i < im->row ; i++ )
 		for( j = 0 ; j < im->column ; j++, sp++ ){
 //-32767.000
-			if( *sp == -32767 )	continue;
+			if( *sp == -32767 || *sp == 0 )	continue;
 
 			if( fSet == 0 ){
 				*min = *max = *sp;
@@ -483,8 +507,10 @@ int	i,	j;
 	tp = (float *)im->data;
 
 	for( i = 0 ; i < im->row ; i++ )
-		for( j = 0 ; j < im->column ; j++, sp++, tp++ )
-			*tp = *sp * factor;
+		for( j = 0 ; j < im->column ; j++, sp++, tp++ ){
+			*tp = 255*(*sp - min) /( max - min );
+		//	*tp = *sp * factor;
+		}
 
 
 	return( im );
@@ -780,6 +806,85 @@ imageF_binary( image_type *sim, int T, image_type *im )
 		for( j = 0 ; j < sim->column ; j++, sp++, tp++ ){
 			*tp = ( *sp <= T )? 0 : 255;
 
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageF_levelR( image_type *sim, float min, float max, image_type *im )
+{
+	float	*sp;
+	u_char	*tp;
+
+	int	i,	j;
+
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data_f;
+	tp = im->data;
+
+
+	for( i = 0; i < im->row ; i++ )
+		for( j = 0 ; j < im->column ; j++, sp++, tp++ ){
+			if( *sp < min ){
+				*tp = 0;
+			}
+			else if( *sp > max )
+					*tp = 255;
+			else {
+				int k = ( 255 * (*sp - min))/(max - min );
+
+				*tp = PUSH_TO_RANGE( k, 0, 255 );
+			}
+		}
+
+		return( im );
+}
+
+
+
+
+image_type *	
+imageF_level( image_type *sim, float m0, float m1, float range[], int nRange, image_type *im )
+{
+	float	*sp;
+	u_char	*tp;
+	int	h[256];
+	int	r,	val;
+
+	int	i,	j,	k;
+
+	k = 0;
+	for( k = 0, i = 0 ; k < nRange ; k++){
+		r = 255*(range[k] - m0 )/(m1-m0);
+		if( r > 255 )	r = 255;
+		val = k*255/nRange;
+		for( ; i < r ; i++ )
+			h[i] = val;
+
+	}
+
+	for( ; i < 256 ; i++ )
+		h[i] = 255;
+
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data_f;
+	tp = im->data;
+
+
+	for( i = 0; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++, sp++, tp++ ){
+
+			k = 255*( *sp - m0) / ( m1 - m0 );
+			k = PUSH_TO_RANGE( k, 0, 255);
+
+			*tp = h[k];
 		}
 	}
 

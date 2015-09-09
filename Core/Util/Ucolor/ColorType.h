@@ -23,17 +23,26 @@ extern "C" {
 #define		COLOR_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
 #define		COLOR_RGBA( a, r, g, b ) 	( ((a)<<24) | ((r)<<16) | ((g)<<8) | (b) )
 #endif
-    
-    
-#ifdef __APPLE__
+
+
+#ifdef __pnacl__
 #define		COLOR_RED( pixel )		( ((pixel) >> 16) &0xff )
 #define		COLOR_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
 #define		COLOR_BLUE( pixel )	(  (pixel)&0xff )
-    
+
 #define		COLOR_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
 #define		COLOR_RGBA( a, r, g, b ) 	( ((a)<<24) | ((r)<<16) | ((g)<<8) | (b) )
 #endif
 
+
+#ifdef __APPLE__
+#define		COLOR_RED( pixel )		( ((pixel) >> 16) &0xff )
+#define		COLOR_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
+#define		COLOR_BLUE( pixel )	(  (pixel)&0xff )
+
+#define		COLOR_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
+#define		COLOR_RGBA( a, r, g, b ) 	( ((a)<<24) | ((r)<<16) | ((g)<<8) | (b) )
+#endif
 
 #ifdef __linux
 #define		COLOR_ALPHA( pixel )	( ((pixel) >> 24) &0xff )

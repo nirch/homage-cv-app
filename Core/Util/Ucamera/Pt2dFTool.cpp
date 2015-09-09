@@ -136,7 +136,7 @@ char	signature[64];
 	if( (fp = fopen( file, "rb")) == NULL )
 		return( -1 );
 
-	fscanf(fp, "%s  %d  %d", &signature, &version, &n );
+	fscanf(fp, "%s  %d  %d", signature, &version, &n );
 	if( strcmp( signature, "PTF") != 0 ){
 		fseek( fp, 0, SEEK_SET );
 		version = 0;
@@ -176,6 +176,8 @@ char	signature[64];
 			apt->axis = PT2D_AXIS_XY;
 		}
 
+		if( apt->nA >= apt->NA )
+			apt = pt2dA_realloc( apt, apt->nA + 64 );
 
 		apt->a[apt->nA++] = pt;
 	}

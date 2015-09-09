@@ -539,6 +539,62 @@ int	i,	j;
 	return( im );
 }
 
+int
+imageT_set_FF( image_type *sim )
+{
+
+	int	i,	j;
+
+	
+
+	u_int *sp = sim->data_ui;
+	
+	for( i = 0; i < sim->height; i++ ){
+		for( j = 0 ; j < sim->width; j++, sp++){
+			*sp |= 0xFF000000;
+		}
+	}
+
+	return( 1 );
+}
+
+int
+	imageT_set_00( image_type *sim )
+{
+
+	int	i,	j;
+
+
+
+	u_int *sp = sim->data_ui;
+
+	for( i = 0; i < sim->height; i++ ){
+		for( j = 0 ; j < sim->width; j++, sp++){
+			*sp &= 0x00FFFFFF;
+		}
+	}
+
+	return( 1 );
+}
+
+
+int
+imageT_nPixel( image_type *sim )
+{
+	int	i,	j,	n;
+
+	u_int *sp = sim->data_ui;
+
+	for( i = 0, n = 0 ; i < sim->height; i++ ){
+		for( j = 0 ; j < sim->width; j++, sp++){
+			if( *sp & 0xFF000000 )
+				n++;
+		}
+	}
+
+	return( n );
+}
+
 
 void
 imageT_clearN( image_type *image )
@@ -898,6 +954,32 @@ imageA_set_alpha3( image_type *sim, int transparent, image_type *mim, image_type
 }
 
 
+void
+imageA_set_alpha_band( image_type *sim, image_type *aim )
+{
+
+	int	i,	j;
+
+
+
+
+	u_int *sp = sim->data_ui;
+	u_char *ap = aim->data;
+
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, ap++ ){
+
+			u_int t = *ap;
+
+			*sp = (*sp  & 0xFFFFFF )| ( t << 24 );
+
+			///*sp = (0xFF0000 ) | ( t << 24 );
+		}
+	}
+
+}
+
+
 static image_type *	imageA_set_alpha3_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
 
 
@@ -1108,6 +1190,7 @@ image_type *
 
 
 			if( w == 0 ){
+
 				*tp++ = R;
 				*tp++ = G;
 				*tp++ = B;
@@ -1131,6 +1214,80 @@ image_type *
 			*tp++ =  (( w * ( r - R)) >> 8)  + R;
 			*tp++ =  (( w * ( g - G)) >> 8)  + G;
 			*tp++ =  (( w * ( b - B)) >> 8)  + B;
+
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageA_set_colorM4( image_type *sim, int color, image_type *im )
+{
+	u_int	*tp;
+	u_int	*sp;
+	int	i,	j;
+	int	R,	G,	B;
+
+
+
+
+	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
+
+
+	R = IMAGE4_RED(color);
+	G = IMAGE4_GREEN(color);
+	B = IMAGE4_BLUE(color);
+
+
+	sp = sim->data_ui;
+
+	tp = im->data_ui;
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp ++ ){
+
+			int r = IMAGE4_RED(*sp);
+			int g = IMAGE4_GREEN(*sp);
+			int b = IMAGE4_BLUE(*sp);
+			int w = (*sp)>>24 & 0xFF;
+			w = 255 - w;
+
+
+			if( w == 0 ){
+				*tp++ = color;
+
+				//*tp++ = R;
+				//*tp++ = G;
+				//*tp++ = B;
+				//*tp++ = 0;
+				continue;
+			}
+
+
+
+
+			if( w == 255 ){
+				//*tp++ = 0;
+				//*tp++ = r;
+				//*tp++ = g;
+				//*tp++ = b;
+
+				*tp++ = IMAGE4_RGB( r, g, b );
+				continue;
+			}
+
+
+			w = w +1 ;
+
+			//*tp++ = 0;
+			//*tp++ =  (( w * ( r - R)) >> 8)  + R;
+			//*tp++ =  (( w * ( g - G)) >> 8)  + G;
+			//*tp++ =  (( w * ( b - B)) >> 8)  + B;
+			r =  (( w * ( r - R)) >> 8)  + R;
+			g =  (( w * ( g - G)) >> 8)  + G;
+			b =  (( w * ( b - B)) >> 8)  + B;
+			*tp++ = IMAGE4_RGB( r, g, b );
 
 		}
 	}

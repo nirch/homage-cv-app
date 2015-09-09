@@ -280,8 +280,8 @@ image_readBMP32( gio_type *gio, int row, int column )
 {
 image_type *im;
 int     i, j;
-u_int	*p;
-int	r,	g,	b;
+u_int	*tp;
+int	r,	g,	b,	a;
 
 //	im = image_create( row, column, 4, 1, 0 );
 	im = image_alloc( column, row, 4, IMAGE_TYPE_U8, 1 );
@@ -291,15 +291,15 @@ int	r,	g,	b;
 //						 * EOscanline */
 
 	for (i = row - 1; i >= 0; i--) {
-		p = IMAGE4_PIXEL( im, i, 0 );
+		tp = IMAGE4_PIXEL( im, i, 0 );
 
 		for (j = 0; j < column; j++) {
 			b = GIO_GETC( gio );
 			g = GIO_GETC( gio );
 			r = GIO_GETC( gio );
-			GIO_GETC( gio );
+			a = GIO_GETC( gio );
 
-			*p++ = IMAGE4_RGB( r, g, b );
+			*tp++ = (a<<24) | IMAGE4_RGB( r, g, b );
 		}
 
 //		for (j = 0; j < padb; j++)	GIO_GETC( gio);

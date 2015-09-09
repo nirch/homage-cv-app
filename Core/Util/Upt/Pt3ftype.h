@@ -60,6 +60,17 @@ typedef struct pt3fA_type {
 
 
 
+typedef struct pt3fG_type {
+
+	int nA;
+
+	int	NA;
+
+
+	pt3fA_type	**a;
+
+} pt3fG_type;
+
 
 
 
@@ -95,8 +106,15 @@ void	pt3fA_translate( pt3fA_type *apt, float x, float y, float z );
 
 void	pt3fA_scale( pt3fA_type *apt, float scale );
 
-double	pt3dA_distance2( pt3fA_type *apt, vec3f_type *p );
+double	pt3fA_distance2( pt3fA_type *apt, vec3f_type *p );
 
+float	pt3fA_length( pt3fA_type *apt );
+
+int	pt3fA_t2p( pt3fA_type *apt, float t, vec3f_type *p );
+
+pt3fG_type *pt3fG_alloc( int n );
+
+void	pt3fG_destroy( pt3fG_type *apt );
 
 
 
@@ -105,10 +123,13 @@ double	pt3dA_distance2( pt3fA_type *apt, vec3f_type *p );
 void	pt3fA_dump( pt3fA_type *apt, char *prefix, int index, char *suffix );
 
 //#define PT3_VERSION	1
-
+int	pt3fG_write_to_file( pt3fG_type *apt, char *file );
 int	pt3fA_write_to_file( pt3fA_type *apt, char *file );
+int	pt3fA_write( pt3fA_type *apt, FILE *fp );
+
 
 int	pt3fA_read_from_file( pt3fA_type **av, char *file );
+int	pt3fA_read( pt3fA_type **apt, FILE *fp );
 
 
 

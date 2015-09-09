@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <fcntl.h>
 */
-#include <sys/timeb.h>
+
 #include <time.h>
 
 #ifndef WIN32
@@ -15,6 +15,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 #else
+#include <sys/timeb.h>
 # include <direct.h>
 # include <io.h>
 #endif
@@ -22,6 +23,7 @@
 
 #include "zip_file.h"
 #include "Uigp/igp.h"
+#include "UTime/GpTime.h"
 
 
 #define MAXFILENAME (256)
@@ -47,7 +49,7 @@ int zip_files_date( char *pathname, int deltaClock )
 char *files[MAX_NUM_OF_FILES];
 int  num_of_files, i;
 
-struct timeb timeNow;
+//struct timeb timeNow;
 long timeBefor, timeDelta, timeWrite;
 
 char dir[MAXFILENAME], name[MAXFILENAME], extension[MAXFILENAME];
@@ -57,9 +59,12 @@ char filename[2*MAXFILENAME];
 	if ( deltaClock <= 0 )
 		deltaClock = DELTA_CLOCK_DEFAULT;
 
-	ftime( &timeNow );
+//	ftime( &timeNow );
+//	timeDelta = (long)deltaClock*3600L;
+//	timeBefor = timeNow.time - timeDelta;
+
 	timeDelta = (long)deltaClock*3600L;
-	timeBefor = timeNow.time - timeDelta;
+	timeBefor = vTime()/1000 - timeDelta;
 
 	num_of_files = gpDir_get_files_list( pathname, 0, 0,
 						 files, MAX_NUM_OF_FILES, FULL_PATH );

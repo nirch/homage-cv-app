@@ -23,6 +23,25 @@ static int		pln_min_x0( pln_type *pl, box2f_type *b, float *x0, float *gt0 );
 
 
 
+int CPlnHeadTracker::HeadPose( plnA_type *apl, headPose_type *h )
+{
+	vec2f_type p;
+
+	int ret = HeadPose( apl->a[0], NULL, &p );
+
+	if( ret < 0 && apl->nA > 1 )
+		ret = HeadPose( apl->a[1], NULL, &p );
+
+	if( ret < 0 )	return( -1 );
+
+	float scale = 1.0;
+	headPose_set( h, -1, 0, p.x, p.y, scale, 0.0 );
+
+	return( ret );
+}
+
+
+
 
 int CPlnHeadTracker::HeadPose( pln_type *pl, pln_type **spl, vec2f_type *p )
 {

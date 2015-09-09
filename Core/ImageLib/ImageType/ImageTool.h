@@ -61,6 +61,8 @@ image_type *	image4_to_android( image_type *sim, image_type *im );
 
 image_type *	image3_to_android( image_type *sim, image_type *im );
 
+	// ImagePncal.cpp
+image_type *image4_to_pncal( image_type *sim, image_type *im );
 
 
 void		image4_mark( image_type *im, int row0, int col0,
@@ -239,10 +241,19 @@ void	imageT_clear( image_type *im, int color );
 
 image_type * imageT_copy_alpha( image_type *sim, image_type *im );
 
+int	imageT_set_FF( image_type *sim );
+
+int	imageT_set_00( image_type *sim );
+
+int	imageT_nPixel( image_type *sim );
+
+
 
 image_type * imageA_set_alpha( image_type *sim, int transparent, image_type *mim, image_type *im );
 
 image_type * imageA_set_alpha_inversed_mask( image_type *sim, int transparent, image_type *mim, image_type *im );
+
+void	imageA_set_alpha_band( image_type *sim, image_type *aim );
 
 
 image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent, int color, image_type *im );
@@ -250,6 +261,8 @@ image_type * imageA_set_color( image_type *sim, image_type *mim, int transparent
 image_type *imageA_set_colorN( image_type *sim, image_type *mim, int color, image_type *im );
 
 image_type * imageA_set_colorM( image_type *sim, int color, image_type *im );
+
+image_type *	imageA_set_colorM4( image_type *sim, int color, image_type *im );
 
 
 image_type *imageA_set_backgorund( image_type *sim, image_type *mim, image_type *bim, image_type *im );

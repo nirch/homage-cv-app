@@ -64,6 +64,12 @@ int	crPln_create( pln_type *bpl, pln_type *pl, int iPl, float r1, float r2, int 
 int	crPln_createN( pln_type *bpl, pln_type *pl, int iPl, float r0, float r1, crPln_type cr[] );
 
 
+
+int	crPlnA_parallel( pln_type *bpl, plnA_type *apl, int i0,  float r1, float r2, float aT, crPlnA_type *ac );
+int	crPln_create_parallel( pln_type *bpl, pln_type *pl, int iPl, float r1, float r2, float aT, crPln_type cr[] );
+
+
+
 void	crPln_inverse( crPln_type *c, int fPl );
 
 

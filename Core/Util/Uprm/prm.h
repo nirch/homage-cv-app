@@ -14,7 +14,7 @@ extern "C" {
 /*
  *   Handling parameters .
  *      Usefull for non-interface algorithms as well as for interface .
- * /
+ */
 
 
 /*

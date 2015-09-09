@@ -362,6 +362,7 @@ int	gif89a;
 		no = 1<<((mask&7)+1);
 		if( gifIo->palette != NULL )	palette_destroy( gifIo->palette );
 		gifIo->palette = palette_alloc( no );
+		gifIo->palette->nA = no;
 		for( i = 0 ; i < no ; i++ ){
 			(gifIo->palette)->data[i].Red = GIO_GETC( gifIo->gio);
 			(gifIo->palette)->data[i].Green = GIO_GETC( gifIo->gio);
@@ -403,6 +404,8 @@ palette_type *palette;
 int	top,	left;
 int	r,	g,	b,	color;
 
+	im = image_read_gif_next_imageData( gifIo, &top, &left, &palette );
+
 	if ( gifIo->im == NULL ){
 		gifIo->im = image_create( gifIo->row, gifIo->column, 4, 4, NULL );
 
@@ -418,7 +421,7 @@ int	r,	g,	b,	color;
 //		image4_const( gifIo->im, 0xffffff ); 
 	}
 
-	im = image_read_gif_next_imageData( gifIo, &top, &left, &palette );
+//	im = image_read_gif_next_imageData( gifIo, &top, &left, &palette );
 
 
 

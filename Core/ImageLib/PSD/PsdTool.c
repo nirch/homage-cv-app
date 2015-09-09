@@ -26,6 +26,10 @@ psd_type	*psd;
 
 	psd->nLayer = 0;
 
+	psd->resolution = 72;
+
+	psd->mode = 3; // RGB
+
 
 	psd->image = NULL;
 

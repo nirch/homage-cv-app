@@ -4,6 +4,10 @@
 #include	<math.h>
 #include <stdlib.h>
 
+#define _GPLOG
+
+#include "Ulog/Log.h"
+
 #ifdef _DEBUG
 #define _DUMP
 #endif
@@ -24,6 +28,8 @@ CHomageRenderer::CHomageRenderer()
 
 	m_nS = 0;
 	m_nOut = 0;
+
+	m_process = 0;
 }
 
 CHomageRenderer::~CHomageRenderer()
@@ -80,6 +86,8 @@ int CHomageRenderer::AddOutput( CHrOutputI *o )
 {
 	m_aOut[m_nOut++] = o;
 
+GPLOGF( ("AddOutput: %d\n", m_nOut ));
+
 	return( m_nOut-1 );
 }
 
@@ -92,95 +100,6 @@ CHrOutputI * CHomageRenderer::GetOuput( int i )
 }
 
 
-int
-CHomageRenderer::Process( CHrSourceI *b, CHrSourceI *u,  CHrSourceI *f, CHrOutputI *out[], int nOut )
-{
-int	i;
-image_type *im;
-
-
-	AddSource( b );
-	AddSource( u );
-	AddSource( f );
-
-	for( i = 0 ; i < nOut ; i++ )
-		AddOutput( out[i] );
-
-	Process();
-	return( 1 );
-
-
-
-
-	for( i = 0 ; ; i++ ){
-
-		if( b != NULL )
-		{
-			if( b->ReadFrame( i, &im ) < 0 )
-				break;
-
-			IMAGE_DUMP( im, "aa", i, "b" );
-			IMAGE_DUMP_ALPHA( im, "aa", i, "ba" );
-
-			m_im = image_make_copy( im, m_im );
-
-			IMAGE_DUMP( m_im, "aa", i, "1" );
-			IMAGE_DUMP_ALPHA( m_im, "aa", i, "1a" );
-		}
-
-
-
-		if( u->ReadFrame( i, &im ) < 0 )
-			break;
-
-		IMAGE_DUMP( im, "aa", i, "u" );
-		IMAGE_DUMP_ALPHA( im, "aa", i, "ua" );
-
-		if( b != NULL )
-		{
-			imageA_combine( im, m_im );
-		}
-		else 	
-		{
-			m_im = image_make_copy( im, m_im );
-		}
-
-		IMAGE_DUMP( m_im, "aa", i, "2" );
-		IMAGE_DUMP_ALPHA( m_im, "aa", i, "2a" );
-
-
-		if( f != NULL )
-		{
-			if( f->ReadFrame( i, &im ) < 0 )
-				continue;
-
-			IMAGE_DUMP( im, "aa", i, "f" );
-			IMAGE_DUMP_ALPHA( im, "aa", i, "f-a" );
-
-			imageA_combine( im, m_im );
-
-			IMAGE_DUMP( m_im, "aa", i, "3" );
-			IMAGE_DUMP_ALPHA( m_im, "aa", i, "3a" );
-		}
-
-
-		int	k;
-		for( k = 0 ; k < nOut ; k++ )
-			out[k]->WriteFrame( m_im, i );
-
-
-		IMAGE_DUMP( m_im, "im", i, NULL );
-		IMAGE_DUMP_ALPHA( m_im, "im-a", i, NULL );
-
-
-		fprintf( stdout, "  ." );
-
-	}
-	
-
-
-	return( -1 );
-}
 
 
 
@@ -190,6 +109,8 @@ CHomageRenderer::Process()
 	int	i,	k;
 	image_type *im;
 
+	m_process = 1;
+
 	for( i = 0 ; ; i++ ){
 
 		for( k = 0 ; k < m_nS ; k++ ){
@@ -198,6 +119,7 @@ CHomageRenderer::Process()
 
 			if( k == 0 ){
 				m_im = image_make_copy( im, m_im );
+
 				continue;
 			}
 
@@ -208,9 +130,11 @@ CHomageRenderer::Process()
 			break;
 
 
-
-		for( k = 0 ; k < m_nOut ; k++ )
+		 
+		for( k = 0 ; k < m_nOut ; k++ ){
+			GPLOGF( ("Frame Write %d\n", k ));
 			m_aOut[k]->WriteFrame( m_im, i );
+		}
 
 
 		IMAGE_DUMP( m_im, "im", i, NULL );

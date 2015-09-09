@@ -5,8 +5,11 @@
 
 #include "ImageType/ImageType.h"
 #include <math.h>
-#include <memory.h>
+//#include <memory.h>
+
+#ifdef _AA_
 #include <vector>
+#endif
 
 void IlyaImageSubstruction(unsigned char *bgr1,unsigned char *bgr2,int size,short *res);
 	void IlyaImageSubstruction2(unsigned char *bgr1,unsigned char *bgr2,int size,short *res);
@@ -96,9 +99,12 @@ public:
 	void flipBit(int c,int r){int idx = r*nPitch+c; pBuf[idx>>5] ^= (1<<(idx&31));}
 	void ilya1d_simple_new(int *bitWidth,int *counter,float x0,float y0,int width,int length,float nx,float ny) const;
 	void ilya1d_simple_new3(int *bitWidth,int *counter,float x0,float y0,int width,int length,float nx,float ny) const;
+
+#ifdef _AA_
 	void buildIntegratedMatrix(BitMatrix SubMatrix, int *bitWidth, float x0, float y0, int width,
 								  int length,float nx,float ny, int& integralCount, float& meanX, float& meanY,
 								  std::vector< std::pair<int,int> > &raw_points) const;
+#endif
 	void ilya1d_simple_new2(int *bitWidth,int *counter,float x0,float y0,int width,int back_length,
 		int length,float nx,float ny) const;
 	void CenterOfRegion(float& point_x, float& point_y, int width);

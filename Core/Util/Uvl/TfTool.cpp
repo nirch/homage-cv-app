@@ -519,23 +519,38 @@ int	i;
 }
 
 void
-tfA_add( tfA_type *tfA, int iFrame, tf_type *t )
+tfA_add( tfA_type *atf, int iFrame, tf_type *t )
 {
+int	i;
 
-	if( iFrame < 0 )	iFrame = tfA->nA;
-
-	if( iFrame < tfA->nA && tfA->a[iFrame] != NULL )
-		free( tfA->a[iFrame] );
+	if( iFrame < 0 )	iFrame = atf->nA;
 
 
-	tfA->a[iFrame] = t;
+	if( iFrame >= atf->NA ){
+
+		int NA = atf->NA + iFrame+32;
+		atf->a = ( tf_type **)realloc( atf->a, NA*sizeof(tf_type *) );
+
+		for( i = atf->NA ; i <  NA ; i++ )
+			atf->a[i] = NULL;
+
+		atf->NA = NA;
+	}
+
+
+
+	if( iFrame < atf->nA && atf->a[iFrame] != NULL )
+		free( atf->a[iFrame] );
+
+
+	atf->a[iFrame] = t;
 
 
 	t->iFrame = iFrame;
 
 
-	if( tfA->nA <= t->iFrame )
-		tfA->nA = t->iFrame+1;
+	if( atf->nA <= t->iFrame )
+		atf->nA = t->iFrame+1;
 }
 
 int
@@ -605,6 +620,8 @@ tfA_average( tfA_type *tfA )
 	int	i,	k,	n;
 
 	tf_type	*atf = NULL;
+
+
 
 
 

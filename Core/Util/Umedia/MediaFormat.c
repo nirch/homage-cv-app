@@ -185,10 +185,14 @@ mediaData_format2extension( int format, char *extension )
 	case MI_BMP:
 			strcpy( extension, ".bmp" );
 		break;
-
+	case MI_JPG:
+			strcpy( extension, ".jpg" );
+		break;
 	case MV_VIM:
 		strcpy( extension, ".vim" );
 		break;
+
+
 	}
 
 	return( extension );

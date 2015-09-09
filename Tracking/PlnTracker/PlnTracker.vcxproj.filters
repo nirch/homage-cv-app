@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="PlnHeadTracker\HeadPose.cpp">
+      <Filter>PlnHeadTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnHeadTracker\PlnHeadBox.cpp">
+      <Filter>PlnHeadTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnHeadTracker\PlnHeadPose.cpp">
+      <Filter>PlnHeadTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnHeadTracker\PlnHeadTracker.cpp">
+      <Filter>PlnHeadTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnHeadDetect\PlnHeadDetect.cpp">
+      <Filter>PlnHeadDetect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnHeadDetect\PlnHeadDetectPrm.cpp">
+      <Filter>PlnHeadDetect</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlnHeadTracker\PlnHeadTracker.h">
+      <Filter>PlnHeadTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnHeadTracker\HeadPose.h">
+      <Filter>PlnHeadTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnHeadDetect\PlnHeadDetect.h">
+      <Filter>PlnHeadDetect</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PlnHeadDetect">
+      <UniqueIdentifier>{bdf9b187-6cd3-42ac-87d2-457219cb5633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlnHeadTracker">
+      <UniqueIdentifier>{5492f2e4-32cd-4697-a368-52e99907e886}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

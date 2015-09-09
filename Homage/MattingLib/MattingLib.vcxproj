@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0846F50D-0A79-405F-83E9-E5B40F4794D6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MattingLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_GPLOG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\Core\ImageLib;..\..\Core\Util;..\..\Tracking;..\..\Edge;..\..\Video;..\..\VimGui;..\..\Image;..\..\Image\Png</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_GPLOG;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\Core\ImageLib;..\..\Core\Util;..\..\Tracking;..\..\Edge;..\..\Video;..\..\VimGui</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Background\BackgroundRemoval.cpp" />
+    <ClCompile Include="ColorBackground\ColorBackground.cpp" />
+    <ClCompile Include="DynamicMask\DynamicMask.cpp" />
+    <ClCompile Include="DynamicMask\TrackPoint.cpp" />
+    <ClCompile Include="MattingTask\MattingTask.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustBottom.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustCoherent.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustEdge.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustIn.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustIntersect.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustStart.cpp" />
+    <ClCompile Include="PlnAdjust\PlnAdjustThin.cpp" />
+    <ClCompile Include="UnBackgroundM\UmPrm.cpp" />
+    <ClCompile Include="UnBackgroundM\UnBackgroundM.cpp" />
+    <ClCompile Include="UnBackgroundM\UnBackgroundMProcess.cpp" />
+    <ClCompile Include="UnBackground\bImage.cpp" />
+    <ClCompile Include="UnBackground\TestSilhouetteDeviation.cpp" />
+    <ClCompile Include="UnBackground\UnBackground.cpp" />
+    <ClCompile Include="UnBackground\UnBackgroundDrakness.cpp" />
+    <ClCompile Include="UnBackground\UnBlob.cpp" />
+    <ClCompile Include="UnBackground\UnBlobB.cpp" />
+    <ClCompile Include="UnBackground\UnBlobC.cpp" />
+    <ClCompile Include="UnBackground\UnBlobD.cpp" />
+    <ClCompile Include="UnBackground\UnPrm.cpp" />
+    <ClCompile Include="UnBackground\UnState.cpp" />
+    <ClCompile Include="UniformBackground\UbBackground.cpp" />
+    <ClCompile Include="UniformBackground\UbBlob.cpp" />
+    <ClCompile Include="UniformBackground\UbBlob1.cpp" />
+    <ClCompile Include="UniformBackground\UbBlob2.cpp" />
+    <ClCompile Include="UniformBackground\UbContour.cpp" />
+    <ClCompile Include="UniformBackground\UbDynamicMask.cpp" />
+    <ClCompile Include="UniformBackground\UbEdge.cpp" />
+    <ClCompile Include="UniformBackground\UbPrm.cpp" />
+    <ClCompile Include="UniformBackground\UbSmooth.cpp" />
+    <ClCompile Include="UniformBackground\UbThin.cpp" />
+    <ClCompile Include="UniformBackground\UbUpdate.cpp" />
+    <ClCompile Include="UniformBackground\UniformBackground.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Background\BackgroundRemoval.h" />
+    <ClInclude Include="ColorBackground\ColorBackground.h" />
+    <ClInclude Include="DynamicMask\DynamicMask.h" />
+    <ClInclude Include="DynamicMask\TrackPoint.h" />
+    <ClInclude Include="MattingTask\MattingTask.h" />
+    <ClInclude Include="PlnAdjust\PlnAdjust.h" />
+    <ClInclude Include="UnBackgroundM\UnBackgroundM.h" />
+    <ClInclude Include="UnBackground\bImage.h" />
+    <ClInclude Include="UnBackground\UnBackground.h" />
+    <ClInclude Include="UniformBackground\UniformBackground.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

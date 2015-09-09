@@ -396,7 +396,7 @@ float	dis,	tmp,	len;
 	*t = 100;
 	ret = -1;
 
-	dis = 100000;
+	dis = -1;
 
 	cv.x = v->x - ctr->x;
 	cv.y = v->y - ctr->y;
@@ -435,7 +435,7 @@ float	dis,	tmp,	len;
 		}
 
 
-		if( tmp >= dis )	continue;
+		if( dis > 0 && tmp >= dis )	continue;
 
 		dis = tmp;
 

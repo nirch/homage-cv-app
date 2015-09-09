@@ -26,7 +26,8 @@ int	i;
 
 	p->ALLOCATED = 1<< p->bitPerPixel;
 
-	p->nColor = n;
+	p->NA = n;
+	p->nA = 0;
 
 	p->data = (color_type *)calloc(p->ALLOCATED * sizeof(color_type), 1);
 
@@ -44,13 +45,13 @@ palette_copy( palette_type *palette, palette_type *tp )
 	if( palette == NULL )
 		return( NULL );
 
-	tp = palette_alloc( palette->nColor);
+	tp = palette_alloc( palette->nA);
 
 	tp->bitPerPixel = palette->bitPerPixel;
 
 	tp->type = palette->type;
 
-	memcpy(tp->data, palette->data, (tp->nColor) * sizeof(color_type));
+	memcpy(tp->data, palette->data, (tp->nA) * sizeof(color_type));
 
 	return( tp );
 }
@@ -116,7 +117,7 @@ int	i;
 
 			p = palette_alloc( 256 );
 
-			for (i = 0; i < p->nColor; i++){
+			for (i = 0; i < p->nA; i++){
 				p->data[i].Red = i;
 				p->data[i].Green = i;
 				p->data[i].Blue = i;
@@ -143,7 +144,7 @@ int	i,	r,	g,	b;
 	
 	p = palette_alloc(64);
 	
-	for (i = 0 ; i < p->nColor ; i++) {
+	for (i = 0 ; i < p->NA ; i++) {
 		r = ( ((i) >> 4 ) &0x3 );
 		g = ( ((i) >> 2 ) &0x3 );
 		b = ( (i) &0x3 );
@@ -156,6 +157,9 @@ int	i,	r,	g,	b;
 		p->data[i].Green = g;
 		p->data[i].Blue = b;
 	}
+
+	p->nA = i;
+
 	p->type = PALETTE_222;
 
 	return ( p );
@@ -170,6 +174,7 @@ int	i;
 	p = palette_alloc(1 << bit);
 	p->bitPerPixel = bit;
 
+	p->nA = p->NA;
 	for (i = 0; i < p->nColor ; i++)
 		p->data[i].Blue = p->data[i].Green = p->data[i].Red = (( 255 * i ) / ( p->nColor - 1 ));
 	
@@ -185,6 +190,7 @@ palette_type	*p;
 int	i;
 	
 	p = palette_alloc( 216 );
+	p->nA = p->NA;
 
 	for (i = 0; i < 216; i++){
 		p->data[i].Red = (unsigned char)(i % 6 * 51);
@@ -313,7 +319,7 @@ palette_type *p;
 		k0 = k1;
 	}
 
-	p->nColor = k0+1;
+	p->nA = k0+1;
 
 	fclose( fp );
 
@@ -368,7 +374,7 @@ palette_read_heax_data( char *data )
 		return( NULL );
 	}
 
-	p->nColor = i;
+	p->nA = i;
 
 
 	return( p );
@@ -434,7 +440,7 @@ palette_type *p;
 		return( NULL );
 	}
 
-	p->nColor = k0+1;
+	p->nA = k0+1;
 
 
 	return( p );
@@ -813,6 +819,7 @@ palette_create_WINDOW_SYSTEM()
 palette_type	*p;
 
 	p = palette_alloc( 256 );
+	p->nA =256;
 	memcpy( p->data, Window_system_palette, 256*3 );
 
 	p->type = PALETTE_WINDOW_SYSTEM;

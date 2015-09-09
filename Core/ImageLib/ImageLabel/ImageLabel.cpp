@@ -75,7 +75,7 @@ imageLabel_bigest( imageLabel_type *abw, int color )
 {
 	int	i,	no,	iMax,	 nMax;
 
-	nMax = iMax = 0;
+	nMax = iMax = -1;
 
 	for( i = 0, no = 0 ; i < abw->nA ; i++ ){
 		bwLabel_type *bw = &abw->a[i];

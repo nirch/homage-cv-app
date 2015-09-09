@@ -88,6 +88,16 @@ image1_sample2L( image_type *sim, int level, image_type *im )
 	image_type	*tim;
 	int	i;
 
+
+	if( level == 0 ){
+		if( im == NULL )	return( sim );
+
+		im = image_make_copy( sim, im );
+		return( im );
+	}
+
+
+
 	if( level == 2 ){
 		im = image1_sample4( sim, im );
 		return( im );
@@ -331,6 +341,39 @@ image1_sample4( image_type *sim, image_type *im )
 
 	return( im );
 }
+
+
+
+
+
+image_type *
+image1_sample2x( image_type *sim, image_type *im )
+{
+	u_char	*sp0,	*sp1,	*tp;
+	int	i,	j;
+
+
+	im = image_realloc( im, sim->column/2, sim->row, 1, IMAGE_TYPE_U8, 1 );
+
+
+	tp = im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		sp0 = IMAGE_PIXEL( sim, i, 0 );
+		sp1 = sp0+1;
+
+
+		for( j = 0 ; j < im->column ; j++ ){
+
+			*tp++ = ( *(sp0++) + *(sp1++) ) >>1;
+
+			sp0 += 1;
+			sp1 += 1;
+		}
+	}
+
+	return( im );
+}
+
 
 //image_type *
 //image1_sample_column( image_type *sim, int si0, int d, image_type *im, int i0 )

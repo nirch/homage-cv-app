@@ -35,6 +35,9 @@ public:
 
 	int	Process( plnA_type *apl, vec2f_type *p, pln_type **spl, int iFrame );
 
+	//int	Process( plnA_type *apl, headPose_type *hp, pln_type **spl, int iFrame );
+	int	Process( plnA_type *apl, headPose_type *hp, vec2f_type *p, int iFrame );
+
 
 	int	ProcessTranslate( plnA_type *apl, headPose_type *pose0, int iFrame );
 
@@ -43,6 +46,8 @@ public:
 	int	ProcessPrediction ( plnA_type *apl, headPose_type *pose0, vec2f_type *p, lnFit_type *lf, int iFrame );
 
 
+
+	int	Fit( plnA_type *apl, headPose_type *hp, headPose_type *h, int iFrame );
 
 	int	ProcessA( plnA_type *apl, pln_type **spl, int iFrame );
 
@@ -56,6 +61,8 @@ public:
 
 	int	GetHeadPose( vec2f_type *p, float *r );
 
+
+	int HeadPose( plnA_type *apl, headPose_type *h );
 
 	int HeadPose( pln_type *pl, pln_type **spl, vec2f_type *p );
 
@@ -79,6 +86,7 @@ public:
 
 
 	float GetCover()	{ return( m_lf.cover);}
+	float GetCover1()	{ return( m_lf.cover1);}
 
 
 protected:

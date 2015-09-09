@@ -30,6 +30,10 @@ int		imageUI_maxPixel( image_type *im, int *i0, int *j0 );
 int	imageUI_compare( image_type *im1, image_type *im0 );
 
 
+	//ImageUiFrom.cpp
+image_type *	imageUI_from_imageF( image_type *sim, image_type *im );
+
+
 #ifdef _AA_
 image_type *	imageUI_to_imageU8( image_type *sim, image_type *im );
 

@@ -2,7 +2,7 @@
  ***	XmlStr.c   ***
  *********************/
 
-#include <memory.h>
+//#include <memory.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

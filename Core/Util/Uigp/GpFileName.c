@@ -134,7 +134,7 @@ int	dirlength;
 
 	if ( len == 1)
 	{
-		dir = '\0';
+		dir[0] = '\0';
 		return;
 	}
 
@@ -373,7 +373,7 @@ char *p;
 	}
 }
 
-
+#ifdef _AA_
 int gpFilename_compare_extension( char *fname, char *extension )
 {
 int len;
@@ -388,6 +388,24 @@ char *p;
 	if( *p != '.' )	return( -1 );
 	
 	if( gp_stricmp( p, extension ) != 0 )	return( -1 );
+
+	return( 1 );
+}
+#endif
+
+
+int gpFilename_compare_extension( char *fname, char *extension )
+{
+	int l0,	l1;
+	
+
+	l0 = strlen(fname);
+
+	l1 = strlen(extension);
+
+	if( l0 < l1 )	return( -1 );
+
+	if( gp_stricmp( &fname[l0-l1], extension ) != 0 )	return( -1 );
 
 	return( 1 );
 }
@@ -567,6 +585,11 @@ int gpFilename_path( char *fname, char *dir, char *path )
 {
 	if( fname[0] == '\\' || fname[0] == '/'  || fname[1] == ':' ){
 		strcpy( path, fname );
+		return( 1 );
+	}
+
+	if( strcmp( fname, "." ) == 0 ){
+		strcpy( path, dir );
 		return( 1 );
 	}
 

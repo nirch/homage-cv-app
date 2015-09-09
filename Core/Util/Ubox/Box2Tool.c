@@ -194,7 +194,7 @@ box2dA_union( box2f_type ab[], int *nB, float d )
 	for( i = 1, n = 1 ; i < *nB ; i++ ){
 
 		for( j = 0 ; j < n ; j++ ){
-			if( box2d_distance( &ab[i], &ab[j] ) < d )
+			if( box2f_distance( &ab[i], &ab[j] ) < d )
 				break;
 		}
 

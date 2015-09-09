@@ -103,6 +103,8 @@ st_final( st_type *st )
 	st->av /= st->n;
 
 	st->var = st->var/ st->n - st->av*st->av;
+	if( st->var < 0 )
+		st->var = 0;
 
 	st->var = sqrt( st->var );
 }

@@ -27,6 +27,7 @@ static void		image_write_gif_force_87a( FILE *fp );
 static int log2m1(int n);
 
 
+#ifdef _AA_
 int image_write_gif( image_type *im, palette_type *palette, char *dir, char *name )
 {
 char	file[256];
@@ -49,7 +50,57 @@ int	ret;
 	
 	return ret;
 }
+#endif
 
+int image_write_gif( image_type *im, palette_type *palette, char *file )
+{
+	gifIo_type	*gifIo;
+	int	ret;
+
+
+
+	gifIo = image_write_gifIo_open_file( file, IMAGE_ROW(im), IMAGE_COLUMN(im),
+		10, palette, -1, 0, 0 );
+
+
+	if( gifIo == NULL )	return( -1 );
+
+
+	ret = image_write_gifIo_add_frame( gifIo, im, 0 );
+
+	image_write_gifIo_close( gifIo );
+
+	return ret;
+}
+
+
+int image_gif_write_to_buffer( image_type *im, palette_type *pl, u_char **data, int *nData ) 
+{
+	char tmpFile[256];
+
+
+	*data = NULL;
+	gp_filename_get_temporary( "gif", 0, ".gif", tmpFile );
+
+
+	if( pl == NULL ){
+		pl =  palette_alloc( 256 );
+		pl->nColor = 0;
+		image_adaptive_palette( &im, 1, pl, (1<<8) - 1 );
+	}
+
+	if( image_write_gif( im, pl, tmpFile ) < 0 )
+		return( -1 );
+
+	//palette_destroy( pl );
+
+	gpFile_read_to_buffer( tmpFile, (char**)data, nData );
+
+	gpFile_delete( tmpFile );
+
+	return 1;
+
+}
 
 
 gifIo_type *
@@ -139,6 +190,7 @@ cst_type	cst;
 int bytes,	size;
 u_char codeLength;
 float var,	dev,	average;
+int disposal;
 
 
 
@@ -276,8 +328,14 @@ float var,	dev,	average;
 
 	gifIo->ftell_delayTime[ gifIo->frame_no] = ftell( gifIo->fp );
 
+	disposal = 1;
+	if( gifIo->transparent_index > 0  ){
+		if( gifIo->frame_no > 0 || imageT_nPixel( rim ) > 0 )
+			disposal = 2;
+	}
+
 	image_write_gif_GraphicControl( gifIo, gifIo->delay_time,
-											gifIo->transparent_index );
+											gifIo->transparent_index, disposal );
 
 
 
@@ -347,6 +405,10 @@ int bytes;
 
 	if( gifIo->ftell_delayTime != NULL )
 		free( gifIo->ftell_delayTime );
+
+
+	if( gifIo->palette != NULL )
+		palette_destroy( gifIo->palette );
 
 	free( gifIo );
 
@@ -485,7 +547,7 @@ const u_char *p;
 
 
 int 
-image_write_gif_GraphicControl( gifIo_type *gifIo, int DelayTime, int transparentIndex )
+image_write_gif_GraphicControl( gifIo_type *gifIo, int DelayTime, int transparentIndex, int disposal )
 {
 u_char buf[8];
 int	mask;
@@ -497,7 +559,8 @@ int	mask;
 
 
 	mask = ( transparentIndex >= 0 )? 0x05: 0x4;
-	if( gifIo->frame_no > 0 && transparentIndex > 0  )
+//	if( gifIo->frame_no > 0 && transparentIndex > 0  )
+	if( disposal == 2 )
 		mask = 0x09;
 
 	buf[3] = mask;

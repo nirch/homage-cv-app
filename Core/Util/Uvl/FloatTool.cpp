@@ -7,7 +7,7 @@
 #include	"FloatType.h"
 
 
-
+#include "Umath/St/StType.h"
 
 
 floatA_type *
@@ -107,6 +107,48 @@ int	i;
 		as->a[as->nA++] = val[i];
 }
 
+void 
+floatA_cycle( floatA_type *as, int n )
+{
+	int	i;
+
+	if( as->nA < n )
+		as->nA++;
+
+	for( i = as->nA-1 ; i >0 ; i-- )
+		as->a[i] = as->a[i-1];
+
+}
+
+
+void 
+	floatA_st( floatA_type *as, st_type *st )
+{
+int	i;
+
+	st_init( st );
+
+	for( i = 0 ; i < as->nA ; i++ )
+		st_add( st, as->a[i] );
+
+
+	st_final( st );
+}
+
+float 
+floatA_average( floatA_type *as )
+{
+int	i;
+
+	float sum = 0;
+
+	for( i = 0 ; i < as->nA ; i++ )
+		sum += as->a[i];
+
+	sum /= as->nA;
+
+	return( sum );
+}
 
 int
 floatA_write( floatA_type *ai, char *file )

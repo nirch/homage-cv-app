@@ -9,10 +9,9 @@
 extern "C" {
 #endif
 
-extern "C"
-{
- #include	"ImageType/ImageType.h"
-}
+
+#include	"ImageType/ImageType.h"
+
 
 
 int image_GetYUVFrame( image_type *frame, u_char **ppOutFrame, int *piSize );
@@ -34,13 +33,36 @@ image_type *	image_read_yuv( int row, int column, int frame, char *file );
 
 image_type *	image3_to_YUV420( image_type *sim, image_type *im );
 
-image_type *	image_from_YUV420(int row, int column, u_char *pY, u_char *pU,
-								  u_char *pV, int bufCol, image_type *im );
+//image_type *	image_from_YUV420(int row, int column, u_char *pY, u_char *pU,
+//								  u_char *pV, int bufCol, image_type *im );
 
 image_type *	imageYUV420_to_RGB( image_type *sim, image_type *im );
 
 
+
+
+
+image_type *	imageYUV420_to_RGB_SWAP( image_type *sim, image_type *im );
+
+
+
 image_type *	imageYUV_sampling2( image_type *sim, image_type *im );
+
+
+
+	// ImageNV21.cpp
+image_type *	imageNV21_to_RGB( image_type *sim, image_type *im );
+
+image_type *	imageNV21_to_RGB_swap( image_type *sim, image_type *im );
+
+
+image_type *	imageNV21_to_RGB_swap_inv( image_type *sim, image_type *im );
+
+
+image_type *	imageNV21_crop( image_type *sim, int x0, int y0, int width, int height, image_type *im );
+
+image_type *	imageNV21_sample2( image_type *sim, image_type *im );
+
 
 
 #ifdef __cplusplus

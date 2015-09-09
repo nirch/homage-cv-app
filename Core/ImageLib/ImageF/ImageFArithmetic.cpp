@@ -316,6 +316,34 @@ imageF_inner_U( image_type *im0, image_type *im1 )
 		return( sum/( im0->width * im0->height ) );
 }
 
+
+double
+imageF_innerW( image_type *sim, int i0, int j0, image_type *wim )
+{
+	double	sum;
+	int	i,	j;
+
+
+
+
+	float *sp = (float *)IMAGE_PIXEL( sim, i0, j0 );
+	float *wp = wim->data_f;
+
+
+	int	align = sim->width - wim->width;
+
+	sum = 0;
+	for( i = 0 ; i < wim->height ; i++, sp += align )
+		for( j = 0 ; j < wim->width ; j++ ){
+
+			sum += *sp++  * *wp++;
+		}
+
+
+		return( sum );
+}
+
+
 void
 imageF_sum( image_type *sim, float f, image_type *im )
 {

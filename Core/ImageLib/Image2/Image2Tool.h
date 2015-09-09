@@ -25,6 +25,9 @@ image_type *	image2_to_image1_P( image_type *sim, int val, image_type *im );
 
 image_type *	image2_from_imageF( image_type *sim );
 
+image_type *	imageUSC_from_imageF( image_type *sim, float a, float b, image_type *im );
+
+
 
 void	image2_const( image_type *im, int r );
 

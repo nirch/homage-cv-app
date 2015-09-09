@@ -2,7 +2,7 @@
  *** UjniTool.c   ***
  ********************/
 
-#include "stdafx.h"
+
 #include	<string.h>
 #include "UjniTool.h"
 

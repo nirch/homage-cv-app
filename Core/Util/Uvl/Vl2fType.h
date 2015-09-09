@@ -94,6 +94,8 @@ int		vl2fA_select( vl2fA_type *Avl, vec2f_type *p, float D );
 
 void	vl2f_points( vl2f_type *vl, vec2f_type *p0, vec2f_type *p1 );
 
+void	vl2f_box( vl2f_type *vl, struct box2f_type *b );
+
 
 void	vl2f_set( vl2f_type *vl, vec2f_type *p0, vec2f_type *p1 );
 
@@ -155,6 +157,8 @@ int	vl2fA_fit_affine_lt( vl2fA_type *bavl,  vl2fA_type *avl, int g, struct lt2_t
 vl2fA_type *	vl2fA_fit_lt_field( vl2fA_type *bavl,  struct lt2_type *lt, vl2fA_type *avl );
 
 
+	// Vl2fProncipalDirection.cpp
+int	vl2fA_principal_direction( vl2fA_type *avl, vl2f_type *rvl );
 
 
 struct pt2dA_type *	vl2fA_to_pt2dA( vl2fA_type *avl );
@@ -165,6 +169,8 @@ vl2fA_type *	vl2fA_from_pt2dA( struct pt2dA_type *apt );
 int	vl2fA_read( vl2fA_type **avl, char *file );
 
 int	vl2fA_write( vl2fA_type *avl, char *file );
+
+int	vl2fA_write_pt( vl2fA_type *avl, char *file );
 
 
 int	vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix );

@@ -332,7 +332,7 @@ image1S_axb( image_type *sim, float a, float b, image_type *im )
 image_type *
 image1S_abs_128( image_type *sim, image_type *im )
 {
-	char	*sp;
+	s_char	*sp;
 	u_char	*tp;
 	int	i,	j,	tmp;
 

@@ -32,8 +32,10 @@ int	len;
 		Dump_dir[len-1] = 0;
 
 
-	if( gpDir_exist( Dump_dir ) != 1 )
-		gp_mkdir( Dump_dir );
+//	if( gpDir_exist( Dump_dir ) != 1 )
+//		gp_mkdir( Dump_dir );
+
+	gpDir_force_exist(Dump_dir);
 
 
 	Fdump = 1;

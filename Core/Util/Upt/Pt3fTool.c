@@ -72,6 +72,8 @@ pt3fA_destroy( pt3fA_type *apt )
 
 
 
+
+
 pt3fA_type *
 pt3fA_set( pt3fA_type *apt, vec3fA_type *av )
 {
@@ -150,6 +152,9 @@ pt3fA_type *
 
 		gpt->a[ gpt->nA++ ] = apt->a[i];
 	}
+
+	if( gpt->state == PT3_CLOSE )
+		gpt->nA--;
 
 	return( gpt);
 }
@@ -419,14 +424,71 @@ pt3fA_scale( pt3fA_type *apt, float scale )
 
 
 
+float 
+pt3fA_length( pt3fA_type *apt )
+{
+	int	i;
+	float len = 0;
+
+	for( i = 1 ; i < apt->nA ; i++ ){
+		vec3f_type	p;
+		p.x = apt->a[i].p.x - apt->a[i-1].p.x;
+		p.y = apt->a[i].p.y - apt->a[i-1].p.y;
+		p.z = apt->a[i].p.z - apt->a[i-1].p.z;
+
+		len += sqrt( p.x*p.x + p.y*p.y + p.z*p.z );
+	} 
+
+	return( len );
+}
+
+
+int
+pt3fA_t2p( pt3fA_type *apt, float t, vec3f_type *p )
+{
+	int	i;
+	float len;
+	vec3f_type	dp;
+
+	for( i = 1 ; i < apt->nA ; i++ ){
+		dp.x = apt->a[i].p.x - apt->a[i-1].p.x;
+		dp.y = apt->a[i].p.y - apt->a[i-1].p.y;
+		dp.z = apt->a[i].p.z - apt->a[i-1].p.z;
+
+		len = VEC3D_NORM( dp );
+		if( len > t )
+			break;
+
+		t -= len;
+	} 
+
+	t = t /len;
+	p->x = apt->a[i-1].p.x + t *dp.x;
+	p->y = apt->a[i-1].p.y + t *dp.y;
+	p->z = apt->a[i-1].p.z + t *dp.z;
+
+	return( 1 );
+}
 
 
 double
-pt3dA_distance2( pt3fA_type *apt, vec3f_type *p )
+pt3fA_distance2( pt3fA_type *apt, vec3f_type *p )
 {
 	int	i;
 
 	double tMin,	t;
+
+
+	if( apt->nA == 1 ){
+		vec3f_type	dp;
+		dp.x = p->x - apt->a[0].p.x;
+		dp.y = p->y - apt->a[0].p.y;
+		dp.z = p->z - apt->a[0].p.z;
+
+		t = VEC3D_INNER( dp, dp );
+
+		return( t );
+	}
 
 
 	for( i = 0 ; i < apt->nA-1 ; i++ ){
@@ -478,3 +540,34 @@ int	i;
 
 
 
+
+
+
+pt3fG_type *
+pt3fG_alloc( int n )
+{
+	pt3fG_type	*ptA;
+
+
+	ptA = (pt3fG_type *)malloc( sizeof( pt3fG_type) );
+
+	ptA->a = ( pt3fA_type **)malloc( n*sizeof(pt3fA_type*) );
+
+
+	ptA->NA = n;
+
+	ptA->nA = 0;
+
+
+
+	return( ptA );
+}
+
+void
+pt3fG_destroy( pt3fG_type *apt )
+{
+
+	free( apt->a );
+
+	free( apt );
+}

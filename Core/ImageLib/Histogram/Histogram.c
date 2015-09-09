@@ -5,7 +5,7 @@
 #include "ImageType/ImageType.h"
 #include "ImageType/ImageTool.h"
 
-
+#include "Histogram.h"
 
 void
 histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 )
@@ -36,7 +36,7 @@ int	nPixel;
 		if( sum > T )	break;
 	}
 
-	*r1 = ( i < nH-1 )? i +1 : nH-1;
+	*r1 = ( i < nH-1 )? i : nH-1;
 }
 
 
@@ -56,4 +56,35 @@ histogram_write( int h[], int nH, char *file )
 		fprintf( fp, "%d		%d\n", i, h[i] );
 
 	fclose( fp );
+}
+
+
+
+float
+histogram_median( int h[], int nH )
+{
+	int	i;
+	int	sum;
+	float	T,	t,	t0;
+	int	nPixel;
+
+
+	for( i = 0, nPixel = 0 ; i < nH ; i++ )
+		nPixel += h[i];
+
+
+
+	T = nPixel * 50/100;
+	for( i = 0, sum = 0 ; i < nH ; i++ ){
+		sum += h[i];
+		if( sum > T )	break;
+	}
+
+	t0 = sum - h[i];
+
+	t = i +  ( T - t0 )/( sum - t0 );
+
+
+
+	return( t );
 }

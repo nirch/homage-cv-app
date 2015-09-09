@@ -18,7 +18,6 @@
 		D00FB7CB184124330043E8F4 /* ImageLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = D00FB7C5184124330043E8F4 /* ImageLabel.h */; };
 		D00FB7CF184127600043E8F4 /* FreeLineDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D00FB7CD184127600043E8F4 /* FreeLineDraw.cpp */; };
 		D0200C5B17DC582100080EAB /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0200C5017DC582100080EAB /* FrameBuffer.cpp */; };
-		D0200C5C17DC582100080EAB /* FrameBufferMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0200C5417DC582100080EAB /* FrameBufferMac.mm */; };
 		D0200C6917DC582F00080EAB /* FrameLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0200C6017DC582F00080EAB /* FrameLabel.cpp */; };
 		D0200C6A17DC582F00080EAB /* FrameLabelMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0200C6317DC582F00080EAB /* FrameLabelMac.mm */; };
 		D05435DD182D9367007954D8 /* FrameNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05435DB182D9367007954D8 /* FrameNavigator.cpp */; };
@@ -69,8 +68,6 @@
 		D00FB7CE184127600043E8F4 /* FreeLineDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeLineDraw.h; path = FreeLineDraw/FreeLineDraw.h; sourceTree = "<group>"; };
 		D0200C5017DC582100080EAB /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
 		D0200C5117DC582100080EAB /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
-		D0200C5317DC582100080EAB /* FrameBufferMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBufferMac.h; sourceTree = "<group>"; };
-		D0200C5417DC582100080EAB /* FrameBufferMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameBufferMac.mm; sourceTree = "<group>"; };
 		D0200C5617DC582100080EAB /* FrameBufferPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBufferPC.cpp; sourceTree = "<group>"; };
 		D0200C5717DC582100080EAB /* FrameBufferPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBufferPC.h; sourceTree = "<group>"; };
 		D0200C5817DC582100080EAB /* FrameBufferWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBufferWin.cpp; sourceTree = "<group>"; };
@@ -217,8 +214,6 @@
 			children = (
 				D0DD9412181BCE6200084E8F /* FrameBufferIos.h */,
 				D0DD9413181BCE6200084E8F /* FrameBufferIos.mm */,
-				D0200C5317DC582100080EAB /* FrameBufferMac.h */,
-				D0200C5417DC582100080EAB /* FrameBufferMac.mm */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -458,7 +453,6 @@
 				349E33F1549E42EF9FE785B9 /* GpwMarker.cpp in Sources */,
 				D07E8EC01A9F0A56004465A8 /* VtoolUIImage.mm in Sources */,
 				D0200C5B17DC582100080EAB /* FrameBuffer.cpp in Sources */,
-				D0200C5C17DC582100080EAB /* FrameBufferMac.mm in Sources */,
 				D0200C6917DC582F00080EAB /* FrameLabel.cpp in Sources */,
 				D0200C6A17DC582F00080EAB /* FrameLabelMac.mm in Sources */,
 				D09493B317DF8BB80048A9C5 /* TextLabel.cpp in Sources */,

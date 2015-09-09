@@ -54,7 +54,10 @@ typedef struct cst_type {
 
 #define		CST_BYTE_INDEX( cst )	( (cst)->rp - (cst)->data )
 
-#define     CST_BYTE_AVAILABLE( cst ) ((cst) ->BYTE_NO - CST_BYTES(cst))
+
+//#define     CST_BYTE_AVAILABLE( cst ) ((cst) ->BYTE_NO - CST_BYTES(cst))
+
+#define     CST_BYTE_AVAILABLE( cst ) ((cst) ->BYTE_NO - ((cst)->wp - (cst)->data) )
 
 
 #define		CST_END_BYTE( cst )  ( cst->wp)
@@ -103,6 +106,13 @@ int	cst_get_buffer( cst_type *cst, u_char buf[], int byte_no );
 
 int	cst_put_buffer_int( cst_type *cst, u_char buf[], int byte_no );
 
+
+
+void	cst_put_int( cst_type *cst, int a );
+
+int		cst_get_int( cst_type *cst );
+
+
 struct bst_type *	cst2bst(cst_type* cst, int byte_no);
 
 
@@ -114,9 +124,13 @@ void	cst_rewind_data( cst_type *cst );
 	// CstFile.c
 void	cst_read( FILE *fp, cst_type *cst, int byte_no );
 
+int		cst_readN( cst_type *cst, int nByte, FILE *fp );
+
 void	cst_write( FILE *fp, cst_type *cst );
 
 cst_type * cst_load_from_file( char *file );
+
+int		cst_read_file( cst_type **cst, char *file );
 
 int		cst_write_to_file(cst_type *cst, char *file);
 

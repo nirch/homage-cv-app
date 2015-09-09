@@ -40,7 +40,7 @@ public:
 	~CMattingTask();
 
 	int Init( char *prmFile,  char *ctrFile, int width, int height );
-
+	void SetFrameRate( int frameRate )	{ m_frameRate = frameRate; }
 
 	void SetImageAcquisition( CImageAcquisition *imageAcquisition );
 
@@ -72,6 +72,12 @@ public:
 	int	GetOutput( u_char *data, int *nData, u_char *data1, int *nData1 );
 
 
+
+	int	Record( image_type *im );
+
+	int	StartRecord( char *dir );
+
+	int	StopRecord();
 
 
 public:
@@ -110,6 +116,11 @@ public:
 
 	char	m_dumpDir[256];
 
+
+	int	m_record;
+	class CPngWriter *m_recorder;
+
+	int m_frameRate;
 	vTimer_type	m_timer;
 
 

@@ -18,7 +18,7 @@
 
 
 static void	contour_image_mask_normal( image_type *sim );
-static void	image1_mask_append( image_type *sim, image_type *im );
+//static void	image1_mask_append( image_type *sim, image_type *im );
 
 static void	image1_mask_normal( image_type *sim );
 
@@ -526,21 +526,21 @@ int	i,	j;
 }
 
 
-static void
-image1_mask_append( image_type *sim, image_type *im )
-{
-	u_char	*sp,	*tp;
-	int	i,	j;
-
-
-	sp = sim->data;
-	tp = im->data;
-
-	for( i = 0 ; i < sim->width ; i++ ){
-		for( j = 0 ; j < sim->height ; j++, sp++, tp++ ){
-			if( *sp > 0 )
-				*tp = *sp;
-		}
-	}
-}
+//static void
+//image1_mask_append( image_type *sim, image_type *im )
+//{
+//	u_char	*sp,	*tp;
+//	int	i,	j;
+//
+//
+//	sp = sim->data;
+//	tp = im->data;
+//
+//	for( i = 0 ; i < sim->width ; i++ ){
+//		for( j = 0 ; j < sim->height ; j++, sp++, tp++ ){
+//			if( *sp > 0 )
+//				*tp = *sp;
+//		}
+//	}
+//}
 

@@ -38,6 +38,8 @@ extern "C" {
 #define	IMAGE_TYPE_F		7
 #define	IMAGE_TYPE_C		8
 
+#define	IMAGE_TYPE_U64		9
+
 
 #define	IMAGE_FORMAT( type, channel )	( type | ( (channel<<8)))
 
@@ -114,6 +116,9 @@ typedef struct	image_type {
 		u_short	*data_us;
 		u_int	*data_ui;
 		float	*data_f;
+#ifndef __GNUC__
+		u_int64 *data_u64;
+#endif
 	};
 
 	palette_type	*palette;
@@ -225,11 +230,17 @@ typedef struct imageA_type {
 
 #ifndef IMAGE4_RGB
 
-#define		IMAGE4_BLUE( pixel )	( ((pixel) >> 16 ) &0xff )
-#define		IMAGE4_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
-#define		IMAGE4_RED( pixel )		(  (pixel)&0xff )
+//#define		IMAGE4_BLUE( pixel )	( ((pixel) >> 16 ) &0xff )
+//#define		IMAGE4_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
+//#define		IMAGE4_RED( pixel )		(  (pixel)&0xff )
+//
+//#define		IMAGE4_RGB( r, g, b ) 	(((b)<<16) | ((g)<<8) | (r) )
 
-#define		IMAGE4_RGB( r, g, b ) 	(((b)<<16) | ((g)<<8) | (r) )
+#define		IMAGE4_RED( pixel )		( ((pixel) >> 16) &0xff )
+#define		IMAGE4_GREEN( pixel )	( ((pixel) >> 8 ) &0xff )
+#define		IMAGE4_BLUE( pixel )	(  (pixel)&0xff )
+
+#define		IMAGE4_RGB( r, g, b ) 	(((r)<<16) | ((g)<<8) | (b) )
 #endif
 
 

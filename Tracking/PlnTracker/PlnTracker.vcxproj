@@ -84,10 +84,16 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PlnHeadDetect\PlnHeadDetect.cpp" />
+    <ClCompile Include="PlnHeadDetect\PlnHeadDetectPrm.cpp" />
+    <ClCompile Include="PlnHeadTracker\HeadPose.cpp" />
+    <ClCompile Include="PlnHeadTracker\PlnHeadBox.cpp" />
     <ClCompile Include="PlnHeadTracker\PlnHeadPose.cpp" />
     <ClCompile Include="PlnHeadTracker\PlnHeadTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PlnHeadDetect\PlnHeadDetect.h" />
+    <ClInclude Include="PlnHeadTracker\HeadPose.h" />
     <ClInclude Include="PlnHeadTracker\PlnHeadTracker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

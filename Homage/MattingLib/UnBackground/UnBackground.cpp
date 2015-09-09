@@ -28,7 +28,7 @@
 
 #include "bImage.h"
 
-#include "../UnBackgroundM/UnBackgroundM.h"
+#include "..//UnBackgroundM/UnBackgroundM.h"
 
 
 int	image1_mask_sbA( image_type *im, sbA_type *as );

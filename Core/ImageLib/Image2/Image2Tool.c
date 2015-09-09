@@ -111,6 +111,9 @@ int	i,	j;
 }
 
 
+
+
+
 void
 image2_const( image_type *im, int r )
 {
@@ -126,6 +129,34 @@ int	i,	j;
 			*tp++ = r;
 		}
 	}
+}
+
+
+image_type *
+imageUSC_from_imageF( image_type *sim, float a, float b, image_type *im )
+{
+	int	i,	j,	k,	channel;
+	float	*sp;
+	u_short *tp;
+
+	channel = IMAGE_CHANNEL(sim);
+
+	im = image_realloc( im, sim->width, sim->height, channel, IMAGE_TYPE_U16, 1 );
+	
+
+	tp = im->data_us;
+	sp = sim->data_f;
+
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++ ){
+			for( k = 0 ; k < channel ; k++ ){
+				*tp++ = a* *sp + b;
+				sp++;
+			}
+		}
+	}
+
+	return( im );
 }
 
 //void

@@ -6,7 +6,7 @@
 
 
 image_type *	image3_sample3( image_type *sim, image_type *im );
-image_type *	image3_sample3_B( image_type *sim, box2i_type *b, image_type *im );
+static image_type *	image3B_sample3( image_type *sim, box2i_type *b, image_type *im );
 
 
 image_type *	
@@ -20,16 +20,6 @@ image_sample( image_type *sim, int d, image_type *im )
 
 
 	if( sim->depth == 3 ){
-
-		//if( d == 3 ){
-		//	im = image3_sample3( sim, im );
-		//	return( im );
-		//}
-
-		//if( d == 2 ){
-		//	im = image3_sample2( sim, im );
-		//	return( im );
-		//}
 
 		im = image3_sample( sim, d, im );
 
@@ -52,26 +42,34 @@ image_type *
 image_sample_B( image_type *sim, box2i_type *b, int d, image_type *im )
 {
 	if( sim->depth == 4 ){
-		im = image4_sample( sim, d, im );
+		if( im != NULL )
+			image_destroy( im, 1 );
+		return( NULL );
+		//im = image4_sample( sim, d, im );
 
-		return( im );
+		//return( im );
 	}
 
 
 	if( sim->depth == 3 ){
 
 		if( d == 3 ){
-			im = image3_sample3_B( sim, b, im );
+			im = image3B_sample3( sim, b, im );
 			return( im );
 		}
 
-		im = image3_sample( sim, d, im );
+		if( im != NULL )
+			image_destroy( im, 1 );
+
+		return( NULL );
+
+//		im = image3_sample( sim, d, im );
 
 		return( im );
 	}
 
 	if( sim->depth == 1 ){
-		im = image1_sample( sim, d, im );
+		im = image1B_sample( sim, b, d, im );
 
 		return( im );
 	}
@@ -156,7 +154,23 @@ int	i,	j,	i1,	j1;
 
 
 
+image_type *
+image_sample2L( image_type *sim, int level, image_type *im )
+{
+	image_type	*tim;
+	int	i;
 
+
+	im = image_sample2( sim, im  );
+
+	for( i = 1 ; i < level ; i++ ){
+		tim = image_sample2( im, NULL );
+		image_destroy( im, 1 );
+		im = tim;
+	}
+
+	return( im );
+}
 
 image_type *	
 image_sample2( image_type *sim, image_type *im )
@@ -386,8 +400,8 @@ image3_sample3( image_type *sim, image_type *im )
 }
 
 
-image_type *
-image3_sample3_B( image_type *sim, box2i_type *b, image_type *im )
+static image_type *
+image3B_sample3( image_type *sim, box2i_type *b, image_type *im )
 {
 	u_char	*sp0,	*sp1, *sp2,	*tp;
 	int	i,	j;

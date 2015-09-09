@@ -16,6 +16,10 @@
 #include "PlnType.h"
 
 
+static int	pln_eigen_update( pln_type *pl, float gt0, float gt1, float dt, eigen2dAux_type *ea );
+
+
+
 int
 pln_eigen( pln_type *pl, float dt, eigen2d_type *e )
 {
@@ -139,6 +143,56 @@ pln_eigenS( pln_type *pl, float gt0, float gt1, float dt, eigen2d_type *e )
 	return( n );
 }
 
+
+
+int
+plnA_eigen( plnA_type *apl, eigen2d_type *e )
+{
+eigen2dAux_type ea;
+int	i;
+
+	eigen2dAux_init( &ea, 1 );
+
+
+	for( i = 0; i < apl->nA ; i++ )
+		pln_eigen_update( apl->a[i], 0, 0, 1.0, &ea );
+
+	int ret = eigen2dAux_final( &ea, e );
+		
+
+	return( ret );
+}
+
+
+static int
+pln_eigen_update( pln_type *pl, float gt0, float gt1, float dt, eigen2dAux_type *ea )
+{
+
+	vec2f_type	p;
+	int	n;
+	float	t;
+
+
+
+	
+	if( gt1 <= 0 )	gt1 = pl->len;
+
+
+	for( t = gt0, n = 0 ; t < gt1 ; t += dt ){
+
+		pln_gt2p( pl, t, &p );
+
+
+		EIGEN2D_UPDATE( *ea, p.x, p.y );
+
+		n++;
+	}
+
+
+
+
+	return( n );
+}
 
 
 

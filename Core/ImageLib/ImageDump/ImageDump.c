@@ -178,6 +178,19 @@ image_type	*im;
 	image_destroy( im, 1 );
 }
 
+void
+	image_dump_data( int width, int height, int depth, u_char *data, char *prefix, int index, char *suffix )
+{
+	image_type *im;
+
+	im = image_create( height, width, depth, 1, data );
+
+
+	image_dump( im, prefix, index, suffix );
+
+	image_destroy( im, 0 );
+
+}
 
 void
 image_dump_scale( image_type *im, float scale, char *prefix, int index, char *suffix )
@@ -220,19 +233,12 @@ image_dump_dup( image_type *sim, int d, float a, char *name, int index, char *ex
 
 
 void
-image_dump( image_type *im, char *name, int index, char *ext )
+image_dump( image_type *im, char *name, int index, char *suffix )
 {
 char	file[256];
 
+#ifdef _AA_
 	if( Fdump == 0 )	return;
-
-
-	//if( IMAGE_TYPE(im) == IMAGE_TYPE_S12 && im->channel == 1 ){
-	//	image2_dump( im, name,  index, ext );
-	//	return;
-	//}
-
-
 
 	if( index == -1 )
 		sprintf( file, "%s/%s.bmp", Dump_dir, name );
@@ -240,7 +246,10 @@ char	file[256];
 				sprintf( file, "%s/%s-%.3d.bmp", Dump_dir, name, index );
 			else
 				sprintf( file, "%s/%s-%.3d-%s.bmp", Dump_dir, name, index, ext );
+#endif
 
+	if( gpDump_filename( name, index, suffix, ".bmp", file ) < 0 )
+		return;
 
 
 	image_write_bmp( im, file );

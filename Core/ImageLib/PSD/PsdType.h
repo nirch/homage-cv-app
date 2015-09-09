@@ -1,6 +1,10 @@
 #ifndef	_PSD_TYPE_H_
 #define	_PSD_TYPE_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct image_type;
 
 
@@ -12,6 +16,13 @@ typedef struct psdLayer_type
 	char   name[32];
     struct image_type *image;
 
+
+	int	flag;
+	int	clipping;
+	int	matte;
+	int	blendkey;
+
+
 } psdLayer_type;
 
 
@@ -19,6 +30,11 @@ typedef struct psdLayer_type
 typedef struct psd_type {
 
 	int	width,	height;
+
+	int	resolution;
+
+
+	int	mode;	//0-Bitmap, 1-Grayscale, 2-Indexed, 3-RGB, 4-CMYK, 7-Multichannel, 8-Duetone, 9-Lab
 
 
 	int		nLayer;
@@ -62,6 +78,8 @@ int		psd_read_file( char *file, psd_type **psd );
 int		psd_write_file( psd_type *psd, char *file );
 
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -20,6 +20,32 @@ static float	fKmean_update( float a[], int nA, fKmean_type ak[], int nK );
 static float	fKmean_histogram_update( int a[], int nA, fKmean_type ak[], int nK );
 
 
+int 
+	fKmean( float a[], int nA, fKmean_type ak[], int nK )
+{
+	int	k,	i;
+	float	m;
+
+
+	floatA_order( a, nA );
+
+	float d = (a[nA-1] - a[0])/nK;
+
+	for( k = 0, m = a[0]+ 0.5 *d ; m < a[nA-1] ; k++, m += d ){
+		ak[k].m = m ;
+	}
+
+	nK = k;
+
+
+	for( i = 0; i < 10 ; i++ ){
+		m = fKmean_update( a, nA, ak,  nK );
+		if( ABS(m) < 0.1 )	break;
+	}
+
+	return( nK );
+}
+
 
 int 
 fKmean( float a[], int nA, fKmean_type ak[], int nK, float d )

@@ -454,7 +454,7 @@ u_int	*tp;
 
 
 int
-imageLabelUI_eigen2d( image_type *im, int id, box2i_type *b, eigen2d_type *e )
+imageLabelUI_eigen2dO( image_type *im, int id, box2i_type *b, eigen2d_type *e )
 {
 int	i,	j,	n;
 u_int	*tp;
@@ -510,6 +510,64 @@ float	sx,	sy;
 
 
 	return( 1 );
+
+}
+
+
+int
+imageLabelUI_eigen2d( imageLabel_type *abw, int id, eigen2d_type *e )
+{
+	int	i,	j,	n;
+	float	sx,	sy;
+
+	matrix2_type	m;
+	matrix2_zero( &m );
+
+	sx = sy = 0;
+	box2i_type *b = &abw->a[id].b;
+
+	for( i = b->y0, n = 0 ; i <= b->y1 ; i++ ){
+		u_int *tp = (u_int *)IMAGE_PIXEL( abw->im, i, b->x0 );
+		for( j = b->x0 ; j <= b->x1 ; j++, tp++ ){
+			if( *tp != id )	continue;
+
+			sx += j;
+			sy += i;
+
+			m.a00 += j*j;
+			m.a01 += j*i;
+			m.a11 += i*i;
+			n++;
+		}
+	}
+
+	if( n == 0 )
+		return( -1 );
+
+	sx /= n;
+	sy /= n;
+
+	m.a00 = m.a00 / n - sx*sx;
+	m.a01 = m.a01 / n - sx*sy;
+	m.a11 = m.a11 / n - sy*sy;
+	m.a10 = m.a01;
+
+
+	e->p.x = sx;
+	e->p.y = sy;
+
+
+
+
+	matrix2S_eigen( &m, &e->e1, &e->v1, &e->e2 );
+
+
+#ifdef _TEST_
+	matrix2_type	m3;
+	matrix2S_eigen_inv( &m3, e->e1, &e->v1, e->e2 );
+#endif
+
+	return( n );
 
 }
 

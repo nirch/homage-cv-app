@@ -18,6 +18,60 @@
 static void	vl2fA_group_nv3( vl2fA_type *avl, int iGroup, int iGroup0, int iGroup1, vec2f_type *nv );
 
 
+void
+	vl2fA_group( vl2fA_type *avl, float angle )
+{
+	int	i,	j;
+	float	T,	t;
+	int	nGroup;
+	vl2f_type	*pt,	*cpt;
+
+	T = cos( ANGLE_D2R(angle) );
+
+	//avl->nGroup = 0;
+
+	nGroup = 0;
+	avl->a[0].group = nGroup++;
+//	apt->nGroup = 1;
+
+
+	for( i = 1; i < avl->nA; i++ ){
+		pt = &avl->a[i];
+		pt->group = -1;
+
+		for( j = 0 ; j < i ; j++ ){
+			cpt = &avl->a[j];
+
+			if( cpt->group == pt->group )
+				continue;
+
+			t = VEC2D_INNER( cpt->v, pt->v );
+			if( t < 0 )	t = -t;
+
+			if( t < T )	continue;
+			if( pt->group == -1 ){
+				pt->group = cpt->group;
+				continue;
+			}
+
+			if( pt->group < cpt->group )
+				vl2fA_group_replace_id( avl, i+1, cpt->group, pt->group );
+			else
+				vl2fA_group_replace_id( avl, i+1, pt->group, cpt->group );
+
+//			avl->nGroup--;
+		}
+
+		if( pt->group == -1 ){
+			pt->group = nGroup++;
+//			avl->nGroup++;
+		}
+	}
+
+//	avl->mGroup = nGroup;
+
+}
+
 
 
 pt2dGroupA_type *

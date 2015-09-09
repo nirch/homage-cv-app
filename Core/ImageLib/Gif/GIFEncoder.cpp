@@ -19,6 +19,8 @@ extern "C"
 CGifEncoder::CGifEncoder():CImageEncoder()
 {
 
+	m_iDither = 0;
+
 }
 CGifEncoder::~CGifEncoder()
 {

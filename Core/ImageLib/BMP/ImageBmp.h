@@ -14,6 +14,9 @@ int		image_write_bmp( image_type *im, char *file );
 
 int		image_writeN_bmp( image_type *im, char *fname, int i );
 
+int		image4_write_bmp_T( image_type *im, char *file );
+
+
 //#define image_writeF_bmp   image_write_bmp
 
 

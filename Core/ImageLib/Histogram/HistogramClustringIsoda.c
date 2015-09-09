@@ -69,6 +69,10 @@ int	nC,	i;
 //	c = (isdata1_type *)malloc( 2*K*sizeof(isdata1_type));
 
 	clustring_isodata_histogram_init( H, nH, K, c, &nC );
+	if( nC == 1 ){
+		*nM = 1;
+		return;
+	}
 
 
 
@@ -255,6 +259,15 @@ clustring_isodata_histogram_init( int H[], int nH, int K, isdata1_type c[], int 
 int	m0,	m1,	sum;
 int	k,	i;
 	histogram_minmax( H, nH, &m0, &m1, &sum );
+
+	if( m0 == m1 ){
+		c[0].mean = m0;
+		c[0].var = 0;
+		c[0].n = H[m0];
+		c[0].i0 = c[0].i1 = m0;
+		*nC = 1;
+		return;
+	}
 
 
 	k = 0.5*(m1 - m0);

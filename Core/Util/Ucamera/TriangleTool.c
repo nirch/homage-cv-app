@@ -46,17 +46,17 @@ int	i;
 		t = &at->t[i];	
 
 		if( t->i0 == i0 ){
-			if( t->i1 == i1 && t->i2 == i2 || t->i1 == i2 && t->i2 == i1 )
+			if( (t->i1 == i1 && t->i2 == i2) || (t->i1 == i2 && t->i2 == i1) )
 				return;
 		}
 
 		if( t->i1 == i0 ){
-			if( t->i0 == i1 && t->i2 == i2 || t->i0 == i2 && t->i2 == i1 )
+			if( (t->i0 == i1 && t->i2 == i2) || (t->i0 == i2 && t->i2 == i1) )
 				return;
 		}
 
 		if( t->i2 == i0 ){
-			if( t->i0 == i1 && t->i1 == i2 || t->i0 == i2 && t->i1 == i1 )
+			if( (t->i0 == i1 && t->i1 == i2) || (t->i0 == i2 && t->i1 == i1) )
 				return;
 		}
 	}

@@ -68,7 +68,9 @@ int	i,	j,	k;
 
 	return( im );
 }
-
+//
+//u_int  color0 = 0;
+//u_int  color1 = 0;
 
 void
 image_8to24_copy( image_type *sim, image_type *im, int row0, int col0, palette_type *p )
@@ -89,6 +91,11 @@ int	i,	j,	k,	align;
 		b = p->data[i].Blue;
 		color_arr[i] = IMAGE4_RGB( r, g, b );
 	}
+
+	//if( p->nColor == 2 ){
+	//color0 = color_arr[0];
+	//color1 = color_arr[1];
+	//}
 
 	for( i = 0 ; i < sim->row ; i++, tp += align ) {
 		for( j = 0; j < sim->column ; j++ ){

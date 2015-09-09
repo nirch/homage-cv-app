@@ -122,7 +122,7 @@ int     validity;
 	if (prm->format == NULL)
 		return( PRM_INVALID );
 
-	if (prm->default_str == NULL)
+	if (prm->default_str[0] == 0)
 		return( PRM_INVALID );
 
 	if (strlen(prm->default_str) > PRM_DEFAULT_STRING_MAX_SIZE)

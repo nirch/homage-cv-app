@@ -1,6 +1,7 @@
-#include <memory.h>
+//#include <memory.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #include "ImageType/ImageType.h"
 #include "ImageDithering.h"

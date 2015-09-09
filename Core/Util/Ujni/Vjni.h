@@ -12,6 +12,8 @@ jobject		ujni_newObject(JNIEnv *env, char *className, char *method_sig, jvalue *
 
 jbyteArray ujni_createJByteArray(JNIEnv *env, char *data, int len);
 
+void	ujni_releaseJByteArray(JNIEnv *env, jbyteArray arr );
+
 
 int		ujni_getJByteArrayData(JNIEnv *env, jbyteArray byteArr, char **data, int *len);
 int		ujni_getJIntArrayData(JNIEnv *env, jintArray byteArr, int **data, int *len);

@@ -158,7 +158,7 @@ char	*p,	*p0,	*p1;
 		return( ret );
 
 
-	while( *cst->rp == '#' ||  *cst->rp == '/' && *(cst->rp+1) == '/' ){
+	while( *cst->rp == '#' ||  *cst->rp == '//' && *(cst->rp+1) == '//' ){
 		if( (ret = cst_skip_line( cst )) < 0 )	return( ret );
 		if( (ret = cst_skip_space( cst )) < 0 )	return( ret );
 	}

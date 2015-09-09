@@ -124,7 +124,7 @@ void gp_encode_build_number(char *pBuild, const char *pBuildDate, const char *pB
 	char buffMin[3];
 	char buffHour[3];
 	char buffDay[3];
-	char buffMonth[3];
+	char buffMonth[4];
 	char buffYear[3];
 	int iLength;
 
@@ -135,15 +135,15 @@ void gp_encode_build_number(char *pBuild, const char *pBuildDate, const char *pB
 
 	// hours
 	strncpy(buffHour, pBuildTime , 2);
-	buffHour[2] = '\x0';
+	buffHour[2] = '\0';
 
 	//
 	strncpy(buffMin, pBuildTime + 3 , 2);
-	buffMin[2] = '\x0';
+	buffMin[2] = '\0';
 
 	//
 	strncpy(buffMonth, pBuildDate , 3);
-	buffMonth[3] = '\x0';
+	buffMonth[3] = '\0';
 	gp_transform_month_to_num(buffMonth);
 
 	//
@@ -151,13 +151,13 @@ void gp_encode_build_number(char *pBuild, const char *pBuildDate, const char *pB
 	if (buffDay[0] == ' ')
 		buffDay[0] = '0';
 
-	buffDay[2] = '\x0';
+	buffDay[2] = '\0';
 
 
 	//
 	iLength = strlen(pBuildDate);
 	strncpy(buffYear, pBuildDate + ( iLength - 2 ), 2);
-	buffYear[2] = '\x0';
+	buffYear[2] = '\0';
 
 	sprintf(pBuild, "%s%s%s%s%s", buffYear, buffDay, buffMonth, buffHour, buffMin);
 }
@@ -185,7 +185,7 @@ gp_buildNumber_decode( u_int lBuild, char *pBuild )
 
 	// start decode from the end because at start it may be the number of the year 
 	// with one or two symbols	
-	sprintf(buffNum,"%ld", lBuild);
+	sprintf(buffNum,"%ld", (long)lBuild);
 	//eyal ultoa is not ANSI   _ultoa(lBuild, buffNum, 10);
 
 	iLength = strlen(buffNum);

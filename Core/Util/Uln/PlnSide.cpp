@@ -21,6 +21,13 @@ pln_interior_force_right( pln_type *pl )
 		pln_inverse( pl );
 }
 
+void	
+	pln_interior_force_left( pln_type *pl )
+{
+	if( pln_interior_side( pl ) == 1 )
+		pln_inverse( pl );
+}
+
 
 
 // if the interior of the close contour pl is on right  return 1 otherwise  0

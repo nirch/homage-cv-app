@@ -19,11 +19,16 @@ extern "C" {
 	// ImageSample.c
 image_type *	image_sample( image_type *sim, int d, image_type *im );
 
+image_type *	imageB_sample( image_type *sim, box2i_type *b, int d, image_type *im );
+
+
 image_type *	image4_sample( image_type *sim, int d, image_type *im );
 
 image_type *	image4_dup( image_type *sim, int d, image_type *im );
 
 //image_type *	image4_sample2( image_type *sim, image_type *im );
+
+image_type *	image_sample2L( image_type *sim, int level, image_type *im );
 
 image_type *	image_sample2( image_type *sim, image_type *im );
 

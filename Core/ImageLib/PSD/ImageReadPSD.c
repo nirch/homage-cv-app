@@ -1,7 +1,7 @@
 /************************
  *	ImagePSDFile.c	*
  ************************/
-#include	<memory.h>
+#include <string.h>
 
 
 #include	"Uigp/igp.h"

@@ -277,6 +277,7 @@ LIST(APPEND ${this_target}_SOURCE_FILES ${${this_target}_HEADER_FILES})
 #  - DO NOT add  the following definitions(already defined in ${OSP_DEFINITIONS}:
 # 	-DSHP, -DWIN32, -D_WINDOWS, -D_DEBUG, -D_USRDLL, -D_CRT_SECURE_NO_DEPRECATE
 ADD_DEFINITIONS(
+	_DEBUG;WIN32;_LIB;USE_IPP;_USE_ASM 
 	)
 
 ## section: add target

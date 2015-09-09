@@ -40,6 +40,16 @@ extern "C" {
 #pragma warning(disable:4995)
 #pragma warning(disable:4275)
 #pragma warning(disable:4251)
+#pragma warning(disable:4267)
+#endif
+
+
+#ifndef __ANDROID__
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored  "-Wvisibility"
+#pragma GCC diagnostic ignored  "-Wc++11-compat-deprecated-writable-strings"
+#pragma GCC diagnostic ignored  "-Wpointer-sign"
+#endif
 #endif
 
 #ifdef __ANDROID__
@@ -55,6 +65,7 @@ extern "C" {
 #define hypot(x,y) sqrt((x)*(x) + (y)*(y))
 #define strdup( p )	gpStr_strdup( p )
 #endif // __SYMBIAN32__
+
 
 
 #define		TRUE	1
@@ -95,9 +106,6 @@ extern "C" {
 	// byte order
 #ifndef LITTLE_ENDIAN
 #define		LITTLE_ENDIAN		0
-#endif
-    
-#ifndef BIG_ENDIAN
 #define		BIG_ENDIAN			1
 #endif
 
@@ -142,6 +150,8 @@ extern "C" {
 #define		CYCLIC_NEXT( i, N )		( (i < N-1 )? i+1 : 0 )
 
 
+#define		IS_NAN( f )	 (!(f <= 1.0 ) && !(f>1.0))
+
 #ifdef  WIN32
 typedef	signed char		s_char;
 
@@ -157,6 +167,13 @@ typedef unsigned long   u_long;
 	#endif
 #endif
 
+#ifdef WIN32
+#ifndef u_int64
+typedef unsigned _int64  u_int64;
+#endif
+#endif
+
+
 #ifndef __ANDROID__
 #ifdef WIN32
 #ifndef int64_t
@@ -165,6 +182,14 @@ typedef __int64  int64_t;
 #ifndef uint64_t
 typedef unsigned __int64  uint64_t;
 #endif
+#endif
+#endif
+
+#ifndef vTime_type
+#ifdef WIN32
+typedef _int64	vTime_type;
+#else
+typedef long long vTime_type;
 #endif
 #endif
 
@@ -272,7 +297,7 @@ int 	gpFile_exist( char *file );
 
 int		gpFile_size( char *file );
 
-long	gpFile_mtime( char *file );
+vTime_type	gpFile_mtime( char *file );
 
 int 	gpDir_exist( char *dir );
 
@@ -282,6 +307,9 @@ int		gp_rmdir( char *dir );
 
 int		gpFile_rename( char *oldName, char *newName );
 
+int		gpFile_moveto( char *inFile, char *dir );
+
+
 int		gpFile_delete( char *file );
 
 
@@ -289,6 +317,8 @@ int		gpDir_force_exist( char *dir );
 
 int		gpDir_unuse_id( char *base, int i0, char *dir );
 int		gpFile_unuse_id( char *base, int i0, char *file );
+
+char *	gpFile_fullpath( char *file, char *fullpath );
 
 
 	// GpFile1.c
@@ -300,7 +330,7 @@ int		gpFile_copy_to( char *sfile, char *dir );
 
 int		gp_file_append( char *file, int i0, FILE *fp );
 
-int		gp_file_compare( char *file1, char *file2 );
+int		gpFile_compare( char *file1, char *file2 );
 
 int		gpFile_lines( char *file );
 
@@ -323,6 +353,9 @@ int		gpFile_find_itoken( FILE *fp, char *token, char line[1024] );
 int		gpFile_read_path( FILE *fp, char *dir, char *path );
 
 int		gpFile_sread_path( char *str, char *dir, char *path );
+
+
+int		gpFilename_is_abs_path( char *fname );
 
 int		gpFile_abs_path( char *fname, char *dir, char *path );
 
@@ -386,7 +419,7 @@ int	gpFilename_is_number( char *file );
 int	gpDir_get_directory( char *dir, char *precede, char *extension,
                                         char *name[], int max, int fullPath  );
 
-int	gp_directory_dir( char *dir, char *name[], int max  );
+//int	gp_directory_dir( char *dir, char *name[], int max  );
 
 int gpDir_get_files_list_W( char *dir,  char *prefix, char *ext,
 						   char *files[], int max_num_of_files, int bFullPath );
@@ -400,13 +433,25 @@ int gpDir_get_files( char *dir,  char *prefix, char *suffix,
 
 int gpDir_get_file( char *dir, char *prefix, char *ext, char *file );
 
-int	gp_directory_childs( char *dir, char *precede,
-				char *extension, char *name[], int max  );
+//int	gp_directory_childs( char *dir, char *precede,
+//				char *extension, char *name[], int max  );
+
+
+void	gpDir_delete(  char *dir );
 
 void	gpDir_delete_files( char *dir, char *prefix, char *ext );
 
+int		gpDir_delete_files_size(  char *dir, char *prefix, char *ext, double size );
 
 
+int		gpDir_delete_files_sizeMoify(  char *dir, char *prefix, char *ext, double size );
+
+
+
+int	gpDir_copy_to( char *sdir, char *dir );
+int	gpDir_copy( char *sdir, char *dir );
+
+int gpDir_FreeDiskSpace( char *dir, double *free_space );
 
 	/* GpRelinquish.c */
 void	gp_relinquish_cpu();
@@ -440,6 +485,9 @@ int		gp_stricmp(const char *s1, const char *s2);
 char *	gpStr_strdup( char *p );
 
 int		gpStr_indexOf( char *str, char a );
+
+int		gpStr_lastIndexOf( char *str, char a );
+
 
 char *	gpStr_union( char *s[], int nS, char **data, int *byte );
 

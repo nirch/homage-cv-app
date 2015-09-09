@@ -41,11 +41,17 @@ image_type *	imageUS_to_imageU8( image_type *sim, image_type *im );
 image_type *	imageUS_to_U8( image_type *sim, int min, int max, image_type *im );
 
 
+image_type *	imageUS_to_U8_smart(  image_type *sim, float p0, float p1, image_type *im );
+
+
 image_type *	imageUS3_from_imageF( image_type *sim, image_type *im );
 
 
 
 image_type *imageUS_linearAB( image_type *sim, float a, float b, image_type *im );
+
+
+image_type *	imageUS_binary( image_type *sim, int T, int unit, image_type *im );
 
 
 	// ImageUSInterpolate.c
@@ -63,6 +69,8 @@ image_type *	imageAS_interpolation_V( imageA_type *aim, vec2f_type *p, vec2f_typ
 
 
 	// ImageUSDynamicRange.cpp
+void	imageUS_dynamic_range( image_type *im, float h0, float h1, int *a0, int *a1 );
+
 void	imageUS_dynamic_rangeH( image_type *im, float h0, float h1, int *a0, int *a1 );
 
 

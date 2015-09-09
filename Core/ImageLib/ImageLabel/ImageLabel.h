@@ -78,8 +78,9 @@ void	imageLabelUI_set_aux( image_type *im, bwLabel_type *aBw, int nBw );
 
 void	imageLabelUI_set_box( imageLabel_type *abw );
 
+int		imageLabelUI_eigen2d( imageLabel_type *abw, int id, struct eigen2d_type *e );
 
-int		imageLabelUI_eigen2d( image_type *im, int id, box2i_type *b, struct eigen2d_type *e );
+int		imageLabelUI_eigen2dO( image_type *im, int id, box2i_type *b, struct eigen2d_type *e );
 
 
 void	imageLabelUI_merge( imageLabel_type *abw, int i0, int i1 );

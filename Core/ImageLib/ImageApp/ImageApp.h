@@ -11,6 +11,8 @@ extern "C" {
 #include	"Ujet2/Jet2Type.h"
 #include	"Ujet1/Jet1Type.h"
 
+#include	"Ujet2/Jet23Type.h"
+
 #include	"ImageType/ImageType.h"
 
 
@@ -90,6 +92,10 @@ int	image1_jet1AppW( image_type *im, int i0,	int	j0, jet2App_type *ja, jet1_type
 int	image1_jet1AppWY( image_type *im, int	i0,	int	j0, jet2App_type *ja, jet1_type *f );
 
 
+
+
+	// Image1AppJet3.c
+int image1_app5_jet3( image_type *im, int i0, int j0, jet3_type *jet );
 
 #ifdef __cplusplus
 }

@@ -120,6 +120,36 @@ vl2f_points( vl2f_type *vl, vec2f_type *p0, vec2f_type *p1 )
 	p1->y = vl->p.y + vl->d*vl->v.y;
 }
 
+void 
+	vl2f_box( vl2f_type *vl, box2f_type *b )
+{
+vec2f_type	p0,	p1;
+	p0.x = vl->p.x - vl->d*vl->v.x;
+	p0.y = vl->p.y - vl->d*vl->v.y;
+
+	p1.x = vl->p.x + vl->d*vl->v.x;
+	p1.y = vl->p.y + vl->d*vl->v.y;
+
+
+	if( p0.x < p1.x ){
+		b->x0 = p0.x;
+		b->x1 = p1.x;
+	}
+	else {
+		b->x0 = p1.x;
+		b->x1 = p0.x;
+	}
+
+	if( p0.y < p1.y ){
+		b->y0 = p0.y;
+		b->y1 = p1.y;
+	}
+	else {
+		b->y0 = p1.y;
+		b->y1 = p0.y;
+	}
+}
+
 
 float
 vl2f_distance( vl2f_type *vl, vec2f_type *p )
@@ -283,7 +313,7 @@ vl2fA_read( vl2fA_type **avl, char *file )
 
 
 int
-vl2fA_write( vl2fA_type *avl, char *file )
+vl2fA_write_pt( vl2fA_type *avl, char *file )
 {
 	pt2dA_type	*apt;
 

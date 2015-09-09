@@ -216,3 +216,15 @@ intA_index( intA_type *ai, int val )
 }
 
 
+void
+intA_flip( intA_type *b )
+{
+int	i0,	i1;
+
+	for( i0 = 0, i1 = b->nA-1 ; i0 < i1 ; i0++, i1-- ){
+		int tmp = b->a[i0];
+		b->a[i0] = b->a[i1];
+
+		b->a[i1] = tmp;
+	}
+}
