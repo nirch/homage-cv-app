@@ -201,8 +201,8 @@ LOCAL_SRC_FILES := 	\
 	./ImageDump/ImageDump.c \
 	./ImageF/ImageFConvolution.c \
 	./ImageF/ImageFTool.c \
-	./ImageMorphology\Image1Morphology.cpp \
-	./ImageMorphology\BitMatrix.cpp \
+	./ImageMorphology/Image1Morphology.cpp \
+	./ImageMorphology/BitMatrix.cpp \
 	./ImageTransform/ImageDct.c \
 	./ImageTransform/ImageDct88.c \
 	./ImageTransform/ImageFFT.c \

@@ -1,7 +1,5 @@
 TOP_LOCAL_PATH := $(call my-dir)
 
-VIM_PATH := D:/_work/Gp_vim
-
 include $(CLEAR_VARS)
 
 

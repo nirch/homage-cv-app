@@ -3,6 +3,10 @@
  ********************************/
 #include	<string.h>
 
+#define _GPLOG
+
+#include	"Uigp/igp.h"
+#include	"Ulog/Log.h"
 
 #include	"ImageAcquisition.h"
 
@@ -21,9 +25,10 @@ CImageAcquisition::CImageAcquisition()
 	m_width = -1;
 	m_height = -1;
 
-	m_iFrame = -1;
-    
-    m_fx = m_fy = 0;
+	m_iFrame = -1; 
+
+	m_fx = m_fy = 0;
+	m_x0 = m_y0 = 0;
 
 	m_image = NULL;
 }
@@ -56,6 +61,8 @@ int CImageAcquisition::Get( image_type **im, int forceActive )
 {
 	*im = m_image;
 
+	GPLOGF(("<Base Get ..."));
+
 	return( 1 );
 }
 
@@ -64,14 +71,7 @@ void CImageAcquisition::SetFrameSize( int width, int height )
 {
 	m_rWidth = width;
 	m_rHeight = height;
-    
-    m_width = width;
-    m_height = height;
-}
 
-void CImageAcquisition::SetFoucusPixel( int x, int y )
-{
-	m_fx = x;
-	m_fy = y;
-    
+	m_width = width;
+	m_height = height;
 }

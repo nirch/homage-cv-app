@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="PngLib">
+      <UniqueIdentifier>{465897e0-2f3a-437c-b290-902a9b822518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Png">
+      <UniqueIdentifier>{fc34dfaf-5547-42b6-8580-3ca9e51ee5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Mng">
+      <UniqueIdentifier>{a325027e-d39b-431f-a9bb-f591128b42c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PngWriter">
+      <UniqueIdentifier>{50d4dfee-7269-44b0-b223-d96f7f61468f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PngLib\png.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngerror.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pnggccrd.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngget.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngmem.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngpread.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngread.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngrio.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngrtran.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngrutil.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngset.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngtest.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngtrans.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngvcrd.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngwio.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngwrite.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngwtran.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="PngLib\pngwutil.c">
+      <Filter>PngLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Png\ImageReadPng.c">
+      <Filter>Png</Filter>
+    </ClCompile>
+    <ClCompile Include="Png\ImageWritePng.c">
+      <Filter>Png</Filter>
+    </ClCompile>
+    <ClCompile Include="Png\PngDecoder.cpp">
+      <Filter>Png</Filter>
+    </ClCompile>
+    <ClCompile Include="Png\PngEncoder.cpp">
+      <Filter>Png</Filter>
+    </ClCompile>
+    <ClCompile Include="Mng\ImageWriteMng.c">
+      <Filter>Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="Mng\mng_ImageWritePng.c">
+      <Filter>Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="Mng\mng_pngwrite.c">
+      <Filter>Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="Mng\MngEncoder.cpp">
+      <Filter>Mng</Filter>
+    </ClCompile>
+    <ClCompile Include="PngWriter\PngWriter.cpp">
+      <Filter>PngWriter</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PngLib\png.h">
+      <Filter>PngLib</Filter>
+    </ClInclude>
+    <ClInclude Include="PngLib\pngconf.h">
+      <Filter>PngLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Png\ImageReadPng.h">
+      <Filter>Png</Filter>
+    </ClInclude>
+    <ClInclude Include="Png\ImageWritePng.h">
+      <Filter>Png</Filter>
+    </ClInclude>
+    <ClInclude Include="Png\PngDecoder.h">
+      <Filter>Png</Filter>
+    </ClInclude>
+    <ClInclude Include="Png\PngEncoder.h">
+      <Filter>Png</Filter>
+    </ClInclude>
+    <ClInclude Include="Mng\ImageWriteMng.h">
+      <Filter>Mng</Filter>
+    </ClInclude>
+    <ClInclude Include="Mng\MngEncoder.h">
+      <Filter>Mng</Filter>
+    </ClInclude>
+    <ClInclude Include="Mng\MngIo.h">
+      <Filter>Mng</Filter>
+    </ClInclude>
+    <ClInclude Include="PngWriter\PngWriter.h">
+      <Filter>PngWriter</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
