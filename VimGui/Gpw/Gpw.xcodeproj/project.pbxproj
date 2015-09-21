@@ -492,6 +492,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
 				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
@@ -521,6 +522,7 @@
 					../../Core/Util,
 					../../VimGui,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Gpw/build;
@@ -543,6 +545,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
@@ -572,6 +575,7 @@
 					../../Core/Util,
 					../../VimGui,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Gpw/build;
@@ -590,6 +594,7 @@
 					../../Core/Util,
 					../../VimGui,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Gpw/build;
@@ -612,6 +617,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
 				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
@@ -645,6 +651,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "-DNDEBUG";
 				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
@@ -792,6 +799,7 @@
 					../../Core/Util,
 					../../VimGui,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Gpw/build;

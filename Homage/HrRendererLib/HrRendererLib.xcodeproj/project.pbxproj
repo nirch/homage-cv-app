@@ -202,6 +202,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "    -DNDEBUG  ";
 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
@@ -235,6 +236,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "    -DNDEBUG  ";
 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
@@ -268,6 +270,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "    ";
 				OTHER_CPLUSPLUSFLAGS = "    ";
@@ -290,6 +293,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Homage;
@@ -301,6 +305,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Homage;
@@ -312,6 +317,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Homage;
@@ -323,6 +329,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "../Lib//$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SYMROOT = ../Homage;
@@ -345,6 +352,7 @@
 					.,
 				);
 				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "       -DNDEBUG  ";
 				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
