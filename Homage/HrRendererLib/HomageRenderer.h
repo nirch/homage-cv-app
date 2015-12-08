@@ -45,6 +45,9 @@ public:
 	int AddLayer( int x0, int y0, image_type *sim );
 
 
+	void SetFrameSize( int width, int height );
+
+
 
 
 	image_type * Process( image_type *bim,  

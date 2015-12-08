@@ -151,9 +151,14 @@ int CMattingTask::Init( char *prmFile,  char *ctrFile, int width, int height )
 
 void CMattingTask::SetOperation( int operation )
 {
+
 	m_operation = operation;
 
 	GPLOGF(("CMattingTask: SetOpretion: %d \n", m_operation ) );
+
+	if( m_operation == 2 )
+		m_matting->ResetBackground();
+
 }
 
 void CMattingTask::SetBackground( int color )

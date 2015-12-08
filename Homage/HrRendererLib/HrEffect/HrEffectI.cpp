@@ -19,6 +19,7 @@
 
 CHrEffectI::CHrEffectI()
 {
+	m_id = -1;
 }
 
 CHrEffectI::~CHrEffectI()

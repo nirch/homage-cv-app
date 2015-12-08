@@ -211,7 +211,7 @@ bImage_row( image_type *bim, int a0[], int a1[] )
 		}
 
 		if( j == 1 )
-			a0[i] = j+5;//-1;
+			a0[i] = j;//+5;//-1;
 		else a0[i] = j-1;
 
 
@@ -221,7 +221,7 @@ bImage_row( image_type *bim, int a0[], int a1[] )
 
 
 		if( j ==  bim->width-2 )
-			a1[i] = j -5;//-1;
+			a1[i] = j;// -5;//-1;
 		else a1[i] = j+1;
 	}
 

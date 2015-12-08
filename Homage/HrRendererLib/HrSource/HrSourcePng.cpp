@@ -89,6 +89,13 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 	GPLOG(("\n" ) );
 	m_iFrame = 0;
 
+	image_type *im;
+	if( ReadFrame( 0, &im ) < 0 )
+		return( -1 );
+
+	m_width = im->width;
+	m_height = im->height;
+
 	return( 1 );
 
 

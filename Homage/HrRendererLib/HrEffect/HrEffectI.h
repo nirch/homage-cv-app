@@ -37,7 +37,8 @@ public:
 	void MergeAlpha( image_type *sim );
 
 private:
-
+public:
+	int	m_id;
 
 };
 

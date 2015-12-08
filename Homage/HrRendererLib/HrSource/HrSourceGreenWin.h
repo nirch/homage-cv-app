@@ -35,7 +35,7 @@ public:
 
 private:
 
-	int	m_iFrame;
+//	int	m_iFrame;
 
 	int	m_color;
 

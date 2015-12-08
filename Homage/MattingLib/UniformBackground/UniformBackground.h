@@ -125,9 +125,10 @@ protected:
 	int	ProcessSmooth();
 
 	int	ProcessContour();
-	int	ProcessContourAdjust( plnA_type *apl );
+public:
+	int	ProcessContourAdjust( plnA_type *apl, int width, int height );
 
-
+private:
 	int	ProcessEdgeContourInit();
 	int	ProcessEdgeContour();
 
@@ -174,8 +175,7 @@ protected:
 
 
 	image_type	*m_bim;
-	int	m_nc[2];
-	
+
 
 	image_type	*m_bimC;
 
@@ -198,6 +198,7 @@ protected:
 
 	plnF_type	*m_fpl;
 	plnF_type	*m_fplH;
+	plnF_type	*m_fplEdge;
 
 	plnA_type *m_aplEdge;
 

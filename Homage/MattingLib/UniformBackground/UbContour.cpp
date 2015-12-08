@@ -102,7 +102,7 @@ int	CUniformBackground::ProcessContour()
 
 
 
-	ProcessContourAdjust( apl );
+	ProcessContourAdjust( apl, m_sim->width, m_sim->height );
 
 
 
@@ -119,7 +119,7 @@ int	CUniformBackground::ProcessContour()
 static void	image1_mask_sharp( image_type *sim, float a );
 
 
-int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
+int	CUniformBackground::ProcessContourAdjust( plnA_type *apl, int width, int height )
 {
 	if( m_prm->contour  < 2 || apl->nA <= 0 )	
 		return( -1 );
@@ -161,7 +161,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 		m_headTracking->HeadRange( apl, &gt[0], &gt[1] );
 
 	if( plnA_adjust_thin( apl, bapl, gt, m_iFrame ) > 0 )
-		plnA_adjust_start( apl,  m_sim->height );
+		plnA_adjust_start( apl, height );
 	PLNA_DUMPF( apl, "contor", m_iFrame, "thin", m_dFrame == m_iFrame );
 
 
@@ -171,7 +171,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 	if( m_prm->enableEdge != 0 ){
 
-		plnA_adjust_bottom( apl, m_aplEdge, m_sim->height, m_prm->fillBlobAll, m_iFrame );
+		plnA_adjust_bottom( apl, m_aplEdge, height, m_prm->fillBlobAll, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "bottom", m_dFrame == m_iFrame );
 	}
 
@@ -186,7 +186,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 		if( m_headTracking != NULL )
 			m_headTracking->HeadRange( apl, &gt[0], &gt[1] );
 
-		plnA_adjust_edge( apl, m_aplEdge, m_sim->height, gt, m_iFrame );
+		plnA_adjust_edge( apl, m_aplEdge, height, gt, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "edge",  m_dFrame == m_iFrame );
 	}
 
@@ -214,13 +214,13 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 
 	//if( m_iFrame != 39 ){
 	plnA_adjust_intersect( apl );
-	plnA_adjust_start( apl,  m_sim->height );
+	plnA_adjust_start( apl,  height );
 	PLNA_DUMPF( apl, "contor", m_iFrame, "intersect", m_dFrame == m_iFrame );
 //	}
 
 #ifdef _AA_
 	if( m_iFrame > 0 && m_fpl->a[m_iFrame-1]->nA > 0 ){
-		pln_coherent( apl, m_fpl->a[m_iFrame-1], m_sim->height, m_iFrame );
+		pln_coherent( apl, m_fpl->a[m_iFrame-1], height, m_iFrame );
 
 		PLNA_DUMPF( apl, "contor", m_iFrame, "coherent", m_dFrame == m_iFrame );
 	}
@@ -244,11 +244,11 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl )
 	cln_type *cln = cln_from_plnA( apl, 1 );
 
 	if( m_prm->smooth == 0 ){	
-		m_cim = image1_mask_cln( cln, m_sim->width, m_sim->height, 1, m_cim );
+		m_cim = image1_mask_cln( cln, width, height, 1, m_cim );
 		ProcessSmooth();
 	}
 	else {
-		m_cim = image1_mask_cln( cln, m_sim->width, m_sim->height, 0, m_cim );
+		m_cim = image1_mask_cln( cln, width, height, 0, m_cim );
 		m_cimS = image_make_copy( m_cim, m_cimS );
 	}
 

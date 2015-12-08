@@ -33,6 +33,7 @@ int	CUnBackground::ProcessState()
 {
 int	r0[3],	r1[3],	i;
 
+	
 
 	if( TestDrakness( m_yim ) > 0 ){
 		m_state = -10;

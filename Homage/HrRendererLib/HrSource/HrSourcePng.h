@@ -37,7 +37,7 @@ public:
 
 private:
 
-	int	m_iFrame;
+//	int	m_iFrame;
 
 	char m_dir[256];
 

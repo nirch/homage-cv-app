@@ -22,6 +22,7 @@
 
 
 
+
 CHomageRenderer::CHomageRenderer()
 {
 	m_im = NULL;
@@ -81,6 +82,20 @@ CHrSourceI * CHomageRenderer::GetSource( int i )
 }
 
 
+void
+CHomageRenderer::SetFrameSize( int width, int height )
+{
+	int	i,	k;
+
+
+	for( i = 0 ; i < m_nS ; i++ ){
+		CHrSourceI *s = m_as[i];
+		s->SetFrameSize( width, height );
+	}
+}
+
+
+
 
 int CHomageRenderer::AddOutput( CHrOutputI *o )
 {
@@ -124,6 +139,9 @@ CHomageRenderer::Process()
 			}
 
 			imageA_combine( im, m_im );
+
+			IMAGE_DUMP( m_im, "AA", k, NULL );
+			IMAGE_DUMP( im, "AA", k, "M" );
 		}
 
 		if( k < m_nS )
@@ -132,7 +150,7 @@ CHomageRenderer::Process()
 
 		 
 		for( k = 0 ; k < m_nOut ; k++ ){
-			GPLOGF( ("Frame Write %d\n", k ));
+			GPLOGF( ("Frame Write %d-%d\n", i, k ));
 			m_aOut[k]->WriteFrame( m_im, i );
 		}
 

@@ -36,14 +36,14 @@ public:
 
 private:
 
-	int	m_iFrame;
+//	int	m_iFrame;
 
 	int	m_color;
 
 	int m_delay;
 
-	int	m_width;
-	int	m_height;
+	//int	m_width;
+	//int	m_height;
 
 
 	char	m_file[256];

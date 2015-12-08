@@ -9,6 +9,8 @@ extern "C" {
 #include	"Uigp/igp.h"
 #include "Ubox/Box2d.h"
 
+#include "ImageType/ImageType.h"
+
 typedef struct lbm_type {
 	short i;
 	short j0;

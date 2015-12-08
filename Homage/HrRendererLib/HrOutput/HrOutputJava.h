@@ -42,7 +42,7 @@ public:
 
 private:
 
-	int	m_iFrame;
+//	int	m_iFrame;
 
 
 	JNIEnv	*m_env;
@@ -56,8 +56,8 @@ private:
 	jmethodID  m_methodTest;
 
 
-	int	m_width;
-	int	m_height;
+	//int	m_width;
+	//int	m_height;
 
 
 	char	m_file[256];

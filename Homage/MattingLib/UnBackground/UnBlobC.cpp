@@ -79,20 +79,34 @@ int	CUnBackground::ProcessBlobC()
 
 
 
-	
-	ProcessBlobSide( m_abw, b0, m_hp.x/8, k0, 0, m_hp.y/8, &m_as0 );
 
+	int	i0 = m_hp.x/8;
+	ProcessBlobSide( m_abw, b0, m_hp.x/8, k0, 0, m_hp.y/8, &m_as0 );
 	ProcessBlobSide_test( m_abw, b0, 0, m_hp.y/8, &m_as0 );
-	//sbA_write( &m_as0, stdout );
+#ifdef _DEBUG
+//	sbA_write( &m_as0, stdout );
+#endif
 
 	ProcessBlobSide( m_abw, b1, m_hp.x/8, k1, m_hp.y/8, m_abw->im->width, &m_as1 );
 	ProcessBlobSide_test( m_abw, b1, m_hp.y/8, m_abw->im->width, &m_as1 );
-	//sbA_write( &m_as1, stdout );
+#ifdef _DEBUG
+//	sbA_write( &m_as1, stdout );
+#endif
 
+	int n  = ( m_as1.a[i0].j0 - m_as0.a[i0].j1 );
+	if( n*8 > 100 )	m_closeUp = 1;
+
+#ifdef _DEBUG
+	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
+#endif
 
 
 	ProcessBlobSide_gap(  m_abw, b0, 0, m_hp.y/8, &m_as0 );
 	ProcessBlobSide_gap(   m_abw, b1, m_hp.y/8, m_abw->im->width, &m_as1 );
+
+#ifdef _DEBUG
+	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
+#endif
 
 
 	for( i = 0 ; i < m_as0.nA ; i++ ){
@@ -202,6 +216,19 @@ int	CUnBackground::ProcessBlobSide_gap( imageLabel_type *abw, int iB, int j0, in
 
 		if( m_abw->a[id].no < 100 )	continue;
 
+
+		if( m_closeUp ){
+			if( j0 > 0 ){
+				if(  i > as->nA - 15 && as->a[i-1].j0 > ac.a[k0].j1 )
+					break;
+			}
+		
+			else {
+				if(  i > as->nA - 15 && as->a[i-1].j0 > ac.a[k0].j1 )
+					break;
+			}
+		}
+
 		as->a[i] = ac.a[k0];
 
 		ProcessBlobSide_overlap_down( abw, id, i,  j0,  j1,  as );
@@ -214,6 +241,18 @@ int	CUnBackground::ProcessBlobSide_gap( imageLabel_type *abw, int iB, int j0, in
 	return( 1 );
 }
 
+
+//
+//int	CUnBackground::ProcessBlobSide_filter_right( sbA_type *as )
+//{
+//int	i;
+//	for( i = as ->nA-15 ; i < as ->nA ; i++ ){
+//		if( as->a[i-1].j1 < 0 || as->a[i].j1 < 0 )	continue;
+//
+//	}
+//
+//	return( 1 );
+//}
 
 
 int	CUnBackground::ProcessBlobSide_test( imageLabel_type *abw, int iB, int j0, int j1, sbA_type *as )

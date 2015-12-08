@@ -29,6 +29,8 @@ public:
 	int Init( char *inFile );
 	int InitFromData( char *data );
 
+	int SetFrameSize( int width, int height );
+
 	 int Process( image_type *sim, int iFrame, image_type **im );
 
 	 int GetPose( int iFrame, vec2f_type *p, float *scale, float *rx, float *ry, float *rz );

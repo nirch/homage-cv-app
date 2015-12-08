@@ -33,12 +33,12 @@ public:
 	int	Close();
 
 private:
-	int m_width;
-	int m_height;
+	//int m_width;
+	//int m_height;
 
 	int m_nFrame;
 
-	int	m_iFrame;
+	//int	m_iFrame;
 
 
 

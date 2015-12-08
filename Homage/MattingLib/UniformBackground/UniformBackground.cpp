@@ -98,6 +98,7 @@ CUniformBackground::CUniformBackground()
 
 	m_fpl = plnF_alloc( 1000 );
 	m_fplH = plnF_alloc( 1000 );
+	m_fplEdge = plnF_alloc( 1000 );
 
 	m_aplEdge = NULL;
 
@@ -106,6 +107,7 @@ CUniformBackground::CUniformBackground()
 	m_flip = 0;
 
 	m_dr = NULL;
+
 
 #ifdef _DYNAMIC_BACKGROUND
 	m_dm = NULL;
@@ -265,7 +267,11 @@ void CUniformBackground::DeleteContents()
 		plnF_destroy( m_fplH );
 		m_fplH = NULL;
 	}
-	
+	if( m_fplEdge != NULL ){
+		plnF_destroy( m_fplEdge );
+		m_fplEdge = NULL;
+	}
+	else 
 	if( m_aplEdge != NULL ){
 		plnA_destroy( m_aplEdge );
 		m_aplEdge = NULL;
@@ -409,6 +415,8 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 	if( m_bim == NULL ){
 		ProcessInitBackground( m_sim );
 
+		//IMAGE_DUMP( m_bim, "BB", 1, "A" );
+
 		InitHeadTracker( m_iHead );
 
 		m_headBoxF = 0;
@@ -539,13 +547,16 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 
 int	CUniformBackground::Write( char *outFile )
 {
-	plnF_write( m_fpl, outFile );
+	if( m_fpl != NULL )
+		plnF_write( m_fpl, outFile );
 
 
 	char	file[256];
 	gpFilename_force_extension( outFile, "-h.plf", file );
 	plnF_write( m_fplH, file );
 
+	gpFilename_force_extension( outFile, "-e.plf", file );
+	plnF_write( m_fplEdge, file );
 
 	if( m_headBoxF == 1 ){
 
@@ -606,6 +617,17 @@ char * CUniformBackground::GetProcessLog()
 
 void CUniformBackground::ProcessLog()
 {
+	gpLog_time( "Calibrate", &m_rTime );
+	gpLog_time( "Compare", &m_tCompare );
+	gpLog_time( "Thin", &m_tThin );
+	gpLog_time( "Smooth", &m_tSmooth );
+
+	gpLog_time( "Bn-dd", &m_tBn );
+	gpLog_time( "Update", &m_tUpdate );
+	gpLog_time( "Edge", &m_tEdge );
+	gpLog_time( "Contour", &m_tCln );
+
+	gpLog_time( "Total", &m_gTime );
 
 	if( m_tCompare.no == 0 || (m_tCompare.no%10) != 0 )
 		return;
@@ -614,6 +636,7 @@ void CUniformBackground::ProcessLog()
 	int nn = gpTime_mpf( &m_tThin);
 	int g = gpTime_mpf( &m_tSmooth);
 	int update = gpTime_mpf( &m_tUpdate);
+
 
 }
 

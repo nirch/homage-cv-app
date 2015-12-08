@@ -15,6 +15,8 @@
 
 #include "HrSourceI.h"
 
+#include "../HrEffect/HrEffectPose.h"
+
 
 void	imageA_merge_alpha( image_type *sim, image_type *im );
 
@@ -60,6 +62,35 @@ int CHrSourceI::AddEffect( CHrEffectI *e )
 	m_ae[m_nE++] = e;
 
 	return( m_nE-1 );
+}
+
+
+CHrEffectI * CHrSourceI::GetEffect( int id )
+{
+int	i;
+	for( i = 0 ; i < m_nE ; i++ ){
+		CHrEffectI *e = m_ae[i];
+		if( e->m_id == id )
+			return( e );
+	}
+
+	return( NULL );
+}
+
+
+void
+	CHrSourceI::SetFrameSize( int width, int height )
+{
+
+	CHrEffectPose *e = (CHrEffectPose*)GetEffect( EFFECT_POSE );
+
+	if( e == NULL ){
+		e = new CHrEffectPose();
+
+		AddEffect( e );
+	}
+
+	e->SetFrameSize( width, height );
 }
 
 

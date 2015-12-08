@@ -28,6 +28,7 @@
 
 CHrEffectAlignment::CHrEffectAlignment()
 {
+	m_id = EFFECT_ALIGNMENT;
 
 	m_im = NULL;
 

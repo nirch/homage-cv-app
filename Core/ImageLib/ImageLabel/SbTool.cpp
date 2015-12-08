@@ -62,6 +62,33 @@ sbA_write3( sbA_type *as, sbA_type *as0, sbA_type *as1, FILE *fp )
 
 
 int
+sbA_set_from_contour( sbA_type *as, sbA_type *as0, sbA_type *as1, int m )
+{
+	int	i;
+	for( i = 0 ; i < as->nA ; i++ ){
+			as0->a[i].y = as1->a[i].y = 0;
+
+			if( as->a[i].j0 == -1 ){
+				as0->a[i].j0 = as0->a[i].j1 = -1;
+				as1->a[i].j0 = as1->a[i].j1 = -1;
+	
+				continue;
+			}
+
+			as0->a[i].j0 =  as0->a[i].j1 = as->a[i].j0 - 1;
+
+
+			int j = ( as->a[i].j1 >= m )? -1 : as->a[i].j1+1;
+			as1->a[i].j0 =  as1->a[i].j1 = j;
+	}
+
+	as0->nA = as1->nA = as->nA;
+
+	return( 1 );
+}
+
+
+int
 sbA_range( sbA_type *as, int *i0, int *i1 )
 {
 	int	i,	n;

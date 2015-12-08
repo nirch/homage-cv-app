@@ -38,12 +38,12 @@ public:
 
 private:
 
-	int	m_iFrame;
+//	int	m_iFrame;
 
 	int m_color;
 
-	int	m_width;
-	int	m_height;
+	//int	m_width;
+	//int	m_height;
 	int	m_codec;
 	int	m_frameRate;
 	int	m_bitrate;

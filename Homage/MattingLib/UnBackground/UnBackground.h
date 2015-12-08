@@ -158,7 +158,7 @@ public:
 
 	int	m_state;
 
-
+	int	m_closeUp;
 
 	// old algorithm
 	class CUnBackgroundM *m_unBackgroundM;

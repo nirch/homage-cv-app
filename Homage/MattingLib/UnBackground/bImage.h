@@ -64,6 +64,10 @@ int		bImage_fill_gap( image_type *bim, int a[], int side );
 
 int		bImage_fill_gap( image_type *bim, int a[], int i0, int i1, int side );
 
+int	bImage_fill_gapR( image_type *bim, int a[] );
+int	bImage_fill_gapL( image_type *bim, int a[] );
+
+int	bImage_fill_gap_up( image_type *bim, int a0[], int a1[] );
 
 
 #ifdef _DUMP

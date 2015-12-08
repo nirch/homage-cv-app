@@ -3,32 +3,52 @@
 
 cmake_minimum_required(VERSION 2.6.2)
 
-# replace MattingLib with binary name. e.g. mbase or FBase
-SET (this_target MattingLib)
+# replace HrRendererLib with binary name. e.g. mbase or FBase
+SET (this_target HrRendererLib)
 PROJECT(${this_target})
 
 ## section: include directory
 
 INCLUDE_DIRECTORIES(
+	.
 	../../Core/ImageLib
 	../../Core/Util
+	../../Tracking
+	../../Edge
+	../../Video
 	)
 
 ## section: source files
 # Add your source files here (one file per line), please SORT in alphabetical order for future maintenance
 SET (${this_target}_SOURCE_FILES
-	./Background/BackgroundRemoval.cpp 
-	./ColorBackground/ColorBackground.cpp 
-	./ColorBackground/UniformBackground.cpp 
-	./ColorBackground/UniformBackgroundContour.cpp 
-	./ColorBackground/UniformBackgroundFill.cpp 
+	./HomageRenderer.cpp 
+	./HrEffect/HrEffectI.cpp 
+	./HrEffect/HrEffectMask.cpp 
+	./HrEffect/HrEffectPose.cpp 
+	./HrOutput/HrOutputGif.cpp 
+	./HrOutput/HrOutputGreenWin.cpp 
+	./HrOutput/HrOutputI.cpp 
+	./HrSource/HrSourceGif.cpp 
+	./HrSource/HrSourceGreenWin.cpp 
+	./HrSource/HrSourceI.cpp 
+	./HrSource/HrSourceLive.cpp 
+	./HrSource/HrSourcePngWin.cpp 
 	)
 
 ## section: header files
 # Add your header files here(one file per line), please SORT in alphabetical order for future maintenance!
 SET(${this_target}_HEADER_FILES
-	./Background/BackgroundRemoval.h 
-	./ColorBackground/ColorBackground.h 
+	./HomageRenderer.h 
+	./HrEffect/HrEffectI.h 
+	./HrEffect/HrEffectMask.h 
+	./HrEffect/HrEffectPose.h 
+	./HrOutput/HrOutputGif.h 
+	./HrOutput/HrOutputGreenWin.h 
+	./HrOutput/HrOutputI.h 
+	./HrSource/HrSourceGif.h 
+	./HrSource/HrSourceGreenWin.h 
+	./HrSource/HrSourceI.h 
+	./HrSource/HrSourceLive.h 
 )
 
 SET_SOURCE_FILES_PROPERTIES(${this_target}_HEADER_FILES

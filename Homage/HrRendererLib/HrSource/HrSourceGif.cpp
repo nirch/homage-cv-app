@@ -68,6 +68,9 @@ int CHrSourceGif::Init( char *inFile )
 	image_read_gif_get_frame_no( m_gifIo );
 	m_nFrame = m_gifIo->frame_no;
 
+	m_width = m_gifIo->column;
+	m_height - m_gifIo->row;
+
 	m_iFrame = -1;
 	return( 1 );
 
@@ -99,9 +102,12 @@ int	CHrSourceGif::ReadFrame( int iFrame, image_type **im )
 
 
 
+	ProcessEffect( m_im, iFrame, im );
+//	*im = m_im;
+
 	m_iFrame = iFrame;
 
-	*im = m_im;
+
 
 
 	return( 1 );

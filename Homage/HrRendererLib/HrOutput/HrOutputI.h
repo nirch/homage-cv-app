@@ -31,9 +31,14 @@ public:
 
 
 	virtual int Close() = 0;
-private:
 
+	int GetWidth()	{ return m_width; }
+	int	GetHeight() { return m_height; }
+private:
+public:
 	int	m_iFrame;
+	int m_width;
+	int m_height;
 
 
 

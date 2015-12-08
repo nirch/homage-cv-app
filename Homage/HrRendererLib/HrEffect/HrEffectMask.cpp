@@ -28,6 +28,7 @@ static image_type *	imageA_merge_alpha( image_type *sim, image_type *imA, image_
 
 CHrEffectMask::CHrEffectMask()
 {
+	m_id = EFFECT_MASK;
 
 	m_im = NULL;
 

@@ -38,6 +38,9 @@ int	sbA_write3( sbA_type *as, sbA_type *as0, sbA_type *as1, FILE *fp );
 
 int	sbA_in( sbA_type *as, int j0 );
 
+int	sbA_set_from_contour( sbA_type *as, sbA_type *as0, sbA_type *as1, int m );
+
+
 int	sbA_overlap( sbA_type *as, sb_type *s, int a[], int *nA );
 
 int	seg_overlap( sb_type *s0, sb_type *s );

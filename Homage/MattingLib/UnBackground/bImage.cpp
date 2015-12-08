@@ -761,7 +761,7 @@ bImage_fill_gap( image_type *bim, int a[], int side )
 			continue;
 		}
 
-		if( n > 0 && i0 >=0 )
+		if( n > 0 && i0 >= 0 )
 			bImage_fill_gap( bim, a, i0, i, side );
 
 		i0 = i;
@@ -773,6 +773,80 @@ bImage_fill_gap( image_type *bim, int a[], int side )
 
 	return( 1 );
 }
+
+
+int
+bImage_fill_gapR( image_type *bim, int a[] )
+{
+	int	i;
+
+	int	h = bim->height;
+
+
+	for( i = h-1; i > h-24 ; i-- ){
+		if( a[i] < 0 )	continue;
+
+		if( a[i] > a[i-1] )	break;
+
+		a[i] = -1;
+	}
+
+	return( 1 );
+}
+
+
+int
+	bImage_fill_gapL( image_type *bim, int a[] )
+{
+	int	i;
+
+	int	h = bim->height;
+
+
+	for( i = h-1; i > h-24 ; i-- ){
+		if( a[i] < 0 )	continue;
+
+		if( a[i] < a[i-1] )	break;
+
+		a[i] = -1;
+	}
+
+	return( 1 );
+}
+
+
+int
+bImage_fill_gap_up( image_type *bim, int a0[], int a1[] )
+{
+	int	i;
+
+	for( i = 0 ; i <  bim->height ; i++ ){
+		if( a0[i] >= 0 )	break;
+	}
+
+	int i0 = i;
+
+
+	for( i = 0 ; i <  bim->height ; i++ ){
+		if( a1[i] >= 0 )	break;
+	}
+
+
+	int i1 = i;
+
+	if( a1[i1] - a0[i0] < 10 || MAX(i0, i1 ) < 8 )	
+		return( 1 );
+
+
+	for( i = 0 ; i < 4 ; i++ ){
+		a0[i0-i] = a0[i0];
+		a1[i1-i] = a1[i1];
+	}
+
+	return( 1 );
+}
+
+
 
 int
 bImage_fill_gap( image_type *bim, int a[], int i0, int i1, int side )

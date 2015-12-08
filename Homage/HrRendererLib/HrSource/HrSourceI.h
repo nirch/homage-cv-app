@@ -46,9 +46,15 @@ public:
 
 	int AddEffect( CHrEffectI *e );
 
-private:
+	CHrEffectI * GetEffect( int id );
+	void	SetFrameSize( int width, int height );
 
+private:
+public:
 	int	m_iFrame;
+
+	int m_width;
+	int m_height;
 
 	image_type *m_alphaIm;
 

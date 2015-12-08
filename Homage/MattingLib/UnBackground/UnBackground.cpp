@@ -58,6 +58,8 @@ CUnBackground::CUnBackground()
 
 	m_unBackgroundM = NULL;
 
+	m_closeUp = 0;
+
 	gpTime_init( &m_gTime );
 }
 
@@ -173,6 +175,7 @@ int	CUnBackground::ReadMask( char *inFile, int width, int height )
 		image_dump( im, "mask", m_nM, NULL );
 
 		m_mim[m_nM] = image1_sample( im, 8, NULL );
+		IMAGE_DUMP_DUP( m_mim[m_nM], 8, 1.0, "mask", m_nM, "DUP" );
 		image1_threshold( m_mim[m_nM], 255 );
 
 		image_destroy( im, 1 );
@@ -254,6 +257,12 @@ int	ret;
 	ProcessSilhouette();
 
 	ret = ProcessBlobC();
+
+//#ifdef _DEBUG
+//	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
+//#endif
+
+#ifdef _OLD
 	if( ret < 0 ){
 
 		if( TestDrakness( m_yim ) > 0 )
@@ -273,8 +282,26 @@ int	ret;
 		GPTRACE( (3, "Background: %d\n", m_state ) );
 		return( 1 );
 	}
+#endif
+	if( ret < 0 ){
+
+		if( TestDrakness( m_yim ) > 0 )
+			m_state = -10;
+		else
+			m_state = -11;
+		int m = m_bim->width-3;
+
+		sbA_set_from_contour( &m_asB[0], &m_as0, &m_as1, m );
+
+		m_closeUp = 1;
+
+		GPTRACE( (3, "Background: %d\n", m_state ) );
+	}
 
 
+#ifdef _DEBUG
+	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
+#endif
 	
 	bImage_set_sbA( m_bim, &m_as0 );
 	bImage_set_sbA( m_bim, &m_as1 );
@@ -290,7 +317,8 @@ int	ret;
 
 	ProcessFill();
 
-	ProcessState();
+	if( m_state >= 0 )
+		ProcessState();
 
 //	fprintf( stdout, "State: %d\n", m_state );
 	GPTRACE( (3, "Background: %d\n", m_state ) );
@@ -327,8 +355,15 @@ int	CUnBackground::ProcessFill()
 	a0[i+1] = a1[i+1] = -1;
 
 
+	if( m_closeUp ){
+		bImage_fill_gapR( m_bim, a1 );
+		bImage_fill_gapL( m_bim, a0 );
+	}
+
 	bImage_fill_gap( m_bim, a0, F_LEFT );
 	bImage_fill_gap( m_bim, a1, F_RIGHT );
+
+	bImage_fill_gap_up( m_bim, a0, a1 );
 
 
 	bImage_fill( m_bim, a0, a1 );
