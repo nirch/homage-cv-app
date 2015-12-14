@@ -92,6 +92,12 @@ CHomageRenderer::SetFrameSize( int width, int height )
 		CHrSourceI *s = m_as[i];
 		s->SetFrameSize( width, height );
 	}
+
+
+	for( i = 0 ; i < m_nOut ; i++ ){
+		CHrOutputI *o = m_aOut[i];
+		o->SetFrameSize( width, height );
+	}
 }
 
 

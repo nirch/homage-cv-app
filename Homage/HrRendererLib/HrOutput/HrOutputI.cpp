@@ -37,6 +37,12 @@ void CHrOutputI::DeleteContents()
 }
 
 
+void CHrOutputI::SetFrameSize( int width, int hieght )
+{
+	m_width = width;
+	m_height = hieght;
+}
+
 
 
 

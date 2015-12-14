@@ -209,8 +209,8 @@ image4_dewarp_lt2( image_type *sim, lt2_type *lt, image_type *im )
 
 
 
-
-	im = image_realloc( im, sim->width, sim->height, sim->channel, IMAGE_TYPE_U8, 1 );
+	if( im == NULL )
+		im = image_realloc( im, sim->width, sim->height, sim->channel, IMAGE_TYPE_U8, 1 );
 
 
 

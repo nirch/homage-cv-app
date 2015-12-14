@@ -29,6 +29,8 @@ public:
 
 	virtual int	WriteFrame( image_type *im, int iFrame ) = 0;
 
+	virtual void SetFrameSize( int width, int hieght );
+
 
 	virtual int Close() = 0;
 
