@@ -220,6 +220,9 @@ CUnBackground::Process( image_type *sim, int iFrame )
 {
 int	ret;
 
+	m_state = 0;
+
+
 	iFrame = m_iFrame;
 
 	GPLOG(("CUnBackground: %d %d %d %d", iFrame, sim->width, sim->height, sim->channel ) );
@@ -313,7 +316,7 @@ int	ret;
 #ifdef _DEBUG
 	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
-
+	
 
 	ProcessFill();
 
@@ -359,10 +362,10 @@ int	CUnBackground::ProcessFill()
 		bImage_fill_gapR( m_bim, a1 );
 		bImage_fill_gapL( m_bim, a0 );
 	}
-
+	
 	bImage_fill_gap( m_bim, a0, F_LEFT );
 	bImage_fill_gap( m_bim, a1, F_RIGHT );
-
+	
 	bImage_fill_gap_up( m_bim, a0, a1 );
 
 

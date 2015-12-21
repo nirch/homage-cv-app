@@ -55,7 +55,7 @@ int	CUnBackground::ProcessBlobB()
 
 	int i0 = 0;
 	for( i = 1 ; i < nC ; i++ ){
-		if( ac[i].n > ac[i0].n )
+		if( ac[i].n > ac[i0].n || ac[i].n > 400 && ac[i].mean > 2*ac[i0].mean )
 			i0 = i;
 	}
 
