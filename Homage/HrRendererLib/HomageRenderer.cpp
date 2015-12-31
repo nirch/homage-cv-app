@@ -31,6 +31,9 @@ CHomageRenderer::CHomageRenderer()
 	m_nOut = 0;
 
 	m_process = 0;
+    
+    // Default value
+    this->setDuration(2.0, 12);
 }
 
 CHomageRenderer::~CHomageRenderer()
@@ -100,7 +103,13 @@ CHomageRenderer::SetFrameSize( int width, int height )
 	}
 }
 
-
+void CHomageRenderer::setDuration(double duration, int fps)
+{
+    this->duration = duration;
+    this->fps = fps;
+    this->maxTimeStamp = duration * 1000000000;
+    this->timeDeltaPerFrame = 1000000000 / fps;
+}
 
 
 int CHomageRenderer::AddOutput( CHrOutputI *o )
@@ -131,11 +140,14 @@ CHomageRenderer::Process()
 	image_type *im;
 
 	m_process = 1;
-
+    long long timeStamp = 0;
 	for( i = 0 ; ; i++ ){
-
 		for( k = 0 ; k < m_nS ; k++ ){
-			if( m_as[k]->ReadFrame( i, &im ) < 0 )
+            
+            if( timeStamp >= maxTimeStamp)
+                break;
+            
+			if( m_as[k]->ReadFrame( i, timeStamp, &im ) < 0 )
 				break;
 
 			if( k == 0 ){
@@ -166,7 +178,7 @@ CHomageRenderer::Process()
 
 
 		fprintf( stdout, "  ." );
-
+        timeStamp += this->timeDeltaPerFrame;
 	}
 
 

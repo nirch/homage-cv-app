@@ -28,7 +28,7 @@ public:
 
 	int Init( char *inFile );
 
-	 int	ReadFrame( int iFrame, image_type **im );
+    int	ReadFrame( int iFrame, long long timeStamp, image_type **im );
 
 	int	Close();
 

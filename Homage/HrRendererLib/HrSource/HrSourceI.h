@@ -31,12 +31,9 @@ public:
 
 	virtual int Init( char *inFile, int aFrame[], int nF )	{ return( -1 ); };
 
-	virtual int	ReadFrame( int iFrame, image_type **im ) = 0;
-
+	virtual int	ReadFrame( int iFrame, long long timeStamp, image_type **im ) = 0;
 
 	virtual int Close() = 0;
-
-
 
 	void SetAlpha( image_type *im );
 
@@ -48,6 +45,9 @@ public:
 
 	CHrEffectI * GetEffect( int id );
 	void	SetFrameSize( int width, int height );
+    
+    void SetSourceDuration(double duration);
+    int PickFrameAtTS(long long timeStamp, int maxFramesCount);
 
 private:
 public:
@@ -58,7 +58,7 @@ public:
 
 	image_type *m_alphaIm;
 
-
+    double duration;
 
 	int	m_nE;
 	CHrEffectI	*m_ae[128];

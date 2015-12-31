@@ -29,6 +29,8 @@ CHrSourceI::CHrSourceI()
 	m_alphaIm = NULL;
 
 	m_nE = 0;
+    
+    this->SetSourceDuration(2.0);
 }
 
 CHrSourceI::~CHrSourceI()
@@ -92,6 +94,20 @@ void
 
 	e->SetFrameSize( width, height );
 }
+
+void CHrSourceI::SetSourceDuration(double duration)
+{
+    this->duration = duration;
+}
+
+int CHrSourceI::PickFrameAtTS(long long timeStamp, int maxFramesCount)
+{
+    long double timeInSeconds = timeStamp/1000000000.0;
+    int pickedFrame = (int)((timeInSeconds / (long double)this->duration) * maxFramesCount);
+    pickedFrame = pickedFrame % maxFramesCount;
+    return pickedFrame;
+}
+
 
 
 int CHrSourceI::ProcessEffect( image_type *sim, int iFrame, image_type **im )

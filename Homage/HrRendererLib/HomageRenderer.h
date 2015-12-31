@@ -30,13 +30,12 @@ public:
 
 	int IsProcess()	{ return m_process; }
 
+    void setDuration(double duration, int fps);
 
 	int	Process( CHrSourceI *b, CHrSourceI *u, CHrSourceI *f, CHrOutputI *out[], int nOut );
 
 	int AddSource( CHrSourceI *s );
 	int AddOutput( CHrOutputI *out );
-
-
 
 	int SetBackground( image_type *bim );
 
@@ -69,8 +68,10 @@ public:
 
 	void	Trace( FILE *fp )	{}
 
-
-
+    int fps;
+    double duration;
+    long long maxTimeStamp;
+    long long timeDeltaPerFrame;
 
 //private:
 public:

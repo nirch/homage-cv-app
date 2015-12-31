@@ -78,38 +78,20 @@ int CHrSourceGif::Init( char *inFile )
 }
 
 
-int	CHrSourceGif::ReadFrame( int iFrame, image_type **im )
+int	CHrSourceGif::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 {
+	if( iFrame < 0 ) return( -1 );
 
-
-	if( iFrame < 0 || iFrame >= m_nFrame )	return( -1 );
-
-	//if( m_iFrame == iFrame ){
-	//	if( m_im == NULL )
-	//		return( -1 );
-
-
-	//	*im = m_im;
-	//	return( 1 );
-	//}
-
-
-	if( image_read_gif_i( m_gifIo, iFrame ) < 0 )
+    int pickedFrame = this->PickFrameAtTS(timeStamp, m_nFrame);
+    if( image_read_gif_i( m_gifIo, pickedFrame ) < 0 )
 		return( -1 );
 
 	m_im = image_make_copy( m_gifIo->im, m_im );
 	imageT_negative_alpha( m_im, m_im );
 
-
-
 	ProcessEffect( m_im, iFrame, im );
-//	*im = m_im;
 
 	m_iFrame = iFrame;
-
-
-
-
 	return( 1 );
 }
 
