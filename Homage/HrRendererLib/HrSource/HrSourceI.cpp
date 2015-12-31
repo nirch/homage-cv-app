@@ -31,6 +31,9 @@ CHrSourceI::CHrSourceI()
 	m_nE = 0;
     
     this->SetSourceDuration(2.0);
+    this->startTimeOffset = -1;
+    this->freezeTime = -1;
+    this->endTime = -1;
 }
 
 CHrSourceI::~CHrSourceI()
@@ -98,6 +101,16 @@ void
 void CHrSourceI::SetSourceDuration(double duration)
 {
     this->duration = duration;
+}
+
+void CHrSourceI::SetTimingOffset(double startTimeOffset)
+{
+    this->startTimeOffset = startTimeOffset;
+}
+
+void CHrSourceI::SetTimingEnd(double endTime)
+{
+    
 }
 
 int CHrSourceI::PickFrameAtTS(long long timeStamp, int maxFramesCount)

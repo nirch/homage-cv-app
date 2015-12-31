@@ -46,10 +46,19 @@ public:
 	CHrEffectI * GetEffect( int id );
 	void	SetFrameSize( int width, int height );
     
+    // Timing methods
     void SetSourceDuration(double duration);
+    void SetTimingOffset(double startTimeOffset);
+    void SetTimingEnd(double endTime);
+    void SetFreezeTime(double freezeTime);
     int PickFrameAtTS(long long timeStamp, int maxFramesCount);
 
 private:
+protected:
+    double duration;
+    long long startTimeOffset;
+    long long endTime;
+    long long freezeTime;
 public:
 	int	m_iFrame;
 
@@ -58,9 +67,7 @@ public:
 
 	image_type *m_alphaIm;
 
-    double duration;
-
-	int	m_nE;
+    int	m_nE;
 	CHrEffectI	*m_ae[128];
 
 };
