@@ -47,18 +47,24 @@ public:
 	void	SetFrameSize( int width, int height );
     
     // Timing methods
+    void SetShouldUseTiming(bool shouldUseTiming);
     void SetSourceDuration(double duration);
-    void SetTimingOffset(double startTimeOffset);
-    void SetTimingEnd(double endTime);
-    void SetFreezeTime(double freezeTime);
+    double GetDuration();
+    void SetTimingOffset(long long startTimeOffset);
+    void SetTimingEnd(long long endTime);
+    void SetFreezeTime(long long freezeTime);
     int PickFrameAtTS(long long timeStamp, int maxFramesCount);
+    long long CalculatedTS(long long timeStamp);
 
 private:
 protected:
+    int first_iFrame;
+    bool shouldUseTiming;
     double duration;
     long long startTimeOffset;
     long long endTime;
     long long freezeTime;
+    long long lastUsedTimeStamp;
 public:
 	int	m_iFrame;
 
@@ -66,6 +72,7 @@ public:
 	int m_height;
 
 	image_type *m_alphaIm;
+    image_type *empty_image;
 
     int	m_nE;
 	CHrEffectI	*m_ae[128];
