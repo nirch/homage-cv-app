@@ -14,7 +14,11 @@
 #define EFFECT_POSE				2
 #define EFFECT_ALIGNMENT		3
 #define EFFECT_MASKGIF			4
-
+#define EFFECT_MORPHING			5
+#define EFFECT_SEPIA			6
+#define EFFECT_GRAY				7
+#define EFFECT_ALPHA			8
+#define EFFECT_CARTOON			9
 class CHrEffectI 
 {
 public:

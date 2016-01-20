@@ -64,6 +64,8 @@ image_type *	image3_to_android( image_type *sim, image_type *im );
 	// ImagePncal.cpp
 image_type *image4_to_pncal( image_type *sim, image_type *im );
 
+image_type *	image4_to_pncalA( image_type *sim, image_type *im );
+
 
 void		image4_mark( image_type *im, int row0, int col0,
 					int row, int col, int color );
@@ -197,13 +199,13 @@ void	image4_comparisonG( image_type *im0, image_type *im1, float *var, float *de
 int		image_equal( image_type *im0, image_type *im1 );
 
 
-	/* ImageCutUarray.c */
-void	image4_cut_uarray( image_type *im,
-                        int x0, int y0, int row, int column,
-                        u_char *aY,
-                        u_char *aQ,
-                        u_char *aA,
-                        int acolumn);
+	// ImageCutUarray.c 
+void	image4_cut_uarray( image_type *im, int x0, int y0, int row, int column,
+						 u_char *aY, u_char *aQ,  u_char *aA, int acolumn);
+
+
+int	image_cut_uarray_US( image_type *im,  int x0, int y0, int row, int column,	
+						u_short *aY, u_short *aQ, u_short *aA, int acolumn);
 
 
 
@@ -486,8 +488,8 @@ void	guasian_dg( int n, float sigma, float g[], float dg[] );
 
 
 
-image_type *image_mask( image_type *sim, image_type *mim, image_type *im );
-image_type *image1_mask( image_type *sim, image_type *mim, image_type *im );
+image_type *image_mask( image_type *sim, image_type *mim, int color, image_type *im );
+image_type *image1_mask( image_type *sim, image_type *mim, int color, image_type *im );
 
 
 	// ImageInterlive.c
@@ -540,6 +542,10 @@ image_type *		image_to_y( image_type *sim, image_type *im );
 
 	// ImageToR.c
 image_type *		image_to_r( image_type *sim, image_type *im );
+
+
+	// ImageCosnt.cpp
+int	image_const( image_type *sim, int color );
 
 
 
@@ -596,6 +602,18 @@ int		image_boundary( image_type *sim, int color );
 void	image4_boundary( image_type *sim, int color );
 
 void	image1_boundary( image_type *sim, int color );
+
+
+	// ImageFusion.cpp
+image_type *	image_fusion( image_type *sim0, image_type *sim1, float t, image_type *im );
+
+
+	// ImgaeAverage.cpp
+image_type *image_average8( image_type *sim, image_type *im );
+
+
+	// ImageSepiaEfect.cpp
+image_type *	image_sepia_efect( image_type *sim, image_type *im );
 
 
 
