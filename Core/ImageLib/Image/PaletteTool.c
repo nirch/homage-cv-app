@@ -50,8 +50,11 @@ palette_copy( palette_type *palette, palette_type *tp )
 	tp->bitPerPixel = palette->bitPerPixel;
 
 	tp->type = palette->type;
+	tp->nA = palette->nA;
 
 	memcpy(tp->data, palette->data, (tp->nA) * sizeof(color_type));
+
+
 
 	return( tp );
 }
@@ -79,13 +82,14 @@ int	i;
 	case PALETTE_HALFTONE:
 
 			p = palette_alloc( 216 );
-
+			p->nA = 216;
 			for (i = 0; i < 216; i++){
 				p->data[i].Red = (unsigned char)(i % 6 * 51);
 				p->data[i].Green = (unsigned char)(i / 6 % 6 * 51);
 				p->data[i].Blue = (unsigned char)(i / 36 * 51);
 			}
 			p->type = PALETTE_HALFTONE;
+
 		break;
 
 
@@ -95,11 +99,13 @@ int	i;
 			p->data[0].Blue = p->data[0].Green = p->data[0].Red = 0;
 			p->data[1].Blue = p->data[1].Green = p->data[1].Red = 0xff;
 			p->type = PALETTE_BW;
+			p->nA = 2;
 		break;
 
 	case PALETTE_WB:
 
 			p = palette_alloc(2);
+			p->nA = 2;
 			p->data[0].Blue = p->data[0].Green = p->data[0].Red = 0xff;
 			p->data[1].Blue = p->data[1].Green = p->data[1].Red = 0x00;
 			p->type = PALETTE_BW;
@@ -116,6 +122,7 @@ int	i;
 			//p->data[3].Blue = p->data[3].Green = p->data[3].Red = 0xa0;
 
 			p = palette_alloc( 256 );
+			p->nA = 256;
 
 			for (i = 0; i < p->nA; i++){
 				p->data[i].Red = i;
@@ -124,6 +131,7 @@ int	i;
 			}
 
 			p->type = PALETTE_GRAY;
+
 		break;
 
 	case	PALETTE_WINDOW_SYSTEM:
@@ -456,14 +464,14 @@ int	i,	k;
 
 	
 
-	pl->data[0].color = 0;
+	pl->data[pl->nA++].color = 0;
 	for( i = 0 ; i < nColor ; i++ ){
 
 	
 		k = 255 * (float)i / (nColor-1) + 0.5;
 
 
-		pl->data[i+1].color = spl->data[k].color;
+		pl->data[pl->nA++].color = spl->data[k].color;
 
 	}
 

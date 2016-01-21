@@ -324,7 +324,7 @@ int	k;
 
 			if( *sp & 0xFF000000 ){
 				*tp++ = palette->nColor;
-				*sp++;
+				sp++;
 				continue;
 			}
 

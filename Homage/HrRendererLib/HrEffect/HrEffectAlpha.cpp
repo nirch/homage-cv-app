@@ -58,10 +58,7 @@ void CHrEffectAlpha::DeleteContents()
 		m_atf = NULL;
 	}
 
-}
-
-
-
+}	
 
 int CHrEffectAlpha::Init( char *tfFile )
 {
@@ -72,6 +69,17 @@ int CHrEffectAlpha::Init( char *tfFile )
 	return( 1 );
 }
 
+int CHrEffectAlpha::InitFromData( char *data )
+{
+    char	buf[10001];
+    strncpy( buf, data, 1000 );
+    GPLOG( ("%s\n", buf));
+    
+    if( tfA_read_from_data( &m_atf, data ) < 0 )
+        return( -1 );
+    
+    return( 1 );
+}
 
 int	CHrEffectAlpha::Process( image_type *sim, int iFrame, image_type **im ) 
 {

@@ -26,6 +26,7 @@ public:
 
 
 	int Init( char *file );
+    int InitFromData( char *data );
 
 
 	 int Process( image_type *sim, int iFrame, image_type **im );

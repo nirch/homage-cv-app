@@ -26,7 +26,7 @@ public:
 
 
 
-	int Init( char *file );
+	int Init( float fR, float fG, float fB, char *file );
 
 
 	 int Process( image_type *sim, int iFrame, image_type **im );
@@ -39,7 +39,9 @@ private:
 	int m_width;
 	int m_height;
 
-
+	float	m_fR;
+	float	m_fG;
+	float	m_fB;
 
 
 

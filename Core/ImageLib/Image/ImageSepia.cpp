@@ -9,23 +9,23 @@
 #include	"ImageType/ImageType.h"
 
 
-static image_type *	image3_sepia_efect( image_type *sim, image_type *im );
-static image_type *	image4_sepia_efect( image_type *sim, image_type *im );
+static image_type *	image3_sepia_efect( image_type *sim,  float fr, float fg, float fb, image_type *im );
+static image_type *	image4_sepia_efect( image_type *sim,  float fr, float fg, float fb, image_type *im );
 
 
   
 image_type *
-	image_sepia_efect( image_type *sim, image_type *im )
+	image_sepia_efect( image_type *sim,  float fr, float fg, float fb, image_type *im )
 {
 
 
 	if( sim->depth == 3){
-		im = image3_sepia_efect( sim, im );
+		im = image3_sepia_efect( sim, fr, fg, fb, im );
 		return( im );
 	}
 
 	if( sim->depth == 4){
-		im = image4_sepia_efect( sim, im );
+		im = image4_sepia_efect( sim, fr, fg, fb, im );
 		return( im );
 	}
 
@@ -38,7 +38,7 @@ image_type *
 
 
 static image_type *
-image3_sepia_efect( image_type *sim, image_type *im )
+image3_sepia_efect( image_type *sim, float fr, float fg, float fb, image_type *im )
 {
 	int	i,	j;
 
@@ -57,13 +57,16 @@ image3_sepia_efect( image_type *sim, image_type *im )
 			int blue = sp[0];
 
 
+
 			int tmp;
-			tmp = (red * .393) + (green *.769) + (blue * .189);
-			tp[2] = PUSH_TO_RANGE( tmp, 0, 255 );
-			tmp = ( red * .349) + (green *.686) + (blue * .168);
-			tp[1] = PUSH_TO_RANGE( tmp, 0, 255 );
-			tmp = ( red * .272) + (green *.534) + (blue * .131);
+			tmp = fb*( ( red * .272) + (green *.534) + (blue * .131));
 			tp[0] = PUSH_TO_RANGE( tmp, 0, 255 );
+
+			tmp = fg*(( red * .349) + (green *.686) + (blue * .168));
+			tp[1] = PUSH_TO_RANGE( tmp, 0, 255 );
+
+			tmp = fr*((red * .393) + (green *.769) + (blue * .189));
+			tp[2] = PUSH_TO_RANGE( tmp, 0, 255 );
 		}
 	}
 
@@ -74,7 +77,7 @@ image3_sepia_efect( image_type *sim, image_type *im )
 
 
 static image_type *
-image4_sepia_efect( image_type *sim, image_type *im )
+image4_sepia_efect( image_type *sim, float fr, float fg, float fb, image_type *im )
 {
 	int	i,	j;
 
@@ -102,13 +105,13 @@ image4_sepia_efect( image_type *sim, image_type *im )
 
 
 			int tmp;
-			tmp = ( red * .272) + (green *.534) + (blue * .131);
+			tmp = fb*( ( red * .272) + (green *.534) + (blue * .131));
 			tp[0] = PUSH_TO_RANGE( tmp, 0, 255 );
 
-			tmp = ( red * .349) + (green *.686) + (blue * .168);
+			tmp = fg*(( red * .349) + (green *.686) + (blue * .168));
 			tp[1] = PUSH_TO_RANGE( tmp, 0, 255 );
 
-			tmp = (red * .393) + (green *.769) + (blue * .189);
+			tmp = fr*((red * .393) + (green *.769) + (blue * .189));
 			tp[2] = PUSH_TO_RANGE( tmp, 0, 255 );
 
 			tp[3] = sp[3];

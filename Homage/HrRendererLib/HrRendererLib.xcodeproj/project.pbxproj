@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		546C4C721C50D9EB00EA64DC /* HrEffectCartoon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546C4C711C50D9EB00EA64DC /* HrEffectCartoon.cpp */; };
 		5477719F1C4FD07D0042A524 /* HrEffectAlpha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5477719C1C4FD07D0042A524 /* HrEffectAlpha.cpp */; };
 		547771A01C4FD07D0042A524 /* HrEffectGray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5477719D1C4FD07D0042A524 /* HrEffectGray.cpp */; };
 		547771A11C4FD07D0042A524 /* HrEffectSepia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5477719E1C4FD07D0042A524 /* HrEffectSepia.cpp */; };
@@ -31,6 +32,8 @@
 		3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectI.cpp; path = HrEffect/HrEffectI.cpp; sourceTree = SOURCE_ROOT; };
 		3B47A79D08A240C8B27C9828 /* HrOutputI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrOutputI.cpp; path = HrOutput/HrOutputI.cpp; sourceTree = SOURCE_ROOT; };
 		542606E4854441F3BD28ECD3 /* HomageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomageRenderer.h; sourceTree = SOURCE_ROOT; };
+		546C4C711C50D9EB00EA64DC /* HrEffectCartoon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectCartoon.cpp; path = HrEffect/HrEffectCartoon.cpp; sourceTree = "<group>"; };
+		546C4C731C50D9F500EA64DC /* HrEffectCartoon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectCartoon.h; path = HrEffect/HrEffectCartoon.h; sourceTree = "<group>"; };
 		5477719C1C4FD07D0042A524 /* HrEffectAlpha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectAlpha.cpp; path = HrEffect/HrEffectAlpha.cpp; sourceTree = "<group>"; };
 		5477719D1C4FD07D0042A524 /* HrEffectGray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectGray.cpp; path = HrEffect/HrEffectGray.cpp; sourceTree = "<group>"; };
 		5477719E1C4FD07D0042A524 /* HrEffectSepia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectSepia.cpp; path = HrEffect/HrEffectSepia.cpp; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 		8B1E1C5AC29749E1948F4173 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				546C4C711C50D9EB00EA64DC /* HrEffectCartoon.cpp */,
 				5477719C1C4FD07D0042A524 /* HrEffectAlpha.cpp */,
 				5477719D1C4FD07D0042A524 /* HrEffectGray.cpp */,
 				5477719E1C4FD07D0042A524 /* HrEffectSepia.cpp */,
@@ -104,6 +108,7 @@
 		970C00B9B348496AAEE84342 /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
+				546C4C731C50D9F500EA64DC /* HrEffectCartoon.h */,
 				547771A21C4FD0890042A524 /* HrEffectAlpha.h */,
 				547771A31C4FD0890042A524 /* HrEffectGray.h */,
 				547771A41C4FD0890042A524 /* HrEffectSepia.h */,
@@ -188,6 +193,7 @@
 				F29186AFF9704B59A5D9A1AE /* HomageRenderer.cpp in Sources */,
 				B146982E045748D2B30B4BA3 /* HrEffectI.cpp in Sources */,
 				54B987201B3AFD410012387E /* HrEffectAlignment.cpp in Sources */,
+				546C4C721C50D9EB00EA64DC /* HrEffectCartoon.cpp in Sources */,
 				7436A85718894C0397EA4822 /* HrEffectMask.cpp in Sources */,
 				6DC2090F3D3440DEBD09775B /* HrEffectPose.cpp in Sources */,
 				547771A11C4FD07D0042A524 /* HrEffectSepia.cpp in Sources */,
