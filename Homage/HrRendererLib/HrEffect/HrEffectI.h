@@ -39,10 +39,13 @@ public:
 	void SetAlpha( image_type *im );
 
 	void MergeAlpha( image_type *sim );
+    
+    void SwitchBR();
 
 private:
 public:
 	int	m_id;
+    int m_switchBR;
 
 };
 

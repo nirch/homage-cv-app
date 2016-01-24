@@ -613,7 +613,7 @@ image_type *image_average8( image_type *sim, image_type *im );
 
 
 	// ImageSepiaEfect.cpp
-image_type *	image_sepia_efect( image_type *sim, float fr, float fg, float fb, image_type *im );
+image_type *	image_sepia_efect( image_type *sim, float fr, float fg, float fb, int switchBR, image_type *im );
 
 
 
