@@ -56,6 +56,8 @@ public:
 
 
 	int	Process();
+    
+    void Cancel();
 
 
 	image_type * GetImage()	{ return m_im; }
@@ -73,7 +75,6 @@ public:
     long long maxTimeStamp;
     long long timeDeltaPerFrame;
 
-//private:
 public:
 	int	m_iFrame;
 
@@ -89,6 +90,7 @@ public:
 
 
 	int m_process;
+    bool wasCanceled;
 };
 
 
