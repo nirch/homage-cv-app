@@ -379,7 +379,7 @@ imageLabelUI_blobe0( imageLabel_type *abw, int i0, int j0, int dj, int *k0, int 
 	*k0 = *k1 = -1;
 
 	u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0-dj );
-	for( j = j0-dj ; j > j0 - 4*dj ; j--, sp-- ){
+	for( j = j0-dj ; j > j0 - 4*dj && j >= 0  ; j--, sp-- ){
 		if( abw->a[*sp].color == 0 && abw->a[*sp].no > 150 ){
 			*b0 = abw->a[*sp].id;
 			*k0 = j;
@@ -389,7 +389,7 @@ imageLabelUI_blobe0( imageLabel_type *abw, int i0, int j0, int dj, int *k0, int 
 
 
 	sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0+dj );
-	for( j = j0+dj ; j < j0 + 4*dj ; j++, sp++ ){
+	for( j = j0+dj ; j < j0 + 4*dj && j < abw->im->width ; j++, sp++ ){
 		if( abw->a[*sp].color == 0 && abw->a[*sp].no > 150  ){
 			*b1 = abw->a[*sp].id;
 			*k1 = j;

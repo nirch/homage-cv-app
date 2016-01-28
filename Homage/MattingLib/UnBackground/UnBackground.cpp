@@ -9,6 +9,12 @@
 #define _DUMP
 #endif
 
+
+#ifndef __ANDROID__
+#define EXCEPTION
+#endif
+
+
 #include "Ulog/Log.h"
 
 #include "ImageType/ImageType.h"
@@ -32,7 +38,6 @@
 
 
 int	image1_mask_sbA( image_type *im, sbA_type *as );
-
 
 
 
@@ -220,6 +225,11 @@ CUnBackground::Process( image_type *sim, int iFrame )
 {
 int	ret;
 
+
+#ifdef EXCEPTION
+	try {
+#endif
+
 	m_state = 0;
 
 
@@ -334,6 +344,15 @@ int	ret;
 
 	gpTime_stop( &m_gTime );
 
+#ifdef EXCEPTION
+	}
+
+	catch (...) {
+		m_state = -100;
+		return( -1 );
+	}
+#endif
+
 	return( 1 );
 }
 
@@ -357,17 +376,19 @@ int	CUnBackground::ProcessFill()
 	}
 	a0[i+1] = a1[i+1] = -1;
 
-
+//#ifdef _NEWA_
 	if( m_closeUp ){
 		bImage_fill_gapR( m_bim, a1 );
 		bImage_fill_gapL( m_bim, a0 );
 	}
-	
+//#endif
+
 	bImage_fill_gap( m_bim, a0, F_LEFT );
 	bImage_fill_gap( m_bim, a1, F_RIGHT );
-	
-	bImage_fill_gap_up( m_bim, a0, a1 );
 
+//#ifdef _NEWA_
+	bImage_fill_gap_up( m_bim, a0, a1 );
+//#endif
 
 	bImage_fill( m_bim, a0, a1 );
 
