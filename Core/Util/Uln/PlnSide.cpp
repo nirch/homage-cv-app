@@ -15,6 +15,16 @@
 
 
 void	
+plnA_interior_force_right( plnA_type *apl )
+{
+int	i;
+	
+	for( i = 0 ; i < apl->nA ; i++ )
+		pln_interior_force_right( apl->a[i] );
+}
+
+
+void	
 pln_interior_force_right( pln_type *pl )
 {
 	if( pln_interior_side( pl ) == 0 )
@@ -83,6 +93,26 @@ vec2f_type	p;
 
 	return( 1 );
 }
+
+
+float		
+pln_insideP( pln_type *pl, pln_type *bpl )
+{
+	float	gt,	sum;
+	vec2f_type	p;
+	float	dt = 2;
+
+	for( gt = 0, sum = 0 ; gt < pl->len ; gt += dt ){
+		pln_gt2p( pl, gt, &p );
+
+		if( pln_point_side( bpl, &p ) == 1 )
+			sum += dt;
+	}
+
+	sum = sum / pl->len;
+	return( sum );
+}
+
 
 
 

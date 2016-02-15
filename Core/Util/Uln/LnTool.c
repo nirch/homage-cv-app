@@ -435,7 +435,7 @@ float	dis,	tmp,	len;
 		}
 
 
-		if( dis > 0 && tmp >= dis )	continue;
+		if( dis >= 0 && tmp >= dis )	continue;
 
 		dis = tmp;
 
@@ -459,6 +459,9 @@ float	dis,	tmp,	len;
 
 	return( ret );
 }
+
+
+
 
 float
 lnL_length( ln_type *link )

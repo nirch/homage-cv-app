@@ -8,6 +8,8 @@
 
 
 #include "Umath/St/StType.h"
+#include "Uvl/IntType.h"
+#include "Umath/Matrix2Type.h"
 
 
 floatA_type *
@@ -258,3 +260,121 @@ floatA_index( floatA_type *ai, int val )
 }
 
 
+void
+floatA_set( floatA_type *a, float val )
+{
+	int	i;
+
+	for( i = 0 ; i < a->nA ; i++ )
+		a->a[i] = val;
+
+}
+
+
+int
+floatA_max( floatA_type *a )
+{
+	int	i;
+
+	int iMax = 0;
+	for( i = 1; i < a->nA ; i++ ){
+		if( a->a[i] > a->a[iMax] )
+			iMax = i;
+	}
+
+	return( iMax );
+}
+
+int
+	floatA_minmax( floatA_type *a, float *m0, float *m1 )
+{
+	int	i;
+
+	int iMax = 0;
+	for( i = 1; i < a->nA ; i++ ){
+		if( a->a[i] > a->a[iMax] )
+			iMax = i;
+	}
+
+	return( iMax );
+}
+
+floatA_type *
+floatA_from( intA_type *a )
+{
+	floatA_type	*b = floatA_alloc( a->nA );
+
+	int	i;
+	for( i = 0 ; i < a->nA ; i++ )
+		b->a[i] = a->a[i];
+
+	b->nA = a->nA;
+
+	return( b );
+}
+
+
+int
+floatA_axb( floatA_type *a, int i0, float n, float *A, float *B )
+{
+	matrix2_type m;
+	vec2d_type	D,	X;
+
+	matrix2_zero( &m );
+	D.x = D.y = 0;
+
+	int	i;
+	for( i = i0-n ; i <= i0 + n ; i++ ){
+		m.a00 += i*i;
+		m.a01 += i;
+		D.x   += a->a[i]*i;
+
+		m.a10 += i;
+		m.a11 += 1;
+		D.y   += a->a[i];
+	}
+
+	matrix2_solve( &m, &D, &X );
+
+	*A = X.x;
+	*B = X.y;
+
+	return( 1 );
+}
+
+
+int	
+floatA_dump( floatA_type *af, char *prefix, int index, char *suffix )
+{
+	char	file[256];
+
+	if( gpDump_filename( prefix, index, suffix, ".txt", file ) < 0 )
+		return( -1 );
+
+
+	floatA_write_index( af, file );
+
+	return( 1 );
+}
+
+
+int
+floatA_write_index( floatA_type *ai, char *file )
+{
+	FILE *fp;
+	int	i;
+
+	if( ( fp = fopen( file, "wb")) == NULL )
+		return( -1 );
+
+	fprintf( fp, " %d \n", ai->nA );
+
+	for( i = 0 ; i < ai->nA ; i++ )
+		fprintf( fp, "%3d  %4f\n", i, ai->a[i] );
+
+
+	fprintf( fp, "\n" );
+
+	fclose( fp );
+	return( 1 );
+}

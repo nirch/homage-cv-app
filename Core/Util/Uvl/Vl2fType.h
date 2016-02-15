@@ -18,6 +18,7 @@ extern "C" {
 
 #include "Uvec/Vec2d.h"
 #include "Uvec/Vec3d.h"
+#include "Ubox/Box2d.h"
 
 // straight line segemnet 
 
@@ -35,6 +36,7 @@ typedef struct vl2f_type {
 
 	vec2f_type	ev;
 	float		e;
+	float		w[2];
 
 	int	id;
 
@@ -59,6 +61,17 @@ typedef struct vl2fA_type {
 	vl2f_type	*a;
 
 } vl2fA_type;
+
+
+typedef struct vl2fB_type {
+
+	int nA;
+	int	NA;
+
+	vl2fA_type	**a;
+
+} vl2fB_type;
+
 
 
 #define VL2F_ALLOC()	( vl2f_type *)malloc( sizeof(vl2f_type) );
@@ -96,6 +109,8 @@ void	vl2f_points( vl2f_type *vl, vec2f_type *p0, vec2f_type *p1 );
 
 void	vl2f_box( vl2f_type *vl, struct box2f_type *b );
 
+void	vl2f_boxE( vl2f_type *vl, float w0, float w1, box2f_type *b);
+
 
 void	vl2f_set( vl2f_type *vl, vec2f_type *p0, vec2f_type *p1 );
 
@@ -105,7 +120,12 @@ void	vl2f_cutpoint( vl2f_type *vl0, vl2f_type *vl1, vec2f_type *p );
 
 void	vl2fA_inverse_direction( vl2fA_type *avl );
 
-void		vl2fA_set_group( vl2fA_type *avl, int iGroup );
+
+void	vl2fA_set_group( vl2fA_type *avl, int group );
+
+void	vl2fA_update_group( vl2fA_type *avl, int group0, int group );
+
+
 
 vl2fA_type *	vl2fA_from( vl2f_type *av[], int nV, vl2fA_type *avl );
 
@@ -161,6 +181,13 @@ vl2fA_type *	vl2fA_fit_lt_field( vl2fA_type *bavl,  struct lt2_type *lt, vl2fA_t
 int	vl2fA_principal_direction( vl2fA_type *avl, vl2f_type *rvl );
 
 
+int	vl2fA_principal_direction_side( vl2fA_type *avl, float aT, float uT, vl2f_type *bvl, float al[2], float ar[2] );
+
+int	vl2fA_principal_direction_vertical( vl2fA_type *avl, float aT, vl2f_type *bvl );
+
+
+
+
 struct pt2dA_type *	vl2fA_to_pt2dA( vl2fA_type *avl );
 
 vl2fA_type *	vl2fA_from_pt2dA( struct pt2dA_type *apt );
@@ -175,14 +202,30 @@ int	vl2fA_write_pt( vl2fA_type *avl, char *file );
 
 int	vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix );
 
+void	vl2f_dump( vl2f_type *vl, char *prefix, int index, char *suffix );
+
+
+	// Vl2fBTool.cpp
+vl2fB_type *	vl2fB_alloc( int n );
+
+vl2fB_type *	vl2fB_realloc( vl2fB_type *avl, int n );
+
+void	vl2fB_destroy( vl2fB_type *bvl );
+
+int	vl2fB_add( vl2fB_type *bvl, vl2fA_type *avl );
+
+void	vl2fB_cycle( vl2fB_type *fvl );
+
 
 
 #ifdef _DUMP
 #define VL2FA_DUMP( apt, name, index, ext )  vl2fA_dump( apt, name, index, ext )
 #define VL2FA_DUMPF( apl, name, index, ext, flag )  if( flag )	vl2fA_dump( apl, name, index, ext )
+#define VL2F_DUMP( apt, name, index, ext )  vl2f_dump( apt, name, index, ext )
 #else
 #define VL2FA_DUMP( apt, name, index, ext )
 #define VL2FA_DUMPF( apl, name, index, ext, flag )
+#define VL2F_DUMP( apt, name, index, ext )
 #endif
 
 

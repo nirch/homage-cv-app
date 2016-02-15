@@ -13,12 +13,14 @@
 #define _GPMEMORY_LEAK 
 #endif
 #include "Uigp/GpMemoryLeak.h"
-
+#include "Uvl/FloatType.h"
 
 #include "Uvl/Vl2fType.h"
 #include "Uln/PlnType.h"
 #include "Umath/Ellipse/EllipseType.h"
 #include "CrPlnType.h"
+
+
 
 
 pln_type *
@@ -52,6 +54,7 @@ pln_alloc( int no )
 
 	pl->ac = NULL;
 	pl->ai = NULL;
+	pl->af = NULL;
 
 	GPMEMORY_LEAK_ALLOC( pl );
 
@@ -95,6 +98,11 @@ pln_destroy( pln_type *pl )
 
 //	if( pl->data = NULL )
 //		free( pl->data );
+
+	if( pl->af != NULL ){
+		floatA_destroy( pl->af );
+		pl->af = NULL;
+	}
 
 
 	free( pl );
@@ -330,7 +338,7 @@ pln_inverse( pln_type *pl )
 {
 vec2f_type	p;
 
-	if ( pl->state == PLN_OPEN ){
+	if ( pl->state != PLN_CLOSE ){
 		lnL_end_point(&pl->ctr, pl->link, &p );
 		pl->ctr = p;
 	}
@@ -877,6 +885,41 @@ pln_type	*pl;
 
 
 pln_type *
+	pln_copy_subD( pln_type *spl, float gt0, float gt1, float D )
+{
+	pln_type	*pl;
+
+	pl = pln_alloc(0);
+
+	if(  gt0 > gt1 && spl->len - gt0 < D )
+		gt0 = 0;
+
+	if( gt0 > gt1 ){
+		lnL_copy_subD( &spl->ctr, spl->link, gt0, spl->len, D, &pl->ctr, &pl->link );
+
+		if( gt1 > 0.5 ){
+			vec2f_type ctr;
+			ln_type *link;
+			lnL_copy_subD( &spl->ctr, spl->link, 0, gt1, D, &ctr, &link );
+
+			ln_type *l1 = lnL_last( pl->link );
+			ln_connect( l1, link );
+		}
+	}
+	else
+		lnL_copy_subD( &spl->ctr, spl->link, gt0, gt1, D, &pl->ctr, &pl->link );
+
+
+	pl->len = lnL_length( pl->link );
+
+	pl->state = PLN_OPEN;
+
+
+	return( pl );
+}
+
+
+pln_type *
 pln_copy_subR( pln_type *spl, float gt0, float gt1 )
 {
 pln_type	*pl;
@@ -922,7 +965,7 @@ pln_appendL( pln_type *pl, vec2f_type *ctr, ln_type *link )
 	pl->len = lnL_length( pl->link );
 }
 
-void
+pln_type *
 pln_append( pln_type *pl, pln_type *pl1 )
 {
 	lnL_connect_s( &pl->ctr, pl->link, &pl1->ctr, pl1->link, 0.5 );
@@ -932,6 +975,8 @@ pln_append( pln_type *pl, pln_type *pl1 )
 	pln_destroy( pl1 );
 
 	pl->len = lnL_length( pl->link );
+
+	return( pl );
 }
 
 
@@ -1046,6 +1091,11 @@ pln_box( pln_type *pl, box2f_type *box )
 	lnL_box( &pl->ctr, pl->link, NULL, box );
 }
 
+void
+pln_set_box( pln_type *pl )
+{
+	lnL_box( &pl->ctr, pl->link, NULL, &pl->b );
+}
 
 void
 plnA_set_box( plnA_type *apl )
@@ -1199,6 +1249,44 @@ int
 }
 
 
+int
+plnC_intersection( pln_type *bpl, pln_type *pl, float *dis )
+{
+
+
+
+	float	m0,	m1;
+	pln_distance_plnC( bpl, pl, &m0, &m1 );
+
+	box2f_type b,	b1;
+	pln_box( bpl, &b );
+	pln_box( pl, &b1 );
+
+	if( (*dis = box2f_distance( &b, &b1 )) > 1 )
+		return( 0 );
+
+	*dis = m1;
+
+
+	if( m0 > 0 )
+		return( 1 );	// pl in bpl
+
+
+	if( m0 < 0 && m1 > 0)	// pl cut bpl
+		return( 2 );
+
+
+
+
+	pln_distance_plnC( pl, bpl, &m0, &m1 );
+	if( m0 > 0 )	// bpl in pl
+		return( 3 );
+
+
+	return( -1 );
+}
+
+
 
 int
 plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type *sd )
@@ -1264,15 +1352,16 @@ int	i;
 
 
 void 
-plnA_translate( plnA_type *aP, float x, float y )
+plnA_translate( plnA_type *apl, float x, float y )
 {
 	pln_type	*pl;
 	int	i;
 
+	apl->p.x += x;
+	apl->p.y += y;
 
-
-	for( i = 0 ; i < aP->nA ; i++ ){
-		pl = aP->a[i];
+	for( i = 0 ; i < apl->nA ; i++ ){
+		pl = apl->a[i];
 		pl->ctr.x += x;
 		pl->ctr.y += y;
 	}
@@ -1291,7 +1380,7 @@ int	i;
 	}
 }
 
-
+#ifdef _AA_
 void
 pln_sample( pln_type *pl, float t0, float r, int n, int direct, pt2dA_type *apt )
 {
@@ -1473,7 +1562,7 @@ pln_sampleC( pln_type *pl, float gt0, int n, float dt, pt2dA_type *apt )
 
 	return( apt );
 }
-
+#endif
 
 
 pln_type *
@@ -1671,6 +1760,20 @@ pln_pv( pln_type *pl, float gt, float dt, int nDt, vec2f_type *pd, vec2f_type *v
 
 
 void
+pln_app_vl( pln_type *pl, float gt, float dt, vl2f_type *vl )
+{
+
+	if( pl->len < 2*dt )	dt = pl->len / 2;
+	
+	gt = PUSH_TO_RANGE( gt, dt, pl->len-dt );
+
+
+	
+	pln_pv_d( pl, gt - dt, gt + dt, 1.0, vl );
+	
+}
+
+void
 pln_pv_d( pln_type *pl, float gt0, float gt1, float dt, vl2f_type *vl )
 {
 	pt2dA_type	*apt;
@@ -1756,6 +1859,25 @@ plnA_get_group( plnA_type *apl, int group, int Fdetouch, plnA_type *capl )
 	return( capl );
 }
 
+
+//plnA_type *
+//	plnA_copy_group( plnA_type *apl, int group, plnA_type *capl )
+//{
+//	int	i;
+//
+//	if( capl == NULL )
+//		capl = plnA_alloc( apl->nA );
+//
+//	capl->nA = 0;
+//	for( i = 0 ; i < apl->nA ; i++ ){
+//		if( apl->a[i]->group == group ){
+//			capl->a[capl->nA++] = pln_copy( apl->a[i] );
+//		}
+//	}
+//
+//	return( capl );
+//}
+
 plnA_type *
 plnA_copy( plnA_type *apl, int fData, plnA_type *capl )
 {
@@ -1768,6 +1890,12 @@ plnA_copy( plnA_type *apl, int fData, plnA_type *capl )
 
 
 	plnA_clear( capl );
+	capl->iFrame = apl->iFrame;
+	capl->angle = apl->angle;
+	capl->scale = apl->scale;
+	capl->p = apl->p;
+	capl->v = apl->v;
+
 
 	capl->nA = 0;
 	for( i = 0 ; i < apl->nA ; i++ ){
@@ -1781,22 +1909,55 @@ plnA_copy( plnA_type *apl, int fData, plnA_type *capl )
 }
 
 
-
 plnA_type *
-plnA_copy_group( plnA_type *apl, int group, plnA_type *capl )
+plnA_copy_len( plnA_type *apl, float dT, int fData, plnA_type *capl )
 {
 	int	i;
 
-	if( capl == NULL )
-		capl = plnA_alloc( apl->nA );
+
+
+	capl = plnA_realloc( capl, apl->nA );
+
+
+	plnA_clear( capl );
 
 	capl->nA = 0;
 	for( i = 0 ; i < apl->nA ; i++ ){
-		if( apl->a[i]->group == group )
+		if( apl->a[i]->len < dT )
+			continue;
+
+
+		if( fData == 1 )
+			capl->a[capl->nA++] = pln_copy( apl->a[i] );
+		else
 			capl->a[capl->nA++] = apl->a[i];
 	}
 
 	return( capl );
+}
+
+
+
+plnA_type *
+plnA_copy_group( plnA_type *apl, int group, int fCopy, plnA_type *capl )
+{
+	int	i;
+
+
+	capl = plnA_realloc( capl, apl->nA );
+
+	capl->nA = 0;
+	for( i = 0 ; i < apl->nA ; i++ ){
+		pln_type *pl = apl->a[i];
+		if( pl->group != group )	continue;
+
+		if( fCopy == 1)
+			pl = pln_copy( pl );
+
+		capl->a[capl->nA++] = pl;
+	}
+
+	return( capl );;
 }
 
 
@@ -1820,13 +1981,15 @@ plnA_move_group( plnA_type *apl, int group, plnA_type *gapl )
 }
 
 
-void
+plnA_type  *
 plnA_append( plnA_type *tapl, plnA_type *apl )
 {
 	int	i;
 
+	if( tapl == NULL )
+		return( apl );
 
-	if( tapl->nA + apl->nA >= apl->NA ){
+	if( tapl->nA + apl->nA >= tapl->NA ){
 		tapl->NA += apl->nA;
 		tapl->a = ( pln_type **)realloc( tapl->a, tapl->NA*sizeof(pln_type *) );
 	}
@@ -1841,6 +2004,8 @@ plnA_append( plnA_type *tapl, plnA_type *apl )
 
 	apl->nA = 0;
 	plnA_destroy( apl );
+
+	return( NULL );
 }
 
 

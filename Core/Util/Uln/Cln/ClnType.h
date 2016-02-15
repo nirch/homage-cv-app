@@ -18,7 +18,7 @@ extern "C" {
 
 
 
-#define		MAX_PLN		128
+#define		MAX_PLN		1000
 
 
 typedef struct cln_type {
@@ -32,8 +32,10 @@ typedef struct cln_type {
 	vec2d	ctr;
 	vec2f_type	v;
 
+	int	NA;
 	int	nA;
-	pln_type	*a[MAX_PLN];
+//	pln_type	*a[MAX_PLN];
+	pln_type	**a;
 
 } cln_type;
 
@@ -129,11 +131,15 @@ void	clnA_clear_anchor( clnA_type *ac );
 
 void	cln_clear_anchor( cln_type *c );
 
+int		clnA_select( clnA_type *ac, int type, vec2f_type *p );
+
 int		cln_point_inside( cln_type *c, vec2f_type *p );
 
 void	cln_set_dirrection( cln_type *c );
 
 void	cln_set_range( cln_type *c );
+void	clnA_set_range( clnA_type *ac );
+
 
 int		cln_check_cross( cln_type *c, float d_min, vec2f_type *mp );
 
@@ -152,12 +158,15 @@ float	cln_distance( cln_type *c, vec2d  *p, struct dPln_type *d );
 
 cln_type *	cln_detach_transparent( cln_type *c );
 
+int		cln_point_inside( cln_type *c, vec2f_type *p );
+
+int		clnA_select( clnA_type *ac, int type, vec2f_type *p );
 
 
 	// ClnWrite.cpp
-void cln_dump( cln_type *cln, char *prefix, int index, char *suffix );
+void	cln_dump( cln_type *cln, char *prefix, int index, char *suffix );
 
-void clnA_dump( clnA_type *ac, char *prefix, int index, char *suffix );
+void	clnA_dump( clnA_type *ac, char *prefix, int index, char *suffix );
 
 int		cln_write(cln_type *cln, char *file );
 

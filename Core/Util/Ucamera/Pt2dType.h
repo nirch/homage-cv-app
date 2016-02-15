@@ -96,7 +96,7 @@ typedef struct pt2dA_type {
 } pt2dA_type;
 
 
-typedef struct pt2dF_type {
+typedef struct pt2dB_type {
 
 	int	NA;
 
@@ -104,8 +104,9 @@ typedef struct pt2dF_type {
 
 	pt2dA_type	**a;
 
-} pt2dF_type;
+} pt2dB_type;
 
+typedef pt2dB_type  pt2dF_type;
 
 typedef struct pt2dG_type {
 	int	Ni,	Nj;
@@ -121,7 +122,7 @@ typedef struct pt2dG_type {
 
 
 
-
+struct pln_type;
 
 
 
@@ -280,7 +281,8 @@ int pt2A_eigen_T( pt2dA_type *apt, int i0, float T, struct eigen2d_type *e );
 	//Pt2dApproximateLink.c
 void	pt2d_approximate_linkO( pt2dA_type *apt, vec2f_type *ctr, ln_type **link );
 
-//void	pt2d_approximate_link( pt2dA_type *apt, vec2f_type *ctr, ln_type **gelm );
+int	pt2dA_approximate_pln( pt2dA_type *apt, int i0, int i1, struct pln_type **pl );
+
 void	pt2d_approximate_link( pt2dA_type *apt, int i0, int i1, vec2d *ctr, ln_type **link );
 
 pt2dA_type *	pt2d_from_polylink(vec2f_type *ctr, ln_type *link, float d );
@@ -357,6 +359,9 @@ int	pt2dA_app_ab_test( pt2dA_type *apt, int i0, int i1, float a0, float b0, floa
 struct plnA_type *	pt2dA_componnet( pt2dA_type *apt, float dT, int nT );
 
 struct pln_type *	pt2dA_bounding_contour( pt2dA_type *apt );
+
+	// Pt2dBonding.cpp
+struct pln_type *	pt2dA_bounding_contourN( pt2dA_type *apt, int r0, float r1 );
 
 
 

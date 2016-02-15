@@ -4,9 +4,13 @@
 #include	<stdio.h>
 #include	<string.h>
 
+#
+
 #include "Uigp/igp.h"
 
 #include	"Vl2fType.h"
+
+#include "Uln/PlnType.h"
 
 
 #define VL2F_VERSION	1
@@ -32,6 +36,25 @@ static void	vl2f_read( vl2f_type *vl, FILE *fp );
 //
 //	return( 1 );
 //}
+
+
+int
+	vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix )
+{
+	plnA_type *apl;
+
+	if( avl->nA == 0 )
+		return( -1 );
+
+	apl = plnA_from_vlA( avl, NULL );
+
+	plnA_dump( apl, prefix, index, suffix );
+
+	plnA_destroy( apl );
+
+	return( 1 );
+}
+
 
 
 void	

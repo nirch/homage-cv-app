@@ -1,7 +1,7 @@
 #ifndef _FLOAT_TYPE_
 #define _FLOAT_TYPE_
 
-
+#include <stdio.h>
 
 
 
@@ -43,6 +43,16 @@ float	floatA_average( floatA_type *as );
 
 int		floatA_index( floatA_type *ai, int val );
 
+void	floatA_set( floatA_type *a, float val );
+
+int		floatA_max( floatA_type *a );
+
+
+floatA_type *	floatA_from( struct intA_type *a );
+
+int	floatA_axb( floatA_type *a, int i0, float n, float *A, float *B );
+
+
 void	floatA_write( floatA_type *ai, FILE *fp );
 
 void	floatA_writeb( floatA_type *ai, FILE *fp );
@@ -58,6 +68,19 @@ int		floatA_read( floatA_type **ai, FILE *fp );
 
 int	floatA_write( floatA_type *ai, char *file );
 
+int	floatA_write_index( floatA_type *ai, char *file );
+
+
+int		floatA_dump( floatA_type *af, char *prefix, int index, char *suffix );
+
+
+
+
+#ifdef _DUMP
+#define FLOATA_DUMP( apt, name, index, ext )  floatA_dump( apt, name, index, ext )
+#else
+#define FLOATA_DUMP( apt, name, index, ext )
+#endif
 
 
 #endif

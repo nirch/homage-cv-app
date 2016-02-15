@@ -119,12 +119,13 @@ plnA_write( plnA_type *apl, FILE *fp )
 
 	fprintf( fp, "%s  %d  %d   %d\n", "PL", PL_VERSION, apl->iFrame, apl->nA );
 
-	fprintf( fp, "AXIS  %f %f %f %f\n", apl->p.x, apl->p.y, apl->scale, apl->angle );
+	fprintf( fp, "AXIS  %f %f %f %f\n", apl->p.x, apl->p.y, apl->scale, ANGLE_R2D( apl->angle ) );
 
 
-	for( i = 0 ; i < apl->nA ; i++ )
-		pln_write( apl->a[i], fp );
-
+	for( i = 0 ; i < apl->nA ; i++ ){
+		if( apl->a[i] != NULL )
+			pln_write( apl->a[i], fp );
+	}
 
 	return( 1 );
 

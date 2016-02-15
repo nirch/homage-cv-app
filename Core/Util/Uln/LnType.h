@@ -146,6 +146,9 @@ void	lnL_gt2lt_p( vec2f_type *ctr, ln_type *link, float gt, vec2f_type *ctr0, ln
 
 int		lnL_copy_sub( vec2d *pctr, ln_type *plink, float gt0, float gt1, vec2d *ctr, ln_type **link  );
 
+int		lnL_copy_subD( vec2d *pctr, ln_type *plink, float gt0, float gt1, float D, vec2d *ctr, ln_type **link );
+
+
 void	lnL_connect_s( vec2f_type *ctr, ln_type *link, vec2f_type *ctr1, ln_type *link1, float T );
 
 

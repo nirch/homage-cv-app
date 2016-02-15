@@ -43,6 +43,7 @@ typedef struct pln_type {
 	int	step;
 	int	type;
 
+
 	int	group;
 
 	int	id;
@@ -60,6 +61,8 @@ typedef struct pln_type {
 	struct ellipse_type *e;
 	struct  crPlnA_type *ac;
 	struct intA_type	*ai;
+	struct floatA_type	*af;
+
 
 } pln_type;
 
@@ -95,11 +98,22 @@ typedef struct plnA_type {
 } plnA_type;
 
 
+//typedef struct plnB_type {
+//	int	NA;
+//
+//	int	nA;
+//
+//	plnA_type	**a;
+//
+//} plnB_type;
+
 
 typedef struct plnF_type {
 	int	NA;
 
 	int	nA;
+
+	int	frame0;
 
 	plnA_type	**a;
 
@@ -123,7 +137,7 @@ typedef struct pPln_type {		//use to define parallel relation between pln
 } pPln_type;
 
 
-
+#include "PlnItrator.h"
 
 
 pln_type *pln_alloc( int no );
@@ -150,12 +164,15 @@ void	pln_trim( pln_type *pl, int direct, float gt );
 
 pln_type *	pln_copy_sub( pln_type *spl, float gt0, float gt1 );
 
+pln_type *	pln_copy_subD( pln_type *spl, float gt0, float gt1, float D );
+
+
 pln_type *pln_copy_subR( pln_type *spl, float gt0, float gt1 );
 
 
 void	pln_appendL( pln_type *pl, vec2f_type *ctr, ln_type *link );
 
-void	pln_append( pln_type *pl, pln_type *pl1 );
+pln_type *	pln_append( pln_type *pl, pln_type *pl1 );
 
 void	pln_end_point( pln_type *pl, vec2d *p );
 
@@ -225,6 +242,8 @@ void	plnA_destroy_group( plnA_type *apl, int group );
 
 plnA_type *	plnA_copy( plnA_type *apl, int fData, plnA_type *capl );
 
+plnA_type *	plnA_copy_len( plnA_type *apl, float dT, int fData, plnA_type *capl );
+
 
 pln_type *	plnA_get( plnA_type *apl, int i0, int detouch );
 
@@ -243,9 +262,12 @@ int	pln_distance_pln_u( pln_type *bpl, pln_type *pl, dPln_type *md );
 
 int	pln_distance_plnM( pln_type *bpl, pln_type *pl, float *m0, float *m1 );
 
-
+	// 1 pl in bpl,   3 bpl in pl,    2 pl cut bpl,    -1 separate
+int	plnC_intersection( pln_type *bpl, pln_type *pl, float *dis );
 
 void	pln_box( pln_type *pl, box2f_type *box );
+
+void	pln_set_box( pln_type *pl );
 
 void	plnA_set_box( plnA_type *apl );
 
@@ -295,6 +317,9 @@ pt2dA_type *	pln_sampleN( pln_type *pl, float D, float r, pt2dA_type *apt );
 
 pt2dA_type * pln_sampleP( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt );
 
+pt2dA_type *	pln_samplePV( pln_type *pl, float gt0, float gt1, float dt, pt2dA_type *apt );
+
+
 pt2dA_type *	pln_sampleC( pln_type *pl, float gt0, int n, float dt, pt2dA_type *apt );
 
 
@@ -306,6 +331,9 @@ void	pln_tangetS( pln_type *pl, float gt, vec2f_type *v );
 void	pln_pv( pln_type *pl, float gt, float dt, int nDt, vec2f_type *pd, vec2f_type *vd, float *d );
 
 void	pln_pv_d( pln_type *pl, float gt0, float gt1, float dt, struct vl2f_type *vl );
+
+void	pln_app_vl( pln_type *pl, float gt, float dt, vl2f_type *vl );
+
 
 int		pln_pv_p( pln_type *pl, vec2f_type *p, float dt, int nDt, struct vl2f_type *vl );
 
@@ -386,7 +414,8 @@ float	plnA_parallel_distanceH(  plnA_type *apl, float r0, float r1 );
 plnA_type *
 plnA_get_group( plnA_type *apl, int group, int Fdetouch, plnA_type *capl );
 
-plnA_type *plnA_copy_group( plnA_type *apl, int group, plnA_type *capl );
+
+plnA_type *plnA_copy_group( plnA_type *apl, int group, int fCopy, plnA_type *capl );
 
 plnA_type *	plnA_copy_step( plnA_type *apl, int step, plnA_type *capl );
 
@@ -394,7 +423,7 @@ void	plnAG_set_step( plnA_type *apl, int group, int step );
 
 plnA_type *	plnA_move_group( plnA_type *apl, int group, plnA_type *gapl );
 
-void	plnA_append( plnA_type *tapl, plnA_type *apl );
+plnA_type *	plnA_append( plnA_type *tapl, plnA_type *apl );
 
 
 void	plnA_set_groupId( plnA_type *apl, int group );
@@ -439,12 +468,16 @@ int	plnA_fit( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, f
 
 int	plnA_fitT( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, float T, lnFit_type *f );
 
+int	plnA_fitV( plnA_type *apl, pln_type *bpl0, float gt0, float gt1, int cycle, vec2f_type *V, float T, lnFit_type *f );
+
 
 int	plnA_fit_compare( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
 int	plnA_fit_compareN( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float *cover, float *dis );
 
 int	plnA_fit_compareW( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float W, float *cover, float *dis );
+
+int	plnA_fit_compareG( plnA_type *apl, pln_type *bpl, float gt0, float gt1, float dT, float W, float *cover, float *dis );
 
 
 	// PlnGroup.c
@@ -458,9 +491,22 @@ int	plnA_group_max( plnA_type *apl, int *iG, int *no );
 pt2dGroupA_type *	pt2dGroupA_set_pln( pt2dGroupA_type *ag, plnA_type *apl );
 
 
+int	plnA_group_append( plnA_type *apl, plnA_type *gapl, float dT );
+
+
+
 	// PlnBounding.cpp
+pln_type *	plnA_bounding_convex( plnA_type *apl, float radius );
+
+pln_type *	pln_bounding_convex( pln_type *bpl, float radius );
+
 pln_type *	plnA_bounding( plnA_type *apl, float radius );
 
+
+	// PlnCrop.cpp
+plnA_type *	plnA_crop_box( plnA_type *apl, box2f_type *b, plnA_type *tapl );
+
+pln_type *	pln_crop_box( pln_type *pl, box2f_type *b );
 
 
 // PlnParallelDistance.c
@@ -495,11 +541,16 @@ int	plnA_eigen( plnA_type *apl, struct eigen2d_type *e );
 
 pt2dA_type * pln_apt( pln_type *pl, float dt );
 
+void	plnA_eigen_axis( plnA_type *apl );
+
 
 
 	// PlnSide.c 
 // if the interior of the close contour pl is on right  return 1 otherwise  0
 int		pln_interior_side( pln_type *pl );
+
+
+void	plnA_interior_force_right( plnA_type *apl );
 
 void	pln_interior_force_right( pln_type *pl );
 
@@ -510,7 +561,10 @@ void		pln_interior_force_left( pln_type *pl );
 // return 1 if p inside p2, else 0
 int		pln_inside( pln_type *p, pln_type *p2 );
 
-int			pln_insideA( pln_type *p, pln_type *p2 );
+int		pln_insideA( pln_type *p, pln_type *p2 );
+
+float	pln_insideP( pln_type *pl, pln_type *bpl );
+
 
 
 // if the point  is in the right side of the close contour pl  return 1  otherwise 0
@@ -539,12 +593,35 @@ pln_type *	pln_smoothA( pln_type *pl, int d );
 int	pln_smooth_segment( pln_type *pl, float minLen, gapp_type *gapp, float ag[], int *nG );
 
 
-	// PlnVTool.cpp
+	// PlnIn.cpp
+float pln_in_box( pln_type *pl, box2f_type *b );
+
+
+	// PlnBoxV.cpp;
+int	plnA_boxV( plnA_type *apl, vec2f_type *p0, vec2f_type *v, box2f_type *b );
+
+int	pln_boxV( pln_type *pl, vec2f_type *p0, vec2f_type *v, box2f_type *b );
+
+int	plnA_boxVV( plnA_type *apl, vec2f_type *p0, vec2f_type *v, box2f_type *b );
+
+int	pln_boxVV( pln_type *pl, vec2f_type *p0, vec2f_type *v, box2f_type *b );
+
+
+int	plnA_boxVx( plnA_type *apl, float d, vec2f_type *p0, vec2f_type *v, box2f_type *b );
+
+
+int	plnA_copy_boxV( plnA_type *apl, float d, vl2f_type *vl, float dy, int fCopy, plnA_type *tapl );
+
+
+	// PlnFTool.cpp
 plnF_type *		plnF_alloc( int n );
 
 void	plnF_destroy( plnF_type *fpl );
 
 void	plnF_add( plnF_type *vpl, plnA_type *apl, int iFrame );
+
+void	plnF_append( plnF_type *fpl, plnA_type *apl, int iFrame );
+
 
 plnA_type *	plnF_get( plnF_type *vpl, int iFrame );
 
@@ -572,6 +649,27 @@ int	plnA_filter_parallel_in( plnA_type *apl, float dT );
 
 int	plnA_filter_parallel_in_1( plnA_type *apl, int i0, float dT );
 
+
+
+	// PlnSample.cpp
+vl2fA_type *	plnA_sample_vl( plnA_type *apl, vl2fA_type *avl );
+
+vl2fA_type *	pln_sample_vl( pln_type *pl, int d, vl2fA_type *avl );
+
+
+	// PlnDistance.cpp
+int	pln_distanceC( pln_type *pl, vec2f_type *p, dPln_type *d );
+
+int	pln_distance_plnC( pln_type *bpl, pln_type *pl, float *m0, float *m1 );
+
+
+
+#define PLNA_DESTROY( apl )	{ \
+								if( apl != NULL ){ \
+									plnA_destroy( apl ); \
+									apl = NULL; \
+								} \
+							}
 
 
 #ifdef _DUMP

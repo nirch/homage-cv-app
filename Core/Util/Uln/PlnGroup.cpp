@@ -238,6 +238,44 @@ pt2dGroupA_set_pln( pt2dGroupA_type *ag, plnA_type *apl )
 
 
 
+
+int
+plnA_group_append( plnA_type *apl, plnA_type *gapl, float dT )
+{
+	int	i,	j;
+	pln_type	*pl,	*cpl;
+
+
+	int	nG = gapl->nA;
+
+
+	for( i = 0 ; i < apl->nA; i++ ){
+		pl = apl->a[i];
+
+
+		for( j = 0 ; j < nG ; j++ ){
+			cpl = gapl->a[j];
+
+
+			if( box2f_distance( &pl->b, &cpl->b) > dT )
+				continue;
+
+			dPln_type d;
+			if( pln_distance_pln_u( pl, cpl, &d ) < 0 )
+				continue;
+
+			if( ABS(d.u) > dT )
+				continue;
+
+			plnA_add( gapl, pl );
+			break;
+		}
+	}
+
+	return( gapl->nA - nG );
+}
+
+
 #ifdef _AA_
 
 int

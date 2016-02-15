@@ -10,6 +10,12 @@
 
 #include	"Uigp/igp.h"
 #include "Ulog/Log.h"
+
+#ifdef _WIN32
+#define _GPMEMORY_LEAK 
+#endif
+#include "Uigp/GpMemoryLeak.h"
+
 #include "Ucamera/Pt2dType.h"
 
 #include "Uln/PlnType.h"
@@ -34,6 +40,8 @@ vl2fA_alloc( int n )
 
 	avl->iFrame = -1;
 	avl->fit = 0;
+
+	GPMEMORY_LEAK_ALLOC( avl );
 
 	return( avl );
 }
@@ -76,6 +84,8 @@ vl2fA_copy( vl2fA_type *bavl, vl2fA_type *avl )
 void
 vl2fA_destroy( vl2fA_type *avl )
 {
+	GPMEMORY_LEAK_DESTROY( avl );
+
 	free( avl->a );
 
 	free( avl );
@@ -151,6 +161,41 @@ vec2f_type	p0,	p1;
 }
 
 
+void
+vl2f_boxE( vl2f_type *vl, float w0, float w1, box2f_type *b)
+{
+	vec2f_type	p0,	p1;
+	vl2f_points( vl, &p0, &p1 );
+
+	b->x0 = b->x1 = p0.x;
+	b->y0 = b->y1 = p0.y;
+	BOX2D_UPDATE( *b, p1.x, p1.y );
+
+	vec2f_type	bu;
+	VEC2D_RIGHT( vl->v, bu );
+
+	vec2f_type	p;
+	p.x = p0.x + w0* bu.x;
+	p.y = p0.y + w0* bu.y;
+	BOX2D_UPDATE( *b, p.x, p.y );
+
+
+	p.x = p0.x + w1* bu.x;
+	p.y = p0.y + w1* bu.y;
+	BOX2D_UPDATE( *b, p.x, p.y );
+
+
+	p.x = p1.x + w0* bu.x;
+	p.y = p1.y + w0* bu.y;
+	BOX2D_UPDATE( *b, p.x, p.y );
+
+
+	p.x = p1.x + w1* bu.x;
+	p.y = p1.y + w1* bu.y;
+	BOX2D_UPDATE( *b, p.x, p.y );
+}
+
+
 float
 vl2f_distance( vl2f_type *vl, vec2f_type *p )
 {
@@ -185,12 +230,24 @@ vl2f_distance2( vl2f_type *vl, vec2f_type *p )
 
 
 void
-vl2fA_set_group( vl2fA_type *avl, int iGroup )
+vl2fA_set_group( vl2fA_type *avl, int group )
 {
 	int	i;
 
-	for( i = 0; i < avl->nA ; i++ )
-		avl->a[i].group = -1;
+	for( i = 0; i < avl->nA ; i++ ){
+			avl->a[i].group = group;
+	}
+}
+
+void
+vl2fA_update_group( vl2fA_type *avl, int group0, int group )
+{
+	int	i;
+
+	for( i = 0; i < avl->nA ; i++ ){
+		if( group0 < 0 || avl->a[i].group == group0 )
+			avl->a[i].group = group;
+	}
 }
 
 
@@ -276,22 +333,22 @@ vl2fA_type	*avl;
 
 
 
-int
-vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix )
-{
-plnA_type *apl;
-
-	if( avl->nA == 0 )
-		return( -1 );
-
-	apl = plnA_from_vlA( avl, NULL );
-
-	PLNA_DUMP( apl, prefix, index, suffix );
-
-	plnA_destroy( apl );
-
-	return( 1 );
-}
+//int
+//vl2fA_dump( vl2fA_type *avl, char *prefix, int index, char *suffix )
+//{
+//plnA_type *apl;
+//
+//	if( avl->nA == 0 )
+//		return( -1 );
+//
+//	apl = plnA_from_vlA( avl, NULL );
+//
+//	PLNA_DUMP( apl, prefix, index, suffix );
+//
+//	plnA_destroy( apl );
+//
+//	return( 1 );
+//}
 
 
 

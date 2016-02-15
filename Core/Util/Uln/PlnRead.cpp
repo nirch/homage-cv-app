@@ -266,8 +266,10 @@ plnA_read( plnA_type **apl, FILE *fp )
 	*apl = plnA_alloc( nPl+10 );
 
 
-	if( version >= 4 )
+	if( version >= 4 ){
 		fscanf( fp, "%s  %f %f %f %f", buf, &(*apl)->p.x, &(*apl)->p.y, &(*apl)->scale, &(*apl)->angle );
+		(*apl)->angle = ANGLE_D2R( (*apl)->angle );
+	}
 
 
 	//if( nPl <= 0 ){
@@ -325,6 +327,7 @@ contour
 	int	type;
 	fscanf(fp, "%s  %d", buf, &type );
 	fscanf( fp, "%s  %f %f %f %f", buf, &(*apl)->p.x, &(*apl)->p.y, &(*apl)->scale, &(*apl)->angle );
+	(*apl)->angle = ANGLE_D2R( (*apl)->angle );
 
 
 	for( i = 0 ;  ; i++ ){
