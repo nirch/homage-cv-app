@@ -155,6 +155,8 @@ void	cln_inverse( cln_type *c );
 
 float	cln_distance( cln_type *c, vec2d  *p, struct dPln_type *d );
 
+int		cln_point_in( cln_type *c, vec2d  *p );
+
 
 cln_type *	cln_detach_transparent( cln_type *c );
 

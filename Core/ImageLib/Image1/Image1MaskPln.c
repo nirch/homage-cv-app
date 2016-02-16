@@ -2,7 +2,7 @@
  ***    Image1MaskPln.c   ***
  ****************************/
 #ifdef _DEBUG
-#define _DUMP
+//#define _DUMP
 #endif
 
 #include	<math.h>
@@ -23,29 +23,6 @@ static void	contour_image_mask_normal( image_type *sim );
 static void	image1_mask_normal( image_type *sim );
 
 
-#ifdef _AA_
-image_type *
-contourA_image_mask( contourA_type *ac, int width, int height, image_type *im )
-{
-image_type	*tim;
-int	i;
-
-	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
-	image1_const( im, 0 );
-
-	tim = NULL;
-	for( i = 0 ; i < ac->nC ; i++ ){
-		tim = contour_image_mask( ac->c[i], width, height, tim );
-		image1_mask_append( tim, im );
-	}
-
-	if( tim != NULL )
-		image_destroy( tim, 1 );
-
-	return( im );
-
-}
-#endif
 
 
 
@@ -54,6 +31,84 @@ static void	linkL_expand( vec2d *ctr, ln_type *link, int Fbr, image_type *image 
 static void	link_expand( vec2d *ctr, ln_type *l, int Fbr, image_type *image );
 
 static void  image1_mask_pln_fill( image_type *image );
+
+static void		image1_mask_pln_fillR( image_type *im, int i0 );
+
+
+static void	image1_mask_cln_boundary( cln_type *cln, image_type *im );
+
+static void	image1_mask_pln_boundary( pln_type *pln, image_type *im );
+
+
+image_type *	image1_mask_clnM( cln_type *cln, int *x0, int *y0, image_type *im );
+
+
+image_type * 
+image1_mask_clnA( clnA_type *ac, int width, int height )
+{
+	int	i,	x0,	y0;
+
+
+	image_type	*mim = NULL;
+
+	image_type *im = image_alloc( width, height, 1, IMAGE_TYPE_U8, 1 );
+	image1_const( im, 0 );
+
+	for( i = 0 ; i < ac->nA ; i++ ){
+
+
+		//mim = image1_mask_cln( ac->a[i], im->width, im->height, mim );
+
+		
+		mim = image1_mask_clnM( ac->a[i], &x0, &y0, mim );
+		image1_binaryM( mim, 128, mim );
+
+
+		image1M_set( im, x0, y0, mim, i );
+		IMAGE_DUMP( im, "im", i, "fill" );
+		image1_mask( im, mim, i, mim );
+	}
+
+	IMAGE_DUMP( im, "im", 4, "fill" );
+
+	image_destroy( mim, 1 );
+
+	return( im );
+}
+
+image_type *
+	image1_mask_clnM( cln_type *cln, int *x0, int *y0, image_type *im )
+{
+	box2f_type box;
+	box2i_type b;
+	cln_box( cln, &box );
+
+
+	BOX2D_SWAP( box, b );
+	box2i_extend( &b, 8 );
+
+	if( b.x0 < 0 )	b.x0 = 0;
+	if( b.y0 < 0 )	b.y0 = 0;
+
+	*x0 = b.x0;
+	*y0 = b.y0;
+
+	cln_translate( cln, -*y0, -*x0 );
+
+	im = image1_mask_cln( cln, b.x1-b.x0, b.y1 - b.y0, im );
+
+	IMAGE_DUMP( im, "MASK", 1, NULL );
+	CLN_DUMP( cln, "MASK", 1, NULL );
+
+	cln_translate( cln, *y0, *x0 );
+
+	return( im );
+
+
+}
+
+
+
 
 
 image_type *
@@ -90,7 +145,7 @@ image1_mask_plnA( plnA_type *apl, int width, int height, image_type *im )
 
 
 image_type *
-image1_mask_cln( cln_type *cln, int width, int height, int fNormal, image_type *im )
+image1_mask_cln( cln_type *cln, int width, int height, image_type *im )
 {
 	pln_type	*pl;
 	int	i,	Fbr;
@@ -99,6 +154,10 @@ image1_mask_cln( cln_type *cln, int width, int height, int fNormal, image_type *
 	im = image_realloc( im, width, height, 1, IMAGE_TYPE_U8, 1 );
 	image1_const( im, 0 );
 
+	if( cln == NULL || cln->nA == 0 ){
+		image1_const( im, 255 );
+		return( im );
+	}
 
 	cln_set_dirrection( cln );
 
@@ -110,18 +169,47 @@ image1_mask_cln( cln_type *cln, int width, int height, int fNormal, image_type *
 	}
 
 
+	image1_mask_cln_boundary( cln, im );
+
+	//if( cln_point_inside( cl, &p ) > 0 ){
+
+	//}
+
+
 	image1_mask_pln_fill( im );
 
-	IMAGE_DUMP( im, "im", 1, "fill" );
+	//IMAGE_DUMP( im, "im", 1, "fill" );
 
-	if( fNormal )
-		image1_mask_normal( im );
+	//if( fNormal )
+	//	image1_mask_normal( im );
 
 	IMAGE_DUMP( im, "im", 2, "fill" );
 
 	return( im );
 }
 
+
+static void
+image1_mask_cln_boundary( cln_type *cln, image_type *im )
+{
+	vec2f_type	p;
+
+	p.x = p.y = 0.5;
+	if( cln_point_in( cln, &p ) > 0 ){
+		u_char *tp = im->data;
+		*tp = 255;
+	}
+
+	p.y = 0.5;
+	p.x = im->height-0.5;
+	if( cln_point_in( cln, &p ) > 0 ){
+		u_char *tp = IMAGE_PIXEL( im, im->height-1, 0 );
+		*tp = 255;
+	}
+
+
+	image1_mask_pln_fillR( im, 0 );
+}
 
 
 
@@ -141,7 +229,7 @@ image1_mask_pln( pln_type *pl, int width, int height, image_type *im )
 	Fbr = 2;	// right contour
 	linkL_expand( &pl->ctr, pl->link, Fbr, im );
 
-
+	image1_mask_pln_boundary( pl, im );
 
 	//	IMAGE_DUMP( im, "BB", 2, NULL );
 
@@ -154,6 +242,30 @@ image1_mask_pln( pln_type *pl, int width, int height, image_type *im )
 	return( im );
 }
 
+static void
+	image1_mask_pln_boundary( pln_type *pl, image_type *im )
+{
+	vec2f_type	p;
+	dPln_type	d;
+	p.x = p.y = 0.5;
+	pln_distanceC( pl, &p, &d );
+
+	if( d.u > 0 ){
+		u_char *tp = im->data;
+		*tp = 255;
+	}
+
+	p.y = 0.5;
+	p.x = im->height-0.5;
+	pln_distanceC( pl, &p, &d );
+	if( d.u > 0 ){
+		u_char *tp = IMAGE_PIXEL( im, im->height-1, 0 );
+		*tp = 255;
+	}
+
+
+	image1_mask_pln_fillR( im, 0 );
+}
 
 
 
@@ -349,32 +461,36 @@ image1_mask_pln_fill( image_type *image )
 				fBg = 1;
 			else fBg = 0;
 
-			//dist = *tp;
-
-			//if ( dist >= 0xC0 ){
-			//	fBg = 1;
-			//	*tp = 0xC;
-			//	continue;
-			//}
-
-			//if ( dist  >= 0x80 ) {
-			//	fBg = 1;
-			//	*tp = ( ( dist - 0x40 ) >> 1 ) & 0x7F;
-			//	continue;
-			//}
-
-			//if ( dist  >= 0x60 ) {
-			//	fBg = 0;
-			//	*tp = ( ( dist - 0x40 ) >> 1 ) & 0x7F;
-			//	continue;
-			//}
-
-			//if( dist  != 0  ){
-			//	fBg = 0;
-			//	*tp = 0;
-			//	continue;
-			//}
 		}	
+
+}
+
+
+
+static void  
+	image1_mask_pln_fillR( image_type *im, int i0 )
+{
+	u_char	*tp;
+	int		i;
+	char	fBg;
+
+
+	tp = IMAGE_PIXEL( im, i0, 0 );
+
+	for ( i = 0, fBg = 1; i < im->height; i++, tp += im->width ) {
+
+		if( *tp == 0 ){
+			if( fBg == 0 )
+				*tp = 255;
+			continue;
+		}
+
+
+		if( *tp < 128 )
+			fBg = 1;
+		else fBg = 0;
+	}	
+
 
 }
 

@@ -280,6 +280,15 @@ int CMattingTask::Process()
 	gpTime_stop( &m_tCapture );
 	GPLOG_TIMEM(( "m_imageAcquisition->Get", &m_tCapture, 16) );
 
+	int ret = Process( im );
+
+	return( ret );
+}
+
+
+int CMattingTask::Process( image_type *im )
+{	
+
 	m_iFrame++;
 
 	IMAGE_DUMP( im, "AA", m_iFrame, NULL );

@@ -63,6 +63,8 @@ public:
 
 	int Process();
 
+	int Process( image_type *im );
+
 
 	int	SetOutput( int operation, hiFrame_type *vf, image_type *im );
 

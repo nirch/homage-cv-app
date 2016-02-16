@@ -599,6 +599,26 @@ cln_inverse( cln_type *c )
 }
 
 
+int
+cln_point_in( cln_type *c, vec2d  *p )
+{
+	int	i;
+	dPln_type d;
+
+	for( i = 0 ; i < c->nA ; i++ ){
+
+		if( pln_distanceC(  c->a[i], p, &d ) < 0 )
+			continue;
+
+		if(d.u < 0 )	return( -1 );
+
+	}
+
+	return( 1 );
+}
+
+
+
 
 
 float
@@ -606,23 +626,39 @@ cln_distance( cln_type *c, vec2d  *p, dPln_type *d )
 {
 int	i;
 dPln_type cd;
-float	dis,	mDis;
 
+	int iMin = -1;
 
-	mDis = pln_distance(  c->a[0], p, d );
+	for( i = 0 ; i < c->nA ; i++ ){
+		if( pln_distanceC(  c->a[i], p, &cd ) < 0 )
+			continue;
 
-	for( i = 1 ; i < c->nA ; i++ ){
-	
-
-		dis = pln_distance(  c->a[i], p, &cd );
-		if( dis < mDis ){
+		if( iMin < 0 || ABS(cd.u) < ABS(d->u) ){
+			iMin = i;
 			*d = cd;
-			mDis = dis;
 		}
 
 	}
-	return( mDis );
+
+	return( d->u );
+
+
+
+	//mDis = pln_distance(  c->a[0], p, d );
+
+	//for( i = 1 ; i < c->nA ; i++ ){
+	//
+
+	//	dis = pln_distance(  c->a[i], p, &cd );
+	//	if( dis < mDis ){
+	//		*d = cd;
+	//		mDis = dis;
+	//	}
+
+	//}
+	//return( mDis );
 }
+
 
 
 cln_type *

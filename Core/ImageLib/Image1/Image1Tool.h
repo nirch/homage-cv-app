@@ -89,6 +89,8 @@ image_type *	image1_sample_mathlab( image_type *sim, int d, image_type *im );
 
 
 void	image1_average( image_type *im, int x0, int y0, int width, int height, float *av );
+void	image1M_average( image_type *sim, image_type *mim, float *av );
+
 
 void	image1_var( image_type *im, int x0, int y0, int width, int height, float *av, float *var );
 
@@ -250,6 +252,9 @@ int	image1_mask_append( image_type *sim, image_type *im );
 
 void	image1_set( image_type *sim, box2i *b, int val );
 
+void	image1M_set( image_type *sim, int x0, int y0, image_type *mim, int color );
+
+
 image_type *image1_sub( image_type *im0, image_type *im1, image_type *im );
 
 
@@ -338,7 +343,7 @@ image_type *	image1_histogram_equlization( image_type *sim, image_type *im );
 // Image1Average.c
 image_type *	image1_avrage4_diff( image_type *sim, image_type *var, image_type *im );
 
-image_type *	image1_average8( image_type *sim, image_type *im );
+//image_type *	image1_average8( image_type *sim, image_type *im );
 
 image_type *	image1_average8B( image_type *sim, image_type *im );
 
@@ -402,9 +407,12 @@ image_type *	image1M_majority( image_type *sim, image_type *mim, int N, int mH, 
 image_type *	image1_mask_area( image_type *sim, int rC, image_type *im );
 
 	// Image1MaskPln.c
-image_type *	image1_mask_plnA( struct plnA_type *apl, int width, int height, image_type *im );
+image_type *	image1_mask_clnA( struct clnA_type *ac, int width, int height );
 
-image_type *	image1_mask_cln( struct cln_type *cln, int width, int height, int fNormal, image_type *im );
+image_type *	image1_mask_cln( struct cln_type *c, int width, int height, image_type *im );
+
+
+image_type *	image1_mask_plnA( struct plnA_type *apl, int width, int height, image_type *im );
 
 image_type *	image1_mask_pln( struct pln_type *pl, int width, int height, image_type *im );
 
@@ -414,6 +422,12 @@ image_type *	image1_mask_pln( struct pln_type *pl, int width, int height, image_
 image_type *	image1_eigen8( image_type *yim, image_type *im );
 
 image_type *	image1_eigen8E( image_type *yim, image_type *im );
+
+
+	// ImageContour.cpp
+int	image1_contour( image_type *im, struct plnA_type **apl );
+
+int		image1_contour_all( image_type *im, int blobT, int external, struct plnA_type **apl );
 
 
 #ifdef __cplusplus

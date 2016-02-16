@@ -178,6 +178,41 @@ JNIEXPORT jint JNICALL  Java_com_homage_matting_Matting_cameraCallBack
 
 
 
+JNIEXPORT jint JNICALL  Java_com_homage_matting_Matting_process
+	(JNIEnv * env, jclass c, jint width, jint height, jbyteArray buffer )
+{
+	//	GPLOGF( ("<cameraCallBack-J ..") );
+	//	m_env = env;
+	//	m_c = c;
+
+
+
+	if( m_iaq == NULL )
+		return( -1 );
+
+	//	GPLOGF( (" 1") );
+	u_char *data = (u_char *)(env->functions)->GetByteArrayElements(env, buffer, NULL);
+	if( data == NULL )
+		return( -1 );
+
+	image_type *im = image_create( height, width, 3, 1, data );
+
+	//	GPLOGF( (" 2") );
+	int ret = m_vg->Process( im );
+
+
+	image_destroy( im, 0 );
+
+	//	GPLOGF( (" 3") );
+	(env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *)data, 0);
+
+	//	GPLOGF( (" >") );
+
+	return ret;
+}
+
+
+
 JNIEXPORT int JNICALL Java_com_homage_matting_Matting_getUpdate
   (JNIEnv * env, jclass c, jbyteArray  out, jbyteArray  out1 )
 {

@@ -50,6 +50,10 @@ JNIEXPORT jint JNICALL  Java_com_homage_matting_Matting_cameraCallBack
 		(JNIEnv * env, jclass c, jint width, jint height, jbyteArray buffer );
 
 
+JNIEXPORT jint JNICALL  Java_com_homage_matting_Matting_process
+	(JNIEnv * env, jclass c, jint width, jint height, jbyteArray buffer );
+
+
 JNIEXPORT int JNICALL Java_com_homage_matting_Matting_getUpdate
 		(JNIEnv * env, jclass c, jbyteArray  out, jbyteArray  out1 );
 

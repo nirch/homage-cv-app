@@ -834,7 +834,7 @@ bImage_fill_gap_up( image_type *bim, int a0[], int a1[] )
 
 	int i1 = i;
 
-	if( a1[i1] - a0[i0] < 10 || MAX(i0, i1 ) < 8 || MAX(i0,i1) > 24 )	
+	if( a1[i1] - a0[i0] < 10 || MIN(i0, i1 ) < 6 || MAX(i0,i1) > 24 )	
 		return( 1 );
 
 

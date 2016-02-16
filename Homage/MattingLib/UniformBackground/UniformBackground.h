@@ -94,6 +94,8 @@ public:
 
 	int	Write( char *file );
 
+	int	WritePlf( char *outFile );
+
 	void	Trace( FILE *fp );
 
 	char * GetProcessLog();

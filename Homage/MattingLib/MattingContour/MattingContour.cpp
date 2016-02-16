@@ -201,18 +201,27 @@ int	CMattingContour::Init( char *xmlFile, char *ctrFile, int iHead, int width, i
 
 
 
-
-
-
-
-
 	return( 1 );
 }
 
 
 
 
+int	CMattingContour::Read( char *inFile )
+{
+	if( plnF_read( &m_fpl, inFile ) < 0 )
+		return( -1 );
 
+	return( 1 );
+}
+
+
+int	CMattingContour::Process( int iFrame )
+{
+	int ret = Process( m_fpl->a[iFrame], iFrame );
+
+	return( ret );
+}
 
 
 int	CMattingContour::Process( plnA_type *apl, int iFrame )
@@ -262,12 +271,13 @@ int	CMattingContour::ProcessAlpha( plnA_type *apl )
 
 
 	if( m_prm->smooth == 0 ){	
-		m_cim = image1_mask_cln( cln, m_width, m_height, 1, m_cim );
+		m_cim = image1_mask_cln( cln, m_width, m_height, m_cim );
+		image1_binaryM( m_cim, 128, m_cim );
 		//		ProcessSmooth();
 		m_cimS = image_make_copy( m_cim, m_cimS );
 	}
 	else {
-		m_cim = image1_mask_cln( cln, m_width, m_height, 0, m_cim );
+		m_cim = image1_mask_cln( cln, m_width, m_height, m_cim );
 		m_cimS = image_make_copy( m_cim, m_cimS );
 	}
 

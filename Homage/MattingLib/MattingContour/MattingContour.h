@@ -51,6 +51,9 @@ public:
 	int	InitHeadTracker( int iHead );
 
 
+	int	Read( char *inFile );
+
+	int	Process( int iFrame );
 
 	int	Process( plnA_type *apl, int iFrame );
 
@@ -98,12 +101,12 @@ private:
 
 
 	
-
+	plnF_type	*m_fpl;
 
 
 	struct cln_type *m_cln;
 
-	plnF_type	*m_fpl;
+//	plnF_type	*m_fpl;
 	plnF_type	*m_fplH;
 	plnF_type	*m_fplEdge;
 

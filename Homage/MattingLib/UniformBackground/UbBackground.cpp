@@ -112,6 +112,12 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 
 		if( a0[i] == -1 || a1[i] == -1 )
 			continue;
+
+
+		if( a0[i] < 0 || a1[i] < 0 )
+			continue;
+
+//		fprintf( stdout, "%d  %d %d", i,  a0[59], a1[59] );
 		
 		int	j0,	j1;
 		bImage_type *bp0,	*bp1;
@@ -135,6 +141,7 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 			j1 = a1[i];
 			bp1 = bp + a1[i];
 		}
+
 
 
 

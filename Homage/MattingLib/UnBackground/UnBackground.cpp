@@ -176,7 +176,8 @@ int	CUnBackground::ReadMask( char *inFile, int width, int height )
 
 
 	for( i = 0, m_nM = 0 ; i < m_ac->nA ; i += 2 ){
-		image_type *im = image1_mask_cln( m_ac->a[i], width, height, 1, NULL );
+		image_type *im = image1_mask_cln( m_ac->a[i], width, height, NULL );
+		image1_binaryM( im, 128, im );
 		image_dump( im, "mask", m_nM, NULL );
 
 		m_mim[m_nM] = image1_sample( im, 8, NULL );

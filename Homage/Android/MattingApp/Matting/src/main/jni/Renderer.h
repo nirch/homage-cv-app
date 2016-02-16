@@ -23,42 +23,44 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_create
 
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSource
-	(JNIEnv * env, jclass c, jint type, jstring file );
+	(JNIEnv * env, jclass c, jint iR, jint type, jstring file );
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSourceFrame
-	(JNIEnv * env, jclass c, jint type, jstring jfile, jintArray jframe );
+	(JNIEnv * env, jclass c, jint iR, jint type, jstring jfile, jintArray jframe );
 
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffect
-		(JNIEnv * env, jclass c, jint sourceId, jint type, jstring file );
+		(JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring file );
+
 
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffectData
-	(JNIEnv * env, jclass c, jint sourceId, jint type, jbyteArray buffer );
-
-
+	(JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring jdata );
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
-		(JNIEnv * env, jclass c, jint type, jstring file, jint width, jint height, int fjrameSpeed );
+		(JNIEnv * env, jclass c, jint iR, jint type, jstring file, jint width, jint height, int fjrameSpeed );
 
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
-	(JNIEnv * env, jclass c, jobject obj,
+	(JNIEnv * env, jclass c, jint iR, jobject obj,
 	jstring jfile, jint width, jint height, jint frameRate );
 
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutputA
-	(JNIEnv * env, jclass c, jstring className,
+	(JNIEnv * env, jclass c, jint iR, jstring className,
 	jstring jfile, jint width, jint height, jint frameRate );
 
 
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_setOutputPallete
-	(JNIEnv * env, jclass c, jbyteArray buffer );
+	(JNIEnv * env, jclass c, jint iR, int id, jbyteArray jdata );
 
+
+JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_setFrameSize
+	(JNIEnv * env, jclass c, jint iR, jint width, jint height );
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_process
-	(JNIEnv * env, jclass c );
+	(JNIEnv * env, jclass c, jint iR );
 
 
 

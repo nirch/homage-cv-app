@@ -102,7 +102,7 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 }
 
 
-int	CHrSourcePng::ReadFrame( int iFrame, image_type **im )
+int	ReadFrame( int iFrame, long long timeStamp, image_type **im )
 {
 image_type	*sim;
 

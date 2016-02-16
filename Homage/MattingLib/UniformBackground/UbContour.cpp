@@ -63,7 +63,7 @@ int	CUniformBackground::ProcessContour()
 		m_cln = NULL;
 	}
 
-	m_cln = imageLabelUS_contour( m_abwC->im, n );
+	m_cln = imageLabelUS_contour( m_abwC->im, n, 64, 0 );
 
 
 
@@ -244,11 +244,12 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl, int width, int hei
 	cln_type *cln = cln_from_plnA( apl, 1 );
 
 	if( m_prm->smooth == 0 ){	
-		m_cim = image1_mask_cln( cln, width, height, 1, m_cim );
+		m_cim = image1_mask_cln( cln, width, height, m_cim );
+		image1_binaryM( m_cim, 128, m_cim );
 		ProcessSmooth();
 	}
 	else {
-		m_cim = image1_mask_cln( cln, width, height, 0, m_cim );
+		m_cim = image1_mask_cln( cln, width, height, m_cim );
 		m_cimS = image_make_copy( m_cim, m_cimS );
 	}
 

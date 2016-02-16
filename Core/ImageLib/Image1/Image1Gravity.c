@@ -139,6 +139,8 @@ image1_binaryM( image_type *sim, int T, image_type *im )
 	return( im );
 }
 
+
+
 void
 image1_boundary_set( image_type *im, int val )
 {
@@ -455,6 +457,26 @@ int	i,	j,	x0,	y0,	x1,	y1;
 }
 
 
+
+
+void
+image1M_set( image_type *sim, int x0, int y0, image_type *mim, int color )
+{
+	u_char	*tp;
+	u_char	*mp;
+	int	i,	j;
+
+	mp = mim->data;
+
+	for( i = 0 ; i < mim->height ; i++ ){
+		tp = IMAGE_PIXEL( sim, i+y0, x0 );
+		for( j = 0 ; j < mim->width ; j++, mp++, tp++ ){
+
+			if( *mp != 0 )
+				*tp = color;
+		}
+	}
+}
 
 
 int 

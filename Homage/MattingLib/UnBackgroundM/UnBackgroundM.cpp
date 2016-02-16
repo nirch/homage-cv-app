@@ -134,7 +134,8 @@ int	i;
 
 
 	for( i = 0, m_nM = 0 ; i < m_ac->nA ; i += 2 ){
-		m_mim[m_nM] = image1_mask_cln( m_ac->a[i], width, height, 1, m_mim[m_nM] );
+		m_mim[m_nM] = image1_mask_cln( m_ac->a[i], width, height, m_mim[m_nM] );
+		image1_binaryM( m_mim[m_nM], 128, m_mim[m_nM] );
 		image_dump( m_mim[m_nM], "mask", m_nM, NULL );
 		m_nM++;
 	}

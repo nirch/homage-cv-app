@@ -363,7 +363,8 @@ int	i;
 
 
 	for( i = 0, m_nM = 0 ; i < m_ac->nA ; i += 2 ){
-		m_mim[m_nM] = image1_mask_cln( m_ac->a[i], width, height, 1, m_mim[m_nM] );
+		m_mim[m_nM] = image1_mask_cln( m_ac->a[i], width, height, m_mim[m_nM] );
+		image1_binaryM( m_mim[m_nM], 128, m_mim[m_nM] );
 		image_dump( m_mim[m_nM], "mask", m_nM, NULL );
 		m_nM++;
 	}
@@ -559,7 +560,6 @@ int	CUniformBackground::Write( char *outFile )
 	plnF_write( m_fplEdge, file );
 
 	if( m_headBoxF == 1 ){
-
 		gpFilename_force_extension( outFile, ".ebox", file );
 		box2f_write_from_file( &m_headBox, file );
 
@@ -576,6 +576,15 @@ int	CUniformBackground::Write( char *outFile )
 
 	return( 1 );
 }
+
+
+
+int	CUniformBackground::WritePlf( char *outFile )
+{
+	if( m_fpl != NULL )
+		plnF_write( m_fpl, outFile );
+}
+
 
 
 
@@ -787,7 +796,8 @@ int CUniformBackground::ProcessPl(  image_type *sim, int iFrame, plnA_type *apl 
 	cln_type *cln = cln_from_plnA( apl, 1 );
 
 
-	m_cimS = image1_mask_cln( cln, sim->width, sim->height, 0, m_cimS );
+	m_cimS = image1_mask_cln( cln, sim->width, sim->height, m_cimS );
+
 
 	cln_destroy( cln );
 

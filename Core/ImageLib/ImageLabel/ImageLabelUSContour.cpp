@@ -76,7 +76,7 @@ static gapp_type *	gapp_breakpoint( gapp_type *gapp, int d );
 
 
 cln_type *
-imageLabelUS_contour( image_type *im, int id )
+imageLabelUS_contour( image_type *im, int id, float minLen, int extrnal )
 {
 int	i,	j,	i0,	j0,	side;
 int	no;
@@ -99,7 +99,7 @@ cln_type *cln;
 		agpLevel_contour_1( im, i, j, side, gapp );
 //		gapp_dump( gapp, "gapp", no, NULL );
 
-		if( gapp->no < 64 )	
+		if( gapp->no < minLen )	
 			continue;
 
 		
@@ -130,6 +130,9 @@ cln_type *cln;
 
 		cln->a[cln->nA ++ ] = pl;
 
+		if( extrnal == 1 )
+			break;
+
 	
 
 //		CONTOUR_DUMP( c, "c", no, NULL );
@@ -144,6 +147,11 @@ cln_type *cln;
 	}
 
 	gapp_destroy( gapp );
+
+	if( cln->nA == 0 ){
+		cln_destroy( cln );
+		return( NULL );
+	}
 
 //	CONTOUR_DUMP( ac, "c", no, "gl" );
 

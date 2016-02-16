@@ -32,9 +32,10 @@
 #include "HrRendererLib/HrEffect/HrEffectMaskGif.h"
 
 
-static CHomageRenderer *m_hr = NULL;
 
 
+static int	m_nR = 0;
+static CHomageRenderer *m_ar[16];
 
 CHrSourceI  *	HrSource_create( int type );
 
@@ -48,29 +49,38 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_create
 {
 	GPLOGF(("<Renderer Create"));
 
-	if( m_hr != NULL )
-		return( -1 );
-
-	if( m_hr == NULL ){
-		m_hr = new CHomageRenderer();
+	int	i;
+	for( i = 0 ; i < m_nR ; i++ ){
+		if( m_ar[i] == NULL )
+			break;
 	}
 
+	if( i >= 8 )	return( -1 );
 
-	GPLOGF((" >\n"));
+	if( i >= m_nR )	m_nR = i+1;
 
-	return( 1 );
+
+	m_ar[i] = new CHomageRenderer();
+	
+
+
+	GPLOGF((" %d>\n", i ));
+
+	return( i );
 }
 
 
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSource
-	(JNIEnv * env, jclass c, jint type, jstring jfile )
+	(JNIEnv * env, jclass c, jint iR, jint type, jstring jfile )
 {
 
 	GPLOGF(("<addSource"));
 
 
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
@@ -99,11 +109,11 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSource
 
 	GPLOGF((" Init %s", file ));
 
-	GPLOGF((" nS: %d ", m_hr->m_nS ));
+	GPLOGF((" nS: %d ", hr->m_nS ));
 
-	int id = m_hr->AddSource( source );
+	int id = hr->AddSource( source );
 	
-	GPLOGF((" Id: %d ", id ));
+	GPLOGF((" Id: %d.%d ", iR, id ));
 
 
 	ujni_releaseJString( env, jfile, file );
@@ -117,12 +127,13 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSource
 
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSourceFrame
-	(JNIEnv * env, jclass c, jint type, jstring jfile, jintArray jframe )
+	(JNIEnv * env, jclass c, jint iR, jint type, jstring jfile, jintArray jframe )
 {
 
 	GPLOGF(("<start Png Frames"));
 
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
@@ -161,9 +172,9 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSourceFrame
 
 	GPLOGF((" Init %s", file ));
 
-	GPLOGF((" nS: %d ", m_hr->m_nS ));
+	GPLOGF((" nS: %d ", hr->m_nS ));
 
-	int id = m_hr->AddSource( source );
+	int id = hr->AddSource( source );
 
 	GPLOGF((" Id: %d ", id ));
 
@@ -181,16 +192,17 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer_addSourceFrame
 
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffect
-	(JNIEnv * env, jclass c, jint sourceId, jint type, jstring jfile )
+	(JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring jfile )
 {
 	GPLOGF(("<addEffect"));
 
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
 
-	CHrSourceI *src = m_hr->GetSource( sourceId );
+	CHrSourceI *src = hr->GetSource( sourceId );
 	if( src == NULL )
 		return( -1 );
 
@@ -224,17 +236,18 @@ JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffect
 
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffectData
-	(JNIEnv * env, jclass c, jint sourceId, jint type, jbyteArray jdata )
+	(JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring jdata )
 {
 
 	GPLOGF(("<addEffectData"));
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
 
 
-	CHrSourceI *src = m_hr->GetSource( sourceId );
+	CHrSourceI *src = hr->GetSource( sourceId );
 	if( src == NULL )
 		return( -1 );
 
@@ -244,14 +257,15 @@ JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffectData
 	if( ef == NULL )
 		return( -1 );
 
-	u_char *data = (u_char *)(env->functions)->GetByteArrayElements(env, jdata, NULL);
+
+	const char *data = ujni_getJString( env, jdata );
 
 	ef->InitFromData( (char *)data );
 
 	int id = src->AddEffect( ef );
 
 
-	(env->functions)->ReleaseByteArrayElements(env, jdata, (jbyte *)data, 0);
+	ujni_releaseJString( env, jdata, data );
 
 
 	GPLOGF((" >\n"));
@@ -260,12 +274,15 @@ JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer_addEffectData
 
 
 
-JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
-	(JNIEnv * env, jclass c, jint type, jstring jfile, jint width, jint height, int fjrameSpeed )
-{
-	GPLOGF(("<addOutpur"));
 
-	if( m_hr == NULL || m_hr->IsProcess() ){
+
+JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
+	(JNIEnv * env, jclass c, jint iR, jint type, jstring jfile, jint width, jint height, int fjrameSpeed )
+{
+	GPLOGF(("<addOutput"));
+
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
@@ -275,7 +292,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 
 	if( type == HR_GIF ){
 		CHrOutputGif *out = new CHrOutputGif();
-		GPLOGF((" GIF"));
+		GPLOGF((" GIF  %d %d", width, height ));
 		if( out->Init( (char *)file, width, height, fjrameSpeed ) < 0 ){
 			ujni_releaseJString( env, jfile, file );
 			return( -1 );
@@ -283,7 +300,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 
 		GPLOGF((" Init"));
 
-		int id = m_hr->AddOutput( out );
+		int id = hr->AddOutput( out );
 
 		GPLOGF((" id = %d >\n", id));
 
@@ -301,7 +318,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 
 		GPLOGF((" Init"));
 
-		int id = m_hr->AddOutput( out );
+		int id = hr->AddOutput( out );
 
 		GPLOGF((" id = %d >\n", id));
 
@@ -318,12 +335,13 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
-	(JNIEnv * env, jclass c, jobject obj,
+	(JNIEnv * env, jclass c, jint iR, jobject obj,
 	jstring jfile, jint width, jint height, jint frameRate )
 {
 	GPLOGF(("<addJavaOutput"));
 
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
@@ -352,7 +370,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
 
 	GPLOGF((" Init"));
 
-	int id = m_hr->AddOutput( out );
+	int id = hr->AddOutput( out );
 
 	
 
@@ -363,65 +381,21 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
 	return( id );
 }
 
-#ifdef _AA_
-JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutputA
-	(JNIEnv * env, jclass c, jstring jclassName,
-	jstring jfile, jint width, jint height, jint frameRate )
-{
-	GPLOGF(("<addJavaOutputA"));
 
-	const char *className = ujni_getJString( env, jclassName );
-	GPLOGF((" class: %s", className));
-
-	const char *file = ujni_getJString( env, jfile );
-	GPLOGF((" File: %s", file));
-
-
-	CHrOutputJava *out = new CHrOutputJava();
-	GPLOGF((" Java"));
-
-
-	//if( out->SetJavaEncoder( env, obj ) < 0 ){
-	//	ujni_releaseJString( env, jclassName, className );
-	//	ujni_releaseJString( env, jfile, file );
-	//	GPLOGF((" Init Failed"));
-	//	return( -1 );
-	//}
-
-	GPLOGF((" Init"));
-
-	if( out->Init( (char *)className, (char *)file, width, height, frameRate ) < 0 ){
-		ujni_releaseJString( env, jclassName, className );
-		ujni_releaseJString( env, jfile, file );
-		return( -1 );
-	}
-
-	GPLOGF((" Init"));
-
-	int id = m_hr->AddOutput( out );
-
-	GPLOGF((" id = %d >\n", id));
-
-	ujni_releaseJString( env, jclassName, className );
-	ujni_releaseJString( env, jfile, file );
-
-
-	return( id );
-}
-#endif
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_setOutputPallete
-	(JNIEnv * env, jclass c, int id, jbyteArray jdata )
+	(JNIEnv * env, jclass c, jint iR, int id, jbyteArray jdata )
 {
 
 	GPLOGF(("<setOutputPallete"));
-	if( m_hr == NULL || m_hr->IsProcess() ){
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
 		GPLOGF(("In process  >\n"));
 		return( -1 );
 	}
 
 
-	CHrOutputI *out = m_hr->GetOuput( id );
+	CHrOutputI *out = hr->GetOuput( id );
 	if( out == NULL )
 		return( -1 );
 
@@ -441,20 +415,44 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_setOutputPallete
 }
 
 
-JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_process
-	(JNIEnv * env, jclass c )
+
+JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_setFrameSize
+	(JNIEnv * env, jclass c, jint iR, jint width, jint height )
 {
-	GPLOGF(("<Render Process"));
+	GPLOGF(("<setFrameSize"));
+
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() ){
+		GPLOGF(("In process  >\n"));
+		return( -1 );
+	}
 
 
-	m_hr->Process();
+	hr->SetFrameSize( width, height );
 
-	delete m_hr;
+	GPLOGF((">/n"));
 
-	m_hr = NULL;
+	return( 1 );
+}
 
 
-	GPLOGF((" >\n"));
+
+JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_process
+	(JNIEnv * env, jclass c, jint iR )
+{
+	GPLOGF(("<Render Process: %d", iR ));
+
+	CHomageRenderer *hr  = m_ar[iR];
+	if( hr == NULL || hr->IsProcess() )
+		return( -1 );
+
+	hr->Process();
+
+	delete m_ar[iR];
+	m_ar[iR] = NULL;
+
+
+	GPLOGF((" %d >\n", iR ));
 
 	return( 1 );
 }

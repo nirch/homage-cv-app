@@ -154,7 +154,7 @@ plnA_type *	imageLabelUI_plnA( imageLabel_type *abw, plnA_type *apl );
 
 
 	// ImageLabelUSContour.cpp
-cln_type *	imageLabelUS_contour( image_type *im, int id );
+cln_type *	imageLabelUS_contour( image_type *im, int id, float minLen, int extrnal );
 
 #ifdef __cplusplus
 }

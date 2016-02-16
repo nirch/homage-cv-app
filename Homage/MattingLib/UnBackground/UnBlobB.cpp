@@ -59,7 +59,7 @@ int	CUnBackground::ProcessBlobB()
 			i0 = i;
 	}
 
-	fprintf( stdout, "AAA %d %d\n", (int)ac[i0].mean, ac[i0].n );
+	fprintf( stdout, "COLOR %d %d\n", (int)ac[i0].mean, ac[i0].n );
 
 
 
