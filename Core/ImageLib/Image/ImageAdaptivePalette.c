@@ -70,23 +70,46 @@ int	ncolor;
 	for( n = 0 ; n < nImage ; n++ ){
 		im = images[n];
 
-		p = (u_int *)im->data;
-		for( i = 0; i < im->row; i++){
-			for( j = 0; j < im->column; j++, p++){
+		if( im->depth == 4 ){
+			p = (u_int *)im->data;
+			for( i = 0; i < im->row; i++){
+				for( j = 0; j < im->column; j++, p++){
 
-				if ( (*p) & 0xFF000000 )	continue;
+					if ( (*p) & 0xFF000000 )	continue;
 
-				r = IMAGE4_RED(*p);
-				g = IMAGE4_GREEN(*p);
-				b = IMAGE4_BLUE(*p);
+					r = IMAGE4_RED(*p);
+					g = IMAGE4_GREEN(*p);
+					b = IMAGE4_BLUE(*p);
 
-				k = COLOR_TO_INDEX4( r, g, b );
+					k = COLOR_TO_INDEX4( r, g, b );
 
 
-				H[k].r += r;
-				H[k].g += g;
-				H[k].b += b;
-				H[k].n++;
+					H[k].r += r;
+					H[k].g += g;
+					H[k].b += b;
+					H[k].n++;
+				}
+			}
+
+			if( im->depth == 3 ){
+				p = (u_int *)im->data;
+				for( i = 0; i < im->row; i++){
+					for( j = 0; j < im->column; j++){
+
+
+						r = *p++;
+						g = *p++;
+						b = *p++;
+
+						k = COLOR_TO_INDEX4( r, g, b );
+
+
+						H[k].r += r;
+						H[k].g += g;
+						H[k].b += b;
+						H[k].n++;
+					}
+				}
 			}
 		}
 	}

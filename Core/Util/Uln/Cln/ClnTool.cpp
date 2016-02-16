@@ -14,8 +14,10 @@ cln_type *
 cln_alloc()
 {
 	cln_type *c = (cln_type *)malloc(sizeof(cln_type));
-
 	memset(c, 0, sizeof(cln_type) );
+
+	c->NA = 1000;
+	c->a = ( pln_type **)malloc( c->NA *sizeof(pln_type *) );
 
 	c->type = 0;
 
@@ -36,6 +38,8 @@ int	i;
 
 	for( i = 0 ; i < c->nA ; i++ )
 		pln_destroy( c->a[i] );
+
+	free( c->a );
 
 	free( c );
 }
@@ -139,11 +143,15 @@ cln_type *c;
 int	i;
 
 	c = cln_alloc();
+	c->angle = sc->angle;
+	c->scale = sc->scale;
+	c->ctr = sc->ctr;
+	c->v = sc->v;
+	c->type = sc->type;
 
-	*c = *sc;
 
-	for( i = 0 ; i < c->nA ; i++ )
-		c->a[i] = pln_copy( sc->a[i] );
+	for( i = 0 ; i < sc->nA ; i++ )
+		c->a[c->nA++] = pln_copy( sc->a[i] );
 
 	return( c );
 }
@@ -510,6 +518,9 @@ int	i, j;
 }
 
 
+
+
+
 int		
 cln_check_cross( cln_type *c, float d_min, vec2f_type *mp )
 {
@@ -529,6 +540,9 @@ int rez;
 	return 0;
 }
 #endif
+
+
+
 
 
 void	
@@ -696,6 +710,15 @@ cln_set_range( cln_type *c )
 	}
 }
 
+void
+	clnA_set_range( clnA_type *ac )
+{
+	int	i;
+	for( i = 0 ; i < ac->nA ; i++ )
+		cln_set_range( ac->a[i] );
+}
+
+
 
 int	
 cln_point_inside( cln_type *c, vec2f_type *p )
@@ -708,3 +731,28 @@ cln_point_inside( cln_type *c, vec2f_type *p )
 
 	return( 1 );
 }
+
+
+
+
+int
+clnA_select( clnA_type *ac, int type, vec2f_type *p )
+{
+	int	i;
+
+	if( ac == NULL )	return( -1 );
+
+
+	for( i = 0 ; i < ac->nA ; i++ ){
+		if( type >=0 && ac->a[i]->type != type )
+			continue;
+
+		cln_set_range( ac->a[i] );
+
+		if( cln_point_inside( ac->a[i], p ) > 0 )
+			return( i );
+	}
+
+	return( -1 );
+}
+

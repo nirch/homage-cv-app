@@ -20,6 +20,7 @@
 CHrEffectI::CHrEffectI()
 {
 	m_id = -1;
+    m_switchBR = 0;
 }
 
 CHrEffectI::~CHrEffectI()
@@ -27,9 +28,14 @@ CHrEffectI::~CHrEffectI()
 	DeleteContents();
 }
 
-
-
-
+void CHrEffectI::SwitchBR()
+{
+    if (m_switchBR) {
+        m_switchBR = 0;
+    } else {
+        m_switchBR = 1;
+    }
+}
 
 void CHrEffectI::DeleteContents()
 {

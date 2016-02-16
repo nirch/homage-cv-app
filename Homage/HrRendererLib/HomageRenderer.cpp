@@ -31,6 +31,11 @@ CHomageRenderer::CHomageRenderer()
 	m_nOut = 0;
 
 	m_process = 0;
+    
+    this->wasCanceled = false;
+    
+    // Default value
+    this->setDuration(2.0, 12);
 }
 
 CHomageRenderer::~CHomageRenderer()
@@ -100,7 +105,13 @@ CHomageRenderer::SetFrameSize( int width, int height )
 	}
 }
 
-
+void CHomageRenderer::setDuration(double duration, int fps)
+{
+    this->duration = duration;
+    this->fps = fps;
+    this->maxTimeStamp = duration * 1000000000;
+    this->timeDeltaPerFrame = 1000000000 / fps;
+}
 
 
 int CHomageRenderer::AddOutput( CHrOutputI *o )
@@ -121,7 +132,11 @@ CHrOutputI * CHomageRenderer::GetOuput( int i )
 }
 
 
-
+void
+CHomageRenderer::Cancel()
+{
+    this->wasCanceled = true;
+}
 
 
 int
@@ -131,11 +146,16 @@ CHomageRenderer::Process()
 	image_type *im;
 
 	m_process = 1;
-
+    long long timeStamp = 0;
 	for( i = 0 ; ; i++ ){
-
+        
+        // Iterate sources, read frame for each source and combine.
 		for( k = 0 ; k < m_nS ; k++ ){
-			if( m_as[k]->ReadFrame( i, &im ) < 0 )
+            
+            if( timeStamp >= maxTimeStamp || wasCanceled == true)
+                break;
+            
+			if( m_as[k]->ReadFrame( i, timeStamp, &im ) < 0 )
 				break;
 
 			if( k == 0 ){
@@ -150,11 +170,11 @@ CHomageRenderer::Process()
 			IMAGE_DUMP( im, "AA", k, "M" );
 		}
 
+        // Continue only if all sources combined.
 		if( k < m_nS )
-			break;
-
-
-		 
+            break;
+		
+        // Iterate output
 		for( k = 0 ; k < m_nOut ; k++ ){
 			GPLOGF( ("Frame Write %d-%d\n", i, k ));
 			m_aOut[k]->WriteFrame( m_im, i );
@@ -165,8 +185,8 @@ CHomageRenderer::Process()
 		IMAGE_DUMP_ALPHA( m_im, "im-a", i, NULL );
 
 
-		fprintf( stdout, "  ." );
-
+		//fprintf( stdout, "  ." );
+        timeStamp += this->timeDeltaPerFrame;
 	}
 
 

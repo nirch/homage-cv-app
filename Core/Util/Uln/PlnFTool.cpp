@@ -19,41 +19,42 @@
 plnF_type *	
 plnF_alloc( int n )
 {
-plnF_type	*vpl;
+plnF_type	*fpl;
 int	i;
 
-	vpl = ( plnF_type *)malloc( sizeof( plnF_type) );
+	fpl = ( plnF_type *)malloc( sizeof( plnF_type) );
 	
-	vpl->NA = n;
+	fpl->NA = n;
 	
-	vpl->a = ( plnA_type **)malloc( vpl->NA * sizeof( plnA_type*) );
+	fpl->a = ( plnA_type **)malloc( fpl->NA * sizeof( plnA_type*) );
 
-	vpl->nA = 0;
+	fpl->nA = 0;
 
-	for( i = 0 ; i <  vpl->NA ; i++ )
-		vpl->a[i] = NULL;
+	fpl->frame0 = 0;
+
+	for( i = 0 ; i <  fpl->NA ; i++ )
+		fpl->a[i] = NULL;
 	
-	return( vpl );
+	return( fpl );
 }
 
 
 void 
-plnF_destroy( plnF_type *vpl )
+plnF_destroy( plnF_type *fpl )
 {
 int	i;
 
-
-	for( i = 0 ; i < vpl->nA ; i++ ){
-		if( vpl->a[i] != NULL ){
-			plnA_destroy( vpl->a[i] );
-			vpl->a[i] = NULL;
+	for( i = 0 ; i < fpl->nA ; i++ ){
+		if( fpl->a[i] != NULL ){
+			plnA_destroy( fpl->a[i] );
+			fpl->a[i] = NULL;
 		}
 	}
 
 
-	free( vpl->a );
+	free( fpl->a );
 
-	free( vpl );
+	free( fpl );
 }
 
 plnA_type *
@@ -66,43 +67,90 @@ plnA_from_pl( pln_type *pl )
 }
 
 plnA_type *
-plnF_get( plnF_type *vpl, int iFrame )
+plnF_get( plnF_type *fpl, int iFrame )
 {
-	if( iFrame < 0 || iFrame >= vpl->nA )
+	iFrame -= fpl->frame0;
+
+	if( iFrame < 0 || iFrame >= fpl->nA )
 		return( NULL );
 
-	return( vpl->a[iFrame] );
+	return( fpl->a[iFrame] );
 }
 
 
 
 void
-plnF_add( plnF_type *vpl, plnA_type *apl, int iFrame )
+plnF_add( plnF_type *fpl, plnA_type *apl, int iFrame )
 {
 int	i;
 
-	if( iFrame >= vpl->NA ){
+	iFrame -= fpl->frame0;
+
+	if( iFrame >= fpl->NA ){
 		
-		int NA = vpl->NA + iFrame+32;
-		vpl->a = ( plnA_type **)realloc( vpl->a, NA*sizeof(plnA_type *) );
+		int NA = fpl->NA + iFrame+32;
+		fpl->a = ( plnA_type **)realloc( fpl->a, NA*sizeof(plnA_type *) );
 
-		for( i = vpl->NA ; i <  NA ; i++ )
-			vpl->a[i] = NULL;
+		for( i = fpl->NA ; i <  NA ; i++ )
+			fpl->a[i] = NULL;
 
-		vpl->NA = NA;
+		fpl->NA = NA;
 	}
 
-	if( vpl->nA > iFrame && vpl->a[iFrame] != NULL )
-		plnA_destroy( vpl->a[iFrame] );
 
-	vpl->a[iFrame] = apl;
-	apl->iFrame = iFrame;
+	if( fpl->nA > iFrame && fpl->a[iFrame] != NULL )
+		plnA_destroy( fpl->a[iFrame] );
 
 
-	if( vpl->nA <= iFrame )
-		vpl->nA = iFrame+1;
+	fpl->a[iFrame] = apl;
+	apl->iFrame = iFrame + fpl->frame0;
+
+
+	if( fpl->nA <= iFrame )
+		fpl->nA = iFrame+1;
 
 }
+
+
+void
+	plnF_append( plnF_type *fpl, plnA_type *apl, int iFrame )
+{
+	int	i;
+
+	iFrame -= fpl->frame0;
+
+	if( iFrame >= fpl->NA ){
+
+		int NA = fpl->NA + iFrame+32;
+		fpl->a = ( plnA_type **)realloc( fpl->a, NA*sizeof(plnA_type *) );
+
+		for( i = fpl->NA ; i <  NA ; i++ )
+			fpl->a[i] = NULL;
+
+		fpl->NA = NA;
+	}
+
+	if( fpl->nA > iFrame && fpl->a[iFrame] != NULL ){
+		plnA_append( fpl->a[iFrame], apl );
+		//for( i = 0 ; i < apl->nA ; i++ )
+		//	plnA_add( fpl->a[iFrame], apl->a[i] );
+
+		//apl->nA = 0;
+		//plnA_destroy( apl );
+		return;
+	}
+	
+
+	fpl->a[iFrame] = apl;
+	apl->iFrame = iFrame + fpl->frame0;
+
+
+	if( fpl->nA <= iFrame )
+		fpl->nA = iFrame+1;
+
+}
+
+
 
 
 
@@ -122,12 +170,14 @@ int	i;
 
 
 void
-plnF_clear( plnF_type *vpl, int iFrame )
+plnF_clear( plnF_type *fpl, int iFrame )
 {
 
-	if( iFrame < vpl->nA && vpl->a[iFrame] != NULL ){
-		plnA_destroy( vpl->a[iFrame] );
+	iFrame -= fpl->frame0;
 
-		vpl->a[iFrame] = NULL;
+	if( iFrame < fpl->nA && fpl->a[iFrame] != NULL ){
+		plnA_destroy( fpl->a[iFrame] );
+
+		fpl->a[iFrame] = NULL;
 	}
 }

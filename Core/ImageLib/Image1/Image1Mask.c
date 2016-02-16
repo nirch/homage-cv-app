@@ -29,7 +29,7 @@ image_type	*tim;
 	image_destroy( tim, 1 );
 
 
-	image_mask( im, sim, im );
+	image_mask( im, sim, 0, im );
 
 	return( im );
 }

@@ -325,20 +325,18 @@ void
 
 	matrix2_inverse( &im, &m );
 
-
-
 	//scale = 1.0 / scale;
 
 	lt2_type	lt0;
 
 
-	lt0.a0 = scale * m.a00;
-	lt0.b0 = scale * m.a01;
+	lt0.a0 = scale * im.a00;
+	lt0.b0 = scale * im.a01;
 	lt0.c0 = -lt0.a0 *x0 - lt0.b0 *y0 + dx;
 
 
-	lt0.a1 = scale * m.a10;
-	lt0.b1 = scale * m.a11;
+	lt0.a1 = scale * im.a10;
+	lt0.b1 = scale * im.a11;
 	lt0.c1 = -lt0.a1 *x0 - lt0.b1 *y0 + dy;
 
 
@@ -348,13 +346,13 @@ void
 	// dx -= 120;
 	// dy -= 120
 
-	lt->a0 = scale * m.a00;
-	lt->b0 = scale * m.a01;
+	lt->a0 = scale * im.a00;
+	lt->b0 = scale * im.a01;
 	//	lt->c0 = -lt->a0 *x0 - lt->b0 *y0 + dx;
 	lt->c0 = -lt->a0 *dx - lt->b0 *dy + x0;
 
-	lt->a1 = scale * m.a10;
-	lt->b1 = scale * m.a11;
+	lt->a1 = scale * im.a10;
+	lt->b1 = scale * im.a11;
 	//	lt->c1 = -lt->a1 *x0 - lt->b1 *y0 + dy;
 	lt->c1 = -lt->a1 *dx - lt->b1 *dy + y0;
 
@@ -363,7 +361,7 @@ void
 		p.x = LT2_F1( *lt, a[i].x, a[i].y );
 		p.y = LT2_F2( *lt, a[i].x, a[i].y );
 		vec3f_type p1;
-		matrix3_multV( &m, &a[i], &p1 );
+		matrix3_multV( &im, &a[i], &p1 );
 
 		p1.x -= p.x;
 		p1.y -= p.y;

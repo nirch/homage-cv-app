@@ -4,11 +4,12 @@
 #include	"Uigp/igp.h"
 
 #include	"Umath/Matrix2Type.h"
+#include 	"UGeoApp/GeoApp.h"
+
+#include	"Uln/PlnType.h"
 #include	"Ucamera/Pt2dType.h"
 
-#include 	"UGeoApp/GeoApp.h"
-#include 	"Uln/LnType.h"
-  
+
 
 static int		pt2dA_get_next_break( pt2dA_type *apt, vec2d	*v, int i0, float dis );
 
@@ -62,7 +63,20 @@ gapp_prm	Qgprm;
 
 
 
+int	pt2dA_approximate_pln( pt2dA_type *apt, int i0, int i1, pln_type **pl )
+{
+	*pl = pln_alloc(0);
 
+	pt2d_approximate_linkO( apt, &(*pl)->ctr, &(*pl)->link );
+
+	pln_set_length( *pl );
+
+	
+
+	(*pl)->state = PLN_OPEN;
+
+	return( 1 );
+}
 		
 
 void

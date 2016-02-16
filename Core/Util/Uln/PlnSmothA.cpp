@@ -78,6 +78,8 @@ pln_smoothA( pln_type *pl, int d )
 	pt2dA_destroy( apt );
 	pt2dA_destroy( apt1 );
 
+	spl->size = pl->size;
+
 	return( spl );
 
 }

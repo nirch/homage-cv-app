@@ -203,6 +203,8 @@ pt2dA_dump( pt2dA_type *apt, char *prefix, int index, char *suffix )
 {
 	char	file[256];
 
+	if( apt->nA == 0 )	return;
+
 	if( gpDump_filename( prefix, index, suffix, ".pt", file ) < 0 )
 		return;
 

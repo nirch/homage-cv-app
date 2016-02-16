@@ -6,17 +6,17 @@
 
 static image_type *imageUS3_mask( image_type *sim, image_type *mim, image_type *im );
 
-static image_type *image4_mask( image_type *sim, image_type *mim, image_type *im );
+static image_type *image4_mask( image_type *sim, image_type *mim, int color, image_type *im );
 
 //static image_type *image1_mask( image_type *sim, image_type *mim, image_type *im );
 
-static image_type *image3_mask( image_type *sim, image_type *mim, image_type *im );
+static image_type *image3_mask( image_type *sim, image_type *mim, int color, image_type *im );
 
 
 
 
 image_type *
-image_mask( image_type *sim, image_type *mim, image_type *im )
+image_mask( image_type *sim, image_type *mim, int color, image_type *im )
 {
 	if( IMAGE_TYPE(sim) == IMAGE_TYPE_U16 ){
 		im = imageUS3_mask( sim, mim, im  );
@@ -25,18 +25,18 @@ image_mask( image_type *sim, image_type *mim, image_type *im )
 
 
 	if( sim->depth == 1 ){
-		im = image1_mask( sim, mim, im );
+		im = image1_mask( sim, mim, color, im );
 		return( im );
 	}
 
 	if( sim->depth == 3 ){
-		im = image3_mask( sim, mim, im );
+		im = image3_mask( sim, mim, color, im );
 		return( im );
 	}
 
 
 	if( sim->depth == 4 ){
-		im = image4_mask( sim, mim, im );
+		im = image4_mask( sim, mim, color, im );
 		return( im );
 	}
 
@@ -49,7 +49,7 @@ image_mask( image_type *sim, image_type *mim, image_type *im )
 
 
 static image_type *
-image4_mask( image_type *sim, image_type *mim, image_type *im )
+image4_mask( image_type *sim, image_type *mim, int color, image_type *im )
 {
 u_int	*sp,	*tp;
 u_char	*mp;
@@ -66,7 +66,7 @@ int	i,	j;
 	for( i = 0 ; i < sim->row ; i++ ){
 		for( j = 0 ; j < sim->column ; j++, sp++, mp++, tp++ ){
 
-			*tp = ( *mp == 0  )? 0 : *sp;
+			*tp = ( *mp == 0  )? color : *sp;
 		}
 	}
 
@@ -76,7 +76,7 @@ int	i,	j;
 
 
 image_type *
-image1_mask( image_type *sim, image_type *mim, image_type *im )
+image1_mask( image_type *sim, image_type *mim, int color, image_type *im )
 {
 u_char	*sp,	*mp,	*tp;
 int	i,	j;
@@ -87,10 +87,12 @@ int	i,	j;
 	mp = mim->data;
 	tp = im->data;
 
+	color = color & 0xFF;
+
 	for( i = 0 ; i < sim->row ; i++ ){
 		for( j = 0 ; j < sim->column ; j++, sp++, mp++, tp++ ){
 
-			*tp = ( *mp == 0  )? 0 : *sp;
+			*tp = ( *mp == 0  )? color : *sp;
 		}
 	}
 
@@ -100,7 +102,7 @@ int	i,	j;
 
 
 image_type *
-image3_mask( image_type *sim, image_type *mim, image_type *im )
+image3_mask( image_type *sim, image_type *mim, int color, image_type *im )
 {
 	u_char	*sp,	*mp,	*tp;
 	int	i,	j;
@@ -111,12 +113,16 @@ image3_mask( image_type *sim, image_type *mim, image_type *im )
 	mp = mim->data;
 	tp = im->data;
 
+	int R = COLOR_RED( color );
+	int G = COLOR_GREEN( color );
+	int B = COLOR_BLUE( color );
+
 	for( i = 0 ; i < sim->height ; i++ ){
 		for( j = 0 ; j < sim->width ; j++, mp++ ){
 			if( *mp == 0 ){
-				*tp++ = 0;
-				*tp++ = 0;
-				*tp++ = 0;
+				*tp++ = R;
+				*tp++ = G;
+				*tp++ = B;
 				sp += 3;
 				continue;
 			}

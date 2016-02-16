@@ -184,7 +184,7 @@ int	iMin,	i;
 	return( -1 );
 }
 
-
+#ifdef _AA_
 pln_type *
 pt2dA_to_plN( pt2dA_type *apt, int a[], int nA )
 {
@@ -230,7 +230,7 @@ pt2d_type *pt0,	*pt1;
 
 	return( pl );
 }
-
+#endif
 
 static void	ln_smooth_a( ln_type *link, ln_type *pl, ln_type *nl );
 

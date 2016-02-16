@@ -71,6 +71,29 @@ int	i;
 }
 
 
+void
+intA_set( intA_type *a, int val )
+{
+	int	i;
+
+	for( i = 0 ; i < a->nA ; i++ )
+		a->a[i] = val;
+
+}
+
+
+int
+intA_sum( intA_type *a )
+{
+	int	i,	sum;
+
+	for( i = 0, sum = 0 ; i < a->nA ; i++ )
+		sum += a->a[i];
+
+	return( sum );
+}
+
+
 void 
 intA_add( intA_type *as, int val )
 {
@@ -109,6 +132,40 @@ int	i;
 
 
 int
+	intA_write_index( intA_type *ai, char *file )
+{
+	FILE *fp;
+	int	i;
+
+	if( ( fp = fopen( file, "wb")) == NULL )
+		return( -1 );
+		
+	fprintf( fp, " %d \n", ai->nA );
+
+	for( i = 0 ; i < ai->nA ; i++ )
+		fprintf( fp, "%3d  %d\n", i, ai->a[i] );
+
+
+	fprintf( fp, "\n" );
+
+	fclose( fp );
+	return( 1 );
+}
+
+
+void
+intA_dump( intA_type *ai, char *prefix, int index, char *suffix )
+{
+	char	file[256];
+
+	if( gpDump_filename( prefix, index, suffix, ".txt", file ) < 0 )
+		return;
+
+	intA_write_index( ai, file );
+}
+
+
+int
 intA_write( intA_type *ai, char *file )
 {
 FILE *fp;
@@ -128,7 +185,7 @@ intA_write( intA_type *ai, FILE *fp )
 {
 	int	i;
 
-	fprintf( fp, " %d", ai->nA );
+	fprintf( fp, " %d :", ai->nA );
 
 	for( i = 0 ; i < ai->nA ; i++ )
 		fprintf( fp, " %d", ai->a[i] );

@@ -61,6 +61,10 @@ pt2dF_add( pt2dF_type *vpl, pt2dA_type *apl, int iFrame )
 {
 int	i;
 
+	if( iFrame < 0 )
+		iFrame = vpl->nA;
+
+
 	if( iFrame >= vpl->NA ){
 		
 		int NA = vpl->NA + iFrame+32;

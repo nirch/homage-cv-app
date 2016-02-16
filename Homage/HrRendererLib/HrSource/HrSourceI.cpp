@@ -29,6 +29,14 @@ CHrSourceI::CHrSourceI()
 	m_alphaIm = NULL;
 
 	m_nE = 0;
+    
+    this->SetSourceDuration(2.0);
+    this->first_iFrame = 0;
+    this->startTimeOffset = 0;
+    this->freezeTime = -1;
+    this->endTime = -1;
+    this->lastUsedTimeStamp = -1;
+    this->shouldUseTiming = false;
 }
 
 CHrSourceI::~CHrSourceI()
@@ -93,6 +101,70 @@ void
 	e->SetFrameSize( width, height );
 }
 
+void CHrSourceI::SetShouldUseTiming(bool shouldUseTiming)
+{
+    this->shouldUseTiming = shouldUseTiming;
+}
+
+void CHrSourceI::SetSourceDuration(double duration)
+{
+    this->duration = duration;
+}
+
+double CHrSourceI::GetDuration()
+{
+    return this->duration;
+}
+
+void CHrSourceI::SetTimingOffset(long long startTimeOffset)
+{
+    this->startTimeOffset = startTimeOffset;
+}
+
+void CHrSourceI::SetTimingEnd(long long endTime)
+{
+    this->endTime = endTime;
+}
+
+void CHrSourceI::SetFreezeTime(long long freezeTime)
+{
+    this->freezeTime = freezeTime;
+}
+
+int CHrSourceI::PickFrameAtTS(long long timeStamp, int maxFramesCount)
+{
+    // Get the calculated time stamp, taking into account timing effects.
+    long long calculatedTimeStamp = this->CalculatedTS(timeStamp);
+    if (calculatedTimeStamp == -1) return -1;
+    
+    // Calculate the frame needed to be used (and keep it in available bounds).
+    long double timeInSeconds = timeStamp/1000000000.0;
+    int pickedFrame = (int)((timeInSeconds / (long double)this->duration) * maxFramesCount);
+    pickedFrame = pickedFrame % maxFramesCount;
+    
+    // Return the picked frame.
+    return pickedFrame;
+}
+
+long long CHrSourceI::CalculatedTS(long long timeStamp)
+{
+    long long ts = -1;
+    
+    if (startTimeOffset >=0 && timeStamp < startTimeOffset) {
+        // If timeStamp is smaller than startTime, an empty frame should be used.
+        ts = -1;
+    } else if (endTime >= 0 && timeStamp > endTime) {
+        // If timeStamp is bigger then endTime, an empty frame should be used.
+        ts = -1;
+    } else if (freezeTime >=0 && timeStamp >= freezeTime) {
+        // If timeStamp is bigger then freezeTime, continue returning the last picked frame.
+        ts = lastUsedTimeStamp;
+    } else {
+        ts = timeStamp - startTimeOffset;
+    }
+    this->lastUsedTimeStamp = ts;
+    return ts;
+}
 
 int CHrSourceI::ProcessEffect( image_type *sim, int iFrame, image_type **im )
 {

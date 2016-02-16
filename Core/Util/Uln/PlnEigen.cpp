@@ -4,11 +4,14 @@
 #include <stdio.h>
 #include <math.h>
 
+#define _GPLOG
+
 #ifdef _DEBUG
 #define _DUMP
 #endif
 
 #include "Uigp/igp.h"
+#include "Ulog/Log.h"
 #include "Umath/Matrix2Type.h"
 #include "Umath/EigenType.h"
 
@@ -225,5 +228,61 @@ pln_apt( pln_type *pl, float dt )
 
 	return( apt );
 
+
+}
+
+
+
+
+void
+	plnA_eigen_axis( plnA_type *apl )
+{
+
+	eigen2d_type e;
+	plnA_eigen( apl, &e );
+
+
+
+
+	{  //dump
+		pt2dA_type *apt = pt2dA_alloc( 4 );
+		apt->axis = PT2D_AXIS_YX;
+		apt->type = PT2D_4V;
+
+		pt2d_type *pt = &apt->a[apt->nA++];
+		pt->p = e.p;
+		pt->n = e.v1;
+
+		PT2DA_DUMP( apt, "F", 1, NULL );
+		pt2dA_destroy( apt );
+	}
+
+
+
+	apl->p.x = e.p.x;
+	apl->p.y = e.p.y;
+
+	apl->angle = atan2( e.v1.y, e.v1.x );
+	apl->angle = apl->angle;
+
+	apl->scale = 1.0;
+
+	box2f_type	b;
+	plnA_boxV( apl, &apl->p, &e.v1, &b );
+
+	float x = 0.5*(b.x1 - b.x0);
+	float y = 0.5*(b.y1 - b.y0);
+
+	float dx = 0.5*(b.x1 + b.x0);
+	float dy = 0.5*(b.y1 + b.y0);
+
+
+	apl->p.x += dx*e.v1.x - dy * e.v1.y;
+	apl->p.y += dx*e.v1.y + dy * e.v1.x;
+	//plnA_boxV( apl, &apl->p, &e.v1, &b );
+
+
+
+//	GPLOG( ( "%.2f  %.2f\n", 2*x, 2*y ) );
 
 }

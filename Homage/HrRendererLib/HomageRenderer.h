@@ -30,13 +30,12 @@ public:
 
 	int IsProcess()	{ return m_process; }
 
+    void setDuration(double duration, int fps);
 
 	int	Process( CHrSourceI *b, CHrSourceI *u, CHrSourceI *f, CHrOutputI *out[], int nOut );
 
 	int AddSource( CHrSourceI *s );
 	int AddOutput( CHrOutputI *out );
-
-
 
 	int SetBackground( image_type *bim );
 
@@ -57,6 +56,8 @@ public:
 
 
 	int	Process();
+    
+    void Cancel();
 
 
 	image_type * GetImage()	{ return m_im; }
@@ -69,10 +70,11 @@ public:
 
 	void	Trace( FILE *fp )	{}
 
+    int fps;
+    double duration;
+    long long maxTimeStamp;
+    long long timeDeltaPerFrame;
 
-
-
-//private:
 public:
 	int	m_iFrame;
 
@@ -88,6 +90,7 @@ public:
 
 
 	int m_process;
+    bool wasCanceled;
 };
 
 

@@ -48,6 +48,8 @@ lnL_last( ln_type *link )
 {
 ln_type	*l,	*pl;
 
+	pl = NULL;
+
 	for( l = link; l != NULL ; l = LN_NEXT(l) ){
 		pl = l;
 	}
@@ -157,6 +159,80 @@ lnL_copy_sub( vec2d *pctr, ln_type *plink, float gt0, float gt1, vec2d *ctr, ln_
 	lnL_gt2lt( plink, gt0, &l0, &t0 );
 	lnL_gt2lt( plink, gt1, &l1, &t1 );
 
+	//if( l0->len - t0 < 0.5 ){
+	//	l0 = LN_NEXT( l0 );
+	//	t0 = 0;
+	//}
+
+	//if( t1 < 0.5 ){
+	//	l1 = LN_PREV( l1 );
+	//	t1 = l1->len;
+	//}
+
+
+	for( l = plink, *ctr = *pctr ; l != l0 ; l = LN_NEXT(l) ){
+		ctr->x += l->v.x;
+		ctr->y += l->v.y;
+	}
+
+	*link = lnL_copy( l0, LN_NEXT(l1) );
+
+
+
+	if( t1 < l1->len - 0.25 ){
+		for( l = *link ; LN_NEXT(l) != NULL ; l = LN_NEXT(l) );
+
+		l2 = ln_split( l, t1, 0.25 );
+
+		if( l2 == l )
+			l = LN_PREV(l);
+
+		free( l2 );
+
+		if( l == NULL ){
+			*link = NULL;
+			return( 1 );
+		}
+		l->p[1] = NULL;
+
+	}
+
+
+	if( t0 > 0.25 ){
+		l = ln_split( *link, t0, 0.25 );
+		if( l != *link && l != NULL ){
+			ctr->x += (*link)->v.x;
+			ctr->y += (*link)->v.y;
+			free( *link );
+			*link = l;
+			l->p[0] = NULL;
+		}
+	}
+
+	return( 1 );
+}
+
+
+int
+	lnL_copy_subD( vec2d *pctr, ln_type *plink, float gt0, float gt1, float D, vec2d *ctr, ln_type **link  )
+{
+	ln_type	*l0, *l1;
+	float		t0, t1;
+	ln_type	*l,	*l2;
+
+
+	lnL_gt2lt( plink, gt0, &l0, &t0 );
+	lnL_gt2lt( plink, gt1, &l1, &t1 );
+
+	if( l0->len - t0 < D ){
+		l0 = LN_NEXT( l0 );
+		t0 = 0;
+	}
+
+	if( t1 < D ){
+		l1 = LN_PREV( l1 );
+		t1 = l1->len;
+	}
 
 
 	for( l = plink, *ctr = *pctr ; l != l0 ; l = LN_NEXT(l) ){

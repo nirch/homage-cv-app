@@ -51,6 +51,10 @@ int	i;
 	return( tf );
 }
 
+
+
+
+
 void
 tf_destroy( tf_type *tf )
 {
@@ -73,6 +77,10 @@ void
 	tf_set( tf_type *t, float val )
 {
 	int	i;
+
+	t->id = 0;
+	t->name[0] = 0;
+	t->iFrame = 0;
 
 	for( i = 0; i < t->nA ; i++ )
 		t->a[i] = val;
@@ -269,231 +277,6 @@ tfA_type *
 
 
 
-int
-tfA_write( tfA_type *aS, int prefix, char *file )
-{
-FILE	*fp;
-int	i;
-
-	gp_filename_force_extension( file, ".tf" );
-
-	if(  (fp = fopen( file, "wb" )) == NULL )
-		return( -1 );
-
-	if( prefix == 1 )
-		fprintf( fp, "TF  %d  %d\n", TF_VERSION, aS->nA );
-
-
-	for( i = 0 ; i < aS->nA ; i++ ){
-		if(  aS->a[i] == NULL )	continue;
-
-		tf_write( aS->a[i], prefix, fp );
-	}
-
-
-	fclose( fp );
-
-	return ( 1 );
-}
-
-
-int
-tf_write( tf_type *s, int prefix, FILE *fp )
-{
-int	i;
-
-	if( prefix  == 1 )
-		fprintf( fp, "%s\t%d\t%d", s->name, s->iFrame, s->nA );
-
-
-	for( i = 0 ; i < s->nA ; i++ )
-		fprintf( fp, "\t%f", s->a[i] );
-
-	fprintf( fp, "\n" );
-
-	return ( 1 );
-}
-
-
-
-
-tfA_type *
-tfA_read( char *file )
-{
-tfA_type *atf;
-tf_type *tf;
-FILE	*fp;
-int	nA;
-
-
-	if(  (fp = fopen( file, "rb" ) ) == NULL )
-		return( NULL );
-
-
-	fscanf( fp, "%d", &nA );
-
-	atf = tfA_alloc( nA );
-
-
-	int n = 0;
-	while( (tf = tf_read( fp )) != NULL ){
-		tfA_add( atf, tf->iFrame, tf );
-
-		n++;
-
-	}
-
-
-	fclose( fp );
-
-	return( atf );
-}
-
-
-int
-tfA_read( tfA_type **atf, char *file )
-{
-	tf_type *s;
-	FILE	*fp;
-	int	nS,	version;
-	char	signature[256];
-
-	//	gp_filename_force_extension( file, ".tf" );
-
-	*atf = NULL;
-	if(  (fp = fopen( file, "rb" ) ) == NULL )
-		return( NULL );
-
-
-	fscanf( fp, "%s", signature );
-	if( strcmp( signature, "TF" ) != 0 ){
-		version = 0;
-		nS = atoi( signature );
-	}
-	else
-		fscanf( fp, "%d %d", &version, &nS );
-
-
-	*atf = tfA_alloc( nS );
-
-
-
-	while( (s = tf_read( fp )) != NULL ){
-		tfA_add( *atf, s->iFrame, s );
-
-	}
-
-	fclose( fp );
-
-	return( 1 );
-}
-
-
-
-
-static tf_type *
-tf_read( FILE *fp )
-{
-tf_type *s;
-int	i;
-int	iFrame,	nP;
-char	name[256];
-
-
-	if( fscanf( fp, "%s  %d   %d", name, &iFrame, &nP ) == EOF )
-		return( NULL );
-
-	s = tf_alloc( nP );
-	s->iFrame = iFrame;
-	strcpy( s->name, name );
-	s->nA = nP;
-
-
-	for( i = 0 ; i < s->nA ; i++ )
-		fscanf( fp, "%f", &s->a[i] );
-
-	return ( s );
-}
-
-
-static tf_type *	tf_read_trtok( );
-
-
-
-int
-	tfA_read_from_data( tfA_type **atf, char *data )
-{
-	tf_type *s;
-
-	int	nS,	version;
-	char	signature[256];
-
-
-	if( gp_strtok_string( data, " \t\r\n", signature ) < 0 )
-		return( -1 );
-
-	if( strcmp( signature, "TF" ) != 0 ){
-		version = 0;
-		nS = atoi( signature );
-	}
-	else {
-		if( gp_strtok_int( NULL, " \t\r\n", &version ) < 0 )
-			return(-1 );
-		if( gp_strtok_int( NULL, " \t\r\n", &nS ) < 0 )
-			return( -1 );
-	}
-	
-
-
-	*atf = tfA_alloc( 100 );//nS );
-
-
-
-	while( (s = tf_read_trtok()) != NULL ){
-		tfA_add( *atf, s->iFrame, s );
-
-	}
-
-	
-
-	return( 1 );
-}
-
-
-static tf_type *
-tf_read_trtok( )
-{
-	tf_type *s;
-	int	i;
-	int	iFrame,	nP;
-	char	name[256];
-
-
-	if( gp_strtok_string( NULL, " \t\r\n", name ) < 0 )
-		return( NULL );
-
-
-	if( gp_strtok_int( NULL, " \t\r\n", &iFrame ) < 0 )
-		return( NULL );
-	if( gp_strtok_int( NULL, " \t\r\n", &nP ) < 0 )
-		return( NULL );
-
-
-	s = tf_alloc( nP );
-	s->iFrame = iFrame;
-	strcpy( s->name, name );
-	s->nA = nP;
-
-
-	for( i = 0 ; i < s->nA ; i++ )
-		gp_strtok_float( NULL, " \t\r\n", &s->a[i] );
-	
-
-	return ( s );
-}
-
-
-
 
 void
 tfA_set( tfA_type *tfA, int iFrame, float a[], int nA )
@@ -552,6 +335,26 @@ int	i;
 	if( atf->nA <= t->iFrame )
 		atf->nA = t->iFrame+1;
 }
+
+
+void
+tfA_append( tfA_type *atf, tfA_type *tatf  )
+{
+	int	i;
+
+
+	for( i = 0 ; i < atf->nA ; i++ ){
+		tf_type *tf = tfA_get( atf, i );
+		if( tf == NULL )	continue;
+		tfA_add( tatf, tf->iFrame, tf );
+	}
+
+	atf->nA = 0;
+
+	tfA_destroy( atf );
+}
+
+
 
 int
 tfA_get( tfA_type *tfA, int iFrame, float a[], int *nA )
@@ -655,6 +458,82 @@ tfA_average( tfA_type *tfA )
 		atf->a[k] /= n;
 
 	return( atf );
+}
+
+
+int
+	tfA_var( tfA_type *at, int id, tf_type **av, tf_type **var )
+{
+	int	i,	k;
+	tf_type *tf;
+
+	for( i = 0  ; i < at->nA ; i++ ){
+		tf = at->a[i];
+		if( tf == NULL )	continue;
+		if( id >= 0 && tf->id != id )	continue;
+
+		break;
+	}
+
+	if( i >= at->nA )	return( -1 );
+
+	
+
+
+	*av = tf_alloc( tf->nA );
+	tf_set( *av, 0 );
+	(*av)->iFrame = id;
+	(*av)->id = id;
+	strcpy( (*av)->name, tf->name );
+
+
+	*var = tf_alloc( tf->nA );
+	tf_set( *var, 0 );
+	(*var)->iFrame = id;
+	(*var)->id = id;
+	strcpy( (*var)->name, tf->name );
+
+
+	tf_type *na = tf_alloc( tf->nA );
+	tf_set( na, 0 );
+
+	int	n;
+	for( i = 0, n = 0  ; i < at->nA ; i++ ){
+		tf_type *tf = at->a[i];
+		if( id >= 0 && tf->id != id )	continue;
+
+		for( k = 0 ; k < tf->nA ; k++ ){
+			if( tf->a[k] == -1000 )
+				continue;
+
+			(*av)->a[k] += tf->a[k];
+			(*var)->a[k] += tf->a[k]*tf->a[k];
+
+			float a = na->a[k];
+			na->a[k] += 1;
+		}
+
+		n++;
+	}
+
+	if( n == 0 )
+		return( -1 );
+
+	for( k = 0 ; k < na->nA ; k++ ){
+
+		(*av)->a[k] /= na->a[k];
+		(*var)->a[k] = (*var)->a[k] / na->a[k] - (*av)->a[k]*(*av)->a[k];
+
+		(*var)->a[k] = ((*var)->a[k] < 0 )? 0 : sqrt( (*var)->a[k] );
+	}
+
+	if( id < 0 ){
+		strcpy( (*var)->name, "all" );
+		strcpy( (*av)->name, "all" );
+
+	}
+
+	return( n );
 }
 
 
@@ -775,4 +654,84 @@ int	tfA_findByName( tfA_type *aw, char *name )
 	}
 
 	return( -1 );
+}
+
+
+
+int
+	tfA_absdif( tfA_type *atf, tfA_type *atf1 )
+{
+	int	i;
+
+	float aMax = 0;
+	for( i = 0 ; i < atf->nA ; i++ ){
+		tf_type *tf = tfA_get( atf, i );
+		if( tf == NULL )	continue;
+
+
+		tf_type *tf1 = tfA_get( atf1, i );
+		if( tf1 == NULL )	continue;
+
+		float a = tf_absdiff( tf, tf1 );
+
+		if( a > aMax )	aMax = a;
+	}
+
+	return( aMax );
+}
+
+
+float
+	tf_absdiff( tf_type *stf, tf_type *tf )
+{
+	int	i;
+
+	float	aMax = 0;
+
+	for( i = 0 ; i < stf->nA ; i++ ){
+		float a = tf->a[i] - stf->a[i];
+		if( a < 0 )	a = -a;
+
+		if( a > aMax )
+			aMax = a;
+
+	}
+
+	return( aMax );
+}
+
+
+
+tfB_type *
+tfB_alloc( int no )
+{
+	tfB_type *btf;
+	int	i;
+
+	btf = (tfB_type*)malloc( sizeof(tfB_type) );
+
+	btf->NA = no;
+	btf->a = (tfA_type **)malloc( btf->NA * sizeof(tfA_type *) );
+
+	for( i = 0 ; i < btf->NA ; i++ )
+		btf->a[i] = NULL;
+
+	btf->nA = 0;
+	return( btf );
+}
+
+
+void 
+tfB_destroy( tfB_type *btf )
+{	
+	int	i;
+
+	for( i = 0 ; i < btf->nA ; i++ ){
+		if( btf->a[i] != NULL ){
+			tfA_destroy( btf->a[i] );
+		}
+	}
+
+	free( btf->a );
+	free( btf );
 }

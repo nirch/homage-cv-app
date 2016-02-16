@@ -5,6 +5,10 @@
 #include <math.h>
 #include "Uigp/igp.h"
 
+#ifdef _DEBUG
+#define _DUMP
+#endif
+
 #ifdef _WIN32
 #define _GPMEMORY_LEAK 
 #endif
