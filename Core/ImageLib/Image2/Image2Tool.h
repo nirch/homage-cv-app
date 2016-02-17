@@ -27,6 +27,7 @@ image_type *	image2_from_imageF( image_type *sim );
 
 image_type *	imageUSC_from_imageF( image_type *sim, float a, float b, image_type *im );
 
+image_type *	imageUS_binaryM( image_type *sim, int T, image_type *im );
 
 
 void	image2_const( image_type *im, int r );

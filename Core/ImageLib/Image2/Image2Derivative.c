@@ -21,7 +21,7 @@ int	i,	j;
 		tp = (short*)IMAGE_PIXEL( im, i, 0 );
 
 		*tp++ = *(sp+1) - *sp;
-		*sp++;
+		sp++;
 		for( j = 1 ; j < im->column-1 ; j++, sp++ )
 			*tp++ = (*(sp+1) - *(sp-1) )>>1;
 
@@ -47,7 +47,7 @@ int	i,	j;
 
 	sp0 = (short*)IMAGE_PIXEL( sim, 0, 0 );
 	sp1 = (short*)IMAGE_PIXEL( sim, 1, 0 );
-	for( j = 0 ; j < im->column ; j++, sp0++, *sp1++ )
+	for( j = 0 ; j < im->column ; j++, sp0++, sp1++ )
 		*tp++ = *sp1 - *sp0;
 
 
@@ -61,7 +61,7 @@ int	i,	j;
 
 
 	sp1 = sp0 + im->column;
-	for( j = 0 ; j < im->column ; j++, sp0++, *sp1++ )
+	for( j = 0 ; j < im->column ; j++, sp0++, sp1++ )
 		*tp++ = *sp1 - *sp0;
 
 

@@ -7,13 +7,19 @@
 
 
 void
-imageUS_dynamic_range( image_type *im, float h0, float h1, int *a0, int *a1 )
+imageUS_dynamic_range( image_type *im, box2i_type *box, float h0, float h1, int *a0, int *a1 )
 {
 	u_short	*tp;
 	int	i,	j,	tmp;
 
 	int	*h,	nH;
 	int	channel;
+
+	int	i0,	i1,	j0,	j1;
+
+
+	imageA_box( im , box, &j0, &i0, &j1, &i1 );
+
 
 	nH = 1<<16;
 	h = (int *)malloc( nH*sizeof(int) );
@@ -23,9 +29,11 @@ imageUS_dynamic_range( image_type *im, float h0, float h1, int *a0, int *a1 )
 
 	for( i = 0 ; i < nH ; i++ )	h[i] = 0;
 
-	tp = (u_short *)im->data_s;
-	for( i = 0 ; i < im->row ; i++ ){
-		for( j = 0 ; j < channel * im->column ; j++ ){
+	j1 = j0 + im->channel*(j1-j0);
+
+	for( i = i0 ; i < i1 ; i++ ){
+		tp = (u_short*)IMAGE_PIXEL( im, i, j0 );
+		for( j = j0 ; j < j1 ; j++ ){
 			tmp = *tp++;
 			h[tmp]++;
 

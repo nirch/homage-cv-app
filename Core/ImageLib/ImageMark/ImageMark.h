@@ -73,7 +73,7 @@ void	image4_draw_rectangle( image_type *im, int x, int y,
 void	image_draw_rectangle( image_type *im, int x0, int y0, int dx, int dy, int color );
 
 
-void	image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int color );
+void	image_draw_line( image_type *im, float x0, float y0, float x1, float y1, float width, int color );
 
 void	image4_draw_line( image_type *im, float x0, float y0, float x1, float y1, int color );
 

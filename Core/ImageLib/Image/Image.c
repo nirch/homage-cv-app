@@ -2,6 +2,8 @@
 #include	<string.h>
 #include	"ImageType/ImageType.h"
 
+#define _GPLOG
+#include "Ulog/Log.h"
 
 #ifdef _WIN32
 #define _GPMEMORY_LEAK 
@@ -52,7 +54,8 @@ image_type	*im;
 
 
 	im->data = (u_char *)malloc( im->height* im->column_byte + 16 );
-
+	if( im->data == NULL )
+		GPLOGF(("image->data=NULL"));
 
 
 	im->palette = NULL;
@@ -101,7 +104,8 @@ image_realloc( image_type *im, int width, int height, int channel, int type, int
 	free( im->data );
 //	im->data = (u_char *)malloc( im->height* im->width+16 + im->column_byte);
 	im->data = (u_char *)malloc( im->height* im->column_byte + 16);
-
+	if( im->data == NULL )
+		GPLOGF(("image->data=NULL"));
 
 
 	if( im->palette != NULL ){

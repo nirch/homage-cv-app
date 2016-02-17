@@ -25,6 +25,7 @@ LOCAL_SRC_FILES := 	\
 	./Image/imageAndroid.cpp \
 	./Image/ImageAppend.c \
 	./Image/ImageBand.c \
+	./Image/ImageConst.cpp \
 	./Image/ImageCreate.c \
 	./Image/ImageCrop.c \
 	./Image/ImageDewarpLt2.c \
@@ -36,7 +37,7 @@ LOCAL_SRC_FILES := 	\
 	./Image/ImageLeak.c \
 	./Image/ImageLevel.c \
 	./Image/ImageLinearCombination.c \
-	./Image/ImageMask.c \
+	./Image/ImageMask.cpp \
 	./Image/ImagePixel.c \
 	./Image/ImageToR.c \
 	./Image/ImageToY.c \
@@ -168,13 +169,13 @@ LOCAL_SRC_FILES := 	\
 	./Image/ImageExtend.c \
 	./Image/ImageFields.c \
 	./Image/ImageFile.c \
-	./Image/ImageHistogram.c \
+	./Image/ImageHistogram.cpp \
 	./Image/ImageHsiTune.c \
 	./Image/ImageLogo.c \
 	./Image/ImageNegative.c \
 	./Image/ImagePreview.c \
 	./Image/ImagePyramid.c \
-	./Image/ImageRgbYCrCb.c \
+	./Image/ImageRgbYCrCb.cpp \
 	./Image/ImageRgbYiq.c \
 	./Image/ImageSline.c \
 	./Image/ImageSmartPalette.c \

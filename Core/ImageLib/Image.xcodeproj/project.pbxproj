@@ -18,7 +18,6 @@
 		10350781D16B4CB9AAEE11D4 /* ImageSline.c in Sources */ = {isa = PBXBuildFile; fileRef = C601BECA78864BCAA196291F /* ImageSline.c */; settings = {COMPILER_FLAGS = ""; }; };
 		11C8CC5D181E406E9F3AC0B7 /* Image1Majority.c in Sources */ = {isa = PBXBuildFile; fileRef = E8FC4142B8B049919028EE4D /* Image1Majority.c */; settings = {COMPILER_FLAGS = ""; }; };
 		11DDB12C23FF41459593F1D7 /* ImageNegative.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B411DBC7249778D06ED8C /* ImageNegative.c */; settings = {COMPILER_FLAGS = ""; }; };
-		1253470E511C4066BB36B608 /* ImageHistogram.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BA8922046D4567BB5F5068 /* ImageHistogram.c */; settings = {COMPILER_FLAGS = ""; }; };
 		127054B409DA4483870F523A /* Image6From.c in Sources */ = {isa = PBXBuildFile; fileRef = E6FA25B9C9A04DC7B641DB40 /* Image6From.c */; settings = {COMPILER_FLAGS = ""; }; };
 		128FCCC61AA24BFAA6A72542 /* Image3DynamicRange.c in Sources */ = {isa = PBXBuildFile; fileRef = FCC65B8366BD4A54BF3B7EC2 /* Image3DynamicRange.c */; settings = {COMPILER_FLAGS = ""; }; };
 		15E28C2BD7C7419A8337670B /* Image1Interpolate.c in Sources */ = {isa = PBXBuildFile; fileRef = 02A591904845456AAB3BBA16 /* Image1Interpolate.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -70,6 +69,9 @@
 		547771991C4FCEEB0042A524 /* ImageMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 547771981C4FCEEB0042A524 /* ImageMask.cpp */; };
 		5477719B1C4FCFF50042A524 /* ImageSepia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5477719A1C4FCFF50042A524 /* ImageSepia.cpp */; };
 		547D7D0A5A32469A8C5A5A79 /* ImageCut.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BD58FDA4D9448FAACA85673 /* ImageCut.c */; settings = {COMPILER_FLAGS = ""; }; };
+		549987B81C748168001DB549 /* ImageHistogram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987B61C748167001DB549 /* ImageHistogram.cpp */; };
+		549987B91C748168001DB549 /* ImageRgbYCrCb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987B71C748168001DB549 /* ImageRgbYCrCb.cpp */; };
+		549987BB1C748D04001DB549 /* ImageConst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987BA1C748D04001DB549 /* ImageConst.cpp */; };
 		54C68E3B1B209DAC008BDDD9 /* ImageBgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E3A1B209DAC008BDDD9 /* ImageBgr.cpp */; };
 		54D8D8AE1B8DE63F0023BB19 /* ImageYUVSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D8D8AD1B8DE63F0023BB19 /* ImageYUVSampling.cpp */; };
 		54D8D8B01B8DE6530023BB19 /* ImageReadYuv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D8D8AF1B8DE6530023BB19 /* ImageReadYuv.cpp */; };
@@ -180,7 +182,6 @@
 		D0E2732218BDBFD200E239FD /* Image1MaskPln.c in Sources */ = {isa = PBXBuildFile; fileRef = D0E2731F18BDBFD200E239FD /* Image1MaskPln.c */; };
 		D4CB94AC53484B8BA7CD9AC4 /* ImageApp2.c in Sources */ = {isa = PBXBuildFile; fileRef = ADF1EC39315C4413A57D6C1B /* ImageApp2.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D558D83E603E47F8A1B35784 /* Image1Pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 429D6BB480624AFE941A61D0 /* Image1Pixel.c */; settings = {COMPILER_FLAGS = ""; }; };
-		D5821947C7BD46E59E3823D7 /* ImageRgbYCrCb.c in Sources */ = {isa = PBXBuildFile; fileRef = A6BE08075CD344BCA869C1EC /* ImageRgbYCrCb.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D60ADAF6F5F34F939059E296 /* Image1Tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 69C6F8DD5A364D2B8C1554FF /* Image1Tool.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D644EAE674084A999B8D505C /* Image1Convolution.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ED78D30F74B4873BF8057CB /* Image1Convolution.c */; settings = {COMPILER_FLAGS = ""; }; };
 		D7FAEB37292742C2B48BB75E /* ImageBand.c in Sources */ = {isa = PBXBuildFile; fileRef = 110AE87AB45041D1BF141400 /* ImageBand.c */; settings = {COMPILER_FLAGS = ""; }; };
@@ -283,6 +284,9 @@
 		547771981C4FCEEB0042A524 /* ImageMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageMask.cpp; path = Image/ImageMask.cpp; sourceTree = "<group>"; };
 		5477719A1C4FCFF50042A524 /* ImageSepia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageSepia.cpp; path = Image/ImageSepia.cpp; sourceTree = "<group>"; };
 		549103A053E44FB4BBC2121A /* ImageAux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageAux.c; path = Image/ImageAux.c; sourceTree = SOURCE_ROOT; };
+		549987B61C748167001DB549 /* ImageHistogram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageHistogram.cpp; path = Image/ImageHistogram.cpp; sourceTree = "<group>"; };
+		549987B71C748168001DB549 /* ImageRgbYCrCb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRgbYCrCb.cpp; path = Image/ImageRgbYCrCb.cpp; sourceTree = "<group>"; };
+		549987BA1C748D04001DB549 /* ImageConst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageConst.cpp; path = Image/ImageConst.cpp; sourceTree = "<group>"; };
 		54C68E3A1B209DAC008BDDD9 /* ImageBgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageBgr.cpp; path = Image/ImageBgr.cpp; sourceTree = "<group>"; };
 		54CA48355D064323BEBD8AA0 /* VegetationIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VegetationIndex.h; path = VegetationIndex/VegetationIndex.h; sourceTree = SOURCE_ROOT; };
 		54D8D8AD1B8DE63F0023BB19 /* ImageYUVSampling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageYUVSampling.cpp; path = YUV/ImageYUVSampling.cpp; sourceTree = "<group>"; };
@@ -328,7 +332,6 @@
 		86DFF058061B4E66935E02F6 /* Image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image.c; path = Image/Image.c; sourceTree = SOURCE_ROOT; };
 		8871EFF977F0410487794706 /* ImageNdrgiF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageNdrgiF.c; path = VegetationIndex/ImageNdrgiF.c; sourceTree = SOURCE_ROOT; };
 		88B0F484FB9340EAAE1248B5 /* ImageApp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageApp.c; path = ImageApp/ImageApp.c; sourceTree = SOURCE_ROOT; };
-		88BA8922046D4567BB5F5068 /* ImageHistogram.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageHistogram.c; path = Image/ImageHistogram.c; sourceTree = SOURCE_ROOT; };
 		8916CF351694460FBFE7D0CC /* lzw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lzw.h; path = Gif/lzw.h; sourceTree = SOURCE_ROOT; };
 		8935E5E5F45840F5935486C0 /* Image1Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image1Tool.h; path = Image1/Image1Tool.h; sourceTree = SOURCE_ROOT; };
 		8A53DC609B5B4D22B8483B7B /* GifDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GifDecoder.cpp; path = Gif/GifDecoder.cpp; sourceTree = SOURCE_ROOT; };
@@ -354,7 +357,6 @@
 		A51362F059ED4A36AD771411 /* ImageAppW.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageAppW.c; path = ImageApp/ImageAppW.c; sourceTree = SOURCE_ROOT; };
 		A54BA54F7AB74A75968CAEEF /* ImageDitherOrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageDitherOrd.c; path = Dithering/ImageDitherOrd.c; sourceTree = SOURCE_ROOT; };
 		A675837F0D2443CCA23D1329 /* ImageDump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageDump.h; path = ImageDump/ImageDump.h; sourceTree = SOURCE_ROOT; };
-		A6BE08075CD344BCA869C1EC /* ImageRgbYCrCb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageRgbYCrCb.c; path = Image/ImageRgbYCrCb.c; sourceTree = SOURCE_ROOT; };
 		A84522EEE0D4430D97461DE7 /* Image24To8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image24To8.c; path = Image24To8/Image24To8.c; sourceTree = SOURCE_ROOT; };
 		A9382984DF194F74A3122EBD /* ImageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageLabel.h; path = ImageLabel/ImageLabel.h; sourceTree = SOURCE_ROOT; };
 		AA77DA6576AB428B994D48AD /* ImageFPyramid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ImageFPyramid.c; path = ImageF/ImageFPyramid.c; sourceTree = SOURCE_ROOT; };
@@ -539,6 +541,8 @@
 		4C04DAF749E04E74B5B4D388 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				549987B61C748167001DB549 /* ImageHistogram.cpp */,
+				549987B71C748168001DB549 /* ImageRgbYCrCb.cpp */,
 				541D24841C6380D90095B44A /* ImageMbt.cpp */,
 				54D8D8B11B8DEA0D0023BB19 /* ImageUSInterpolate.cpp */,
 				54D8D8B21B8DEA0D0023BB19 /* ImageUSInterpolateV.cpp */,
@@ -593,13 +597,11 @@
 				CEA6C3D19B7F46B9AE9AC06E /* ImageExtend.c */,
 				B735C2A2BA31432B9C1B5FFD /* ImageFields.c */,
 				9EE002FCECF94CBCB84D8BB3 /* ImageFile.c */,
-				88BA8922046D4567BB5F5068 /* ImageHistogram.c */,
 				8F9BA02044C145DA8AB589BC /* ImageHsiTune.c */,
 				2C7F24E7D78046AAAEF2F6FC /* ImageLogo.c */,
 				4D0B411DBC7249778D06ED8C /* ImageNegative.c */,
 				7FC31BE267944E2B8CBB64BE /* ImagePreview.c */,
 				06532879AFCE4144AA66705F /* ImagePyramid.c */,
-				A6BE08075CD344BCA869C1EC /* ImageRgbYCrCb.c */,
 				4A8F90F749E74CE8922573F2 /* ImageRgbYiq.c */,
 				C601BECA78864BCAA196291F /* ImageSline.c */,
 				4F64210DFDB842FA80BF72D4 /* ImageSmartPalette.c */,
@@ -686,6 +688,7 @@
 		D00FB7E8184731350043E8F4 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				549987BA1C748D04001DB549 /* ImageConst.cpp */,
 				5477719A1C4FCFF50042A524 /* ImageSepia.cpp */,
 				547771981C4FCEEB0042A524 /* ImageMask.cpp */,
 				D04D18E01A88ACC000104D52 /* ImageTransparent.cpp */,
@@ -946,6 +949,7 @@
 				3349019CDDD1497CB2F1EC37 /* ImageClustringIsodata.c in Sources */,
 				D02583131902F3150012BD2B /* ImageLabelUSContour.cpp in Sources */,
 				9D050048C6514CA9A67D0BEE /* ImageDecoder.cpp in Sources */,
+				549987BB1C748D04001DB549 /* ImageConst.cpp in Sources */,
 				547771991C4FCEEB0042A524 /* ImageMask.cpp in Sources */,
 				A967EEEE0EF240109A335F34 /* ImageEncoder.cpp in Sources */,
 				B01A09E8A6E5491BAE5288C0 /* Histogram.c in Sources */,
@@ -970,6 +974,7 @@
 				EFC3E3268FB94DF59CC678DA /* ImageToR.c in Sources */,
 				76FAD9DB79CE44C68668E135 /* ImageToY.c in Sources */,
 				30E3C37924764FBEB22B7FFB /* Image1Average.c in Sources */,
+				549987B91C748168001DB549 /* ImageRgbYCrCb.cpp in Sources */,
 				634074D3ABA94A1AB16BF463 /* Image1Bluring.c in Sources */,
 				D644EAE674084A999B8D505C /* Image1Convolution.c in Sources */,
 				FCC6EE5E5E4D4E84A7B42424 /* Image1ConvolutionM.c in Sources */,
@@ -1064,6 +1069,7 @@
 				5477719B1C4FCFF50042A524 /* ImageSepia.cpp in Sources */,
 				CC9A74ED1BE042B2BAA58B09 /* ImageReadGifFrame.c in Sources */,
 				00221F858FBC4D8B8369706F /* ImageWriteGif.c in Sources */,
+				549987B81C748168001DB549 /* ImageHistogram.cpp in Sources */,
 				713FE829BB41481EB0D03576 /* LzwEncoding.c in Sources */,
 				F64DC6D4CF8B46D98A9AC842 /* Guasian.c in Sources */,
 				70E73FB227354868AABD5F9F /* Image.c in Sources */,
@@ -1084,14 +1090,12 @@
 				7ABB81CC6D264470A00B8DF3 /* ImageExtend.c in Sources */,
 				3582D4758E714575B0457198 /* ImageFields.c in Sources */,
 				2F675F054D764F13A7830463 /* ImageFile.c in Sources */,
-				1253470E511C4066BB36B608 /* ImageHistogram.c in Sources */,
 				F9150219AB9743ACBAC9927B /* ImageHsiTune.c in Sources */,
 				2309A0A1AD4E4580B1672CA3 /* ImageLogo.c in Sources */,
 				D0C9C0CA1A67B4CA008F9D1D /* SbTool.cpp in Sources */,
 				11DDB12C23FF41459593F1D7 /* ImageNegative.c in Sources */,
 				B520F010AB9445C290E0E7A3 /* ImagePreview.c in Sources */,
 				531622DF60AA426088928653 /* ImagePyramid.c in Sources */,
-				D5821947C7BD46E59E3823D7 /* ImageRgbYCrCb.c in Sources */,
 				DB51E9A157364CCBBA629C16 /* ImageRgbYiq.c in Sources */,
 				10350781D16B4CB9AAEE11D4 /* ImageSline.c in Sources */,
 				9AB18CDBEF5F49DE848AC20B /* ImageSmartPalette.c in Sources */,

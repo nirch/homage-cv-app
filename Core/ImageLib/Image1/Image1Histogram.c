@@ -44,6 +44,10 @@ u_char	*sp,	*mp;
 int	i,	j;
 
 
+	if( mim == NULL ){
+		image1_histogram( im, NULL, h, 1 );
+		return;
+	}
 
 
 	for( i = 0 ; i < 256 ; i++ )	h[i] = 0;

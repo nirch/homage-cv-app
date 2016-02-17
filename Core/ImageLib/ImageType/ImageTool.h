@@ -532,9 +532,12 @@ int	image_histogram( image_type *sim, box2i_type *box, int h[], int fClear );
 
 int	imageA_histogram( imageA_type *aim, box2i_type *box, int **h, int *nH );
 
+int	imageM_histogram( image_type *sim, image_type *mim, int h[], int fClear );
+
+
 
 	// Histogram.c
-void	histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 );
+int	histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 );
 
 
 	// ImageToY.c
@@ -610,6 +613,7 @@ image_type *	image_fusion( image_type *sim0, image_type *sim1, float t, image_ty
 
 	// ImgaeAverage.cpp
 image_type *image_average8( image_type *sim, image_type *im );
+image_type *	image1_average8( image_type *sim, image_type *im );
 
 
 	// ImageSepiaEfect.cpp

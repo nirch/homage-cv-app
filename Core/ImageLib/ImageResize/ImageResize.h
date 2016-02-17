@@ -95,6 +95,10 @@ image_type *	image3_resize_bilinear( image_type *sim, float scale, image_type *i
 
 image_type *	image_resize_bilinearB( image_type *sim, box2i_type *b, int width, int height, image_type *im );
 
+
+	// ImageResampleBilinear.c
+image_type *		image_resample_bilinear( image_type *sim, int width, int height, image_type *im );
+
 #ifdef __cplusplus
 }
 #endif

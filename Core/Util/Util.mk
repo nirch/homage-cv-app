@@ -20,6 +20,8 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Ucamera/Pt2dApproximatePolylink.c \
 	./Ucamera/Pt2dApproximatePolynom.c \
  	./Ucamera/Pt2dComponnet.c \
+	./Ucamera/Pt2dComponnetN.cpp \
+	./Ucamera/Pt2dBounding.cpp \
 	./Ucamera/Pt2dCurvtur.c \
 	./Ucamera/Pt2dDensity.c \
 	./Ucamera/Pt2dGroup.c \
@@ -51,7 +53,11 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Uln/LnTool1.c \
 	./Uln/LnWrite.c \
 	./Uln/PlnApproximate.cpp \
+	./Uln/PlnDistance.cpp \
 	./Uln/PlnEigen.cpp \
+	./Uln/PlnIn.cpp \
+	./Uln/PlnBoxV.cpp \
+	./Uln/PlnCrop.cpp \
 	./Uln/PlnFit.cpp \
 	./Uln/PlnFitA.cpp \
 	./Uln/PlnFTool.cpp \
@@ -62,6 +68,7 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Uln/PlnSide.cpp \
 	./Uln/PlnSmooth.cpp \
 	./Uln/PlnTool.cpp \
+	./Uln/PlnSample.cpp \
 	./Uln/PlnWrite.cpp \
 	./Uln/PlnBounding.cpp \
 	./Ulog/Log.c \
@@ -97,9 +104,11 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	./Uvl/Vl2fTool.cpp \
 	./Uvl/Vl2fGroup.cpp \
 	./Uvl/Vl2fMatch.cpp \
+	./Uvl/Vl2fBTool.cpp \
 	./Uvl/Vl3dIo.c \
 	./Uvl/Vl3dTool.cpp \
 	./Uvl/TfTool.cpp \
+	./Uvl/TfIo.cpp \
 	./Uvl/TfMean.cpp \
 	./Uvl/IntTool.cpp \
 	./Uvl/FloatTool.cpp \
@@ -110,6 +119,7 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	Ubase64/Base64.cpp \
 	Ubox/Box2iTool.c \
 	Ubox/Box2Tool.c \
+	Ubox/Box1iTool.cpp \
 	Ubst/BstFile.c \
 	Ubst/BstGet.c \
 	Ubst/BstIn.c \
@@ -175,6 +185,7 @@ LOCAL_SRC_FILES := 	./Ubox/Box2Dump.c \
 	Umath/LT2Tool.c \
 	Umath/Matrix3Tool.c \
 	Umath/Matrix4Tool.c \
+	Umath/St/StTool.c \
 	Umedia/MdFormat.cpp \
 	Umedia/MdFormatXml.cpp \
 	Umedia/MediaDataCo.c \

@@ -5,17 +5,17 @@
 #include	"ImageType/ImageType.h"
 #include	"Image1Tool.h"
 
-void
-image1_const( image_type *im, int color )
-{
-u_char	*p;
-int	i,	j;
-
-	p = (u_char *)im->data;
-	for( i = 0 ; i < im->row ; i++ )
-		for( j = 0 ; j < im->column ; j++ )
-			*p++ = color;
-}
+//void
+//image1_const( image_type *im, int color )
+//{
+//u_char	*p;
+//int	i,	j;
+//
+//	p = (u_char *)im->data;
+//	for( i = 0 ; i < im->row ; i++ )
+//		for( j = 0 ; j < im->column ; j++ )
+//			*p++ = color;
+//}
 
 
 
@@ -156,6 +156,32 @@ int	i,	j,	n;
 
 
 	n = height * width;
+	*av = sum / n;
+}
+
+
+void
+	image1M_average( image_type *sim, image_type *mim, float *av )
+{
+	u_char	*sp,	*mp;
+	float	sum;
+	int	i,	j,	n;
+
+
+	sum = 0;
+	n = 0;
+	for( i = 0 ; i < sim->height ; i++ ){
+		sp = IMAGE_PIXEL( sim, i, 0 );
+		mp = IMAGE_PIXEL( mim, i, 0 );
+		for( j = 0 ; j < sim->width ; j++, sp++, mp++ ){
+			if( *mp == 0 )	continue;
+
+			sum += *sp;
+			n++;
+		}
+	}
+
+
 	*av = sum / n;
 }
 

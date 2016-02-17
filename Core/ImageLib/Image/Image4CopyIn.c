@@ -20,13 +20,13 @@ image4_copy_in( image_type *sim, int x0, int y0, image_type *im )
 
 
 	if( sim->depth == 3 ){
-		image4_copy_in_image3( sim, 0, 0, im );
+		image4_copy_in_image3( sim, x0, y0, im );
 		return( 1 );
 	}
 
 
 	if( sim->depth == 4 ){
-		image_copy_in( sim, 0, 0, im );
+		image_copy_in( sim, x0, y0, im );
 		return( 1 );
 	}
 

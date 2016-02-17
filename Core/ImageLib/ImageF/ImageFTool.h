@@ -22,6 +22,9 @@ image_type *	imageF_from_image1( image_type *im, image_type *imc );
 
 image_type *	imageF_to_image1( image_type *sim, image_type *im );
 
+image_type *	imageF_to_U8( image_type *sim, float min, float max, image_type *im );
+
+
 image_type *	imageF_to_image1_S( image_type *sim, image_type *im );
 
 image_type *	imageF_to_image1_axb( image_type *sim, float a, float b, image_type *im );

@@ -59,6 +59,9 @@ jet2App_type *	jet2App_init( int n, int weight );
 
 void	jet2App_destroy( jet2App_type *ja );
 
+void	jet2App_normalize( jet2App_type *ja );
+
+
 
 int	image_jet2App( image_type *im, int	i0,	int	j0, jet2App_type *ja, jet2 *f );
 

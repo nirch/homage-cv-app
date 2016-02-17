@@ -86,6 +86,14 @@ extern "C" {
 
 
 
+#define IMAGE_DESTROY( im ) { \
+								if( im != NULL ){ \
+									image_destroy( im, 1 ); \
+									im = NULL; \
+								} \
+							}
+
+
 #define MAX_RC	100
 
 

@@ -140,7 +140,7 @@ imageF_subtrct( image_type *im1, image_type *im0, image_type *im )
 	float	*sp0,	*sp1;
 	int	i,	j;
 
-	im = image_recreate( im, im0->row, im0->column, 4, 1 );
+	im = image_reallocL( im0, im );
 
 	sp1 = (float *)im1->data;
 	sp0 = (float *)im0->data;

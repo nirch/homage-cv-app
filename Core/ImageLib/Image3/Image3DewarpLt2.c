@@ -318,7 +318,7 @@ int	idst_x,	idst_y;
 	wp = (float *)wim->data;
 	sp = im->data;
 	for( y = 0 ; y < sim->row ; y++ ){
-		for( x = 0 ; x < sim->column ; x++, sp += 3, tp0++, tp1++, tp2++, *wp++ ){
+		for( x = 0 ; x < sim->column ; x++, sp += 3, tp0++, tp1++, tp2++, wp++ ){
 			if( *wp != 0 ){
 				tmp = *tp0 / *wp;
 				sp[0] = PUSH_TO_RANGE( tmp, 0, 255 );

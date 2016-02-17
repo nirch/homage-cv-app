@@ -78,6 +78,32 @@ float	x,	t;
 }
 
 
+void
+jet2App_normalize( jet2App_type *ja )
+{
+	int	i;
+
+	if( ja->type != JAPP_NORMAL ){
+		for( i = 0 ; i < ja->n ; i++ ){
+			ja->a0[i] *= ja->w[i];
+			ja->a1[i] *= ja->w[i];
+			ja->a2[i] *= ja->w[i];
+
+		}
+
+		ja->type = JAPP_NORMAL;
+	}
+
+
+
+	ja->f10 *= ja->dn_inv;
+
+	ja->f20 *= ja->dn_inv*ja->dn_inv;
+	ja->f11 *= ja->dn_inv*ja->dn_inv;
+}
+
+
+
 int	
 image_jet2App( image_type *im, int	i0,	int	j0, jet2App_type *ja, jet2 *f )
 {
@@ -113,6 +139,11 @@ int	ret;
 		return( ret );
 	}
 
+	if( im->depth == 2 ){
+		ret = imageUS_jet2App( im, i0,	j0, ja, f );
+		return( ret );
+	}
+
 	sp = IMAGE_PIXEL(im, i0, j0 );
 	align = im->column - ja->n;
 
@@ -143,19 +174,32 @@ int	ret;
 
 
 
-	f->a00 = g.a00 * ( ja->t0*ja->t0 );
+	//f->a00 = g.a00 * ( ja->t0*ja->t0 );
 
-	f->a10 = g.a10 * ( ja->t0*ja->t1 );
-	f->a01 = g.a01 * ( ja->t0*ja->t1 );
+	//f->a10 = g.a10 * ( ja->t0*ja->t1 );
+	//f->a01 = g.a01 * ( ja->t0*ja->t1 );
 
 
-	f->a20 = g.a20 * ( ja->t0*ja->t2 );
-	f->a11 = g.a11 * ( ja->t1*ja->t1 );
-	f->a02 = g.a02 * ( ja->t0*ja->t2 );
+	//f->a20 = g.a20 * ( ja->t0*ja->t2 );
+	//f->a11 = g.a11 * ( ja->t1*ja->t1 );
+	//f->a02 = g.a02 * ( ja->t0*ja->t2 );
 
-	//f->a00 -= f->a20 * ja->t02 *ja->t0* ja->t0 + f->a02 * ja->t02 *ja->t0* ja->t0;
+	//f->a00 -= ( f->a20 + f->a02 )* ja->t02 *ja->t0* ja->t0;
 
-	f->a00 -= ( f->a20 + f->a02 )* ja->t02 *ja->t0* ja->t0;
+
+
+	f->a00 = g.a00 * ja->f00;
+	f->a00 -= (g.a20  + g.a02)*  ja->f00_2 * ja->f20;
+
+	f->a10 = g.a10 * ja->f10;
+	f->a01 = g.a01 * ja->f10;
+
+
+	f->a20 = g.a20 * ja->f20;
+	f->a11 = g.a11 * ja->f11;
+	f->a02 = g.a02 * ja->f20;
+
+	//f->a00 -= (f->a20  + f->a02)*  ja->f00_2;
 
 
 	return( 1 );
@@ -207,6 +251,7 @@ int	ret;
 
 
 	f->a00 = g.a00 * ja->f00;//( ja->t0*ja->t0 );
+	f->a00 -= (g.a20  + g.a02)*  ja->f00_2 * ja->f20;
 
 	f->a10 = g.a10 * ja->f10;//( ja->t0*ja->t1 );
 	f->a01 = g.a01 * ja->f10;//( ja->t0*ja->t1 );
@@ -216,7 +261,7 @@ int	ret;
 	f->a11 = g.a11 * ja->f11;//( ja->t1*ja->t1 );
 	f->a02 = g.a02 * ja->f20;//( ja->t0*ja->t2 );
 
-	f->a00 -= (f->a20  + f->a02)*  ja->f00_2;//ja->t0 * ja->t02;
+//	f->a00 -= (f->a20  + f->a02)*  ja->f00_2;//ja->t0 * ja->t02;
 
 
 
@@ -271,19 +316,40 @@ int	ret;
 
 
 
-	f->a00 = g.a00 * ( ja->t0*ja->t0 );
+	//f->a00 = g.a00 * ( ja->t0*ja->t0 );
 
-	f->a10 = g.a10 * ( ja->t0*ja->t1 );
-	f->a01 = g.a01 * ( ja->t0*ja->t1 );
-
-
-	f->a20 = g.a20 * ( ja->t0*ja->t2 );
-	f->a11 = g.a11 * ( ja->t1*ja->t1 );
-	f->a02 = g.a02 * ( ja->t0*ja->t2 );
-
-	f->a00 -= f->a20 * ja->t02 *ja->t0* ja->t0 + f->a02 * ja->t02 *ja->t0* ja->t0;
+	//f->a10 = g.a10 * ( ja->t0*ja->t1 );
+	//f->a01 = g.a01 * ( ja->t0*ja->t1 );
 
 
+	//f->a20 = g.a20 * ( ja->t0*ja->t2 );
+	//f->a11 = g.a11 * ( ja->t1*ja->t1 );
+	//f->a02 = g.a02 * ( ja->t0*ja->t2 );
+
+	//f->a00 -= f->a20 * ja->t02 *ja->t0* ja->t0 + f->a02 * ja->t02 *ja->t0* ja->t0;
+
+	//f->a00 = g.a00 * ja->f00;//( ja->t0*ja->t0 );
+	//f->a00 -= (g.a20  + g.a02)*  ja->f00_2 * ja->f20;
+
+	//f->a10 = g.a10 * ja->f10;//( ja->t0*ja->t1 );
+	//f->a01 = g.a01 * ja->f10;//( ja->t0*ja->t1 );
+
+
+	//f->a20 = g.a20 * ja->f20;//( ja->t0*ja->t2 );
+	//f->a11 = g.a11 * ja->f11;//( ja->t1*ja->t1 );
+	//f->a02 = g.a02 * ja->f20;//( ja->t0*ja->t2 );
+
+
+	f->a00 = g.a00 * ja->f00;
+	f->a00 -= (g.a20  + g.a02)*  ja->f00_2 * ja->f20;
+
+	f->a10 = g.a10 * ja->f10;
+	f->a01 = g.a01 * ja->f10;
+
+
+	f->a20 = g.a20 * ja->f20;
+	f->a11 = g.a11 * ja->f11;
+	f->a02 = g.a02 * ja->f20;
 
 	return( 1 );
 }

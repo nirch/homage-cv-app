@@ -92,6 +92,38 @@ int	i,	j;
 }
 
 
+image_type *
+	imageF_to_U8( image_type *sim, float min, float max, image_type *im )
+{
+	float	*sp;
+	u_char	*tp;
+	int	i,	j;
+	double	t;
+	int	tmp;
+
+
+	im = image_realloc( im, sim->width, sim->height, sim->channel, IMAGE_TYPE_U8, 1 );
+
+
+	sp = sim->data_f;
+	tp = im->data;
+
+	t = 255.0 / ( max-min);
+
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < sim->channel*im->column ; j++ ){
+
+
+
+			tmp = ((*sp++) - min )*t + 0.5;
+			*tp++ = PUSH_TO_RANGE( tmp, 0, 255 );
+		}
+	}
+
+	return( im );
+}
+
+
 
 image_type *
 imageF_to_image1_S( image_type *sim, image_type *im )

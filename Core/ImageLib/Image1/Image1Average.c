@@ -70,7 +70,7 @@ int	no;
 	return( im );
 }
 
-
+#ifdef _AA_
 image_type *
 image1_average8( image_type *sim, image_type *im )
 {
@@ -116,7 +116,7 @@ image1_average8( image_type *sim, image_type *im )
 
 	return( im );
 }
-
+#endif
 
 image_type *
 image1_average8B( image_type *sim, image_type *im )

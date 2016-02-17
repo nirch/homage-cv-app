@@ -230,6 +230,15 @@ image4_dewarp_lt2( image_type *sim, lt2_type *lt, image_type *im )
 
 
 			if( y < 0.5 || iy > sim->row-1-0.5 ||  x < 0.5 || x > sim->column-1-0.5 ){
+				if( iy >= 0 && iy < sim->row &&  ix >= 0 && ix < sim->column ){
+					sp = IMAGE_PIXEL( sim, iy, ix );
+					*tp++ = *sp++;
+					*tp++ = *sp++;
+					*tp++ = *sp++;
+					*tp++ = *sp++;
+					continue;
+				}
+
 				*tp++ = 0;
 				*tp++ = 0;
 				*tp++ = 0;

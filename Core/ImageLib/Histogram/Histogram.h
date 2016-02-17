@@ -14,7 +14,7 @@ extern "C" {
 
 
 	// Histogram.c
-void	histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 );
+int	histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 );
 
 void	histogram_write( int h[], int nH, char *file );
 

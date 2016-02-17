@@ -9,6 +9,10 @@ image_type *	image3_sample3( image_type *sim, image_type *im );
 static image_type *	image3B_sample3( image_type *sim, box2i_type *b, image_type *im );
 
 
+static image_type *	imageUS_sample2( image_type *sim, image_type *im );
+
+
+
 image_type *	
 image_sample( image_type *sim, int d, image_type *im )
 {
@@ -175,6 +179,20 @@ image_sample2L( image_type *sim, int level, image_type *im )
 image_type *	
 image_sample2( image_type *sim, image_type *im )
 {
+
+	if( IMAGE_TYPE(sim) == IMAGE_TYPE_U16 ){
+		if( sim->channel == 1 ){
+			im = imageUS_sample2( sim, im );
+
+			return( im );
+		}
+
+		if( im != NULL )
+			image_destroy( im, 1 );
+		return( NULL );
+	}
+
+
 	if( sim->depth == 4 ){
 		im = image4_sample2( sim, im );
 
@@ -472,3 +490,37 @@ image4_sample2( image_type *sim, image_type *im )
 
 
 
+
+
+
+
+
+static image_type *
+	imageUS_sample2( image_type *sim, image_type *im )
+{
+	u_short	*sp0,	*sp1, *sp2,	*sp3,	*tp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width/2, sim->height/2, 1, IMAGE_TYPE_U16, 1 );
+
+
+	tp = im->data_us;
+	for( i = 0 ; i < im->row ; i++ ){
+		sp0 = (u_short *)IMAGE_PIXEL( sim, 2*i, 0 );
+		sp1 = sp0+1;
+		sp2 = sp0 + sim->width;
+		sp3 = sp2 + 1;
+
+		for( j = 0 ; j < im->column ; j++ ){
+
+			*tp++ = ( *(sp0++) + *(sp1++) + *(sp2++) + *(sp3++) ) >>2;
+
+			sp0 += 1;
+			sp1 += 1;
+			sp2 += 1;
+			sp3 += 1;
+		}
+	}
+
+	return( im );
+}

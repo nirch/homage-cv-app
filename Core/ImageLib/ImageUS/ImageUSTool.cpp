@@ -4,6 +4,26 @@
 #include	"ImageType/ImageType.h"
 #include	"ImageUSTool.h"
 
+
+void
+imageUS_const( image_type *im, int color )
+{
+	int	i,	j;
+
+
+	color = 0xFF & color;
+
+
+	u_short	*sp = im->data_us;
+	for( i = 0 ; i < im->row ; i++ )
+		for( j = 0 ; j < im->column ; j++ ){
+			*sp++ = color;
+
+		}
+}
+
+
+
 void
 imageUS_minmax( image_type *im, int *min,	int *max )
 {
@@ -77,6 +97,67 @@ int	i,	j;
 }
 
 
+image_type *
+	imageUS_to_image1_F( image_type *sim, float f, image_type *im )
+{
+	u_short	*sp;
+	u_char	*tp;
+	int	i,	j;
+
+
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data_us;
+	tp = im->data;
+	for( i = 0 ; i < im->row ; i++ ){
+		for( j = 0 ; j < im->column ; j++, sp++ ){
+
+			float t = f * *sp;
+
+			*tp++ = PUSH_TO_RANGE( t, 0, 255 );
+		}
+	}
+
+	return( im );
+}
+
+
+
+
+
+image_type *
+	imageUS_from( image_type *sim, image_type *im )
+{
+	if( sim->format == IMAGE_FORMAT_US ){
+		if( im == NULL )
+			return( sim );
+
+		im = image_make_copy( sim, im );
+		return( im );
+	}
+
+
+
+	if( sim->format == IMAGE_FORMAT_UC ){
+
+		im = image2_from_image1( sim, im );
+		return( im );
+	}
+
+
+
+
+	if( sim->depth == 3 )
+		return imageUS3_to_y( sim, im );
+
+
+	//if( sim->depth == 4 )
+	//	return image4_to_y( sim, im );
+
+
+	return( NULL );
+}
 
 
 image_type *
@@ -246,7 +327,7 @@ imageUS_to_U8_smart(  image_type *sim, float p0, float p1, image_type *im )
 {
 
 	int	a0,	a1;
-	imageUS_dynamic_range( sim, p0, p1, &a0, &a1 );
+	imageUS_dynamic_range( sim, NULL, p0, p1, &a0, &a1 );
 	if( a1 - a0 < 256 ){
 		float da = 0.5*( 256 - ( a1-a0 ) );
 		a0 -= da;
@@ -316,6 +397,27 @@ imageUS_binary( image_type *sim, int T, int unit, image_type *im )
 
 			*tp = ( *sp <= T )? 0 : unit;
 
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	imageUS_band( image_type *sim, int T0, float T1, image_type *im )
+{
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U16, 1 );
+
+	u_short *sp = sim->data_us;
+	u_short *tp = im->data_us;
+
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
+
+			*tp = PUSH_TO_RANGE( *sp, T0, T1 );
 		}
 	}
 

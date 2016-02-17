@@ -196,7 +196,7 @@ int	id1,	id,	NBW;
 		tp++;
 		tp1++;
 		tp0 = tp-1;
-		for( j = 1 ; j < sim->column ; j++, sp++, sp1++, sp0++, tp++, tp0++, *tp1++ ){
+		for( j = 1 ; j < sim->column ; j++, sp++, sp1++, sp0++, tp++, tp0++, tp1++ ){
 //			if( *sp == 0 )	continue;
 			if( *sp0 == *sp ){
 
@@ -353,7 +353,7 @@ imageLabelUI_create4( image_type *sim, bwLabel_type **tbw, int *tnBw, image_type
 		tp++;
 		tp1++;
 		tp0 = tp-1;
-		for( j = 1 ; j < sim->column ; j++, sp++, sp1++, sp0++, tp++, tp0++, *tp1++ ){
+		for( j = 1 ; j < sim->column ; j++, sp++, sp1++, sp0++, tp++, tp0++, tp1++ ){
 			//			if( *sp == 0 )	continue;
 			if( *sp0 == *sp ){
 
@@ -423,6 +423,15 @@ imageLabelUI_create4( image_type *sim, bwLabel_type **tbw, int *tnBw, image_type
 int
 imageLabelUI_pixel_id( imageLabel_type *abw, int i0, int j0 )
 {
+	if( i0 < 0 || i0 >= abw->im->height || j0 < 0 || j0 >= abw->im->width  )
+		return( -1 );
+
+	if( abw->im->depth == 2 ){
+		u_short *sp = (u_short *)IMAGE_PIXEL( abw->im, i0, j0 );
+
+		return( (int )*sp );;
+	}
+
 	u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0 );
 
 	return( (int )*sp );

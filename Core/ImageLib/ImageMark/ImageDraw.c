@@ -2,9 +2,11 @@
  ***   ImageDraw.cpp   ***
  *************************/
 #include	<math.h>
+
+#define _GPLOG
 #include	"Uigp/igp.h"
 #include "Umath/Matrix2Type.h"
-
+#include "Ulog/Log.h"
 #include	"ImageType/ImageType.h"
 
 #include	"ImageMark.h"
@@ -76,7 +78,7 @@ float	w;
 
 			t = sqrt(d);
 			w = 0;
-			if( t > r-1.0 );
+			if( t > r-1.0 )
 				w = 255*(-t + r);
 
 
@@ -117,7 +119,7 @@ int	x1,	y1;
 
 		for( i = y0 ; i < y1 ; i++ ){
 			u_char *tp = IMAGE_PIXEL( im, i, x0 );
-			for( j = x0 ; j < x1 ; j++, tp ){
+			for( j = x0 ; j < x1 ; j++ ){
 				*tp++ = R;
 				*tp++ = G;
 				*tp++ = B;
@@ -198,13 +200,14 @@ image4_draw_pointA( image_type *im, int x, int y, int color )
 
 
 void
-image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int color )
+image_draw_line( image_type *im, float x0, float y0, float x1, float y1, float width, int color )
 {
 	int	i0,	j0,	i1,	j1,	i,	j;
 	float	dx,	dy,	d,	t;
 	float	len;
 	vec2d	v,	u;
 
+	if( width <= 0 )	width = 0.5;
 
 	v.x = x1-x0;
 	v.y = y1-y0;
@@ -257,7 +260,7 @@ image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int col
 				if( t < -0.5 || t > len+0.5 )	continue;
 
 				d = u.x * dx + u.y * dy;
-				if( d < -0.5 || d > 0.5 )	continue;
+				if( d < -width || d > width )	continue;
 
 				*tp = c;
 			}
@@ -268,6 +271,7 @@ image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int col
 
 
 	if( im->depth == 4 ){
+	
 		for( i = i0 ; i < i1 ; i++ ){
 			u_int	*tp = (u_int *)IMAGE_PIXEL( im, i, j0 );
 
@@ -279,11 +283,14 @@ image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int col
 				t = v.x * dx + v.y * dy;
 				if( t < -0.5 || t > len+0.5 )	continue;
 				d = u.x * dx + u.y * dy;
-				if( d < -0.5 || d > 0.5 )	continue;
+				if( d < -width || d > width )	continue;
 
 				*tp = color;
+			
 			}
 		}
+
+		
 		return;
 	}
 
@@ -305,7 +312,7 @@ image_draw_line( image_type *im, float x0, float y0, float x1, float y1, int col
 				t = v.x * dx + v.y * dy;
 				if( t < -0.5 || t > len+0.5 )	continue;
 				d = u.x * dx + u.y * dy;
-				if( d < -0.75 || d > 0.75 )	continue;
+				if( d < -width || d > width )	continue;
 
 				*tp     = R;
 				*(tp+1) = G;

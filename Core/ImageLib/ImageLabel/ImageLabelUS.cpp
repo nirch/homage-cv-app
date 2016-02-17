@@ -414,7 +414,7 @@ imageLabelUS_value( imageLabel_type *abw, image_type *sim )
 {
 	int	i,	j;
 	short	*bp;
-	u_char	*sp;
+
 
 	bwLabel_type *bw;
 
@@ -425,15 +425,30 @@ imageLabelUS_value( imageLabel_type *abw, image_type *sim )
 	}
 
 
+	if( IMAGE_TYPE( sim ) == IMAGE_TYPE_U8 ){
+		u_char *sp = sim->data;
+		bp = abw->im->data_s;
+		for( i = 0 ; i < abw->im->height ; i++ ){
+			for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
+				bw = &abw->a[*bp];
+				bw->no++;
+				bw->av += *sp;
+				bw->var += *sp * *sp;
+			}
+		}
+	}
 
-	sp = sim->data;
-	bp = abw->im->data_s;
-	for( i = 0 ; i < abw->im->height ; i++ ){
-		for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
-			bw = &abw->a[*bp];
-			bw->no++;
-			bw->av += *sp;
-			bw->var += *sp * *sp;
+	if( IMAGE_TYPE( sim ) == IMAGE_TYPE_U16 ){
+		u_short *sp = sim->data_us;
+	
+		for( i = 0 ; i < sim->height ; i++ ){
+			bp = (short*)IMAGE_PIXEL( abw->im, i+abw->margin, abw->margin );
+			for( j = 0 ; j < sim->width ; j++, bp++, sp++ ){
+				bw = &abw->a[*bp];
+				bw->no++;
+				bw->av += *sp;
+				bw->var += *sp * *sp;
+			}
 		}
 	}
 

@@ -90,7 +90,7 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 	m_iFrame = 0;
 
 	image_type *im;
-	if( ReadFrame( 0, &im ) < 0 )
+	if( ReadFrame( 0, 0, &im ) < 0 )
 		return( -1 );
 
 	m_width = im->width;
@@ -102,7 +102,7 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 }
 
 
-int	ReadFrame( int iFrame, long long timeStamp, image_type **im )
+int	CHrSourcePng::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 {
 image_type	*sim;
 

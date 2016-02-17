@@ -7,7 +7,9 @@
 
 #include "Histogram.h"
 
-void
+
+
+int
 histogram_range( int h[], int nH, float p0, float p1, float *r0, float *r1 )
 {
 int	i;
@@ -37,7 +39,11 @@ int	nPixel;
 	}
 
 	*r1 = ( i < nH-1 )? i : nH-1;
+
+	return( nPixel );
 }
+
+
 
 
 

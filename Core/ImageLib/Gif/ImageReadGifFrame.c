@@ -154,6 +154,7 @@ int Suffix[4096];
   
 	gd.Raster = malloc( 2*width* height + 100 );
 
+
 	ptr = gd.Raster;
 	while( ( no = GIO_GETC( gifIo->gio) ) != 0 )
 		while( no-- )	*ptr++ = GIO_GETC( gifIo->gio);

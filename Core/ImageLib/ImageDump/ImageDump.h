@@ -51,6 +51,7 @@ void	imageT_dump( image_type *sim, char *name, int index, char *suffix );
 #define IMAGE_DUMPF( im, name, index, ext, flag  )  if( flag ) image_dump( im, name, index, ext )
 #define IMAGEF_DUMP( im, stretch, name, index, ext )  imageF_dump( im, stretch, name, index, ext )
 #define IMAGE_DUMP_SCALE( im, scale, name, index, ext )  image_dump_scale( im, scale, name, index, ext )
+#define IMAGE_DUMP_SCALEF( im, scale, name, index, ext, flag )  if( flag ) image_dump_scale( im, scale, name, index, ext )
 #define IMAGEF_DUMPAB( im, a, b, name, index, ext )  imageF_dumpAB( im, a, b, name, index, ext )
 #define IMAGE_DUMP_ALPHA( im, name, index, ext )  image_dump_alpha( im, name, index, ext )
 #define IMAGET_DUMP( im, name, index, ext )  imageT_dump( im, name, index, ext )
@@ -63,6 +64,7 @@ void	imageT_dump( image_type *sim, char *name, int index, char *suffix );
 #define IMAGE_DUMPF( im, name, index, ext, flag  )	{}
 #define IMAGEF_DUMP( im, stretch, name, index, ext ) {}
 #define IMAGE_DUMP_SCALE( im, scale, name, index, ext ) {}
+#define IMAGE_DUMP_SCALEF( im, scale, name, index, ext, flag ) {}
 #define IMAGEF_DUMPAB( im, a, b, name, index, ext ) {}
 #define IMAGE_DUMP_ALPHA( im, name, index, ext ) {}
 #define IMAGET_DUMP( im, name, index, ext )		{}

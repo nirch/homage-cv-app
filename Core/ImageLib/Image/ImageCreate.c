@@ -2,7 +2,8 @@
 #include	<string.h>
 #include	"ImageType/ImageType.h"
 
-
+#define _GPLOG
+#include "Ulog/Log.h"
 
 
 #ifdef _WIN32
@@ -79,6 +80,8 @@ int	depth,	channle;
 	else	im->data = data;
 
 
+	if( im->data == NULL )
+		GPLOGF(("image->data=NULL"));
 
 	im->file = NULL;
 
@@ -168,6 +171,9 @@ int	depth,	channle;
 	im->pad = im->column_byte - im->column*im->depth;
 
 	im->data = (u_char *)malloc( im->row* im->column_byte );
+
+	if( im->data == NULL )
+		GPLOGF(("image->data=NULL"));
 
 
 	if( im->palette != NULL ){

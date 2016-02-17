@@ -89,3 +89,69 @@ u_char	*sp,	*tp,	sp0,	sp2;
 
 	return( im );
 }
+
+
+image_type *
+image4_to_pncal( image_type *sim, image_type *im )
+{
+	u_char	*sp,	*tp,	sp0,	sp2;
+	int	i,	j;
+
+	if( sim->depth == 3 ){
+		im = image3_to_android( sim, im );
+		return( im );
+	}
+
+	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data;
+	tp = im->data;
+	for( i = 0; i < sim->height ; i++ ){
+		for( j = 0; j < sim->width ; j++, tp += 4, sp += 4 ){
+
+
+			sp0 = sp[0];
+			sp2 = sp[2];
+
+			tp[0] = sp2;
+			tp[1] = sp[1];
+			tp[2] = sp0;
+			tp[3] = 0xFF;//sp[3];
+		}
+	}
+
+	return( im );
+}
+
+
+image_type *
+	image4_to_pncalA( image_type *sim, image_type *im )
+{
+	u_char	*sp,	*tp,	sp0,	sp2;
+	int	i,	j;
+
+	if( sim->depth == 3 ){
+		im = image3_to_android( sim, im );
+		return( im );
+	}
+
+	im = image_realloc( im, sim->width, sim->height, 4, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data;
+	tp = im->data;
+	for( i = 0; i < sim->height ; i++ ){
+		for( j = 0; j < sim->width ; j++, tp += 4, sp += 4 ){
+
+
+			sp0 = sp[0];
+			sp2 = sp[2];
+
+			tp[0] = sp0;
+			tp[1] = sp[1];
+			tp[2] = sp2;
+			tp[3] = 0xFF;//sp[3];
+		}
+	}
+
+	return( im );
+}

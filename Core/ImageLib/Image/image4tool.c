@@ -69,17 +69,17 @@ int	i,	j;
 
 
 
-void
-image4_const( image_type *im, int color )
-{
-u_int	*p;
-int	i,	j;
-
-	p = (u_int *)im->data;
-	for( i = 0 ; i < im->row ; i++ )
-		for( j = 0 ; j < im->column ; j++ )
-			*p++ = color;
-}
+//void
+//image4_const( image_type *im, int color )
+//{
+//u_int	*p;
+//int	i,	j;
+//
+//	p = (u_int *)im->data;
+//	for( i = 0 ; i < im->row ; i++ )
+//		for( j = 0 ; j < im->column ; j++ )
+//			*p++ = color;
+//}
 
 
 

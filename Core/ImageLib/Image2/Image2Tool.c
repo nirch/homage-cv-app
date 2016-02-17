@@ -159,6 +159,30 @@ imageUSC_from_imageF( image_type *sim, float a, float b, image_type *im )
 	return( im );
 }
 
+
+image_type *
+	imageUS_binaryM( image_type *sim, int T, image_type *im )
+{
+	u_short	*sp;
+	u_char	*tp;
+	int	i,	j;
+
+	im = image_realloc( im, sim->width, sim->height, 1, IMAGE_TYPE_U8, 1 );
+
+	sp = sim->data_us;
+	tp = im->data;
+
+	for( i = 0 ; i < sim->height ; i++ ){
+		for( j = 0 ; j < sim->width ; j++, sp++, tp++ ){
+
+			*tp = ( *sp <= T )? 0 : 255;
+
+		}
+	}
+
+	return( im );
+}
+
 //void
 //image2_dynamic_range( image_type *im, float h0, float h1, float maxD )
 //{

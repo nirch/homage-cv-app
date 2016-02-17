@@ -72,6 +72,7 @@ obj/local/arm64-v8a/objs/Image/./Image/ImageCreate.o: \
  /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/./ImageUI/ImageUITool.h \
  /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/./Bmp/ImageBmp.h \
  /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/./ImageResize/ImageResize.h \
+ /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/../Util/./Ulog/Log.h \
  /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/../Util/./Uigp/GpMemoryLeak.h
 
 /Users/nirchannes/Documents/Dev/NDK/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/stdio.h:
@@ -217,5 +218,7 @@ obj/local/arm64-v8a/objs/Image/./Image/ImageCreate.o: \
 /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/./Bmp/ImageBmp.h:
 
 /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/./ImageResize/ImageResize.h:
+
+/Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/../Util/./Ulog/Log.h:
 
 /Users/nirchannes/Documents/Projects/homage-cv-app/Core/ImageLib/../Util/./Uigp/GpMemoryLeak.h:
