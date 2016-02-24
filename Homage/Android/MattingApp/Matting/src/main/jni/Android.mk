@@ -26,7 +26,7 @@ LOCAL_PATH := $(TOP_LOCAL_PATH)
 
 
 LOCAL_MODULE    := Matting
-LOCAL_SRC_FILES := Matting.cpp  Renderer.cpp  PngRecorder.cpp UjniTool.cpp
+LOCAL_SRC_FILES := Matting.cpp  Matting2.cpp  Renderer.cpp  PngRecorder.cpp UjniTool.cpp
 
 
 include $(BUILD_SHARED_LIBRARY)
