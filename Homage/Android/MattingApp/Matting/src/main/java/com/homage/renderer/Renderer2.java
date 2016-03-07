@@ -19,6 +19,7 @@ public class Renderer2 {
     public static native int create(float duration, int fps);
 
     public static native int addImageSource( int id, int imageType, String file );
+    public static native int addJavaSource( int id, Object javaSource);
 
     public static native int addFX(int id, int sourceId, int effectType, String data );
 

@@ -16,6 +16,7 @@
 #include "HrRendererLib/HomageRenderer.h"
 #include "HrRendererLib/HrSource/HrSourceGif.h"
 #include "HrRendererLib/HrSource/HrSourcePng.h"
+#include "HrRendererLib/HrSource/HrSourceJava.h"
 
 
 #include "HrRendererLib/HrOutput/HrOutputGif.h"
@@ -121,10 +122,10 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_create
     return (i);
 }
 
-JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addImageSource
+JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
         (JNIEnv * env, jclass c, jint iR, jint type, jstring jfile ) {
 
-    GPLOGF(("<addSource"));
+    GPLOGF(("<addSourceImage"));
 
 
     CHomageRenderer *hr  = m_ar2[iR];
@@ -172,6 +173,36 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addImageSource
 
     return( id );
 }
+
+JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceJava
+        (JNIEnv * env, jclass c, jint iR, jobject javaSource){
+    GPLOGF(("<addSourceJava"));
+
+
+    CHomageRenderer *hr  = m_ar2[iR];
+
+    if( hr == NULL || hr->IsProcess() ){
+        GPLOGF(("In process  >\n"));
+        return( -1 );
+    }
+
+    CHrSourceJava  *source = new CHrSourceJava();
+
+    source->SetJavaSource(env, javaSource);
+
+    if (!source->Open())
+        return -1;
+
+    int id = hr->AddSource( source );
+
+    image_type *imm = NULL;
+    //id = source->ReadFrame(0, 1231, &imm);
+
+    GPLOGF((" >\n"));
+
+    return( id );
+}
+
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer2_addFX
         (JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring jdata ) {
@@ -260,6 +291,27 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutput
     return (-1);
 }
 
+JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutputJava
+        (JNIEnv *env, jclass c, jint iR, jobject javaOutput){
+    CHomageRenderer *hr = m_ar2[iR];
+    if (hr == NULL || hr->IsProcess()) {
+        GPLOGF(("In process  >\n"));
+        return (-1);
+    }
+
+    CHrOutputJava  *output = new CHrOutputJava();
+
+    output->SetJavaOutput(env, javaOutput);
+
+    if (!output->Open())
+        return -1;
+
+    int id = hr->AddOutput( output );
+
+    GPLOGF((" >\n"));
+    return (id);
+}
+
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_process
     (JNIEnv * env, jclass c, jint iR, jint width, jint height ) {
     GPLOGF(("<Render Process: %d", iR));
@@ -274,6 +326,23 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_process
         return (-1);
 
     hr->Process();
+
+    // Closing all the sources
+    int idxSrc = 0;
+    CHrSourceI *src = hr->GetSource(idxSrc++);
+    while (src != NULL){
+        src->Close();
+        src = hr->GetSource(idxSrc++);
+    }
+
+    //int iii = 7;
+    // Closing all the outputs
+    int idxOutput = 0;
+    CHrOutputI *output = hr->GetOuput(idxOutput++);
+    while (output != NULL){
+        output->Close();
+        output = hr->GetOuput(idxOutput++);
+    }
 
     delete m_ar2[iR];
     m_ar2[iR] = NULL;

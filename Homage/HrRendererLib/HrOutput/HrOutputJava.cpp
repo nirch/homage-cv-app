@@ -28,9 +28,7 @@
 
 CHrOutputJava::CHrOutputJava()
 {
-	
-//	m_im = NULL;
-
+	m_frame = NULL;
 }
 
 
@@ -55,59 +53,16 @@ void CHrOutputJava::DeleteContents()
 }
 
 
-
-int CHrOutputJava::Init( char *outFile, int width, int height, int frameRate )
-{	
-	m_width = width;
-	m_height = height;
-
-	
-	strcpy( m_file, outFile );
-
-	GPLOGF( ("  call open hh\n" ));
-
-	jstring jfile = m_env->NewStringUTF( m_file );
-
-	GPLOGF( (" %s  %d %d %d \n", m_file, width, height, frameRate ));
-
-
-
-
-//	int ret2 = m_env->CallIntMethod( m_obj, m_methodClose );
-//	GPLOGF( ("  call close succeed \n" ));
-
-
-	int ret = m_env->CallIntMethod( m_obj, m_methodOpen, width, height, frameRate, jfile );
-	GPLOGF( ("  call open succeed \n" ));
-
-
-
-	//WriteFrame( "123456", 5 );
-	//GPLOGF( ("  call write succeed \n" ));
-
-	m_env->DeleteLocalRef( jfile );
-
-	GPLOG( ("call open %d\n", 1 ));
-
-	return( 1 );
-}
-
-
-
-
-int CHrOutputJava::SetJavaEncoder( JNIEnv* env, jobject mainJavaClass )
+int CHrOutputJava::SetJavaOutput( JNIEnv *env, jobject javaOutput )
 {
 
 	m_env = env;
-	m_obj = mainJavaClass;
+	m_jOutput = env->NewGlobalRef(javaOutput);
 
-//	strcpy( m_className, className );
 
-	GPLOGF( ("<SetJavaEncoder \n" ));
-	//jclass cls = (m_env)->FindClass( className );
-	//if( cls == NULL )	return( -1 );
+	GPLOGF( ("<SetJavaOutput \n" ));
 
-	jclass clazz = (m_env)->GetObjectClass(mainJavaClass); 
+	jclass clazz = (m_env)->GetObjectClass(m_jOutput);
 
 
 	if( clazz == NULL ){
@@ -120,112 +75,68 @@ int CHrOutputJava::SetJavaEncoder( JNIEnv* env, jobject mainJavaClass )
 
 
 	GPLOGF( ("close id\n" ));
-	m_methodClose = (m_env)->GetMethodID(clazz, "close", "()I");
+	m_methodClose = m_env->GetMethodID(clazz, "close", "()I");
 	if( m_methodClose == NULL )	return( -1 );
 
 	GPLOGF( ("close exist hh\n" ));
 
-
-
-
-	m_methodWrite = m_env->GetMethodID(clazz, "write", "(II[B)I");
+	m_methodWrite = m_env->GetMethodID(clazz, "write", "([BI)I");
 	if( m_methodWrite == NULL )	return( -1 );
 	GPLOGF( ("write exist\n" ));
 
 
-	m_methodOpen = (m_env)->GetMethodID(clazz, "open", "(IIILjava/lang/String;)I" );
+	m_methodOpen = m_env->GetMethodID(clazz, "open", "()I" );
 	if( m_methodOpen == NULL )	return( -1 );
+
 
 	GPLOGF( ("open exist\n" ));
 
-
-
-
-
-
-
-
-
 	return( 1 );
 }
 
+int	CHrOutputJava::Open()
+{
+	int ret = -1;
+	if( m_env != NULL ){
+		ret = m_env->CallIntMethod( m_jOutput, m_methodOpen );
+		GPLOGF( (" java open %d \n", ret ));
+	}
+
+	return( ret );
+}
 
 int CHrOutputJava::WriteFrame( image_type *im, int iFrame )
 {
-	
-	WriteFrameA( "123456", 5 );
 
+	GPLOGF( ("<java ReadFrame" ));
 
-	GPLOGF( ("<java WriteFrame" ));
+	if (m_frame == NULL) {
+		m_frameLen = im->width * im->height * im->channel;
+		m_frame = m_env->NewByteArray(m_frameLen);
+	}
 
-	u_char *data = im->data;
-	int nData = im->width*im->height*im->channel;
+	m_env->SetByteArrayRegion(m_frame, 0, m_frameLen, (jbyte*)im->data );
 
-	GPLOGF( ("1  %d  %d %d %d  \n", nData, im->width, im->height, im->channel ));
-	jbyteArray jdata = ujni_createJByteArray( m_env, (char *)data, nData );
+	jint ret = m_env->CallIntMethod( m_jOutput, m_methodWrite, m_frame, iFrame);
 
-	if( jdata == NULL )
-		GPLOGF( ("jdata = NULL" ));
-	GPLOGF( ("2" ));
-
-
-	int	width = im->width;
-	int	height = im->height;
-
-	GPLOGF( ("3" ));
-
-	int ret = m_env->CallIntMethod( m_obj, m_methodWrite, width, height, jdata );
-
-	GPLOGF( ("4" ));
-	
-
-	///ujni_releaseJByteArray( m_env, jdata );
+	//m_env->ReleaseByteArrayElements(m_frame, (jbyte*)im->data, 0);
 
 	GPLOGF( (" %d\n>", ret ));
 
-	return( 1 );
+	return( ret );
 }
-
-
-int CHrOutputJava::WriteFrameA( char *data, int nData )
-{
-	GPLOGF( ("write 1\n" ));
-	jbyteArray jdata = ujni_createJByteArray( m_env, (char *)data, nData );
-
-	if( jdata == NULL )
-		GPLOGF( ("jdata == NULL\n" ));
-
-	GPLOGF( ("write 2\n" ));
-
-	if( m_methodWrite == NULL )
-		GPLOGF( ("m_methodWrite == NULL\n" ));
-
-	m_env->CallIntMethod( m_obj, m_methodWrite, 10, 10, jdata );
-
-	GPLOGF( ("write 3\n" ));
-
-//	ujni_releaseJByteArray( m_env, jdata );
-
-	GPLOGF( ("write 4\n" ));
-
-	return( 1 );
-}
-
 
 int	CHrOutputJava::Close()
 {
-
+	int ret = -1;
 	if( m_env != NULL ){
-		int ret = m_env->CallIntMethod( m_obj, m_methodClose );
+		ret = m_env->CallIntMethod( m_jOutput, m_methodClose );
 		GPLOGF( (" java close %d \n", ret ));
+
+		m_env->DeleteGlobalRef(m_jOutput);
+		m_jOutput = NULL;
+		m_env = NULL;
 	}
 
-
-	//if( m_im != NULL ){
-	//	image_destroy( m_im, 1 );
-	//	m_im = NULL;
-	//}
-
-
-	return( 1 );
+	return( ret );
 }

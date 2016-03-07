@@ -334,7 +334,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 
 
 
-JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
+/*JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
 	(JNIEnv * env, jclass c, jint iR, jobject obj,
 	jstring jfile, jint width, jint height, jint frameRate )
 {
@@ -379,7 +379,7 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
 	GPLOGF((" id = %d >\n", id));
 
 	return( id );
-}
+}*/
 
 
 

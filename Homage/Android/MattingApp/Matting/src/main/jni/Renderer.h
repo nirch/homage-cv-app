@@ -41,14 +41,14 @@ JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addOutput
 		(JNIEnv * env, jclass c, jint iR, jint type, jstring file, jint width, jint height, int fjrameSpeed );
 
 
-JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
+/*JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutput
 	(JNIEnv * env, jclass c, jint iR, jobject obj,
 	jstring jfile, jint width, jint height, jint frameRate );
 
 
 JNIEXPORT int JNICALL Java_com_homage_renderer_Renderer_addJavaOutputA
 	(JNIEnv * env, jclass c, jint iR, jstring className,
-	jstring jfile, jint width, jint height, jint frameRate );
+	jstring jfile, jint width, jint height, jint frameRate );*/
 
 
 

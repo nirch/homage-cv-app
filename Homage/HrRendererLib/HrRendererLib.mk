@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := 	\
 	HrOutput/HrOutputI.cpp \
 	HrSource/HrSourceGif.cpp \
 	HrSource/HrSourcePng.cpp \
+	HrSource/HrSourceJava.cpp \
 	HrSource/HrSourceI.cpp \
 	HrSource/HrSourceLive.cpp
 
