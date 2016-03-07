@@ -69,6 +69,7 @@
 		50A0632B3F254362A6906CDA /* XmlIO.c in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE8C30C5A24CFE89DF389D /* XmlIO.c */; settings = {COMPILER_FLAGS = ""; }; };
 		50E0345BBB4B41EDB3235BA8 /* UnityS4.c in Sources */ = {isa = PBXBuildFile; fileRef = 517EEDC194D641EFB89C85E8 /* UnityS4.c */; settings = {COMPILER_FLAGS = ""; }; };
 		523A2C2DCCB442F8AD0A1AAF /* GpFunction.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F89CEF8CD79402E94EDE9F5 /* GpFunction.c */; settings = {COMPILER_FLAGS = ""; }; };
+		547451341C8C434200875FD0 /* Box1iTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 547451331C8C434200875FD0 /* Box1iTool.cpp */; };
 		549987A41C70DE11001DB549 /* FloatTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987A31C70DE11001DB549 /* FloatTool.cpp */; };
 		549987A81C70DEC1001DB549 /* PlnBoxV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987A51C70DEC1001DB549 /* PlnBoxV.cpp */; };
 		549987A91C70DEC1001DB549 /* PlnDistance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 549987A61C70DEC1001DB549 /* PlnDistance.cpp */; };
@@ -330,6 +331,8 @@
 		51B6102A7693438381675F08 /* uinf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uinf.h; path = Uinf/uinf.h; sourceTree = SOURCE_ROOT; };
 		5372996C1A1047779F653E5C /* HuffmanPut.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = HuffmanPut.c; path = Uhuffman/HuffmanPut.c; sourceTree = SOURCE_ROOT; };
 		537D1F019DAB4868B49E77EC /* CstFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CstFile.c; path = Ucst/CstFile.c; sourceTree = SOURCE_ROOT; };
+		547451331C8C434200875FD0 /* Box1iTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Box1iTool.cpp; path = Ubox/Box1iTool.cpp; sourceTree = "<group>"; };
+		547451351C8C434A00875FD0 /* Box1i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Box1i.h; path = Ubox/Box1i.h; sourceTree = "<group>"; };
 		549987A31C70DE11001DB549 /* FloatTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FloatTool.cpp; path = Uvl/FloatTool.cpp; sourceTree = "<group>"; };
 		549987A51C70DEC1001DB549 /* PlnBoxV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnBoxV.cpp; path = Uln/PlnBoxV.cpp; sourceTree = "<group>"; };
 		549987A61C70DEC1001DB549 /* PlnDistance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlnDistance.cpp; path = Uln/PlnDistance.cpp; sourceTree = "<group>"; };
@@ -583,6 +586,7 @@
 		3D1C8F22107148D4BAEC436F /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
+				547451351C8C434A00875FD0 /* Box1i.h */,
 				549987B51C71D13D001DB549 /* StType.h */,
 				439E7FF45953486C8CFAE02F /* Base64.h */,
 				067E9B0C0B104850849C014F /* Box2d.h */,
@@ -905,6 +909,7 @@
 		D03D2BB118C1D341002B7CF4 /* Ubox */ = {
 			isa = PBXGroup;
 			children = (
+				547451331C8C434200875FD0 /* Box1iTool.cpp */,
 				A00FBF9256ED407896EF39E7 /* Box2Dump.c */,
 				A6D44ADE72E44B869FE376D5 /* Box2iTool.c */,
 				0758B4CC15AF4358AAEA8CA2 /* Box2Tool.c */,
@@ -1221,6 +1226,7 @@
 				D0DAACF9025B4E598B3CF32E /* BstPut.c in Sources */,
 				1B456CBDB5DB4E238416D56C /* BstTool.c in Sources */,
 				0FF93215AE75433EA722FB4D /* CfgParser.c in Sources */,
+				547451341C8C434200875FD0 /* Box1iTool.cpp in Sources */,
 				B0B80E7B05E54A0B8419C000 /* CfgTool.c in Sources */,
 				DDEEEA6509F04639AA1B7FB9 /* CfgWrite.c in Sources */,
 				D02F38DE19482EE200FB25A5 /* Pt2dApproximateLineAxB.c in Sources */,

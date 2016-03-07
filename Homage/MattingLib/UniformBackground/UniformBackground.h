@@ -107,6 +107,8 @@ public:
 	image_type *GetImage(  image_type *bim, image_type *im );
 	image_type * GetImageAlpha( image_type *im );
 
+	int GetProcessBackgroundSimilarity();
+
 protected:
 
 	int	ProcessCompare( image_type *sim );

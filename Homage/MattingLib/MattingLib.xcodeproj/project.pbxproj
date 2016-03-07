@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 085A49792B8245F481C5BBF2 /* ColorBackground.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5474512F1C8C401E00875FD0 /* UnFill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5474512D1C8C401E00875FD0 /* UnFill.cpp */; };
+		547451301C8C401E00875FD0 /* UnCloseUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5474512E1C8C401E00875FD0 /* UnCloseUp.cpp */; };
+		547451321C8C402C00875FD0 /* UbCompare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 547451311C8C402C00875FD0 /* UbCompare.cpp */; };
 		54C68E511B3173CF008BDDD9 /* UmPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E4D1B3173CF008BDDD9 /* UmPrm.cpp */; };
 		54C68E521B3173CF008BDDD9 /* UnBackgroundM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E4E1B3173CF008BDDD9 /* UnBackgroundM.cpp */; };
 		54C68E531B3173CF008BDDD9 /* UnBackgroundMProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E501B3173CF008BDDD9 /* UnBackgroundMProcess.cpp */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		085A49792B8245F481C5BBF2 /* ColorBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorBackground.cpp; path = ColorBackground/ColorBackground.cpp; sourceTree = SOURCE_ROOT; };
+		5474512D1C8C401E00875FD0 /* UnFill.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnFill.cpp; sourceTree = "<group>"; };
+		5474512E1C8C401E00875FD0 /* UnCloseUp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnCloseUp.cpp; sourceTree = "<group>"; };
+		547451311C8C402C00875FD0 /* UbCompare.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UbCompare.cpp; path = UniformBackground/UbCompare.cpp; sourceTree = "<group>"; };
 		54C68E4D1B3173CF008BDDD9 /* UmPrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UmPrm.cpp; sourceTree = "<group>"; };
 		54C68E4E1B3173CF008BDDD9 /* UnBackgroundM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBackgroundM.cpp; sourceTree = "<group>"; };
 		54C68E4F1B3173CF008BDDD9 /* UnBackgroundM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnBackgroundM.h; sourceTree = "<group>"; };
@@ -158,6 +164,8 @@
 		D0C9C0CB1A67BE4B008F9D1D /* UnBackground */ = {
 			isa = PBXGroup;
 			children = (
+				5474512D1C8C401E00875FD0 /* UnFill.cpp */,
+				5474512E1C8C401E00875FD0 /* UnCloseUp.cpp */,
 				D0C9C0CC1A67BE4B008F9D1D /* bImage.cpp */,
 				D0C9C0CD1A67BE4B008F9D1D /* bImage.h */,
 				D0C9C0CF1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp */,
@@ -176,6 +184,7 @@
 		D0E0A58018D0BC65004435E2 /* UniformBackground */ = {
 			isa = PBXGroup;
 			children = (
+				547451311C8C402C00875FD0 /* UbCompare.cpp */,
 				F130B1051A83D26E0094F801 /* UbEdge.cpp */,
 				D02C8A4B1949A1550078EB83 /* UbPrm.cpp */,
 				D0E0A58118D0BC99004435E2 /* UbBackground.cpp */,
@@ -281,9 +290,11 @@
 				F130B10F1A83D6910094F801 /* PlnAdjustEdge.cpp in Sources */,
 				D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */,
 				F130B1111A83D6910094F801 /* PlnAdjustBottom.cpp in Sources */,
+				547451301C8C401E00875FD0 /* UnCloseUp.cpp in Sources */,
 				D0C9C0E01A67BE4B008F9D1D /* UnPrm.cpp in Sources */,
 				D0C9C0DB1A67BE4B008F9D1D /* UnBackground.cpp in Sources */,
 				D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */,
+				5474512F1C8C401E00875FD0 /* UnFill.cpp in Sources */,
 				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
 				D04D18F51A88AF6E00104D52 /* PlnAdjustCoherent.cpp in Sources */,
 				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
@@ -304,6 +315,7 @@
 				F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */,
 				54C68E511B3173CF008BDDD9 /* UmPrm.cpp in Sources */,
 				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
+				547451321C8C402C00875FD0 /* UbCompare.cpp in Sources */,
 				D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */,
 				D0C9C0DD1A67BE4B008F9D1D /* UnBlob.cpp in Sources */,
 				D0C9C0DC1A67BE4B008F9D1D /* UnBackgroundDrakness.cpp in Sources */,

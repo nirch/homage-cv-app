@@ -64,18 +64,19 @@ int	CUnBackground::ProcessBlobC()
 
 
 
-
+#ifdef _DUMP
 	u_char T[6] = { 255, 0, 128, 64 };
 
-
-//	image_type *im = imageLabelUI_color_image( m_abw, 0, NULL );
-	image_type *im = imageLabelUI_color_imageT( m_abw, T, NULL );
-	IMAGE_DUMP_DUP( im, 8, 1, "ub", 1, "DM-2" );
+	image_type *im1 = imageLabelUI_color_imageT( m_abw, T, NULL );
+	IMAGE_DUMP_DUP( im1, 8, 1, "ub", 1, "DM-2" );
 
 
 
-	im = imageLabelUI_imageID( m_abw, im );
-	IMAGE_DUMP_DUP( im, 8, 1, "ub", 1, "DM-ID-2" );
+	im1 = imageLabelUI_imageID( m_abw, im1 );
+	IMAGE_DUMP_DUP( im1, 8, 1, "ub", 1, "DM-ID-2" );
+	image_destroy( im1, 1 );
+#endif
+
 
 
 
@@ -91,6 +92,7 @@ int	CUnBackground::ProcessBlobC()
 	ProcessBlobSide_test( m_abw, b1, m_hp.y/8, m_abw->im->width, &m_as1 );
 #ifdef _DEBUG
 //	sbA_write( &m_as1, stdout );
+	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
 
 	int n  = ( m_as1.a[i0].j0 - m_as0.a[i0].j1 );
@@ -117,7 +119,7 @@ int	CUnBackground::ProcessBlobC()
 	}
 
 
-	image_destroy( im, 1 );
+	
 
 	return( 1 );
 }

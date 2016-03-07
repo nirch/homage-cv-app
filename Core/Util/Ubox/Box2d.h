@@ -168,7 +168,17 @@ typedef struct rect_type {
 
 #define		BOX_WIDTH( b )	( b->x1 - b->x0)
 #define		BOX_HEIGHT( b )	( b->y1 - b->y0)
+#define		BOX2D_WIDTH( b )	( (b).x1 - (b).x0)
+#define		BOX2D_HEIGHT( b )	( (b).y1 - (b).y0)
 
+
+#define BOX2D_CROP_IMAGE( b, im )	\
+{ \
+	if( b.x0 < 0 )	b.x0 = 0; \
+	if( b.x1 > im->width )	b.x1 = im->width; \
+	if( b.y0 < 0 )	b.y0 = 0; \
+	if( b.y1 > im->height )	b.y1 = im->height; \
+}
 
 
 box2d *box2d_alloc();
@@ -188,6 +198,9 @@ void	box2f_update( box2f_type *b, box2f_type *b1 );
 
 void	box2f_extend( box2f_type *b, int margin );
 
+void	box2d_extend( box2d_type *b, int margin );
+
+
 void	box2f_union( box2f_type ab[], int no, box2f_type *b );
 #define box2d_union box2f_union;
 
@@ -195,6 +208,7 @@ void	box2d_round( box2f_type *b );
 
 void	box2dA_union( box2f_type ab[], int *nB, float d );
 
+void	box2d_and( box2d_type *b0, box2d_type *b1, box2d_type *b );
 
 int	box2f_push_in( box2f_type *b, vec2f_type *p );
 

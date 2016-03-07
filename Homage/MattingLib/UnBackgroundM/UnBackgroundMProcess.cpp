@@ -278,19 +278,9 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 
 			float f = (k - j0)/(float)( j1 - j0 ); 
 
-			//if( f < 0.25 )	f *= 0.5;
-			//else	if( f < 0.75 )	f = f *1.5 - 0.25;
-			//else	f = 0.5 + 0.5*f;
-
-
 			if( f < 0.25 )	f /= 3;
 			else	if( f < 0.75 )	f = 0.5 + ( f - 0.5)*5.0/3 ;
 			else	f = 1 - ( 1-f)/3;
-
-			//if( f < 0.25 )	f *= 0.25;
-			//else	if( f < 0.75 )	f = 0.375 + 0.25*f;//f *1.5 - 0.25;
-			//else	f = 0.5 + 0.25*f;
-
 
 
 			cp->r = (1-f) * bp0->r + f* bp1->r;
