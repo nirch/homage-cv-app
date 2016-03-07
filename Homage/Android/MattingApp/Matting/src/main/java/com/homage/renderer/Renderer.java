@@ -16,8 +16,8 @@ public class Renderer {
 
     public static native int addOutput( int outputType, String file, int width, int height, int duration  );
 
-    public static native int addJavaOutput( Object videoEncoder, String file, int width, int height, int frameRate  );
-    public static native int addJavaOutputA( String className, String file, int width, int height, int frameRate  );
+    /*public static native int addJavaOutput( Object videoEncoder, String file, int width, int height, int frameRate  );
+    public static native int addJavaOutputA( String className, String file, int width, int height, int frameRate  );*/
 
     public static native int setOutputPallete( int outputId, byte[] data );
 

@@ -18,12 +18,13 @@ public class Renderer2 {
 
     public static native int create(float duration, int fps);
 
-    public static native int addImageSource( int id, int imageType, String file );
-    public static native int addJavaSource( int id, Object javaSource);
+    public static native int addSourceImage( int id, int imageType, String file );
+    public static native int addSourceJava( int id, Object javaSource);
 
     public static native int addFX(int id, int sourceId, int effectType, String data );
 
     public static native int addOutput(int id, int outputType, String file, int width, int height, int duration  );
+    public static native int addOutputJava( int id, Object javaOutput);
 
     public static native int process(int id, int width, int height);
     public static native int delete(int id);
