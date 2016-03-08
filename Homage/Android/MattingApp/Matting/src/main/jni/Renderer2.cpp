@@ -25,8 +25,11 @@
 
 #include "HrRendererLib/HrEffect/HrEffectMask.h"
 #include "HrRendererLib/HrEffect/HrEffectPose.h"
-#include "HrRendererLib/HrEffect/HrEffectAlignment.h"
 #include "HrRendererLib/HrEffect/HrEffectMaskGif.h"
+#include "HrRendererLib/HrEffect/HrEffectSepia.h"
+#include "HrRendererLib/HrEffect/HrEffectGray.h"
+#include "HrRendererLib/HrEffect/HrEffectAlpha.h"
+#include "HrRendererLib/HrEffect/HrEffectCartoon.h"
 
 /*
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_init
@@ -91,11 +94,14 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_readFrame( JNIEnv * en
     return result;
 }*/
 
+#define MAX_RENDERERS 8
+
 static int	m_nR2 = 0;
 static CHomageRenderer *m_ar2[16];
 
 CHrSourceI  *HrSource_create2( int type );
-CHrEffectI  *HrEffect_create2( int type, const char *data );
+//CHrOutputI  *HrOutput_create2( int type );
+CHrEffectI  *HrEffect_create2( JNIEnv *env, int type, jobject jObjData, jint jIntData );
 
 
 
@@ -109,7 +115,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_create
             break;
     }
 
-    if (i >= 8) return (-1);
+    if (i >= MAX_RENDERERS) return (-1);
 
     if (i >= m_nR2) m_nR2 = i + 1;
 
@@ -205,7 +211,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceJava
 
 
 JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer2_addFX
-        (JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jstring jdata ) {
+        (JNIEnv * env, jclass c, jint iR, jint sourceId, jint type, jobject jObjData, jint jIntData ) {
     GPLOGF(("<addEffect"));
 
     CHomageRenderer *hr = m_ar2[iR];
@@ -218,11 +224,8 @@ JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer2_addFX
     if (src == NULL)
         return (-1);
 
-    const char *data = ujni_getJString(env, jdata);
 
-    CHrEffectI *ef = HrEffect_create2(type, data);
-
-    ujni_releaseJString(env, jdata, data);
+    CHrEffectI *ef = HrEffect_create2(env, type, jObjData, jIntData);
 
     if (ef == NULL)
         return (-1);
@@ -237,7 +240,7 @@ JNIEXPORT jint JNICALL  Java_com_homage_renderer_Renderer2_addFX
 }
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutput
-    (JNIEnv * env, jclass c, jint iR, jint type, jstring jfile, jint width, jint height, int fjrameSpeed ) {
+    (JNIEnv * env, jclass c, jint iR, jint type, jstring jfile, jint width, jint height, jint fps ) {
     GPLOGF(("<addOutput"));
 
     CHomageRenderer *hr = m_ar2[iR];
@@ -252,7 +255,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutput
     if (type == HR_GIF) {
         CHrOutputGif *out = new CHrOutputGif();
         GPLOGF((" GIF  %d %d", width, height));
-        if (out->Init((char *) file, width, height, fjrameSpeed) < 0) {
+        if (out->Init((char *) file, width, height, 1000 / fps) < 0) {
             ujni_releaseJString(env, jfile, file);
             return (-1);
         }
@@ -270,7 +273,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutput
     if (type == HR_PNG) {
         CHrOutputPng *out = new CHrOutputPng();
         GPLOGF((" PNG"));
-        if (out->Init((char *) file, width, height, fjrameSpeed) < 0) {
+        if (out->Init((char *) file, width, height, 1000 / fps) < 0) {
             ujni_releaseJString(env, jfile, file);
             return (-1);
         }
@@ -386,44 +389,108 @@ CHrSourceI  *HrSource_create2( int type ) {
     return (NULL);
 }
 
-CHrEffectI  *HrEffect_create2( int type, const char *data ) {
+CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIntData ) {
 
     CHrEffectI *effect = NULL;
 
-    if (type == EFFECT_MASK) {
-        effect = new CHrEffectMask();
+    bool convertToString = false;
 
-        GPLOGF((" effect mask"));
-    }
-    else if (type == EFFECT_POSE) {
-        effect = new CHrEffectPose();
+    // Creating
+    switch (type){
+        case EFFECT_MASK:{
+            effect = new CHrEffectMask();
+            convertToString = true;
 
-        GPLOGF((" effect pose"));
-    }
-    else if (type == EFFECT_ALIGNMENT) {
-        effect = new CHrEffectAlignment();
+            GPLOGF((" effect mask"));
+            break;
+        }
+        case EFFECT_POSE:{
+            effect = new CHrEffectPose();
+            convertToString = true;
+            int f =0;
 
-        GPLOGF((" effect ALIGNMENT"));
+            GPLOGF((" effect pose"));
+            break;
+        }
+        case EFFECT_MASKGIF:{
+            effect = new CHrEffectMaskGif();
+            convertToString = true;
 
-    }
-    else if (type == EFFECT_MASKGIF) {
-        effect = new CHrEffectMaskGif();
+            GPLOGF((" effect MASK GIF"));
+            break;
+        }
+        case EFFECT_SEPIA:{
+            effect = new CHrEffectSepia();
 
-        GPLOGF((" effect MASK GIF"));
-    }
+            GPLOGF((" effect sepia"));
+            break;
+        }
+        case EFFECT_GRAY:{
+            effect = new CHrEffectGray();
 
+            GPLOGF((" effect gray"));
+            break;
+        }
+        case EFFECT_ALPHA:{
+            effect = new CHrEffectAlpha();
+            convertToString = true;
 
-    if (type == EFFECT_MASK || type == EFFECT_MASKGIF) {
-        if (effect->Init((char *) data) < 0) {
+            GPLOGF((" effect alpha"));
+            break;
+        }
+        case EFFECT_CARTOON:{
+            effect = new CHrEffectCartoon();
 
-            delete effect;
-
-            GPLOGF(("Init mask/maskgif effect failed >\n"));
-            return (NULL);
+            GPLOGF((" effect cartoon"));
+            break;
         }
     }
-    else if (type == EFFECT_POSE) {
-        effect->InitFromData((char *) data);
+
+
+    const char *dataStr = NULL;
+
+    if (convertToString) {
+        dataStr = ujni_getJString(env, (jstring)jObjData);
+    }
+
+    // Initializing
+    switch (type){
+        case EFFECT_MASK:
+        case EFFECT_MASKGIF:{
+            if (effect->Init((char *) dataStr) < 0) {
+
+                delete effect;
+                effect = NULL;
+
+                GPLOGF(("Init mask/maskgif effect failed >\n"));
+            }
+            break;
+        }
+        case EFFECT_POSE:
+        case EFFECT_ALPHA: {
+            effect->InitFromData((char *) dataStr);
+            break;
+        }
+        case EFFECT_SEPIA:{
+
+            // Converting the int color to rgb normalized values
+            float r = ((jIntData & 0xFF0000) >> 16) / 255.0;
+            float g = ((jIntData & 0x00FF00) >> 8) / 255.0;
+            float b = (jIntData & 0x0000FF) / 255.0;
+
+            ((CHrEffectSepia*)effect)->Init(r, g, b, NULL);
+            break;
+        }
+        case EFFECT_CARTOON:{
+
+            ((CHrEffectCartoon*)effect)->Init(jIntData, NULL);
+            break;
+        }
+    }
+
+
+    if (dataStr != NULL){
+        ujni_releaseJString(env, (jstring)jObjData, dataStr);
     }
 
     return (effect);

@@ -775,6 +775,7 @@ bImage_fill_gap( image_type *bim, int a[], int side )
 }
 
 
+#ifdef _AA_
 int
 bImage_fill_gapR( image_type *bim, int a[] )
 {
@@ -786,7 +787,8 @@ bImage_fill_gapR( image_type *bim, int a[] )
 	for( i = h-1; i > h-24 ; i-- ){
 		if( a[i] < 0 )	continue;
 
-		if( a[i] > a[i-1] )	break;
+		if( a[i] > a[i-1] && a[i-1] > a[i-2] && a[i] > bim->width - 10 )
+			break;
 
 		a[i] = -1;
 	}
@@ -806,14 +808,15 @@ int
 	for( i = h-1; i > h-24 ; i-- ){
 		if( a[i] < 0 )	continue;
 
-		if( a[i] < a[i-1] )	break;
+		if( a[i] < a[i-1] && a[i-1] < a[i-2] && a[i] < 10 )
+			break;
 
 		a[i] = -1;
 	}
 
 	return( 1 );
 }
-
+#endif
 
 int
 bImage_fill_gap_up( image_type *bim, int a0[], int a1[] )
@@ -927,6 +930,7 @@ bImage_fill_gap( image_type *bim, int a[], int i0, int i1, int side )
 			bp->r = bp0->r;
 			bp->g = bp0->g;
 			bp->b = bp0->b;
+			bp->n = 1;
 		}
 	}
 

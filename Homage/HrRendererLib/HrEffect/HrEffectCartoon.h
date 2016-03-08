@@ -14,13 +14,13 @@
 
 
 
-class CHrEffectCortoon : public CHrEffectI
+class CHrEffectCartoon : public CHrEffectI
 {
 public:
 	
-	CHrEffectCortoon();
+	CHrEffectCartoon();
 
-	virtual ~CHrEffectCortoon();
+	virtual ~CHrEffectCartoon();
 
 	void DeleteContents();
 

@@ -182,6 +182,7 @@ LOCAL_SRC_FILES := 	\
 	./Image/ImageStretch.c \
 	./Image/ImageSubtruct.c \
 	./Image/ImageTransparent.cpp \
+	./Image/ImageSepia.cpp \
 	./Image/PaletteTool.c \
 	./Image1/Image1EdgeSobol.c \
 	./Image1/Image1Tool.c \

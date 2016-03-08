@@ -27,7 +27,20 @@
 
 
 
- int	bImage_fill( image_type *bim, int a0[], int a1[] );
+ //int	bImage_fill( image_type *bim, int a0[], int a1[] );
+
+
+
+int CUniformBackground::GetProcessBackgroundSimilarity()
+{
+
+
+	if( m_unBackground == NULL )
+		return( -1 );
+
+
+	return m_unBackground->GetSimilarity();
+}
 
 
 
@@ -97,7 +110,7 @@ int	ret;
 
 
 
-
+#ifdef _AA_
 int
 bImage_fill( image_type *bim, int a0[], int a1[] )
 {
@@ -177,7 +190,7 @@ bImage_fill( image_type *bim, int a0[], int a1[] )
 	return( 1 );
 }
 
-
+#endif
 
 
 

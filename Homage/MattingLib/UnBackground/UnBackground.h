@@ -57,6 +57,7 @@ public:
 
 	int GetState()	{ return( m_state ); }
 	int GetHead()	{ return( m_iHead ); }
+	int GetSimilarity()	{ return( m_similarity ); }
 
 	image_type *	GetBim( image_type *bim  );
 
@@ -112,6 +113,9 @@ private:
 
 	pt2dA_type * ProcessBlobD_point( imageLabel_type *abw, pt2dA_type *apt );
 
+
+	int	ProcessCloseUp();
+
 private:
 	int	m_iFrame;
 
@@ -157,6 +161,8 @@ public:
 	image_type *m_imMask;
 
 	int	m_state;
+
+	int	m_similarity;
 
 	int	m_closeUp;
 

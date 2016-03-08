@@ -253,7 +253,7 @@ int	ret;
 
 
 	BIMAGE_DUMP( m_bim, m_N, "ub", 1, "A" );	
-
+	
 
 
 	m_bimD = bImage_grad_c( m_bim, m_bimD );
@@ -272,10 +272,11 @@ int	ret;
 
 	ret = ProcessBlobC();
 
+	
 //#ifdef _DEBUG
 //	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 //#endif
-#define _OLD
+//#define _OLD
 #ifdef _OLD
 	if( ret < 0 ){
 
@@ -313,6 +314,7 @@ int	ret;
 	}
 
 
+
 #ifdef _DEBUG
 	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
@@ -328,6 +330,13 @@ int	ret;
 	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
 	
+	if( m_closeUp )
+		ProcessCloseUp();
+
+
+#ifdef _DEBUG
+	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
+#endif
 
 	ProcessFill();
 
@@ -359,7 +368,7 @@ int	ret;
 
 
 
-
+#ifdef _AA_
 int	bImage_fill( image_type *bim, int a0[], int a1[] );
 
 
@@ -377,12 +386,15 @@ int	CUnBackground::ProcessFill()
 	}
 	a0[i+1] = a1[i+1] = -1;
 
+
 //#ifdef _NEWA_
-	if( m_closeUp ){
-		bImage_fill_gapR( m_bim, a1 );
-		bImage_fill_gapL( m_bim, a0 );
-	}
+	//if( m_closeUp ){
+	//	bImage_fill_gapR( m_bim, a1 );
+	//	bImage_fill_gapL( m_bim, a0 );
+	//}
 //#endif
+
+
 
 	bImage_fill_gap( m_bim, a0, F_LEFT );
 	bImage_fill_gap( m_bim, a1, F_RIGHT );
@@ -405,7 +417,7 @@ int	CUnBackground::ProcessFill()
 
 	return( 1 );
 }
-
+#endif
 
 
 int image1_mask_sbA( image_type *im, sbA_type *as )

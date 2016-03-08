@@ -153,6 +153,17 @@ box2f_extend( box2f_type *b, int margin )
 
 
 void
+	box2d_extend( box2d_type *b, int margin )
+{
+	b->x0 -= margin;
+	b->x1 += margin;
+
+	b->y0 -= margin;
+	b->y1 += margin;
+}
+
+
+void
 box2f_union( box2f_type ab[], int no, box2f_type *b )
 {
 int	i;
@@ -410,3 +421,13 @@ box2f_push_in( box2f_type *b, vec2f_type *p )
 }
 
 
+
+void 
+box2d_and( box2d_type *b0, box2d_type *b1, box2d_type *b )
+{
+	b->x0 = MAX( b0->x0, b1->x0 );
+	b->x1 = MIN( b0->x1, b1->x1 );
+
+	b->y0 = MAX( b0->y0, b1->y0 );
+	b->y1 = MIN( b0->y1, b1->y1 );
+}

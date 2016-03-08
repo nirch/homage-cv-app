@@ -11,6 +11,10 @@ LOCAL_SRC_FILES := 	\
 	HrEffect/HrEffectMask.cpp \
 	HrEffect/HrEffectPose.cpp \
 	HrEffect/HrEffectMaskGif.cpp \
+	HrEffect/HrEffectGray.cpp \
+	HrEffect/HrEffectSepia.cpp \
+	HrEffect/HrEffectCartoon.cpp \
+	HrEffect/HrEffectAlpha.cpp \
 	HrOutput/HrOutputGif.cpp \
 	HrOutput/HrOutputPng.cpp \
 	HrOutput/HrOutputJava.cpp \

@@ -27,7 +27,7 @@ static image_type *	image4_cartoon( image_type *sim, palette_type *pl, image_typ
 
 
 
-CHrEffectCortoon::CHrEffectCortoon()
+CHrEffectCartoon::CHrEffectCartoon()
 {
 	m_id = EFFECT_CARTOON;
 
@@ -38,7 +38,7 @@ CHrEffectCortoon::CHrEffectCortoon()
 
 }
 
-CHrEffectCortoon::~CHrEffectCortoon()
+CHrEffectCartoon::~CHrEffectCartoon()
 {
 	DeleteContents();
 }
@@ -47,7 +47,7 @@ CHrEffectCortoon::~CHrEffectCortoon()
 
 
 
-void CHrEffectCortoon::DeleteContents()
+void CHrEffectCartoon::DeleteContents()
 {
 
 
@@ -64,14 +64,14 @@ void CHrEffectCortoon::DeleteContents()
 
 
 
-int CHrEffectCortoon::Init( int nColor, char *file )
+int CHrEffectCartoon::Init( int nColor, char *file )
 {
 	m_nColor = nColor;
 	return( 1 );
 }
 
 
-int	CHrEffectCortoon::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectCartoon::Process( image_type *sim, int iFrame, image_type **im ) 
 {
 	if( m_palette == NULL ){
 
@@ -94,7 +94,7 @@ int	CHrEffectCortoon::Process( image_type *sim, int iFrame, image_type **im )
 
 
 
-int	CHrEffectCortoon::Close()
+int	CHrEffectCartoon::Close()
 {
 		DeleteContents();
 

@@ -19,7 +19,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_create(JNIEnv *, jclas
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage(JNIEnv *, jclass, jint, jint, jstring);
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceJava(JNIEnv *, jclass, jint, jobject);
 
-JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addFX(JNIEnv *, jclass, jint, jint, jint, jstring);
+JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addFX(JNIEnv *, jclass, jint, jint, jint, jobject, jint);
 
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutput(JNIEnv *, jclass, jint, jint, jstring, jint, jint, jint);
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addOutputJava(JNIEnv *, jclass, jint, jobject);

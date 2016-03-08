@@ -32,6 +32,7 @@ LOCAL_SRC_FILES := 	\
 	UniformBackground/UbSmooth.cpp \
 	UniformBackground/UbThin.cpp \
 	UniformBackground/UbUpdate.cpp \
+	UniformBackground/UbCompare.cpp \
 	UniformBackground/UniformBackground.cpp \
 	UnBackground/bImage.cpp \
 	UnBackground/TestSilhouetteDeviation.cpp \
@@ -43,6 +44,8 @@ LOCAL_SRC_FILES := 	\
 	UnBackground/UnBlobD.cpp \
 	UnBackground/UnPrm.cpp \
 	UnBackground/UnState.cpp \
+	UnBackground/UnCloseUp.cpp \
+	UnBackground/UnFill.cpp \
 	UnBackgroundM/UnBackgroundM.cpp \
 	UnBackgroundM/UnBackgroundMProcess.cpp \
 	UnBackgroundM/UmPrm.cpp \
