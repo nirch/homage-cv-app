@@ -16,181 +16,257 @@
 #include "../Core/ImageLib/ImageType/ImageTool.h"
 
 
-static int m_intWidth;
-static int m_intHeight;
-static int m_intThreadsCount;
 
-static CUniformBackground **m_ub;
-static image_type **m_imgYUV;
-static image_type **m_imgRGB;
-static image_type **m_imgRGBCropped;
-static image_type **m_imgAndroid;
+#define MAX_MATTING 8
 
+static int	m_nM2 = 0;
+static CUniformBackground *m_ub[MAX_MATTING];
+static int m_intWidth[MAX_MATTING];
+static int m_intHeight[MAX_MATTING];
+static image_type *m_imgYUV[MAX_MATTING];
+static image_type *m_imgRGB[MAX_MATTING];
+static image_type *m_imgRGBCropped[MAX_MATTING];
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_init
-        (JNIEnv * env, jclass c, jstring jprmFile, jstring jctrFile, jint width, jint height,
-         jint threadsCount) {
-    GPLOGF(("<  init-J ..."));
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_create
+        (JNIEnv * env, jclass c, jstring jprmFile, jstring jctrFile, jint width, jint height) {
+    GPLOGF(("<Matting2 Create"));
 
-    const char *prmFile = ujni_getJString(env, jprmFile);
-    const char *ctrFile = ujni_getJString(env, jctrFile);
-
-    if (m_ub == NULL) {
-
-        m_intWidth = width;
-        m_intHeight = height;
-        m_intThreadsCount = threadsCount;
-
-        m_ub = new CUniformBackground*[threadsCount];
-        m_imgYUV = new image_type*[threadsCount]; // First height because this is how the parameters of the method
-        m_imgRGB = new image_type*[threadsCount];
-        m_imgRGBCropped = new image_type*[threadsCount];
-        m_imgAndroid = new image_type*[threadsCount];
-
-
-        for (int i = 0; i < threadsCount; ++i) {
-            m_ub[i] = new CUniformBackground();
-            m_ub[i]->Init((char *) prmFile, (char *) ctrFile, width, height);
-
-            m_imgYUV[i] = NULL;
-            m_imgRGB[i] = NULL;
-            m_imgRGBCropped[i] = NULL;
-            m_imgAndroid[i] = NULL;
-        }
+    int i;
+    for (i = 0; i < m_nM2; i++) {
+        if (m_ub[i] == NULL)
+            break;
     }
 
+    if (i >= MAX_MATTING) return (-1);
+
+    if (i >= m_nM2) m_nM2 = i + 1;
+
+    // Creates the new uniform background
+    m_ub[i] = new CUniformBackground();
+
+    // Initializing it
+    const char *prmFile = ujni_getJString(env, jprmFile);
+    const char *ctrFile = ujni_getJString(env, jctrFile);
+    int ret = m_ub[i]->Init((char *) prmFile, (char *) ctrFile, width, height);
     ujni_releaseJString(env, jprmFile, prmFile);
     ujni_releaseJString(env, jctrFile, ctrFile);
 
-    GPLOGF((" >\n"));
+    if (ret != 1)
+        return -1;
 
-    return 1;
+    m_intWidth[i] = width;
+    m_intHeight[i] = height;
+
+    // Preparing its members
+    m_imgYUV[i] = NULL;
+    m_imgRGB[i] = NULL;
+    m_imgRGBCropped[i] = NULL;
+
+    GPLOGF((" %d>\n", i));
+
+    return (i);
 }
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_release
-        (JNIEnv *env, jclass c) {
 
-    for (int i = 0; i < m_intThreadsCount; ++i) {
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_delete
+        (JNIEnv *env, jclass c, jint id) {
 
-        if (m_ub[i]) {
-            delete m_ub[i];
-            m_ub[i] = NULL;
-        }
-        if (m_imgYUV[i]) {
-            image_destroy(m_imgYUV[i], 1);
-            m_imgYUV[i] = NULL;
-        }
+    if (m_ub[id]) {
+        delete m_ub[id];
+        m_ub[id] = NULL;
+    }
+    if (m_imgYUV[id]) {
+        image_destroy(m_imgYUV[id], 1);
+        m_imgYUV[id] = NULL;
+    }
 
-        if (m_imgRGB[i]) {
-            image_destroy(m_imgRGB[i], 1);
-            m_imgRGB[i] = NULL;
-        }
+    if (m_imgRGB[id]) {
+        image_destroy(m_imgRGB[id], 1);
+        m_imgRGB[id] = NULL;
+    }
 
-        if (m_imgRGBCropped[i]) {
-            image_destroy(m_imgRGBCropped[i], 1);
-            m_imgRGBCropped[i] = NULL;
-        }
-
-        if (m_imgAndroid[i]) {
-            image_destroy(m_imgAndroid[i], 1);
-            m_imgAndroid[i] = NULL;
-        }
+    if (m_imgRGBCropped[id]) {
+        image_destroy(m_imgRGBCropped[id], 1);
+        m_imgRGBCropped[id] = NULL;
     }
 
     return 1;
 }
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_getFormattedImage
-        (JNIEnv *env, jclass c, jint threadIdx, jbyteArray buffer, jint width, jint height, jint orientation,
-         jbyteArray resRGBAImage) {
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
-    u_char *resRGBA = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBAImage, NULL);
+image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation, bool crop) {
 
-    if (m_imgYUV[threadIdx] == NULL)
-        m_imgYUV[threadIdx] = image_createYUV420(height, width, NULL);
+    // If the existing YUV image is not on the same size - so we destroy it
+    if (m_imgYUV[iM] != NULL && (m_imgYUV[iM]->width != width || m_imgYUV[iM]->height != height)){
+        image_destroy(m_imgYUV[iM], 1);
+        m_imgYUV[iM] = NULL;
+    }
 
-    memcpy(m_imgYUV[threadIdx]->data, data, width * height * 1.5);
+    // Creates new YUV image
+    if (m_imgYUV[iM] == NULL)
+        m_imgYUV[iM] = image_createYUV420(height, width, NULL);
+
+    memcpy(m_imgYUV[iM]->data, yuv, width * height * 1.5);
 
     switch (orientation) {
         case 0:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
+            m_imgRGB[iM] = imageNV21_to_RGB(m_imgYUV[iM], m_imgRGB[iM]);
             break;
         case 90:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB_swap(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
-            image_flipV(m_imgRGB[threadIdx]);
+            m_imgRGB[iM] = imageNV21_to_RGB_swap(m_imgYUV[iM], m_imgRGB[iM]);
+            image_flipV(m_imgRGB[iM]);
             break;
         case 270:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB_swap(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
+            m_imgRGB[iM] = imageNV21_to_RGB_swap(m_imgYUV[iM], m_imgRGB[iM]);
             break;
     }
 
-    m_imgRGBCropped[threadIdx] = image_crop(m_imgRGB[threadIdx], 0, 0, m_intWidth, m_intHeight, m_imgRGBCropped[threadIdx]);
+    if (!crop)
+        return m_imgRGB[iM];
 
-    //image_flipH(m_imgRGBCropped[threadIdx]);
 
-    // Returning the rgba Image
-    //m_imgAndroid[threadIdx] = image_android(m_imgRGBCropped[threadIdx], m_imgAndroid[threadIdx]);
-    //memcpy(resRGBA, m_imgAndroid[threadIdx]->data, m_intWidth * m_intHeight * 4);
-
-    memcpy(resRGBA, m_imgRGBCropped[threadIdx]->data, m_intWidth * m_intHeight * 3);
-
-    (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
-    (env->functions)->ReleaseByteArrayElements(env, resRGBAImage, (jbyte *) resRGBA, 0);
-
-    return 1;
+    m_imgRGBCropped[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM],
+                                            m_imgRGBCropped[iM]);
+    return m_imgRGBCropped[iM];
 }
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_process
-        (JNIEnv *env, jclass c, jint threadIdx, jbyteArray buffer, jint width, jint height, jint orientation,
-         jbyteArray resRGBAImage, jbyteArray resMaskChannel) {
-    if (m_ub[threadIdx] == NULL)
-        return (-1);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	GPLOGF( (" 1") );
-    u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
-    u_char *resRGBA = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBAImage, NULL);
-    u_char *resMask = (u_char * )(env->functions)->GetByteArrayElements(env, resMaskChannel, NULL);
-    if (!data || !resRGBA || !resMask)
-        return (-1);
+image_type *getImageRGB(JNIEnv *env, jint iM, jbyteArray buffer, jint width, jint height){
+    if (m_ub[iM] == NULL)
+        return (NULL);
 
-    if (m_imgYUV[threadIdx] == NULL)
-        m_imgYUV[threadIdx] = image_createYUV420(height, width, NULL);
+    image_type *img = m_imgRGBCropped[iM];
+    if (buffer != NULL){
+        u_char *data = (u_char *)(env->functions)->GetByteArrayElements(env, buffer, NULL);
 
-    memcpy(m_imgYUV[threadIdx]->data, data, width * height * 1.5);
+        m_imgRGB[iM] = image_realloc( m_imgRGB[iM], height, width, 3, IMAGE_TYPE_U8, 1 );
 
-    switch (orientation) {
-        case 0:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
-            break;
-        case 90:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB_swap(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
-            image_flipV(m_imgRGB[threadIdx]);
-            break;
-        case 270:
-            m_imgRGB[threadIdx] = imageNV21_to_RGB_swap(m_imgYUV[threadIdx], m_imgRGB[threadIdx]);
-            break;
+        memcpy(m_imgRGB[iM]->data, data, width * height * 3);
+        img = m_imgRGBCropped[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM], m_imgRGBCropped[iM]);
+
+        (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
     }
 
-    m_imgRGBCropped[threadIdx] = image_crop(m_imgRGB[threadIdx], 0, 0, m_intWidth, m_intHeight, m_imgRGBCropped[threadIdx]);
+    return img;
+}
 
-    //image_flipH(m_imgRGBCropped[threadIdx]);
+image_type *getImageYUV(JNIEnv *env, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage){
+    if (m_ub[iM] == NULL)
+        return (NULL);
 
-    // Returning the rgba Image
-    //m_imgAndroid[threadIdx] = image_android(m_imgRGBCropped[threadIdx], m_imgAndroid[threadIdx]);
-    //memcpy(resRGBA, m_imgAndroid[threadIdx]->data, m_intWidth * m_intHeight * 4);
+    image_type *img = m_imgRGBCropped[iM];
+    if (buffer != NULL) {
+        u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
 
-    memcpy(resRGBA, m_imgRGBCropped[threadIdx]->data, m_intWidth * m_intHeight * 3);
+        img = yuv2rgb(iM, data, width, height, orientation, true);
 
+        (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
 
-    // Returning the mask alpha single channel - Image
+        if (resRGBImage != NULL) {
+            // Copying the rgb
+            u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
+            memcpy(resRGB, img->data, m_intWidth[iM] * m_intHeight[iM] * 3);
+            (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
+        }
+    }
+
+    return img;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int processImg(JNIEnv *env, int iM, image_type *img, jbyteArray resMaskChannel){
+
+    if (img == NULL)
+        return (-1);
+
     image_type *resImg;
-    m_ub[threadIdx]->Process(m_imgRGBCropped[threadIdx], 1, &resImg);
-    memcpy(resMask, resImg->data, m_intWidth * m_intHeight);
+    int retVal = m_ub[iM]->Process(img, 1, &resImg);
 
-    (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
-    (env->functions)->ReleaseByteArrayElements(env, resRGBAImage, (jbyte *) resRGBA, 0);
+    // Copying the result mask
+    u_char *resMask = (u_char *)(env->functions)->GetByteArrayElements(env, resMaskChannel, NULL);
+    memcpy(resMask, resImg->data, m_intWidth[iM] * m_intHeight[iM]);
     (env->functions)->ReleaseByteArrayElements(env, resMaskChannel, (jbyte *) resMask, 0);
 
-    return 123;
+    return retVal;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_yuv2rgb
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jboolean crop,
+         jbyteArray resRGBImage) {
+
+    if (m_ub[iM] == NULL)
+        return (-1);
+
+    u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
+    u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
+
+    // Converting
+    image_type *rgbImage = yuv2rgb(iM, data, width, height, orientation, crop);
+
+    // Copying the result
+    memcpy(resRGB, rgbImage->data, rgbImage->width * rgbImage->height * 3);
+
+    (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
+    (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
+
+    return 1;
+}
+
+
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectRGB
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height) {
+
+    image_type *img = getImageRGB(env, iM, buffer, width, height);
+
+    if (img == NULL)
+        return (-1);
+
+    return m_ub[iM]->ProcessBackground(img, 1);
+}
+
+
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectYUV
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage) {
+
+    image_type *img = getImageYUV(env, iM, buffer, width, height, orientation, resRGBImage);
+
+    if (img == NULL)
+        return (-1);
+
+    return m_ub[iM]->ProcessBackground(img, 1);
+}
+
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundRGB
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jbyteArray resMaskChannel) {
+
+    image_type *img = getImageRGB(env, iM, buffer, width, height);
+
+    if (img == NULL)
+        return (-1);
+
+    return processImg(env, iM, img, resMaskChannel);
+}
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundYUV
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation,
+         jbyteArray resRGBImage, jbyteArray resMaskChannel) {
+
+    image_type *img = getImageYUV(env, iM, buffer, width, height, orientation, resRGBImage);
+
+    if (img == NULL)
+        return (-1);
+
+    return processImg(env, iM, img, resMaskChannel);
 }
