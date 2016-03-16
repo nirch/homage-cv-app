@@ -101,7 +101,7 @@ int CHrEffectMask::Init( char *file )
 }
 
 
-int	CHrEffectMask::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectMask::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 
 	m_im = imageA_merge_alpha( sim, m_alphaIm, m_im );

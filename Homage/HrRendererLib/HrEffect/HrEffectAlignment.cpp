@@ -126,7 +126,7 @@ int CHrEffectAlignment::InitFromData( char *data0, char *data )
 }
 
 
-int	CHrEffectAlignment::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectAlignment::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 
 

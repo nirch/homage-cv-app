@@ -32,7 +32,7 @@ public:
 	virtual int Init( char *file )	{return( -1 ); }
 	virtual int InitFromData( char *data )	{return( -1 ); }
 
-	virtual int	Process( image_type *sim, int iFrame, image_type **im ) = 0;
+	virtual int	Process( image_type *sim, int iFrame, long long timeStamp,image_type **im ) = 0;
 
 	virtual int Close() = 0;
 

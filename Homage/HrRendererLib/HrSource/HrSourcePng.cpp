@@ -130,7 +130,7 @@ image_type	*sim;
 	imageT_negative_alpha( m_im, m_im );
 
 
-	ProcessEffect( m_im, iFrame, im );
+	ProcessEffect( m_im, iFrame, timeStamp, im );
 
 	image_destroy( sim, 1 );
 

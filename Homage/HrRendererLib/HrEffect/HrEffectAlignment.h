@@ -30,7 +30,7 @@ public:
 	int Init( char *inFile );
 	int InitFromData( char *data0, char *data );
 
-	 int Process( image_type *sim, int iFrame, image_type **im );
+	 int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
 
 	int	Close();

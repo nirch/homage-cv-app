@@ -241,7 +241,7 @@ int CHrEffectMorphing::InitFromData( char *data )
 
 
 
-int	CHrEffectMorphing::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectMorphing::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 
 

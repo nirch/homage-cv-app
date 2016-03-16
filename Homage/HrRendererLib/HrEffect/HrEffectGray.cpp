@@ -67,7 +67,7 @@ int CHrEffectGray::Init( char *file )
 }
 
 
-int	CHrEffectGray::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectGray::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	m_im = image4_gray_efect( sim, m_im );
 

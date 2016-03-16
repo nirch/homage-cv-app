@@ -89,7 +89,7 @@ int	CHrSourceGif::ReadFrame( int iFrame, long long timeStamp, image_type **im )
     }
 
     // Process effects.
-	ProcessEffect( m_im, iFrame, im );
+	ProcessEffect( m_im, iFrame, timeStamp, im );
 
 	m_iFrame = iFrame;
 	return( 1 );

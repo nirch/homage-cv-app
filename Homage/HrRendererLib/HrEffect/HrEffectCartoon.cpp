@@ -71,7 +71,7 @@ int CHrEffectCartoon::Init( int nColor, char *file )
 }
 
 
-int	CHrEffectCartoon::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectCartoon::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	if( m_palette == NULL ){
 

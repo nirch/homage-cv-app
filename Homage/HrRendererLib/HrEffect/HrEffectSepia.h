@@ -26,7 +26,7 @@ public:
 
 	int Init( float fR, float fG, float fB, char *file );
     
-    int Process( image_type *sim, int iFrame, image_type **im );
+    int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
     int GetPose( int iFrame, vec2f_type *p, float *angle, float *scale );
 

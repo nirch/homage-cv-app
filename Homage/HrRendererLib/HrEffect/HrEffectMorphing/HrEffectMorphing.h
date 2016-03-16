@@ -31,7 +31,7 @@ public:
 	int InitFromData( char *data );
 
 
-	 int Process( image_type *sim, int iFrame, image_type **im );
+	 int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
 	int	GetPose( tfA_type *atf, int iFrame, float *T, float *a );
 

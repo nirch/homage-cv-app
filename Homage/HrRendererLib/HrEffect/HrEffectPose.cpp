@@ -124,7 +124,7 @@ int CHrEffectPose::InitFromData( char *data )
 }
 
 
-int	CHrEffectPose::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectPose::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	vec2f_type	p;
 	float rx,	ry,	rz,	scale;

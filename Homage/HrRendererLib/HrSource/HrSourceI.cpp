@@ -166,14 +166,14 @@ long long CHrSourceI::CalculatedTS(long long timeStamp)
     return ts;
 }
 
-int CHrSourceI::ProcessEffect( image_type *sim, int iFrame, image_type **im )
+int CHrSourceI::ProcessEffect( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 int	i;
 
 	*im = sim;
 
 	for( i = 0 ; i < m_nE ; i++ ){
-		m_ae[i]->Process( sim, iFrame, im );
+		m_ae[i]->Process( sim, iFrame, timeStamp, im );
 		sim = *im;
 	}
 

@@ -64,7 +64,7 @@ int CHrEffectSepia::Init(  float fR, float fG, float fB, char *file )
 }
 
 
-int	CHrEffectSepia::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectSepia::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	m_im = image_sepia_efect( sim, m_fR, m_fG, m_fG,  m_switchBR, m_im);
 

@@ -81,7 +81,7 @@ int CHrEffectAlpha::InitFromData( char *data )
     return( 1 );
 }
 
-int	CHrEffectAlpha::Process( image_type *sim, int iFrame, image_type **im ) 
+int	CHrEffectAlpha::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	float	a;
 	GetPose( m_atf, iFrame, &a );

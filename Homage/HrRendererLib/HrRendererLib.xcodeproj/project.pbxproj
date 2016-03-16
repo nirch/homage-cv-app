@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0815A5BD1C9720E600AD7C01 /* HrEffectMaskWithSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0815A5BB1C9720E600AD7C01 /* HrEffectMaskWithSource.cpp */; };
 		106E2D99620243F6AEA48608 /* HrSourceGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB86C74AD14E8FA2B0BFE1 /* HrSourceGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		5120090751A6422DB3A19BED /* HrOutputGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA549ECC0C0B4E40B3C0F1FC /* HrOutputGif.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		541D24801C624C590095B44A /* HrEffectMorphing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 541D247E1C624C590095B44A /* HrEffectMorphing.cpp */; };
@@ -27,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		02C98FCC108E423989C880FF /* HrOutputI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputI.h; path = HrOutput/HrOutputI.h; sourceTree = SOURCE_ROOT; };
+		0815A5BB1C9720E600AD7C01 /* HrEffectMaskWithSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HrEffectMaskWithSource.cpp; path = HrEffect/HrEffectMaskWithSource.cpp; sourceTree = "<group>"; };
+		0815A5BC1C9720E600AD7C01 /* HrEffectMaskWithSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectMaskWithSource.h; path = HrEffect/HrEffectMaskWithSource.h; sourceTree = "<group>"; };
 		0A38D6FEDC4940509F60690B /* libHrRendererLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHrRendererLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2A64373BC2424F9AF4B6F4 /* HrEffectI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrEffectI.h; path = HrEffect/HrEffectI.h; sourceTree = SOURCE_ROOT; };
 		18D19644009C48818E0FE1A9 /* HrOutputGreenWin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HrOutputGreenWin.h; path = HrOutput/HrOutputGreenWin.h; sourceTree = SOURCE_ROOT; };
@@ -91,6 +94,7 @@
 		8B1E1C5AC29749E1948F4173 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				0815A5BB1C9720E600AD7C01 /* HrEffectMaskWithSource.cpp */,
 				541D247E1C624C590095B44A /* HrEffectMorphing.cpp */,
 				541D247F1C624C590095B44A /* MorphingPlnMap.cpp */,
 				546C4C711C50D9EB00EA64DC /* HrEffectCartoon.cpp */,
@@ -98,9 +102,7 @@
 				5477719D1C4FD07D0042A524 /* HrEffectGray.cpp */,
 				5477719E1C4FD07D0042A524 /* HrEffectSepia.cpp */,
 				54B9871B1B3AFD410012387E /* HrEffectMaskGif.cpp */,
-				54B9871C1B3AFD410012387E /* HrEffectMaskGif.h */,
 				54B9871D1B3AFD410012387E /* HrEffectAlignment.cpp */,
-				54B9871E1B3AFD410012387E /* HrEffectAlignment.h */,
 				C81184561E014C9197D0FE67 /* HomageRenderer.cpp */,
 				3232B9AA074E4B74AC35CF2E /* HrEffectI.cpp */,
 				1B3160F80C5A4C8B868FF007 /* HrEffectMask.cpp */,
@@ -116,6 +118,9 @@
 		970C00B9B348496AAEE84342 /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
+				0815A5BC1C9720E600AD7C01 /* HrEffectMaskWithSource.h */,
+				54B9871C1B3AFD410012387E /* HrEffectMaskGif.h */,
+				54B9871E1B3AFD410012387E /* HrEffectAlignment.h */,
 				541D24821C624C640095B44A /* HrEffectMorphing.h */,
 				541D24831C624C640095B44A /* MorphingPlnMap.h */,
 				546C4C731C50D9F500EA64DC /* HrEffectCartoon.h */,
@@ -202,6 +207,7 @@
 			files = (
 				F29186AFF9704B59A5D9A1AE /* HomageRenderer.cpp in Sources */,
 				B146982E045748D2B30B4BA3 /* HrEffectI.cpp in Sources */,
+				0815A5BD1C9720E600AD7C01 /* HrEffectMaskWithSource.cpp in Sources */,
 				541D24801C624C590095B44A /* HrEffectMorphing.cpp in Sources */,
 				54B987201B3AFD410012387E /* HrEffectAlignment.cpp in Sources */,
 				546C4C721C50D9EB00EA64DC /* HrEffectCartoon.cpp in Sources */,

@@ -39,7 +39,7 @@ public:
 
 	void MergeAlpha( image_type *sim );
 
-	int ProcessEffect( image_type *sim, int iFrame, image_type **im );
+	int ProcessEffect( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
 	int AddEffect( CHrEffectI *e );
 
