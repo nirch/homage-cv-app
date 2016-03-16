@@ -145,7 +145,7 @@ int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 	m_env->ReleaseByteArrayElements(dataArr, pixles, 0);
 
 	// Process effects.
-	ProcessEffect( m_im, iFrame, im );
+	ProcessEffect( m_im, iFrame, timeStamp, im );
 
 	GPLOGF( (" %d\n>", 1 ));
 
