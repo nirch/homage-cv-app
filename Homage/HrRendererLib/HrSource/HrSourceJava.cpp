@@ -101,7 +101,7 @@ int CHrSourceJava::SetJavaSource( JNIEnv *env, jobject javaSource )
 
 int	CHrSourceJava::Open()
 {
-	int ret = -1;
+	int ret = 0;
 	if( m_env != NULL ){
 		ret = m_env->CallIntMethod( m_jSrc, m_methodOpen );
 		GPLOGF( (" java open %d \n", ret ));
@@ -131,6 +131,9 @@ int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 
 
 	jbyteArray dataArr = (jbyteArray)m_env->CallObjectMethod( m_jSrc, m_methodRead, timeStamp);
+
+	if (dataArr == NULL)
+		return -1;
 
 	jbyte *pixles = (jbyte *)m_env->GetByteArrayElements(dataArr, NULL);
 

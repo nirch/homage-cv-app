@@ -111,11 +111,16 @@ image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation,
 
     memcpy(m_imgYUV[iM]->data, yuv, width * height * 1.5);
 
+
     switch (orientation) {
         case 0:
             m_imgRGB[iM] = imageNV21_to_RGB(m_imgYUV[iM], m_imgRGB[iM]);
             break;
         case 90:
+            m_imgRGB[iM] = imageNV21_to_RGB(m_imgYUV[iM], m_imgRGB[iM]);
+            image_flipV(m_imgRGB[iM]);
+            break;
+        case 180:
             m_imgRGB[iM] = imageNV21_to_RGB_swap(m_imgYUV[iM], m_imgRGB[iM]);
             image_flipV(m_imgRGB[iM]);
             break;
@@ -126,7 +131,6 @@ image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation,
 
     if (!crop)
         return m_imgRGB[iM];
-
 
     m_imgRGBCropped[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM],
                                             m_imgRGBCropped[iM]);
