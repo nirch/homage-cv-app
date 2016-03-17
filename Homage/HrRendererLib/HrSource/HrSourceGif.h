@@ -17,37 +17,19 @@
 class CHrSourceGif : public CHrSourceI
 {
 public:
-	
 	CHrSourceGif();
-
 	virtual ~CHrSourceGif();
-
-	void DeleteContents();
-
-
-
 	int Init( char *inFile );
-
     int	ReadFrame( int iFrame, long long timeStamp, image_type **im );
-
 	int	Close();
-
 private:
+    void DeleteContents();
 	//int m_width;
 	//int m_height;
-
 	int m_nFrame;
-
 	//int	m_iFrame;
-
-
-
 	struct gifIo_type	*m_gifIo;
-
-	
 	image_type *m_im;
-
-
 };
 
 

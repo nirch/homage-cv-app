@@ -22,10 +22,6 @@ public:
 
 	~CHrEffectMorphing();
 
-	void DeleteContents();
-
-
-
 	//int Init( char *splFile,  char *tFile, char *plnFile, char *tfFile );
     int Init( char *splFile,  image_type *tim, char *plnFile, char *tfFile );
 	int InitFromData( char *data );
@@ -38,6 +34,8 @@ public:
 	int	Close();
 
 private:
+    void DeleteContents();
+
 	int m_width;
 	int m_height;
 

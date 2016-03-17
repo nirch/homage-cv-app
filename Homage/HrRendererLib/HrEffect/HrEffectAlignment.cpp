@@ -39,12 +39,15 @@ CHrEffectAlignment::CHrEffectAlignment()
 
 CHrEffectAlignment::~CHrEffectAlignment()
 {
+    Close();
 	DeleteContents();
 }
 
 
-
-
+int	CHrEffectAlignment::Close()
+{
+    return( 1 );
+}
 
 void CHrEffectAlignment::DeleteContents()
 {
@@ -147,11 +150,6 @@ int	CHrEffectAlignment::Process( image_type *sim, int iFrame, long long timeStam
 
 
 
-int	CHrEffectAlignment::Close()
-{
-		DeleteContents();
 
-		return( 1 );
-}
 
 

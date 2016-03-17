@@ -25,9 +25,7 @@ void	imageA_merge_alpha( image_type *sim, image_type *im );
 
 CHrSourceI::CHrSourceI()
 {
-
 	m_alphaIm = NULL;
-
 	m_nE = 0;
     
     this->SetSourceDuration(2.0);
@@ -44,10 +42,6 @@ CHrSourceI::~CHrSourceI()
 	DeleteContents();
 }
 
-
-
-
-
 void CHrSourceI::DeleteContents()
 {
 int	i;
@@ -56,7 +50,6 @@ int	i;
 		image_destroy( m_alphaIm, 1 );
 		m_alphaIm = NULL;
 	}
-
 
 	for( i = 0 ; i < m_nE ; i++ ){
 		delete m_ae[i];

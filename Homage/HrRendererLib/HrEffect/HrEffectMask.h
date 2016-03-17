@@ -22,10 +22,6 @@ public:
 
 	virtual ~CHrEffectMask();
 
-	void DeleteContents();
-
-
-
 	int Init( image_type *im );
 
 	int Init( char *file );
@@ -38,6 +34,8 @@ public:
 	int	Close();
 
 private:
+    void DeleteContents();
+
 	int m_width;
 	int m_height;
 

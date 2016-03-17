@@ -64,11 +64,14 @@ CHrEffectMorphing::CHrEffectMorphing()
 
 CHrEffectMorphing::~CHrEffectMorphing()
 {
+    Close();
 	DeleteContents();
 }
 
-
-
+int	CHrEffectMorphing::Close()
+{
+    return( 1 );
+}
 
 
 void CHrEffectMorphing::DeleteContents()
@@ -352,10 +355,4 @@ int	CHrEffectMorphing::GetPose( tfA_type *atf, int iFrame, float *T, float *a )
 
 
 
-int	CHrEffectMorphing::Close()
-{
-		DeleteContents();
-
-		return( 1 );
-}
 

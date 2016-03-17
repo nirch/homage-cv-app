@@ -22,8 +22,6 @@ public:
 
 	virtual ~CHrEffectSepia();
 
-	void DeleteContents();
-
 	int Init( float fR, float fG, float fB, char *file );
     
     int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
@@ -33,6 +31,7 @@ public:
 	int	Close();
 
 private:
+    void DeleteContents();
 	int m_width;
 	int m_height;
 

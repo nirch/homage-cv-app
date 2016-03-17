@@ -39,12 +39,14 @@ CHrEffectMask::CHrEffectMask()
 
 CHrEffectMask::~CHrEffectMask()
 {
-	DeleteContents();
+    Close();
+    DeleteContents();
 }
 
-
-
-
+int	CHrEffectMask::Close()
+{
+    return( 1 );
+}
 
 void CHrEffectMask::DeleteContents()
 {
@@ -109,16 +111,6 @@ int	CHrEffectMask::Process( image_type *sim, int iFrame, long long timeStamp, im
 	*im = m_im;
 
 	return( 1 );
-}
-
-
-
-
-int	CHrEffectMask::Close()
-{
-		DeleteContents();
-
-		return( 1 );
 }
 
 

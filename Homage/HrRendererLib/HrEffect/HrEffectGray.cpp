@@ -37,6 +37,7 @@ CHrEffectGray::CHrEffectGray()
 
 CHrEffectGray::~CHrEffectGray()
 {
+    Close();
 	DeleteContents();
 }
 
@@ -57,6 +58,10 @@ void CHrEffectGray::DeleteContents()
 
 }
 
+int	CHrEffectGray::Close()
+{
+    return( 1 );
+}
 
 
 
@@ -79,12 +84,6 @@ int	CHrEffectGray::Process( image_type *sim, int iFrame, long long timeStamp, im
 
 
 
-int	CHrEffectGray::Close()
-{
-		DeleteContents();
-
-		return( 1 );
-}
 
 
 

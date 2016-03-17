@@ -48,12 +48,14 @@ CHrEffectPose::CHrEffectPose()
 
 CHrEffectPose::~CHrEffectPose()
 {
+    Close();
 	DeleteContents();
 }
 
-
-
-
+int	CHrEffectPose::Close()
+{
+    return( 1 );
+}
 
 void CHrEffectPose::DeleteContents()
 {
@@ -226,12 +228,6 @@ int	CHrEffectPose::GetPose( int iFrame, vec2f_type *p, float *scale, float *rx, 
 
 
 
-int	CHrEffectPose::Close()
-{
-		DeleteContents();
-
-		return( 1 );
-}
 
 
 

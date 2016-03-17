@@ -31,7 +31,14 @@ CHrEffectMaskWithSource::CHrEffectMaskWithSource()
 
 CHrEffectMaskWithSource::~CHrEffectMaskWithSource()
 {
+    Close();
 	DeleteContents();
+}
+
+
+int	CHrEffectMaskWithSource::Close()
+{
+    return( 1 );
 }
 
 void CHrEffectMaskWithSource::DeleteContents()
@@ -42,15 +49,15 @@ void CHrEffectMaskWithSource::DeleteContents()
 		m_im = NULL;
 	}
 
-	if( m_mask_owned_by_source != NULL ){
-        // No need to free this image.
-        // It is owned by the source.
-        m_mask_owned_by_source = NULL;
-	}
-    
     if( m_alpha != NULL ){
         image_destroy( m_alpha, 1 );
         m_alpha = NULL;
+    }
+
+    if( m_mask_owned_by_source != NULL ){
+        // No need to free this image.
+        // It is owned by the source.
+        m_mask_owned_by_source = NULL;
     }
     
     if (source != NULL) {
@@ -80,17 +87,6 @@ int	CHrEffectMaskWithSource::Process( image_type *sim, int iFrame, long long tim
     
 	return( 1 );
 }
-
-
-
-
-int	CHrEffectMaskWithSource::Close()
-{
-		DeleteContents();
-		return( 1 );
-}
-
-
 
 
 static image_type *

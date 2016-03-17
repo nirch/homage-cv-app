@@ -28,8 +28,6 @@ public:
 
 	virtual ~CHrEffectI();
 
-	void DeleteContents();
-
 	virtual int Init( char *file )	{return( -1 ); }
 	virtual int InitFromData( char *data )	{return( -1 ); }
 
@@ -44,6 +42,7 @@ public:
     void SwitchBR();
 
 private:
+    void DeleteContents();
 public:
 	int	m_id;
     int m_switchBR;

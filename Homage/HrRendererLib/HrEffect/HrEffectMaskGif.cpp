@@ -42,20 +42,22 @@ CHrEffectMaskGif::CHrEffectMaskGif()
 
 CHrEffectMaskGif::~CHrEffectMaskGif()
 {
+    Close();
 	DeleteContents();
 }
 
-
-
-
+int	CHrEffectMaskGif::Close()
+{
+    if( m_gifIo != NULL ){
+        image_read_gif_close( m_gifIo );
+        m_gifIo = NULL;
+    }
+    
+    return( 1 );
+}
 
 void CHrEffectMaskGif::DeleteContents()
 {
-	if( m_gifIo != NULL ){
-		image_read_gif_close( m_gifIo );
-		m_gifIo = NULL;
-	}
-
 	if( m_im != NULL ){
 		image_destroy( m_im, 1 );
 		m_im = NULL;
@@ -66,7 +68,6 @@ void CHrEffectMaskGif::DeleteContents()
 		image_destroy( m_alphaIm, 1 );
 		m_alphaIm = NULL;
 	}
-
 }
 
 
@@ -105,16 +106,6 @@ int	CHrEffectMaskGif::Process( image_type *sim, int iFrame, long long timeStamp,
 	*im = m_im;
 
 	return( 1 );
-}
-
-
-
-
-int	CHrEffectMaskGif::Close()
-{
-		DeleteContents();
-
-		return( 1 );
 }
 
 

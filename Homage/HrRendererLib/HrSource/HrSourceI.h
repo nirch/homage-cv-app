@@ -18,22 +18,16 @@
 
 class CHrSourceI 
 {
-public:
-	
+public:	
 	CHrSourceI();
-
 	virtual ~CHrSourceI();
-
-	void DeleteContents();
-
+    virtual int Close() = 0;
 
 	virtual int Init( char *file ) { return( -1 ); };
 
 	virtual int Init( char *inFile, int aFrame[], int nF )	{ return( -1 ); };
 
 	virtual int	ReadFrame( int iFrame, long long timeStamp, image_type **im ) = 0;
-
-	virtual int Close() = 0;
 
 	void SetAlpha( image_type *im );
 
@@ -57,6 +51,7 @@ public:
     long long CalculatedTS(long long timeStamp);
 
 private:
+    void DeleteContents();
 protected:
     int first_iFrame;
     bool shouldUseTiming;

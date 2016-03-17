@@ -18,15 +18,11 @@ class CHrEffectMaskWithSource : public CHrEffectI
 public:
 	CHrEffectMaskWithSource();
     ~CHrEffectMaskWithSource();
-    
+    int	Close();
     int InitWithSource( CHrSourceI *source );
-
-    void DeleteContents();
-    
     int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
-	int	Close();
-
 private:
+    void DeleteContents();
     CHrSourceI *source;
     image_type *m_mask_owned_by_source;
     image_type *m_alpha;

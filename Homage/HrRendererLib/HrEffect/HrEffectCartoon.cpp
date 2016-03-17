@@ -40,24 +40,21 @@ CHrEffectCartoon::CHrEffectCartoon()
 
 CHrEffectCartoon::~CHrEffectCartoon()
 {
+    Close();
 	DeleteContents();
 }
 
-
-
-
+int	CHrEffectCartoon::Close()
+{
+    return( 1 );
+}
 
 void CHrEffectCartoon::DeleteContents()
 {
-
-
 	if( m_im != NULL ){
 		image_destroy( m_im, 1 );
 		m_im = NULL;
 	}
-
-
-
 }
 
 
@@ -94,12 +91,7 @@ int	CHrEffectCartoon::Process( image_type *sim, int iFrame, long long timeStamp,
 
 
 
-int	CHrEffectCartoon::Close()
-{
-		DeleteContents();
 
-		return( 1 );
-}
 
 
 

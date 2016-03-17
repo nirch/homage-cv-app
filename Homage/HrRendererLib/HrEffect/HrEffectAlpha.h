@@ -22,9 +22,6 @@ public:
 
 	virtual ~CHrEffectAlpha();
 
-	void DeleteContents();
-
-
 	int Init( char *file );
     int InitFromData( char *data );
 
@@ -37,6 +34,8 @@ public:
 	int	Close();
 
 private:
+    void DeleteContents();
+
 	int m_width;
 	int m_height;
 

@@ -36,11 +36,15 @@ CHrEffectAlpha::CHrEffectAlpha()
 
 CHrEffectAlpha::~CHrEffectAlpha()
 {
+    Close();
 	DeleteContents();
 }
 
 
-
+int	CHrEffectAlpha::Close()
+{
+    return( 1 );
+}
 
 
 void CHrEffectAlpha::DeleteContents()
@@ -96,12 +100,6 @@ int	CHrEffectAlpha::Process( image_type *sim, int iFrame, long long timeStamp, i
 
 
 
-int	CHrEffectAlpha::Close()
-{
-		DeleteContents();
-
-		return( 1 );
-}
 
 
 

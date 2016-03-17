@@ -22,22 +22,19 @@ public:
 
 	virtual ~CHrEffectMaskGif();
 
-	void DeleteContents();
-
-
-
 	int Init( image_type *im );
 
 	int Init( char *file );
 
+    int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
-	 int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
-
-	 int GetPose( int iFrame, vec2f_type *p, float *angle, float *scale );
+    int GetPose( int iFrame, vec2f_type *p, float *angle, float *scale );
 
 	int	Close();
 
 private:
+    void DeleteContents();
+
 	int m_width;
 	int m_height;
 

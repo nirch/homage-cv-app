@@ -23,7 +23,6 @@ public:
 
 	~CHrEffectAlignment();
 
-	void DeleteContents();
 
 
 
@@ -36,6 +35,7 @@ public:
 	int	Close();
 
 private:
+    void DeleteContents();
 	int m_width;
 	int m_height;
 

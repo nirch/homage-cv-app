@@ -38,12 +38,14 @@ CHrEffectSepia::CHrEffectSepia()
 
 CHrEffectSepia::~CHrEffectSepia()
 {
+    Close();
 	DeleteContents();
 }
 
-
-
-
+int	CHrEffectSepia::Close()
+{
+    return( 1 );
+}
 
 void CHrEffectSepia::DeleteContents()
 {
@@ -77,12 +79,6 @@ int	CHrEffectSepia::Process( image_type *sim, int iFrame, long long timeStamp, i
 
 
 
-int	CHrEffectSepia::Close()
-{
-		DeleteContents();
-
-		return( 1 );
-}
 
 
 

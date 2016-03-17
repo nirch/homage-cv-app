@@ -28,16 +28,21 @@ CHrSourceGif::CHrSourceGif()
 
 CHrSourceGif::~CHrSourceGif()
 {
-	DeleteContents();
+    Close();
+    DeleteContents();
+}
+
+int	CHrSourceGif::Close()
+{
+    if( m_gifIo != NULL ){
+        image_read_gif_close( m_gifIo );
+        m_gifIo = NULL;
+    }
+    return( 1 );
 }
 
 void CHrSourceGif::DeleteContents()
 {
-	if( m_gifIo != NULL ){
-		image_read_gif_close( m_gifIo );
-		m_gifIo = NULL;
-	}
-
 	if( m_im != NULL ){
 		image_destroy( m_im, 1 );
 		m_im = NULL;
@@ -94,11 +99,3 @@ int	CHrSourceGif::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 	m_iFrame = iFrame;
 	return( 1 );
 }
-
-
-int	CHrSourceGif::Close()
-{
-    DeleteContents();
-    return( 1 );
-}
-
