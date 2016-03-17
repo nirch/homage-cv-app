@@ -25,7 +25,7 @@ static int m_intWidth[MAX_MATTING];
 static int m_intHeight[MAX_MATTING];
 static image_type *m_imgYUV[MAX_MATTING];
 static image_type *m_imgRGB[MAX_MATTING];
-static image_type *m_imgRGBCropped[MAX_MATTING];
+static image_type *m_imgRGBResized[MAX_MATTING];
 
 JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_create
         (JNIEnv * env, jclass c, jstring jprmFile, jstring jctrFile, jint width, jint height) {
@@ -60,7 +60,7 @@ JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_create
     // Preparing its members
     m_imgYUV[i] = NULL;
     m_imgRGB[i] = NULL;
-    m_imgRGBCropped[i] = NULL;
+    m_imgRGBResized[i] = NULL;
 
     GPLOGF((" %d>\n", i));
 
@@ -85,9 +85,9 @@ JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_delete
         m_imgRGB[id] = NULL;
     }
 
-    if (m_imgRGBCropped[id]) {
-        image_destroy(m_imgRGBCropped[id], 1);
-        m_imgRGBCropped[id] = NULL;
+    if (m_imgRGBResized[id]) {
+        image_destroy(m_imgRGBResized[id], 1);
+        m_imgRGBResized[id] = NULL;
     }
 
     return 1;
@@ -97,7 +97,7 @@ JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_delete
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation, bool crop) {
+image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation) {
 
     // If the existing YUV image is not on the same size - so we destroy it
     if (m_imgYUV[iM] != NULL && (m_imgYUV[iM]->width != width || m_imgYUV[iM]->height != height)){
@@ -129,67 +129,97 @@ image_type *yuv2rgb(int iM, u_char* yuv, int width, int height, int orientation,
             break;
     }
 
-    if (!crop)
-        return m_imgRGB[iM];
+    m_imgRGBResized[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM], m_imgRGBResized[iM]);
 
-    m_imgRGBCropped[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM],
-                                            m_imgRGBCropped[iM]);
-    return m_imgRGBCropped[iM];
+    return m_imgRGBResized[iM];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-image_type *getImageRGB(JNIEnv *env, jint iM, jbyteArray buffer, jint width, jint height){
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_prepareYUV
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage) {
+
     if (m_ub[iM] == NULL)
-        return (NULL);
+        return (-1);
 
-    image_type *img = m_imgRGBCropped[iM];
+    image_type *img = m_imgRGBResized[iM];
+    if (buffer != NULL) {
+        u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
+
+        img = yuv2rgb(iM, data, width, height, orientation);
+
+        (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
+
+        // Copying the rgb
+        u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
+        memcpy(resRGB, img->data, m_intWidth[iM] * m_intHeight[iM] * 3);
+        (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
+    }
+
+    if (img == NULL)
+        return (-1);
+
+    return 1;
+}
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_prepareRGB
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jbyteArray resRGBImage) {
+
+    if (m_ub[iM] == NULL)
+        return (-1);
+
+    image_type *img = m_imgRGBResized[iM];
     if (buffer != NULL){
         u_char *data = (u_char *)(env->functions)->GetByteArrayElements(env, buffer, NULL);
 
         m_imgRGB[iM] = image_realloc( m_imgRGB[iM], height, width, 3, IMAGE_TYPE_U8, 1 );
 
         memcpy(m_imgRGB[iM]->data, data, width * height * 3);
-        img = m_imgRGBCropped[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM], m_imgRGBCropped[iM]);
-
-        (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
-    }
-
-    return img;
-}
-
-image_type *getImageYUV(JNIEnv *env, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage){
-    if (m_ub[iM] == NULL)
-        return (NULL);
-
-    image_type *img = m_imgRGBCropped[iM];
-    if (buffer != NULL) {
-        u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
-
-        img = yuv2rgb(iM, data, width, height, orientation, true);
+        img = m_imgRGBResized[iM] = image_crop(m_imgRGB[iM], 0, 0, m_intWidth[iM], m_intHeight[iM], m_imgRGBResized[iM]);
 
         (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
 
-        if (resRGBImage != NULL) {
-            // Copying the rgb
-            u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
-            memcpy(resRGB, img->data, m_intWidth[iM] * m_intHeight[iM] * 3);
-            (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
-        }
+        u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
+        memcpy(resRGB, img->data, m_intWidth[iM] * m_intHeight[iM] * 3);
+        (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
     }
-
-    return img;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int processImg(JNIEnv *env, int iM, image_type *img, jbyteArray resMaskChannel){
 
     if (img == NULL)
         return (-1);
 
+    return 1;
+}
+
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspect
+        (JNIEnv *env, jclass c, jint iM) {
+
+    if (m_ub[iM] == NULL || m_imgRGBResized[iM] == NULL)
+        return (-1);
+
+
+    return m_ub[iM]->ProcessBackground(m_imgRGBResized[iM], 1);
+}
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_getBackgroundSimilarity
+        (JNIEnv *env, jclass c, jint iM){
+
+    if (m_ub[iM] == NULL)
+        return (-1);
+
+    return m_ub[iM]->GetProcessBackgroundSimilarity();
+}
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_process
+        (JNIEnv *env, jclass c, jint iM, jbyteArray resMaskChannel) {
+
+    if (m_ub[iM] == NULL || m_imgRGBResized[iM] == NULL)
+        return (-1);
+
     image_type *resImg;
-    int retVal = m_ub[iM]->Process(img, 1, &resImg);
+    int retVal = m_ub[iM]->Process(m_imgRGBResized[iM], 1, &resImg);
 
     // Copying the result mask
     u_char *resMask = (u_char *)(env->functions)->GetByteArrayElements(env, resMaskChannel, NULL);
@@ -199,78 +229,3 @@ int processImg(JNIEnv *env, int iM, image_type *img, jbyteArray resMaskChannel){
     return retVal;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_yuv2rgb
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jboolean crop,
-         jbyteArray resRGBImage) {
-
-    if (m_ub[iM] == NULL)
-        return (-1);
-
-    u_char *data = (u_char * )(env->functions)->GetByteArrayElements(env, buffer, NULL);
-    u_char *resRGB = (u_char * )(env->functions)->GetByteArrayElements(env, resRGBImage, NULL);
-
-    // Converting
-    image_type *rgbImage = yuv2rgb(iM, data, width, height, orientation, crop);
-
-    // Copying the result
-    memcpy(resRGB, rgbImage->data, rgbImage->width * rgbImage->height * 3);
-
-    (env->functions)->ReleaseByteArrayElements(env, buffer, (jbyte *) data, 0);
-    (env->functions)->ReleaseByteArrayElements(env, resRGBImage, (jbyte *) resRGB, 0);
-
-    return 1;
-}
-
-
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectRGB
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height) {
-
-    image_type *img = getImageRGB(env, iM, buffer, width, height);
-
-    if (img == NULL)
-        return (-1);
-
-    return m_ub[iM]->ProcessBackground(img, 1);
-}
-
-
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectYUV
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage) {
-
-    image_type *img = getImageYUV(env, iM, buffer, width, height, orientation, resRGBImage);
-
-    if (img == NULL)
-        return (-1);
-
-    return m_ub[iM]->ProcessBackground(img, 1);
-}
-
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundRGB
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jbyteArray resMaskChannel) {
-
-    image_type *img = getImageRGB(env, iM, buffer, width, height);
-
-    if (img == NULL)
-        return (-1);
-
-    return processImg(env, iM, img, resMaskChannel);
-}
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundYUV
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation,
-         jbyteArray resRGBImage, jbyteArray resMaskChannel) {
-
-    image_type *img = getImageYUV(env, iM, buffer, width, height, orientation, resRGBImage);
-
-    if (img == NULL)
-        return (-1);
-
-    return processImg(env, iM, img, resMaskChannel);
-}

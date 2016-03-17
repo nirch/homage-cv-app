@@ -19,6 +19,7 @@
 #define EFFECT_GRAY				7
 #define EFFECT_ALPHA			8
 #define EFFECT_CARTOON			9
+#define EFFECT_MASK_SOURCE		10
 class CHrEffectI 
 {
 public:

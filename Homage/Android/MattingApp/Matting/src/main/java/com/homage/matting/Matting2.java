@@ -12,11 +12,12 @@ public class Matting2 {
     public static native int create(String prmFile, String ctrFile, int width, int height);
     public static native int delete(int id);
 
-    public static native int yuv2rgb(int id, byte[] buffer, int width, int height, int orientation, boolean crop, byte[] resRGBImage);
-    public static native int inspectRGB(int id, byte[] buffer, int width, int height);
-    public static native int inspectYUV(int id, byte[] buffer, int width, int height, int orientation, byte[]resRGBImage);
-    public static native int removeBackgroundRGB(int id, byte[] buffer, int width, int height, byte[] resMaskChannel);
-    public static native int removeBackgroundYUV(int id, byte[] buffer, int width, int height, int orientation, byte[]resRGBImage, byte[] resMaskChannel);
+    public static native int prepareYUV(int id, byte[] buffer, int width, int height, int orientation, byte[] resRGBImage);
+    public static native int prepareRGB(int id, byte[] buffer, int width, int height, byte[] resRGBImage);
+    public static native int getBackgroundSimilarity(int id);
+    public static native int inspect(int id);
+
+    public static native int process(int id, byte[] resMaskChannel);
 
     static {
         System.loadLibrary("Matting");

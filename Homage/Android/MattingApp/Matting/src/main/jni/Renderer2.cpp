@@ -30,6 +30,7 @@
 #include "HrRendererLib/HrEffect/HrEffectGray.h"
 #include "HrRendererLib/HrEffect/HrEffectAlpha.h"
 #include "HrRendererLib/HrEffect/HrEffectCartoon.h"
+#include "HrRendererLib/HrEffect/HrEffectMaskWithSource.h"
 
 /*
 JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_init
@@ -102,6 +103,7 @@ static CHomageRenderer *m_ar2[16];
 CHrSourceI  *HrSource_create2( int type );
 //CHrOutputI  *HrOutput_create2( int type );
 CHrEffectI  *HrEffect_create2( JNIEnv *env, int type, jobject jObjData, jint jIntData );
+CHrSourceJava *HrSource_createJavaSource2(JNIEnv * env, jobject javaSource);
 
 
 
@@ -114,6 +116,8 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_create
         if (m_ar2[i] == NULL)
             break;
     }
+
+    int f = 0;
 
     if (i >= MAX_RENDERERS) return (-1);
 
@@ -133,7 +137,6 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
 
     GPLOGF(("<addSourceImage"));
 
-
     CHomageRenderer *hr  = m_ar2[iR];
 
     if( hr == NULL || hr->IsProcess() ){
@@ -144,7 +147,8 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
 
     const char *file = ujni_getJString( env, jfile );
 
-
+//int f = 0;
+    //asda
 
     CHrSourceI  *source = HrSource_create2( type );
 
@@ -171,7 +175,6 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
 
     GPLOGF((" Id: %d.%d ", iR, id ));
 
-
     ujni_releaseJString( env, jfile, file );
 
     GPLOGF((" >\n"));
@@ -192,16 +195,15 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceJava
         return( -1 );
     }
 
-    CHrSourceJava  *source = new CHrSourceJava();
+    CHrSourceJava  *source = HrSource_createJavaSource2(env, javaSource);
 
-    source->SetJavaSource(env, javaSource);
-
-    if (!source->Open())
+    if (source == NULL){
         return -1;
+    }
 
     int id = hr->AddSource( source );
 
-    image_type *imm = NULL;
+    //image_type *imm = NULL;
     //id = source->ReadFrame(0, 1231, &imm);
 
     GPLOGF((" >\n"));
@@ -330,23 +332,7 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_process
 
     hr->Process();
 
-    // Closing all the sources
-    int idxSrc = 0;
-    CHrSourceI *src = hr->GetSource(idxSrc++);
-    while (src != NULL){
-        src->Close();
-        src = hr->GetSource(idxSrc++);
-    }
-
-    //int iii = 7;
-    // Closing all the outputs
-    int idxOutput = 0;
-    CHrOutputI *output = hr->GetOuput(idxOutput++);
-    while (output != NULL){
-        output->Close();
-        output = hr->GetOuput(idxOutput++);
-    }
-
+    // Delete will close all the outputs and sources
     delete m_ar2[iR];
     m_ar2[iR] = NULL;
 
@@ -363,6 +349,18 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_delete
     return (1);
 }
 
+CHrSourceJava *HrSource_createJavaSource2(JNIEnv * env, jobject javaSource){
+    CHrSourceJava  *source = new CHrSourceJava();
+
+    source->SetJavaSource(env, javaSource);
+
+    if (!source->Open()){
+        delete source;
+        return NULL;
+    }
+
+    return source;
+}
 
 
 CHrSourceI  *HrSource_create2( int type ) {
@@ -399,9 +397,20 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
     switch (type){
         case EFFECT_MASK:{
             effect = new CHrEffectMask();
-            convertToString = true;
 
             GPLOGF((" effect mask"));
+            break;
+        }
+        case EFFECT_MASKGIF:{
+            effect = new CHrEffectMaskGif();
+
+            GPLOGF((" effect MASK GIF"));
+            break;
+        }
+        case EFFECT_MASK_SOURCE: {
+            effect = new CHrEffectMaskWithSource();
+
+            GPLOGF((" effect SOURCE MASK"));
             break;
         }
         case EFFECT_POSE:{
@@ -410,13 +419,6 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
             int f =0;
 
             GPLOGF((" effect pose"));
-            break;
-        }
-        case EFFECT_MASKGIF:{
-            effect = new CHrEffectMaskGif();
-            convertToString = true;
-
-            GPLOGF((" effect MASK GIF"));
             break;
         }
         case EFFECT_SEPIA:{
@@ -453,22 +455,29 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
         dataStr = ujni_getJString(env, (jstring)jObjData);
     }
 
+    int initRes = -1;
+
     // Initializing
     switch (type){
         case EFFECT_MASK:
         case EFFECT_MASKGIF:{
-            if (effect->Init((char *) dataStr) < 0) {
 
-                delete effect;
-                effect = NULL;
+            initRes = effect->Init((char *) dataStr);
+            break;
+        }
+        case EFFECT_MASK_SOURCE:{
 
-                GPLOGF(("Init mask/maskgif effect failed >\n"));
+            CHrSourceJava  *source = HrSource_createJavaSource2(env, jObjData);
+
+            if (source != NULL) {
+                initRes = ((CHrEffectMaskWithSource*)effect)->InitWithSource(source);
             }
+
             break;
         }
         case EFFECT_POSE:
         case EFFECT_ALPHA: {
-            effect->InitFromData((char *) dataStr);
+            initRes = effect->InitFromData((char *) dataStr);
             break;
         }
         case EFFECT_SEPIA:{
@@ -478,12 +487,12 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
             float g = ((jIntData & 0x00FF00) >> 8) / 255.0;
             float b = (jIntData & 0x0000FF) / 255.0;
 
-            ((CHrEffectSepia*)effect)->Init(r, g, b, NULL);
+            initRes = ((CHrEffectSepia*)effect)->Init(r, g, b, NULL);
             break;
         }
         case EFFECT_CARTOON:{
 
-            ((CHrEffectCartoon*)effect)->Init(jIntData, NULL);
+            initRes = ((CHrEffectCartoon*)effect)->Init(jIntData, NULL);
             break;
         }
     }
@@ -491,6 +500,14 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
 
     if (dataStr != NULL){
         ujni_releaseJString(env, (jstring)jObjData, dataStr);
+    }
+
+    if (initRes <= 0)
+    {
+        delete effect;
+        effect = NULL;
+
+        GPLOGF(("Init effect failed >\n"));
     }
 
     return (effect);

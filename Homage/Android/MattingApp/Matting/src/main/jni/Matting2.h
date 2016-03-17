@@ -19,22 +19,21 @@ JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_create(JNIEnv *, jclass,
 
 JNIEXPORT jint JNICALL  Java_com_homage_matting_Matting2_delete(JNIEnv *, jclass, jint);
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_yuv2rgb
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jboolean crop,
-         jbyteArray resRGBImage);
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectRGB
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height);
-
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspectYUV
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_prepareYUV
         (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation, jbyteArray resRGBImage);
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundRGB
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jbyteArray resMaskChannel);
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_prepareRGB
+        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jbyteArray resRGBImage);
 
-JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_removeBackgroundYUV
-        (JNIEnv *env, jclass c, jint iM, jbyteArray buffer, jint width, jint height, jint orientation,
-         jbyteArray resRGBImage, jbyteArray resMaskChannel);
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_inspect
+        (JNIEnv *env, jclass c, jint iM);
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_getBackgroundSimilarity
+        (JNIEnv *env, jclass c, jint iM);
+
+JNIEXPORT jint JNICALL Java_com_homage_matting_Matting2_process
+        (JNIEnv *env, jclass c, jint iM, jbyteArray resMaskChannel);
+
 
 #ifdef __cplusplus
 }

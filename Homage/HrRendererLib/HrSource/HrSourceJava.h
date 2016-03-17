@@ -45,8 +45,8 @@ private:
 	jmethodID  m_methodRead;
 	jmethodID  m_methodClose;
 
-
 	image_type* m_im;
+	int m_dcRes;
 
 };
 
