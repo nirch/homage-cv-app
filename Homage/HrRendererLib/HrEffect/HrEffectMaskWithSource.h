@@ -28,7 +28,7 @@ public:
 
 private:
     CHrSourceI *source;
-    image_type *m_mask;
+    image_type *m_mask_owned_by_source;
     image_type *m_alpha;
 	image_type *m_im;
 };

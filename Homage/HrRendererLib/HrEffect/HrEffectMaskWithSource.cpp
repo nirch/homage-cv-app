@@ -25,7 +25,7 @@ static image_type *	imageA_merge_alpha( image_type *sim, image_type *imA, image_
 CHrEffectMaskWithSource::CHrEffectMaskWithSource()
 {
 	m_im = NULL;
-    m_mask = NULL;
+    m_mask_owned_by_source = NULL;
     m_alpha = NULL;
 }
 
@@ -42,14 +42,15 @@ void CHrEffectMaskWithSource::DeleteContents()
 		m_im = NULL;
 	}
 
-	if( m_mask != NULL ){
-		image_destroy( m_mask, 1 );
-		m_mask = NULL;
+	if( m_mask_owned_by_source != NULL ){
+        // No need to free this image.
+        // It is owned by the source.
+        m_mask_owned_by_source = NULL;
 	}
     
     if( m_alpha != NULL ){
         image_destroy( m_alpha, 1 );
-        m_mask = NULL;
+        m_mask_owned_by_source = NULL;
     }
     
     if (source != NULL) {
@@ -70,10 +71,10 @@ int CHrEffectMaskWithSource::InitWithSource(CHrSourceI *source)
 int	CHrEffectMaskWithSource::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
     // Read mask frame from the source
-    source->ReadFrame(iFrame, timeStamp, &m_mask);
+    source->ReadFrame(iFrame, timeStamp, &m_mask_owned_by_source);
     
     // Use mask image to set alpha channel on current source image
-    m_alpha = image_band( m_mask, 0, m_alpha );
+    m_alpha = image_band( m_mask_owned_by_source, 0, m_alpha );
 	m_im = imageA_merge_alpha( sim, m_alpha, m_im );
 	*im = m_im;
     
