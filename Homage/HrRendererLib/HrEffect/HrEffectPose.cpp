@@ -142,7 +142,7 @@ int	CHrEffectPose::Process( image_type *sim, int iFrame, long long timeStamp, im
 //	float y0 = 0.5*m_height;
 //	float x0 = 0.5*m_width;
 
-	lt2_affine_setR( &lt, x0, y0, p.x, p.y, scale, rx, ry, -rz );
+	lt2_affine_setR( &lt, x0, y0, p.x, p.y, scale, rx, ry, rz );
 
 	//if( m_width >= 0 ){
 //		lt.c0 -= 0.5*m_width - x0;
