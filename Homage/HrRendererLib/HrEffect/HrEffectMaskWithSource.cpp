@@ -36,6 +36,7 @@ CHrEffectMaskWithSource::~CHrEffectMaskWithSource()
 
 void CHrEffectMaskWithSource::DeleteContents()
 {
+    // Delete objects / free memory.
 	if( m_im != NULL ){
 		image_destroy( m_im, 1 );
 		m_im = NULL;
@@ -51,7 +52,12 @@ void CHrEffectMaskWithSource::DeleteContents()
         m_mask = NULL;
     }
     
-    source->DeleteContents();
+    if (source != NULL) {
+        // It is the responsibility of the source to call DeleteContents on
+        // its own destructor to free its own resources.
+        delete source;
+        this->source = NULL;
+    }
 }
 
 int CHrEffectMaskWithSource::InitWithSource(CHrSourceI *source)
