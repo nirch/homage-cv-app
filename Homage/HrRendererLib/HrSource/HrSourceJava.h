@@ -24,8 +24,6 @@ public:
 
 	virtual ~CHrSourceJava();
 
-	void DeleteContents();
-
 	int SetJavaSource( JNIEnv *env, jobject javaSource );
 
 	int LoadInfo();
@@ -36,6 +34,8 @@ public:
 	int	Close();
 
 private:
+
+	void DeleteContents();
 
 	JNIEnv	*m_env;
 	jobject m_jSrc;

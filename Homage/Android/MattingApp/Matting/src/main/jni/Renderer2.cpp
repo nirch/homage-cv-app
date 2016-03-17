@@ -117,8 +117,6 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_create
             break;
     }
 
-    int f = 0;
-
     if (i >= MAX_RENDERERS) return (-1);
 
     if (i >= m_nR2) m_nR2 = i + 1;
@@ -146,9 +144,6 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
 
 
     const char *file = ujni_getJString( env, jfile );
-
-//int f = 0;
-    //asda
 
     CHrSourceI  *source = HrSource_create2( type );
 
@@ -416,7 +411,6 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
         case EFFECT_POSE:{
             effect = new CHrEffectPose();
             convertToString = true;
-            int f =0;
 
             GPLOGF((" effect pose"));
             break;
@@ -496,7 +490,6 @@ CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIn
             break;
         }
     }
-
 
     if (dataStr != NULL){
         ujni_releaseJString(env, (jstring)jObjData, dataStr);
