@@ -50,7 +50,7 @@ void CHrEffectMaskWithSource::DeleteContents()
     
     if( m_alpha != NULL ){
         image_destroy( m_alpha, 1 );
-        m_mask_owned_by_source = NULL;
+        m_alpha = NULL;
     }
     
     if (source != NULL) {
