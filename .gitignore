@@ -30,5 +30,5 @@ CMakeScripts
 # Backups
 _bak/
 
-#compiled
+# compiled
 obj/
