@@ -36,28 +36,17 @@ CHrSourceJava::CHrSourceJava()
 
 CHrSourceJava::~CHrSourceJava()
 {
+	Close();
 	DeleteContents();
 }
 
 
 void CHrSourceJava::DeleteContents()
 {
-	int ret = -1;
-	if( m_env != NULL ){
-		ret = m_env->CallIntMethod( m_jSrc, m_methodClose );
-		GPLOGF( (" java close %d \n", ret ));
-
-		m_env->DeleteGlobalRef(m_jSrc);
-		m_jSrc = NULL;
-		m_env = NULL;
-	}
-
 	if (m_im != NULL){
 		image_destroy(m_im, 1);
 		m_im = NULL;
 	}
-
-	m_dcRes = ret;
 }
 
 
@@ -159,7 +148,15 @@ int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 
 int	CHrSourceJava::Close()
 {
-	DeleteContents();
+	int ret = -1;
+	if( m_env != NULL ){
+		ret = m_env->CallIntMethod( m_jSrc, m_methodClose );
+		GPLOGF( (" java close %d \n", ret ));
 
-	return m_dcRes;
+		m_env->DeleteGlobalRef(m_jSrc);
+		m_jSrc = NULL;
+		m_env = NULL;
+	}
+
+	return ret;
 }

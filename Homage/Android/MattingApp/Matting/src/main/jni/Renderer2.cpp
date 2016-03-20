@@ -142,19 +142,15 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
         return( -1 );
     }
 
-
-    const char *file = ujni_getJString( env, jfile );
-
     CHrSourceI  *source = HrSource_create2( type );
 
     if( source == NULL ){
-        ujni_releaseJString( env, jfile, file );
         GPLOGF((" >\n"));
         return( -1 );
     }
 
+    const char *file = ujni_getJString( env, jfile );
     GPLOGF((" %s", file ));
-
     if( source->Init( (char *)file ) < 0 ){
         delete source;
         ujni_releaseJString( env, jfile, file );
@@ -164,13 +160,13 @@ JNIEXPORT jint JNICALL Java_com_homage_renderer_Renderer2_addSourceImage
 
     GPLOGF((" Init %s", file ));
 
+    ujni_releaseJString( env, jfile, file );
+
     GPLOGF((" nS: %d ", hr->m_nS ));
 
     int id = hr->AddSource( source );
 
     GPLOGF((" Id: %d.%d ", iR, id ));
-
-    ujni_releaseJString( env, jfile, file );
 
     GPLOGF((" >\n"));
 
@@ -360,26 +356,26 @@ CHrSourceJava *HrSource_createJavaSource2(JNIEnv * env, jobject javaSource){
 
 CHrSourceI  *HrSource_create2( int type ) {
 
-    if (type == HR_GIF) {
-        CHrSourceGif *b = new CHrSourceGif();
+    CHrSourceI *source = NULL;
+    switch (type){
+        case HR_GIF:{
+            CHrSourceGif *b = new CHrSourceGif();
 
-        GPLOGF((" source gif"));
+            GPLOGF((" source gif"));
 
-        return (b);
+            break;
+        }
+        case HR_PNG:{
+            CHrSourcePng *b = new CHrSourcePng();
+            GPLOGF((" source png"));
+
+            break;
+        }
+        default:
+            GPLOGF((" source none"));
     }
 
-
-    if (type == HR_PNG) {
-        CHrSourcePng *b = new CHrSourcePng();
-        GPLOGF((" source png"));
-
-
-        return (b);
-    }
-
-    GPLOGF((" source none"));
-
-    return (NULL);
+    return source;
 }
 
 CHrEffectI  *HrEffect_create2(JNIEnv * env, int type, jobject jObjData, jint jIntData ) {
