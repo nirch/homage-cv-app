@@ -8,7 +8,7 @@
 
 #include "ImageType/ImageType.h"
 #include "Utime/GpTime.h"
-
+#include "Uvl/TfType.h"
 
 #include "HrEffectI.h"
 
@@ -29,7 +29,7 @@ public:
 	 int Process( image_type *sim, int iFrame, long long timeStamp, image_type **im );
 
 
-	 int GetPose( tfA_type *atf, int iFrame, float *a );
+	 int GetAlpha( tfA_type *atf, int iFrame, float *a );
 
 	int	Close();
 

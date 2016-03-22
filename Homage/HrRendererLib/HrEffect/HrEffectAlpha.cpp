@@ -14,8 +14,6 @@
 #include "ImageType/ImageType.h"
 #include "ImageDump/ImageDump.h"
 
-
-
 #include "HrEffectAlpha.h"
 
 
@@ -88,7 +86,7 @@ int CHrEffectAlpha::InitFromData( char *data )
 int	CHrEffectAlpha::Process( image_type *sim, int iFrame, long long timeStamp, image_type **im )
 {
 	float	a;
-	GetPose( m_atf, iFrame, &a );
+	GetAlpha( m_atf, iFrame, &a );
 
 	m_im = image4_alpha_efect( sim, a, m_im );
 
@@ -103,7 +101,7 @@ int	CHrEffectAlpha::Process( image_type *sim, int iFrame, long long timeStamp, i
 
 
 
-int	CHrEffectAlpha::GetPose( tfA_type *atf, int iFrame, float *a )
+int	CHrEffectAlpha::GetAlpha( tfA_type *atf, int iFrame, float *a )
 {
 
 
