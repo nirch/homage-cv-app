@@ -60,6 +60,7 @@ protected:
     long long endTime;
     long long freezeTime;
     long long lastUsedTimeStamp;
+    long long renderStartTimeStamp;
 public:
 	int	m_iFrame;
 

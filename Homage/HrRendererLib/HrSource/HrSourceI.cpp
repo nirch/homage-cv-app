@@ -34,6 +34,7 @@ CHrSourceI::CHrSourceI()
     this->freezeTime = -1;
     this->endTime = -1;
     this->lastUsedTimeStamp = -1;
+	this->renderStartTimeStamp = -1;
     this->shouldUseTiming = false;
 }
 
@@ -152,8 +153,13 @@ long long CHrSourceI::CalculatedTS(long long timeStamp)
     } else if (freezeTime >=0 && timeStamp >= freezeTime) {
         // If timeStamp is bigger then freezeTime, continue returning the last picked frame.
         ts = lastUsedTimeStamp;
-    } else {
-        ts = timeStamp - startTimeOffset;
+    } else if (renderStartTimeStamp == -1) {
+		// We set first time our 0 render start timestamp
+		renderStartTimeStamp = timeStamp;
+		ts = 0;
+	}
+	else {
+        ts = timeStamp - renderStartTimeStamp;
     }
     this->lastUsedTimeStamp = ts;
     return ts;

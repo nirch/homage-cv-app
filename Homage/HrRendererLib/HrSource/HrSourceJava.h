@@ -46,8 +46,9 @@ private:
 	jmethodID  m_methodClose;
 
 	image_type* m_im;
-	int m_dcRes;
+	image_type* m_emptyImage;
 
+	long long   lastReadFrameTS;
 };
 
 

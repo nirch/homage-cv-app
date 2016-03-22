@@ -28,8 +28,9 @@
 
 CHrSourceJava::CHrSourceJava()
 {
-	
+	m_emptyImage = NULL;
 	m_im = NULL;
+	lastReadFrameTS = -1;
 }
 
 
@@ -46,6 +47,11 @@ void CHrSourceJava::DeleteContents()
 	if (m_im != NULL){
 		image_destroy(m_im, 1);
 		m_im = NULL;
+	}
+
+	if (m_emptyImage != NULL){
+		image_destroy(m_emptyImage, 1);
+		m_emptyImage = NULL;
 	}
 }
 
@@ -85,7 +91,7 @@ int CHrSourceJava::SetJavaSource( JNIEnv *env, jobject javaSource )
 	m_methodOpen = m_env->GetMethodID(clazz, "open", "()I" );
 	if( m_methodOpen == NULL )	return( -1 );
 
-	m_methodGetInfo = m_env->GetMethodID(clazz, "getInfo", "()[I" );
+	m_methodGetInfo = m_env->GetMethodID(clazz, "getInfo", "()[J" );
 	if( m_methodGetInfo == NULL )	return( -1 );
 
 	GPLOGF( ("open exist\n" ));
@@ -109,13 +115,14 @@ int	CHrSourceJava::Open()
 }
 
 int CHrSourceJava::LoadInfo(){
-	jintArray infoRet = (jintArray)m_env->CallObjectMethod( m_jSrc, m_methodGetInfo );
-	jint *info = (jint *)m_env->GetIntArrayElements(infoRet, NULL);
+	jlongArray infoRet = (jlongArray)m_env->CallObjectMethod( m_jSrc, m_methodGetInfo );
+	jlong *info = (jlong *)m_env->GetLongArrayElements(infoRet, NULL);
 
-	m_width = info[0];
-	m_height = info[1];
+	m_width = (int)info[0];
+	m_height = (int)info[1];
+	this->SetSourceDuration(info[2]);
 
-	m_env->ReleaseIntArrayElements(infoRet, info, 0);
+	m_env->ReleaseLongArrayElements(infoRet, info, 0);
 }
 
 int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
@@ -123,23 +130,43 @@ int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 	
 	GPLOGF( ("<java ReadFrame" ));
 
+	long long readTimeStamp = timeStamp;
+	if (this->shouldUseTiming) {
+		readTimeStamp = this->CalculatedTS(timeStamp);
+	}
 
-	jbyteArray dataArr = (jbyteArray)m_env->CallObjectMethod( m_jSrc, m_methodRead, timeStamp);
+	if (readTimeStamp == -1) {
+		// Creating an empty image frame
+		if (m_emptyImage == NULL) {
+			m_emptyImage = image_create(m_height, m_width, 4, 1, NULL);
+			memset(m_emptyImage->data, 0, m_height * m_width * 4);
+		}
 
-	if (dataArr == NULL)
-		return -1;
+		*im = m_emptyImage;
+	}
+	else {
+		if (lastReadFrameTS != readTimeStamp) {
+			lastReadFrameTS = readTimeStamp;
 
-	jbyte *pixles = (jbyte *)m_env->GetByteArrayElements(dataArr, NULL);
+			jbyteArray dataArr = (jbyteArray) m_env->CallObjectMethod(m_jSrc, m_methodRead,
+																	  readTimeStamp);
 
-	if (m_im == NULL)
-		m_im = image_create(m_height, m_width, 4, 1, NULL);
+			if (dataArr == NULL)
+				return -1;
 
-	memcpy(m_im->data, pixles, m_width * m_height * m_im->channel);
+			jbyte *pixels = (jbyte *) m_env->GetByteArrayElements(dataArr, NULL);
 
-	m_env->ReleaseByteArrayElements(dataArr, pixles, 0);
+			if (m_im == NULL)
+				m_im = image_create(m_height, m_width, 4, 1, NULL);
 
-	// Process effects.
-	ProcessEffect( m_im, iFrame, timeStamp, im );
+			memcpy(m_im->data, pixels, m_width * m_height * m_im->channel);
+
+			m_env->ReleaseByteArrayElements(dataArr, pixels, 0);
+		}
+
+		// Process effects.
+		ProcessEffect(m_im, iFrame, readTimeStamp, im);
+	}
 
 	GPLOGF( (" %d\n>", 1 ));
 
