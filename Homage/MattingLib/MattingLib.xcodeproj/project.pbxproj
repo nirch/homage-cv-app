@@ -25,10 +25,10 @@
 		D0C9C0DC1A67BE4B008F9D1D /* UnBackgroundDrakness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D21A67BE4B008F9D1D /* UnBackgroundDrakness.cpp */; };
 		D0C9C0DD1A67BE4B008F9D1D /* UnBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D31A67BE4B008F9D1D /* UnBlob.cpp */; };
 		D0C9C0DE1A67BE4B008F9D1D /* UnBlobB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D41A67BE4B008F9D1D /* UnBlobB.cpp */; };
-		D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D51A67BE4B008F9D1D /* UnBlobC.cpp */; };
+		D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D51A67BE4B008F9D1D /* UnBlobC.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
 		D0C9C0E01A67BE4B008F9D1D /* UnPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D61A67BE4B008F9D1D /* UnPrm.cpp */; };
 		D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0D71A67BE4B008F9D1D /* UnState.cpp */; };
-		D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58118D0BC99004435E2 /* UbBackground.cpp */; };
+		D0E0A58B18D0BC99004435E2 /* UbBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58118D0BC99004435E2 /* UbBackground.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
 		D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58218D0BC99004435E2 /* UbBlob.cpp */; };
 		D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58318D0BC99004435E2 /* UbBlob1.cpp */; };
 		D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58418D0BC99004435E2 /* UbBlob2.cpp */; };
@@ -36,7 +36,7 @@
 		D0E0A59018D0BC99004435E2 /* UbSmooth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58618D0BC99004435E2 /* UbSmooth.cpp */; };
 		D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58718D0BC99004435E2 /* UbThin.cpp */; };
 		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
-		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
+		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
 		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		F130B1061A83D26E0094F801 /* UbEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1051A83D26E0094F801 /* UbEdge.cpp */; };
 		F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1071A83D6910094F801 /* PlnAdjustIntersect.cpp */; };
@@ -328,6 +328,7 @@
 		1E8BD26AFF514970B34A68FF /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -377,6 +378,7 @@
 		4D897B093B694BE288C8ED05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -426,6 +428,7 @@
 		7AF3BEDF787D49DBAE613384 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -488,6 +491,7 @@
 		FB1C6D7AE07E4AF9B36C19F2 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
