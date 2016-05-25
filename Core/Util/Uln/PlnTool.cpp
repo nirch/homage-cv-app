@@ -1300,13 +1300,13 @@ plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type
 	sd->u = D;
 	for( i = 0 ; i < apl->nA ; i++ ){
 		pln_type *pl = apl->a[i];
-		if( pln_distance( pl, p, &d ) < 0 )
+		if( pln_distanceC( pl, p, &d ) < 0 )
 			continue;
 
 		if( d.gt < 0 || d.gt > pl->len )	continue;
 
 
-		if( ABS(d.u) < ABS(sd->u) ){
+		if( iMin < 0 ||  ABS(d.u) < ABS(sd->u) ){
 			*spl = pl;
 			*sd = d;
 			iMin = i;
@@ -1314,6 +1314,9 @@ plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type
 	}
 
 	if( *spl == NULL )
+		return( -1 );
+
+	if( D > 0  && ABS(sd->u) > D )
 		return( -1 );
 
 	return( iMin );
@@ -2108,6 +2111,37 @@ pln_close( pln_type *pl, float T )
 }
 
 
+void
+pln_close_test( pln_type *pl, float T )
+{
+	vec2f_type	p1,	p,	v;
+	ln_type	*l,	*el;
+
+	for( l = pl->link, p = pl->ctr ; LN_NEXT(l) != NULL ; l = LN_NEXT(l) ){
+		p.x += l->v.x;
+		p.y += l->v.y;
+	}
+
+	el = l;
+
+	p1.x = p.x + el->v.x;
+	p1.y = p.y + el->v.y;
+
+	v.x = pl->ctr.x - p1.x;
+	v.y = pl->ctr.y - p1.y;
+
+	if( v.x*v.x + v.y*v.y > T )
+		return;
+
+
+	el->v.x = pl->ctr.x - p.x;
+	el->v.y = pl->ctr.y - p.y;
+	ln_set_aux( el );
+
+	pl->state = PLN_CLOSE;
+	pl->len = lnL_length( pl->link );
+}
+
 
 
 float
@@ -2163,4 +2197,18 @@ plnA_reorder_length( plnA_type *apl )
 	//for( i = 0 ; i < apl->nA ; i++ )
 	//	fprintf( stdout, "%f\n", apl->a[i]->len );
 
+}
+
+
+pln_type *
+	plnA_group_get_pl( plnA_type *apl, int group )
+{
+	int	i;
+
+	for( i = 0 ; i < apl->nA ; i++ ){
+		if( apl->a[i]->group == group )
+			return( apl->a[i] );
+	}
+
+	return( NULL );
 }

@@ -14,7 +14,7 @@
 #include "ImageDump/ImageDump.h"
 #include "ImageMorphology/ImageMorphology.h"
 #include "Imagelabel/BwLabel.h"
-
+#include "ImageLabel/ImageLabel.h"
 #define DIFF_THRESH 16// 12
 
 
@@ -436,7 +436,7 @@ image1_blob_filter( image_type *sim, int nT )
 	}
 
 //	image2_bwLabel_set_direction( im, abw, nBw );
-	imageLabel2_set_id( im, abw );
+	imageLabelUS_set_id_B( im, abw );
 
 
 
@@ -488,7 +488,7 @@ dbSilhouette_remove_blob( image_type *sim, int nT, int value )
 		return;
 	}
 
-	imageLabel2_set_id( im, abw );
+	imageLabelUS_set_id_B( im, abw );
 
 
 
@@ -542,7 +542,7 @@ dbSilhouette_fill_blob( image_type *sim, int nP, int nT, int value )
 		return;
 	}
 
-	imageLabel2_set_id( im, abw );
+	imageLabelUS_set_id_B( im, abw );
 
 
 

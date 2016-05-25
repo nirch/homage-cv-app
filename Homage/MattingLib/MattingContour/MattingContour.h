@@ -60,6 +60,8 @@ public:
 
 	int	ProcessHead( plnA_type *apl, int iFrame );
 
+	int	ProcessAdjust( plnA_type *apl, plnA_type *bapl, int iFrame );
+
 	int	Write( char *file );
 
 	void	Trace( FILE *fp );

@@ -12,6 +12,7 @@
 #include "Uln/Cln/ClnType.h"
 
 #include "ImageLabel/SbType.h"
+#include "PlnTracker/Pose2dType.h"
 
 
 typedef struct unDarkPrm_type {
@@ -21,10 +22,12 @@ typedef struct unDarkPrm_type {
 	float F1;
 } unDarkPrm_type;
 
-typedef struct unPrm_type {
-	int thin;
 
-	int fillBlob;
+typedef struct unPrm_type {
+	int	straightLine;
+
+
+	int fillBlob1;
 
 
 	unDarkPrm_type	d;
@@ -68,6 +71,10 @@ private:
 	int	ProcessBlobB();
 
 	int	ProcessBlobC();
+
+	int	ProcessLineInit( char *prmFile );
+	int ProcessLine( int k0, int k1 );
+	int	ProcessLineMask( struct imageLabel_type *abw, int k0, int k1, vl2f_type *vl );
 
 	int	ProcessBlobSide( struct imageLabel_type *abw, int iB, int x0, int y0, int j0, int j1, sbA_type *as );
 	int	ProcessBlobSide_test( imageLabel_type *abw, int iB, int j0, int j1, sbA_type *as );
@@ -147,6 +154,8 @@ private:
 	box2i_type	m_roi;
 	int	m_N;
 
+	class CUnEdge  *m_ue;
+
 
 	struct imageLabel_type *m_abw;
 
@@ -166,11 +175,13 @@ public:
 
 	int	m_closeUp;
 
-	// old algorithm
-	class CUnBackgroundM *m_unBackgroundM;
+	pose2d_type m_head;
+
+
 
 	gpTime_type m_gTime;
 
+	gpTime_type m_tEdge;
 
 
 };

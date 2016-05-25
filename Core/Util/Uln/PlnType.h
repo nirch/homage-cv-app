@@ -298,6 +298,7 @@ float	plnA_max_length( plnA_type *aP );
 
 int		plnA_distance( plnA_type *apl, vec2f_type *p, float D, pln_type **spl, dPln_type *sd );
 
+
 int	plnA_add( plnA_type *apl, pln_type *pl );
 
 void	plnA_addA( plnA_type *apl, plnA_type *apl1 );
@@ -433,9 +434,14 @@ void	plnA_set_qulity( plnA_type *apl, float qulity );
 
 void	pln_close( pln_type *pl, float T );
 
+void	pln_close_test( pln_type *pl, float T );
+
+
 float	pln_radius( pln_type *pl, vec2f_type *p0 );
 
 void	plnA_reorder_length( plnA_type *apl );
+
+pln_type *	plnA_group_get_pl( plnA_type *apl, int group );
 
 
 

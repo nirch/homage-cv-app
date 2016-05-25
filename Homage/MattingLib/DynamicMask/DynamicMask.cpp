@@ -123,7 +123,6 @@ box2i	b;
 
 		if( lk->SetRefernceImage( m_yim, &b ) < 0 ){
 			delete lk;
-			//fprintf( stdout, "A" );
 			continue;
 		}
 
@@ -173,7 +172,6 @@ int	CDynamicMask::Process( image_type *sim, int iFrame )
 
 	image_type *yim = image1_from( sim, NULL );
 
-//	fprintf( stdout, "track: %d\n", m_iFrame );
 
 	for( i = 0, n = 0 ; i < m_nT ; i++ ){
 		CLkRegistration *lk = m_at[i];
@@ -193,7 +191,6 @@ int	CDynamicMask::Process( image_type *sim, int iFrame )
 
 		float	a,	b,	angle, scale;
 		lt2_similarity_get( &lt, &a, &b, &angle, &scale );
-		//fprintf( stdout, "%.2f %.2f %.2f %.2f  %.2f \n", a, b, angle, scale,  state.ssd );
 
 		if( scale < 0.85 || scale > 1.2 )
 			continue;

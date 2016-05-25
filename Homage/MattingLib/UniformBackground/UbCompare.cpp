@@ -73,8 +73,8 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 
 	if( m_iFrame == m_dFrame ){
 		bImage_dump( m_bim, m_N, "bim", m_iFrame, "B" );
-		IMAGE_DUMP( sim, "m", m_iFrame, "SIM" );
-		IMAGE_DUMP( m_cim, "m", m_iFrame, "1" );
+		IMAGE_DUMPF( sim, "m", m_iFrame, "SIM", m_dFrame == m_iFrame  );
+		IMAGE_DUMPF( m_cim, "m", m_iFrame, "1", m_dFrame == m_iFrame  );
 	}
 
 
@@ -87,9 +87,9 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 
 
 
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP( m_cim, "m", m_iFrame, "22" );
-	}
+
+	IMAGE_DUMPF( m_cim, "m", m_iFrame, "22", m_dFrame == m_iFrame  );
+
 
 
 	gpTime_start( &m_tOpen );
@@ -98,34 +98,15 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 	gpTime_stop( &m_tOpen );
 
 
+	IMAGE_DUMPF( m_cim, "m", m_iFrame, "2", m_dFrame == m_iFrame  );
 
 
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP( m_cim, "m", m_iFrame, "2" );
-	}
-
-
-//	ProcessBlob();
-
-//	ProcessBlob1();
 
 	ProcessBlob2();
+	IMAGE_DUMPF( m_cim, "m", m_iFrame, "3", m_dFrame == m_iFrame  );
 
 
 
-
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP( m_cim, "m", m_iFrame, "3" );
-	}
-
-
-
-
-	//image1_close1( m_cim );
-
-	//if( m_iFrame == m_dFrame ){
-	//	IMAGE_DUMP( m_cim, "m", m_iFrame, "4" );
-	//}
 
 
 	gpTime_stop( &m_tCompare );

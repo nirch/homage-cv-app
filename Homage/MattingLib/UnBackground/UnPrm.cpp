@@ -15,10 +15,10 @@ unPrm_alloc()
 
 	prm = (unPrm_type *)malloc( sizeof(unPrm_type) );
 
-	prm->thin = 0;
 
-	prm->fillBlob = 120*120;
 
+
+	prm->straightLine = 1;
 
 
 	prm->d.T0 = 64;
@@ -47,12 +47,11 @@ CUnBackground::ReadPrm( char *inFile )
 
 
 	if((xmlDoc = xml_parse_file(  inFile )) == NULL ){
-		fprintf( stdout, "Reading %s  failed\n", inFile );
 		return( -1 );
 	}
 
 
-	pTag = xmlTag_get_tag( xmlDoc->root, "UniformBackgroundPrm" );
+	pTag = xmlTag_get_tag( xmlDoc->root, "UnBackground" );
 	if( pTag == NULL ){
 		xml_destroy(xmlDoc);
 		return( -1 );
@@ -67,24 +66,21 @@ CUnBackground::ReadPrm( char *inFile )
 
 	for( tag = pTag->firstChild ; tag != NULL ; tag = tag->next ){
 
-
-		if ( (gp_stricmp(tag->name, "thin") == 0) ){
-			m_prm->thin = atoi( tag->data );
-
-			continue;
-		}
-
-		if ( (gp_stricmp(tag->name, "FillBlob") == 0) ){
-			m_prm->fillBlob = atoi( tag->data );
+		if ( (gp_stricmp(tag->name, "StraightLine") == 0) ){
+			m_prm->straightLine = atoi( tag->data );
 
 			continue;
 		}
+
+
 
 
 		if ( (gp_stricmp(tag->name, "Dark") == 0) ){
 			ReadPrmDarkTag( &m_prm->d, tag );
 			continue;
 		}
+
+
 	}
 
 
@@ -92,7 +88,7 @@ CUnBackground::ReadPrm( char *inFile )
 	xml_destroy(xmlDoc);
 
 
-	fprintf( stdout, "Reading %s\n", inFile );
+
 
 	return( 1 );
 }

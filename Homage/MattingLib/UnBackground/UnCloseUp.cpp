@@ -34,12 +34,12 @@ int	CUnBackground::ProcessCloseUp()
 {
 	int		i,	k;
 
-	box1iA_type  *ab0 = box1iA_alloc( 20 );
+	box1iA_type  *ab0 = box1iA_alloc( 32 );
 	sbA_segment( &m_as0,  ab0 );
 
 	
 
-	box1iA_type  *ab1 = box1iA_alloc( 20 );
+	box1iA_type  *ab1 = box1iA_alloc( 32 );
 	sbA_segment( &m_as1,  ab1 );
 
 

@@ -78,7 +78,15 @@ int	CUnBackground::ProcessBlobC()
 #endif
 
 
+	if( m_prm->straightLine == 1 )
+		ProcessLine( k0, k1 );
 
+
+#ifdef _DUMP
+	im1 = imageLabelUI_color_imageT( m_abw, T, NULL );
+	IMAGE_DUMP_DUP( im1, 8, 1, "ub", 1, "DM-3" );
+	image_destroy( im1, 1 );
+#endif
 
 
 	int	i0 = m_hp.x/8;
@@ -266,6 +274,9 @@ int	i;
 	for( i = 1 ; i < as ->nA ; i++ ){
 		if( as->a[i-1].j1 < 0 )	continue;
 
+		if( as->a[i].id == as->a[i-1].id )
+			continue;
+
 		if( seg_overlap( &as->a[i], &as->a[i-1]) > 0 )
 			continue;
 
@@ -382,6 +393,7 @@ imageLabelUI_blobe0( imageLabel_type *abw, int i0, int j0, int dj, int *k0, int 
 
 	u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0-dj );
 	for( j = j0-dj ; j > j0 - 4*dj && j >= 0  ; j--, sp-- ){
+		if( *sp >= (u_int)abw->nA )	continue;
 		if( abw->a[*sp].color == 0 && abw->a[*sp].no > 150 ){
 			*b0 = abw->a[*sp].id;
 			*k0 = j;
@@ -392,6 +404,7 @@ imageLabelUI_blobe0( imageLabel_type *abw, int i0, int j0, int dj, int *k0, int 
 
 	sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0+dj );
 	for( j = j0+dj ; j < j0 + 4*dj && j < abw->im->width ; j++, sp++ ){
+		if( *sp >= (u_int)abw->nA )	continue;
 		if( abw->a[*sp].color == 0 && abw->a[*sp].no > 150  ){
 			*b1 = abw->a[*sp].id;
 			*k1 = j;

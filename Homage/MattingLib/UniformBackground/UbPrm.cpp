@@ -30,7 +30,7 @@ ubPrm_alloc()
 
 	prm->contour = 1;
 
-
+	prm->head.on = 1;
 
 
 	return( prm );
@@ -52,10 +52,9 @@ CUniformBackground::ReadPrm( char *inFile )
 
 
 
-	if((xmlDoc = xml_parse_file(  inFile )) == NULL ){
-		fprintf( stdout, "Reading %s  failed\n", inFile );
+	if((xmlDoc = xml_parse_file(  inFile )) == NULL )
 		return( -1 );
-	}
+
 
 
 	pTag = xmlTag_get_tag( xmlDoc->root, "UniformBackgroundPrm" );
@@ -115,6 +114,12 @@ CUniformBackground::ReadPrm( char *inFile )
 			continue;
 		}
 
+
+		if ( (gp_stricmp(tag->name, "Head") == 0) ){
+			ReadHeadTagPrm( tag, &m_prm->head  );
+			continue;
+		}
+
 	}
 
 
@@ -122,9 +127,28 @@ CUniformBackground::ReadPrm( char *inFile )
 	xml_destroy(xmlDoc);
 
 
-	fprintf( stdout, "Reading %s\n", inFile );
 
 	return( 1 );
 }
 
 
+int
+CUniformBackground::ReadHeadTagPrm( xmlTag_type *pTag, ubHeadPrm_type *h )
+{
+	xmlTag_type *tag;
+
+
+
+	for( tag = pTag->firstChild ; tag != NULL ; tag = tag->next ){
+
+
+		if ( (gp_stricmp(tag->name, "On") == 0) ){
+			h->on = atoi( tag->data );
+
+			continue;
+		}
+
+	}
+
+	return( 1 );
+}

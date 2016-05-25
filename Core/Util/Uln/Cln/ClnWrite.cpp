@@ -21,7 +21,7 @@ cln_to_plnA( cln_type *cln, int fData )
 
 	apl = plnA_alloc( cln->nA );
 
-	apl->p = cln->ctr;
+	apl->p = cln->p;
 	apl->angle = cln->angle;
 	apl->scale = cln->scale;
 
@@ -43,7 +43,7 @@ cln_from_plnA( plnA_type *apl, int fData )
 
 	cln_type *cln = cln_alloc();
 
-	cln->ctr = apl->p;
+	cln->p = apl->p;
 	cln->scale = apl->scale;
 	cln->angle = apl->angle;
 	cln->iFrame = apl->iFrame;
@@ -219,7 +219,7 @@ cln_read( cln_type **cl, FILE *fp )
 		return( -1 );
 	if( gp_strnicmp(buf , "contour", 7) != 0 )
 		return( -1 );
-	fscanf( fp, "%s  %f %f %f %f", buf, &(*cl)->ctr.x, &(*cl)->ctr.y, &(*cl)->scale, &(*cl)->angle );
+	fscanf( fp, "%s  %f %f %f %f", buf, &(*cl)->p.x, &(*cl)->p.y, &(*cl)->scale, &(*cl)->angle );
 	(*cl)->angle = ANGLE_D2R( (*cl)->angle );
 
 
@@ -277,7 +277,7 @@ cln_write( cln_type *cl, FILE *fp )
 	fprintf(fp, "contour  %d\n", cl->type );
 
 	fprintf( fp, "transform\n" );
-	fprintf( fp, "%f %f %f %f\n", cl->ctr.x, cl->ctr.y, cl->scale, ANGLE_R2D( cl->angle ) );
+	fprintf( fp, "%f %f %f %f\n", cl->p.x, cl->p.y, cl->scale, ANGLE_R2D( cl->angle ) );
 	
 
 

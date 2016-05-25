@@ -15,7 +15,7 @@ typedef struct lbm_type {
 	short i;
 	short j0;
 	short j1;
-	short id;
+	u_short id;
 } lbm_type;
 
 
@@ -77,7 +77,6 @@ void	image2_bwLabel( image_type *im, bwLabel_type **tbw, int *tnBw );
 void	image2_bwLabel_remove_boundary( image_type *im, bwLabel_type *bw );
 
 
-void	imageLabel2_set_id( image_type *im, bwLabel_type *bw );
 
 void	imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB );
 

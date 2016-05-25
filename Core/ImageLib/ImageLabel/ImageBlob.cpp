@@ -216,7 +216,7 @@ int	ab[64],	 nB;
 }
 
 
-
+#ifdef _AA_
 void 
 image1_fill_blob( image_type *sim, int nP, int pT, int bT, int value )
 {
@@ -225,12 +225,12 @@ bwLabel_type *abw;
 int nBw; 
 int	i,	j;
 u_char *sp;
-short *bp;
+u_short *bp;
 
 	im = image_create( sim->height, sim->width, 2, 1, NULL );
 
 	sp = sim->data;
-	bp = im->data_s;
+	bp = im->data_us;
 	for( i = 0 ; i < sim->height ; i++ )
 		for( j = 0 ; j < sim->width ; j++, sp++, bp++ )
 			*bp = ( *sp < nP )? 1 :0;
@@ -242,6 +242,9 @@ short *bp;
 		image_destroy( im, 1);
 		return;
 	}
+
+
+
 
 
 	imageLabel2_set_boundary( im, abw, nBw );
@@ -260,7 +263,7 @@ short *bp;
 
 
 	sp = sim->data;
-	bp = im->data_s;
+	bp = im->data_us;
 
 	for( i = 0 ; i < sim->height ; i++ )
 		for( j = 0 ; j < sim->width ; j++, sp++, bp++ ){
@@ -272,8 +275,52 @@ short *bp;
 		free( abw );
 		image_destroy( im, 1 );
 }
+#endif
 
 
+
+
+void 
+image1_fill_blob( image_type *sim, int nP, int pT, int bT, int value )
+{
+
+	int	i,	j;
+	u_char *sp;
+	u_short *bp;
+
+
+
+	imageLabel_type *abw = imageLabelUS_N( sim, nP, 0, 0, NULL );
+
+
+	imageLabelUS_set_boundary( abw );
+
+
+	for( i = 0 ; i < abw->nA ; i++ ){
+		bwLabel_type *bw = &abw->a[i];
+		bw->existence = 0;
+
+		if( bw->boundary == 1 )	bw->existence = 1;
+	}
+
+
+	bwLabel_filter( abw->a, abw->nA, pT, bT );
+
+
+
+	sp = sim->data;
+	bp = abw->im->data_us;
+
+	for( i = 0 ; i < sim->height ; i++ )
+		for( j = 0 ; j < sim->width ; j++, sp++, bp++ ){
+			if( *bp == 0 )	continue;
+			if( abw->a[*bp].id < 0 )
+				*sp = value;
+		}
+
+
+	imageLabel_destroy( abw );
+}
 
 void 
 image1_fill_blobV( image_type *vim, image_type *sim, int nP, int pT, int bT, int vT, int value )

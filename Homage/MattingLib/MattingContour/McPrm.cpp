@@ -1,5 +1,6 @@
 #include	<string.h>
 #include "Uigp/igp.h"
+#include "Ulog/Log.h"
 
 #include "Uxml/XmlType.h"
 
@@ -52,10 +53,9 @@ CMattingContour::ReadPrm( char *inFile )
 
 
 
-	if((xmlDoc = xml_parse_file(  inFile )) == NULL ){
-		fprintf( stdout, "Reading %s  failed\n", inFile );
+	if((xmlDoc = xml_parse_file(  inFile )) == NULL )
 		return( -1 );
-	}
+
 
 
 	pTag = xmlTag_get_tag( xmlDoc->root, "UniformBackgroundPrm" );
@@ -118,7 +118,7 @@ CMattingContour::ReadPrm( char *inFile )
 	xml_destroy(xmlDoc);
 
 
-	fprintf( stdout, "Reading %s\n", inFile );
+	GPTRACE( ( 3, "Reading %s\n", inFile) );
 
 	return( 1 );
 }

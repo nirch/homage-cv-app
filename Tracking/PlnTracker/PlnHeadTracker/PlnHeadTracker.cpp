@@ -57,9 +57,9 @@ int CPlnHeadTracker::Init( cln_type *cln )
 
 	m_cln = cln;
 
-	lt2_similarity_set( &m_lf.lt, m_cln->ctr.x, m_cln->ctr.y, 0.0F, 1.0F );
+	lt2_similarity_set( &m_lf.lt, m_cln->p.x, m_cln->p.y, 0.0F, 1.0F );
 
-	pln_translate( m_cln->a[0], -m_cln->ctr.x, -cln->ctr.y );
+	pln_translate( m_cln->a[0], -m_cln->p.x, -cln->p.y );
 
 
 	pln_box( m_cln->a[0], &m_box );
@@ -421,8 +421,13 @@ int	ret;
 		return( -1 );
 
 
+	plnA_type *capl = CropApl( apl, hp, 40 );
+
+
 	SetPose( hp->p.x, hp->p.y, hp->angle, hp->scale );
-	ret = ProcessA( apl, NULL, iFrame );
+	ret = ProcessA( capl, NULL, iFrame );
+
+	plnA_destroy( capl );
 	if( ret < 0  )
 		return( -1  );
 
@@ -466,6 +471,19 @@ int	CPlnHeadTracker::Process( plnA_type *apl, pln_type **spl, int iFrame )
 		return( -1 );
 
 	int ret = pln_adjust_head( apl->a[0], m_cln, iFrame, spl, &m_lf );
+
+
+
+	m_pose.iFrame = iFrame;
+	m_pose.qulity = m_lf.cover;
+	m_pose.state = 0;
+
+	if( m_lf.cover > 0 ){
+		lt2_similarity_get( &m_lf.lt, &m_pose.p.x, &m_pose.p.y, &m_pose.angle, &m_pose.scale );
+
+		m_pose.state = 1;
+	}
+
 
 
 	return( ret );
@@ -551,7 +569,7 @@ pln_adjust_head( pln_type *pl, cln_type *cln, int iFrame, pln_type **spl, lnFit_
 
 
 	if( f->cover <= 0 )
-		lt2_similarity_set( &f->lt, cln->ctr.x, cln->ctr.y, 0, 1.0 );
+		lt2_similarity_set( &f->lt, cln->p.x, cln->p.y, 0, 1.0 );
 
 
 	int ret = pln_fit( pl, bpl, 0, bpl->len, side, cycle,  4.0, f );
@@ -622,7 +640,7 @@ static int
 
 
 	if( f->cover <= 0 )
-		lt2_similarity_set( &f->lt, cln->ctr.x, cln->ctr.y, 0, 1.0 );
+		lt2_similarity_set( &f->lt, cln->p.x, cln->p.y, 0, 1.0 );
 
 
 	//int ret = pln_fit( pl, bpl, 0, bpl->len, side, cycle,  4.0, f );
@@ -681,7 +699,7 @@ static int
 }
 
 
-int	CPlnHeadTracker::GetHeadPose( vec2f_type *p, float *r )
+int	CPlnHeadTracker::GetHeadPose( vec2f_type *p, vec2f_type *v, float *r )
 {
 
 	if( m_cln == NULL || m_lf.cover <= 0 )
@@ -698,5 +716,66 @@ int	CPlnHeadTracker::GetHeadPose( vec2f_type *p, float *r )
 	float scale = hypot( m_lf.lt.a0, m_lf.lt.b0 );
 	*r = 0.75 *m_r * scale ;
 
+	v->x = m_lf.lt.a0/scale;
+	v->y = m_lf.lt.b0/scale;
+
+
+
 	return( 1 );
+}
+
+
+int	CPlnHeadTracker::GetHeadPose( vec2f_type ap[4] )
+{
+
+	if( m_cln == NULL || m_lf.cover <= 0 )
+		return( -1 );
+
+
+
+	pln_type *bpl =  m_cln->a[0];
+
+	ap[0].x = LT2_F1_C( m_lf.lt );
+	ap[0].y = LT2_F2_C( m_lf.lt );
+
+	vec2f_type p;
+
+	p.x = m_box.x0;
+	p.y = 0.5*(m_box.y1 + m_box.y0);
+	LT2_F( m_lf.lt, p, ap[1] );
+
+
+	p.x = 0;
+	p.y = m_box.y0;
+	LT2_F( m_lf.lt, p, ap[2] );
+
+	p.x = 0;
+	p.y = m_box.y1;
+	LT2_F( m_lf.lt, p, ap[3] );
+	return( 1 );
+}
+
+
+
+plnA_type *	CPlnHeadTracker::CropApl( plnA_type *apl, headPose_type *h, float margin )
+{
+	lt2_type lt;
+	box2f_type b;
+
+	lt2_similarity_set( &lt, h->p.x, h->p.y, h->angle, h->scale );
+	pln_type *pl = pln_affine_lt( m_cln->a[0], &lt, NULL );
+
+	pln_box(pl, &b );
+
+	box2f_extend( &b, margin );
+
+
+	plnA_type *capl = plnA_crop_box( apl, &b, NULL );
+
+	PLN_DUMP( pl, "AA", 1, "CROP-pl" );
+	PLNA_DUMP( capl, "AA", 1, "CROP" );
+
+	pln_destroy( pl );
+
+	return( capl );
 }

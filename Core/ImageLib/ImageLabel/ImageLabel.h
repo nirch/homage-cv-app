@@ -103,6 +103,8 @@ imageLabel_type *imageLabelUS_N( image_type *sim, int T, int inv, int margin, im
 
 void	imageLabelUS_set_id( imageLabel_type *abw );
 
+void	imageLabelUS_set_id_B( image_type *im, bwLabel_type *bw );
+
 int		imageLabelUS_set_pixel( image_type *sim, imageLabel_type *abw, int value );
 
 void	imageLabelUS_create( image_type *im, bwLabel_type **tbw, int *tnBw );
@@ -145,7 +147,9 @@ void	image1_fill_blobV( image_type *vim, image_type *sim, int nP, int pT, int bT
 	// ImageLabelUIContour.cpp
 clnA_type *	imageLabelUI_clnA( imageLabel_type *abw, clnA_type *ac );
 
-cln_type *	imageLabelUI_cln( image_type *im, int id );
+//cln_type *	imageLabelUI_cln( image_type *im, int id );
+cln_type *	imageLabelUI_cln( image_type *im, int id, float minLen, int extrnal );
+
 
 	// ImageLabelUITopology.cpp
 

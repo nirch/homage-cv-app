@@ -24,7 +24,7 @@ cln_alloc()
 	c->scale = 1.0;
 	c->angle = 0.0;
 
-	c->ctr.x = c->ctr.y = 0;
+	c->p.x = c->p.y = 0;
 
 	return( c );
 }
@@ -145,7 +145,7 @@ int	i;
 	c = cln_alloc();
 	c->angle = sc->angle;
 	c->scale = sc->scale;
-	c->ctr = sc->ctr;
+	c->p = sc->p;
 	c->v = sc->v;
 	c->type = sc->type;
 
@@ -192,7 +192,7 @@ int	i;
 
 
 	c->angle = sc->angle;
-	c->ctr = sc->ctr;
+	c->p = sc->p;
 	c->scale = sc->scale;
 	c->nA = 1;
 	c->a[0] = sc->a[iPlink];
@@ -218,8 +218,8 @@ cln_lt2( cln_type *sc, lt2_type *lt, cln_type *c )
 		c = cln_make_copy( sc );
 
 
-	c->ctr.x = LT2_F1( *lt, sc->ctr.x, sc->ctr.y );
-	c->ctr.y = LT2_F2( *lt, sc->ctr.x, sc->ctr.y );
+	c->p.x = LT2_F1( *lt, sc->p.x, sc->p.y );
+	c->p.y = LT2_F2( *lt, sc->p.x, sc->p.y );
 
 
 	c->v.x = LT2_F1( *lt, sc->v.x, sc->v.y ) - lt->c0;
@@ -240,8 +240,8 @@ cln_scale( cln_type *c, float scale )
 	int	i;
 
 
-	c->ctr.x *= scale;
-	c->ctr.y *= scale;
+	c->p.x *= scale;
+	c->p.y *= scale;
 
 
 	for( i = 0 ; i < c->nA ; i++ )
@@ -331,8 +331,8 @@ vec2d	p0;
 float	scale;
 
 
-	c->a[0]->ctr.x -= c->ctr.x;
-	c->a[0]->ctr.y -= c->ctr.y;
+	c->a[0]->ctr.x -= c->p.x;
+	c->a[0]->ctr.y -= c->p.y;
 
 
 	p0.x = p0.y = 0;
@@ -351,8 +351,8 @@ vec2d	p0;
 	
 
 
-	c->a[0]->ctr.x += c->ctr.x;
-	c->a[0]->ctr.y += c->ctr.y;
+	c->a[0]->ctr.x += c->p.x;
+	c->a[0]->ctr.y += c->p.y;
 
 //	polylink_set_ctr( &c->a[0]->ctr, c->a[0]->link );
 }
@@ -402,8 +402,8 @@ cln_translate( cln_type *c, float x, float y )
 {
 	int	i;
 
-	c->ctr.x += x;
-	c->ctr.y += y;
+	c->p.x += x;
+	c->p.y += y;
 
 	for( i = 0 ; i < c->nA ; i++ ){
 		pln_translate( c->a[i], x, y );
@@ -670,7 +670,7 @@ cln_detach_transparent( cln_type *c )
 	ct = cln_alloc();
 
 	ct->angle= c->angle;
-	ct->ctr = c->ctr;
+	ct->p = c->p;
 	ct->scale = c->scale;
 	ct->nA = 0;
 
@@ -699,8 +699,8 @@ box2f_type	b;
 
 	cln_box( c, &b );
 
-	c->ctr.x = 0.5*(b.x0 + b.x1);
-	c->ctr.y = 0.5*(b.y0 + b.y1);
+	c->p.x = 0.5*(b.x0 + b.x1);
+	c->p.y = 0.5*(b.y0 + b.y1);
 	c->angle = 0;
 
 	c->v.x = 20*cos( c->angle );

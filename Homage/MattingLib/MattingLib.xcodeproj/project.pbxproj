@@ -14,6 +14,10 @@
 		54C68E511B3173CF008BDDD9 /* UmPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E4D1B3173CF008BDDD9 /* UmPrm.cpp */; };
 		54C68E521B3173CF008BDDD9 /* UnBackgroundM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E4E1B3173CF008BDDD9 /* UnBackgroundM.cpp */; };
 		54C68E531B3173CF008BDDD9 /* UnBackgroundMProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C68E501B3173CF008BDDD9 /* UnBackgroundMProcess.cpp */; };
+		54E947B01CB2AF4E0029CCAA /* UnEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54E947AC1CB2AF4E0029CCAA /* UnEdge.cpp */; };
+		54E947B11CB2AF4E0029CCAA /* UnEdgePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54E947AE1CB2AF4E0029CCAA /* UnEdgePrm.cpp */; };
+		54E947B21CB2AF4E0029CCAA /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54E947AF1CB2AF4E0029CCAA /* UniformBackground.cpp */; };
+		54E947B41CB2BB540029CCAA /* UnLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54E947B31CB2BB540029CCAA /* UnLine.cpp */; };
 		D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02C8A4B1949A1550078EB83 /* UbPrm.cpp */; };
 		D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38B919482B0000FB25A5 /* PlnAdjustIn.cpp */; };
 		D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02F38BA19482B0000FB25A5 /* PlnAdjustStart.cpp */; };
@@ -37,7 +41,6 @@
 		D0E0A59118D0BC99004435E2 /* UbThin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58718D0BC99004435E2 /* UbThin.cpp */; };
 		D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58818D0BC99004435E2 /* UbUpdate.cpp */; };
 		D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E0A58918D0BC99004435E2 /* UniformBackground.cpp */; };
-		D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		F130B1061A83D26E0094F801 /* UbEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1051A83D26E0094F801 /* UbEdge.cpp */; };
 		F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1071A83D6910094F801 /* PlnAdjustIntersect.cpp */; };
 		F130B10F1A83D6910094F801 /* PlnAdjustEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F130B1091A83D6910094F801 /* PlnAdjustEdge.cpp */; };
@@ -53,7 +56,11 @@
 		54C68E4E1B3173CF008BDDD9 /* UnBackgroundM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBackgroundM.cpp; sourceTree = "<group>"; };
 		54C68E4F1B3173CF008BDDD9 /* UnBackgroundM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnBackgroundM.h; sourceTree = "<group>"; };
 		54C68E501B3173CF008BDDD9 /* UnBackgroundMProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnBackgroundMProcess.cpp; sourceTree = "<group>"; };
-		5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackgroundRemoval.cpp; path = Background/BackgroundRemoval.cpp; sourceTree = SOURCE_ROOT; };
+		54E947AC1CB2AF4E0029CCAA /* UnEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnEdge.cpp; sourceTree = "<group>"; };
+		54E947AD1CB2AF4E0029CCAA /* UnEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnEdge.h; sourceTree = "<group>"; };
+		54E947AE1CB2AF4E0029CCAA /* UnEdgePrm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnEdgePrm.cpp; sourceTree = "<group>"; };
+		54E947AF1CB2AF4E0029CCAA /* UniformBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformBackground.cpp; sourceTree = "<group>"; };
+		54E947B31CB2BB540029CCAA /* UnLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnLine.cpp; sourceTree = "<group>"; };
 		7885ACADB627440AAA11DA86 /* ColorBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorBackground.h; path = ColorBackground/ColorBackground.h; sourceTree = SOURCE_ROOT; };
 		80E96089DA054933BF5A8B95 /* BackgroundRemoval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundRemoval.h; path = Background/BackgroundRemoval.h; sourceTree = SOURCE_ROOT; };
 		BDE895EA1510494B83EB22EB /* libMattingLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMattingLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,10 +135,20 @@
 			path = UnBackgroundM;
 			sourceTree = "<group>";
 		};
+		54E947AB1CB2AF4E0029CCAA /* UnEdge */ = {
+			isa = PBXGroup;
+			children = (
+				54E947AC1CB2AF4E0029CCAA /* UnEdge.cpp */,
+				54E947AD1CB2AF4E0029CCAA /* UnEdge.h */,
+				54E947AE1CB2AF4E0029CCAA /* UnEdgePrm.cpp */,
+				54E947AF1CB2AF4E0029CCAA /* UniformBackground.cpp */,
+			);
+			path = UnEdge;
+			sourceTree = "<group>";
+		};
 		93D3460ADEB24C8EB830AA82 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
-				5F531D33D3E140368E94E434 /* BackgroundRemoval.cpp */,
 				085A49792B8245F481C5BBF2 /* ColorBackground.cpp */,
 			);
 			name = "Source Files";
@@ -164,6 +181,7 @@
 		D0C9C0CB1A67BE4B008F9D1D /* UnBackground */ = {
 			isa = PBXGroup;
 			children = (
+				54E947B31CB2BB540029CCAA /* UnLine.cpp */,
 				5474512D1C8C401E00875FD0 /* UnFill.cpp */,
 				5474512E1C8C401E00875FD0 /* UnCloseUp.cpp */,
 				D0C9C0CC1A67BE4B008F9D1D /* bImage.cpp */,
@@ -204,6 +222,7 @@
 		F6160FA366C749B1BC40ABE7 /* MattingLib */ = {
 			isa = PBXGroup;
 			children = (
+				54E947AB1CB2AF4E0029CCAA /* UnEdge */,
 				54C68E4C1B3173CE008BDDD9 /* UnBackgroundM */,
 				D0C9C0CB1A67BE4B008F9D1D /* UnBackground */,
 				D02F38B719482B0000FB25A5 /* PlnAdjust */,
@@ -284,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54E947B11CB2AF4E0029CCAA /* UnEdgePrm.cpp in Sources */,
 				D0C9C0DF1A67BE4B008F9D1D /* UnBlobC.cpp in Sources */,
 				D0C9C0D81A67BE4B008F9D1D /* bImage.cpp in Sources */,
 				D02F38BC19482B0000FB25A5 /* PlnAdjustIn.cpp in Sources */,
@@ -295,7 +315,6 @@
 				D0C9C0DB1A67BE4B008F9D1D /* UnBackground.cpp in Sources */,
 				D0C9C0E11A67BE4B008F9D1D /* UnState.cpp in Sources */,
 				5474512F1C8C401E00875FD0 /* UnFill.cpp in Sources */,
-				D75CC711C01942A98D347410 /* BackgroundRemoval.cpp in Sources */,
 				D04D18F51A88AF6E00104D52 /* PlnAdjustCoherent.cpp in Sources */,
 				3347543E83F2461EA78700F4 /* ColorBackground.cpp in Sources */,
 				D02F38BD19482B0000FB25A5 /* PlnAdjustStart.cpp in Sources */,
@@ -304,6 +323,7 @@
 				D0E0A58C18D0BC99004435E2 /* UbBlob.cpp in Sources */,
 				D0E0A58D18D0BC99004435E2 /* UbBlob1.cpp in Sources */,
 				D0E0A58E18D0BC99004435E2 /* UbBlob2.cpp in Sources */,
+				54E947B41CB2BB540029CCAA /* UnLine.cpp in Sources */,
 				D0E0A58F18D0BC99004435E2 /* UbContour.cpp in Sources */,
 				D02C8A4C1949A1550078EB83 /* UbPrm.cpp in Sources */,
 				54C68E521B3173CF008BDDD9 /* UnBackgroundM.cpp in Sources */,
@@ -313,12 +333,14 @@
 				54C68E531B3173CF008BDDD9 /* UnBackgroundMProcess.cpp in Sources */,
 				D0C9C0DA1A67BE4B008F9D1D /* TestSilhouetteDeviation.cpp in Sources */,
 				F130B10D1A83D6910094F801 /* PlnAdjustIntersect.cpp in Sources */,
+				54E947B21CB2AF4E0029CCAA /* UniformBackground.cpp in Sources */,
 				54C68E511B3173CF008BDDD9 /* UmPrm.cpp in Sources */,
 				D0E0A59218D0BC99004435E2 /* UbUpdate.cpp in Sources */,
 				547451321C8C402C00875FD0 /* UbCompare.cpp in Sources */,
 				D0E0A59318D0BC99004435E2 /* UniformBackground.cpp in Sources */,
 				D0C9C0DD1A67BE4B008F9D1D /* UnBlob.cpp in Sources */,
 				D0C9C0DC1A67BE4B008F9D1D /* UnBackgroundDrakness.cpp in Sources */,
+				54E947B01CB2AF4E0029CCAA /* UnEdge.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

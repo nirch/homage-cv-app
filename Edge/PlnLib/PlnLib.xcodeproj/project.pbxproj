@@ -1,0 +1,761 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		7C9E3EABA9994E0F87512459 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 59D20F713DAD4A1C9DB1C199 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				9A78D8097C664299A1FF8A60 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		E2072B00E3BB4E82AAD346E7 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D5EC65B859DC41068D35C2D1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				40C1AF88AA694F20A4446140 /* CMake Rules */,
+			);
+			dependencies = (
+				26247B0F2E784F61B5078B5F /* PBXTargetDependency */,
+				CD35C2A7F08345A69E918E2E /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		18D8621B8DC74A0789BE45C1 /* PlnFeaturePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78273F7F0AA3477880127F77 /* PlnFeaturePrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		353316690E1842CDB7EFB668 /* PlnMerging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E714A3DCBEE42EC92703EBA /* PlnMerging.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		4AA99705ED64482CABA8EE53 /* PlnMergingScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 770427FDBAC34C22B94605E8 /* PlnMergingScale.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		55AECB10C4AB405D952C407B /* PlnUnion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC2310E464444264A21F07D5 /* PlnUnion.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5C5376DE1E134C929DABBA62 /* PlnCurvature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44D3E9D4CA2A4C22970CBEEA /* PlnCurvature.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		60478E9934EE4DC7A618AB6C /* PlnStraightVl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D54613B3F43C6A4E52456 /* PlnStraightVl.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		649F909DAAE047CEA8ABD41E /* PlnFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCC67CA2D837427C88C2748C /* PlnFeature.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		9C6B423C0359406A8B694F92 /* PlnConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E45E7CE3B1E74B05A526E603 /* PlnConnect.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D7055E51228B480998198A66 /* PlnMergingPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C494461E8749E782899D8E /* PlnMergingPrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		E4B7F25BB8A340258524A59C /* PlnConnectPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 533C1A20F64E4FD89D792FE4 /* PlnConnectPrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		E4DB69C4B725460E945DEC06 /* PlncurvaturePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29C08755A5A44D9A4B7FE89 /* PlncurvaturePrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		44E26134FDF44DC587D91B2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C9E3EABA9994E0F87512459;
+			remoteInfo = ZERO_CHECK;
+		};
+		D7527D4893A640E1BAC92244 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 230FC1394EDA47BCB9FD36D6;
+			remoteInfo = PlnLib;
+		};
+		F4384D6B5DEC46858C4F7AAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C9E3EABA9994E0F87512459;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		221160C741EC4D7FBA2F020C /* PlnFeature.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PlnFeature.h; path = PlnFeature/PlnFeature.h; sourceTree = SOURCE_ROOT; };
+		28ECE73D8B154634B3F42853 /* CSegType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = CSegType.h; path = PlnCurvature/CSegType.h; sourceTree = SOURCE_ROOT; };
+		2BB5C251418B4167830BAD84 /* libPlnLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPlnLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D1D54613B3F43C6A4E52456 /* PlnStraightVl.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnStraightVl.cpp; path = PlnCurvature/PlnStraightVl.cpp; sourceTree = SOURCE_ROOT; };
+		44D3E9D4CA2A4C22970CBEEA /* PlnCurvature.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnCurvature.cpp; path = PlnCurvature/PlnCurvature.cpp; sourceTree = SOURCE_ROOT; };
+		45C494461E8749E782899D8E /* PlnMergingPrm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnMergingPrm.cpp; path = PlnMerging/PlnMergingPrm.cpp; sourceTree = SOURCE_ROOT; };
+		4E829E92124B484081A4EECB /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		533C1A20F64E4FD89D792FE4 /* PlnConnectPrm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnConnectPrm.cpp; path = PlnConnect/PlnConnectPrm.cpp; sourceTree = SOURCE_ROOT; };
+		6861771F01454B80BD5BBD1F /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		770427FDBAC34C22B94605E8 /* PlnMergingScale.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnMergingScale.cpp; path = PlnMerging/PlnMergingScale.cpp; sourceTree = SOURCE_ROOT; };
+		78273F7F0AA3477880127F77 /* PlnFeaturePrm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnFeaturePrm.cpp; path = PlnFeature/PlnFeaturePrm.cpp; sourceTree = SOURCE_ROOT; };
+		7E714A3DCBEE42EC92703EBA /* PlnMerging.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnMerging.cpp; path = PlnMerging/PlnMerging.cpp; sourceTree = SOURCE_ROOT; };
+		9F9B412EE7D64785B54F512B /* PlnMerging.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PlnMerging.h; path = PlnMerging/PlnMerging.h; sourceTree = SOURCE_ROOT; };
+		BA92B4177E31446E985914A9 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		DEAAD5A2D1B44B64877CC1B7 /* PlnConnect.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PlnConnect.h; path = PlnConnect/PlnConnect.h; sourceTree = SOURCE_ROOT; };
+		E29C08755A5A44D9A4B7FE89 /* PlncurvaturePrm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlncurvaturePrm.cpp; path = PlnCurvature/PlncurvaturePrm.cpp; sourceTree = SOURCE_ROOT; };
+		E45E7CE3B1E74B05A526E603 /* PlnConnect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnConnect.cpp; path = PlnConnect/PlnConnect.cpp; sourceTree = SOURCE_ROOT; };
+		FA0F583B76C44E058560B870 /* PlnCurvature.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PlnCurvature.h; path = PlnCurvature/PlnCurvature.h; sourceTree = SOURCE_ROOT; };
+		FC2310E464444264A21F07D5 /* PlnUnion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnUnion.cpp; path = PlnUnion/PlnUnion.cpp; sourceTree = SOURCE_ROOT; };
+		FCC67CA2D837427C88C2748C /* PlnFeature.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlnFeature.cpp; path = PlnFeature/PlnFeature.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		30278902C861468B8C45F2C1 /* PlnLib */ = {
+			isa = PBXGroup;
+			children = (
+				430D519777FD4883B45EFB1A /* Source Files */,
+				786DBF19D6514A6C91B57052 /* Header Files */,
+				4E829E92124B484081A4EECB /* CMakeLists.txt */,
+			);
+			name = PlnLib;
+			sourceTree = "<group>";
+		};
+		30F1135C450B465999AB712B /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				D5FFC23BE17E47E09A7D3978 /* CMake Rules */,
+				BA92B4177E31446E985914A9 /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		430D519777FD4883B45EFB1A /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				E45E7CE3B1E74B05A526E603 /* PlnConnect.cpp */,
+				533C1A20F64E4FD89D792FE4 /* PlnConnectPrm.cpp */,
+				44D3E9D4CA2A4C22970CBEEA /* PlnCurvature.cpp */,
+				3D1D54613B3F43C6A4E52456 /* PlnStraightVl.cpp */,
+				E29C08755A5A44D9A4B7FE89 /* PlncurvaturePrm.cpp */,
+				FCC67CA2D837427C88C2748C /* PlnFeature.cpp */,
+				78273F7F0AA3477880127F77 /* PlnFeaturePrm.cpp */,
+				7E714A3DCBEE42EC92703EBA /* PlnMerging.cpp */,
+				45C494461E8749E782899D8E /* PlnMergingPrm.cpp */,
+				770427FDBAC34C22B94605E8 /* PlnMergingScale.cpp */,
+				FC2310E464444264A21F07D5 /* PlnUnion.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		5538B897422843B1995E0D01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BB5C251418B4167830BAD84 /* libPlnLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		786DBF19D6514A6C91B57052 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEAAD5A2D1B44B64877CC1B7 /* PlnConnect.h */,
+				28ECE73D8B154634B3F42853 /* CSegType.h */,
+				FA0F583B76C44E058560B870 /* PlnCurvature.h */,
+				221160C741EC4D7FBA2F020C /* PlnFeature.h */,
+				9F9B412EE7D64785B54F512B /* PlnMerging.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		A9229D96D2EF4BE79B6C82BF /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		CB0714E5BA6440C49EA977C7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				30278902C861468B8C45F2C1 /* PlnLib */,
+				F7CDAFD4E0CF4C7FB8310406 /* ALL_BUILD */,
+				30F1135C450B465999AB712B /* ZERO_CHECK */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		D5FFC23BE17E47E09A7D3978 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		F4229968DC9947A299BAA9D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F7CDAFD4E0CF4C7FB8310406 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				A9229D96D2EF4BE79B6C82BF /* CMake Rules */,
+				6861771F01454B80BD5BBD1F /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		FD82476691234897A07D24EA = {
+			isa = PBXGroup;
+			children = (
+				CB0714E5BA6440C49EA977C7 /* Sources */,
+				F4229968DC9947A299BAA9D1 /* Resources */,
+				5538B897422843B1995E0D01 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		230FC1394EDA47BCB9FD36D6 /* PlnLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6670B7D6BC86444999A57D1E /* Build configuration list for PBXNativeTarget "PlnLib" */;
+			buildPhases = (
+				40F4D62C98D24607AE680717 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6336861429DC4C5881996848 /* PBXTargetDependency */,
+			);
+			name = PlnLib;
+			productName = PlnLib;
+			productReference = 2BB5C251418B4167830BAD84 /* libPlnLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B20E806A93049CBA585C30D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = 4A52C0AA8B104BCABF792F43 /* Build configuration list for PBXProject "PlnLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FD82476691234897A07D24EA;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E2072B00E3BB4E82AAD346E7 /* ALL_BUILD */,
+				230FC1394EDA47BCB9FD36D6 /* PlnLib */,
+				7C9E3EABA9994E0F87512459 /* ZERO_CHECK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40C1AF88AA694F20A4446140 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib -f /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		9A78D8097C664299A1FF8A60 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib -f /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40F4D62C98D24607AE680717 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C6B423C0359406A8B694F92 /* PlnConnect.cpp in Sources */,
+				E4B7F25BB8A340258524A59C /* PlnConnectPrm.cpp in Sources */,
+				5C5376DE1E134C929DABBA62 /* PlnCurvature.cpp in Sources */,
+				60478E9934EE4DC7A618AB6C /* PlnStraightVl.cpp in Sources */,
+				E4DB69C4B725460E945DEC06 /* PlncurvaturePrm.cpp in Sources */,
+				649F909DAAE047CEA8ABD41E /* PlnFeature.cpp in Sources */,
+				18D8621B8DC74A0789BE45C1 /* PlnFeaturePrm.cpp in Sources */,
+				353316690E1842CDB7EFB668 /* PlnMerging.cpp in Sources */,
+				D7055E51228B480998198A66 /* PlnMergingPrm.cpp in Sources */,
+				4AA99705ED64482CABA8EE53 /* PlnMergingScale.cpp in Sources */,
+				55AECB10C4AB405D952C407B /* PlnUnion.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		26247B0F2E784F61B5078B5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7C9E3EABA9994E0F87512459 /* ZERO_CHECK */;
+			targetProxy = F4384D6B5DEC46858C4F7AAD /* PBXContainerItemProxy */;
+		};
+		6336861429DC4C5881996848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7C9E3EABA9994E0F87512459 /* ZERO_CHECK */;
+			targetProxy = 44E26134FDF44DC587D91B2C /* PBXContainerItemProxy */;
+		};
+		CD35C2A7F08345A69E918E2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 230FC1394EDA47BCB9FD36D6 /* PlnLib */;
+			targetProxy = D7527D4893A640E1BAC92244 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		398A4A191677490B96E70D79 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = MinSizeRel;
+		};
+		3B8BFB7754D84686B2C973D7 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = MinSizeRel;
+		};
+		43180F09D62045F0908FF515 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Debug;
+		};
+		62AC37F027AE44759072C887 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		73D30488D72E40028E044E8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Debug;
+		};
+		9145CA0C51B64C9E89877A90 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+			};
+			name = RelWithDebInfo;
+		};
+		98C6DE2113504BCEBE5E1819 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+			};
+			name = Release;
+		};
+		A265DCB1AA64472DAE645D76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Release;
+		};
+		AAF37DAB490B46A1AFD8DE54 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		BFED2536D117483BA26424C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+			};
+			name = Debug;
+		};
+		C06FEB6FAA3D4B0C96DF9977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Release;
+		};
+		D265175991054196A884CA1B /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "../Lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					..,
+					../../Core/ImageLib,
+					../../Core/Util,
+					../../VimGui,
+					../../Tracking,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PlnLib;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../PlnLib;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		E2067A0E08914643AD9DB800 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Release;
+		};
+		E2731AFF37F74DEBAF204010 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = Debug;
+		};
+		F2440B8B2A914A15AC336038 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+					"$(inherited)",
+				);
+			};
+			name = MinSizeRel;
+		};
+		F90A5380CA9C4760A91C6CE9 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+			};
+			name = MinSizeRel;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A52C0AA8B104BCABF792F43 /* Build configuration list for PBXProject "PlnLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFED2536D117483BA26424C0 /* Debug */,
+				98C6DE2113504BCEBE5E1819 /* Release */,
+				F90A5380CA9C4760A91C6CE9 /* MinSizeRel */,
+				9145CA0C51B64C9E89877A90 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		59D20F713DAD4A1C9DB1C199 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2731AFF37F74DEBAF204010 /* Debug */,
+				A265DCB1AA64472DAE645D76 /* Release */,
+				F2440B8B2A914A15AC336038 /* MinSizeRel */,
+				AAF37DAB490B46A1AFD8DE54 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6670B7D6BC86444999A57D1E /* Build configuration list for PBXNativeTarget "PlnLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D30488D72E40028E044E8F /* Debug */,
+				C06FEB6FAA3D4B0C96DF9977 /* Release */,
+				398A4A191677490B96E70D79 /* MinSizeRel */,
+				D265175991054196A884CA1B /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5EC65B859DC41068D35C2D1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43180F09D62045F0908FF515 /* Debug */,
+				E2067A0E08914643AD9DB800 /* Release */,
+				3B8BFB7754D84686B2C973D7 /* MinSizeRel */,
+				62AC37F027AE44759072C887 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1B20E806A93049CBA585C30D /* Project object */;
+}

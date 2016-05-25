@@ -20,7 +20,7 @@ extern "C" {
 
 #define		MAX_PLN		1000
 
-
+//#ifdef _AA_
 typedef struct cln_type {
 
 	int iFrame;
@@ -29,16 +29,17 @@ typedef struct cln_type {
 
 	float	scale;
 	float	angle;
-	vec2d	ctr;
+	vec2d	p;
 	vec2f_type	v;
 
 	int	NA;
 	int	nA;
-//	pln_type	*a[MAX_PLN];
 	pln_type	**a;
 
 } cln_type;
+//#endif
 
+//typedef  plnA_type cln_type;
 
 
 typedef struct clnA_type {

@@ -68,7 +68,6 @@ plnA_adjust_bottom( plnA_type *apl, plnA_type *eapl, float height, int fillAll, 
 
 		pln_trim( pl, F_END, pl->len - gt0 );
 
-		fprintf( stdout, "B" );
 
 		pln_append( pl, pl0 );
 

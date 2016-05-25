@@ -3,6 +3,15 @@
 #define _UNIFORMA_BACKGROUND_H_
 
 
+
+#if defined _DEBUG || defined DEBUG
+#pragma comment( lib, "MattingLibD.lib" )
+#else
+#pragma comment( lib, "MattingLib.lib" )
+#endif
+
+
+
 #include "Uvec/Vec3d.h"
 #include "Utime/GpTime.h"
 
@@ -10,12 +19,11 @@
 
 #include "ImageType/ImageType.h"
 
-typedef struct ubDarkPrm_type {
-	int T0;
-	int	T1;
-	float F0;
-	float F1;
-} ubDarkPrm_type;
+
+typedef struct ubHeadPrm_type {
+	int	on;
+} ubHeadPrm_type;
+
 
 typedef struct ubPrm_type {
 	int thin;
@@ -32,7 +40,7 @@ typedef struct ubPrm_type {
 
 	int contour;
 
-	//ubDarkPrm_type	d;
+	ubHeadPrm_type	head;
 
 } ubPrm_type;
 
@@ -109,6 +117,8 @@ public:
 
 	int GetProcessBackgroundSimilarity();
 
+	int	GetHeadPose( vec2f_type *p, float *angle, float *scale );
+
 protected:
 
 	int	ProcessCompare( image_type *sim );
@@ -146,6 +156,9 @@ private:
 
 	
 	int	ReadPrm( char *inFile );
+
+	int	ReadHeadTagPrm( struct xmlTag_type *pTag, ubHeadPrm_type *h );
+
 
 
 	class CUnBackground *m_unBackground;
