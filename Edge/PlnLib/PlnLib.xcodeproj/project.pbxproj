@@ -6,33 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		7C9E3EABA9994E0F87512459 /* ZERO_CHECK */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 59D20F713DAD4A1C9DB1C199 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
-			buildPhases = (
-				9A78D8097C664299A1FF8A60 /* CMake Rules */,
-			);
-			dependencies = (
-			);
-			name = ZERO_CHECK;
-			productName = ZERO_CHECK;
-		};
-		E2072B00E3BB4E82AAD346E7 /* ALL_BUILD */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = D5EC65B859DC41068D35C2D1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
-			buildPhases = (
-				40C1AF88AA694F20A4446140 /* CMake Rules */,
-			);
-			dependencies = (
-				26247B0F2E784F61B5078B5F /* PBXTargetDependency */,
-				CD35C2A7F08345A69E918E2E /* PBXTargetDependency */,
-			);
-			name = ALL_BUILD;
-			productName = ALL_BUILD;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		18D8621B8DC74A0789BE45C1 /* PlnFeaturePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78273F7F0AA3477880127F77 /* PlnFeaturePrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		353316690E1842CDB7EFB668 /* PlnMerging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E714A3DCBEE42EC92703EBA /* PlnMerging.cpp */; settings = {COMPILER_FLAGS = ""; }; };
@@ -46,30 +19,6 @@
 		E4B7F25BB8A340258524A59C /* PlnConnectPrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 533C1A20F64E4FD89D792FE4 /* PlnConnectPrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 		E4DB69C4B725460E945DEC06 /* PlncurvaturePrm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29C08755A5A44D9A4B7FE89 /* PlncurvaturePrm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		44E26134FDF44DC587D91B2C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7C9E3EABA9994E0F87512459;
-			remoteInfo = ZERO_CHECK;
-		};
-		D7527D4893A640E1BAC92244 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 230FC1394EDA47BCB9FD36D6;
-			remoteInfo = PlnLib;
-		};
-		F4384D6B5DEC46858C4F7AAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B20E806A93049CBA585C30D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7C9E3EABA9994E0F87512459;
-			remoteInfo = ZERO_CHECK;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		221160C741EC4D7FBA2F020C /* PlnFeature.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PlnFeature.h; path = PlnFeature/PlnFeature.h; sourceTree = SOURCE_ROOT; };
@@ -213,7 +162,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6336861429DC4C5881996848 /* PBXTargetDependency */,
 			);
 			name = PlnLib;
 			productName = PlnLib;
@@ -240,37 +188,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E2072B00E3BB4E82AAD346E7 /* ALL_BUILD */,
 				230FC1394EDA47BCB9FD36D6 /* PlnLib */,
-				7C9E3EABA9994E0F87512459 /* ZERO_CHECK */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		40C1AF88AA694F20A4446140 /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib -f /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-		9A78D8097C664299A1FF8A60 /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib -f /Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		40F4D62C98D24607AE680717 /* Sources */ = {
@@ -292,24 +213,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		26247B0F2E784F61B5078B5F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7C9E3EABA9994E0F87512459 /* ZERO_CHECK */;
-			targetProxy = F4384D6B5DEC46858C4F7AAD /* PBXContainerItemProxy */;
-		};
-		6336861429DC4C5881996848 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7C9E3EABA9994E0F87512459 /* ZERO_CHECK */;
-			targetProxy = 44E26134FDF44DC587D91B2C /* PBXContainerItemProxy */;
-		};
-		CD35C2A7F08345A69E918E2E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 230FC1394EDA47BCB9FD36D6 /* PlnLib */;
-			targetProxy = D7527D4893A640E1BAC92244 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		398A4A191677490B96E70D79 /* MinSizeRel */ = {
@@ -348,87 +251,6 @@
 				);
 			};
 			name = MinSizeRel;
-		};
-		3B8BFB7754D84686B2C973D7 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SDKROOT = iphoneos;
-				SECTORDER_FLAGS = "";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = MinSizeRel;
-		};
-		43180F09D62045F0908FF515 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SDKROOT = iphoneos;
-				SECTORDER_FLAGS = "";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = Debug;
-		};
-		62AC37F027AE44759072C887 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SDKROOT = iphoneos;
-				SECTORDER_FLAGS = "";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = RelWithDebInfo;
 		};
 		73D30488D72E40028E044E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -470,80 +292,33 @@
 		9145CA0C51B64C9E89877A90 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+				SYMROOT = "${SRCROOT}/build";
 			};
 			name = RelWithDebInfo;
 		};
 		98C6DE2113504BCEBE5E1819 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+				SYMROOT = "${SRCROOT}/build";
 			};
 			name = Release;
-		};
-		A265DCB1AA64472DAE645D76 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = Release;
-		};
-		AAF37DAB490B46A1AFD8DE54 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = RelWithDebInfo;
 		};
 		BFED2536D117483BA26424C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+				SYMROOT = "${SRCROOT}/build";
 			};
 			name = Debug;
 		};
@@ -621,90 +396,14 @@
 			};
 			name = RelWithDebInfo;
 		};
-		E2067A0E08914643AD9DB800 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SDKROOT = iphoneos;
-				SECTORDER_FLAGS = "";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = Release;
-		};
-		E2731AFF37F74DEBAF204010 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = Debug;
-		};
-		F2440B8B2A914A15AC336038 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-					"$(inherited)",
-				);
-			};
-			name = MinSizeRel;
-		};
 		F90A5380CA9C4760A91C6CE9 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = "/Users/nirchannes/Documents/Projects/homage-cv-app/Edge/PlnLib/build";
+				SYMROOT = "${SRCROOT}/build";
 			};
 			name = MinSizeRel;
 		};
@@ -722,17 +421,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		59D20F713DAD4A1C9DB1C199 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E2731AFF37F74DEBAF204010 /* Debug */,
-				A265DCB1AA64472DAE645D76 /* Release */,
-				F2440B8B2A914A15AC336038 /* MinSizeRel */,
-				AAF37DAB490B46A1AFD8DE54 /* RelWithDebInfo */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		6670B7D6BC86444999A57D1E /* Build configuration list for PBXNativeTarget "PlnLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -740,17 +428,6 @@
 				C06FEB6FAA3D4B0C96DF9977 /* Release */,
 				398A4A191677490B96E70D79 /* MinSizeRel */,
 				D265175991054196A884CA1B /* RelWithDebInfo */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		D5EC65B859DC41068D35C2D1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43180F09D62045F0908FF515 /* Debug */,
-				E2067A0E08914643AD9DB800 /* Release */,
-				3B8BFB7754D84686B2C973D7 /* MinSizeRel */,
-				62AC37F027AE44759072C887 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
