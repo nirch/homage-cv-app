@@ -99,6 +99,9 @@ imageLabel_bigest( imageLabel_type *abw, int color )
 int
 imageLabel_pixel_id( imageLabel_type *abw, int i0, int j0 )
 {
+	if( i0 < 0 || i0 >= abw->im->height || j0 < 0 || j0 >= abw->im->width )
+		return( -1 );
+
 	if( abw->im->depth == 4 ){
 		u_int *sp = (u_int *)IMAGE_PIXEL( abw->im, i0, j0 );
 

@@ -887,7 +887,7 @@ pt2dA_seg_union3( pt2dA_type *apt, plnA_type *eapl, eseg_type as[], int *nS, int
 		return( 1 );
 
 
-	fprintf( stdout, "M" );
+
 //	as[i0].type = 1;
 
 	int di = i - i0 - 1;
@@ -1451,17 +1451,11 @@ pt2dA_seg_filter_short( plnA_type *apl, pt2dA_type *apt, eseg_type as[], int *nS
 		as[j++] = as[i];
 
 
-
-
-//		float gt0 = apt->a[as[i].i0].f;
-//		float gt1 = apt->a[as[i].i1].f;
-
 	}
 
 	*nS = j;
 
-	if( n > 0 )
-		fprintf( stdout, "S" );
+
 
 	return( n );
 }

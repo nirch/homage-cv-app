@@ -42,6 +42,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "230FC1394EDA47BCB9FD36D6"
+               BuildableName = "libPlnLib.a"
+               BlueprintName = "PlnLib"
+               ReferencedContainer = "container:Edge/PlnLib/PlnLib.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "D745E1F1586F462C92C4D734"
                BuildableName = "libEdgeLib.a"
                BlueprintName = "EdgeLib"

@@ -97,7 +97,7 @@ pln_coherent( pln_type *pl, pln_type *bpl, float h, int iFrame )
 
 		
 
-//		fprintf( stdout, "%d %f %f %f\n", apt->nA, af[i].dis, af[i].cover, hypot( af[i].lt.a0, af[i].lt.b0) );
+
 #ifdef _DUMPA
 		pln_type *tpl = pln_affine_lt( bpl, &af[nA].lt, NULL );
 		PLN_DUMP( tpl, "tt", nA, "fit" );
@@ -131,7 +131,6 @@ pln_coherent( pln_type *pl, pln_type *bpl, float h, int iFrame )
 
 		gt = f->gt;
 		if( pln_adjust_dd( pl, bpl, s*(gt-30), s*(gt+30), f ) > 0 ){
-			fprintf( stdout, "G%d", iFrame );
 			no++;
 		}
 	
@@ -179,7 +178,7 @@ pln_adjust_dd( pln_type *pl, pln_type *bpl, float gt0, float gt1, lnFit_type *f 
 			pln_adjust_do( pl, bpl, apt, s );
 
 			PLN_DUMP( pl, "TT", i, "AA" );
-		//	fprintf( stdout, "G");
+
 			no++;
 			break;
 		}

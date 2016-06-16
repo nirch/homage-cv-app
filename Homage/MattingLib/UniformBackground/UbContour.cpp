@@ -25,7 +25,7 @@
 //#define EXCEPTION
 
 
-
+int	imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp );
 
 
 int	CUniformBackground::ProcessContour()
@@ -42,21 +42,27 @@ int	CUniformBackground::ProcessContour()
 	gpTime_start( &m_tCln );
 
 
+	IMAGE_DUMPF( m_cim, "cim", m_iFrame, NULL, m_dFrame == m_iFrame  );
 
-	if( m_dFrame == m_iFrame ){
-		IMAGE_DUMP( m_cim, "cim", m_iFrame, NULL );
+
+
+
+
+	m_abwC = imageLabelUS( m_cim, 128, 0, 1, m_abwC );
+
+
+	// choose blob
+	int	n;
+	vec2f_type p,	v;
+	float	r;
+	if( m_headTracking != NULL && m_headTracking->GetHeadPose( &p, &v, &r) > 0 ){
+		VEC2D_SWAP(p);
+		imageLabelUS_set_mass( m_abwC );
+		n = imageLabel_main_blob( m_abwC, 1, &p );
 	}
+	else
+		n = imageLabel_bigest( m_abwC, 1 );
 
-
-
-
-
-
-	m_abwC = imageLabelUS_N( m_cim, 128, 0, 1, m_abwC );
-
-
-
-	int n = imageLabel_bigest( m_abwC, 1 );
 	
 	if( m_cln != NULL ){
 		cln_destroy( m_cln );
@@ -198,11 +204,13 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl, int width, int hei
 	PLNA_DUMPF( apl, "contor", m_iFrame, "in", m_dFrame == m_iFrame );
 
 
-	vec2f_type p;
+	vec2f_type p,	v;
 	float r;
-	if( m_headTracking != NULL && m_headTracking->GetHeadPose( &p, &r) > 0 ){
+	if( m_headTracking != NULL && m_headTracking->GetHeadPose( &p, &v, &r) > 0 ){
 		plnA_adjust_in_head( apl, &p, r, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "in-head", m_dFrame == m_iFrame );
+		m_mp.x = p.y/2;
+		m_mp.y = p.x/2;
 	}
 
 
@@ -259,7 +267,7 @@ int	CUniformBackground::ProcessContourAdjust( plnA_type *apl, int width, int hei
 }
 
 catch (...) {
-	fprintf( stdout, "EXCEPTION %d", m_iFrame );
+	GPLOG( "EXCEPTION %d", m_iFrame );
 	return( -1 );
 }
 #endif
@@ -284,33 +292,24 @@ int	CUniformBackground::WriteContour( char *file )
 	return( 1 );
 }
 
-#ifdef _AA_
-int	CUniformBackground::Write( char *outFile )
+
+
+int	CUniformBackground::GetHeadPose( vec2f_type *p, float *angle, float *scale )
 {
-	plnF_write( m_fpl, outFile );
+	if( m_headTracking == NULL )
+		return( -1 );
 
+	vec2f_type v;
+	if( m_headTracking->GetHeadPose( p, &v, scale) < 0 )
+		return( -1 );
 
-	char	file[256];
-	gpFilename_force_extension( outFile, "-h.plf", file );
-	plnF_write( m_fplH, file );
-
-
-	if( m_headBoxF == 1 ){
-
-		gpFilename_force_extension( outFile, ".ebox", file );
-		box2f_write_from_file( &m_headBox, file );
-
-
-		pln_type *pl = pln_from_box( &m_headBox );
-
-		gpFilename_force_extension( outFile, "-box.plf", file );
-		pln_write_to_file( pl, file );
-
-	}
+	*angle = 0;
 
 	return( 1 );
 }
-#endif
+
+
+
 
 
 

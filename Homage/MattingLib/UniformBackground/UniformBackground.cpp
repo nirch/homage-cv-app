@@ -329,13 +329,20 @@ int	CUniformBackground::Init( char *xmlFile, char *ctrFile, int width, int heigh
 
 int	CUniformBackground::InitHeadTracker( int iHead )
 {
+	if( m_prm->head.on == 0 )
+		return( 1 );
+
 	cln_type *cln = clnA_detach( m_ac, iHead );
 	if ( cln != NULL ){
-
 
 		if( m_headTracking == NULL )
 			m_headTracking = new CPlnHeadTracker();
 		m_headTracking->Init( cln );
+
+		pose2d_type *p = &m_unBackground->m_head;
+
+
+		m_headTracking->SetPose( p->x, p->y, 0, p->scale );
 	}
 
 	return( 1 );

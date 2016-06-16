@@ -71,8 +71,6 @@ int
 	imageLabelUI_remove_B( sim,  abw, 0, 1000 );
 
 
-	//int no = imageLabel_no( abw );
-	//fprintf( stdout, "blob: %d\n", no );
 
 
 

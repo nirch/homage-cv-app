@@ -40,7 +40,6 @@ int	CUnBackground::ProcessBlobB()
 		bwLabel_type *bw = &m_abw->a[aI[i]];
 		H[(int)bw->av] = bw->no;
 
-		fprintf( stdout, "%d %d %d\n", aI[i], (int)bw->av, bw->no );
 	}
 
 
@@ -59,7 +58,7 @@ int	CUnBackground::ProcessBlobB()
 			i0 = i;
 	}
 
-	fprintf( stdout, "COLOR %d %d\n", (int)ac[i0].mean, ac[i0].n );
+	GPTRACE( ( 3, "COLOR %d %d\n", (int)ac[i0].mean, ac[i0].n ) );
 
 
 
@@ -284,7 +283,6 @@ int	i,		nW,	n;
 
 	}
 
-	fprintf( stdout, "TestSilhouette: %d( %d %.2f )\n", nW, n, nW*100.0/n );
 
 
 	return( nW*100.0/n );
@@ -320,7 +318,6 @@ int	CUnBackground::TestSilhouetteHead( sbA_type *as, int i1, imageLabel_type *ab
 	nw[1] = (n[1] > 0 )? w[1] / (float)n[1] : 0;
 	nw[2] = (n[2] > 0 )? w[2] / (float)n[2] : 0;
 
-	fprintf( stdout, "TestSilhouette- Head: %.2f( %d )   %.2f( %d )   %.2f( %d )  \n", nw[0], n[0], nw[1], n[1], nw[2], n[2] );
 
 
 	return( 1 );

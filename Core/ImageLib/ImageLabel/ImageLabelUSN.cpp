@@ -5,11 +5,11 @@
 #include "Uigp/igp.h"
 
 
-
+#include "BwLabel.h"
 
 #include "ImageType/ImageType.h"
 #include "ImageLabel.h"
-#include "BwLabel.h"
+
 
 
 void	imageLabelUS_createN( imageLabel_type *abw );
@@ -27,7 +27,8 @@ imageLabelUS_N( image_type *sim, int T, int inv, int margin, imageLabel_type *ab
 
 	if( abw == NULL ){
 		abw = imageLabel_alloc();
-		abw->a = (bwLabel_type *)malloc( sim->row*sim->column*sizeof(bwLabel_type) );
+		abw->NA = sim->row*sim->column;
+		abw->a = (bwLabel_type *)malloc( abw->NA*sizeof(bwLabel_type) );
 
 		abw->im = image_realloc( abw->im, sim->width+2*margin, sim->height+2*margin, 1, IMAGE_TYPE_U16, 1 );
 
@@ -79,8 +80,12 @@ int	id;
 
 
 	abw->nA = 0;
-	lbm_type *b0 = (lbm_type *)malloc( abw->im->width * sizeof(lbm_type) );
-	lbm_type *b1 = (lbm_type *)malloc( abw->im->width * sizeof(lbm_type) );
+
+	lbm_type *b0;
+	lbm_type *b1;
+	
+	b0 = (lbm_type *)malloc( abw->im->width * sizeof(lbm_type) );
+	b1 = (lbm_type *)malloc( abw->im->width * sizeof(lbm_type) );
 
 
 	abw->a[0].id = 0;
@@ -89,12 +94,14 @@ int	id;
 
 
 	b0[0].j0 = abw->im->width;
-	lbm_type *b = b1;
+//	lbm_type *b = b1;
 
-	short *sp = abw->im->data_s;
+	//short *sp = abw->im->data_s;
+	u_short *sp = abw->im->data_us;
 	for( i = 0 ; i < abw->im->height ; i++ ){
 		k = 0;
 		lbm_type *b = b1;
+//		b = b1;
 
 		for( j = 0 ; j < abw->im->width ;  ){
 			if( *sp == 0 ){
@@ -103,7 +110,8 @@ int	id;
 				continue;
 			}
 
-			short *tp = sp;
+			//short *tp = sp;
+			u_short *tp = sp;
 
 			b->j0 = b->j1 = j;
 			for( ; j < abw->im->width && *sp != 0 ; j++, sp++ );
@@ -175,7 +183,7 @@ int	id;
 
 
 		
-	imageLabel2_set_id( abw->im, abw->a );
+	imageLabelUS_set_id( abw );
 }
 
 

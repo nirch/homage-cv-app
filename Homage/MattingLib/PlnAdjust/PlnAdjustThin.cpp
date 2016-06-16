@@ -25,7 +25,7 @@
 
 
 
-static int		pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame );
+static int		pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int nT, int iFrame );
 
 
 
@@ -34,7 +34,7 @@ pt2dA_type *	pt2dA_max( pt2dA_type *apt );
 
 static int		pt2dA_delete( pt2dA_type *apt, pt2dA_type *mapt, int checkThin, float dT, int in );
 
-static int		pt2dA_delete_n( pt2dA_type *apt, pt2dA_type *mapt, float dT );
+static int		pt2dA_delete_n( pt2dA_type *apt, pt2dA_type *mapt, float dT, int nT );
 
 static int	pt2dA_thin_in( pt2dA_type *apt, int i0, int i1 );
 
@@ -70,6 +70,10 @@ static int	pt2dA_in_apl( pt2dA_type *apt, float T, plnA_type *apl );
 static int	pt2dA_in_head( pt2dA_type *apt, float ht[2] );
 
 
+static int	pt2dA_in_head_get( pt2dA_type *apt,int i0, int i1  );
+
+
+
 int
 	plnA_adjust_thin( plnA_type *apl, plnA_type *bapl, float ht[2], int iFrame )
 {
@@ -79,11 +83,17 @@ int
 	if( apl->nA <= 0 || apl->a[0]->len < 40 )
 		return( 1 );
 
-	int ret = pln_thin( apl->a[0], bapl, ht, 0, iFrame );
-	if( ret > 0 )
-		pln_thin( apl->a[0], bapl, ht, 0, iFrame );
+	PLNA_DUMP( apl, "thin", iFrame, "1" );
 
-	pln_thin( apl->a[0], bapl, ht, 1, iFrame );
+	int ret = pln_thin( apl->a[0], bapl, ht, 0, 500, iFrame );
+	PLNA_DUMP( apl, "thin", iFrame, "2" );
+	if( ret > 0 ){
+		pln_thin( apl->a[0], bapl, ht, 0, 0, iFrame );
+		PLNA_DUMP( apl, "thin", iFrame, "3" );
+	}
+
+	pln_thin( apl->a[0], bapl, ht, 1, 0, iFrame );
+	PLNA_DUMP( apl, "thin", iFrame, "4" );
 	return( ret );
 }
 
@@ -91,7 +101,7 @@ int
 
 
 int
-pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
+pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int nT, int iFrame )
 {
 
 
@@ -118,12 +128,12 @@ pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
 
 	apt->type = PT2D_4;
 
-	PT2DA_DUMP( apt, "pln", iFrame, "thin-in" );
+	PT2DA_DUMP( apt, "thin", iFrame, "in" );
 
 	pt2dA_type *capt = pt2dA_max( apt );
 
 	capt->type = PT2D_4V;
-	PT2DA_DUMP( capt, "pln", iFrame, "thin-extremom" );
+	PT2DA_DUMP( capt, "thin", iFrame, "extremom" );
 
 	int	k;
 	if( flagIn == 0 ){
@@ -132,7 +142,7 @@ pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
 		k += pt2dA_delete( apt, capt, 1, 8.0, 0 );
 
 
-		k += pt2dA_delete_n( apt, capt, 8.0 );
+		k += pt2dA_delete_n( apt, capt, 8.0, nT );
 	}
 	else 
 		k = pt2dA_delete( apt, capt, 0, 8.0, 1 );
@@ -141,7 +151,7 @@ pln_thin( pln_type *pl, plnA_type *bapl, float ht[2], int flagIn, int iFrame )
 
 	if( k > 0 ){
 		pt2dA_crop(pl, apt );
-		PLN_DUMP( pl, "pln", iFrame, "thin-out" );
+		PLN_DUMP( pl, "thin", iFrame, "out" );
 	}
 
 	pt2dA_destroy( apt );
@@ -176,7 +186,6 @@ pt2dA_crop( pln_type *pl, pt2dA_type *apt )
 		for( ; i > 0 && apt->a[i].id < 0 ; i-- );
 		int i1 = i+1;
 
-//		fprintf( stdout, "%d %d  ", i0, i1 );
 
 		if( i1 <= 1 ){
 			pt2dA_update_end( apt, &i0 );
@@ -195,8 +204,6 @@ pt2dA_crop( pln_type *pl, pt2dA_type *apt )
 			i = i1 - 1;
 			for( ; i > 0 && apt->a[i].id < 0 ; i-- );
 
-//			fprintf( stdout, "  FF   %d %d   %.2f\n", i0, i1, pl->len );
-
 			continue;
 		}
 
@@ -205,7 +212,6 @@ pt2dA_crop( pln_type *pl, pt2dA_type *apt )
 
 		pt2dA_update_2( pl, apt, &i0, &i1 );
 
-//		fprintf( stdout, "  ::   %d %d\n", i0, i1 );
 		pln_type *pl1 = pln_split( pl, apt->a[i0].f, 0.5 );
 
 
@@ -387,9 +393,21 @@ float dis;
 		}
 
 
-		for( j = pt->id ; j <= mapt->a[k].id ; j++ )
-			apt->a[j].id = -1;
+		int inHead0 = pt2dA_in_head_get( apt, i0, i1 );
+		int inHead1 = pt2dA_in_head_get( apt, i1, i0 );
 
+		if( i1-i0 > 400 && inHead0 >  inHead1 ){
+			int tmp = i0;
+			i0 = i1;
+			i1 = tmp;
+		}
+
+
+		//for( j = pt->id ; j <= mapt->a[k].id ; j++ )
+		//	apt->a[j].id = -1;
+
+
+		pt2dA_set_id( apt, i0, i1, -1 );
 
 		float dt = pt->f - mapt->a[k].f;
 //		if( ABS( dt ) < 2*dT )	continue;
@@ -520,14 +538,12 @@ pt2dA_distanceP( pt2dA_type *apt, int i0, float dT, float *dis )
 
 
 static int 
-pt2dA_delete_n( pt2dA_type *apt, pt2dA_type *mapt, float dT )
+pt2dA_delete_n( pt2dA_type *apt, pt2dA_type *mapt, float dT, int nT )
 {
 int i,	n;
 float dis;
 
-#ifdef _DUMP
-//	fprintf( stdout, "NN\n" );
-#endif
+
 
 	for( i = 0, n = 0 ; i < mapt->nA ; i++ ){
 		pt2d_type *pt = &mapt->a[i];
@@ -563,37 +579,37 @@ float dis;
 		int in0 = pt2dA_in( apt, i0,  i1 );
 		int in1 = pt2dA_in( apt, i1,  i0 );
 
-//		if( i0 + apt->nA - i1 <  1.1*(i1 - i0) || i1 - i0 > 750 && i0 + apt->nA - i1 > 750 ){
+		int inHead0 = pt2dA_in_head_get( apt, i0, i1 );
+		int inHead1 = pt2dA_in_head_get( apt, i1, i0 );
+
+
+		if( nT > 0 &&  n1 > nT && n0 > nT )
+			continue;
+
+
 		if(  n1 < 0.75*n0 ||  n0 > 750 && n1 > 750 ){
 
-
-
-			
-
-			//if( n1 < 0.25*n0 || pt2dA_check_thin_dirction( apt,  i0,  i1, dT ) < 0 ){
-
-			if( in1 < in0 || in1 == in0 && n1 < 0.5 * n0 ){
+			if( in1 < in0 || in1 == in0 && n1 < 0.5 * n0 || n0 > 400 && inHead0 >  inHead1 ){
 				int tmp = i0;
 				i0 = i1;
 				i1 = tmp;
 			}
-			//eigen2d_type e0,	e1;
-			//pt2dA_eigen2d(apt, i0, i1,  &e0 );
-			//pt2dA_eigen2d(apt, i1, i0,  &e1 );
-
-
-			//if( e1.r < e0.r  ){
-			//	int tmp = i0;
-			//	i0 = i1;
-			//	i1 = tmp;
-			//}
 		}
-
+		else {
+			if( n0 > 400 && inHead0 >  inHead1 ){
+				int tmp = i0;
+				i0 = i1;
+				i1 = tmp;
+			}
+		}
 
 
 
 		if( pt2dA_check_thin( apt, i0, i1, dT ) < 0 &&  pt2dA_check_thin( apt, i1, i0, dT ) < 0)
 			continue;
+
+
+
 
 
 		
@@ -602,9 +618,7 @@ float dis;
 
 
 		n++;
-#ifdef _DUMP
-//		fprintf( stdout, "%d  %d %d  %.2f\n", i, k, k1, dis );
-#endif
+
 	}
 
 
@@ -789,6 +803,22 @@ pt2dA_in( pt2dA_type *apt,int i0, int i1 )
 }
 
 
+static int
+	pt2dA_in_head_get( pt2dA_type *apt,int i0, int i1  )
+{
+	int	i,	n;
+	if( i1 == 0 )	 i1 = apt->nA;
+	for( i = i0, n = 0 ; i != i1 ; i++ ){
+		if( i >= apt->nA )	i = 0;
+
+		if( apt->a[i].group == 2  )
+			n++;
+	}
+
+	return( n );
+}
+
+
 
 static int
 pt2dA_in_apl( pt2dA_type *apt, float T, plnA_type *apl )
@@ -836,7 +866,7 @@ pt2dA_in_head( pt2dA_type *apt, float ht[2] )
 		pt2d_type *pt = &apt->a[i];
 
 		if( pt->f >= ht[0] && pt->f <= ht[1] ){
-			pt->group = 1;
+			pt->group = 2;
 			n++;
 		}
 	}

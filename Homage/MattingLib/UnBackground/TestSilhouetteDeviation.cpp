@@ -66,7 +66,6 @@ int CUnBackground::TestSilhouetteDeviation()
 
 			if (deviationOccurance >= DEVIATION_OCCURANCE_THRESH)
 			{
-				fprintf( stdout, "Deviation found in line: %d\n", i );
 				return 1;
 			}
 		}
@@ -101,6 +100,6 @@ sbA_type CUnBackground::SelectBiggerContour(sbA_type contourArray[4])
 	}
 
 
-	fprintf( stdout, "bigger contour index is: %d\n", biggerContourIndex );
+
 	return contourArray[biggerContourIndex];
 }

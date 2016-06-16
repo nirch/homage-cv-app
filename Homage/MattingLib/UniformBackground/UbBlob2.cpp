@@ -36,6 +36,8 @@ static void	imageLabelUS_remove( image_type *sim, imageLabel_type *abw, int colo
 void	imageLabelUS2_value( imageLabel_type *abw, image_type *sim );
 
 
+int	imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp );
+
 
 
 int	CUniformBackground::ProcessBlob2()
@@ -51,34 +53,33 @@ int	CUniformBackground::ProcessBlob2()
 	}
 
 	// remove
-	m_abwBlob = imageLabelUS_N( im, 4, 1, 0, m_abwBlob );
+	m_abwBlob = imageLabelUS( im, 4, 1, 0, m_abwBlob );
 
 
 	imageLabelUS_remove_A( im,  m_abwBlob, 0x5, &m_mp );
 
 
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_SCALE( im, 32, "blob", m_iFrame, "2" );
-	}
+
+	IMAGE_DUMP_SCALEF( im, 32, "blob", m_iFrame, "2", m_dFrame == m_iFrame  );
+
 
 	// fill
-	m_abwBlob = imageLabelUS_N( im, 1, 0, 0, m_abwBlob );
+	m_abwBlob = imageLabelUS( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );
 	imageLabelUS_remove_B( im,  m_abwBlob, m_prm->fillBlob/4, m_prm->fillBlobAll, 0x06 );
 
 
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_SCALE( im, 32,"blob", m_iFrame, "3" );
-	}
+
+	IMAGE_DUMP_SCALEF( im, 32,"blob", m_iFrame, "3", m_dFrame == m_iFrame  );
+
 
 
 	image1_set( m_cim, im );
 
-	if( m_iFrame == m_dFrame ){
-		IMAGE_DUMP_SCALE( im, 32,"blob", m_iFrame, "4" );
-		IMAGE_DUMP( m_cim,"blob", m_iFrame, "5" );
-	}
+	IMAGE_DUMP_SCALEF( im, 32,"blob", m_iFrame, "4", m_dFrame == m_iFrame  );
+	IMAGE_DUMPF( m_cim,"blob", m_iFrame, "5", m_dFrame == m_iFrame  );
+
 
 	image_destroy( im, 1 );
 
@@ -151,7 +152,7 @@ static void
 
 
 
-static int	imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp );
+
 
 static int
 	imageLabelUS_remove_A( image_type *sim, imageLabel_type *abw, int color, vec2f_type *mp )
@@ -163,7 +164,11 @@ static int
 	int n = imageLabel_main_blob( abw, 1, mp );
 	if( n < 0 )	return( 1 );
 
+
+	int iGrrop = imageLabel_pixel_id( abw, mp->y, mp->x );
+
 	*mp = abw->a[n].p;
+
 
 
 	int	i;
@@ -182,7 +187,7 @@ static int
 	return( 1 );
 }
 
-static int
+int
 imageLabel_main_blob( imageLabel_type *abw, int color, vec2f_type *mp )
 {
 int	a[6],	nA,	i;
@@ -200,7 +205,7 @@ int	a[6],	nA,	i;
 	for( i = 0 ; i < nA ; i++ ){
 		vec2f_type p;
 		bwLabel_type *bw = &abw->a[a[i]];
-		if( bw->no < 0.6 * bw0->no )
+		if(   bw->no < 0.5 * bw0->no && bw->no < 4000 )
 			return( i0 );
 
 		p.x = bw->p.x - mp->x;

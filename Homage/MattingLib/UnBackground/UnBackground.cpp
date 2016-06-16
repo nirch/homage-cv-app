@@ -29,12 +29,14 @@
 
 #include	"BnImage/BnImage.h"
 
-#include "ImageLabel/ImageLabel.h"
+#include	 "../UnEdge/UnEdge.h"
+
+#include	 "ImageLabel/ImageLabel.h"
 
 
-#include "bImage.h"
+#include	 "bImage.h"
 
-#include "..//UnBackgroundM/UnBackgroundM.h"
+
 
 
 int	image1_mask_sbA( image_type *im, sbA_type *as );
@@ -61,21 +63,17 @@ CUnBackground::CUnBackground()
 	m_imMask = NULL;
 
 
-	m_unBackgroundM = NULL;
+	m_ue = NULL;
+
 
 	m_closeUp = 0;
 
 	gpTime_init( &m_gTime );
+	gpTime_init( &m_tEdge );
 }
 
 CUnBackground::~CUnBackground()
 {
-
-	if( m_unBackgroundM != NULL ){
-		delete m_unBackgroundM;
-		m_unBackgroundM = NULL;
-	}
-
 
 	if( m_ac != NULL ){
 		clnA_destroy( m_ac );
@@ -123,10 +121,16 @@ CUnBackground::~CUnBackground()
 		image_destroy( m_imMask, 1 );
 		m_imMask = NULL;
 	}
+
+
+	if( m_ue != NULL ){
+		delete m_ue;
+		m_ue = NULL;
+	}
 }
 
 
-int	CUnBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
+int	CUnBackground::Init( char *prmFile, char *ctrFile, int width, int height )
 {
 
 	m_roi.x0 = 0;
@@ -137,8 +141,8 @@ int	CUnBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
 
 
 
-	if( xmlFile != NULL && strcmp( xmlFile, "none")  != 0 ){
-		if( ReadPrm( xmlFile) < 0 )
+	if( prmFile != NULL && strcmp( prmFile, "none")  != 0 ){
+		if( ReadPrm( prmFile) < 0 )
 			return( -1 );
 	}
 	else m_prm = unPrm_alloc();
@@ -151,10 +155,7 @@ int	CUnBackground::Init( char *xmlFile, char *ctrFile, int width, int height )
 	}
 
 
-
-	m_unBackgroundM = new CUnBackgroundM();
-
-	m_unBackgroundM->Init( xmlFile, ctrFile, width, height );
+	ProcessLineInit( prmFile );
 
 
 	return( 1 );
@@ -198,7 +199,7 @@ int	CUnBackground::ReadMask( char *inFile, int width, int height )
 
 
 
-	m_hp = m_ac->a[1]->ctr;
+	m_hp = m_ac->a[1]->p;
 	m_hd[0] = 80;
 
 	
@@ -272,32 +273,8 @@ int	ret;
 
 	ret = ProcessBlobC();
 
-	
-//#ifdef _DEBUG
-//	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
-//#endif
-//#define _OLD
-#ifdef _OLD
-	if( ret < 0 ){
 
-		if( TestDrakness( m_yim ) > 0 )
-			m_state = -10;
-		else
-			m_state = -11;
-
-
-		m_unBackgroundM->Process( sim );
-
-		m_iHead = 1;
-		m_bim = m_unBackgroundM->GetBim( m_bim );
-
-		//m_state = m_unBackgroundM->GetState();
-
-		//fprintf( stdout, "State: %d\n", m_state );
-		GPTRACE( (3, "Background: %d\n", m_state ) );
-		return( 1 );
-	}
-#endif
+	// set from conour 
 	if( ret < 0 ){
 
 		if( TestDrakness( m_yim ) > 0 )
@@ -343,7 +320,14 @@ int	ret;
 	if( m_state >= 0 )
 		ProcessState();
 
-//	fprintf( stdout, "State: %d\n", m_state );
+
+	m_head.p.x = 11*8;
+	m_head.p.y = 0.5*8*(m_as1.a[11].j0 + m_as0.a[11].j1);
+	float h = 8*(m_asB[m_iHead].a[11].j1 - m_asB[m_iHead].a[11].j0);
+	m_head.scale = 8*(m_as1.a[11].j0 - m_as0.a[11].j1-2) / h;
+	m_head.qulity = 1;
+
+
 	GPTRACE( (3, "Background: %d\n", m_state ) );
 
 

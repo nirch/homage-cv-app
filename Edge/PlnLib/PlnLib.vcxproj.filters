@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="PlnConnect">
+      <UniqueIdentifier>{1f7361d4-20d5-4a78-a2e9-432ffe356f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlnCurvature">
+      <UniqueIdentifier>{71cc1474-d8f3-435f-9cb4-edba71f6e5a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlnMerging">
+      <UniqueIdentifier>{1258f0bb-cebf-415d-9e6a-bf6db8a35ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlnFeature">
+      <UniqueIdentifier>{64693ea1-dadc-4dcc-8eb2-066029bf1b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlnUnion">
+      <UniqueIdentifier>{80bfa604-7dca-409d-95d4-4e38134054cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="PlnLib.mk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PlnConnect\PlnConnect.cpp">
+      <Filter>PlnConnect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnConnect\PlnConnectPrm.cpp">
+      <Filter>PlnConnect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnCurvature\PlnCurvature.cpp">
+      <Filter>PlnCurvature</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnCurvature\PlncurvaturePrm.cpp">
+      <Filter>PlnCurvature</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnMerging\PlnMerging.cpp">
+      <Filter>PlnMerging</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnFeature\PlnFeature.cpp">
+      <Filter>PlnFeature</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnFeature\PlnFeaturePrm.cpp">
+      <Filter>PlnFeature</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnMerging\PlnMergingScale.cpp">
+      <Filter>PlnMerging</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnMerging\PlnMergingPrm.cpp">
+      <Filter>PlnMerging</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnCurvature\PlnStraightVl.cpp">
+      <Filter>PlnCurvature</Filter>
+    </ClCompile>
+    <ClCompile Include="PlnUnion\PlnUnion.cpp">
+      <Filter>PlnUnion</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlnConnect\PlnConnect.h">
+      <Filter>PlnConnect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnCurvature\PlnCurvature.h">
+      <Filter>PlnCurvature</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnMerging\PlnMerging.h">
+      <Filter>PlnMerging</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnFeature\PlnFeature.h">
+      <Filter>PlnFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnUnion\PlnUnion.h">
+      <Filter>PlnUnion</Filter>
+    </ClInclude>
+    <ClInclude Include="PlnCurvature\CSegType.h">
+      <Filter>PlnCurvature</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

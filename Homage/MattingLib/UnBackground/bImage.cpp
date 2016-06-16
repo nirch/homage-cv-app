@@ -584,7 +584,6 @@ bImage_set_sb( image_type *bim, int i0, sb_type *s )
 	}
 
 	if( n == 0 ){
-		fprintf( stdout, "%d %d\n", s->j0, s->j1 );
 		s->n = 0;
 		return;
 	}

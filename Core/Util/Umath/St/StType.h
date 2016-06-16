@@ -28,12 +28,14 @@ typedef struct st_type {
 
 
 
-st_type * st_alloc( char *name, int no );
+st_type * st_alloc( char *name );
 
 #define		ST_VAL(st)	((st).val)
 
 
 void	st_destory( st_type *st );
+
+void	st_clear( st_type *st, char *name );
 
 void	st_init( st_type *st );
 
@@ -42,7 +44,7 @@ void	st_add( st_type *st, float val );
 void	st_append( st_type *st, st_type *st0 );
 
 
-void	st_final( st_type *st );
+int	st_final( st_type *st );
 
 int		st_write( st_type *st, FILE *fp );
 

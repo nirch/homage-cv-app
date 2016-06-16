@@ -145,7 +145,7 @@ bImage_update( image_type *bim, image_type *cim, float T )
 
 	bImage_update_1( bim, cim );
 	
-//	fprintf( stdout, "%d", no );
+
 	return( no );
 }
 

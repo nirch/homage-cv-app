@@ -2,13 +2,18 @@
 #ifndef _PLN_HEAD_DETECT_H_
 #define _PLN_HEAD_DETECT_H_
 
+#if defined _DEBUG || defined DEBUG
+#pragma comment( lib, "PlnTrackerD.lib" )
+#else
+#pragma comment( lib, "PlnTracker.lib" )
+#endif
 
 #include "Uvec/Vec3d.h"
 
 #include "Umath/LT2Type.h"
 
 
-#include "../PlnHeadTracker/HeadPose.h"
+#include "../HeadPose/HeadPose.h"
 
 
 #include	"Uln/Cln/ClnType.h"
@@ -65,6 +70,12 @@ public:
 	int	Write( char *outFile );
 
 	void Trace( FILE *fp );
+
+
+	plnA_type *	CropApl( plnA_type *apl, headPose_type *h, float margin );
+private:
+
+
 
 
 protected:

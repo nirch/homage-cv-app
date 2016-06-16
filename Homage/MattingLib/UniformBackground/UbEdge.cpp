@@ -56,13 +56,10 @@ int	CUniformBackground::ProcessEdgeContour()
 //#define _TEST
 #ifdef _TEST
 	int	n = image1_nPixel_nonzero( mim );
-	fprintf( stdout, "%d", n );
 	image1_threshold( m_eim, 8 );
 	image_dump_scale( m_eim, 4, "EDGE", m_iFrame, "1" );
 #endif
 
-	//int nPixel = image1_nPixel_nonzero( mim );
-	//fprintf( stdout, "%d ", nPixel );
 
 
 
@@ -77,7 +74,7 @@ int	CUniformBackground::ProcessEdgeContour()
 
 	m_aplEdge = m_dr->Get( 16, 0.5, 1 );
 
-	PLNA_DUMP( m_aplEdge, "edge", m_iFrame, NULL );
+	PLNA_DUMPF( m_aplEdge, "edge", m_iFrame, NULL, m_dFrame == m_iFrame );
 
 	gpTime_stop( &m_tEdge );
 

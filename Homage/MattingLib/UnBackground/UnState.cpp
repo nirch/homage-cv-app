@@ -97,11 +97,9 @@ int	r0[3],	r1[3],	i;
 	int dr = y1 - val1;
 	int	dl = y0 - val0;
 	if(  ABS(dval) > 40 && ( ABS(dr) > 12  || ABS(dl) > 12 ) ){
-		fprintf( stdout, "shadow: %d(%d) %d(%d)\n", val0, y0, val1, y1 );
 		m_state = -4;//( val0 < val1 )? -2 : -3;
 		return( m_state );
 	}
-	else fprintf( stdout, "shadow: %d(%d) %d(%d)\n", val0, y0, val1, y1 );
 
 
 #ifdef _SHADOW_IN

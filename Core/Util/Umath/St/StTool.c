@@ -10,7 +10,7 @@
 
 
 st_type *
-st_alloc( char *name, int no )
+st_alloc( char *name )
 {
 	st_type	*st;
 
@@ -28,6 +28,28 @@ st_destory( st_type *st )
 {
 	free( st );
 }
+
+
+
+
+
+void
+st_clear( st_type *st, char *name )
+{
+	st->name[0] = 0;
+
+	if( name != NULL )
+		strcpy( st->name, name );
+
+	st->n = 0;
+	st->m0 = st->m1 = 0;
+	st->av = st->var  = 0;
+	st->w = 1;
+
+	st->val = 0;
+}
+
+
 
 
 void
@@ -97,9 +119,13 @@ st_append( st_type *st, st_type *st0 )
 }
 
 
-void
+int
 st_final( st_type *st )
 {
+	if( st->n == 0 )
+		return( -1 );
+
+
 	st->av /= st->n;
 
 	st->var = st->var/ st->n - st->av*st->av;
@@ -107,6 +133,8 @@ st_final( st_type *st )
 		st->var = 0;
 
 	st->var = sqrt( st->var );
+
+	return( 1 );
 }
 
 float 
@@ -135,7 +163,7 @@ st_get( st_type *st, float *av, float *var )
 int
 st_write( st_type *st, FILE *fp )
 {
-	fprintf( fp, "%s\t%f\t%f\t%f\t%f\t%d\t%.4f\n",
+	fprintf( fp, "%s\t%f\t%.4f\t%.4f\t%.4f\t%d\t%.4f\n",
 		st->name,
 		st->av,
 		st->var,

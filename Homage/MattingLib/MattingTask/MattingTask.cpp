@@ -7,9 +7,9 @@
 //#define _DUMP
 #endif
 
-#ifndef _GPLOG
-#define _GPLOG
-#endif
+//#ifndef _GPLOG
+//#define _GPLOG
+//#endif
 #include "Ulog/Log.h"
 
 

@@ -6,7 +6,7 @@
 
 
 #ifdef _DEBUG
-#define _DUMP 
+//#define _DUMP 
 #endif
 
 #include	"Uigp/igp.h"
@@ -21,7 +21,7 @@
 
 #include "Uln/PlnType.h"
 
-#include "../PlnHeadTracker/HeadPose.h"
+#include "../HeadPose/HeadPose.h"
 
 #include "PlnHeadDetect.h"
 
@@ -79,9 +79,9 @@ int CPlnHeadDetect::Init( cln_type *cln, char *prmFile )
 
 	m_cln = cln;
 
-	lt2_similarity_set( &m_lt, m_cln->ctr.x, m_cln->ctr.y, 0.0F, 1.0F );
+	lt2_similarity_set( &m_lt, m_cln->p.x, m_cln->p.y, 0.0F, 1.0F );
 
-	pln_translate( m_cln->a[0], -m_cln->ctr.x, -cln->ctr.y );
+	pln_translate( m_cln->a[0], -m_cln->p.x, -cln->p.y );
 
 
 	pln_box( m_cln->a[0], &m_box );
@@ -144,16 +144,25 @@ int CPlnHeadDetect::Process( plnA_type *apl )
 
 		float scale = pt->r / m_size;
 
+		if( scale > 4 )
+			continue;
+
 
 		p.x = pt->p.y;
 		p.y = pt->p.x;
 		headPose_set( h, i, 1, p.x - m_p0.x*scale, p.y - m_p0.y*scale, scale, 0 );
 
+
+//		vTime_type vt = vTime();	
+
 		SetFittingMeasure( apl, h );
+
+//		GPLOG(( "( %d:%d)  ", i, (int)( vTime() - vt) ));
+
 
 		if( h->qulity < 0.5 && pt->f > 5 ){
 			headPose_type h1 = *h;
-			scale = (pt->r + pt->f) / m_size;
+			scale += 0.5;
 			headPose_set( &h1, i, 1, p.x - m_p0.x*scale, p.y - m_p0.y*scale, scale, 0 );
 
 			SetFittingMeasure( apl, &h1 );
@@ -162,9 +171,24 @@ int CPlnHeadDetect::Process( plnA_type *apl )
 
 		}
 
+		if( h->qulity < 0.5 && pt->f > 5 ){
+			headPose_type h1 = *h;
+			scale = (pt->r + pt->f) / m_size;
+			if( scale < 4 ){
+				headPose_set( &h1, i, 1, p.x - m_p0.x*scale, p.y - m_p0.y*scale, scale, 0 );
+
+				SetFittingMeasure( apl, &h1 );
+				if( h1.qulity > h->qulity )
+					*h = h1;
+			}
+
+		}
+
 		m_ah->a[m_ah->nA++] = h;
 	}
 
+
+	pt2dA_destroy( hapt );
 
 	HEADPOSEA_DUMP_PL( m_ah, m_cln->a[0], "AA", 1, NULL );
 
@@ -247,6 +271,8 @@ int CPlnHeadDetect::SetFittingMeasure( plnA_type *apl, headPose_type *h )
 
 	PLN_DUMP( bpl, "AA",1, "Measure" );
 
+	pln_destroy( bpl );
+
 	T = m_prm->du * h->scale;
 	T = PUSH_TO_RANGE( T, 2, 8 );
 
@@ -254,27 +280,58 @@ int CPlnHeadDetect::SetFittingMeasure( plnA_type *apl, headPose_type *h )
 	//gt0 = dg;
 	//gt1 = bpl->len - dg;
 
+	plnA_type *capl = CropApl( apl, h, 40 );
+
 
 	lnFit_type f;
 	lt2_similarity_set( &f.lt, h->p.x, h->p.y, h->angle, h->scale );
-	plnA_fitT( apl, m_cln->a[0], gt0, gt1, 6, 4, &f );
+	plnA_fitT( capl, m_cln->a[0], gt0, gt1, 6, 4, &f );
 	lt2_similarity_get( &f.lt, &h->p.x, &h->p.y, &h->angle, &h->scale );
 
 
-	bpl = GetPln( h );
+	
 
+	bpl = GetPln( h );
 	PLN_DUMP( bpl, "AA",1, "Measure-2" );
+	
+
 
 	float	cover0,	dis0,	cover1,	dis1;
-	plnA_fit_compareW( apl, bpl, gt0*h->scale, 0.5*gt1*h->scale, T,  m_prm->du, &cover0, &dis0 );
-	plnA_fit_compareW( apl, bpl, 0.5*gt0*h->scale, gt1*h->scale, T,  m_prm->du, &cover1, &dis1 );
-
-
-	h->qulity = MIN( cover0, cover1);
-
+	plnA_fit_compareW( capl, bpl, gt0*h->scale, 0.5*gt1*h->scale, T,  m_prm->du, &cover0, &dis0 );
+	plnA_fit_compareW( capl, bpl, 0.5*gt0*h->scale, gt1*h->scale, T,  m_prm->du, &cover1, &dis1 );
 	pln_destroy( bpl );
 
+	h->qulity = MIN( cover0, cover1);
+	h->qulity = 0.5*( cover0 + cover1 );
+
+	plnA_destroy( capl );
+
+
 	return( 1 );
+}
+
+
+plnA_type *	CPlnHeadDetect::CropApl( plnA_type *apl, headPose_type *h, float margin )
+{
+lt2_type lt;
+box2f_type b;
+
+	lt2_similarity_set( &lt, h->p.x, h->p.y, h->angle, h->scale );
+	pln_type *pl = pln_affine_lt( m_cln->a[0], &lt, NULL );
+
+	pln_box(pl, &b );
+
+	box2f_extend( &b, margin );
+
+
+	plnA_type *capl = plnA_crop_box( apl, &b, NULL );
+
+	PLN_DUMP( pl, "AA", 1, "CROP-pl" );
+	PLNA_DUMP( capl, "AA", 1, "CROP" );
+
+	pln_destroy( pl );
+
+	return( capl );
 }
 
 
@@ -355,7 +412,7 @@ int	i;
 
 
 
-	box1i_type	ab[256];
+	box1i_type	ab[512];
 	int nB;
 	p2dA_ny_seg( apt, h, ab, &nB );
 
@@ -370,6 +427,9 @@ int	i;
 
 		if( pln_head_detect( apt, &ab[i], cyclic, &p, &scale, &ds ) < 0 )
 			continue;
+
+		if( hapt->nA >= hapt->NA )
+			pt2dA_realloc( hapt, hapt->nA + 32 );
 
 		pt2d_type *pt = &hapt->a[hapt->nA++];
 

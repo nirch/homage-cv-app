@@ -23,9 +23,6 @@
 
 
 
-
-
-
 int	CMattingContour::ProcessAdjust( plnA_type *apl )
 {
 	if(  apl->nA <= 0 )	
@@ -40,10 +37,21 @@ int	CMattingContour::ProcessAdjust( plnA_type *apl )
 	plnA_type *bapl = ( m_iFrame > 0 ) ? m_fpl->a[m_iFrame-1] : NULL; 
 
 
-	
+	int ret = ProcessAdjust( apl, bapl, m_iFrame );
 
-	//ProcessHead( apl );
+	return( ret );
+}
 
+
+
+int	CMattingContour::ProcessAdjust( plnA_type *apl, plnA_type *bapl, int m_iFrame )
+{
+	if(  apl->nA <= 0 )	
+		return( -1 );
+
+
+
+	PLNA_DUMPF( apl, "contor", m_iFrame, NULL, m_dFrame == m_iFrame );
 
 
 
@@ -91,9 +99,9 @@ int	CMattingContour::ProcessAdjust( plnA_type *apl )
 	PLNA_DUMPF( apl, "contor", m_iFrame, "in", m_dFrame == m_iFrame );
 
 
-	vec2f_type p;
+	vec2f_type p,	v;
 	float r;
-	if( m_headTracking != NULL && m_headTracking->GetHeadPose( &p, &r) > 0 ){
+	if( m_headTracking != NULL && m_headTracking->GetHeadPose( &p, &v, &r) > 0 ){
 		plnA_adjust_in_head( apl, &p, r, m_iFrame );
 		PLNA_DUMPF( apl, "contor", m_iFrame, "in-head", m_dFrame == m_iFrame );
 	}

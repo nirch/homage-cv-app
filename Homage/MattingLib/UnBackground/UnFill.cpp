@@ -68,7 +68,7 @@ int	CUnBackground::ProcessFill()
 	
 	int no = bImage_fill( m_bim, a0, a1, T, &m_similarity );
 
-	fprintf( stdout, "similarity: %d ( %d)\n", m_similarity, no );
+	GPTRACE( ( 3, "similarity: %d ( %d)\n", m_similarity, no) );
 
 	BIMAGE_DUMP( m_bim, m_N, "un", 1, "F" );
 

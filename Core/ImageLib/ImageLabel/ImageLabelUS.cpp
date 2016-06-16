@@ -83,13 +83,13 @@ bwLabel_type	*bw;
 int	nBw;
 
 int	i,	j,	k;
-short	*sp,	*sp0,	*sp1;
+u_short	*sp,	*sp0,	*sp1;
 int	id,	id1;
 
 
 	bw = *tbw;
 	if( bw == NULL )
-		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type)/10 );
+		bw = (bwLabel_type *)malloc( im->row*im->column*sizeof(bwLabel_type)/5 );
 	nBw = 0;
 
 
@@ -98,7 +98,7 @@ int	id,	id1;
 	bw[nBw].no = 0;
 	nBw++;
 
-	sp = (short*)im->data ;
+	sp = (u_short*)im->data ;
 	if( *sp != 0 ){
 		bw[nBw].id = nBw;
 		bw[nBw].no = 0;
@@ -127,7 +127,7 @@ int	id,	id1;
 
 		
 	for( i = 1 ; i < im->row ; i++ ){
-		sp = (short*)IMAGE_PIXEL( im, i, 0 );
+		sp = (u_short*)IMAGE_PIXEL( im, i, 0 );
 		sp1 = sp - im->column;
 		if( *sp != 0 ){
 			if( *sp1 != 0 ){
@@ -196,7 +196,7 @@ int	id,	id1;
 	*tnBw = nBw;
 
 		
-	imageLabel2_set_id( im, *tbw );
+	imageLabelUS_set_id_B( im, *tbw );
 }
 
 
@@ -309,7 +309,7 @@ short	*sp,	*sp0,	*sp1;
 	*tnBw = nBw;
 
 
-	imageLabel2_set_id( im, *tbw );
+	imageLabelUS_set_id_B( im, *tbw );
 }
 
 
@@ -319,12 +319,12 @@ short	*sp,	*sp0,	*sp1;
 
 
 void
-imageLabel2_set_id( image_type *im, bwLabel_type *bw )
+imageLabelUS_set_id_B( image_type *im, bwLabel_type *bw )
 {
-short	*sp;
+u_short	*sp;
 int	i,	j;
 
-	sp = (short *)im->data;
+	sp = (u_short *)im->data;
 	for( i = 0 ; i < im->row ; i++ ){
 		for( j = 0 ; j < im->column ; j++, sp++ ){
 				*sp = bw[*sp].id;
@@ -349,28 +349,28 @@ imageLabelUS_set_id( imageLabel_type *abw )
 void
 imageLabel2_set_boundary( image_type *im, bwLabel_type *abw, int nB )
 {
-	short	*sp;
+	u_short	*sp;
 	int	i,	j;
 
 	for( i = 0 ; i < nB ; i++ )
 		abw[i].boundary = 0;
 
-	sp = (short *)im->data;
+	sp = (u_short *)im->data;
 	for( j = 0 ; j < im->column ; j++, sp++ )
 		abw[*sp].boundary = 1;
 
 
-	sp = (short *)IMAGE_PIXEL( im, im->height-1, 0 );
+	sp = (u_short *)IMAGE_PIXEL( im, im->height-1, 0 );
 	for( j = 0 ; j < im->column ; j++, sp++ )
 			abw[*sp].boundary = 1;
 
 
-	sp = (short *)IMAGE_PIXEL( im, 0, 0 );
+	sp = (u_short *)IMAGE_PIXEL( im, 0, 0 );
 	for( i = 0 ; i < im->row ; i++, sp += im->width )
 		abw[*sp].boundary = 1;
 
 
-	sp = (short *)IMAGE_PIXEL( im, 0, im->width-1 );
+	sp = (u_short *)IMAGE_PIXEL( im, 0, im->width-1 );
 	for( i = 0 ; i < im->row ; i++, sp += im->width )
 		abw[*sp].boundary = 1;
 }
@@ -413,7 +413,7 @@ void
 imageLabelUS_value( imageLabel_type *abw, image_type *sim )
 {
 	int	i,	j;
-	short	*bp;
+//	u_short	*bp;
 
 
 	bwLabel_type *bw;
@@ -427,7 +427,7 @@ imageLabelUS_value( imageLabel_type *abw, image_type *sim )
 
 	if( IMAGE_TYPE( sim ) == IMAGE_TYPE_U8 ){
 		u_char *sp = sim->data;
-		bp = abw->im->data_s;
+		u_short *bp = abw->im->data_us;
 		for( i = 0 ; i < abw->im->height ; i++ ){
 			for( j = 0 ; j < abw->im->width ; j++, bp++, sp++ ){
 				bw = &abw->a[*bp];
@@ -442,7 +442,7 @@ imageLabelUS_value( imageLabel_type *abw, image_type *sim )
 		u_short *sp = sim->data_us;
 	
 		for( i = 0 ; i < sim->height ; i++ ){
-			bp = (short*)IMAGE_PIXEL( abw->im, i+abw->margin, abw->margin );
+			u_short *bp = (u_short*)IMAGE_PIXEL( abw->im, i+abw->margin, abw->margin );
 			for( j = 0 ; j < sim->width ; j++, bp++, sp++ ){
 				bw = &abw->a[*bp];
 				bw->no++;

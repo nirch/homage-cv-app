@@ -90,7 +90,8 @@ imageLabelUI_clnA( imageLabel_type *abw, clnA_type *ac )
 
 		if( abw->a[i].id != i )	continue;
 
-		cln_type *c = imageLabelUI_cln( abw->im, i );
+		cln_type *c = imageLabelUI_cln( abw->im, i, 0, 0 );
+		c->type = abw->a[i].color;
 
 
 		clnA_add( ac, c );
@@ -108,12 +109,14 @@ imageLabelUI_clnA( imageLabel_type *abw, clnA_type *ac )
 
 
 cln_type *
-imageLabelUI_cln( image_type *im, int id )
+imageLabelUI_cln( image_type *im, int id, float minLen, int extrnal )
 {
 int	i,	j,	i0,	j0,	side;
 int	no;
 gapp_type *gapp;
 cln_type *cln;
+
+	if( minLen <=0 )	minLen = 48;
 
 	gapp = gapp_alloc( 200000 );
 
@@ -131,7 +134,7 @@ cln_type *cln;
 		agpLevel_contour_1( im, i, j, side, gapp );
 		GAPP_DUMP( gapp, "gapp", no, NULL );
 
-		if( gapp->no < 48 )	continue;
+		if( gapp->no < minLen )	continue;
 
 
 		pln_type *pl;
@@ -161,6 +164,8 @@ cln_type *cln;
 //		CONTOUR_DUMP( c, "c", no, NULL );
 //		ac = contour_union( ac, c );
 
+		if( extrnal == 1 )
+			break;
 	
 		no++;
 

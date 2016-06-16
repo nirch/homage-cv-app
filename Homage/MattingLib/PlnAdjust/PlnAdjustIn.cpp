@@ -93,7 +93,6 @@ int	i,	j,	ret;
 
 	
 			if( t > 0.55 ){
-//				fprintf( stdout, "N%d", iFrame);
 				apl->a[j++] = apl->a[i];
 				continue;
 			}
@@ -113,7 +112,6 @@ int	i,	j,	ret;
 		pln_distance( apl->a[0], &pl->e->p, &d );
 
 		if( ABS(d.u) > 40 ){
-//			fprintf( stdout, "I%d", iFrame);
 			pln_destroy( pl );
 			continue;
 		}
@@ -124,7 +122,6 @@ int	i,	j,	ret;
 
 		if( bapl != NULL ){
 			if( plnA_is_in( bapl, pl ) < 0 ){
-	//			fprintf( stdout, "J%d", iFrame);
 				pln_destroy( pl );
 				continue;
 			}
@@ -233,7 +230,6 @@ plnA_adjust_in_head( plnA_type *apl, vec2f_type *hp, float r, int iFrame )
 
 		if( ABS(t) < r ){
 			pln_destroy( pl );
-			fprintf( stdout, "H" );
 			continue;
 		}
 

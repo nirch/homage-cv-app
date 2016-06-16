@@ -3,10 +3,16 @@
 #define _PLN_HEAD_TRACKER_H_
 
 
+#if defined _DEBUG || defined DEBUG
+#pragma comment( lib, "PlnTrackerD.lib" )
+#else
+#pragma comment( lib, "PlnTracker.lib" )
+#endif
+
 #include "Uvec/Vec3d.h"
 
 
-#include "HeadPose.h"
+#include "../HeadPose/HeadPose.h"
 
 
 #include	"Uln/Cln/ClnType.h"
@@ -59,7 +65,10 @@ public:
 
 	int	HeadRange( plnA_type *apl, float *gt0, float *gt1 );
 
-	int	GetHeadPose( vec2f_type *p, float *r );
+	int	GetHeadPose( vec2f_type *p, vec2f_type *v, float *r );
+	int	GetHeadPose( vec2f_type ap[4] );
+
+	plnA_type *	CropApl( plnA_type *apl, headPose_type *h, float margin );
 
 
 	int HeadPose( plnA_type *apl, headPose_type *h );
@@ -75,6 +84,8 @@ public:
 
 
 	int HeadPose_peak( pln_type *pl, float gt,  pln_type **spl, vec2f_type *p );
+
+
 
 
 

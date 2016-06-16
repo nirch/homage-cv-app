@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Edge/PlnLib/PlnLib.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Homage/HrRendererLib/HrRendererLib.xcodeproj">
    </FileRef>
    <FileRef
