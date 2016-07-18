@@ -123,11 +123,12 @@ int CHrSourceJava::LoadInfo(){
 	this->SetSourceDuration(info[2]);
 
 	m_env->ReleaseLongArrayElements(infoRet, info, 0);
+	m_env->DeleteLocalRef(infoRet);
 }
 
 int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 {
-	
+
 	GPLOGF( ("<java ReadFrame" ));
 
 	long long readTimeStamp = timeStamp;
@@ -148,20 +149,26 @@ int CHrSourceJava::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 		if (lastReadFrameTS != readTimeStamp) {
 			lastReadFrameTS = readTimeStamp;
 
+
 			jbyteArray dataArr = (jbyteArray) m_env->CallObjectMethod(m_jSrc, m_methodRead,
 																	  readTimeStamp);
 
 			if (dataArr == NULL)
 				return -1;
 
+
 			jbyte *pixels = (jbyte *) m_env->GetByteArrayElements(dataArr, NULL);
 
-			if (m_im == NULL)
+            if (m_im == NULL) {
 				m_im = image_create(m_height, m_width, 4, 1, NULL);
+			}
 
 			memcpy(m_im->data, pixels, m_width * m_height * m_im->channel);
 
 			m_env->ReleaseByteArrayElements(dataArr, pixels, 0);
+			m_env->DeleteLocalRef(dataArr);
+			pixels = NULL;
+			dataArr = NULL;
 		}
 
 		// Process effects.
