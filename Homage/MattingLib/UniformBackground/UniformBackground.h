@@ -177,7 +177,7 @@ private:
 
 	int m_flip;
 
-	float m_T;
+	float m_T;  // threshold for grey level difference for compare
 	
 	float m_bT;
 

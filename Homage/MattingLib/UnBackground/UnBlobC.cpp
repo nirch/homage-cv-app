@@ -44,8 +44,9 @@ int	imageLabelUI_blobe0( imageLabel_type *abw, int i0, int j0, int dj, int *k0, 
 int	CUnBackground::ProcessBlobC()
 {
 	int	i;
-
 	int b0,	b1,	k0,	k1;
+    
+    // Choosing the silhouette to use
 	imageLabelUI_blobe0( m_abw, m_hp.x/8, m_hp.y/8, m_hd[0]/8, &k0, &b0, &k1, &b1 );
 	m_iHead = 0;
 	if( k1 < 0 || k0 < 0 || m_hp.y - 8*k0 > 1.5*m_hd[0] && 8*k1 - m_hp.y > 1.5*m_hd[0] ){
@@ -56,13 +57,6 @@ int	CUnBackground::ProcessBlobC()
 
 		m_iHead = 1;
 	}
-
-
-
-
-
-
-
 
 #ifdef _DUMP
 	u_char T[6] = { 255, 0, 128, 64 };
@@ -77,7 +71,7 @@ int	CUnBackground::ProcessBlobC()
 	image_destroy( im1, 1 );
 #endif
 
-
+    // Looking the stright lines
 	if( m_prm->straightLine == 1 )
 		ProcessLine( k0, k1 );
 

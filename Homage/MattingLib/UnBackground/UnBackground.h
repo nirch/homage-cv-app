@@ -145,13 +145,13 @@ private:
 	int	m_iHead;
 
 
-	image_type *m_yim;
-	image_type *m_bim;
-	image_type *m_bimD;
+	image_type *m_yim;  // Greylevel image of the current image
+	image_type *m_bim;  // Background estimation
+	image_type *m_bimD; // Edge image of 8X8 pixels (only X)
 
 
 
-	box2i_type	m_roi;
+	box2i_type	m_roi;  // relevant box - today it is all the image
 	int	m_N;
 
 	class CUnEdge  *m_ue;

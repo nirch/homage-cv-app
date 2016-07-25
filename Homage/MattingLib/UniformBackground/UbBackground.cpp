@@ -44,7 +44,8 @@ int CUniformBackground::GetProcessBackgroundSimilarity()
 
 
 
-
+// This function should be used in the background detection phase for getting the state of the background (e.g. noisy,
+// shadows, not inside the silhouette, etc.).
  int CUniformBackground::ProcessBackgroundState( image_type *sim, int iFrame )
  {
 
@@ -67,21 +68,21 @@ int CUniformBackground::GetProcessBackgroundSimilarity()
 
 
 
+// Receives the a frame (sim) and creates the background estimation (m_bim)
  int CUniformBackground::ProcessBackground( image_type *sim, int iFrame )
  {
+     // Assuming we have a silhouette
 	 if( m_mim == NULL )
 		 return( -10 );
 
-
-
-
+     // Creating a copy of the image into m_sim (rotating if needed)
 	if( m_flip == 1 )
 		m_sim = image3_rotate180( sim, m_sim );
 	else m_sim = image_make_copy( sim, m_sim );
 
 
 
-
+     // Create the background
 	ProcessInitBackground( m_sim );
 
 
@@ -90,12 +91,12 @@ int CUniformBackground::GetProcessBackgroundSimilarity()
 
 }
 
-
+// Receives the a frame (sim) and creates the background estimation (m_bim)
 int	CUniformBackground::ProcessInitBackground( image_type *sim )
 {
 int	ret;
 
-
+    // The actual creation of the background. Also decides which contour to use if there is more than 1
 	ret = m_unBackground->Process( sim, 1 );
 
 	m_iHead = 2*m_unBackground->GetHead() + 1;

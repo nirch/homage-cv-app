@@ -34,35 +34,34 @@ int	CUnBackground::ProcessBlobB()
 	for( i = 0 ; i < 256 ; i++ )
 		H[i]  = 0;
 
+    // Trying to look for the most common uniform greylevel value
+    
+    // Returns the index id of the 16 biggest uniform blobs (from big to small). Can return less
 	int aI[16],	nI;
 	bwLabelA_order( m_abw, 0, 50, 16, aI, &nI );
 	for( i = 0 ; i < nI ; i++ ){
+        // For each blob saving his size for the average color (then we will look for the biggest value)
 		bwLabel_type *bw = &m_abw->a[aI[i]];
-		H[(int)bw->av] = bw->no;
+		H[(int)bw->av] += bw->no;
 
 	}
 
-
+    // Clustering in groups all the close average color with the total number of cubes
 	isdata1_type ac[16];
 	int	nC;
 	histogram_clustring_isodataA( H, 256, 4, 100, 400, 64, 10, ac, &nC );
 
-
-
-
-
-
+    // Looking for the best uniform background blob
 	int i0 = 0;
 	for( i = 1 ; i < nC ; i++ ){
-		if( ac[i].n > ac[i0].n || ac[i].n > 400 && ac[i].mean > 2*ac[i0].mean )
+		if( ac[i].n > ac[i0].n || (ac[i].n > 400 && ac[i].mean > 2*ac[i0].mean) )
 			i0 = i;
 	}
 
 	GPTRACE( ( 3, "COLOR %d %d\n", (int)ac[i0].mean, ac[i0].n ) );
 
-
-
-
+    
+    // Going over all the blobs in the best uniform cluster and calculating the average RGB and finding the biggest blob
 	int	iB = -1;
 	int	R,	G,	B,	n;
 	R = G = B = n = 0;
@@ -80,36 +79,26 @@ int	CUnBackground::ProcessBlobB()
 		B += bw->B;
 		n++;
 	}
-
 	if( n == 0 )
 		return( 1 );
-
 	R /= n;
 	G /= n;
 	B /= n;
 
 
-
+    // Going over all the blobs and looking for blobs that are not in the best cluster and marking them as uniform but another object (like a door)
 	for( i = 0 ; i < nI ; i++ ){
 		bwLabel_type *bw = &m_abw->a[aI[i]];
 		int av = bw->av;
 		if( av >= ac[i0].i0 && av <= ac[i0].i1 )
 			continue;
 
-
-
+        // Making a further check to validate that this is not part of the big cluster.
 		if( ProcessBlobB_TestBlob(  iB, aI[i] ) < 0 )
 			bw->color = 2;
 	}
 
-
-
-
-
-
-
-
-
+    // Going over all the uniform blobs (not only the biggest 16) and marking those who are different shade than the best cluster
 	for( i = 0 ; i < m_abw->nA ; i++ ){
 		bwLabel_type *bw = &m_abw->a[i];
 

@@ -45,25 +45,24 @@ int	CUniformBackground::ProcessBlob2()
 
 	gpTime_start( &m_tBlob );
 
+    // For Performance issues, scaling down the image
 	image_type *im = image1_sample2N( m_cim, NULL );
-
 
 	if( m_iFrame == m_dFrame ){
 		IMAGE_DUMP_SCALE( im, 32, "blob", m_iFrame, "1" );
 	}
 
-	// remove
+	// Blobs for foreground
 	m_abwBlob = imageLabelUS( im, 4, 1, 0, m_abwBlob );
 
-
+    // Finding the main foreground (biggest) and all the rest are getting a value of 5 (5*32=160)
 	imageLabelUS_remove_A( im,  m_abwBlob, 0x5, &m_mp );
-
 
 
 	IMAGE_DUMP_SCALEF( im, 32, "blob", m_iFrame, "2", m_dFrame == m_iFrame  );
 
 
-	// fill
+	// Blobs for background, removing blobs that are small and are not boundary
 	m_abwBlob = imageLabelUS( im, 1, 0, 0, m_abwBlob );
 
 	imageLabelUS2_value( m_abwBlob, m_dim );

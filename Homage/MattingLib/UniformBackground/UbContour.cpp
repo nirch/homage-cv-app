@@ -35,7 +35,8 @@ int	CUniformBackground::ProcessContour()
 		return( 1 );
 
 
-	if( m_prm->enableEdge == 1 ) 
+	if( m_prm->enableEdge == 1 )
+        // Finding edges on the grey-level image of the original current frame - output is stored in m_aplEdge
 		ProcessEdgeContour();
 
 
@@ -47,7 +48,8 @@ int	CUniformBackground::ProcessContour()
 
 
 
-
+    // Creating a contour over the main foreground blob
+    
 	m_abwC = imageLabelUS( m_cim, 128, 0, 1, m_abwC );
 
 
@@ -100,12 +102,10 @@ int	CUniformBackground::ProcessContour()
 
 	plnA_type *apl = cln_to_plnA( m_cln, 1 );
 
-
+    // Smoothing the contour (smoothing jags)
 	plnA_smooth( apl );
-
+    
 	plnA_adjust_start( apl,  m_sim->height );
-
-
 
 
 	ProcessContourAdjust( apl, m_sim->width, m_sim->height );
