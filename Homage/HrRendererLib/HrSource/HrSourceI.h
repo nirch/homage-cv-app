@@ -14,6 +14,10 @@
 
 #define HR_GIF	1
 #define HR_PNG	2
+#define HR_JPG	3
+#define HR_PNG_SEQ	4
+#define HR_COLOR 5
+#define HR_JAVA	6
 
 
 class CHrSourceI 

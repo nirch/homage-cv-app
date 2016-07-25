@@ -16,7 +16,7 @@ LOCAL_SRC_FILES := 	\
 	./PlnHeadTracker/PlnHeadTracker.cpp \
 	./PlnHeadTracker/PlnHeadBox.cpp \
 	./PlnHeadTracker/PlnHeadPose.cpp \
-	./PlnHeadTracker/HeadPose.cpp \
+	./HeadPose/HeadPose.cpp \
 	./PlnHeadDetect/PlnHeadDetect.cpp \
 	./PlnHeadDetect/PlnHeadDetectPrm.cpp
 

@@ -46,9 +46,13 @@ LOCAL_SRC_FILES := 	\
 	UnBackground/UnState.cpp \
 	UnBackground/UnCloseUp.cpp \
 	UnBackground/UnFill.cpp \
+	UnBackground/UnLine.cpp \
 	UnBackgroundM/UnBackgroundM.cpp \
 	UnBackgroundM/UnBackgroundMProcess.cpp \
 	UnBackgroundM/UmPrm.cpp \
+	UnEdge/UnEdge.cpp \
+	UnEdge/UnEdgePrm.cpp \
+	UnEdge/UniformBackground.cpp \
 	MattingTask/MattingTask.cpp
 
 

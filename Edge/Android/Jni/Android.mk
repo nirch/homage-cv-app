@@ -8,6 +8,7 @@ LOCAL_CFLAGS := -w
 include $(CLEAR_VARS)
 
 include	$(VIM_PATH)/Edge/EdgeLib/EdgeLib.mk
+include	$(VIM_PATH)/Edge/PlnLib/PlnLib.mk
 
 
 
