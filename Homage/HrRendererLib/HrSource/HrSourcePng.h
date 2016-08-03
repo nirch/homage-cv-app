@@ -44,7 +44,10 @@ private:
 	intA_type	*m_af;
 
 	image_type *m_im;
+	image_type *m_imEmpty;
 
+    bool m_bSingleFile;
+    int m_nFrame;
 
 
 

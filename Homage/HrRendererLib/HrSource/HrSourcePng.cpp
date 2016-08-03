@@ -31,7 +31,7 @@
 CHrSourcePng::CHrSourcePng()
 {
 	m_im = NULL;
-
+    m_imEmpty = NULL;
 	m_af = NULL;
 }
 
@@ -52,6 +52,11 @@ void CHrSourcePng::DeleteContents()
 		m_im = NULL;
 	}
 
+	if( m_imEmpty != NULL ){
+        image_destroy( m_imEmpty, 1 );
+        m_imEmpty = NULL;
+    }
+
 	if( m_af != NULL )
 		intA_destroy( m_af );
 
@@ -63,10 +68,10 @@ int CHrSourcePng::Init( char *inFile )
 	strcpy( m_dir, inFile );
 	
 	m_iFrame = 0;
+	m_nFrame = 1;
+	m_bSingleFile = true;
 
 	return( 1 );
-
-
 }
 
 
@@ -75,10 +80,13 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 
 	strcpy( m_dir, inFile );
 
+    m_bSingleFile = false;
 
 	m_af = intA_alloc( nF );
 
 	GPLOG(("PngSource:nF %d", nF ) );
+
+    m_nFrame = nF;
 
 	int	i;
 	for( i = 0 ; i < nF ; i++ ){
@@ -104,36 +112,69 @@ int CHrSourcePng::Init( char *inFile, int aFrame[], int nF )
 
 int	CHrSourcePng::ReadFrame( int iFrame, long long timeStamp, image_type **im )
 {
-image_type	*sim;
+    if( iFrame < 0 ) return( -1 );
 
-	int rFrame = ( m_af != NULL )? m_af->a[iFrame] : iFrame;
+    // Picking a frame.
+    int pickedFrame;
+    if (this->shouldUseTiming) {
+        // Pick frame depending on timeStamp (and timing effects if set).
+        pickedFrame = this->PickFrameAtTS(timeStamp, m_nFrame);
+    } else {
+        // Ignore time stamps and timing effects. Just use the incrementing iFrame number.
+        pickedFrame = iFrame % m_nFrame;
+    }
 
-	m_iFrame = rFrame;
+    image_type *imFrame = NULL;
 
+    // Read the picked frame.
+    if (pickedFrame >= 0) {
 
-	GPLOG(("PngSource:  %d %d", iFrame, rFrame ) );
+        if (m_bSingleFile){
+            // We read the file once
+            if (m_im == NULL){
+                m_im = image_read_png_file( m_dir );
+                imageT_negative_alpha( m_im, m_im );
+            }
+        }
+        else{
 
-	char file[256];
-	sprintf( file, "%s/im-%.4d.png", m_dir, rFrame );
-	sim = image_read_png_file( file );
-	if( sim == NULL ){
-		GPLOG(( "reading %s failed\n", file ) );
-		return( -1 );
-	}
+            image_type	*sim;
 
-	GPLOG(( "reading %s succeed\n", file ) );
+            int rFrame = ( m_af != NULL )? m_af->a[pickedFrame] : pickedFrame;
 
-	IMAGE_DUMP( sim, "bb", 1, NULL );
+            m_iFrame = rFrame;
 
-	m_im = image_make_copy( sim, m_im );
-		
-	imageT_negative_alpha( m_im, m_im );
+            GPLOG(("PngSource:  %d %d", iFrame, rFrame ) );
 
+            char file[256];
+            sprintf( file, "%s/im-%.4d.png", m_dir, rFrame );
+            sim = image_read_png_file( file );
+            if( sim == NULL ){
+                GPLOG(( "reading %s failed\n", file ) );
+                return( -1 );
+            }
 
-	ProcessEffect( m_im, iFrame, timeStamp, im );
+            GPLOG(( "reading %s succeed\n", file ) );
 
-	image_destroy( sim, 1 );
+            IMAGE_DUMP( sim, "bb", 1, NULL );
 
+            m_im = image_make_copy( sim, m_im );
+            image_destroy( sim, 1 );
+            imageT_negative_alpha( m_im, m_im );
+        }
+
+        imFrame = m_im;
+	} else {
+
+        // An empty frame
+	    if (m_imEmpty == NULL){
+            m_imEmpty = image_create(m_height, m_width, 4, 1, NULL);
+        }
+
+        imFrame = m_imEmpty;
+    }
+
+    ProcessEffect( imFrame, iFrame, timeStamp, im );
 
 	return( 1 );
 }
