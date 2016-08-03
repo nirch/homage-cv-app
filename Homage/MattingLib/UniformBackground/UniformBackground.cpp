@@ -401,7 +401,7 @@ int	CUniformBackground::ResetBackground()
 	return( 1 );
 }
 
-
+// Process receives the current frame and returns a mask (foreground extracted)
 int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 {
 
@@ -420,14 +420,18 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 		m_sim = image3_rotate180( sim, m_sim );
 	else m_sim = image_make_copy( sim, m_sim );
 	
-
+    // Grey level of the current frame
 	m_yim = image1_from( m_sim, m_yim );
 
+    // m_bim is the background image
 	if( m_bim == NULL ){
+        
+        // creating the initial background image
 		ProcessInitBackground( m_sim );
 
 		//IMAGE_DUMP( m_bim, "BB", 1, "A" );
 
+        // Inhitialiaze head tracking
 		InitHeadTracker( m_iHead );
 
 		m_headBoxF = 0;
@@ -438,10 +442,12 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 #endif
 	}
 
+	//m_yim = image1_from( m_sim, m_yim );
+    
 
-
-	m_yim = image1_from( m_sim, m_yim );
-
+        
+    // Comparing the current image to the background estimation image
+    // The result is rough mask of the foreground (m_cim) - This will result with a single foreground blob
 	ProcessCompare( m_sim );
 
 
@@ -450,9 +456,13 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 #endif
 
 
-
+    // Removing thin elements that are not "human" compatible (updates m_cim)
+    // This can harm fingers
+    // TODO: use this only if not using contour
 	ProcessThin( 8 );
 
+    // Smoothing the edges (adding alpha channel to the edges)
+    // TODO: use this only if not using contour
 	ProcessSmooth();
 
 //	*cim = m_cim;
@@ -460,9 +470,11 @@ int	CUniformBackground::Process( image_type *sim, int iFrame, image_type **cim )
 		*cim = m_cimS;
 
 
+    // Calculating a contour around the foreground blob and smoothing the contour
 	ProcessContour();
 
 
+    // ProcessBN and ProcessUpdate updates the background
 	ProcessBn( m_sim, m_bnT );
 
 

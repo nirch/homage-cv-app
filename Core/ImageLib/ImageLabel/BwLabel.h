@@ -55,15 +55,15 @@ typedef struct bwLabel_type {
 
 
 typedef struct imageLabel_type {
-	image_type	*mim;
+	image_type	*mim;   // Original image from which blobs were created
 	int	margin;
 
 
-	image_type *im;
+	image_type *im;     // Per pixel holds the id of the relevant blob
 
 	int	NA;
 	int	nA;
-	bwLabel_type *a;
+	bwLabel_type *a;    // Array of blobs
 
 } imageLabel_type;
 

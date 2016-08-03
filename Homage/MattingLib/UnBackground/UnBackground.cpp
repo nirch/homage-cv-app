@@ -222,8 +222,8 @@ CUnBackground::GetBim( image_type *bim )
 	return( bim );
 }
 
-int
-CUnBackground::Process( image_type *sim, int iFrame )
+// Receives the a frame (sim) and creates the background estimation
+int CUnBackground::Process( image_type *sim, int iFrame )
 {
 int	ret;
 
@@ -243,40 +243,39 @@ int	ret;
 
 	gpTime_start( &m_gTime );
 
-
+    // Greylevel image from the given frame
 	m_yim = image1_from( sim, m_yim );
 
-
+    // First step - taking the current frame and creating a 8X8 pixel of it
 	m_bim = bImage_set( sim, &m_roi, m_N, m_bim );
 
-
-
-
-
-	BIMAGE_DUMP( m_bim, m_N, "ub", 1, "A" );	
-	
-
-
+	BIMAGE_DUMP( m_bim, m_N, "ub", 1, "A" );
+    
+    // Edge image of 8X8 pixels (only X derivative)
 	m_bimD = bImage_grad_c( m_bim, m_bimD );
+        
+#ifdef _DUMP
 	image_type *im = image1S_axb(  m_bimD, 1, 128, NULL );
 	IMAGE_DUMP_DUP( im, 8, 1, "ub", 1, "D" );
 	image_destroy( im, 1 );
+#endif
 	
-
-
-
+    // Creating blobs from Edge gradiant image
 	ret = ProcessBlob( m_bimD );
 
+    // Decision like who is the main blob what is the background blob
 	ret = ProcessBlobB();
 
+    // Calculating weight for each of the silhouettes (will use this weight later on).
 	ProcessSilhouette();
 
+    // Finding stright lines and choosing what is the background we shoud use to replace the area of the user
+    // -1 is returned if the head was not found
 	ret = ProcessBlobC();
 
 
-	// set from conour 
+	// If we didn't find a head we are using a different approach to estimate the background - based on the contour
 	if( ret < 0 ){
-
 		if( TestDrakness( m_yim ) > 0 )
 			m_state = -10;
 		else
@@ -307,6 +306,7 @@ int	ret;
 	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
 	
+    // Special case for close-up. The user most likely is touching the end of the frame on the x axis so we want to take the background color from the y axis instead
 	if( m_closeUp )
 		ProcessCloseUp();
 
@@ -315,6 +315,7 @@ int	ret;
 	sbA_write3( &m_as0, &m_asB[0], &m_as1, stdout );
 #endif
 
+    // Filling the foreground area with an estimated background
 	ProcessFill();
 
 	if( m_state >= 0 )

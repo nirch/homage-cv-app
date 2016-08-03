@@ -58,17 +58,13 @@ static void	image1_close1( image_type *sim );
 
 int	CUniformBackground::ProcessCompare( image_type *sim )
 {
-
 	gpTime_start( &m_tCompare );
 
-
-
-
+    // Creating a diff image of the current frame vs estimated background. Subtracting the RGB and putting the largest of them as the result (result is grey-level image)
 	m_dim = bImage_diff( sim,  &m_roi, m_N, m_bim, m_T, m_dim );
 
-
+    // Using a given theshold and all the values below it get 0 value and above get 255 value
 	m_cim = image1_binaryM( m_dim, m_T, m_cim );
-
 
 
 	if( m_iFrame == m_dFrame ){
@@ -78,6 +74,7 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 	}
 
 
+    // Here we want to remove all the small inner noise that are similar to the background shade. We are doing erode and dilate. This will make all the thin black (background) parts disappear
 	gpTime_start( &m_tOpen );
 	image1_negative( m_cim, m_cim );
 	image1_open( m_cim, 1, 0 );
@@ -85,13 +82,10 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 	//	image1_close( m_cim, 1, 255 );
 	gpTime_stop( &m_tOpen );
 
-
-
-
 	IMAGE_DUMPF( m_cim, "m", m_iFrame, "22", m_dFrame == m_iFrame  );
 
 
-
+    // Doing the same erode and dilate on the foreground
 	gpTime_start( &m_tOpen );
 	image1_open( m_cim, 1, 0 );
 //	image1_close( m_cim, 1, 255 );
@@ -101,7 +95,7 @@ int	CUniformBackground::ProcessCompare( image_type *sim )
 	IMAGE_DUMPF( m_cim, "m", m_iFrame, "2", m_dFrame == m_iFrame  );
 
 
-
+    // Choosing main foreground blob, closing inner holes and removing outer noise
 	ProcessBlob2();
 	IMAGE_DUMPF( m_cim, "m", m_iFrame, "3", m_dFrame == m_iFrame  );
 
